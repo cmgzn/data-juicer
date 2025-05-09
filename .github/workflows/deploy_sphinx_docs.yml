@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - mgzn/sphinx
 
 jobs:
   pages:
