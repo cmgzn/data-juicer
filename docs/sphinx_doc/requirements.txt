@@ -7,3 +7,4 @@ googletrans
 recommonmark
 sphinx-intl
 data_juicer
+myst_parser
