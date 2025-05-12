@@ -40,23 +40,79 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="en/DJ-cookbook.html">DJ-Cookbook</a></li>
+</ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">data_juicer.ops.deduplicator</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentMinhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentSimhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentSimhashDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.ImageDeduplicator"><code class="docutils literal notranslate"><span class="pre">ImageDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBasicDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayBasicDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayDocumentDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayDocumentDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayImageDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayImageDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayVideoDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayVideoDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.VideoDeduplicator"><code class="docutils literal notranslate"><span class="pre">VideoDeduplicator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">DocumentDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentDeduplicator.compute_hash"><code class="docutils literal notranslate"><span class="pre">DocumentDeduplicator.compute_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentDeduplicator.process"><code class="docutils literal notranslate"><span class="pre">DocumentDeduplicator.process()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentMinhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentMinhashDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentMinhashDeduplicator.compute_hash"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicator.compute_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentMinhashDeduplicator.process"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicator.process()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentSimhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentSimhashDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentSimhashDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">DocumentSimhashDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentSimhashDeduplicator.compute_hash"><code class="docutils literal notranslate"><span class="pre">DocumentSimhashDeduplicator.compute_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.DocumentSimhashDeduplicator.process"><code class="docutils literal notranslate"><span class="pre">DocumentSimhashDeduplicator.process()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.ImageDeduplicator"><code class="docutils literal notranslate"><span class="pre">ImageDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.ImageDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">ImageDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.ImageDeduplicator.compute_hash"><code class="docutils literal notranslate"><span class="pre">ImageDeduplicator.compute_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.ImageDeduplicator.process"><code class="docutils literal notranslate"><span class="pre">ImageDeduplicator.process()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBasicDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayBasicDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBasicDeduplicator.EMPTY_HASH_VALUE"><code class="docutils literal notranslate"><span class="pre">RayBasicDeduplicator.EMPTY_HASH_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBasicDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">RayBasicDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBasicDeduplicator.calculate_hash"><code class="docutils literal notranslate"><span class="pre">RayBasicDeduplicator.calculate_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBasicDeduplicator.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">RayBasicDeduplicator.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBasicDeduplicator.process_single"><code class="docutils literal notranslate"><span class="pre">RayBasicDeduplicator.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayDocumentDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayDocumentDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayDocumentDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">RayDocumentDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayDocumentDeduplicator.calculate_hash"><code class="docutils literal notranslate"><span class="pre">RayDocumentDeduplicator.calculate_hash()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayImageDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayImageDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayImageDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">RayImageDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayImageDeduplicator.calculate_hash"><code class="docutils literal notranslate"><span class="pre">RayImageDeduplicator.calculate_hash()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayVideoDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayVideoDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayVideoDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">RayVideoDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayVideoDeduplicator.calculate_hash"><code class="docutils literal notranslate"><span class="pre">RayVideoDeduplicator.calculate_hash()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator.EMPTY_HASH_VALUE"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator.EMPTY_HASH_VALUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator.calc_minhash"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator.calc_minhash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator.merge_op_batch"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator.merge_op_batch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator.merge"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator.merge()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator.filter_with_union_find"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator.filter_with_union_find()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator.run"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.deduplicator.VideoDeduplicator"><code class="docutils literal notranslate"><span class="pre">VideoDeduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.VideoDeduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">VideoDeduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.VideoDeduplicator.compute_hash"><code class="docutils literal notranslate"><span class="pre">VideoDeduplicator.compute_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.deduplicator.VideoDeduplicator.process"><code class="docutils literal notranslate"><span class="pre">VideoDeduplicator.process()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
@@ -80,6 +136,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">&lt;no title&gt;</a></li>
       <li class="breadcrumb-item active">data_juicer.ops.deduplicator</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/data_juicer.ops.deduplicator.rst.txt" rel="nofollow"> View page source</a>

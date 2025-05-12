@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluation Results Recorder &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/documentation_options.js?v=8ca9e7a0"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../en/DJ-cookbook.html">DJ-Cookbook</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.format.html">data_juicer.format</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Evaluation Results Recorder</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/tools/evaluator/recorder/README_ZH.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="evaluation-results-recorder">
+<h1>Evaluation Results Recorder<a class="headerlink" href="#evaluation-results-recorder" title="Link to this heading">¶</a></h1>
+<p>使用 <a class="reference internal" href="#wandb_writer.py"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">wandb_writer.py</span></code></span></a> 将评测结果记录到 <a class="reference external" href="https://wandb.ai/">W&amp;B</a> (wandb) 并可视化展示。</p>
+<p><code class="docutils literal notranslate"><span class="pre">wandb_writer.py</span></code> 能够:</p>
+<ul class="simple">
+<li><p>可视化模型在训练过程中各项评测指标的变化
+<img alt="Metrics" src="docs/imgs/eval-02.png" /></p></li>
+<li><p>制作排行榜来比较不同模型的各项评测指标
+<img alt="Leaderboard" src="docs/imgs/eval-01.png" /></p></li>
+</ul>
+<section id="id1">
+<h2>用法<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>wandb_writer.py<span class="w"> </span>--config<span class="w"> </span>&lt;config_file&gt;<span class="w"> </span><span class="o">[</span>--print-only<span class="o">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config_file</span></code>: yaml 配置文件路径（配置项细节请见<a class="reference internal" href="#id2">配置</a>）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--print-only</span></code>: 仅将结果打印到命令行，不执行写 wandb 操作，用于调试</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>配置<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>我们在 <a class="reference internal" href="../../../data_juicer.config.html#module-data_juicer.config" title="data_juicer.config"><span class="xref myst py py-mod"><code class="docutils literal notranslate"><span class="pre">config</span></code></span></a> 文件夹中为三种不同的情况提供了三个示例文件，其中通用的配置项格式如下:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;str&gt;</span><span class="w">   </span><span class="c1"># wandb 项目名</span>
+<span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;str&gt;</span><span class="w">  </span><span class="c1"># wandb 实例 url</span>
+<span class="c1"># other specific configuration items</span>
+</pre></div>
+</div>
+<p>其他配置项根据实际需要填写。</p>
+<section id="helm">
+<h3>从 HELM 输出目录中提取评测结果<a class="headerlink" href="#helm" title="Link to this heading">¶</a></h3>
+<p>如下配置项用于从 HELM 的输出目录中提取评测结果并记录到 wandb 中。</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># general configurations</span>
+<span class="c1"># ...</span>
+
+<span class="nt">evals</span><span class="p">:</span><span class="w">  </span><span class="c1"># evaluations to record</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">eval_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm</span><span class="w">    </span><span class="c1"># 目前仅支持 helm</span>
+<span class="w">    </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;str&gt;</span><span class="w">  </span><span class="c1"># 模型名字</span>
+<span class="w">    </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm</span><span class="w">  </span><span class="c1"># helm 或 file，这里使用 helm 来从 helm 输出目录提取评测结果</span>
+<span class="w">    </span><span class="nt">helm_output_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your helm output dir path&gt;</span>
+<span class="w">    </span><span class="nt">helm_suite_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your helm suite name&gt;</span>
+<span class="w">    </span><span class="nt">token_per_iteration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;tokens per iteration in billions&gt;</span>
+<span class="w">    </span><span class="nt">benchmarks</span><span class="p">:</span><span class="w">  </span><span class="c1"># 需要记录到 wandb 的评测指标，如下是一些样例</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mmlu</span>
+<span class="w">        </span><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolq</span>
+<span class="w">        </span><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">narrative_qa</span>
+<span class="w">        </span><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">F1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hellaswag</span>
+<span class="w">        </span><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>本工具使用 HELM 的 16 组核心指标作为默认评测指标。如果配置中没有提供 benchmarks 域，则会自动使用如下16个评测指标：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mmlu</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">raft</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">imdb</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">truthful_qa</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">summarization_cnndm</span><span class="o">.</span><span class="n">ROUGE</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">summarization_xsum</span><span class="o">.</span><span class="n">ROUGE</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">boolq</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">msmarco_trec</span><span class="o">.</span><span class="n">NDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">msmarco_regular</span><span class="o">.</span><span class="n">RR</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">narrative_qa</span><span class="o">.</span><span class="n">F1</span><span class="p">,</span> <span class="n">natural_qa_closedbook</span><span class="o">.</span><span class="n">F1</span><span class="p">,</span> <span class="n">natural_qa_openbook_longans</span><span class="o">.</span><span class="n">F1</span><span class="p">,</span> <span class="n">civil_comments</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">hellaswag</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">openbookqa</span><span class="o">.</span><span class="n">EM</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="id3">
+<h3>从配置文件中读取评测结果<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>评测结果可以直接写在配置文件中，该选项主要用于快速向 wandb 记录已有的评测结果。</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># general configurations</span>
+<span class="c1"># ...</span>
+
+<span class="nt">evals</span><span class="p">:</span><span class="w">  </span><span class="c1"># evaluations to record</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">eval_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm</span>
+<span class="w">    </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">llama-7B</span><span class="w">  </span><span class="c1"># 模型名字</span>
+<span class="w">    </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span><span class="w">  </span><span class="c1"># helm 或 file，这里使用 file 来直接从配置文件提取评测结果</span>
+<span class="w">    </span><span class="nt">token_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span><span class="w"> </span><span class="c1"># 需要提供该模型训练时使用的 token 数量（单位：B）</span>
+<span class="w">    </span><span class="nt">eval_result</span><span class="p">:</span><span class="w">  </span><span class="c1"># 需要被记录的评测结果，如下为一些样例</span>
+<span class="w">      </span><span class="nt">mmlu</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">EM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.345</span>
+<span class="w">      </span><span class="nt">boolq</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">EM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.751</span>
+<span class="w">      </span><span class="nt">narrative_qa</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">F1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.524</span>
+<span class="w">      </span><span class="nt">hellaswag</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">EM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.747</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>构建排行榜<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>如下配置用于对在同一个 wandb 项目中的数据生成排行榜。</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># general configurations</span>
+<span class="c1"># ...</span>
+<span class="nt">leaderboard</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">leaderboard_metrics</span><span class="p">:</span><span class="w">  </span><span class="c1"># 排行榜中需要统计的指标（仅有包含全部指标评测结果的模型才会进入榜单）</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mmlu.EM</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolq.EM</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quac.F1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hellaswag.EM</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="nt">excluded_models</span><span class="p">:</span><span class="w">   </span><span class="c1"># 不参与排行榜的模型名称</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;model to exclude&gt;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>工具使用 HELM 的 16 组核心指标作为默认的排行榜指标。如果没有提供 <code class="docutils literal notranslate"><span class="pre">leaderboard_metrics</span></code> 域，则会自动使用这 16 组核心指标。</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

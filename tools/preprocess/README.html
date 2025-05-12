@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preprocess Tools &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/documentation_options.js?v=8ca9e7a0"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Postprocess tools" href="../postprocess/README.html" />
+    <link rel="prev" title="How-to Guide for Developers" href="../../docs/DeveloperGuide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../en/DJ-cookbook.html">DJ-Cookbook</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../en/DJ-cookbook.html#curated-resources">Curated Resources</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../en/DJ-cookbook.html#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../en/DJ-cookbook.html#basics">Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../en/DJ-cookbook.html#lookup-materials">Lookup Materials</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../en/DJ-cookbook.html#advanced">Advanced</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Preprocess Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../postprocess/README.html">Postprocess tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../docs/Sandbox.html">Sandbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../docs/DJ_service.html">DJ_service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quality_classifier/README.html">Data Scoring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluator/README.html">Auto Evaluation Toolkit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../thirdparty/LLM_ecosystems/README.html">LLM Ecosystems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../en/DJ-cookbook.html#use-cases-data-recipes">Use Cases &amp; Data Recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../en/DJ-cookbook.html#interactive-examples">Interactive Examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_juicer.format.html">data_juicer.format</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../en/DJ-cookbook.html">DJ-Cookbook</a></li>
+      <li class="breadcrumb-item active">Preprocess Tools</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tools/preprocess/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="preprocess-tools">
+<h1>Preprocess Tools<a class="headerlink" href="#preprocess-tools" title="Link to this heading">¶</a></h1>
+<p>This folder contains some preprocess scripts for additional processing of your dataset before using Data-Juicer.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<section id="split-datasets-to-sub-datasets-by-language">
+<h3>Split datasets to sub-datasets by language<a class="headerlink" href="#split-datasets-to-sub-datasets-by-language" title="Link to this heading">¶</a></h3>
+<p>This tool will split raw dataset to different sub-datasets by language information.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/dataset_split_by_language.py<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">             </span>&lt;src_dir&gt;<span class="w">          </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">          </span>&lt;target_dir&gt;<span class="w">       </span><span class="se">\</span>
+<span class="w">    </span>--suffixes<span class="w">            </span>&lt;suffixes&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--text_key<span class="w">            </span>&lt;text_key&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">            </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/dataset_split_by_language.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: you just need to set this argument to the path which stores your datasets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: result directory to store the converted jsonl files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_key</span></code>: key name of field that stores sample text. Default: text</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffixes</span></code>: the suffix of files that will be read. Default: None</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (optional): number of process workers. Default it’s 1.</p></li>
+</ul>
+</section>
+<section id="convert-raw-arxiv-data-to-jsonl">
+<h3>Convert raw arXiv data to jsonl<a class="headerlink" href="#convert-raw-arxiv-data-to-jsonl" title="Link to this heading">¶</a></h3>
+<p>This tool is used to convert the raw arXiv data downloaded from S3 into the jsonl format which is friendly to Data-Juicer.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_arxiv_to_jsonl.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--arxiv_src_dir<span class="w">       </span>&lt;arxiv_src_dir&gt;<span class="w">    </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">          </span>&lt;target_dir&gt;<span class="w">       </span><span class="se">\</span>
+<span class="w">    </span>--temp_dir<span class="w">            </span>&lt;temp_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">            </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/raw_arxiv_to_jsonl.py<span class="w">  </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arxiv_src_dir</span></code>: if you download raw arXiv data as Redpajama did, you will get a directory src which includes thousands of tar files whose filenames are like <code class="docutils literal notranslate"><span class="pre">arXiv_src_yymm_xxx.tar</span></code>. You just need to set this argument to the path of this dir.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: result directory to store the converted jsonl files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temp_dir</span></code>: directory to store intermediate files, and they will be removed once the conversion ends. Default it’s <code class="docutils literal notranslate"><span class="pre">./tmp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (optional): number of process workers. Default it’s 1.</p></li>
+</ul>
+<p><strong>Note:</strong></p>
+<ul class="simple">
+<li><p>For downloading process, please refer to <a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/arxiv">here</a>.</p></li>
+<li><p>Before you downloading, converting or processing, you might make sure that your drive space is large enough to store the raw data (over 3TB), converted data (over 3TB), at least processed data (about 500-600GB), and even more cache data during processing.</p></li>
+</ul>
+</section>
+<section id="convert-raw-stack-exchange-data-to-jsonl">
+<h3>Convert raw stack_exchange data to jsonl<a class="headerlink" href="#convert-raw-stack-exchange-data-to-jsonl" title="Link to this heading">¶</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">raw_stackexchange_to_jsonl.py</span></code> to convert raw stack_exchange data.</p>
+<p>This tool is used for converting the raw Stack Exchange data downloaded from from <a class="reference external" href="https://archive.org/download/stackexchange">Archive</a> to several jsonl files.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_arxiv_stackexchange_to_jsonl.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">       </span>&lt;src_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">    </span>&lt;target_dir&gt;<span class="w">   </span><span class="se">\</span>
+<span class="w">    </span>--topk<span class="w">          </span>&lt;topk&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">      </span>&lt;num_proc&gt;<span class="w">     </span><span class="se">\</span>
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/raw_stackexchange_to_jsonl.py<span class="w">  </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: if you download raw Stack Exchange data as Redpajama did, you will get a directory src which includes hundreds of 7z files whose filenames are like <code class="docutils literal notranslate"><span class="pre">*.*.com.7z</span> </code>. You need to unzip these files and rename the POSTs.xml to the corresponding compressed package name and place it in that dir. For more details, please refer to <a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/stack_exchange">here</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: result directory to store the converted jsonl files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topk</span></code> (optional): select the topk sites with the most content. Default it’s 28.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (optional): number of process workers. Default it’s 1.</p></li>
+</ul>
+<p><strong>Note:</strong> Before you downloading, converting or processing, you might make sure that your drive space is large enough to store the raw data (over 100GB), converted data (over 100GB)</p>
+</section>
+<section id="convert-raw-alpaca-cot-data-to-jsonl">
+<h3>Convert raw Alpaca-CoT data to jsonl<a class="headerlink" href="#convert-raw-alpaca-cot-data-to-jsonl" title="Link to this heading">¶</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">raw_alpaca_cot_merge_add_meta.py</span></code> to convert raw Alpaca-CoT data.</p>
+<p>This tool is used for converting the raw Alpaca-Cot data downloaded from <a class="reference external" href="https://huggingface.co/datasets/QingyiSi/Alpaca-CoT">HuggingFace</a> to jsonl files.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_alpaca_cot_merge_add_meta.py<span class="w">       </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/raw_alpaca_cot_merge_add_meta.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: you just need to set this argument to the path which stores Alpaca_CoT data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: result directory to store the converted jsonl files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (optional): number of process workers. Default it’s 1.</p></li>
+</ul>
+</section>
+<section id="reformat-csv-or-tsv-file">
+<h3>Reformat csv or tsv file<a class="headerlink" href="#reformat-csv-or-tsv-file" title="Link to this heading">¶</a></h3>
+<p>This tool is used to reformat csv or tsv files which may have Nan values in some field to several jsonl files.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/reformat_csv_nan_value.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--suffixes<span class="w">          </span>&lt;suffixes&gt;<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--is_tsv<span class="w">            </span>&lt;is_tsv&gt;<span class="w">          </span><span class="se">\</span>
+<span class="w">    </span>--keep_default_na<span class="w">   </span>&lt;keep_default_na&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/reformat_csv_nan_value.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: you just need to set this argument to the path which stores filenames are like <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> or <code class="docutils literal notranslate"><span class="pre">*.tsv</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: result directory to store the converted jsonl files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffixes</span></code>: what kind of suffixes you want to process, multi-suffixes args like  <code class="docutils literal notranslate"><span class="pre">--suffixes</span> <span class="pre">'.tsv',</span> <span class="pre">'.csv'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_tsv</span></code>: if true, sep will be set to <code class="docutils literal notranslate"><span class="pre">'\t'</span></code>, otherwise <code class="docutils literal notranslate"><span class="pre">','</span></code> as default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keep_default_na</span></code>: if False, strings will be parsed as NaN, otherwise only the default NaN values are used for parsing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (optional): number of process workers. Default it’s 1.</p></li>
+</ul>
+</section>
+<section id="reformat-jsonl-file">
+<h3>Reformat jsonl file<a class="headerlink" href="#reformat-jsonl-file" title="Link to this heading">¶</a></h3>
+<p>This tool is used to reformat jsonl files which may have Nan values in some field.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/reformat_jsonl_nan_value.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/reformat_jsonl_nan_value.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: you just need to set this argument to the path which stores filenames are like <code class="docutils literal notranslate"><span class="pre">*.jsonl</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: result directory to store the converted jsonl files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (optional): number of process workers. Default it’s 1.</p></li>
+</ul>
+</section>
+<section id="serialize-meta-fields-in-jsonl-file">
+<h3>Serialize meta fields in jsonl file<a class="headerlink" href="#serialize-meta-fields-in-jsonl-file" title="Link to this heading">¶</a></h3>
+<p>In some jsonl files, different samples may have different meta fields, and even the data types in the same meta field may be different, which will cause failure to read the dataset using <a class="reference external" href="https://huggingface.co/docs/datasets/index">HuggingFace Dataset</a>. This tool is used to serialize all meta fields except <code class="docutils literal notranslate"><span class="pre">text_key</span></code> in these jsonl files into strings to facilitate subsequent Data-juicer processing. After the dataset is processed, it usually needs to be deserialized using <a class="reference internal" href="#../postprocess/deserialize_meta.py"><span class="xref myst">deserialize_meta.py</span></a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/serialize_meta.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--text_key<span class="w">          </span>&lt;text_key&gt;<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--serialized_key<span class="w">    </span>&lt;serialized_key&gt;<span class="w">  </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/serialize_meta.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: path to store jsonl files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: path to save the converted jsonl files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_key</span></code>: the key corresponding to the field that will not be serialized. Default it’s ‘text’.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serialized_key</span></code>: the key corresponding to the field that the serialized info saved. Default it’s ‘source_info’.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (optional): number of process workers. Default it’s 1.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../docs/DeveloperGuide.html" class="btn btn-neutral float-left" title="How-to Guide for Developers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../postprocess/README.html" class="btn btn-neutral float-right" title="Postprocess tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

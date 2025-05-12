@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metrics for video generation &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/documentation_options.js?v=8ca9e7a0"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../en/DJ-cookbook.html">DJ-Cookbook</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data_juicer.format.html">data_juicer.format</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Metrics for video generation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/tools/mm_eval/inception_metrics/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="metrics-for-video-generation">
+<h1>Metrics for video generation<a class="headerlink" href="#metrics-for-video-generation" title="Link to this heading">¶</a></h1>
+<p>This folder contains some postprocess scripts for evaluation of generated videos.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<p>Use <a class="reference internal" href="#calc_metrics_for_dataset.py"><span class="xref myst">calc_metrics_for_dataset.py</span></a> to compute FVD/ISV for generated videos.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/video_metrics/calc_metrics_for_dataset.py<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--fake_data_path<span class="w">    </span>&lt;fake_data_path&gt;<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--real_data_path<span class="w">    </span>&lt;real_data_path&gt;<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--fake_mm_dir<span class="w">      </span>&lt;fake_mm_dir&gt;<span class="o">]</span><span class="w">          </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--real_mm_dir<span class="w">      </span>&lt;real_mm_dir&gt;<span class="o">]</span><span class="w">          </span><span class="se">\</span>
+<span class="w">    </span>--metric<span class="w">            </span>&lt;metric&gt;<span class="w">                </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--detector_path<span class="w">    </span>&lt;detector_path&gt;<span class="o">]</span><span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--result_path<span class="w">       </span>&lt;result_path&gt;<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--num_runs<span class="w">          </span>&lt;num_runs&gt;<span class="w">              </span><span class="se">\</span>
+<span class="w">    </span>--height<span class="w">            </span>&lt;height&gt;<span class="w">                </span><span class="se">\</span>
+<span class="w">    </span>--width<span class="w">             </span>&lt;width&gt;<span class="w">                 </span><span class="se">\</span>
+<span class="w">    </span>--replace_cache<span class="w">     </span>&lt;replace_cache&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--verbose<span class="w">           </span>&lt;verbose&gt;<span class="w">               </span><span class="se">\</span>
+<span class="w">    </span>--seed<span class="w">              </span>&lt;seed&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/video_metrics/calc_metrics_for_dataset.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fake_data_path</span></code>: The path to generated dataset. Only support for <code class="docutils literal notranslate"><span class="pre">jsonl</span></code> format. The video paths are put in the list under <code class="docutils literal notranslate"><span class="pre">videos</span></code> keys.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">real_data_path</span></code>: The path to ground truth dataset. Only support for <code class="docutils literal notranslate"><span class="pre">jsonl</span></code> format. The video paths are put in the list under <code class="docutils literal notranslate"><span class="pre">videos</span></code> keys. Required when computing FVD, FID, KID, and PR.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fake_mm_dir</span></code>: The root directory to store the fake videos. If it is not none, the paths in jsonl file at fake_data_path are relative paths on it, else are absolute path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">real_mm_dir</span></code>: The root directory to store the real videos. If it is not none, the paths in jsonl file at real_data_path are relative paths on it, else are absolute path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metric</span></code>: The name of metric applied, currently support <code class="docutils literal notranslate"><span class="pre">fvd2048_16f</span></code>, <code class="docutils literal notranslate"><span class="pre">fvd2048_128f</span></code>, <code class="docutils literal notranslate"><span class="pre">fvd2048_128f_subsample8f</span></code>, <code class="docutils literal notranslate"><span class="pre">kvd2048_16f</span></code>, <code class="docutils literal notranslate"><span class="pre">isv2048_ucf</span></code>, <code class="docutils literal notranslate"><span class="pre">prv2048_3n_16f</span></code>, <code class="docutils literal notranslate"><span class="pre">fid50k</span></code>, <code class="docutils literal notranslate"><span class="pre">kid50k</span></code>, <code class="docutils literal notranslate"><span class="pre">is50k</span></code>, <code class="docutils literal notranslate"><span class="pre">pr50k_3n</span></code>.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">fvd2048_16f</span></code>: Compute Frechet Video Distance (FVD), sample 2048 times in dataset, 16 adjacent frames each time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fvd2048_128f</span></code>: Compute Frechet Video Distance (FVD), sample 2048 times in dataset, 128 adjacent frames each time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fvd2048_128f_subsample8f</span></code>: Compute Frechet Video Distance (FVD), sample 2048 times in dataset, 16 frames each time, sample 1 frame every adjacent 8 frames.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kvd2048_16f</span></code>: Compute Kernel Video Distance (KVD), sample 2048 times in dataset, 16 adjacent frames each time, split features to 100 subset to compute KVDs and return the mean.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isv2048_ucf</span></code>: Compute Inception Score of Videos (ISV), sample 2048 times in dataset, 16 frames each time, split features to 10 subset to compute ISs and return the mean and std.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prv2048_3n_16f</span></code>: Compute Precision/Recall of Videos (PRV), sample 2048 times in dataset, 16 adjacent frames each time, with the 4th nearest features to estimate the distributions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fid50k</span></code>: Compute Frechet Inception Distance (FID) of frames, sample 50000 frames from fake dataset at most.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kid50k</span></code>: Compute Kernel Inception Distance (KID) of frames, sample 50000 frames from fake dataset at most, split features to 100 subset to compute KIDs and return the mean.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is50k</span></code>: Compute Inception Score(IS) of frames, sample 50000 frames from fake dataset at most, split features to 10 subset to compute ISs and return the mean and std.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pr50k_3n</span></code>: Compute Precision/Recall (PR) of frames, sample 50000 frames from fake dataset at most, with the 4th nearest features to estimate the distributions</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">detector_path</span></code>: Path to the corresponding detection model. Download the model from web if it is None.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">result_path</span></code>: Path to JSON filename for saving results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_runs</span></code>: How many runs of the metric to average over.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">height</span></code>: Sampled frames will be resized to this height.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">width</span></code>: Sampled frames will be resized to this width.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">replace_cache</span></code>: Whether to replace the dataset stats cache.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>: Whether to log progress.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seed</span></code>: the random seed</p></li>
+</ul>
+</section>
+<section id="introduction-of-metrics">
+<h2>Introduction of Metrics<a class="headerlink" href="#introduction-of-metrics" title="Link to this heading">¶</a></h2>
+<section id="fvd">
+<h3>FVD<a class="headerlink" href="#fvd" title="Link to this heading">¶</a></h3>
+<p>The Frechet Video Distance (FVD)<sup><a class="reference internal" href="#reference"><span class="xref myst">1</span></a></sup> measures the distance of distribution of video features from real dataset and fake dataset, extracted by a video classifier. The video classifier is an I3D model, trained on Kinetics-400, containing 400 human action classes.</p>
+</section>
+<section id="kvd">
+<h3>KVD<a class="headerlink" href="#kvd" title="Link to this heading">¶</a></h3>
+<p>The Kernel Video Distance (KVD) is the video version of Frechet Inception Distance (FID)<sup><a class="reference internal" href="#reference"><span class="xref myst">3</span></a></sup>, which extract features from videos by an I3D model, trained on Kinetics-400, containing 400 human action classes.</p>
+</section>
+<section id="isv">
+<h3>ISV<a class="headerlink" href="#isv" title="Link to this heading">¶</a></h3>
+<p>The Inception Score of Videos (ISV)<sup><a class="reference internal" href="#reference"><span class="xref myst">2</span></a></sup> evaluates the generated videos based on their quality and diversity, with a preference for diversity. Utilizing a C3D video classification model trained on the UCF101 action recognition dataset, ISV assesses quality through the classification certainty of each video—specifically, by computing the sum of the negative entropy of individual predictions. Meanwhile, diversity is gauged by the entropy of the prediction averages.</p>
+</section>
+<section id="prv">
+<h3>PRV<a class="headerlink" href="#prv" title="Link to this heading">¶</a></h3>
+<p>The Precision/Recall of Videos (PRV) is the video version of Precision/Recall (PR)<sup><a class="reference internal" href="#reference"><span class="xref myst">5</span></a></sup>, which extract features from videos by an I3D model, trained on Kinetics-400, containing 400 human action classes.</p>
+</section>
+<section id="fid">
+<h3>FID<a class="headerlink" href="#fid" title="Link to this heading">¶</a></h3>
+<p>The Frechet Inception Distance (FID)<sup><a class="reference internal" href="#reference"><span class="xref myst">3</span></a></sup> shares similarities with FVD in its approach, evaluating videos by analyzing the features of individual frames derived from an image classification model trained on ImageNet.</p>
+</section>
+<section id="kid">
+<h3>KID<a class="headerlink" href="#kid" title="Link to this heading">¶</a></h3>
+<p>The Kernel Inception Distance (KID)<sup><a class="reference internal" href="#reference"><span class="xref myst">4</span></a></sup> is similar to FID and quantifies the dissimilarity between two sets of videos by computing the squared maximum mean discrepancy of the features of frames through multiple samplings. Unlike FID, KID utilizes an unbiased estimator with a third-degree kernel, aligning more consistently with human perception. The applied image classification model is same as the model FID applied.</p>
+</section>
+<section id="is">
+<h3>IS<a class="headerlink" href="#is" title="Link to this heading">¶</a></h3>
+<p>The Inception Score (IS)<sup><a class="reference internal" href="#reference"><span class="xref myst">2</span></a></sup> shares similarities with ISV in its approach, evaluating videos by analyzing the predictions of individual frames derived from an image classification model trained on ImageNet.</p>
+</section>
+<section id="pr">
+<h3>PR<a class="headerlink" href="#pr" title="Link to this heading">¶</a></h3>
+<p>The Precision/Recall (PR)<sup><a class="reference internal" href="#reference"><span class="xref myst">5</span></a></sup> estimates the distribution of features of frames in the feature space by demarcating a region within the distance to the k-nearest neighbor features. It then assesses the precision and recall of frame generation by determining whether samples fall within the distributions of the real and fake datasets. The features are extracted from the VGG image classification model<sup><a class="reference internal" href="#reference"><span class="xref myst">6</span></a></sup> trained on ILSVRC-2012.</p>
+<h2 id="reference">Reference:</h2>
+<ul class="simple">
+<li><p>[1] Unterthiner, Thomas, et al. “Towards accurate generative models of video: A new metric &amp; challenges.” arXiv preprint arXiv:1812.01717 (2018).</p></li>
+<li><p>[2] Salimans, Tim, et al. “Improved techniques for training gans.” Advances in neural information processing systems 29 (2016).</p></li>
+<li><p>[3] Heusel, Martin, et al. “Gans trained by a two time-scale update rule converge to a local nash equilibrium.” Advances in neural information processing systems 30 (2017).</p></li>
+<li><p>[4] Bińkowski, Mikołaj, et al. “Demystifying mmd gans.” arXiv preprint arXiv:1801.01401 (2018).</p></li>
+<li><p>[5] Kynkäänniemi, Tuomas, et al. “Improved precision and recall metric for assessing generative models.” Advances in neural information processing systems 32 (2019).</p></li>
+<li><p>[6] Simonyan, Karen, and Andrew Zisserman. “Very deep convolutional networks for large-scale image recognition.” arXiv preprint arXiv:1409.1556 (2014).</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

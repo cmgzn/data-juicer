@@ -40,58 +40,309 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="en/DJ-cookbook.html">DJ-Cookbook</a></li>
+</ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">data_juicer.ops.filter</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AlphanumericFilter"><code class="docutils literal notranslate"><span class="pre">AlphanumericFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AudioDurationFilter"><code class="docutils literal notranslate"><span class="pre">AudioDurationFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AudioNMFSNRFilter"><code class="docutils literal notranslate"><span class="pre">AudioNMFSNRFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AudioSizeFilter"><code class="docutils literal notranslate"><span class="pre">AudioSizeFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AverageLineLengthFilter"><code class="docutils literal notranslate"><span class="pre">AverageLineLengthFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.CharacterRepetitionFilter"><code class="docutils literal notranslate"><span class="pre">CharacterRepetitionFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.FlaggedWordFilter"><code class="docutils literal notranslate"><span class="pre">FlaggedWordFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageAestheticsFilter"><code class="docutils literal notranslate"><span class="pre">ImageAestheticsFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageAspectRatioFilter"><code class="docutils literal notranslate"><span class="pre">ImageAspectRatioFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceCountFilter"><code class="docutils literal notranslate"><span class="pre">ImageFaceCountFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceRatioFilter"><code class="docutils literal notranslate"><span class="pre">ImageFaceRatioFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageNSFWFilter"><code class="docutils literal notranslate"><span class="pre">ImageNSFWFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImagePairSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">ImagePairSimilarityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageShapeFilter"><code class="docutils literal notranslate"><span class="pre">ImageShapeFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageSizeFilter"><code class="docutils literal notranslate"><span class="pre">ImageSizeFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextMatchingFilter"><code class="docutils literal notranslate"><span class="pre">ImageTextMatchingFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">ImageTextSimilarityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageWatermarkFilter"><code class="docutils literal notranslate"><span class="pre">ImageWatermarkFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.LanguageIDScoreFilter"><code class="docutils literal notranslate"><span class="pre">LanguageIDScoreFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.MaximumLineLengthFilter"><code class="docutils literal notranslate"><span class="pre">MaximumLineLengthFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.PerplexityFilter"><code class="docutils literal notranslate"><span class="pre">PerplexityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.PhraseGroundingRecallFilter"><code class="docutils literal notranslate"><span class="pre">PhraseGroundingRecallFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.SpecialCharactersFilter"><code class="docutils literal notranslate"><span class="pre">SpecialCharactersFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedFieldFilter"><code class="docutils literal notranslate"><span class="pre">SpecifiedFieldFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedNumericFieldFilter"><code class="docutils literal notranslate"><span class="pre">SpecifiedNumericFieldFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.StopWordsFilter"><code class="docutils literal notranslate"><span class="pre">StopWordsFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.SuffixFilter"><code class="docutils literal notranslate"><span class="pre">SuffixFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TextActionFilter"><code class="docutils literal notranslate"><span class="pre">TextActionFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TextEntityDependencyFilter"><code class="docutils literal notranslate"><span class="pre">TextEntityDependencyFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TextLengthFilter"><code class="docutils literal notranslate"><span class="pre">TextLengthFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TextPairSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">TextPairSimilarityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TokenNumFilter"><code class="docutils literal notranslate"><span class="pre">TokenNumFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoAestheticsFilter"><code class="docutils literal notranslate"><span class="pre">VideoAestheticsFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoAspectRatioFilter"><code class="docutils literal notranslate"><span class="pre">VideoAspectRatioFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoDurationFilter"><code class="docutils literal notranslate"><span class="pre">VideoDurationFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoFramesTextSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">VideoFramesTextSimilarityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreFilter"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreRaftFilter"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreRaftFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoNSFWFilter"><code class="docutils literal notranslate"><span class="pre">VideoNSFWFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoOcrAreaRatioFilter"><code class="docutils literal notranslate"><span class="pre">VideoOcrAreaRatioFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoResolutionFilter"><code class="docutils literal notranslate"><span class="pre">VideoResolutionFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoTaggingFromFramesFilter"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromFramesFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoWatermarkFilter"><code class="docutils literal notranslate"><span class="pre">VideoWatermarkFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.WordRepetitionFilter"><code class="docutils literal notranslate"><span class="pre">WordRepetitionFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.WordsNumFilter"><code class="docutils literal notranslate"><span class="pre">WordsNumFilter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AlphanumericFilter"><code class="docutils literal notranslate"><span class="pre">AlphanumericFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AlphanumericFilter.__init__"><code class="docutils literal notranslate"><span class="pre">AlphanumericFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AlphanumericFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">AlphanumericFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AlphanumericFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">AlphanumericFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AudioDurationFilter"><code class="docutils literal notranslate"><span class="pre">AudioDurationFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AudioDurationFilter.__init__"><code class="docutils literal notranslate"><span class="pre">AudioDurationFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AudioDurationFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">AudioDurationFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AudioDurationFilter.process_single"><code class="docutils literal notranslate"><span class="pre">AudioDurationFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AudioNMFSNRFilter"><code class="docutils literal notranslate"><span class="pre">AudioNMFSNRFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AudioNMFSNRFilter.__init__"><code class="docutils literal notranslate"><span class="pre">AudioNMFSNRFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AudioNMFSNRFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">AudioNMFSNRFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AudioNMFSNRFilter.process_single"><code class="docutils literal notranslate"><span class="pre">AudioNMFSNRFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AudioSizeFilter"><code class="docutils literal notranslate"><span class="pre">AudioSizeFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AudioSizeFilter.__init__"><code class="docutils literal notranslate"><span class="pre">AudioSizeFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AudioSizeFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">AudioSizeFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AudioSizeFilter.process_single"><code class="docutils literal notranslate"><span class="pre">AudioSizeFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.AverageLineLengthFilter"><code class="docutils literal notranslate"><span class="pre">AverageLineLengthFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AverageLineLengthFilter.__init__"><code class="docutils literal notranslate"><span class="pre">AverageLineLengthFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AverageLineLengthFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">AverageLineLengthFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.AverageLineLengthFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">AverageLineLengthFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.CharacterRepetitionFilter"><code class="docutils literal notranslate"><span class="pre">CharacterRepetitionFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.CharacterRepetitionFilter.__init__"><code class="docutils literal notranslate"><span class="pre">CharacterRepetitionFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.CharacterRepetitionFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">CharacterRepetitionFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.CharacterRepetitionFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">CharacterRepetitionFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.FlaggedWordFilter"><code class="docutils literal notranslate"><span class="pre">FlaggedWordFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.FlaggedWordFilter.__init__"><code class="docutils literal notranslate"><span class="pre">FlaggedWordFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.FlaggedWordFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">FlaggedWordFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.FlaggedWordFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">FlaggedWordFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageAestheticsFilter"><code class="docutils literal notranslate"><span class="pre">ImageAestheticsFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageAestheticsFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageAestheticsFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageAestheticsFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImageAestheticsFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageAestheticsFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImageAestheticsFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageAspectRatioFilter"><code class="docutils literal notranslate"><span class="pre">ImageAspectRatioFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageAspectRatioFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageAspectRatioFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageAspectRatioFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">ImageAspectRatioFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageAspectRatioFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">ImageAspectRatioFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceCountFilter"><code class="docutils literal notranslate"><span class="pre">ImageFaceCountFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceCountFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageFaceCountFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceCountFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImageFaceCountFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceCountFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImageFaceCountFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceRatioFilter"><code class="docutils literal notranslate"><span class="pre">ImageFaceRatioFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceRatioFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageFaceRatioFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceRatioFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImageFaceRatioFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageFaceRatioFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImageFaceRatioFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageNSFWFilter"><code class="docutils literal notranslate"><span class="pre">ImageNSFWFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageNSFWFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageNSFWFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageNSFWFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImageNSFWFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageNSFWFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImageNSFWFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImagePairSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">ImagePairSimilarityFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImagePairSimilarityFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImagePairSimilarityFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImagePairSimilarityFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImagePairSimilarityFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImagePairSimilarityFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImagePairSimilarityFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageShapeFilter"><code class="docutils literal notranslate"><span class="pre">ImageShapeFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageShapeFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageShapeFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageShapeFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImageShapeFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageShapeFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImageShapeFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageSizeFilter"><code class="docutils literal notranslate"><span class="pre">ImageSizeFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageSizeFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageSizeFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageSizeFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImageSizeFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageSizeFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImageSizeFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextMatchingFilter"><code class="docutils literal notranslate"><span class="pre">ImageTextMatchingFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextMatchingFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageTextMatchingFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextMatchingFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImageTextMatchingFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextMatchingFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImageTextMatchingFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">ImageTextSimilarityFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextSimilarityFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageTextSimilarityFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextSimilarityFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImageTextSimilarityFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageTextSimilarityFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImageTextSimilarityFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.ImageWatermarkFilter"><code class="docutils literal notranslate"><span class="pre">ImageWatermarkFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageWatermarkFilter.__init__"><code class="docutils literal notranslate"><span class="pre">ImageWatermarkFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageWatermarkFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">ImageWatermarkFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.ImageWatermarkFilter.process_single"><code class="docutils literal notranslate"><span class="pre">ImageWatermarkFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.LanguageIDScoreFilter"><code class="docutils literal notranslate"><span class="pre">LanguageIDScoreFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LanguageIDScoreFilter.__init__"><code class="docutils literal notranslate"><span class="pre">LanguageIDScoreFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LanguageIDScoreFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">LanguageIDScoreFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LanguageIDScoreFilter.process_single"><code class="docutils literal notranslate"><span class="pre">LanguageIDScoreFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter.DEFAULT_SYSTEM_PROMPT"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter.DEFAULT_SYSTEM_PROMPT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter.DEFAULT_INPUT_TEMPLATE"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter.DEFAULT_INPUT_TEMPLATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter.DEFAULT_FIELD_TEMPLATE"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter.DEFAULT_FIELD_TEMPLATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter.__init__"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter.build_input"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter.build_input()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter.parse_output"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter.parse_output()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMQualityScoreFilter.process_single"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter.DEFAULT_SYSTEM_PROMPT"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter.DEFAULT_SYSTEM_PROMPT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter.DEFAULT_INPUT_TEMPLATE"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter.DEFAULT_INPUT_TEMPLATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter.DEFAULT_FIELD_TEMPLATE"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter.DEFAULT_FIELD_TEMPLATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter.__init__"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter.build_input"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter.build_input()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter.parse_output"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter.parse_output()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.LLMDifficultyScoreFilter.process_single"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.MaximumLineLengthFilter"><code class="docutils literal notranslate"><span class="pre">MaximumLineLengthFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.MaximumLineLengthFilter.__init__"><code class="docutils literal notranslate"><span class="pre">MaximumLineLengthFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.MaximumLineLengthFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">MaximumLineLengthFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.MaximumLineLengthFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">MaximumLineLengthFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.PerplexityFilter"><code class="docutils literal notranslate"><span class="pre">PerplexityFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.PerplexityFilter.__init__"><code class="docutils literal notranslate"><span class="pre">PerplexityFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.PerplexityFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">PerplexityFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.PerplexityFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">PerplexityFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.PhraseGroundingRecallFilter"><code class="docutils literal notranslate"><span class="pre">PhraseGroundingRecallFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.PhraseGroundingRecallFilter.__init__"><code class="docutils literal notranslate"><span class="pre">PhraseGroundingRecallFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.PhraseGroundingRecallFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">PhraseGroundingRecallFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.PhraseGroundingRecallFilter.process_single"><code class="docutils literal notranslate"><span class="pre">PhraseGroundingRecallFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.SpecialCharactersFilter"><code class="docutils literal notranslate"><span class="pre">SpecialCharactersFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SpecialCharactersFilter.__init__"><code class="docutils literal notranslate"><span class="pre">SpecialCharactersFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SpecialCharactersFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">SpecialCharactersFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SpecialCharactersFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">SpecialCharactersFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedFieldFilter"><code class="docutils literal notranslate"><span class="pre">SpecifiedFieldFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedFieldFilter.__init__"><code class="docutils literal notranslate"><span class="pre">SpecifiedFieldFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedFieldFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">SpecifiedFieldFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedFieldFilter.process_single"><code class="docutils literal notranslate"><span class="pre">SpecifiedFieldFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedNumericFieldFilter"><code class="docutils literal notranslate"><span class="pre">SpecifiedNumericFieldFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedNumericFieldFilter.__init__"><code class="docutils literal notranslate"><span class="pre">SpecifiedNumericFieldFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedNumericFieldFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">SpecifiedNumericFieldFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SpecifiedNumericFieldFilter.process_single"><code class="docutils literal notranslate"><span class="pre">SpecifiedNumericFieldFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.StopWordsFilter"><code class="docutils literal notranslate"><span class="pre">StopWordsFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.StopWordsFilter.__init__"><code class="docutils literal notranslate"><span class="pre">StopWordsFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.StopWordsFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">StopWordsFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.StopWordsFilter.process_single"><code class="docutils literal notranslate"><span class="pre">StopWordsFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.SuffixFilter"><code class="docutils literal notranslate"><span class="pre">SuffixFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SuffixFilter.__init__"><code class="docutils literal notranslate"><span class="pre">SuffixFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SuffixFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">SuffixFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.SuffixFilter.process_single"><code class="docutils literal notranslate"><span class="pre">SuffixFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TextActionFilter"><code class="docutils literal notranslate"><span class="pre">TextActionFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextActionFilter.__init__"><code class="docutils literal notranslate"><span class="pre">TextActionFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextActionFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">TextActionFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextActionFilter.process_single"><code class="docutils literal notranslate"><span class="pre">TextActionFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TextEntityDependencyFilter"><code class="docutils literal notranslate"><span class="pre">TextEntityDependencyFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextEntityDependencyFilter.__init__"><code class="docutils literal notranslate"><span class="pre">TextEntityDependencyFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextEntityDependencyFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">TextEntityDependencyFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextEntityDependencyFilter.process_single"><code class="docutils literal notranslate"><span class="pre">TextEntityDependencyFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TextLengthFilter"><code class="docutils literal notranslate"><span class="pre">TextLengthFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextLengthFilter.__init__"><code class="docutils literal notranslate"><span class="pre">TextLengthFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextLengthFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">TextLengthFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextLengthFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">TextLengthFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TextPairSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">TextPairSimilarityFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextPairSimilarityFilter.__init__"><code class="docutils literal notranslate"><span class="pre">TextPairSimilarityFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextPairSimilarityFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">TextPairSimilarityFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TextPairSimilarityFilter.process_single"><code class="docutils literal notranslate"><span class="pre">TextPairSimilarityFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.TokenNumFilter"><code class="docutils literal notranslate"><span class="pre">TokenNumFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TokenNumFilter.__init__"><code class="docutils literal notranslate"><span class="pre">TokenNumFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TokenNumFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">TokenNumFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.TokenNumFilter.process_single"><code class="docutils literal notranslate"><span class="pre">TokenNumFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoAestheticsFilter"><code class="docutils literal notranslate"><span class="pre">VideoAestheticsFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoAestheticsFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoAestheticsFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoAestheticsFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoAestheticsFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoAestheticsFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoAestheticsFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoAspectRatioFilter"><code class="docutils literal notranslate"><span class="pre">VideoAspectRatioFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoAspectRatioFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoAspectRatioFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoAspectRatioFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoAspectRatioFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoAspectRatioFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoAspectRatioFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoDurationFilter"><code class="docutils literal notranslate"><span class="pre">VideoDurationFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoDurationFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoDurationFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoDurationFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoDurationFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoDurationFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoDurationFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoFramesTextSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">VideoFramesTextSimilarityFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoFramesTextSimilarityFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoFramesTextSimilarityFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoFramesTextSimilarityFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoFramesTextSimilarityFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoFramesTextSimilarityFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoFramesTextSimilarityFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreFilter"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreFilter.setup_model"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreFilter.setup_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreFilter.compute_flow"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreFilter.compute_flow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreRaftFilter"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreRaftFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreRaftFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreRaftFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreRaftFilter.setup_model"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreRaftFilter.setup_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoMotionScoreRaftFilter.compute_flow"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreRaftFilter.compute_flow()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoNSFWFilter"><code class="docutils literal notranslate"><span class="pre">VideoNSFWFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoNSFWFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoNSFWFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoNSFWFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoNSFWFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoNSFWFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoNSFWFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoOcrAreaRatioFilter"><code class="docutils literal notranslate"><span class="pre">VideoOcrAreaRatioFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoOcrAreaRatioFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoOcrAreaRatioFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoOcrAreaRatioFilter.get_reader"><code class="docutils literal notranslate"><span class="pre">VideoOcrAreaRatioFilter.get_reader()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoOcrAreaRatioFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoOcrAreaRatioFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoOcrAreaRatioFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoOcrAreaRatioFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoResolutionFilter"><code class="docutils literal notranslate"><span class="pre">VideoResolutionFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoResolutionFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoResolutionFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoResolutionFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoResolutionFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoResolutionFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoResolutionFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoTaggingFromFramesFilter"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromFramesFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoTaggingFromFramesFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromFramesFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoTaggingFromFramesFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromFramesFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoTaggingFromFramesFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromFramesFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.VideoWatermarkFilter"><code class="docutils literal notranslate"><span class="pre">VideoWatermarkFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoWatermarkFilter.__init__"><code class="docutils literal notranslate"><span class="pre">VideoWatermarkFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoWatermarkFilter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">VideoWatermarkFilter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.VideoWatermarkFilter.process_single"><code class="docutils literal notranslate"><span class="pre">VideoWatermarkFilter.process_single()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.WordRepetitionFilter"><code class="docutils literal notranslate"><span class="pre">WordRepetitionFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.WordRepetitionFilter.__init__"><code class="docutils literal notranslate"><span class="pre">WordRepetitionFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.WordRepetitionFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">WordRepetitionFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.WordRepetitionFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">WordRepetitionFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.filter.WordsNumFilter"><code class="docutils literal notranslate"><span class="pre">WordsNumFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.WordsNumFilter.__init__"><code class="docutils literal notranslate"><span class="pre">WordsNumFilter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.WordsNumFilter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">WordsNumFilter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.filter.WordsNumFilter.process_batched"><code class="docutils literal notranslate"><span class="pre">WordsNumFilter.process_batched()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
@@ -117,6 +368,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">&lt;no title&gt;</a></li>
       <li class="breadcrumb-item active">data_juicer.ops.filter</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/data_juicer.ops.filter.rst.txt" rel="nofollow"> View page source</a>

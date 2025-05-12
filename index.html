@@ -17,7 +17,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="data_juicer.core" href="data_juicer.core.html" /> 
+    <link rel="next" title="DJ-Cookbook" href="en/DJ-cookbook.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,10 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="en/DJ-cookbook.html">DJ-Cookbook</a></li>
+</ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a></li>
@@ -77,9 +80,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p><a class="reference external" href="README_ZH.md">[中文主页]</a> | <a class="reference external" href="#dj-cookbook">[DJ-Cookbook]</a> | <a class="reference external" href="docs/Operators.md">[OperatorZoo]</a> | <a class="reference external" href="https://modelscope.github.io/data-juicer">[API]</a> | <a class="reference external" href="docs/awesome_llm_data.md">[Awesome LLM Data]</a></p>
-<section id="data-processing-for-and-with-foundation-models">
-<h1>Data Processing for and with Foundation Models<a class="headerlink" href="#data-processing-for-and-with-foundation-models" title="Link to this heading">¶</a></h1>
+  <p id="data-processing-for-and-with-foundation-models"><a class="reference external" href="README_ZH">[中文主页]</a> | <a class="reference external" href="#dj-cookbook">[DJ-Cookbook]</a> | <a class="reference external" href="docs/Operators">[OperatorZoo]</a> | <a class="reference external" href="https://modelscope.github.io/data-juicer">[API]</a> | <a class="reference external" href="docs/awesome_llm_data">[Awesome LLM Data]</a></p>
+<section id="id2">
+<h1>Data Processing for and with Foundation Models<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
 <blockquote>
 <div><p><span class="raw-html-m2r"><img src="https://img.alicdn.com/imgextra/i1/O1CN01fUfM5A1vPclzPQ6VI_!!6000000006165-0-tps-1792-1024.jpg" width = "533" height = "300" alt="Data-Juicer"/></span></p>
 </div></blockquote>
@@ -105,9 +108,9 @@
 </a>
 <a class="reference external image-reference" href="#dj-cookbook"><img alt="Document_List" src="https://img.shields.io/badge/Doc-DJ_Cookbook-blue?logo=Markdown" />
 </a>
-<a class="reference external image-reference" href="README_ZH.md#dj-cookbook"><img alt="文档列表" src="https://img.shields.io/badge/文档-DJ指南-blue?logo=Markdown" />
+<a class="reference external image-reference" href="README_ZH#dj-cookbook"><img alt="文档列表" src="https://img.shields.io/badge/文档-DJ指南-blue?logo=Markdown" />
 </a>
-<a class="reference external image-reference" href="docs/Operators.md"><img alt="OpZoo" src="https://img.shields.io/badge/Doc-OperatorZoo-blue?logo=Markdown" />
+<a class="reference external image-reference" href="docs/Operators"><img alt="OpZoo" src="https://img.shields.io/badge/Doc-OperatorZoo-blue?logo=Markdown" />
 </a>
 <a class="reference external image-reference" href="https://arxiv.org/abs/2309.02033"><img alt="Paper" src="http://img.shields.io/badge/cs.LG-1.0Paper(SIGMOD'24" />
 </a>
@@ -117,548 +120,112 @@
 We provide a <a class="reference external" href="http://8.138.149.181/">playground</a> with a managed JupyterLab. <a class="reference external" href="http://8.138.149.181/">Try Data-Juicer</a> straight away in your browser! If you find Data-Juicer useful for your research or development, please kindly support us by starting it (then be instantly notified of our new releases) and citing our <a class="reference external" href="#references">works</a>.</p>
 <p><a class="reference external" href="https://www.aliyun.com/product/bigdata/learn">Platform for AI of Alibaba Cloud (PAI)</a> has cited our work and integrated Data-Juicer into its data processing products. PAI is an AI Native large model and AIGC engineering platform that provides dataset management, computing power management, model tool chain, model development, model training, model deployment, and AI asset management. For documentation on data processing, please refer to: <a class="reference external" href="https://help.aliyun.com/zh/pai/user-guide/components-related-to-data-processing-for-foundation-models/?spm=a2c4g.11186623.0.0.3e9821a69kWdvX">PAI-Data Processing for Large Models</a>.</p>
 <p>Data-Juicer is being actively updated and maintained. We will periodically enhance and add more features, data recipes and datasets.  We welcome you to join us (via issues, PRs, <a class="reference external" href="https://join.slack.com/t/data-juicer/shared_invite/zt-23zxltg9d-Z4d3EJuhZbCLGwtnLWWUDg?spm=a2c22.12281976.0.0.7a8253f30mgpjw">Slack</a>  channel, <a class="reference external" href="https://qr.dingtalk.com/action/joingroup?code=v1,k1,YFIXM2leDEk7gJP5aMC95AfYT+Oo/EP/ihnaIEhMyJM=&amp;_dt_no_comment=1&amp;origin=11">DingDing</a> group, …), in promoting data-model co-development along with research and applications of foundation models!</p>
+<section id="news">
+<h2>News<a class="headerlink" href="#news" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>🎉 [2025-05-06] Our work of <a class="reference external" href="https://arxiv.org/abs/2407.11784">Data-Juicer Sandbox</a> has been accepted as a <strong>Spotlight</strong> by <em>ICML 2025</em> (top 2.6% of all submissions)!</p></li>
+<li><img alt="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-03-13]Weproposeanewdatasynthesismethod,*MindGym* ,whichencouragesLLMstoself-generatechallengingcognitivequestions,achievingsuperiordataefficiency,cross-modalitygeneralization,andSFTeffectsoverSOTAbaselines(e.g.,*16%*gainon`MathVision&lt;https://mathllm.github.io/mathvision/#leaderboard&gt;`_usingonly*400samples* ).Seemoredetailsin`MindGym:EnhancingVision-LanguageModelsviaSyntheticSelf-ChallengingQuestions&lt;https://arxiv.org/abs/2503.09499&gt;`_." src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-03-13]Weproposeanewdatasynthesismethod,*MindGym* ,whichencouragesLLMstoself-generatechallengingcognitivequestions,achievingsuperiordataefficiency,cross-modalitygeneralization,andSFTeffectsoverSOTAbaselines(e.g.,*16%*gainon`MathVision&lt;https://mathllm.github.io/mathvision/#leaderboard&gt;`_usingonly*400samples* ).Seemoredetailsin`MindGym:EnhancingVision-LanguageModelsviaSyntheticSelf-ChallengingQuestions&lt;https://arxiv.org/abs/2503.09499&gt;`_." />
+</li>
+<li><img alt="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-02-28]DJhasbeenintegratedin`Ray'sofficialEcosystem&lt;https://docs.ray.io/en/latest/ray-overview/ray-libraries.html&gt;`_and`ExampleGallery&lt;https://docs.ray.io/en/latest/data/examples/data_juicer_distributed_data_processing.html&gt;`_.Besides,ourpatchinDJ2.0forthestreamingJSONreaderhasbeenofficiallyintegratedby`ApacheArrow&lt;https://github.com/apache/arrow/pull/45084&gt;`_." src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-02-28]DJhasbeenintegratedin`Ray'sofficialEcosystem&lt;https://docs.ray.io/en/latest/ray-overview/ray-libraries.html&gt;`_and`ExampleGallery&lt;https://docs.ray.io/en/latest/data/examples/data_juicer_distributed_data_processing.html&gt;`_.Besides,ourpatchinDJ2.0forthestreamingJSONreaderhasbeenofficiallyintegratedby`ApacheArrow&lt;https://github.com/apache/arrow/pull/45084&gt;`_." />
+</li>
+<li><img alt="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-02-27]Ourworkoncontrastivedatasynthesis,`ImgDiff&lt;https://arxiv.org/pdf/2408.04594&gt;`_ ,hasbeenacceptedby*CVPR2025* !" src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-02-27]Ourworkoncontrastivedatasynthesis,`ImgDiff&lt;https://arxiv.org/pdf/2408.04594&gt;`_ ,hasbeenacceptedby*CVPR2025* !" />
+</li>
+<li><img alt="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-02-05]Weproposeanewdataselectionmethod,*DaaR* ,whichistheoreticallyinformed,viatreatingdiversityasareward,achievesbetteroverallperformanceacross7benchmarkswhenpost-trainingSOTALLMs.Seemoredetailsin`DiversityasaReward:Fine-TuningLLMsonaMixtureofDomain-UndeterminedData&lt;https://www.arxiv.org/abs/2502.04380&gt;`_." src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-02-05]Weproposeanewdataselectionmethod,*DaaR* ,whichistheoreticallyinformed,viatreatingdiversityasareward,achievesbetteroverallperformanceacross7benchmarkswhenpost-trainingSOTALLMs.Seemoredetailsin`DiversityasaReward:Fine-TuningLLMsonaMixtureofDomain-UndeterminedData&lt;https://www.arxiv.org/abs/2502.04380&gt;`_." />
+</li>
+<li><img alt="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-01-11]Wereleaseour2.0paper,`Data-Juicer2.0:Cloud-ScaleAdaptiveDataProcessingforFoundationModels&lt;https://arxiv.org/abs/2501.14755&gt;`_.Itnowcanprocess70Bdatasampleswithin2.1h,using6400CPUcoreson50RaynodesfromAlibabaCloudcluster,anddeduplicate5TBdatawithin2.8husing1280CPUcoreson8Raynodes." src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-01-11]Wereleaseour2.0paper,`Data-Juicer2.0:Cloud-ScaleAdaptiveDataProcessingforFoundationModels&lt;https://arxiv.org/abs/2501.14755&gt;`_.Itnowcanprocess70Bdatasampleswithin2.1h,using6400CPUcoreson50RaynodesfromAlibabaCloudcluster,anddeduplicate5TBdatawithin2.8husing1280CPUcoreson8Raynodes." />
+</li>
+<li><img alt="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-01-03]Wesupportpost-tuningscenariosbetter,via20+relatednew`OPs&lt;https://github.com/modelscope/data-juicer/releases/tag/v1.0.2&gt;`_ ,andviaunified`datasetformat&lt;https://github.com/modelscope/data-juicer/releases/tag/v1.0.3&gt;`_compatibletoLLaMA-FactoryandModelScope-Swift." src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:target:https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png:alt:new[2025-01-03]Wesupportpost-tuningscenariosbetter,via20+relatednew`OPs&lt;https://github.com/modelscope/data-juicer/releases/tag/v1.0.2&gt;`_ ,andviaunified`datasetformat&lt;https://github.com/modelscope/data-juicer/releases/tag/v1.0.3&gt;`_compatibletoLLaMA-FactoryandModelScope-Swift." />
+</li>
+</ul>
+<details>
+<summary> History News:
+</summary>>
+
+- [2024-12-17] We propose *HumanVBench*, which comprises 16 human-centric tasks with synthetic data, benchmarking 22 video-MLLMs' capabilities from views of inner emotion and outer manifestations. See more details in our [paper](https://arxiv.org/abs/2412.17574), and try to [evaluate](https://github.com/modelscope/data-juicer/tree/HumanVBench) your models with it.
+
+- [2024-11-22] We release DJ [v1.0.0](https://github.com/modelscope/data-juicer/releases/tag/v1.0.0), in which we refactored Data-Juicer's *Operator*, *Dataset*, *Sandbox* and many other modules for better usability, such as supporting fault-tolerant, FastAPI and adaptive resource management.
+
+- [2024-08-25] We give a [tutorial](https://modelscope.github.io/data-juicer/_static/tutorial_kdd24.html) about data processing for multimodal LLMs in KDD'2024.
+
+- [2024-08-09] We propose Img-Diff, which enhances the performance of multimodal large language models through *contrastive data synthesis*, achieving a score that is 12 points higher than GPT-4V on the [MMVP benchmark](https://tsb0601.github.io/mmvp_blog/). See more details in our [paper](https://arxiv.org/abs/2408.04594), and download the dataset from [huggingface](https://huggingface.co/datasets/datajuicer/Img-Diff) and [modelscope](https://modelscope.cn/datasets/Data-Juicer/Img-Diff).
+- [2024-07-24] "Tianchi Better Synth Data Synthesis Competition for Multimodal Large Models" — Our 4th data-centric LLM competition has kicked off! Please visit the competition's [official website](https://tianchi.aliyun.com/competition/entrance/532251) for more information.
+- [2024-07-17] We utilized the Data-Juicer [Sandbox Laboratory Suite](https://github.com/modelscope/data-juicer/blob/main/docs/Sandbox) to systematically optimize data and models through a co-development workflow between data and models, achieving a new top spot on the [VBench](https://huggingface.co/spaces/Vchitect/VBench_Leaderboard) text-to-video leaderboard. The related achievements have been compiled and published in a [paper](http://arxiv.org/abs/2407.11784), and the model has been released on the [ModelScope](https://modelscope.cn/models/Data-Juicer/Data-Juicer-T2V) and [HuggingFace](https://huggingface.co/datajuicer/Data-Juicer-T2V) platforms.
+- [2024-07-12] Our *awesome list of MLLM-Data* has evolved into a systemic [survey](https://arxiv.org/abs/2407.08583) from model-data co-development perspective. Welcome to [explore](docs/awesome_llm_data) and contribute!
+- [2024-06-01] ModelScope-Sora "Data Directors" creative sprint—Our third data-centric LLM competition has kicked off! Please visit the competition's [official website](https://tianchi.aliyun.com/competition/entrance/532219) for more information.
+- [2024-03-07] We release **Data-Juicer [v0.2.0](https://github.com/alibaba/data-juicer/releases/tag/v0.2.0)** now!
+In this new version, we support more features for **multimodal data (including video now)**, and introduce **[DJ-SORA](docs/DJ_SORA)** to provide open large-scale, high-quality datasets for SORA-like models.
+- [2024-02-20] We have actively maintained an *awesome list of LLM-Data*, welcome to [visit](docs/awesome_llm_data) and contribute!
+- [2024-02-05] Our paper has been accepted by SIGMOD'24 industrial track!
+- [2024-01-10] Discover new horizons in "Data Mixture"—Our second data-centric LLM competition has kicked off! Please visit the competition's [official website](https://tianchi.aliyun.com/competition/entrance/532174) for more information.
+- [2024-01-05] We release **Data-Juicer v0.1.3** now!
+In this new version, we support **more Python versions** (3.8-3.10), and support **multimodal** dataset [converting](tools/fmt_conversion/multimodal/README)/[processing](docs/Operators) (Including texts, images, and audios. More modalities will be supported in the future).
+Besides, our paper is also updated to [v3](https://arxiv.org/abs/2309.02033).
+- [2023-10-13] Our first data-centric LLM competition begins! Please
+  visit the competition's official websites, FT-Data Ranker ([1B Track](https://tianchi.aliyun.com/competition/entrance/532157), [7B Track](https://tianchi.aliyun.com/competition/entrance/532158)), for more information.
+</details><div id="table" align="center"></div></section>
 </section>
 <section id="table-of-contents">
 <h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h1>
 <ul class="simple">
-<li><p><a class="reference external" href="#news">News</a></p></li>
-<li><p><a class="reference external" href="#why-data-juicer">Why Data-Juicer?</a></p></li>
-<li><p><a class="reference external" href="#dj-cookbook">DJ-Cookbook</a></p>
+<li><p><a class="reference internal" href="#news">News</a></p></li>
+<li><p><a class="reference internal" href="#why-data-juicer">Why Data-Juicer?</a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul>
-<li><p><a class="reference external" href="#curated-resources">Curated Resources</a></p></li>
-<li><p><a class="reference external" href="#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a></p></li>
-<li><p><a class="reference external" href="#use-cases--data-recipes">Use Cases &amp; Data Recipes</a></p></li>
-<li><p><a class="reference external" href="#interactive-examples">Interactive Examples</a></p></li>
+<li class="toctree-l1"><a class="reference internal" href="en/DJ-cookbook.html">DJ-Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="en/DJ-cookbook.html#curated-resources">Curated Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="en/DJ-cookbook.html#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="en/DJ-cookbook.html#use-cases-data-recipes">Use Cases &amp; Data Recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="en/DJ-cookbook.html#interactive-examples">Interactive Examples</a></li>
 </ul>
 </li>
-<li><p><a class="reference external" href="#installation">Installation</a></p>
-<ul>
-<li><p><a class="reference external" href="#prerequisites">Prerequisites</a></p></li>
-<li><p><a class="reference external" href="#from-source-for-specific-scenarios">From Source for Specific Scenarios</a></p></li>
-<li><p><a class="reference external" href="#from-source-for-specific-ops">From Source for Specific OPs</a></p></li>
-<li><p><a class="reference external" href="#using-pip">Using pip</a></p></li>
-<li><p><a class="reference external" href="#using-docker">Using Docker</a></p></li>
-<li><p><a class="reference external" href="#installation-check">Installation check</a></p></li>
-<li><p><a class="reference external" href="#for-video-related-operators">For Video-related Operators</a></p></li>
 </ul>
-</li>
-<li><p><a class="reference external" href="#quick-start">Quick Start</a></p>
-<ul>
-<li><p><a class="reference external" href="#dataset-configuration">Dataset Configuration</a></p></li>
-<li><p><a class="reference external" href="#data-processing">Data Processing</a></p></li>
-<li><p><a class="reference external" href="#distributed-data-processing">Distributed Data Processing</a></p></li>
-<li><p><a class="reference external" href="#data-analysis">Data Analysis</a></p></li>
-<li><p><a class="reference external" href="#data-visualization">Data Visualization</a></p></li>
-<li><p><a class="reference external" href="#build-up-config-files">Build Up Config Files</a></p></li>
-<li><p><a class="reference external" href="#sandbox">Sandbox</a></p></li>
-<li><p><a class="reference external" href="#preprocess-raw-data-optional">Preprocess Raw Data (Optional)</a></p></li>
-<li><p><a class="reference external" href="#for-docker-users">For Docker Users</a></p></li>
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="#license">License</a></p></li>
+<li><p><a class="reference internal" href="#contributing">Contributing</a></p></li>
+<li><p><a class="reference internal" href="#acknowledgement">Acknowledgement</a></p></li>
+<li><p><a class="reference internal" href="#references">References</a></p></li>
 </ul>
-</li>
-<li><p><a class="reference external" href="#license">License</a></p></li>
-<li><p><a class="reference external" href="#contributing">Contributing</a></p></li>
-<li><p><a class="reference external" href="#acknowledgement">Acknowledgement</a></p></li>
-<li><p><a class="reference external" href="#references">References</a></p></li>
-</ul>
-<section id="id3">
-<h2>Why Data-Juicer?<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="why-data-juicer">
+<h2>Why Data-Juicer?<a class="headerlink" href="#why-data-juicer" title="Link to this heading">¶</a></h2>
 <p><span class="raw-html-m2r"><img src="https://img.alicdn.com/imgextra/i2/O1CN01EteoQ31taUweAW1UE_!!6000000005918-2-tps-4034-4146.png" align="center" width="600" /></span></p>
 <ul>
 <li><p><strong>Systematic &amp; Reusable</strong>:
-Empowering users with a systematic library of 100+ core <a class="reference external" href="docs/Operators.md">OPs</a>, and 50+ reusable config recipes and
+Empowering users with a systematic library of 100+ core <span class="xref std std-doc">OPs</span>, and 50+ reusable config recipes and
 dedicated toolkits, designed to
 function independently of specific multimodal LLM datasets and processing pipelines. Supporting data analysis, cleaning, and synthesis in pre-training, post-tuning, en, zh, and more scenarios.</p></li>
 <li><p><strong>User-Friendly &amp; Extensible</strong>:
-Designed for simplicity and flexibility, with easy-start <a class="reference external" href="#quick-start">guides</a>, and <a class="reference external" href="#dj-cookbook">DJ-Cookbook</a> containing fruitful demo usages. Feel free to <a class="reference external" href="docs/DeveloperGuide.md#build-your-own-ops">implement your own OPs</a> for customizable data processing.</p></li>
-<li><p><strong>Efficient &amp; Robust</strong>: Providing performance-optimized <a class="reference external" href="docs/Distributed.md">parallel data processing</a> (Aliyun-PAIRayCUDAOP Fusion),
+Designed for simplicity and flexibility, with easy-start <a class="reference external" href="#quick-start">guides</a>, and <a class="reference external" href="#dj-cookbook">DJ-Cookbook</a> containing fruitful demo usages. Feel free to <a class="reference external" href="docs/DeveloperGuide#build-your-own-ops">implement your own OPs</a> for customizable data processing.</p></li>
+<li><p><strong>Efficient &amp; Robust</strong>: Providing performance-optimized <a class="reference external" href="docs/Distributed">parallel data processing</a> (Aliyun-PAIRayCUDAOP Fusion),
 faster with less resource usage, verified in large-scale production environments.</p></li>
 <li><p><strong>Effect-Proven &amp; Sandbox</strong>: Supporting data-model co-development, enabling rapid iteration
-through the <a class="reference external" href="docs/Sandbox.md">sandbox laboratory</a>, and providing features such as feedback loops and visualization, so that you can better understand and improve your data and models. Many effect-proven datasets and models have been derived from DJ, in scenarios such as pre-training, text-to-video and image-to-text generation.</p>
+through the <a class="reference internal" href="docs/Sandbox.html"><span class="doc">sandbox laboratory</span></a>, and providing features such as feedback loops and visualization, so that you can better understand and improve your data and models. Many effect-proven datasets and models have been derived from DJ, in scenarios such as pre-training, text-to-video and image-to-text generation.</p>
 <a class="reference external image-reference" href="https://img.alicdn.com/imgextra/i2/O1CN017U7Zz31Y7XtCJ5GOz_!!6000000003012-0-tps-3640-1567.jpg"><img alt="Data-in-the-loop" src="https://img.alicdn.com/imgextra/i2/O1CN017U7Zz31Y7XtCJ5GOz_!!6000000003012-0-tps-3640-1567.jpg" />
 </a>
 </li>
 </ul>
 </section>
-<section id="id5">
-<h2>DJ-Cookbook<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
-<section id="id6">
-<h3>Curated Resources<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><a class="reference external" href="https://modelscope.github.io/data-juicer/_static/tutorial_kdd24.html">KDD-Tutorial</a></p></li>
-<li><p><a class="reference external" href="docs/awesome_llm_data.md">Awesome LLM-Data</a></p></li>
-<li><p><a class="reference external" href="docs/BadDataExhibition.md">“Bad” Data Exhibition</a></p></li>
-</ul>
-</section>
-<section id="id8">
-<h3>Coding with Data-Juicer (DJ)<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Basics</p>
-<ul>
-<li><p><a class="reference external" href="README.md">Overview of DJ</a></p></li>
-<li><p><a class="reference external" href="#quick-start">Quick Start</a></p></li>
-<li><p><a class="reference external" href="docs/RecipeGallery.md">Configuration</a></p></li>
-<li><p><a class="reference external" href="tools/fmt_conversion/README.md">Data Format Conversion</a></p></li>
-</ul>
-</li>
-<li><p>Lookup Materials</p>
-<ul>
-<li><p><a class="reference external" href="docs/Operators.md">DJ OperatorZoo</a></p></li>
-<li><p><a class="reference external" href="https://modelscope.github.io/data-juicer/">API references</a></p></li>
-</ul>
-</li>
-<li><p>Advanced</p>
-<ul>
-<li><p><a class="reference external" href="docs/DeveloperGuide.md">Developer Guide</a></p></li>
-<li><p><a class="reference external" href="tools/preprocess/README.md">Preprocess Tools</a></p></li>
-<li><p><a class="reference external" href="tools/postprocess/README.md">Postprocess Tools</a></p></li>
-<li><p><a class="reference external" href="docs/Sandbox.md">Sandbox</a></p></li>
-<li><p><a class="reference external" href="docs/DJ_service.md">API Service</a></p></li>
-<li><p><a class="reference external" href="tools/quality_classifier/README.md">Data Scoring</a></p></li>
-<li><p><a class="reference external" href="tools/evaluator/README.md">Auto Evaluation</a></p></li>
-<li><p><a class="reference external" href="thirdparty/LLM_ecosystems/README.md">Third-parties Integration</a></p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="id11">
-<h3>Use Cases &amp; Data Recipes<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><a class="reference external" href="docs/RecipeGallery.md">Data Recipe Gallery</a></p>
-<ul>
-<li><p>Data-Juicer Minimal Example Recipe</p></li>
-<li><p>Reproducing Open Source Text Datasets</p></li>
-<li><p>Improving Open Source Pre-training Text Datasets</p></li>
-<li><p>Improving Open Source Post-tuning Text Datasets</p></li>
-<li><p>Synthetic Contrastive Learning Image-text Datasets</p></li>
-<li><p>Improving Open Source Image-text Datasets</p></li>
-<li><p>Basic Example Recipes for Video Data</p></li>
-<li><p>Synthesizing Human-centric Video Benchmarks</p></li>
-<li><p>Improving Existing Open Source Video Datasets</p></li>
-</ul>
-</li>
-<li><p>Data-Juicer related Competitions</p>
-<ul>
-<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532251">Better Synth</a>, explore the impact of large model synthetic data on image understanding ability with DJ-Sandbox Lab and multimodal large models</p></li>
-<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532219">Modelscope-Sora Challenge</a>, based on Data-Juicer and <a class="reference external" href="https://github.com/aigc-apps/EasyAnimate">EasyAnimate</a> framework,  optimize data and train SORA-like small models to generate better videos</p></li>
-<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532174">Better Mixture</a>, only adjust data mixing and sampling strategies for given multiple candidate datasets</p></li>
-<li><p>FT-Data Ranker (<a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532157">1B Track</a>, <a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532158">7B Track</a>), For a specified candidate dataset, only adjust the data filtering and enhancement strategies</p></li>
-<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532254">Kolors-LoRA Stylized Story Challenge</a>, based on Data-Juicer and <a class="reference external" href="https://github.com/modelscope/DiffSynth-Studio">DiffSynth-Studio</a> framework, explore Diffusion model fine-tuning</p></li>
-</ul>
-</li>
-<li><p><a class="reference external" href="docs/DJ_SORA.md">DJ-SORA</a></p></li>
-<li><p>Based on Data-Juicer and <a class="reference external" href="https://github.com/modelscope/agentscope">AgentScope</a> framework, leverage <a class="reference external" href="./demos/api_service/react_data_filter_process.ipynb">agents to call DJ Filters</a> and <a class="reference external" href="./demos/api_service/react_data_mapper_process.ipynb">call DJ Mappers</a></p></li>
-</ul>
-</section>
-<section id="id13">
-<h3>Interactive Examples<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Introduction to Data-Juicer [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/overview_scan/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/overview_scan">HuggingFace</a>]</p></li>
-<li><p>Data Visualization:</p>
-<ul>
-<li><p>Basic Statistics [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_statistics/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_statistics">HuggingFace</a>]</p></li>
-<li><p>Lexical Diversity [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_diversity/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_diversity">HuggingFace</a>]</p></li>
-<li><p>Operator Insight (Single OP) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visualization_op_insight/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_op_insight">HuggingFace</a>]</p></li>
-<li><p>Operator Effect (Multiple OPs) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_op_effect/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_op_effect">HuggingFace</a>]</p></li>
-</ul>
-</li>
-<li><p>Data Processing:</p>
-<ul>
-<li><p>Scientific Literature (e.g. <a class="reference external" href="https://info.arxiv.org/help/bulk_data_s3.html">arXiv</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_sci_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_sci_data">HuggingFace</a>]</p></li>
-<li><p>Programming Code (e.g. <a class="reference external" href="https://huggingface.co/datasets/bigcode/the-stack">TheStack</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_code_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_code_data">HuggingFace</a>]</p></li>
-<li><p>Chinese Instruction Data (e.g. <a class="reference external" href="https://huggingface.co/datasets/QingyiSi/Alpaca-CoT">Alpaca-CoT</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_sft_zh_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_cft_zh_data">HuggingFace</a>]</p></li>
-</ul>
-</li>
-<li><p>Tool Pool:</p>
-<ul>
-<li><p>Dataset Splitting by Language [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/tool_dataset_splitting_by_language/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/tool_dataset_splitting_by_language">HuggingFace</a>]</p></li>
-<li><p>Quality Classifier for CommonCrawl [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/tool_quality_classifier/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/tool_quality_classifier">HuggingFace</a>]</p></li>
-<li><p>Auto Evaluation on <a class="reference external" href="https://github.com/stanford-crfm/helm">HELM</a> [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/auto_evaluation_helm/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/auto_evaluation_helm">HuggingFace</a>]</p></li>
-<li><p>Data Sampling and Mixture [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_mixture/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_mixture">HuggingFace</a>]</p></li>
-</ul>
-</li>
-<li><p>Data Processing Loop [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_process_loop/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_process_loop">HuggingFace</a>]</p></li>
-</ul>
-</section>
-</section>
-<section id="id38">
-<h2>Installation<a class="headerlink" href="#id38" title="Link to this heading">¶</a></h2>
-<section id="id39">
-<h3>Prerequisites<a class="headerlink" href="#id39" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Recommend Python&gt;=3.9,&lt;=3.10</p></li>
-<li><p>gcc &gt;= 5 (at least C++14 support)</p></li>
-</ul>
-</section>
-<section id="id40">
-<h3>From Source for Specific Scenarios<a class="headerlink" href="#id40" title="Link to this heading">¶</a></h3>
-<ul>
-<li><p>Run the following commands to install the latest basic <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> version in
-editable mode:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;path_to_data_juicer&gt;
-pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.
-</pre></div>
-</div>
-</li>
-<li><p>Some OPs rely on some other too large or low-platform-compatibility third-party libraries. You can install optional dependencies as needed:</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;path_to_data_juicer&gt;
-pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.<span class="w">  </span><span class="c1"># Install minimal dependencies, which support the basic functions</span>
-pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>tools<span class="o">]</span><span class="w"> </span><span class="c1"># Install a subset of tools dependencies</span>
-</pre></div>
-</div>
-<p>The dependency options are listed below:</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Tag</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.</span></code> or <code class="docutils literal notranslate"><span class="pre">.[mini]</span></code></p></td>
-<td><p>Install minimal dependencies for basic Data-Juicer.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[all]</span></code></p></td>
-<td><p>Install dependencies for all OPs except sandbox.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[sci]</span></code></p></td>
-<td><p>Install dependencies for OPs related to scientific usage.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[dist]</span></code></p></td>
-<td><p>Install dependencies for additional distributed data processing.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[dev]</span></code></p></td>
-<td><p>Install dependencies for developing the package as contributors.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[tools]</span></code></p></td>
-<td><p>Install dependencies for dedicated tools, such as quality classifiers.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[sandbox]</span></code></p></td>
-<td><p>Install all dependencies for sandbox.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="id41">
-<h3>From Source for Specific OPs<a class="headerlink" href="#id41" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Install dependencies for specific OPs</p></li>
-</ul>
-<p>With the growth of the number of OPs, the dependencies of all OPs become very heavy. Instead of using the command <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-v</span> <span class="pre">-e</span> <span class="pre">.[all]</span></code> to install all dependencies,
-we provide two alternative, lighter options:</p>
-<ul>
-<li><p>Automatic Minimal Dependency Installation: During the execution of Data-Juicer, minimal dependencies will be automatically installed. This allows for immediate execution, but may potentially lead to dependency conflicts.</p></li>
-<li><p>Manual Minimal Dependency Installation: To manually install minimal dependencies tailored to a specific execution configuration, run the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># only for installation from source</span>
-python<span class="w"> </span>tools/dj_install.py<span class="w"> </span>--config<span class="w"> </span>path_to_your_data-juicer_config_file
-
-<span class="c1"># use command line tool</span>
-dj-install<span class="w"> </span>--config<span class="w"> </span>path_to_your_data-juicer_config_file
-</pre></div>
-</div>
-</li>
-</ul>
-</section>
-<section id="id42">
-<h3>Using pip<a class="headerlink" href="#id42" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Run the following command to install the latest released <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>py-data-juicer
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><strong>Note</strong>:</p>
-<ul>
-<li><p>only the basic APIs in <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> and two basic tools
-(data <a class="reference external" href="#data-processing">processing</a> and <a class="reference external" href="#data-analysis">analysis</a>) are available in this way. If you want customizable
-and complete functions, we recommend you install <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> <a class="reference external" href="#from-source">from source</a>.</p></li>
-<li><p>The release versions from pypi have a certain lag compared to the latest version from source.
-So if you want to follow the latest functions of <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code>, we recommend you install <a class="reference external" href="#from-source">from source</a>.</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="id44">
-<h3>Using Docker<a class="headerlink" href="#id44" title="Link to this heading">¶</a></h3>
-<ul>
-<li><p>You can</p>
-<ul>
-<li><p>either pull our pre-built image from DockerHub:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;
-</pre></div>
-</div>
-<ul>
-<li><p>if you can not connect ot DockerHub, please use other registry mirrors (you can find some from the Internet):
-.. code-block:: shell</p>
-<blockquote>
-<div><p>docker pull &lt;other_registry_mirror&gt;/datajuicer/data-juicer:&lt;version_tag&gt;</p>
-</div></blockquote>
-</li>
-</ul>
-</li>
-<li><p>or run the following command to build the docker image including the
-latest <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code> with provided <a class="reference external" href="Dockerfile">Dockerfile</a>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;<span class="w"> </span>.
-</pre></div>
-</div>
-</li>
-<li><p>The format of <code class="docutils literal notranslate"><span class="pre">&lt;version_tag&gt;</span></code> is like <code class="docutils literal notranslate"><span class="pre">v0.2.0</span></code>, which is the same as the release version tag.</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="id45">
-<h3>Installation check<a class="headerlink" href="#id45" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">data_juicer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dj</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dj</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="id46">
-<h3>For Video-related Operators<a class="headerlink" href="#id46" title="Link to this heading">¶</a></h3>
-<p>Before using video-related operators, <strong>FFmpeg</strong> should be installed and accessible via the $PATH environment variable.</p>
-<p>You can install FFmpeg using package managers(e.g. sudo apt install ffmpeg on Debian/Ubuntu, brew install ffmpeg on OS X) or visit the <a class="reference external" href="https://ffmpeg.org/download.html">official ffmpeg link</a>.</p>
-<p>Check if your environment path is set correctly by running the ffmpeg command from the terminal.</p>
-<p align="right"><a href="#table">🔼 back to index</a></p></section>
-</section>
-<section id="id47">
-<h2>Quick Start<a class="headerlink" href="#id47" title="Link to this heading">¶</a></h2>
-<section id="id48">
-<h3>Dataset Configuration<a class="headerlink" href="#id48" title="Link to this heading">¶</a></h3>
-<p>DJ supports various dataset input types, including local files, remote datasets like huggingface; it also supports data validation and data mixture.</p>
-<p>Two ways to configure a input file</p>
-<ul>
-<li><p>Simple scenarios, single path for local/HF file
-.. code-block:: yaml</p>
-<blockquote>
-<div><p>dataset_path: ‘/path/to/your/dataset’  # path to your dataset directory or file</p>
-</div></blockquote>
-</li>
-<li><p>advanced method, supports sub-configuration items and more features
-.. code-block:: yaml</p>
-<blockquote>
-<div><p>dataset:
-configs:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>type: ‘local’
-path: ‘path/to/your/dataset’ # path to your dataset directory or file</p></li>
-</ul>
-</div></blockquote>
-</div></blockquote>
-</li>
-</ul>
-<p>Refer to <a class="reference external" href="docs/DatasetCfg.md">Dataset Configuration Guide</a> for more details.</p>
-</section>
-<section id="id49">
-<h3>Data Processing<a class="headerlink" href="#id49" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">process_data.py</span></code> tool or <code class="docutils literal notranslate"><span class="pre">dj-process</span></code> command line tool with your config as the argument to process
-your dataset.</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># only for installation from source</span>
-python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>configs/demo/process.yaml
-
-<span class="c1"># use command line tool</span>
-dj-process<span class="w"> </span>--config<span class="w"> </span>configs/demo/process.yaml
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><strong>Note:</strong> For some operators that involve third-party models or resources that are not stored locally on your computer, it might be slow for the first running because these ops need to download corresponding resources into a directory first.
-The default download cache directory is <code class="docutils literal notranslate"><span class="pre">~/.cache/data_juicer</span></code>. Change the cache location by setting the shell environment variable, <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_CACHE_HOME</span></code> to another directory, and you can also change <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_MODELS_CACHE</span></code> or <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_ASSETS_CACHE</span></code> in the same way:</p></li>
-<li><p><strong>Note:</strong> When using operators with third-party models, it’s necessary to declare the corresponding <code class="docutils literal notranslate"><span class="pre">mem_required</span></code> in the configuration file (you can refer to the settings in the <code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code> file). During runtime, Data-Juicer will control the number of processes based on memory availability and the memory requirements of the operator models to achieve better data processing efficiency. When running with CUDA environments, if the mem_required for an operator is not declared correctly, it could potentially lead to a CUDA Out of Memory issue.</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># cache home</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_CACHE_HOME</span><span class="o">=</span><span class="s2">&quot;/path/to/another/directory&quot;</span>
-<span class="c1"># cache models</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_MODELS_CACHE</span><span class="o">=</span><span class="s2">&quot;/path/to/another/directory/models&quot;</span>
-<span class="c1"># cache assets</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_ASSETS_CACHE</span><span class="o">=</span><span class="s2">&quot;/path/to/another/directory/assets&quot;</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><strong>Flexible Programming Interface:</strong>
-We provide various simple interfaces for users to choose from as follows.
-<a href="#id50"><span class="problematic" id="id51">``</span></a><a href="#id52"><span class="problematic" id="id53">`</span></a>python
-#… init op &amp; dataset …</p></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="chain-call-style-support-single-operator-or-operator-list">
-<h1>Chain call style, support single operator or operator list<a class="headerlink" href="#chain-call-style-support-single-operator-or-operator-list" title="Link to this heading">¶</a></h1>
-<p>dataset = dataset.process(op)
-dataset = dataset.process([op1, op2])</p>
-</section>
-<section id="functional-programming-style-for-quick-integration-or-script-prototype-iteration">
-<h1>Functional programming style for quick integration or script prototype iteration<a class="headerlink" href="#functional-programming-style-for-quick-integration-or-script-prototype-iteration" title="Link to this heading">¶</a></h1>
-<p>dataset = op(dataset)
-dataset = op.run(dataset)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>### Distributed Data Processing
-
-We have now implemented multi-machine distributed data processing based on [RAY](https://www.ray.io/). The corresponding demos can be run using the following commands:
-
-```shell
-# Run text data processing
-python tools/process_data.py --config ./demos/process_on_ray/configs/demo.yaml
-# Run video data processing
-python tools/process_data.py --config ./demos/process_video_on_ray/configs/demo.yaml
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>To run data processing across multiple machines, it is necessary to ensure that all distributed nodes can access the corresponding data paths (for example, by mounting the respective data paths on a file-sharing system such as NAS).</p></li>
-<li><p>The deduplication operators for RAY mode are different from the single-machine version, and all those operators are prefixed with <code class="docutils literal notranslate"><span class="pre">ray</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">ray_video_deduplicator</span></code> and <code class="docutils literal notranslate"><span class="pre">ray_document_deduplicator</span></code>.</p></li>
-<li><p>More details can be found in the doc for <a class="reference external" href="docs/Distributed.md">distributed processing</a>.</p></li>
-</ul>
-<blockquote>
-<div><p>Users can also opt not to use RAY and instead split the dataset to run on a cluster with <a class="reference external" href="https://slurm.schedmd.com/">Slurm</a>. In this case, please use the default Data-Juicer without RAY.
-<a class="reference external" href="https://www.aliyun.com/activity/bigdata/pai-dlc">Aliyun PAI-DLC</a> supports the RAY framework, Slurm framework, etc. Users can directly create RAY jobs and Slurm jobs on the DLC cluster.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">analyze_data.py</span></code> tool or <code class="docutils literal notranslate"><span class="pre">dj-analyze</span></code> command line tool with your config as the argument to analyze your dataset.</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># only for installation from source</span>
-python<span class="w"> </span>tools/analyze_data.py<span class="w"> </span>--config<span class="w"> </span>configs/demo/analyzer.yaml
-
-<span class="c1"># use command line tool</span>
-dj-analyze<span class="w"> </span>--config<span class="w"> </span>configs/demo/analyzer.yaml
-
-<span class="c1"># you can also use auto mode to avoid writing a recipe. It will analyze a small</span>
-<span class="c1"># part (e.g. 1000 samples, specified by argument `auto_num`) of your dataset</span>
-<span class="c1"># with all Filters that produce stats.</span>
-dj-analyze<span class="w"> </span>--auto<span class="w"> </span>--dataset_path<span class="w"> </span>xx.jsonl<span class="w"> </span><span class="o">[</span>--auto_num<span class="w"> </span><span class="m">1000</span><span class="o">]</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><strong>Note:</strong> Analyzer only computes stats for Filters that produce stats or other OPs that produce tags/categories in meta. So other OPs will be ignored in the analysis process. We use the following registries to decorate OPs:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">NON_STATS_FILTERS</span></code>: decorate Filters that <strong>DO NOT</strong> produce any stats.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TAGGING_OPS</span></code>: decorate OPs that <strong>DO</strong> produce tags/categories in meta field.</p></li>
-</ul>
-</li>
-</ul>
-<ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">app.py</span></code> tool to visualize your dataset in your browser.</p></li>
-<li><p><strong>Note</strong>: only available for installation from source.</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>streamlit<span class="w"> </span>run<span class="w"> </span>app.py
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Config files specify some global arguments, and an operator list for the
-data process. You need to set:</p>
-<ul>
-<li><p>Global arguments: input/output dataset path, number of workers, etc.</p></li>
-<li><p>Operator list: list operators with their arguments used to process the dataset.</p></li>
-</ul>
-</li>
-<li><p>You can build up your own config files by:</p>
-<ul>
-<li><p>➖：Modify from our example config file <cite>``config_all.yaml`</cite> &lt;configs/config_all.yaml&gt;`_ which includes <strong>all</strong> ops and default
-arguments. You just need to <strong>remove</strong> ops that you won’t use and refine
-some arguments of ops.</p></li>
-<li><p>➕：Build up your own config files <strong>from scratch</strong>. You can refer our
-example config file <cite>``config_all.yaml`</cite> &lt;configs/config_all.yaml&gt;`_, <a class="reference external" href="docs/Operators.md">op documents</a>, and advanced <a class="reference external" href="docs/DeveloperGuide.md#build-your-own-configs">Build-Up Guide for developers</a>.</p></li>
-<li><p>Besides the yaml files, you also have the flexibility to specify just
-one (of several) parameters on the command line, which will override
-the values in yaml files.</p></li>
-</ul>
-</li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>xxx.py<span class="w"> </span>--config<span class="w"> </span>configs/demo/process.yaml<span class="w"> </span>--language_id_score_filter.lang<span class="o">=</span>en
-</pre></div>
-</div>
-<ul>
-<li><p>The basic config format and definition is shown below.</p>
-<a class="reference external image-reference" href="https://img.alicdn.com/imgextra/i1/O1CN01uXgjgj1khWKOigYww_!!6000000004715-0-tps-1745-871.jpg"><img alt="Basic config example of format and definition" src="https://img.alicdn.com/imgextra/i1/O1CN01uXgjgj1khWKOigYww_!!6000000004715-0-tps-1745-871.jpg" />
-</a>
-</li>
-</ul>
-<p>The data sandbox laboratory (DJ-Sandbox) provides users with the best practices for continuously producing data recipes. It features low overhead, portability, and guidance.</p>
-<ul class="simple">
-<li><p>In the sandbox, users can quickly experiment, iterate, and refine data recipes based on small-scale datasets and models, before scaling up to produce high-quality data to serve large-scale models.</p></li>
-<li><p>In addition to the basic data optimization and recipe refinement features offered by Data-Juicer, users can seamlessly use configurable components such as data probe and analysis, model training and evaluation, and data and model feedback-based recipe refinement to form a complete one-stop data-model research and development pipeline.</p></li>
-</ul>
-<p>The sandbox is run using the following commands by default, and for more information and details, please refer to the <a class="reference external" href="docs/Sandbox.md">sandbox documentation</a>.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/sandbox_starter.py<span class="w"> </span>--config<span class="w"> </span>configs/demo/sandbox/sandbox.yaml
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Our Formatters support some common input dataset formats for now:</p>
-<ul>
-<li><p>Multi-sample in one file: jsonl/json, parquet, csv/tsv, etc.</p></li>
-<li><p>Single-sample in one file: txt, code, docx, pdf, etc.</p></li>
-</ul>
-</li>
-<li><p>However, data from different sources are complicated and diverse. Such as:</p>
-<ul>
-<li><p><a class="reference external" href="https://info.arxiv.org/help/bulk_data_s3.html">Raw arXiv data downloaded from S3</a> include thousands of tar files and even more gzip files in them, and expected tex files are embedded in the gzip files so they are hard to obtain directly.</p></li>
-<li><p>Some crawled data include different kinds of files (pdf, html, docx, etc.). And extra information like tables, charts, and so on is hard to extract.</p></li>
-</ul>
-</li>
-<li><p>It’s impossible to handle all kinds of data in Data-Juicer, issues/PRs are welcome to contribute to processing new data types!</p></li>
-<li><p>Thus, we provide some <strong>common preprocessing tools</strong> in <cite>``tools/preprocess`</cite> &lt;tools/preprocess/&gt;`_ for you to preprocess these data.</p>
-<ul>
-<li><p>You are welcome to make your contributions to new preprocessing tools for the community.</p></li>
-<li><p>We <strong>highly recommend</strong> that complicated data can be preprocessed to jsonl or parquet files.</p></li>
-</ul>
-</li>
-</ul>
-<ul class="simple">
-<li><p>If you build or pull the docker image of <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code>, you can run the commands or tools mentioned above using this docker image.</p></li>
-<li><p>Run directly:</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the data processing directly</span>
-docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w">  </span><span class="c1"># remove container after the processing</span>
-<span class="w">  </span>--privileged<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--shm-size<span class="w"> </span>256g<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>dj<span class="w">  </span><span class="c1"># name of the container</span>
-<span class="w">  </span>-v<span class="w"> </span>&lt;host_data_path&gt;:&lt;image_data_path&gt;<span class="w">  </span><span class="c1"># mount data or config directory into the container</span>
-<span class="w">  </span>-v<span class="w"> </span>~/.cache/:/root/.cache/<span class="w">  </span><span class="c1"># mount the cache directory into the container to reuse caches and models (recommended)</span>
-<span class="w">  </span>datajuicer/data-juicer:&lt;version_tag&gt;<span class="w">  </span><span class="c1"># image to run</span>
-<span class="w">  </span>dj-process<span class="w"> </span>--config<span class="w"> </span>/path/to/config.yaml<span class="w">  </span><span class="c1"># similar data processing commands</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Or enter into the running container and run commands in editable mode:</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># start the container</span>
-docker<span class="w"> </span>run<span class="w"> </span>-dit<span class="w">  </span><span class="c1"># run the container in the background</span>
-<span class="w">  </span>--privileged<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--shm-size<span class="w"> </span>256g<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--rm<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>dj<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>&lt;host_data_path&gt;:&lt;image_data_path&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>~/.cache/:/root/.cache/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>datajuicer/data-juicer:latest<span class="w"> </span>/bin/bash
-
-<span class="c1"># enter into this container and then you can use data-juicer in editable mode</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container_id&gt;<span class="w"> </span>bash
-</pre></div>
-</div>
-<p align="right"><a href="#table">🔼 back to index</a></p><section id="id54">
-<h2>License<a class="headerlink" href="#id54" title="Link to this heading">¶</a></h2>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">¶</a></h2>
 <p>Data-Juicer is released under Apache License 2.0.</p>
 </section>
-<section id="id55">
-<h2>Contributing<a class="headerlink" href="#id55" title="Link to this heading">¶</a></h2>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">¶</a></h2>
 <p>We are in a rapidly developing field and greatly welcome contributions of new
 features, bug fixes, and better documentation. Please refer to
-<a class="reference external" href="docs/DeveloperGuide.md">How-to Guide for Developers</a>.</p>
+<a class="reference internal" href="docs/DeveloperGuide.html"><span class="doc">How-to Guide for Developers</span></a>.</p>
 </section>
-<section id="id56">
-<h2>Acknowledgement<a class="headerlink" href="#id56" title="Link to this heading">¶</a></h2>
+<section id="acknowledgement">
+<h2>Acknowledgement<a class="headerlink" href="#acknowledgement" title="Link to this heading">¶</a></h2>
 <p>Data-Juicer is used across various foundation model applications and research initiatives, such as industrial scenarios in Alibaba Tongyi and Alibaba Cloud’s platform for AI (PAI).
 We look forward to more of your experience, suggestions, and discussions for collaboration!</p>
 <p>Data-Juicer thanks many community <a class="reference external" href="https://github.com/modelscope/data-juicer/graphs/contributors">contributors</a> and open-source projects, such as
 <a class="reference external" href="https://github.com/huggingface/datasets">Huggingface-Datasets</a>, <a class="reference external" href="https://huggingface.co/bigscience/bloom">Bloom</a>, <a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1">RedPajama</a>, <a class="reference external" href="https://github.com/apache/arrow">Arrow</a>, <a class="reference external" href="https://github.com/ray-project/ray">Ray</a>, ….</p>
 </section>
-<section id="id57">
-<h2>References<a class="headerlink" href="#id57" title="Link to this heading">¶</a></h2>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
 <p>If you find Data-Juicer useful for your research or development, please kindly cite the following works, <a class="reference external" href="https://arxiv.org/abs/2309.02033">1.0paper</a>, <a class="reference external" href="https://arxiv.org/abs/2501.14755">2.0paper</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@inproceedings</span><span class="p">{</span><span class="n">djv1</span><span class="p">,</span>
   <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="n">Data</span><span class="o">-</span><span class="n">Juicer</span><span class="p">:</span> <span class="n">A</span> <span class="n">One</span><span class="o">-</span><span class="n">Stop</span> <span class="n">Data</span> <span class="n">Processing</span> <span class="n">System</span> <span class="k">for</span> <span class="n">Large</span> <span class="n">Language</span> <span class="n">Models</span><span class="p">},</span>
@@ -694,223 +261,6 @@ We look forward to more of your experience, suggestions, and discussions for col
 - [BiMix: A Bivariate Data Mixing Law for Language Model Pretraining](https://arxiv.org/abs/2405.14908)
 
 </details><p align="right"><a href="#table">🔼 back to index</a></p><div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Adapter"><code class="docutils literal notranslate"><span class="pre">Adapter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Analyzer"><code class="docutils literal notranslate"><span class="pre">Analyzer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.NestedDataset"><code class="docutils literal notranslate"><span class="pre">NestedDataset</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.ExecutorBase"><code class="docutils literal notranslate"><span class="pre">ExecutorBase</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.ExecutorFactory"><code class="docutils literal notranslate"><span class="pre">ExecutorFactory</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.DefaultExecutor"><code class="docutils literal notranslate"><span class="pre">DefaultExecutor</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Exporter"><code class="docutils literal notranslate"><span class="pre">Exporter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Monitor"><code class="docutils literal notranslate"><span class="pre">Monitor</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Tracer"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.html#data_juicer.ops.load_ops"><code class="docutils literal notranslate"><span class="pre">load_ops()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.html#data_juicer.ops.Filter"><code class="docutils literal notranslate"><span class="pre">Filter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.html#data_juicer.ops.Mapper"><code class="docutils literal notranslate"><span class="pre">Mapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.html#data_juicer.ops.Deduplicator"><code class="docutils literal notranslate"><span class="pre">Deduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.html#data_juicer.ops.Selector"><code class="docutils literal notranslate"><span class="pre">Selector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.html#data_juicer.ops.Grouper"><code class="docutils literal notranslate"><span class="pre">Grouper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.html#data_juicer.ops.Aggregator"><code class="docutils literal notranslate"><span class="pre">Aggregator</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.AlphanumericFilter"><code class="docutils literal notranslate"><span class="pre">AlphanumericFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.AudioDurationFilter"><code class="docutils literal notranslate"><span class="pre">AudioDurationFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.AudioNMFSNRFilter"><code class="docutils literal notranslate"><span class="pre">AudioNMFSNRFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.AudioSizeFilter"><code class="docutils literal notranslate"><span class="pre">AudioSizeFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.AverageLineLengthFilter"><code class="docutils literal notranslate"><span class="pre">AverageLineLengthFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.CharacterRepetitionFilter"><code class="docutils literal notranslate"><span class="pre">CharacterRepetitionFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.FlaggedWordFilter"><code class="docutils literal notranslate"><span class="pre">FlaggedWordFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageAestheticsFilter"><code class="docutils literal notranslate"><span class="pre">ImageAestheticsFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageAspectRatioFilter"><code class="docutils literal notranslate"><span class="pre">ImageAspectRatioFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageFaceCountFilter"><code class="docutils literal notranslate"><span class="pre">ImageFaceCountFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageFaceRatioFilter"><code class="docutils literal notranslate"><span class="pre">ImageFaceRatioFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageNSFWFilter"><code class="docutils literal notranslate"><span class="pre">ImageNSFWFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImagePairSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">ImagePairSimilarityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageShapeFilter"><code class="docutils literal notranslate"><span class="pre">ImageShapeFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageSizeFilter"><code class="docutils literal notranslate"><span class="pre">ImageSizeFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageTextMatchingFilter"><code class="docutils literal notranslate"><span class="pre">ImageTextMatchingFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageTextSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">ImageTextSimilarityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageWatermarkFilter"><code class="docutils literal notranslate"><span class="pre">ImageWatermarkFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.LanguageIDScoreFilter"><code class="docutils literal notranslate"><span class="pre">LanguageIDScoreFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMQualityScoreFilter"><code class="docutils literal notranslate"><span class="pre">LLMQualityScoreFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMDifficultyScoreFilter"><code class="docutils literal notranslate"><span class="pre">LLMDifficultyScoreFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.MaximumLineLengthFilter"><code class="docutils literal notranslate"><span class="pre">MaximumLineLengthFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.PerplexityFilter"><code class="docutils literal notranslate"><span class="pre">PerplexityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.PhraseGroundingRecallFilter"><code class="docutils literal notranslate"><span class="pre">PhraseGroundingRecallFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.SpecialCharactersFilter"><code class="docutils literal notranslate"><span class="pre">SpecialCharactersFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.SpecifiedFieldFilter"><code class="docutils literal notranslate"><span class="pre">SpecifiedFieldFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.SpecifiedNumericFieldFilter"><code class="docutils literal notranslate"><span class="pre">SpecifiedNumericFieldFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.StopWordsFilter"><code class="docutils literal notranslate"><span class="pre">StopWordsFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.SuffixFilter"><code class="docutils literal notranslate"><span class="pre">SuffixFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextActionFilter"><code class="docutils literal notranslate"><span class="pre">TextActionFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEntityDependencyFilter"><code class="docutils literal notranslate"><span class="pre">TextEntityDependencyFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextLengthFilter"><code class="docutils literal notranslate"><span class="pre">TextLengthFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextPairSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">TextPairSimilarityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.TokenNumFilter"><code class="docutils literal notranslate"><span class="pre">TokenNumFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoAestheticsFilter"><code class="docutils literal notranslate"><span class="pre">VideoAestheticsFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoAspectRatioFilter"><code class="docutils literal notranslate"><span class="pre">VideoAspectRatioFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoDurationFilter"><code class="docutils literal notranslate"><span class="pre">VideoDurationFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoFramesTextSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">VideoFramesTextSimilarityFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoMotionScoreFilter"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoMotionScoreRaftFilter"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreRaftFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoNSFWFilter"><code class="docutils literal notranslate"><span class="pre">VideoNSFWFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoOcrAreaRatioFilter"><code class="docutils literal notranslate"><span class="pre">VideoOcrAreaRatioFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoResolutionFilter"><code class="docutils literal notranslate"><span class="pre">VideoResolutionFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoTaggingFromFramesFilter"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromFramesFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoWatermarkFilter"><code class="docutils literal notranslate"><span class="pre">VideoWatermarkFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.WordRepetitionFilter"><code class="docutils literal notranslate"><span class="pre">WordRepetitionFilter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html#data_juicer.ops.filter.WordsNumFilter"><code class="docutils literal notranslate"><span class="pre">WordsNumFilter</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.AudioAddGaussianNoiseMapper"><code class="docutils literal notranslate"><span class="pre">AudioAddGaussianNoiseMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.AudioFFmpegWrappedMapper"><code class="docutils literal notranslate"><span class="pre">AudioFFmpegWrappedMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.CalibrateQAMapper"><code class="docutils literal notranslate"><span class="pre">CalibrateQAMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.CalibrateQueryMapper"><code class="docutils literal notranslate"><span class="pre">CalibrateQueryMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.CalibrateResponseMapper"><code class="docutils literal notranslate"><span class="pre">CalibrateResponseMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ChineseConvertMapper"><code class="docutils literal notranslate"><span class="pre">ChineseConvertMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.CleanCopyrightMapper"><code class="docutils literal notranslate"><span class="pre">CleanCopyrightMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.CleanEmailMapper"><code class="docutils literal notranslate"><span class="pre">CleanEmailMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.CleanHtmlMapper"><code class="docutils literal notranslate"><span class="pre">CleanHtmlMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.CleanIpMapper"><code class="docutils literal notranslate"><span class="pre">CleanIpMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.CleanLinksMapper"><code class="docutils literal notranslate"><span class="pre">CleanLinksMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogIntentDetectionMapper"><code class="docutils literal notranslate"><span class="pre">DialogIntentDetectionMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogSentimentDetectionMapper"><code class="docutils literal notranslate"><span class="pre">DialogSentimentDetectionMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogSentimentIntensityMapper"><code class="docutils literal notranslate"><span class="pre">DialogSentimentIntensityMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogTopicDetectionMapper"><code class="docutils literal notranslate"><span class="pre">DialogTopicDetectionMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.Difference_Area_Generator_Mapper"><code class="docutils literal notranslate"><span class="pre">Difference_Area_Generator_Mapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractEntityAttributeMapper"><code class="docutils literal notranslate"><span class="pre">ExtractEntityAttributeMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractEntityRelationMapper"><code class="docutils literal notranslate"><span class="pre">ExtractEntityRelationMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractEventMapper"><code class="docutils literal notranslate"><span class="pre">ExtractEventMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractKeywordMapper"><code class="docutils literal notranslate"><span class="pre">ExtractKeywordMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractNicknameMapper"><code class="docutils literal notranslate"><span class="pre">ExtractNicknameMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractSupportTextMapper"><code class="docutils literal notranslate"><span class="pre">ExtractSupportTextMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractTablesFromHtmlMapper"><code class="docutils literal notranslate"><span class="pre">ExtractTablesFromHtmlMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.FixUnicodeMapper"><code class="docutils literal notranslate"><span class="pre">FixUnicodeMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.GenerateQAFromExamplesMapper"><code class="docutils literal notranslate"><span class="pre">GenerateQAFromExamplesMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.GenerateQAFromTextMapper"><code class="docutils literal notranslate"><span class="pre">GenerateQAFromTextMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.HumanPreferenceAnnotationMapper"><code class="docutils literal notranslate"><span class="pre">HumanPreferenceAnnotationMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageBlurMapper"><code class="docutils literal notranslate"><span class="pre">ImageBlurMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageCaptioningFromGPT4VMapper"><code class="docutils literal notranslate"><span class="pre">ImageCaptioningFromGPT4VMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageCaptioningMapper"><code class="docutils literal notranslate"><span class="pre">ImageCaptioningMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageDiffusionMapper"><code class="docutils literal notranslate"><span class="pre">ImageDiffusionMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageFaceBlurMapper"><code class="docutils literal notranslate"><span class="pre">ImageFaceBlurMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageRemoveBackgroundMapper"><code class="docutils literal notranslate"><span class="pre">ImageRemoveBackgroundMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageSegmentMapper"><code class="docutils literal notranslate"><span class="pre">ImageSegmentMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageTaggingMapper"><code class="docutils literal notranslate"><span class="pre">ImageTaggingMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.MllmMapper"><code class="docutils literal notranslate"><span class="pre">MllmMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.NlpaugEnMapper"><code class="docutils literal notranslate"><span class="pre">NlpaugEnMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.NlpcdaZhMapper"><code class="docutils literal notranslate"><span class="pre">NlpcdaZhMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.OptimizeQAMapper"><code class="docutils literal notranslate"><span class="pre">OptimizeQAMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.OptimizeQueryMapper"><code class="docutils literal notranslate"><span class="pre">OptimizeQueryMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.OptimizeResponseMapper"><code class="docutils literal notranslate"><span class="pre">OptimizeResponseMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.PairPreferenceMapper"><code class="docutils literal notranslate"><span class="pre">PairPreferenceMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.PunctuationNormalizationMapper"><code class="docutils literal notranslate"><span class="pre">PunctuationNormalizationMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.PythonFileMapper"><code class="docutils literal notranslate"><span class="pre">PythonFileMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.PythonLambdaMapper"><code class="docutils literal notranslate"><span class="pre">PythonLambdaMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.QuerySentimentDetectionMapper"><code class="docutils literal notranslate"><span class="pre">QuerySentimentDetectionMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.QueryIntentDetectionMapper"><code class="docutils literal notranslate"><span class="pre">QueryIntentDetectionMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.QueryTopicDetectionMapper"><code class="docutils literal notranslate"><span class="pre">QueryTopicDetectionMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RelationIdentityMapper"><code class="docutils literal notranslate"><span class="pre">RelationIdentityMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveBibliographyMapper"><code class="docutils literal notranslate"><span class="pre">RemoveBibliographyMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveCommentsMapper"><code class="docutils literal notranslate"><span class="pre">RemoveCommentsMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveHeaderMapper"><code class="docutils literal notranslate"><span class="pre">RemoveHeaderMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveLongWordsMapper"><code class="docutils literal notranslate"><span class="pre">RemoveLongWordsMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveNonChineseCharacterlMapper"><code class="docutils literal notranslate"><span class="pre">RemoveNonChineseCharacterlMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveRepeatSentencesMapper"><code class="docutils literal notranslate"><span class="pre">RemoveRepeatSentencesMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveSpecificCharsMapper"><code class="docutils literal notranslate"><span class="pre">RemoveSpecificCharsMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveTableTextMapper"><code class="docutils literal notranslate"><span class="pre">RemoveTableTextMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveWordsWithIncorrectSubstringsMapper"><code class="docutils literal notranslate"><span class="pre">RemoveWordsWithIncorrectSubstringsMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ReplaceContentMapper"><code class="docutils literal notranslate"><span class="pre">ReplaceContentMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.SDXLPrompt2PromptMapper"><code class="docutils literal notranslate"><span class="pre">SDXLPrompt2PromptMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.SentenceAugmentationMapper"><code class="docutils literal notranslate"><span class="pre">SentenceAugmentationMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.SentenceSplitMapper"><code class="docutils literal notranslate"><span class="pre">SentenceSplitMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.TextChunkMapper"><code class="docutils literal notranslate"><span class="pre">TextChunkMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromAudioMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromAudioMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromFramesMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromFramesMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromSummarizerMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromSummarizerMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromVideoMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromVideoMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoExtractFramesMapper"><code class="docutils literal notranslate"><span class="pre">VideoExtractFramesMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoFFmpegWrappedMapper"><code class="docutils literal notranslate"><span class="pre">VideoFFmpegWrappedMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoFaceBlurMapper"><code class="docutils literal notranslate"><span class="pre">VideoFaceBlurMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoRemoveWatermarkMapper"><code class="docutils literal notranslate"><span class="pre">VideoRemoveWatermarkMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoResizeAspectRatioMapper"><code class="docutils literal notranslate"><span class="pre">VideoResizeAspectRatioMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoResizeResolutionMapper"><code class="docutils literal notranslate"><span class="pre">VideoResizeResolutionMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoSplitByDurationMapper"><code class="docutils literal notranslate"><span class="pre">VideoSplitByDurationMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoSplitByKeyFrameMapper"><code class="docutils literal notranslate"><span class="pre">VideoSplitByKeyFrameMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoSplitBySceneMapper"><code class="docutils literal notranslate"><span class="pre">VideoSplitBySceneMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoTaggingFromAudioMapper"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromAudioMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoTaggingFromFramesMapper"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromFramesMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.WhitespaceNormalizationMapper"><code class="docutils literal notranslate"><span class="pre">WhitespaceNormalizationMapper</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentMinhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentSimhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentSimhashDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.ImageDeduplicator"><code class="docutils literal notranslate"><span class="pre">ImageDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayBasicDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayBasicDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayDocumentDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayDocumentDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayImageDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayImageDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayVideoDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayVideoDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.VideoDeduplicator"><code class="docutils literal notranslate"><span class="pre">VideoDeduplicator</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.selector.html#data_juicer.ops.selector.FrequencySpecifiedFieldSelector"><code class="docutils literal notranslate"><span class="pre">FrequencySpecifiedFieldSelector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.selector.html#data_juicer.ops.selector.RandomSelector"><code class="docutils literal notranslate"><span class="pre">RandomSelector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.selector.html#data_juicer.ops.selector.RangeSpecifiedFieldSelector"><code class="docutils literal notranslate"><span class="pre">RangeSpecifiedFieldSelector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.selector.html#data_juicer.ops.selector.TagsSpecifiedFieldSelector"><code class="docutils literal notranslate"><span class="pre">TagsSpecifiedFieldSelector</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.selector.html#data_juicer.ops.selector.TopkSpecifiedFieldSelector"><code class="docutils literal notranslate"><span class="pre">TopkSpecifiedFieldSelector</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.common.html">data_juicer.ops.common</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html#data_juicer.ops.common.get_sentences_from_document"><code class="docutils literal notranslate"><span class="pre">get_sentences_from_document()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html#data_juicer.ops.common.get_words_from_document"><code class="docutils literal notranslate"><span class="pre">get_words_from_document()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html#data_juicer.ops.common.merge_on_whitespace_tab_newline"><code class="docutils literal notranslate"><span class="pre">merge_on_whitespace_tab_newline()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html#data_juicer.ops.common.split_on_newline_tab_whitespace"><code class="docutils literal notranslate"><span class="pre">split_on_newline_tab_whitespace()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html#data_juicer.ops.common.split_on_whitespace"><code class="docutils literal notranslate"><span class="pre">split_on_whitespace()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html#data_juicer.ops.common.strip"><code class="docutils literal notranslate"><span class="pre">strip()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html#data_juicer.ops.common.words_augmentation"><code class="docutils literal notranslate"><span class="pre">words_augmentation()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html#data_juicer.ops.common.words_refinement"><code class="docutils literal notranslate"><span class="pre">words_refinement()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html#data_juicer.ops.common.split_text_by_punctuation"><code class="docutils literal notranslate"><span class="pre">split_text_by_punctuation()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.analysis.html">data_juicer.analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.analysis.html#data_juicer.analysis.ColumnWiseAnalysis"><code class="docutils literal notranslate"><span class="pre">ColumnWiseAnalysis</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.analysis.html#data_juicer.analysis.DiversityAnalysis"><code class="docutils literal notranslate"><span class="pre">DiversityAnalysis</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.analysis.html#data_juicer.analysis.OverallAnalysis"><code class="docutils literal notranslate"><span class="pre">OverallAnalysis</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.config.html">data_juicer.config</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.init_configs"><code class="docutils literal notranslate"><span class="pre">init_configs()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.get_init_configs"><code class="docutils literal notranslate"><span class="pre">get_init_configs()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.export_config"><code class="docutils literal notranslate"><span class="pre">export_config()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.merge_config"><code class="docutils literal notranslate"><span class="pre">merge_config()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.prepare_side_configs"><code class="docutils literal notranslate"><span class="pre">prepare_side_configs()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.get_default_cfg"><code class="docutils literal notranslate"><span class="pre">get_default_cfg()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.format.html">data_juicer.format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html#data_juicer.format.JsonFormatter"><code class="docutils literal notranslate"><span class="pre">JsonFormatter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html#data_juicer.format.LocalFormatter"><code class="docutils literal notranslate"><span class="pre">LocalFormatter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html#data_juicer.format.RemoteFormatter"><code class="docutils literal notranslate"><span class="pre">RemoteFormatter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html#data_juicer.format.TextFormatter"><code class="docutils literal notranslate"><span class="pre">TextFormatter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html#data_juicer.format.ParquetFormatter"><code class="docutils literal notranslate"><span class="pre">ParquetFormatter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html#data_juicer.format.CsvFormatter"><code class="docutils literal notranslate"><span class="pre">CsvFormatter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html#data_juicer.format.TsvFormatter"><code class="docutils literal notranslate"><span class="pre">TsvFormatter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html#data_juicer.format.EmptyFormatter"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html#data_juicer.format.RayEmptyFormatter"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter</span></code></a></li>
-</ul>
-</li>
-</ul>
 </div>
 </section>
 </section>
@@ -927,7 +277,7 @@ We look forward to more of your experience, suggestions, and discussions for col
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="data_juicer.core.html" class="btn btn-neutral float-right" title="data_juicer.core" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="en/DJ-cookbook.html" class="btn btn-neutral float-right" title="DJ-Cookbook" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

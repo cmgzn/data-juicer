@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="data_juicer.ops" href="data_juicer.ops.html" />
-    <link rel="prev" title="Data Processing for and with Foundation Models" href="index.html" /> 
+    <link rel="prev" title="&lt;no title&gt;" href="api.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,18 +40,94 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="en/DJ-cookbook.html">DJ-Cookbook</a></li>
+</ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">data_juicer.core</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Adapter"><code class="docutils literal notranslate"><span class="pre">Adapter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Analyzer"><code class="docutils literal notranslate"><span class="pre">Analyzer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.NestedDataset"><code class="docutils literal notranslate"><span class="pre">NestedDataset</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.ExecutorBase"><code class="docutils literal notranslate"><span class="pre">ExecutorBase</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.ExecutorFactory"><code class="docutils literal notranslate"><span class="pre">ExecutorFactory</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.DefaultExecutor"><code class="docutils literal notranslate"><span class="pre">DefaultExecutor</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Exporter"><code class="docutils literal notranslate"><span class="pre">Exporter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Monitor"><code class="docutils literal notranslate"><span class="pre">Monitor</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Tracer"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Adapter"><code class="docutils literal notranslate"><span class="pre">Adapter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Adapter.MAX_BATCH_SIZE"><code class="docutils literal notranslate"><span class="pre">Adapter.MAX_BATCH_SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Adapter.__init__"><code class="docutils literal notranslate"><span class="pre">Adapter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Adapter.execute_and_probe"><code class="docutils literal notranslate"><span class="pre">Adapter.execute_and_probe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Adapter.take_batch"><code class="docutils literal notranslate"><span class="pre">Adapter.take_batch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Adapter.adapt_workloads"><code class="docutils literal notranslate"><span class="pre">Adapter.adapt_workloads()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Adapter.probe_small_batch"><code class="docutils literal notranslate"><span class="pre">Adapter.probe_small_batch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Adapter.batch_size_strategy"><code class="docutils literal notranslate"><span class="pre">Adapter.batch_size_strategy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Adapter.analyze_small_batch"><code class="docutils literal notranslate"><span class="pre">Adapter.analyze_small_batch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Adapter.insight_mining"><code class="docutils literal notranslate"><span class="pre">Adapter.insight_mining()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Analyzer"><code class="docutils literal notranslate"><span class="pre">Analyzer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Analyzer.__init__"><code class="docutils literal notranslate"><span class="pre">Analyzer.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Analyzer.run"><code class="docutils literal notranslate"><span class="pre">Analyzer.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.NestedDataset"><code class="docutils literal notranslate"><span class="pre">NestedDataset</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.__init__"><code class="docutils literal notranslate"><span class="pre">NestedDataset.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.schema"><code class="docutils literal notranslate"><span class="pre">NestedDataset.schema()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.get"><code class="docutils literal notranslate"><span class="pre">NestedDataset.get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.get_column"><code class="docutils literal notranslate"><span class="pre">NestedDataset.get_column()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.process"><code class="docutils literal notranslate"><span class="pre">NestedDataset.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.update_args"><code class="docutils literal notranslate"><span class="pre">NestedDataset.update_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.map"><code class="docutils literal notranslate"><span class="pre">NestedDataset.map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.filter"><code class="docutils literal notranslate"><span class="pre">NestedDataset.filter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.select"><code class="docutils literal notranslate"><span class="pre">NestedDataset.select()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.from_dict"><code class="docutils literal notranslate"><span class="pre">NestedDataset.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.add_column"><code class="docutils literal notranslate"><span class="pre">NestedDataset.add_column()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.select_columns"><code class="docutils literal notranslate"><span class="pre">NestedDataset.select_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.remove_columns"><code class="docutils literal notranslate"><span class="pre">NestedDataset.remove_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.cleanup_cache_files"><code class="docutils literal notranslate"><span class="pre">NestedDataset.cleanup_cache_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.NestedDataset.load_from_disk"><code class="docutils literal notranslate"><span class="pre">NestedDataset.load_from_disk()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.ExecutorBase"><code class="docutils literal notranslate"><span class="pre">ExecutorBase</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.ExecutorBase.__init__"><code class="docutils literal notranslate"><span class="pre">ExecutorBase.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.ExecutorBase.run"><code class="docutils literal notranslate"><span class="pre">ExecutorBase.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.ExecutorFactory"><code class="docutils literal notranslate"><span class="pre">ExecutorFactory</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.ExecutorFactory.create_executor"><code class="docutils literal notranslate"><span class="pre">ExecutorFactory.create_executor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.DefaultExecutor"><code class="docutils literal notranslate"><span class="pre">DefaultExecutor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.DefaultExecutor.__init__"><code class="docutils literal notranslate"><span class="pre">DefaultExecutor.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.DefaultExecutor.run"><code class="docutils literal notranslate"><span class="pre">DefaultExecutor.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.DefaultExecutor.sample_data"><code class="docutils literal notranslate"><span class="pre">DefaultExecutor.sample_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Exporter"><code class="docutils literal notranslate"><span class="pre">Exporter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.KiB"><code class="docutils literal notranslate"><span class="pre">Exporter.KiB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.MiB"><code class="docutils literal notranslate"><span class="pre">Exporter.MiB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.GiB"><code class="docutils literal notranslate"><span class="pre">Exporter.GiB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.TiB"><code class="docutils literal notranslate"><span class="pre">Exporter.TiB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.__init__"><code class="docutils literal notranslate"><span class="pre">Exporter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.export"><code class="docutils literal notranslate"><span class="pre">Exporter.export()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.export_compute_stats"><code class="docutils literal notranslate"><span class="pre">Exporter.export_compute_stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.to_jsonl"><code class="docutils literal notranslate"><span class="pre">Exporter.to_jsonl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.to_json"><code class="docutils literal notranslate"><span class="pre">Exporter.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Exporter.to_parquet"><code class="docutils literal notranslate"><span class="pre">Exporter.to_parquet()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Monitor"><code class="docutils literal notranslate"><span class="pre">Monitor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Monitor.DYNAMIC_FIELDS"><code class="docutils literal notranslate"><span class="pre">Monitor.DYNAMIC_FIELDS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Monitor.__init__"><code class="docutils literal notranslate"><span class="pre">Monitor.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Monitor.monitor_all_resources"><code class="docutils literal notranslate"><span class="pre">Monitor.monitor_all_resources()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Monitor.monitor_current_resources"><code class="docutils literal notranslate"><span class="pre">Monitor.monitor_current_resources()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Monitor.draw_resource_util_graph"><code class="docutils literal notranslate"><span class="pre">Monitor.draw_resource_util_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Monitor.analyze_resource_util_list"><code class="docutils literal notranslate"><span class="pre">Monitor.analyze_resource_util_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Monitor.analyze_single_resource_util"><code class="docutils literal notranslate"><span class="pre">Monitor.analyze_single_resource_util()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Monitor.monitor_func"><code class="docutils literal notranslate"><span class="pre">Monitor.monitor_func()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.core.Tracer"><code class="docutils literal notranslate"><span class="pre">Tracer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Tracer.__init__"><code class="docutils literal notranslate"><span class="pre">Tracer.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Tracer.trace_mapper"><code class="docutils literal notranslate"><span class="pre">Tracer.trace_mapper()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Tracer.trace_batch_mapper"><code class="docutils literal notranslate"><span class="pre">Tracer.trace_batch_mapper()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Tracer.trace_filter"><code class="docutils literal notranslate"><span class="pre">Tracer.trace_filter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.core.Tracer.trace_deduplicator"><code class="docutils literal notranslate"><span class="pre">Tracer.trace_deduplicator()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a></li>
@@ -79,6 +155,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">&lt;no title&gt;</a></li>
       <li class="breadcrumb-item active">data_juicer.core</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/data_juicer.core.rst.txt" rel="nofollow"> View page source</a>
@@ -859,7 +936,7 @@ deduplicator</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Data Processing for and with Foundation Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="data_juicer.ops.html" class="btn btn-neutral float-right" title="data_juicer.ops" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

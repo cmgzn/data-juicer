@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DJ-Cookbook &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/documentation_options.js?v=8ca9e7a0"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Awesome Data-Model Co-Development of MLLMs" href="../docs/awesome_llm_data.html" />
+    <link rel="prev" title="Data Processing for and with Foundation Models" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DJ-Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#curated-resources">Curated Resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../docs/awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
+<li class="toctree-l3"><a class="reference internal" href="../docs/BadDataExhibition.html">Bad Data Exhibition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basics">Basics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../docs/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lookup-materials">Lookup Materials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced">Advanced</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/preprocess/README.html">Preprocess Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/postprocess/README.html">Postprocess tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../docs/Sandbox.html">Sandbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../docs/DJ_service.html">DJ_service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/quality_classifier/README.html">Data Scoring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/evaluator/README.html">Auto Evaluation Toolkit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../thirdparty/LLM_ecosystems/README.html">LLM Ecosystems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#use-cases-data-recipes">Use Cases &amp; Data Recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interactive-examples">Interactive Examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.format.html">data_juicer.format</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">DJ-Cookbook</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/en/DJ-cookbook.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dj-cookbook">
+<h1>DJ-Cookbook<a class="headerlink" href="#dj-cookbook" title="Link to this heading">¶</a></h1>
+<section id="curated-resources">
+<h2>Curated Resources<a class="headerlink" href="#curated-resources" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://modelscope.github.io/data-juicer/_static/tutorial_kdd24.html">KDD-Tutorial</a></p></li>
+<li><p><a class="reference internal" href="../docs/awesome_llm_data.html"><span class="doc">Awesome LLM-Data</span></a></p></li>
+<li><p><a class="reference internal" href="../docs/BadDataExhibition.html"><span class="doc">“Bad” Data Exhibition</span></a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="coding-with-data-juicer-dj">
+<h2>Coding with Data-Juicer (DJ)<a class="headerlink" href="#coding-with-data-juicer-dj" title="Link to this heading">¶</a></h2>
+<section id="basics">
+<h3>Basics<a class="headerlink" href="#basics" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="../index.html"><span class="doc">Overview of DJ</span></a></p></li>
+<li><p><span class="xref std std-doc">Quick Start</span></p></li>
+<li><p><a class="reference internal" href="../docs/RecipeGallery.html"><span class="doc">Configuration</span></a></p></li>
+<li><p><a class="reference internal" href="../tools/fmt_conversion/README.html"><span class="doc">Data Format Conversion</span></a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div></blockquote>
+</section>
+<section id="lookup-materials">
+<h3>Lookup Materials<a class="headerlink" href="#lookup-materials" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md">DJ OperatorZoo</a></p></li>
+<li><p><a class="reference internal" href="../api.html"><span class="doc">API references</span></a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="advanced">
+<h3>Advanced<a class="headerlink" href="#advanced" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="../docs/DeveloperGuide.html"><span class="doc">Developer Guide</span></a></p></li>
+<li><p><a class="reference internal" href="../tools/preprocess/README.html"><span class="doc">Preprocess Tools</span></a></p></li>
+<li><p><a class="reference internal" href="../tools/postprocess/README.html"><span class="doc">Postprocess Tools</span></a></p></li>
+<li><p><a class="reference internal" href="../docs/Sandbox.html"><span class="doc">Sandbox</span></a></p></li>
+<li><p><a class="reference internal" href="../docs/DJ_service.html"><span class="doc">API Service</span></a></p></li>
+<li><p><a class="reference internal" href="../tools/quality_classifier/README.html"><span class="doc">Data Scoring</span></a></p></li>
+<li><p><a class="reference internal" href="../tools/evaluator/README.html"><span class="doc">Auto Evaluation</span></a></p></li>
+<li><p><a class="reference internal" href="../thirdparty/LLM_ecosystems/README.html"><span class="doc">Third-parties Integration</span></a></p></li>
+</ul>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+<section id="use-cases-data-recipes">
+<h2>Use Cases &amp; Data Recipes<a class="headerlink" href="#use-cases-data-recipes" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../docs/RecipeGallery.html"><span class="doc">Data Recipe Gallery</span></a></p>
+<ul>
+<li><p>Data-Juicer Minimal Example Recipe</p></li>
+<li><p>Reproducing Open Source Text Datasets</p></li>
+<li><p>Improving Open Source Pre-training Text Datasets</p></li>
+<li><p>Improving Open Source Post-tuning Text Datasets</p></li>
+<li><p>Synthetic Contrastive Learning Image-text Datasets</p></li>
+<li><p>Improving Open Source Image-text Datasets</p></li>
+<li><p>Basic Example Recipes for Video Data</p></li>
+<li><p>Synthesizing Human-centric Video Benchmarks</p></li>
+<li><p>Improving Existing Open Source Video Datasets</p></li>
+</ul>
+</li>
+<li><p>Data-Juicer related Competitions</p>
+<ul>
+<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532251">Better Synth</a>, explore the impact of large model synthetic data on image understanding ability with DJ-Sandbox Lab and multimodal large models</p></li>
+<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532219">Modelscope-Sora Challenge</a>, based on Data-Juicer and <a class="reference external" href="https://github.com/aigc-apps/EasyAnimate">EasyAnimate</a> framework,  optimize data and train SORA-like small models to generate better videos</p></li>
+<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532174">Better Mixture</a>, only adjust data mixing and sampling strategies for given multiple candidate datasets</p></li>
+<li><p>FT-Data Ranker (<a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532157">1B Track</a>, <a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532158">7B Track</a>), For a specified candidate dataset, only adjust the data filtering and enhancement strategies</p></li>
+<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532254">Kolors-LoRA Stylized Story Challenge</a>, based on Data-Juicer and <a class="reference external" href="https://github.com/modelscope/DiffSynth-Studio">DiffSynth-Studio</a>framework, explore Diffusion model fine-tuning</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../docs/DJ_SORA.html"><span class="doc">DJ-SORA</span></a></p></li>
+<li><p>Based on Data-Juicer and <a class="reference external" href="https://github.com/modelscope/agentscope">AgentScope</a> framework, leverage <cite>agents to call DJ Filters &lt;./demos/api_service/react_data_filter_process.ipynb&gt;</cite> and <cite>call DJ Mappers &lt;./demos/api_service/react_data_mapper_process.ipynb&gt;</cite></p></li>
+</ul>
+</section>
+<section id="interactive-examples">
+<h2>Interactive Examples<a class="headerlink" href="#interactive-examples" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Introduction to Data-Juicer [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/overview_scan/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/overview_scan">HuggingFace</a>]</p></li>
+<li><p>Data Visualization:</p>
+<ul>
+<li><p>Basic Statistics [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_statistics/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_statistics">HuggingFace</a>]</p></li>
+<li><p>Lexical Diversity [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_diversity/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_diversity">HuggingFace</a>]</p></li>
+<li><p>Operator Insight (Single OP) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visualization_op_insight/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_op_insight">HuggingFace</a>]</p></li>
+<li><p>Operator Effect (Multiple OPs) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_op_effect/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_op_effect">HuggingFace</a>]</p></li>
+</ul>
+</li>
+<li><p>Data Processing:</p>
+<ul>
+<li><p>Scientific Literature (e.g. <a class="reference external" href="https://info.arxiv.org/help/bulk_data_s3.html">arXiv</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_sci_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_sci_data">HuggingFace</a>]</p></li>
+<li><p>Programming Code (e.g. <a class="reference external" href="https://huggingface.co/datasets/bigcode/the-stack">TheStack</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_code_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_code_data">HuggingFace</a>]</p></li>
+<li><p>Chinese Instruction Data (e.g. <a class="reference external" href="https://huggingface.co/datasets/QingyiSi/Alpaca-CoT">Alpaca-CoT</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_sft_zh_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_cft_zh_data">HuggingFace</a>]</p></li>
+</ul>
+</li>
+<li><p>Tool Pool:</p>
+<ul>
+<li><p>Dataset Splitting by Language [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/tool_dataset_splitting_by_language/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/tool_dataset_splitting_by_language">HuggingFace</a>]</p></li>
+<li><p>Quality Classifier for CommonCrawl [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/tool_quality_classifier/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/tool_quality_classifier">HuggingFace</a>]</p></li>
+<li><p>Auto Evaluation on <cite>HELM &lt;https://github.com/stanford-crfm/helm&gt;</cite> [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/auto_evaluation_helm/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/auto_evaluation_helm">HuggingFace</a>]</p></li>
+<li><p>Data Sampling and Mixture [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_mixture/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_mixture">HuggingFace</a>]</p></li>
+</ul>
+</li>
+<li><p>Data Processing Loop [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_process_loop/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_process_loop">HuggingFace</a>]</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Data Processing for and with Foundation Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../docs/awesome_llm_data.html" class="btn btn-neutral float-right" title="Awesome Data-Model Co-Development of MLLMs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
