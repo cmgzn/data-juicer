@@ -1,10 +1,10 @@
 # Pinning to avoid unexpected breakages.
 # Used by RTD to generate docs.
-Sphinx==7.2.6
+Sphinx
 sphinx-autobuild
 sphinx_rtd_theme
 googletrans
 recommonmark
 sphinx-intl
-data_juicer
+py-data-juicer
 myst_parser
