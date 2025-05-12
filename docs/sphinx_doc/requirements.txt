@@ -6,3 +6,4 @@ sphinx_rtd_theme
 googletrans
 recommonmark
 sphinx-intl
+data_juicer
