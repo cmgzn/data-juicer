@@ -1,4 +1,4 @@
-# "Bad" Data Exhibition
+# Bad Data Exhibition
 
 This document is a exhibition that shows those so-called "bad" data from diverse datasets during we use our Data-Juicer 
 to process them. The motivations of this exhibition include:
