@@ -7,15 +7,15 @@ Curated Resources
 
 
 * `KDD-Tutorial <https://modelscope.github.io/data-juicer/_static/tutorial_kdd24.html>`_
-* :doc:`Awesome LLM-Data <../docs/awesome_llm_data>`
-* :doc:`"Bad" Data Exhibition <../docs/BadDataExhibition>`
+* :doc:`Awesome LLM-Data <docs/awesome_llm_data>`
+* :doc:`"Bad" Data Exhibition <docs/BadDataExhibition>`
 .. toctree::
    :hidden:
    :maxdepth: 3
    :caption: Curated Resources
 
-   ../docs/awesome_llm_data
-   ../docs/BadDataExhibition
+   docs/awesome_llm_data
+   docs/BadDataExhibition
 
 Coding with Data-Juicer (DJ)
 ----------------------------
@@ -24,55 +24,55 @@ Coding with Data-Juicer (DJ)
 Basics
 ~~~~~~
 
-  * :doc:`Overview of DJ <../index>`
+  * :doc:`Overview of DJ <index>`
   * :doc:`Quick Start <quick-start>`
-  * :doc:`Configuration <../docs/RecipeGallery>`
-  * :doc:`Data Format Conversion <../tools/fmt_conversion/README>`
+  * :doc:`Configuration <docs/RecipeGallery>`
+  * :doc:`Data Format Conversion <tools/fmt_conversion/README>`
   .. toctree::
     :maxdepth: 2
     :hidden:
     :caption: Basics
 
-    ../docs/RecipeGallery
-    ../tools/fmt_conversion/README
+    docs/RecipeGallery
+    tools/fmt_conversion/README
 
 Lookup Materials
 ~~~~~~~~~~~~~~~~
 
   * `DJ OperatorZoo <https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md>`_
-  * :doc:`API references <../api>`
+  * :doc:`API references <api>`
 
 Advanced
 ~~~~~~~~
 
-  * :doc:`Developer Guide <../docs/DeveloperGuide>`
-  * :doc:`Preprocess Tools <../tools/preprocess/README>`
-  * :doc:`Postprocess Tools <../tools/postprocess/README>`
-  * :doc:`Sandbox <../docs/Sandbox>`
-  * :doc:`API Service <../docs/DJ_service>`
-  * :doc:`Data Scoring <../tools/quality_classifier/README>`
-  * :doc:`Auto Evaluation <../tools/evaluator/README>`
-  * :doc:`Third-parties Integration <../thirdparty/LLM_ecosystems/README>`
+  * :doc:`Developer Guide <docs/DeveloperGuide>`
+  * :doc:`Preprocess Tools <tools/preprocess/README>`
+  * :doc:`Postprocess Tools <tools/postprocess/README>`
+  * :doc:`Sandbox <docs/Sandbox>`
+  * :doc:`API Service <docs/DJ_service>`
+  * :doc:`Data Scoring <tools/quality_classifier/README>`
+  * :doc:`Auto Evaluation <tools/evaluator/README>`
+  * :doc:`Third-parties Integration <thirdparty/LLM_ecosystems/README>`
 
 .. toctree::
   :maxdepth: 1
   :hidden:
   :caption: Advanced
 
-  ../docs/DeveloperGuide
-  ../tools/preprocess/README
-  ../tools/postprocess/README
-  ../docs/Sandbox
-  ../docs/DJ_service
-  ../tools/quality_classifier/README
-  ../tools/evaluator/README
-  ../thirdparty/LLM_ecosystems/README
+  docs/DeveloperGuide
+  tools/preprocess/README
+  tools/postprocess/README
+  docs/Sandbox
+  docs/DJ_service
+  tools/quality_classifier/README
+  tools/evaluator/README
+  thirdparty/LLM_ecosystems/README
 
 Use Cases & Data Recipes
 ------------------------
 
 
-* :doc:`Data Recipe Gallery <../docs/RecipeGallery>`
+* :doc:`Data Recipe Gallery <docs/RecipeGallery>`
 
   * Data-Juicer Minimal Example Recipe
   * Reproducing Open Source Text Datasets
@@ -92,7 +92,7 @@ Use Cases & Data Recipes
   * FT-Data Ranker (`1B Track <https://tianchi.aliyun.com/competition/entrance/532157>`_\ , `7B Track <https://tianchi.aliyun.com/competition/entrance/532158>`_\ ), For a specified candidate dataset, only adjust the data filtering and enhancement strategies
   * `Kolors-LoRA Stylized Story Challenge <https://tianchi.aliyun.com/competition/entrance/532254>`_\ , based on Data-Juicer and `DiffSynth-Studio <https://github.com/modelscope/DiffSynth-Studio>`_\ framework, explore Diffusion model fine-tuning
 
-* :doc:`DJ-SORA <../docs/DJ_SORA>`
+* :doc:`DJ-SORA <docs/DJ_SORA>`
 * Based on Data-Juicer and `AgentScope <https://github.com/modelscope/agentscope>`_ framework, leverage `agents to call DJ Filters <./demos/api_service/react_data_filter_process.ipynb>` and `call DJ Mappers <./demos/api_service/react_data_mapper_process.ipynb>`
 
 Interactive Examples

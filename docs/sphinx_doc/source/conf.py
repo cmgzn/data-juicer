@@ -104,7 +104,7 @@ def skip(app, what, name, obj, would_skip, options):
         return False
     return would_skip
 
-def process_operators_and_ZH(app, docname, source):
+def process_operators(app, docname, source):
     operators_url = "https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md"
     
     import re
@@ -115,18 +115,16 @@ def process_operators_and_ZH(app, docname, source):
 
     pattern = r'\[([^\]]+)\]\([^)]*Operators\.md\)'
     source[0] = re.sub(pattern, replace_operators_link, source[0])
-    source[0] = re.sub(r'_ZH.md', '', source[0])
     return source[0]
 
 def process_read(app, docname, source):
-    source[0] = process_operators_and_ZH(app, docname, source)
+    source[0] = process_operators(app, docname, source)
+    source[0] = source[0].replace('.md]', '.html]')
     # auto_translate(app, docname, source)
 
 
 def setup(app):
-    app.config.exclude_patterns = ['zh_CN'] if app.config.language != 'zh_CN' else []
-    app.config.include_patterns = ['**/zh_CN'] if app.config.language == 'zh_CN' else ['**']
-    app.config.root_doc = 'zh_CN/index' if app.config.language == 'zh_CN' else 'index'
+    app.config.exclude_patterns = ['**/*_ZH.md', '**/*_ZH.rst'] if app.config.language != 'zh_CN' else []
     app.connect('source-read', process_read)
     app.connect('html-page-context', get_page_path)
     app.connect("autodoc-skip-member", skip)
