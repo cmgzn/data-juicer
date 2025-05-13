@@ -29,16 +29,19 @@
     <select onchange="window.location.href=this.value;">
         
             <option value="../../../en/tools/evaluator/README.html" 
-                    selected>
+                    
+                    >
                 English
             </option>
         
-            <option value="../../../zh_CN/tools/evaluator/README.html" 
+            <option value="../../../zh_CN/tools/evaluator/README_ZH.html" 
+                    
                     >
                 简体中文
             </option>
         
             <option value="../../../ja/tools/evaluator/README.html" 
+                    
                     >
                 日本語
             </option>
@@ -67,12 +70,12 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../../user/DJ-cookbook.html">DJ-Cookbook</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../user/DJ-cookbook.html#curated-resources">Curated Resources</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../user/DJ-cookbook.html#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../user/DJ-cookbook.html#basics">Basics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../user/DJ-cookbook.html#lookup-materials">Lookup Materials</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../../user/DJ-cookbook.html#advanced">Advanced</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../DJ-cookbook.html">DJ-Cookbook</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../DJ-cookbook.html#curated-resources">Curated Resources</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../DJ-cookbook.html#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../DJ-cookbook.html#basics">Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../DJ-cookbook.html#lookup-materials">Lookup Materials</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../DJ-cookbook.html#advanced">Advanced</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../../docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../preprocess/README.html">Preprocess Tools</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../postprocess/README.html">Postprocess tools</a></li>
@@ -85,12 +88,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../user/DJ-cookbook.html#use-cases-data-recipes">Use Cases &amp; Data Recipes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../user/DJ-cookbook.html#interactive-examples">Interactive Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../DJ-cookbook.html#use-cases-data-recipes">Use Cases &amp; Data Recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../DJ-cookbook.html#interactive-examples">Interactive Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../user/Installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user/quick-start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quick-start.html">Quick Start</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -120,7 +123,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../user/DJ-cookbook.html">DJ-Cookbook</a></li>
+          <li class="breadcrumb-item"><a href="../../DJ-cookbook.html">DJ-Cookbook</a></li>
       <li class="breadcrumb-item active">Auto Evaluation Toolkit</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/tools/evaluator/README.md.txt" rel="nofollow"> View page source</a>
@@ -140,7 +143,7 @@
 <li><p>Multiple GPU machines (at least 2, one for evaluation, the other for training).</p></li>
 <li><p>Mount a shared file system (e.g., NAS) to the same path (e.g., <code class="docutils literal notranslate"><span class="pre">/mnt/shared</span></code>) on the above machines.</p></li>
 <li><p>Install Data-Juicer in the shared file system (e.g., <code class="docutils literal notranslate"><span class="pre">/mnt/shared/code/data-juicer</span></code>).</p></li>
-<li><p>Install thirdparty dependencies (Megatron-LM and HELM) accoroding to <a class="reference internal" href="#../../thirdparty/README.md"><span class="xref myst">thirdparty/README.md</span></a> on each machine.</p></li>
+<li><p>Install thirdparty dependencies (Megatron-LM and HELM) accoroding to <a class="reference internal" href="#../../thirdparty/README.md"><span class="xref myst">thirdparty/README.html</span></a> on each machine.</p></li>
 <li><p>Prepare your dataset and tokenizer, preprocess your dataset with Megatron-LM into mmap format (see <a class="reference internal" href="#../../thirdparty/Megatron-LM/README.md"><span class="xref myst">README</span></a> of Megatron-LM for more details) in the shared file system (e.g., <code class="docutils literal notranslate"><span class="pre">/mnt/shared/dataset</span></code>).</p></li>
 <li><p>Run Megatron-LM on training machines and save the checkpoint in the shared file system (e.g., <code class="docutils literal notranslate"><span class="pre">/mnt/shared/checkpoints</span></code>).</p></li>
 </ol>
@@ -173,7 +176,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">eval-type</span></code>: type of the evaluation to run, support <code class="docutils literal notranslate"><span class="pre">helm</span></code> and <code class="docutils literal notranslate"><span class="pre">gpt</span></code> for now</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">helm</span></code>: evaluate your model with HELM (default), you can change the benchmarks to run by modifying the helm specific template file</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gpt</span></code>: evaluate your model with OpenAI API, more details can be found in <a class="reference internal" href="gpt_eval/README.html"><span class="std std-doc">gpt_eval/README.md</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gpt</span></code>: evaluate your model with OpenAI API, more details can be found in <a class="reference internal" href="gpt_eval/README.html"><span class="std std-doc">gpt_eval/README.html</span></a>.</p></li>
 </ul>
 </li>
 </ul>
@@ -184,7 +187,7 @@
 </div>
 <p>will use HELM to evaluate a Megatron-LM checkpoint every 1000 iterations starting from iteration 2000, and check whether there is a new checkpoint meets the condition every 10 minutes.</p>
 </div></blockquote>
-<p>After running the <a class="reference internal" href="#evaluator.py"><span class="xref myst">evaluator.py</span></a>, you can use <a class="reference internal" href="#recorder/wandb_writer.py"><span class="xref myst">recorder/wandb_writer.py</span></a> to visualize the evaluation results, more details can be found in <a class="reference internal" href="recorder/README.html"><span class="std std-doc">recorder/README.md</span></a>.</p>
+<p>After running the <a class="reference internal" href="#evaluator.py"><span class="xref myst">evaluator.py</span></a>, you can use <a class="reference internal" href="#recorder/wandb_writer.py"><span class="xref myst">recorder/wandb_writer.py</span></a> to visualize the evaluation results, more details can be found in <a class="reference internal" href="recorder/README.html"><span class="std std-doc">recorder/README.html</span></a>.</p>
 </section>
 <section id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>

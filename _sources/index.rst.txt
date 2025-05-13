@@ -176,9 +176,9 @@ Table of Contents
    :maxdepth: 2
    :caption: User Guide
 
-   user/DJ-cookbook
-   user/Installation
-   user/quick-start
+   DJ-cookbook
+   Installation
+   quick-start
 
 * `License`_
 * `Contributing`_
