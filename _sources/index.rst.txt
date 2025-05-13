@@ -287,13 +287,7 @@ If you find Data-Juicer useful for your research or development, please kindly c
 
 .. toctree::
    :maxdepth: 2
+   :caption: API Reference
    :hidden:
 
    api
-
-Indices and Tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
