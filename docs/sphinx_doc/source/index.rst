@@ -74,7 +74,7 @@ Data Processing for and with Foundation Models
 
 
 .. image:: https://img.shields.io/badge/Doc-OperatorZoo-blue?logo=Markdown
-   :target: docs/Operators
+   :target: https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md
    :alt: OpZoo
 
 
@@ -176,9 +176,9 @@ Table of Contents
    :maxdepth: 2
    :caption: User Guide
 
-   en/DJ-cookbook
-   en/Installation
-   en/quick-start
+   user/DJ-cookbook
+   user/Installation
+   user/quick-start
 
 * `License`_
 * `Contributing`_

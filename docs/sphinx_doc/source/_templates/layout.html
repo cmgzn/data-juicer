@@ -1,13 +1,19 @@
 {% extends "!layout.html" %}
 
-{% block footer %}
-    {{ super() }}
-    <div class="language-switcher">
-        <p>切换语言:</p>
-        <ul>
-            {% for lang_code, lang_name in supported_languages.items() %}
-                <li><a href="/{{ lang_code }}/">{{ lang_name }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
+{% block extrabody %}
+{{ super() }}
+{% if supported_languages %}
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        {% for lang_code, lang_name in supported_languages.items() %}
+            <option value="{{ 
+                pathto('', 1) + '../' + lang_code + '/' + pagename + '.html'
+            }}" 
+                    {% if language == lang_code %}selected{% endif %}>
+                {{ lang_name }}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+{% endif %}
 {% endblock %}

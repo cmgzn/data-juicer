@@ -8,10 +8,17 @@ def create_symlinks():
     for md_file in glob.glob(os.path.join(project_root, '**/*.md'), recursive=True):
         if 'outputs' in md_file or 'sphinx_doc' in md_file:
             continue
-            
-        rel_path = os.path.relpath(md_file, project_root)
-        target = os.path.join(source_dir, rel_path)
         
+        rel_path = os.path.relpath(md_file, project_root)
+        if "_ZH" in md_file:
+            language_dir = os.path.join(source_dir, 'zh_CN')
+        else:
+            language_dir = source_dir
+        target = os.path.join(language_dir, rel_path)
+        
+        if "_ZH" in target:
+            target = target.replace("_ZH", "")
+
         os.makedirs(os.path.dirname(target), exist_ok=True)
         
         if not os.path.exists(target):

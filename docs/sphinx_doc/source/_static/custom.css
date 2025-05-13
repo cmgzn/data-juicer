@@ -1,0 +1,34 @@
+.language-selector {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: #f3f3f3;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.language-selector select {
+    min-width: 100px;
+}
+
+/* 优化移动端显示 */
+@media screen and (max-width: 768px) {
+    .language-selector {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* 多语言提示 */
+.rst-versions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    z-index: 1000;
+    background: rgba(0,0,0,0.1);
+    border-top: solid 1px #ccc;
+    padding: 10px;
+    font-size: 12px;
+}
