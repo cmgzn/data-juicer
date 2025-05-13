@@ -1,0 +1,13 @@
+{% extends "!layout.html" %}
+
+{% block footer %}
+    {{ super() }}
+    <div class="language-switcher">
+        <p>切换语言:</p>
+        <ul>
+            {% for lang_code, lang_name in supported_languages.items() %}
+                <li><a href="/{{ lang_code }}/">{{ lang_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

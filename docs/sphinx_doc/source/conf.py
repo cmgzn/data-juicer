@@ -65,22 +65,25 @@ locale_dirs = ['locale/']   # path is example but recommended.
 gettext_compact = False     # optional.
 
 # list of supported languages
-languages = ['en', 'zh_CN', 'ja']
-
-
-
-
+supported_languages = {
+    'en': 'English',
+    'zh_CN': '简体中文',
+    'ja': '日本語',
+}
+html_context = {
+    'supported_languages': supported_languages,
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-def get_translation(text, target_lang):
-    try:
-        return translator.translate(text, dest=target_lang).text
-    except:
-        return text
+# def get_translation(text, target_lang):
+#     try:
+#         return translator.translate(text, dest=target_lang).text
+#     except:
+#         return text
     
 # get the page path
 def get_page_path(app, pagename, templatename, context, doctree):
@@ -98,13 +101,13 @@ def get_page_path(app, pagename, templatename, context, doctree):
 
     
 # automatic translation function
-def auto_translate(app, docname, source):
-    current_lang = app.config.language
+# def auto_translate(app, docname, source):
+#     current_lang = app.config.language
     
-    if current_lang == 'ja':
-        # Automatic translation of Japanese
-        source[0] = get_translation(source[0], 'ja')
-        return source[0]
+#     if current_lang == 'ja':
+#         # Automatic translation of Japanese
+#         source[0] = get_translation(source[0], 'ja')
+#         return source[0]
 
 def skip(app, what, name, obj, would_skip, options):
     if name == "__init__":
@@ -126,7 +129,7 @@ def process_operators(app, docname, source):
 
 def process_read(app, docname, source):
     source[0] = process_operators(app, docname, source)
-    auto_translate(app, docname, source)
+    # auto_translate(app, docname, source)
 
 def setup(app):
     app.connect('source-read', process_read)
