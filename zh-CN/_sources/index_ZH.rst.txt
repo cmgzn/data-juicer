@@ -3,7 +3,7 @@
    :format: html
 
 
-`[英文主页] <README.md>`_ | `[DJ-Cookbook] <#dj-cookbook>`_ | `[算子池] <docs/Operators.md>`_ | `[API] <https://modelscope.github.io/data-juicer>`_ | `[Awesome LLM Data] <docs/awesome_llm_data.md>`_
+`[英文主页] <index>`_ | `[DJ-Cookbook] <DJ-cookbook_ZH>`_ | `[算子池] <docs/Operators.md>`_ | `[API] <https://modelscope.github.io/data-juicer>`_ | `[Awesome LLM Data] <docs/awesome_llm_data.md>`_
 
 Data Processing for and with Foundation Models
 ==============================================
@@ -100,7 +100,7 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
 ------
 .. include:: README_ZH.md
     :start-after: ## 新消息
-    :end-before: 目录
+    :end-before: ## DJ-Cookbook
     :parser: myst_parser.sphinx_
 
 目录
@@ -163,7 +163,6 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
 
 .. toctree::
    :maxdepth: 2
-   :caption: API Reference
    :hidden:
 
    api

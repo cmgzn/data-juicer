@@ -125,7 +125,7 @@ Why Data-Juicer?
 
 .. include:: README.md
    :start-after: ## Why Data-Juicer?
-   :end-before: ## License
+   :end-before: ## DJ-Cookbook
    :parser: myst_parser.sphinx_
    
 
