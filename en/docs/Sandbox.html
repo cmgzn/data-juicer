@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sandbox &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="../_static/documentation_options.js?v=8ca9e7a0"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DJ_service" href="DJ_service.html" />
+    <link rel="prev" title="Postprocess tools" href="../tools/postprocess/README.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+            <option value="../../en/docs/Sandbox.html" 
+                    
+                    >
+                English
+            </option>
+        
+            <option value="../../zh_CN/docs/Sandbox_ZH.html" 
+                    
+                    >
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../DJ-cookbook.html">DJ-Cookbook</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../DJ-cookbook.html#curated-resources">Curated Resources</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../DJ-cookbook.html#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../DJ-cookbook.html#basics">Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DJ-cookbook.html#lookup-materials">Lookup Materials</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../DJ-cookbook.html#advanced">Advanced</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="DeveloperGuide.html">How-to Guide for Developers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/preprocess/README.html">Preprocess Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/postprocess/README.html">Postprocess tools</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Sandbox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DJ_service.html">DJ_service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/quality_classifier/README.html">Data Scoring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/evaluator/README.html">Auto Evaluation Toolkit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../thirdparty/LLM_ecosystems/README.html">LLM Ecosystems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../DJ-cookbook.html#use-cases-data-recipes">Use Cases &amp; Data Recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DJ-cookbook.html#interactive-examples">Interactive Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick-start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../DJ-cookbook.html">DJ-Cookbook</a></li>
+      <li class="breadcrumb-item active">Sandbox</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/docs/Sandbox.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sandbox">
+<h1>Sandbox<a class="headerlink" href="#sandbox" title="Link to this heading">¶</a></h1>
+<section id="user-guide">
+<h2>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading">¶</a></h2>
+<section id="applications-and-achievements">
+<h3>Applications and Achievements<a class="headerlink" href="#applications-and-achievements" title="Link to this heading">¶</a></h3>
+<p>Leveraging the Data-Juicer Sandbox Laboratory Suite, we systematically fine-tuned data and models through a dedicated research and development workflow between data and models. For more detailed information, please refer to our <a class="reference external" href="http://arxiv.org/abs/2407.11784">paper</a>. In our work, we have secured a new leading position on the <a class="reference external" href="https://huggingface.co/spaces/Vchitect/VBench_Leaderboard">VBench</a> text-to-video leaderboard.
+<img alt="top-1_in_vbench" src="https://img.alicdn.com/imgextra/i1/O1CN01I9wHW91UNnX9wtCWu_!!6000000002506-2-tps-1275-668.png" /></p>
+<p>The model is now publicly available on the ModelScope and HuggingFace platforms, and the training dataset has also been available.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Open-source model or dataset</p></th>
+<th class="head"><p>Link</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Data-Juicer (T2V, 147k)</p></td>
+<td><p><a class="reference external" href="https://modelscope.cn/models/Data-Juicer/Data-Juicer-T2V">ModelScope</a> <br> <a class="reference external" href="https://huggingface.co/datajuicer/Data-Juicer-T2V">HuggingFace</a></p></td>
+<td><p>Corresponding to Data-Juicer (T2V-Turbo) model in VBench leaderboard</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data-Juicer (DJ, 228k)</p></td>
+<td><p><a class="reference external" href="https://modelscope.cn/models/Data-Juicer/Data-Juicer-T2V">ModelScope</a> <br> <a class="reference external" href="https://huggingface.co/datajuicer/Data-Juicer-T2V">HuggingFace</a></p></td>
+<td><p>Corresponding to Data-Juicer (2024-09-23, T2V-Turbo) model in VBench leaderboard</p></td>
+</tr>
+<tr class="row-even"><td><p>data_juicer_t2v_optimal_data_pool</p></td>
+<td><p><a class="reference external" href="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/MM_data/our_refined_data/Data-Juicer-T2V/data_juicer_t2v_optimal_data_pool.zip">Aliyun</a> <br> <a class="reference external" href="https://modelscope.cn/datasets/Data-Juicer/data-juicer-t2v-optimal-data-pool">ModelScope</a>  <br> <a class="reference external" href="https://huggingface.co/datasets/datajuicer/data-juicer-t2v-optimal-data-pool">HuggingFace</a></p></td>
+<td><p>The training dataset of Data-Juicer (T2V, 147k)</p></td>
+</tr>
+<tr class="row-odd"><td><p>data_juicer_t2v_evolution_data_pool</p></td>
+<td><p><a class="reference external" href="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/MM_data/our_refined_data/Data-Juicer-T2V/data_juicer_t2v_optimal_data_pool_s2.zip">Aliyun</a> <br> <a class="reference external" href="https://modelscope.cn/datasets/Data-Juicer/data-juicer-t2v-evolution-data-pool">ModelScope</a></p></td>
+<td><p>The training dataset of Data-Juicer (2024-09-23, T2V-Turbo)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Following is the case study for Data-Juicer (DJ, 228k) outputs.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Prompt</p></th>
+<th class="head"><p>Generated Video</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A beautiful coastal beach in spring, waves lapping on sand, zoom out</p></td>
+<td><p><a class="reference external" href="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/MM_data/our_refined_data/Data-Juicer-T2V/show_cases/case0.mp4"><img alt="Case 0" src="https://img.alicdn.com/imgextra/i1/O1CN01KuJeOE1Ylqnk9zYkc_!!6000000003100-2-tps-2048-320.png" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>a boat accelerating to gain speed</p></td>
+<td><p><a class="reference external" href="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/MM_data/our_refined_data/Data-Juicer-T2V/show_cases/case1.mp4"><img alt="Case 1" src="https://img.alicdn.com/imgextra/i2/O1CN01i1iMFE1TKlIUlqE8d_!!6000000002364-2-tps-2048-320.png" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p>A boat sailing leisurely along the Seine River with the Eiffel Tower in background by Hokusai, in the style of Ukiyo</p></td>
+<td><p><a class="reference external" href="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/MM_data/our_refined_data/Data-Juicer-T2V/show_cases/case2.mp4"><img alt="Case 2" src="https://img.alicdn.com/imgextra/i2/O1CN01u2cjJE1RBwRFeCFuo_!!6000000002074-2-tps-2048-320.png" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>a bottle on the left of a wine glass, front view</p></td>
+<td><p><a class="reference external" href="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/MM_data/our_refined_data/Data-Juicer-T2V/show_cases/case3.mp4"><img alt="Case 3" src="https://img.alicdn.com/imgextra/i4/O1CN01vdMm6Q1xWc1CoJZW6_!!6000000006451-2-tps-2048-320.png" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p>A corgi’s head depicted as an explosion of a nebula</p></td>
+<td><p><a class="reference external" href="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/MM_data/our_refined_data/Data-Juicer-T2V/show_cases/case4.mp4"><img alt="Case 4" src="https://img.alicdn.com/imgextra/i2/O1CN014oPB8Q1IrJg0AbUUg_!!6000000000946-2-tps-2048-320.png" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>A graceful ballerina doing a pirouette on a dimly lit stage, with soft spotlight highlighting her movements.</p></td>
+<td><p><a class="reference external" href="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/MM_data/our_refined_data/Data-Juicer-T2V/show_cases/case5.mp4"><img alt="Case 5" src="https://img.alicdn.com/imgextra/i4/O1CN01yNlsVu1ymvkJgkvY8_!!6000000006622-2-tps-2048-320.png" /></a></p></td>
+</tr>
+</tbody>
+</table>
+<p>To reproduce the paper’s experiments, please refer to the sandbox usage guide below, the experimental process in the following figure, the <a class="reference external" href="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/MM_data/our_refined_data/Data-Juicer-T2V/data_juicer_t2v_init_data_pool.zip">initial dataset</a>, and the configuration file demos for the process: <a class="reference internal" href="#../configs/demo/bench/1_single_op_pipeline.yaml"><span class="xref myst">1_single_op_pipeline.yaml</span></a>, <a class="reference internal" href="#../configs/demo/bench/2_multi_op_pipeline.yaml"><span class="xref myst">2_multi_op_pipeline.yaml</span></a>, <a class="reference internal" href="#../configs/demo/bench/3_duplicate_pipeline.yaml"><span class="xref myst">3_duplicate_pipeline.yaml</span></a>.
+<img alt="bench_bottom_up" src="https://img.alicdn.com/imgextra/i2/O1CN01xvu2fo1HU80biR6Q5_!!6000000000760-2-tps-7756-3693.png" /></p>
+</section>
+<section id="what-is-dj-sandbox">
+<h3>What is DJ-Sandbox?<a class="headerlink" href="#what-is-dj-sandbox" title="Link to this heading">¶</a></h3>
+<p>In Data-Juicer, the data sandbox laboratory provides users with the best practices for continuously producing data recipes. It features low overhead, portability, and guidance. In the sandbox, users can quickly experiment, iterate, and refine data recipes based on small-scale datasets and models, before scaling up to produce high-quality data to serve large-scale models.</p>
+<p>In addition to the basic data optimization and recipe refinement features offered by Data-Juicer, users can seamlessly use configurable components such as data probe and analysis, model training and evaluation, and data and model feedback-based recipe refinement to form a complete one-stop data-model research and development pipeline.</p>
+</section>
+<section id="quick-start">
+<h3>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h3>
+<section id="requirements">
+<h4>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h4>
+<p>Before using sandbox, you might need to install sandbox-related third-party dependencies by running the command below:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>sandbox<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>NOTICE</strong>: some sandbox-related dependencies require extra domain dependencies.</p>
+<ol class="arabic simple">
+<li><p>If users want to train an NLP model from ModelScope
+in the sandbox, you might need to install extra <code class="docutils literal notranslate"><span class="pre">nlp</span></code> dependencies for <code class="docutils literal notranslate"><span class="pre">modelscope</span></code> library (see the <a class="reference external" href="https://modelscope.cn/docs/%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85">installation docs</a>).</p></li>
+<li><p>To use <a class="reference external" href="https://github.com/aigc-apps/EasyAnimate">EasyAnimate</a>, you need to execute the following installation script:</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>thirdparty/models/
+bash<span class="w"> </span>setup_easyanimate.sh
+<span class="nb">cd</span><span class="w"> </span>../../
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>When using VBench to benchmark videos, it is necessary to install Detectron2. The following branch is recommended for installation.</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>detectron2@git+https://github.com/facebookresearch/detectron2.git@b7c7f4ba82192ff06f2bbb162b9f67b00ea55867
+</pre></div>
+</div>
+<p>So if some Module-Not-Found errors are raised by these third-party libraries when running the sandbox, users need to check their docs first.</p>
+</section>
+<section id="prepare-configuration-files-for-sandbox">
+<h4>Prepare Configuration Files for Sandbox<a class="headerlink" href="#prepare-configuration-files-for-sandbox" title="Link to this heading">¶</a></h4>
+<p>The sandbox will sequentially execute four types of jobs: Data/Model Probe (<code class="docutils literal notranslate"><span class="pre">probe_job_configs</span></code>), Iterative Recipe Refinement based on Probe Results(<code class="docutils literal notranslate"><span class="pre">refine_recipe_job_configs</span></code>), Dataset Processing and Model Training (<code class="docutils literal notranslate"><span class="pre">execution_job_configs</span></code>) and Data/Model Evaluation (<code class="docutils literal notranslate"><span class="pre">evaluation_job_configs</span></code>). Within each category of jobs, jobs are carried out in the order specified by the configured job list. Each task requires specifying: the hook for mounting this job (<code class="docutils literal notranslate"><span class="pre">hook</span></code>), the tag name for recording intermediate results (<code class="docutils literal notranslate"><span class="pre">meta_name</span></code>), Data-Juicer data processing parameters (<code class="docutils literal notranslate"><span class="pre">dj_configs</span></code>), as well as other specific parameters for the job (<code class="docutils literal notranslate"><span class="pre">extra_configs</span></code>). Among these parameters, hook is required, while others may be left empty. dj_configs can refer to the full Data-Juicer data processing parameters available in <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/configs/config_all.yaml">config_all.yaml</a>. The <code class="docutils literal notranslate"><span class="pre">extra_configs</span></code> are task-specific parameters without restrictions. They can include parameters for model training, inference, evaluation, etc. For example, <code class="docutils literal notranslate"><span class="pre">path_k_sigma_recipe</span></code> can be used to specify the path for saving the data recipe refined using the k-sigma method. An example of a sandbox configuration file can be found at <code class="docutils literal notranslate"><span class="pre">configs/demo/sandbox/sandbox.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">## Sandbox config example</span>
+
+<span class="c1">## global parameters</span>
+<span class="nt">project_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;demo-sandbox&#39;</span>
+<span class="nt">experiment_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;demo-sandbox-run0&#39;</span><span class="w">              </span><span class="c1">## for wandb tracer name</span>
+<span class="nt">hpo_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">                                  </span><span class="c1">## path to a configuration file when using auto-HPO tool.</span>
+
+<span class="c1">## configs for each job, the jobs will be executed according to the order in the list</span>
+<span class="nt">probe_job_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hook</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ProbeViaAnalyzerHook&#39;</span>
+<span class="w">    </span><span class="nt">meta_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;analysis_ori_data&#39;</span>
+<span class="w">    </span><span class="nt">dj_configs</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;configs/demo/process.yaml&#39;</span>
+<span class="w">    </span><span class="nt">extra_configs</span><span class="p">:</span>
+
+<span class="nt">refine_recipe_job_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hook</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;RefineRecipeViaKSigmaHook&#39;</span>
+<span class="w">    </span><span class="nt">meta_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;analysis_ori_data&#39;</span>
+<span class="w">    </span><span class="nt">dj_configs</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;configs/demo/process.yaml&#39;</span>
+<span class="w">    </span><span class="nt">extra_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">path_k_sigma_recipe</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./outputs/demo-process/k_sigma_new_recipe.yaml&#39;</span>
+
+<span class="nt">execution_job_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hook</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ProcessDataHook&#39;</span>
+<span class="w">    </span><span class="nt">meta_name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dj_configs</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./outputs/demo-process/k_sigma_new_recipe.yaml&#39;</span>
+<span class="w">    </span><span class="nt">extra_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hook</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;TrainModelHook&#39;</span>
+<span class="w">    </span><span class="nt">meta_name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dj_configs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">extra_configs</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;configs/demo/sandbox/gpt3_extra_train_config.json&#39;</span>
+
+<span class="nt">evaluation_job_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hook</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ProbeViaAnalyzerHook&#39;</span>
+<span class="w">    </span><span class="nt">meta_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;analysis_processed_data&#39;</span>
+<span class="w">    </span><span class="nt">dj_configs</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;configs/demo/process.yaml&#39;</span>
+<span class="w">    </span><span class="nt">extra_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hook</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;EvaluateDataHook&#39;</span>
+<span class="w">    </span><span class="nt">meta_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;eval_data&#39;</span>
+<span class="w">    </span><span class="nt">dj_configs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">extra_configs</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;configs/demo/sandbox/gpt3_data_quality_eval_config.yaml&#39;</span>
+</pre></div>
+</div>
+<p>Based on this configuration file, sandbox:</p>
+<ol class="arabic simple">
+<li><p>Execute the Data-Juicer data analysis function to calculate specified metrics for each piece of data, for example, in <code class="docutils literal notranslate"><span class="pre">configs/demo/process.yaml</span></code>, the <code class="docutils literal notranslate"><span class="pre">language_id_score_filter</span></code> is designated to calculate language scores.</p></li>
+<li><p>With the results from Data-Juicer data analysis, fine-tune the data recipe using the k-sigma method. Note that the <code class="docutils literal notranslate"><span class="pre">meta_name</span></code> here must be set the same as the <code class="docutils literal notranslate"><span class="pre">meta_name</span></code> used during data analysis to utilize the results.</p></li>
+<li><p>Execute Data-Juicer’s data filtering function with the data recipe fine-tuned by the k-sigma method.</p></li>
+<li><p>Train the model with the filtered data.</p></li>
+<li><p>Analyze the data after filtering.</p></li>
+<li><p>Score the data after filtering with a scorer.</p></li>
+</ol>
+</section>
+<section id="start-sandbox">
+<h4>Start Sandbox<a class="headerlink" href="#start-sandbox" title="Link to this heading">¶</a></h4>
+<p>The entry point for running the sandbox is <code class="docutils literal notranslate"><span class="pre">tools/sandbox_starter.py</span></code>. The usage is similar to the data processing and analysis tool, requiring specifying the sandbox configuration file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">python tools/sandbox_starter.py --config configs/demo/sandbox/sandbox.yaml</span>
+</pre></div>
+</div>
+<p>Once the run is started, the sandbox will sequentially execute each of the predefined pipeline steps according to the configuration file. The default one trial of the pipeline mainly includes four major steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Data/Model Probe</strong>: This step provides probes into the input dataset/model, such as analysing the dataset or analysing the data produced by model inference, to guide the subsequent steps.</p></li>
+<li><p><strong>Iterative Recipe Refinement based on Probe Results</strong>: This step refines and optimizes the recipe hyperparameters based on the data/model probes. For example, the operator (OP) hyperparameters in the data recipe can be adjusted using the k-sigma method based on the data probes.</p></li>
+<li><p><strong>Dataset Processing and Model Training</strong>: This step processes and cleans the input dataset based on the refined recipe. If model training is configured in the sandbox, the processed dataset will also be used to train the configured model.</p></li>
+<li><p><strong>Data/Model Evaluation</strong>: This step evaluates the processed dataset and the model trained in the previous step (if applicable). The evaluation methods may include analysis of the processed dataset and specified benchmark evaluations based on the configuration.</p></li>
+</ol>
+<p>Once this completes one trial of the sandbox pipeline run, the user can validate the effectiveness of the experiment in data production by comparing the probes and evaluation results before and after recipe refinement and dataset processing.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">hpo_config</span></code> is set in the configuration file and appropriate optimization objectives and OP hyperparameters to be refined are configured within it, the sandbox will perform multiple trials of pipeline runs in the form of Hyperparameter Optimization (HPO) and automatically conduct iterative refinement and optimization of the operator hyperparameters. The preparation of this configuration file can be referenced from the <a class="reference external" href="https://github.com/modelscope/data-juicer/tree/main/tools/hpo">HPO tool</a>.</p>
+</section>
+</section>
+<section id="component-factory">
+<h3>Component Factory<a class="headerlink" href="#component-factory" title="Link to this heading">¶</a></h3>
+<p>In a single trial of the sandbox pipeline, four major steps involve various configurable components. Each of these components corresponds to a factory class used to initialize them:</p>
+<ul class="simple">
+<li><p><strong>Data Processing (DataExecutor)</strong>: Executor for dataset processing, i.e., the executor of Data-Juicer</p></li>
+<li><p><strong>Data Analyzing（DataAnalyzer）</strong>: Analyzer for dataset, i.e., the analyzer of Data-Juicer</p></li>
+<li><p><strong>Data Evaluation (DataEvaluator)</strong>: Evaluator on the quality of the dataset</p></li>
+<li><p><strong>Model-Data Evaluation（ModelInferEvaluator）</strong>: Evaluator of dataset quality using the model’s inference results</p></li>
+<li><p><strong>Model Training (ModelTrainExecutor)</strong>: Executor for model training</p></li>
+<li><p><strong>Model Inference (ModelInferExecutor)</strong>: Executor for model inference</p></li>
+<li><p><strong>Model Evaluation (ModelEvaluator)</strong>: Evaluator on the performance of the model</p></li>
+</ul>
+<p>Except for DataExecutor and DataAnalyzer, the rest of the components can be specified in the configuration file using the <code class="docutils literal notranslate"><span class="pre">type</span></code> parameter to choose a specific execution or evaluation type. For example, the data evaluation component supports a <code class="docutils literal notranslate"><span class="pre">type</span></code> of <code class="docutils literal notranslate"><span class="pre">&quot;dj_text_quality_classifier&quot;</span></code> to utilize Data-Juicer’s text quality classifier tool for evaluating the dataset, while the model training component <code class="docutils literal notranslate"><span class="pre">type</span></code> can be set to <code class="docutils literal notranslate"><span class="pre">&quot;modelscope&quot;</span></code> to train a model from the ModelScope platform.</p>
+<p>The currently supported component factories and the components supported within each factory are as follows:</p>
+<ul class="simple">
+<li><p>DataExecutorFactory</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Desc. of Method <code class="docutils literal notranslate"><span class="pre">run</span></code></p></th>
+<th class="head"><p>Reference Materials</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DJExecutor</span></code></p></td>
+<td><p>The data process module of Data-Juicer</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>DataAnalyzerFactory</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Desc. of Method <code class="docutils literal notranslate"><span class="pre">run</span></code></p></th>
+<th class="head"><p>Reference Materials</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DJAnalyzer</span></code></p></td>
+<td><p>The data analysis module of Data-Juicer</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>DataEvaluatorFactory</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Desc. of Method <code class="docutils literal notranslate"><span class="pre">run</span></code></p></th>
+<th class="head"><p>Reference Materials</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Gpt3QualityEvaluator</span></code></p></td>
+<td><p>Evaluate the quality of a dataset using the GPT-3 text quality classifier reproduced by Data-Juicer.</p></td>
+<td><p><br />- <code class="docutils literal notranslate"><span class="pre">eval_type</span></code>: The type of the object to be evaluated by the evaluator, currently only supports <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code>.<br />- <code class="docutils literal notranslate"><span class="pre">eval_obj</span></code>: An useless parameter.<br /></p></td>
+<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/tree/main/tools/quality_classifier">Data-Juicer Quality Classifier Toolkit</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VBenchEvaluator</span></code></p></td>
+<td><p>Evaluate the generated videos according to given prompts in multi dimensions</p></td>
+<td><p><br />- <code class="docutils literal notranslate"><span class="pre">eval_type</span></code>: The type of the object to be evaluated by the evaluator, currently only supports <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code><br />- <code class="docutils literal notranslate"><span class="pre">eval_obj</span></code>: An useless parameter.<br />- Return: The average score of generated videos in multi dimensions.<br /></p></td>
+<td><p><a class="reference external" href="https://arxiv.org/abs/2311.17982">VBench paper</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">InceptionEvaluator</span></code></p></td>
+<td><p>Evaluate the generated videos by features extracted from video classification models.</p></td>
+<td><p><br />- <code class="docutils literal notranslate"><span class="pre">eval_type</span></code>: The type of the object to be evaluated by the evaluator, currently only supports <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code><br />- <code class="docutils literal notranslate"><span class="pre">eval_obj</span></code>: An useless parameter.<br />- Return: A dictionary of scores in the given metric. <br /></p></td>
+<td><p><a class="reference external" href="https://github.com/NVlabs/long-video-gan/tree/main/metrics">Inception Metrics</a></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>ModelInferEvaluatorFactory</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Desc. of Method <code class="docutils literal notranslate"><span class="pre">run</span></code></p></th>
+<th class="head"><p>Reference Materials</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ModelscopeInferExecutor</span></code></p></td>
+<td><p>Perform inference on a model from the ModelScope platform using a specified sampled dataset, and return the inference results.</p></td>
+<td><p><br />- <code class="docutils literal notranslate"><span class="pre">run_type</span></code>: Type of model inference. We need to set <code class="docutils literal notranslate"><span class="pre">type</span></code>  arg as <code class="docutils literal notranslate"><span class="pre">&quot;modelscope&quot;</span></code> in the component configuration file to activate this component.<br />- <code class="docutils literal notranslate"><span class="pre">run_obj</span></code>: Sampled dataset to be fed into model inference.<br /></p></td>
+<td><p><a class="reference external" href="https://modelscope.cn/docs/%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86Pipeline">ModelScope Docs of Model Inference</a></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>ModelTrainExecutorFactory</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Desc. of Method <code class="docutils literal notranslate"><span class="pre">run</span></code></p></th>
+<th class="head"><p>Reference Materials</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ModelscopeTrainExecutor</span></code></p></td>
+<td><p>Perform a training task on a model from the ModelScope platform using specified datasets, and monitor the change in training loss.</p></td>
+<td><p><br />- <code class="docutils literal notranslate"><span class="pre">run_type</span></code>: Type of model training. We need to set <code class="docutils literal notranslate"><span class="pre">type</span></code>  arg as <code class="docutils literal notranslate"><span class="pre">&quot;modelscope&quot;</span></code> in the component configuration file to activate this component.<br />- <code class="docutils literal notranslate"><span class="pre">run_obj</span></code>: An useless parameter.<br /></p></td>
+<td><p><a class="reference external" href="https://modelscope.cn/docs/%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%AD%E7%BB%83Train">ModelScope Docs of Model Training</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EasyAnimateTrainExecutor</span></code></p></td>
+<td><p>Perform a LoRA training task on EasyAnimate text-to-video model, and monitor the change in training loss.</p></td>
+<td><p><br />- <code class="docutils literal notranslate"><span class="pre">run_type</span></code>: Type of model training. We need to set <code class="docutils literal notranslate"><span class="pre">type</span></code>  arg as <code class="docutils literal notranslate"><span class="pre">&quot;easyanimate&quot;</span></code> in the component configuration file to activate this component.<br />- <code class="docutils literal notranslate"><span class="pre">run_obj</span></code>: An useless parameter.<br /></p></td>
+<td><p><a class="reference external" href="https://github.com/aigc-apps/EasyAnimate">EasyAnimate</a></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>ModelInferExecutorFactory</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Desc. of Method <code class="docutils literal notranslate"><span class="pre">run</span></code></p></th>
+<th class="head"><p>Reference Materials</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EasyAnimateInferExecutor</span></code></p></td>
+<td><p>Perform inference on EasyAnimate text-to-video model with the prompts from VBench, and save the generated videos.</p></td>
+<td><p><br />- <code class="docutils literal notranslate"><span class="pre">run_type</span></code>: Type of model inference. We need to set <code class="docutils literal notranslate"><span class="pre">type</span></code>  arg as <code class="docutils literal notranslate"><span class="pre">&quot;easyanimate&quot;</span></code> in the component configuration file to activate this component.<br />- <code class="docutils literal notranslate"><span class="pre">run_obj</span></code>: An useless parameter.<br /></p></td>
+<td><p><a class="reference external" href="https://github.com/aigc-apps/EasyAnimate">EasyAnimate</a></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>ModelEvaluatorFactory</p>
+<ul>
+<li><p>TBD</p></li>
+</ul>
+</li>
+</ul>
+<p>Please refer to <code class="docutils literal notranslate"><span class="pre">data_juicer/core/sandbox/factories.py</span></code> for detailed definitions.</p>
+</section>
+</section>
+<section id="developer-guide">
+<h2>Developer Guide<a class="headerlink" href="#developer-guide" title="Link to this heading">¶</a></h2>
+<p>As mentioned in the previous section, developers can develop customized configurable components and add them to the corresponding factory classes, then route to appropriate instantiation methods using the <code class="docutils literal notranslate"><span class="pre">type</span></code> parameter. Once the components are implemented, developers can encapsulate them as hooks and register the hooks into the job list. After the job list is orchestrated in the pipeline, when the sandbox pipeline is executed, each job in the job list will be executed in sequence at each step. Each of these parts - components, component factory, hooks, job lists, and the registration and execution orchestration of the pipeline - can be customized by the developer. The relationship among these parts is illustrated in the diagram below.
+<img alt="sandbox-pipeline" src="https://img.alicdn.com/imgextra/i3/O1CN01ERmGre1uz3luKOn4n_!!6000000006107-2-tps-4655-1918.png" /></p>
+<section id="the-internal-implementation-of-components">
+<h3>The Internal Implementation of Components<a class="headerlink" href="#the-internal-implementation-of-components" title="Link to this heading">¶</a></h3>
+<p>Currently, components are mainly divided into two major categories:</p>
+<ul class="simple">
+<li><p><strong>Executor</strong>: Since the data executor is already handled by the Data-Juicer’s Executor, the executor here specifically refers to the model executor, including model training, inference, evaluation, etc. The code is located in <code class="docutils literal notranslate"><span class="pre">data_juicer/core/sandbox/model_executors.py</span></code>.</p></li>
+<li><p><strong>Evaluator</strong>: Used for evaluating the quality and performance of datasets or models. The code is located in <code class="docutils literal notranslate"><span class="pre">data_juicer/core/sandbox/evaluators.py</span></code>.</p></li>
+</ul>
+<section id="executor">
+<h4>Executor<a class="headerlink" href="#executor" title="Link to this heading">¶</a></h4>
+<p>The core function of the model executor is to train, infer, or evaluate the model specified in the configuration file with the specified dataset. The model executor needs to inherit from <code class="docutils literal notranslate"><span class="pre">BaseModelExecutor</span></code> and implement several core methods:</p>
+<ul class="simple">
+<li><p>The specific behavior of the model executor (training, inference, evaluation, etc.) needs to be defined in the <code class="docutils literal notranslate"><span class="pre">_run</span></code> method.</p></li>
+<li><p>The model executor does not return any value. Key metrics that need to be monitored during execution are usually parsed from the logs produced by the model executor (such as loss, evaluation results, etc.). The parsing and monitoring process needs to be defined by the <code class="docutils literal notranslate"><span class="pre">_watch_run</span></code> method.</p></li>
+<li><p>Model executor requires input from a dataset, so the <code class="docutils literal notranslate"><span class="pre">data_connector</span></code> method needs to be implemented to convert the dataset from the sandbox’s format to the format required by the model framework or library.</p></li>
+</ul>
+<p>It is important to note that, to monitor the change of training metrics (e.g., loss) promptly during the model training process, logs generated during training need to be monitored. Therefore, both the <code class="docutils literal notranslate"><span class="pre">_run</span></code> method for executing model training and the <code class="docutils literal notranslate"><span class="pre">watch_run</span></code> method for monitoring logs need to be asynchronous methods, indicated by the <code class="docutils literal notranslate"><span class="pre">async</span></code> keyword. In the <code class="docutils literal notranslate"><span class="pre">run</span></code> method, we redirect the standard output stream (stdout) and standard error stream (stderr) to a designated log file before the training starts. Then, we create two asynchronous tasks to execute the aforementioned two methods, each performing the following tasks:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_run</span></code> method: After loading the dataset, it starts model training based on the model training configuration. Upon completion of training, it outputs a predefined task completion identifier to the standard output stream, which has been redirected to the designated log file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">watch_run</span></code> method: It monitors the designated log file, reads it line by line, and calls the <code class="docutils literal notranslate"><span class="pre">_watch_run</span></code> method. The called method is customized based on the model training framework and used to parse the latest log content line, extract key metrics, and monitor them until the predefined task completion identifier is read.</p></li>
+</ul>
+</section>
+<section id="evaluator">
+<h4>Evaluator<a class="headerlink" href="#evaluator" title="Link to this heading">¶</a></h4>
+<p>The core function of the evaluator is to evaluate the quality and performance of the target using some specific methods and return the evaluation result, usually a numerical value. The evaluator needs to inherit from the base class <code class="docutils literal notranslate"><span class="pre">BaseEvaluator</span></code> and implement the <code class="docutils literal notranslate"><span class="pre">run</span></code> method. The <code class="docutils literal notranslate"><span class="pre">run</span></code> method typically takes two required parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">eval_type</span></code>: The type of evaluation, used for internal evaluation type routine within a certain evaluator.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eval_obj</span></code>: The object to be evaluated.</p></li>
+</ul>
+<p>Users can also extend the usage of these two parameters based on their implementation.</p>
+</section>
+</section>
+<section id="pipeline-hook">
+<h3>Pipeline Hook<a class="headerlink" href="#pipeline-hook" title="Link to this heading">¶</a></h3>
+<p>As mentioned at the start of this section, in the pipeline, we need to implement several hooks to connect components with the pipeline execution steps through the job list. Activated hooks will be registered in the pipeline’s job list and then executed one by one during the pipeline execution at each step. The job lists for the four corresponding steps are as follows:</p>
+<ol class="arabic simple">
+<li><p><strong>Data/Model Probe</strong>: Probe job list – probe_jobs</p></li>
+<li><p><strong>Iterative Recipe Refinement based on Probe Results</strong>: Refinement job list – refine_recipe_jobs</p></li>
+<li><p><strong>Data Processing and Model Training</strong>: Execution job list - execution_jobs</p></li>
+<li><p><strong>Data/Model Evaluation</strong>: Evaluation job list - evaluation_jobs</p></li>
+</ol>
+<p>In general, we only need to implement one type of hook function for a type of component factory. In addition to hooks that depend on components, some hooks depend on the existing functionality and tools of Data-Juicer or other third-party libraries. The correspondence among these hooks, dependent components, tools, and job lists is as follows:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hook</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Dependent Component Factory</p></th>
+<th class="head"><p>Dependent Tool or Library</p></th>
+<th class="head"><p>Registered Job List</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ProbeViaAnalyzerHook</span></code></p></td>
+<td><p>Analyze and probe the quality and diversity distribution of the dataset</p></td>
+<td><p>DataAnalyzerFactory</p></td>
+<td><p>Data-Juicer Analyzer</p></td>
+<td><p>- probe_jobs<br />- evaluation_jobs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ProbeViaModelInferHook</span></code></p></td>
+<td><p>Analyze and understand the impact of the dataset on the model, explore and probe “difficult” and “dirty” data</p></td>
+<td><p>DataExecutorFactor <br />ModelInferEvaluatorFactory</p></td>
+<td><p>Data-Juicer Executor</p></td>
+<td><p>- probe_jobs<br />- evaluation_jobs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RefineRecipeViaKSigmaHook</span></code></p></td>
+<td><p>Refine data recipe hyperparameters using the k-sigma method based on the probe results of the dataset</p></td>
+<td><p>-</p></td>
+<td><p>k-sigma recipe refinement tool of Data-Juicer Hyperparameter Optimization (HPO) toolkit</p></td>
+<td><p>- refine_recipe_jobs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RefineRecipeViaModelFeedbackHook</span></code></p></td>
+<td><p>Refine data recipe hyperparameters using model probe and feedback results</p></td>
+<td><p>TODO</p></td>
+<td><p>-</p></td>
+<td><p>- refine_recipe_jobs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ProcessDataHook</span></code></p></td>
+<td><p>Process and clean the dataset based on the current data recipe</p></td>
+<td><p>DataExecutorFactor</p></td>
+<td><p>Data-Juicer Executor</p></td>
+<td><p>- execution_jobs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TrainModelHook</span></code></p></td>
+<td><p>Train a model based on the current dataset</p></td>
+<td><p>ModelTrainExecutorFactory</p></td>
+<td><p><a class="reference internal" href="#../thirdparty//easy_animate/README.md"><span class="xref myst">EasyAnimate</span></a></p></td>
+<td><p>- execution_jobs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">InferModelHook</span></code></p></td>
+<td><p>The model generates output based on the given input</p></td>
+<td><p>ModelInferExecutorFactory</p></td>
+<td><p><a class="reference internal" href="#../thirdparty//easy_animate/README.md"><span class="xref myst">EasyAnimate</span></a></p></td>
+<td><p>- execution_jobs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EvaluateDataHook</span></code></p></td>
+<td><p>Evaluate the dataset in terms of data quality and other dimensions</p></td>
+<td><p>DataEvaluatorFactory</p></td>
+<td><p><a class="reference internal" href="../tools/mm_eval/inception_metrics/README.html"><span class="std std-doc">inception metrics</span></a> for images and videos, such as FID and FVD <br /> <a class="reference internal" href="../tools/mm_eval/vbench_metrics/README.html"><span class="std std-doc">VBench</span></a></p></td>
+<td><p>- evaluation_jobs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EvaluateModelHook</span></code></p></td>
+<td><p>Evaluate the trained model</p></td>
+<td><p>ModelEvaluatorFactory</p></td>
+<td><p>-</p></td>
+<td><p>- evaluation_jobs</p></td>
+</tr>
+</tbody>
+</table>
+<p>It is worth noting that a hook can be registered in multiple job lists, as this hook can play different roles in different steps of the pipeline. For example, we can analyze and probe both the pre-processed and post-processed datasets to compare the changes in quality, diversity, and other dimensions before and after data processing.</p>
+</section>
+<section id="customized-sandbox-pipeline">
+<h3>Customized Sandbox Pipeline<a class="headerlink" href="#customized-sandbox-pipeline" title="Link to this heading">¶</a></h3>
+<p>Users can directly modify the job configuration list in the parameter configuration file to achieve task modification and orchestration.</p>
+</section>
+<section id="watcher">
+<h3>Watcher<a class="headerlink" href="#watcher" title="Link to this heading">¶</a></h3>
+<p>In the above sections, the concept of “monitoring” is repeatedly mentioned. The pipeline will monitor several metrics produced in each step, and these monitoring processes are implemented by <code class="docutils literal notranslate"><span class="pre">SandboxWatcher</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SandboxWatcher</span></code> is based on wandb library and mainly includes four methods:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">setup_sweep</span></code>: This method is called in the multi-trial HPO mode, which is supported by the sweep module in wandb library. Therefore, the additional <code class="docutils literal notranslate"><span class="pre">hpo_config</span></code> configuration for sweep initialization is required to be passed into the sandbox configuration file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">watch_cfgs</span></code>: This method monitors and updates the sandbox experiments and configuration files of various components.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">watch</span></code>: This method monitors a specific metric or experiment result and records it in the wandb log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query</span></code>: This method queries a specific metric or experiment result from the wandb log.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tools/postprocess/README.html" class="btn btn-neutral float-left" title="Postprocess tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DJ_service.html" class="btn btn-neutral float-right" title="DJ_service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

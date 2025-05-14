@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluation Results Recorder &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="../../../_static/documentation_options.js?v=8ca9e7a0"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+            <option value="../../../../en/tools/evaluator/recorder/README.html" 
+                    
+                    >
+                English
+            </option>
+        
+            <option value="../../../../zh_CN/tools/evaluator/recorder/README_ZH.html" 
+                    
+                    >
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../DJ-cookbook.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quick-start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Evaluation Results Recorder</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/tools/evaluator/recorder/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="evaluation-results-recorder">
+<h1>Evaluation Results Recorder<a class="headerlink" href="#evaluation-results-recorder" title="Link to this heading">¶</a></h1>
+<p>Record your evaluation results to <a class="reference external" href="https://wandb.ai/">W&amp;B</a> (wandb) with <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/evaluator/recorder/wandb_writer.py"><code class="docutils literal notranslate"><span class="pre">wandb_writer.py</span></code></a>.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">wandb_writer.py</span></code>, you can:</p>
+<ul class="simple">
+<li><p>visualize the changes of evaluation metrics of your model during the training process
+<img alt="Metrics" src="docs/imgs/eval-02.png" /></p></li>
+<li><p>make a leaderboard to compare the metrics of different models
+<img alt="Leaderboard" src="docs/imgs/eval-01.png" /></p></li>
+</ul>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>wandb_writer.py<span class="w"> </span>--config<span class="w"> </span>&lt;config_file&gt;<span class="w"> </span><span class="o">[</span>--print-only<span class="o">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config_file</span></code>: path to the configuration file (see <a class="reference internal" href="#configuration">Configuration</a> for details)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--print-only</span></code>: only print the result to command line, do not write to wandb</p></li>
+</ul>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
+<p>We provided three example files in <a class="reference internal" href="../../../data_juicer.config.html#module-data_juicer.config" title="data_juicer.config"><span class="xref myst py py-mod"><code class="docutils literal notranslate"><span class="pre">config</span></code></span></a> folder for three different cases.</p>
+<p>The general format is as follows:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;str&gt;</span><span class="w">   </span><span class="c1"># your wandb project name</span>
+<span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;str&gt;</span><span class="w">  </span><span class="c1"># your wandb instance url</span>
+<span class="c1"># other specific configuration items</span>
+</pre></div>
+</div>
+<section id="parse-from-helm-output">
+<h3>Parse from HELM output<a class="headerlink" href="#parse-from-helm-output" title="Link to this heading">¶</a></h3>
+<p>The following configuration is used to parse evaluation results from HELM output folder and record them to wandb.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># general configurations</span>
+<span class="c1"># ...</span>
+
+<span class="nt">evals</span><span class="p">:</span><span class="w">  </span><span class="c1"># evaluations to record</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">eval_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm</span><span class="w">    </span><span class="c1"># only support helm for now</span>
+<span class="w">    </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;str&gt;</span><span class="w">  </span><span class="c1"># your model name</span>
+<span class="w">    </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm</span><span class="w">  </span><span class="c1"># use helm to parse from helm output directory</span>
+<span class="w">    </span><span class="nt">helm_output_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your helm output dir path&gt;</span>
+<span class="w">    </span><span class="nt">helm_suite_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your helm suite name&gt;</span>
+<span class="w">    </span><span class="nt">token_per_iteration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;tokens per iteration in billions&gt;</span>
+<span class="w">    </span><span class="nt">benchmarks</span><span class="p">:</span><span class="w">  </span><span class="c1"># benchmark metrics to be recorded, and below are some examples</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mmlu</span>
+<span class="w">        </span><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolq</span>
+<span class="w">        </span><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">narrative_qa</span>
+<span class="w">        </span><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">F1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hellaswag</span>
+<span class="w">        </span><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EM</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>We use 16 core metrics of HELM as the default benchmarks if the <code class="docutils literal notranslate"><span class="pre">benchmarks</span></code> field is not provided, the 16 metrics are as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mmlu</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">raft</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">imdb</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">truthful_qa</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">summarization_cnndm</span><span class="o">.</span><span class="n">ROUGE</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">summarization_xsum</span><span class="o">.</span><span class="n">ROUGE</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">boolq</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">msmarco_trec</span><span class="o">.</span><span class="n">NDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">msmarco_regular</span><span class="o">.</span><span class="n">RR</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">narrative_qa</span><span class="o">.</span><span class="n">F1</span><span class="p">,</span> <span class="n">natural_qa_closedbook</span><span class="o">.</span><span class="n">F1</span><span class="p">,</span> <span class="n">natural_qa_openbook_longans</span><span class="o">.</span><span class="n">F1</span><span class="p">,</span> <span class="n">civil_comments</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">hellaswag</span><span class="o">.</span><span class="n">EM</span><span class="p">,</span> <span class="n">openbookqa</span><span class="o">.</span><span class="n">EM</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="parse-from-configuration-file">
+<h3>Parse from configuration file<a class="headerlink" href="#parse-from-configuration-file" title="Link to this heading">¶</a></h3>
+<p>The scores of metrics can be given directly in the configuration file, the following is an example.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># general configurations</span>
+<span class="c1"># ...</span>
+
+<span class="nt">evals</span><span class="p">:</span><span class="w">  </span><span class="c1"># evaluations to record</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">eval_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm</span>
+<span class="w">    </span><span class="nt">model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">llama-7B</span><span class="w">  </span><span class="c1"># your model name</span>
+<span class="w">    </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span><span class="w">  </span><span class="c1"># use file to parse from configuration</span>
+<span class="w">    </span><span class="nt">token_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">eval_result</span><span class="p">:</span><span class="w">  </span><span class="c1"># evaluation results to be recorded</span>
+<span class="w">      </span><span class="nt">mmlu</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">EM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.345</span>
+<span class="w">      </span><span class="nt">boolq</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">EM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.751</span>
+<span class="w">      </span><span class="nt">narrative_qa</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">F1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.524</span>
+<span class="w">      </span><span class="nt">hellaswag</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">EM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.747</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</section>
+<section id="make-leaderboard">
+<h3>Make leaderboard<a class="headerlink" href="#make-leaderboard" title="Link to this heading">¶</a></h3>
+<p>The following configuration is used to make a leaderboard.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># general configurations</span>
+<span class="c1"># ...</span>
+<span class="nt">leaderboard</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">leaderboard_metrics</span><span class="p">:</span><span class="w">  </span><span class="c1"># metrics required for the leaderboard</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mmlu.EM</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolq.EM</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quac.F1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hellaswag.EM</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="nt">excluded_models</span><span class="p">:</span><span class="w">   </span><span class="c1"># models that do not participate in the leaderboard</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;model to exclude&gt;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>We use 16 core metrics of HELM as the default leaderboard metrics if the <code class="docutils literal notranslate"><span class="pre">leaderboard_metrics</span></code> field is not provided, the 16 metrics are as same as the default benchmark metrics.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

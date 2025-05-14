@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; data_juicer 1.3.2 文档</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="_static/documentation_options.js?v=6b324692"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=beaddf03"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="Quick Start" href="quick-start.html" />
+    <link rel="prev" title="LLM Ecosystems" href="thirdparty/LLM_ecosystems/README.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+            <option value="./../en/Installation.html" 
+                    
+                    >
+                English
+            </option>
+        
+            <option value="./../zh_CN/Installation_ZH.html" 
+                    
+                    selected>
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="DJ-cookbook.html">DJ-Cookbook</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#from-source-for-specific-scenarios">From Source for Specific Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#from-source-for-specific-ops">From Source for Specific OPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-pip">Using pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-docker">Using Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-check">Installation check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#for-video-related-operators">For Video-related Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick-start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Recommend Python&gt;=3.9,&lt;=3.10</p></li>
+<li><p>gcc &gt;= 5 (at least C++14 support)</p></li>
+</ul>
+</section>
+<section id="from-source-for-specific-scenarios">
+<h2>From Source for Specific Scenarios<a class="headerlink" href="#from-source-for-specific-scenarios" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Run the following commands to install the latest basic <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> version in
+editable mode:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;path_to_data_juicer&gt;
+pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Some OPs rely on some other too large or low-platform-compatibility third-party libraries. You can install optional dependencies as needed:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;path_to_data_juicer&gt;
+pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.<span class="w">  </span><span class="c1"># Install minimal dependencies, which support the basic functions</span>
+pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>tools<span class="o">]</span><span class="w"> </span><span class="c1"># Install a subset of tools dependencies</span>
+</pre></div>
+</div>
+<p>The dependency options are listed below:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tag</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.</span></code> or <code class="docutils literal notranslate"><span class="pre">.[mini]</span></code></p></td>
+<td><p>Install minimal dependencies for basic Data-Juicer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[all]</span></code></p></td>
+<td><p>Install dependencies for all OPs except sandbox.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[sci]</span></code></p></td>
+<td><p>Install dependencies for OPs related to scientific usage.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[dist]</span></code></p></td>
+<td><p>Install dependencies for additional distributed data processing.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[dev]</span></code></p></td>
+<td><p>Install dependencies for developing the package as contributors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[tools]</span></code></p></td>
+<td><p>Install dependencies for dedicated tools, such as quality classifiers.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[sandbox]</span></code></p></td>
+<td><p>Install all dependencies for sandbox.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="from-source-for-specific-ops">
+<h2>From Source for Specific OPs<a class="headerlink" href="#from-source-for-specific-ops" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Install dependencies for specific OPs</p></li>
+</ul>
+<p>With the growth of the number of OPs, the dependencies of all OPs become very heavy. Instead of using the command <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-v</span> <span class="pre">-e</span> <span class="pre">.[all]</span></code> to install all dependencies,
+we provide two alternative, lighter options:</p>
+<ul>
+<li><p>Automatic Minimal Dependency Installation: During the execution of Data-Juicer, minimal dependencies will be automatically installed. This allows for immediate execution, but may potentially lead to dependency conflicts.</p></li>
+<li><p>Manual Minimal Dependency Installation: To manually install minimal dependencies tailored to a specific execution configuration, run the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># only for installation from source</span>
+python<span class="w"> </span>tools/dj_install.py<span class="w"> </span>--config<span class="w"> </span>path_to_your_data-juicer_config_file
+
+<span class="c1"># use command line tool</span>
+dj-install<span class="w"> </span>--config<span class="w"> </span>path_to_your_data-juicer_config_file
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="using-pip">
+<h2>Using pip<a class="headerlink" href="#using-pip" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Run the following command to install the latest released <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>py-data-juicer
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Note</strong>:</p>
+<ul>
+<li><p>only the basic APIs in <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> and two basic tools
+(data <a class="reference internal" href="#data-processing"><span class="xref myst">processing</span></a> and <a class="reference internal" href="#data-analysis"><span class="xref myst">analysis</span></a>) are available in this way. If you want customizable
+and complete functions, we recommend you install <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> <a class="reference internal" href="#from-source"><span class="xref myst">from source</span></a>.</p></li>
+<li><p>The release versions from pypi have a certain lag compared to the latest version from source.
+So if you want to follow the latest functions of <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code>, we recommend you install <a class="reference internal" href="#from-source"><span class="xref myst">from source</span></a>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="using-docker">
+<h2>Using Docker<a class="headerlink" href="#using-docker" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>You can</p>
+<ul>
+<li><p>either pull our pre-built image from DockerHub:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>if you can not connect ot DockerHub, please use other registry mirrors (you can find some from the Internet):</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>&lt;other_registry_mirror&gt;/datajuicer/data-juicer:&lt;version_tag&gt;
+</pre></div>
+</div>
+</li>
+<li><p>or run the following command to build the docker image including the
+latest <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code> with provided <a class="reference internal" href="#Dockerfile"><span class="xref myst">Dockerfile</span></a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;<span class="w"> </span>.
+</pre></div>
+</div>
+</li>
+<li><p>The format of <code class="docutils literal notranslate"><span class="pre">&lt;version_tag&gt;</span></code> is like <code class="docutils literal notranslate"><span class="pre">v0.2.0</span></code>, which is the same as the release version tag.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="installation-check">
+<h2>Installation check<a class="headerlink" href="#installation-check" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">data_juicer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dj</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dj</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="for-video-related-operators">
+<h2>For Video-related Operators<a class="headerlink" href="#for-video-related-operators" title="Link to this heading">¶</a></h2>
+<p>Before using video-related operators, <strong>FFmpeg</strong> should be installed and accessible via the $PATH environment variable.</p>
+<p>You can install FFmpeg using package managers(e.g. sudo apt install ffmpeg on Debian/Ubuntu, brew install ffmpeg on OS X) or visit the <a class="reference external" href="https://ffmpeg.org/download.html">official ffmpeg link</a>.</p>
+<p>Check if your environment path is set correctly by running the ffmpeg command from the terminal.</p>
+<p align="right"><a href="#table">🔼 back to index</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="thirdparty/LLM_ecosystems/README.html" class="btn btn-neutral float-left" title="LLM Ecosystems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quick-start.html" class="btn btn-neutral float-right" title="Quick Start" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

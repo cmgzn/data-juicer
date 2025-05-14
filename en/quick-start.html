@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Start &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="_static/documentation_options.js?v=8ca9e7a0"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="Installation" href="Installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+            <option value="./../en/quick-start.html" 
+                    
+                    >
+                English
+            </option>
+        
+            <option value="./../zh_CN/quick-start_ZH.html" 
+                    
+                    >
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="DJ-cookbook.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dataset-configuration">Dataset Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-processing">Data Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#distributed-data-processing">Distributed Data Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-analysis">Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-visualization">Data Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-up-config-files">Build Up Config Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sandbox">Sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preprocess-raw-data-optional">Preprocess Raw Data (Optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#for-docker-users">For Docker Users</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Quick Start</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/quick-start.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h1>
+<section id="dataset-configuration">
+<h2>Dataset Configuration<a class="headerlink" href="#dataset-configuration" title="Link to this heading">¶</a></h2>
+<p>DJ supports various dataset input types, including local files, remote datasets like huggingface; it also supports data validation and data mixture.</p>
+<p>Two ways to configure a input file</p>
+<ul class="simple">
+<li><p>Simple scenarios, single path for local/HF file</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/path/to/your/dataset&#39;</span><span class="w">  </span><span class="c1"># path to your dataset directory or file</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>advanced method, supports sub-configuration items and more features</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">configs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;local&#39;</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;path/to/your/dataset&#39;</span><span class="w"> </span><span class="c1"># path to your dataset directory or file</span>
+</pre></div>
+</div>
+<p>Refer to <a class="reference internal" href="docs/DatasetCfg.html"><span class="std std-doc">Dataset Configuration Guide</span></a> for more details.</p>
+</section>
+<section id="data-processing">
+<h2>Data Processing<a class="headerlink" href="#data-processing" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">process_data.py</span></code> tool or <code class="docutils literal notranslate"><span class="pre">dj-process</span></code> command line tool with your config as the argument to process
+your dataset.</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># only for installation from source</span>
+python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>configs/demo/process.yaml
+
+<span class="c1"># use command line tool</span>
+dj-process<span class="w"> </span>--config<span class="w"> </span>configs/demo/process.yaml
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Note:</strong> For some operators that involve third-party models or resources that are not stored locally on your computer, it might be slow for the first running because these ops need to download corresponding resources into a directory first.
+The default download cache directory is <code class="docutils literal notranslate"><span class="pre">~/.cache/data_juicer</span></code>. Change the cache location by setting the shell environment variable, <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_CACHE_HOME</span></code> to another directory, and you can also change <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_MODELS_CACHE</span></code> or <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_ASSETS_CACHE</span></code> in the same way:</p></li>
+<li><p><strong>Note:</strong> When using operators with third-party models, it’s necessary to declare the corresponding <code class="docutils literal notranslate"><span class="pre">mem_required</span></code> in the configuration file (you can refer to the settings in the <code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code> file). During runtime, Data-Juicer will control the number of processes based on memory availability and the memory requirements of the operator models to achieve better data processing efficiency. When running with CUDA environments, if the mem_required for an operator is not declared correctly, it could potentially lead to a CUDA Out of Memory issue.</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># cache home</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_CACHE_HOME</span><span class="o">=</span><span class="s2">&quot;/path/to/another/directory&quot;</span>
+<span class="c1"># cache models</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_MODELS_CACHE</span><span class="o">=</span><span class="s2">&quot;/path/to/another/directory/models&quot;</span>
+<span class="c1"># cache assets</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_ASSETS_CACHE</span><span class="o">=</span><span class="s2">&quot;/path/to/another/directory/assets&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Flexible Programming Interface:</strong>
+We provide various simple interfaces for users to choose from as follows.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#... init op &amp; dataset ...</span>
+
+<span class="c1"># Chain call style, support single operator or operator list</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">([</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">])</span>
+<span class="c1"># Functional programming style for quick integration or script prototype iteration</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="distributed-data-processing">
+<h2>Distributed Data Processing<a class="headerlink" href="#distributed-data-processing" title="Link to this heading">¶</a></h2>
+<p>We have now implemented multi-machine distributed data processing based on <a class="reference external" href="https://www.ray.io/">RAY</a>. The corresponding demos can be run using the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run text data processing</span>
+python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>./demos/process_on_ray/configs/demo.yaml
+<span class="c1"># Run video data processing</span>
+python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>./demos/process_video_on_ray/configs/demo.yaml
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>To run data processing across multiple machines, it is necessary to ensure that all distributed nodes can access the corresponding data paths (for example, by mounting the respective data paths on a file-sharing system such as NAS).</p></li>
+<li><p>The deduplication operators for RAY mode are different from the single-machine version, and all those operators are prefixed with <code class="docutils literal notranslate"><span class="pre">ray</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">ray_video_deduplicator</span></code> and <code class="docutils literal notranslate"><span class="pre">ray_document_deduplicator</span></code>.</p></li>
+<li><p>More details can be found in the doc for <a class="reference internal" href="docs/Distributed.html"><span class="std std-doc">distributed processing</span></a>.</p></li>
+</ul>
+<blockquote>
+<div><p>Users can also opt not to use RAY and instead split the dataset to run on a cluster with <a class="reference external" href="https://slurm.schedmd.com/">Slurm</a>. In this case, please use the default Data-Juicer without RAY.
+<a class="reference external" href="https://www.aliyun.com/activity/bigdata/pai-dlc">Aliyun PAI-DLC</a> supports the RAY framework, Slurm framework, etc. Users can directly create RAY jobs and Slurm jobs on the DLC cluster.</p>
+</div></blockquote>
+</section>
+<section id="data-analysis">
+<h2>Data Analysis<a class="headerlink" href="#data-analysis" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">analyze_data.py</span></code> tool or <code class="docutils literal notranslate"><span class="pre">dj-analyze</span></code> command line tool with your config as the argument to analyze your dataset.</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># only for installation from source</span>
+python<span class="w"> </span>tools/analyze_data.py<span class="w"> </span>--config<span class="w"> </span>configs/demo/analyzer.yaml
+
+<span class="c1"># use command line tool</span>
+dj-analyze<span class="w"> </span>--config<span class="w"> </span>configs/demo/analyzer.yaml
+
+<span class="c1"># you can also use auto mode to avoid writing a recipe. It will analyze a small</span>
+<span class="c1"># part (e.g. 1000 samples, specified by argument `auto_num`) of your dataset</span>
+<span class="c1"># with all Filters that produce stats.</span>
+dj-analyze<span class="w"> </span>--auto<span class="w"> </span>--dataset_path<span class="w"> </span>xx.jsonl<span class="w"> </span><span class="o">[</span>--auto_num<span class="w"> </span><span class="m">1000</span><span class="o">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Note:</strong> Analyzer only computes stats for Filters that produce stats or other OPs that produce tags/categories in meta. So other OPs will be ignored in the analysis process. We use the following registries to decorate OPs:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">NON_STATS_FILTERS</span></code>: decorate Filters that <strong>DO NOT</strong> produce any stats.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TAGGING_OPS</span></code>: decorate OPs that <strong>DO</strong> produce tags/categories in meta field.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="data-visualization">
+<h2>Data Visualization<a class="headerlink" href="#data-visualization" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">app.py</span></code> tool to visualize your dataset in your browser.</p></li>
+<li><p><strong>Note</strong>: only available for installation from source.</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>streamlit<span class="w"> </span>run<span class="w"> </span>app.py
+</pre></div>
+</div>
+</section>
+<section id="build-up-config-files">
+<h2>Build Up Config Files<a class="headerlink" href="#build-up-config-files" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Config files specify some global arguments, and an operator list for the
+data process. You need to set:</p>
+<ul>
+<li><p>Global arguments: input/output dataset path, number of workers, etc.</p></li>
+<li><p>Operator list: list operators with their arguments used to process the dataset.</p></li>
+</ul>
+</li>
+<li><p>You can build up your own config files by:</p>
+<ul>
+<li><p>➖：Modify from our example config file <a class="reference internal" href="#configs/config_all.yaml"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code></span></a> which includes <strong>all</strong> ops and default
+arguments. You just need to <strong>remove</strong> ops that you won’t use and refine
+some arguments of ops.</p></li>
+<li><p>➕：Build up your own config files <strong>from scratch</strong>. You can refer our
+example config file <a class="reference internal" href="#configs/config_all.yaml"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code></span></a>, <a class="reference internal" href="docs/Operators.html"><span class="std std-doc">op documents</span></a>, and advanced <a class="reference internal" href="docs/DeveloperGuide.html#build-your-own-configs"><span class="std std-ref">Build-Up Guide for developers</span></a>.</p></li>
+<li><p>Besides the yaml files, you also have the flexibility to specify just
+one (of several) parameters on the command line, which will override
+the values in yaml files.</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>xxx.py<span class="w"> </span>--config<span class="w"> </span>configs/demo/process.yaml<span class="w"> </span>--language_id_score_filter.lang<span class="o">=</span>en
+</pre></div>
+</div>
+<ul>
+<li><p>The basic config format and definition is shown below.</p>
+<p><img alt="Basic config example of format and definition" src="https://img.alicdn.com/imgextra/i1/O1CN01uXgjgj1khWKOigYww_!!6000000004715-0-tps-1745-871.jpg" /></p>
+</li>
+</ul>
+</section>
+<section id="sandbox">
+<h2>Sandbox<a class="headerlink" href="#sandbox" title="Link to this heading">¶</a></h2>
+<p>The data sandbox laboratory (DJ-Sandbox) provides users with the best practices for continuously producing data recipes. It features low overhead, portability, and guidance.</p>
+<ul class="simple">
+<li><p>In the sandbox, users can quickly experiment, iterate, and refine data recipes based on small-scale datasets and models, before scaling up to produce high-quality data to serve large-scale models.</p></li>
+<li><p>In addition to the basic data optimization and recipe refinement features offered by Data-Juicer, users can seamlessly use configurable components such as data probe and analysis, model training and evaluation, and data and model feedback-based recipe refinement to form a complete one-stop data-model research and development pipeline.</p></li>
+</ul>
+<p>The sandbox is run using the following commands by default, and for more information and details, please refer to the <a class="reference internal" href="docs/Sandbox.html"><span class="std std-doc">sandbox documentation</span></a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/sandbox_starter.py<span class="w"> </span>--config<span class="w"> </span>configs/demo/sandbox/sandbox.yaml
+</pre></div>
+</div>
+</section>
+<section id="preprocess-raw-data-optional">
+<h2>Preprocess Raw Data (Optional)<a class="headerlink" href="#preprocess-raw-data-optional" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Our Formatters support some common input dataset formats for now:</p>
+<ul>
+<li><p>Multi-sample in one file: jsonl/json, parquet, csv/tsv, etc.</p></li>
+<li><p>Single-sample in one file: txt, code, docx, pdf, etc.</p></li>
+</ul>
+</li>
+<li><p>However, data from different sources are complicated and diverse. Such as:</p>
+<ul>
+<li><p><a class="reference external" href="https://info.arxiv.org/help/bulk_data_s3.html">Raw arXiv data downloaded from S3</a> include thousands of tar files and even more gzip files in them, and expected tex files are embedded in the gzip files so they are hard to obtain directly.</p></li>
+<li><p>Some crawled data include different kinds of files (pdf, html, docx, etc.). And extra information like tables, charts, and so on is hard to extract.</p></li>
+</ul>
+</li>
+<li><p>It’s impossible to handle all kinds of data in Data-Juicer, issues/PRs are welcome to contribute to processing new data types!</p></li>
+<li><p>Thus, we provide some <strong>common preprocessing tools</strong> in <a class="reference internal" href="#tools/preprocess/"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">tools/preprocess</span></code></span></a> for you to preprocess these data.</p>
+<ul>
+<li><p>You are welcome to make your contributions to new preprocessing tools for the community.</p></li>
+<li><p>We <strong>highly recommend</strong> that complicated data can be preprocessed to jsonl or parquet files.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="for-docker-users">
+<h2>For Docker Users<a class="headerlink" href="#for-docker-users" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>If you build or pull the docker image of <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code>, you can run the commands or tools mentioned above using this docker image.</p></li>
+<li><p>Run directly:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the data processing directly</span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\ </span><span class="w"> </span><span class="c1"># remove container after the processing</span>
+<span class="w">  </span>--privileged<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--shm-size<span class="w"> </span>256g<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>dj<span class="w"> </span><span class="se">\ </span><span class="w"> </span><span class="c1"># name of the container</span>
+<span class="w">  </span>-v<span class="w"> </span>&lt;host_data_path&gt;:&lt;image_data_path&gt;<span class="w"> </span><span class="se">\ </span><span class="w"> </span><span class="c1"># mount data or config directory into the container</span>
+<span class="w">  </span>-v<span class="w"> </span>~/.cache/:/root/.cache/<span class="w"> </span><span class="se">\ </span><span class="w"> </span><span class="c1"># mount the cache directory into the container to reuse caches and models (recommended)</span>
+<span class="w">  </span>datajuicer/data-juicer:&lt;version_tag&gt;<span class="w"> </span><span class="se">\ </span><span class="w"> </span><span class="c1"># image to run</span>
+<span class="w">  </span>dj-process<span class="w"> </span>--config<span class="w"> </span>/path/to/config.yaml<span class="w">  </span><span class="c1"># similar data processing commands</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Or enter into the running container and run commands in editable mode:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># start the container</span>
+docker<span class="w"> </span>run<span class="w"> </span>-dit<span class="w"> </span><span class="se">\ </span><span class="w"> </span><span class="c1"># run the container in the background</span>
+<span class="w">  </span>--privileged<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--shm-size<span class="w"> </span>256g<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rm<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>dj<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>&lt;host_data_path&gt;:&lt;image_data_path&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>~/.cache/:/root/.cache/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>datajuicer/data-juicer:latest<span class="w"> </span>/bin/bash
+
+<span class="c1"># enter into this container and then you can use data-juicer in editable mode</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container_id&gt;<span class="w"> </span>bash
+</pre></div>
+</div>
+<p align="right"><a href="#table">🔼 back to index</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

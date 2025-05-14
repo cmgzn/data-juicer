@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>分布式模糊去重工具 &mdash; data_juicer 1.3.2 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="../../_static/documentation_options.js?v=6b324692"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+            <option value="../../../en/tools/distributed_deduplication/README.html" 
+                    
+                    >
+                English
+            </option>
+        
+            <option value="../../../zh_CN/tools/distributed_deduplication/README.html" 
+                    
+                    selected>
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../DJ-cookbook.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quick-start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">分布式模糊去重工具</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tools/distributed_deduplication/README_ZH.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>分布式模糊去重工具<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>复现与GPT-3论文相似的模糊去重方法并应用到您的Web数据集。</p>
+<p><strong>模糊去重的一般描述</strong>：
+这里的模糊去重方法主要指的是 <a class="reference external" href="https://arxiv.org/pdf/2005.14165.pdf">GPT-3论文</a>附录A中提到的模糊去重方法。</p>
+<blockquote>
+<div><p>为了进一步提高模型质量并防止过拟合（随着模型容量的增加越来越重要），我们使用Spark的MinHashLSH实现对每个数据集中的文档进行了模糊去重（即移除了与其他文档高度重合的文档），使用了10个哈希，使用的<strong>特征与上面用于分类的特征相同</strong>。我们还从Common Crawl中模糊移除了WebText。总体而言，这使数据集的大小平均减少了10％。
+正如论文中提到的，使用的特征与前文描述的质量分类器（<a class="reference internal" href="../quality_classifier/README.html"><span class="std std-doc">quality_classifier tools</span></a>）中所用的一致。
+整个工具包基于PySpark。</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>分词器：由于pyspark的标准分词器无法很好地处理中文等语言的文本，所以使用了PySpark的<a class="reference external" href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.Tokenizer.html#tokenizer">标准分词器</a>或<a class="reference external" href="https://github.com/google/sentencepiece">sentencepiece</a>模型。</p></li>
+<li><p>特征提取器：<a class="reference external" href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.HashingTF.html">HashingTF</a></p></li>
+<li><p>minhashLSH：<a class="reference external" href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.MinHashLSH.html">MinHashLSH</a></p></li>
+</ul>
+<section id="id2">
+<h2>使用方法<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>使用<code class="docutils literal notranslate"><span class="pre">spark_dedup.py</span></code>对文档进行模糊去重。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>spark_dedup.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>&lt;dataset_path&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>&lt;result_path&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--tokenizer<span class="w"> </span>&lt;tokenizer_type&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--num_features<span class="w"> </span>&lt;num_features&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--num_hashtables<span class="w"> </span>&lt;num_hashtables&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--text_key<span class="w"> </span>&lt;text_key&gt;<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--master_url<span class="w"> </span>&lt;master_url&gt;<span class="o">]</span>
+<span class="c1"># 打印使用信息</span>
+python<span class="w"> </span>spark_dedup.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dataset_path</span></code>：输入数据集路径。路径的后缀应该是<code class="docutils literal notranslate"><span class="pre">[json,</span> <span class="pre">jsonl,</span> <span class="pre">parquet]</span></code>中的一个。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">result_path</span></code>：存储带有预测结果数据集的路径。路径的后缀应该是<code class="docutils literal notranslate"><span class="pre">[json,</span> <span class="pre">jsonl,</span> <span class="pre">parquet]</span></code>中的一个。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tokenizer</span></code>：（可选。默认值：None）用于对将要分类的文本进行分词的分词器。如果为None，将使用PySpark的<a class="reference external" href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.Tokenizer.html#tokenizer">标准分词器</a>。此外，你可以使用我们提供的分词器<code class="docutils literal notranslate"><span class="pre">[zh.sp.model,</span> <span class="pre">code.sp.model]</span></code>中的一个，或者你可以将其设置为你自己的<a class="reference external" href="https://github.com/google/sentencepiece">sentencepiece</a>模型的路径。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_features</span></code>：HashingTF生成的特征数量。默认值为1047576，如megatron-turing-nlg论文中所述。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_hashtables</span></code>：（可选。默认值：10）MinHashLSH中使用的哈希数量。默认使用10个哈希，如GPT-3论文中所述。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_key</span></code>：（可选。默认值：&quot;text&quot;）输入数据集中用于存储待分类文本的字段名称。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">master_url</span></code>：（可选。默认值：None）用于Spark配置的master URL。如果为空，则默认运行在&quot;local[*]&quot;模式下。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

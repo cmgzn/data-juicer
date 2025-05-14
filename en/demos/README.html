@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demos &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="../_static/documentation_options.js?v=8ca9e7a0"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+            <option value="../../en/demos/README.html" 
+                    
+                    >
+                English
+            </option>
+        
+            <option value="../../zh_CN/demos/README_ZH.html" 
+                    
+                    >
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DJ-cookbook.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick-start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Demos</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/demos/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="demos">
+<h1>Demos<a class="headerlink" href="#demos" title="Link to this heading">¶</a></h1>
+<p>This folder contains some demos, which allow users to easily experience the basic functions and tools of Data-Juicer.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">app.py</span></code> in the subdirectory of <code class="docutils literal notranslate"><span class="pre">demos</span></code> to run the demos.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;subdir_of_demos&gt;
+streamlit<span class="w"> </span>run<span class="w"> </span>app.py
+</pre></div>
+</div>
+</section>
+<section id="available-demos">
+<h2>Available Demos<a class="headerlink" href="#available-demos" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Data (<code class="docutils literal notranslate"><span class="pre">data</span></code>)</p>
+<ul>
+<li><p>This folder contains some sample datasets.</p></li>
+</ul>
+</li>
+<li><p>Overview scan (<code class="docutils literal notranslate"><span class="pre">overview_scan</span></code>)</p>
+<ul>
+<li><p>This demo introduces the basic concepts and functions of Data-Juicer, such as features, configuration, operators, and so on.</p></li>
+</ul>
+</li>
+<li><p>Data process loop (<code class="docutils literal notranslate"><span class="pre">data_process_loop</span></code>)</p>
+<ul>
+<li><p>This demo analyzes and processes a dataset, providing a comparison of statistical information before and after the processing.</p></li>
+</ul>
+</li>
+<li><p>Data visualization diversity (<code class="docutils literal notranslate"><span class="pre">data_visualization_diversity</span></code>)</p>
+<ul>
+<li><p>This demo analyzes the verb-noun structure of the CFT dataset and plots its diversity in sunburst format.</p></li>
+</ul>
+</li>
+<li><p>Data visualization op effect (<code class="docutils literal notranslate"><span class="pre">data_visualization_op_effect</span></code>)</p>
+<ul>
+<li><p>This demo analyzes the statistics of dataset, and displays the effect of each Filter op by setting different thresholds.</p></li>
+</ul>
+</li>
+<li><p>Data visualization statistics (<code class="docutils literal notranslate"><span class="pre">data_visualization_statistics</span></code>)</p>
+<ul>
+<li><p>This demo analyzes the dataset and obtain up to 13 statistics.</p></li>
+</ul>
+</li>
+<li><p>Process CFT Chinese data (<code class="docutils literal notranslate"><span class="pre">process_cft_zh_data</span></code>)</p>
+<ul>
+<li><p>This demos analyzes and processes part of Chinese dataset in Alpaca-CoT to show how to process IFT or CFT data for LLM fine-tuning.</p></li>
+</ul>
+</li>
+<li><p>Process SCI data (<code class="docutils literal notranslate"><span class="pre">process_sci_data</span></code>)</p>
+<ul>
+<li><p>This demos analyzes and processes part of arXiv dataset to show how to process scientific literature data for LLM pre-training.</p></li>
+</ul>
+</li>
+<li><p>Process code data (<code class="docutils literal notranslate"><span class="pre">process_code_data</span></code>)</p>
+<ul>
+<li><p>This demos analyzes and processes part of Stack-Exchange dataset to show how to process code data for LLM pre-training.</p></li>
+</ul>
+</li>
+<li><p>Text quality classifier (<code class="docutils literal notranslate"><span class="pre">tool_quality_classifier</span></code>)</p>
+<ul>
+<li><p>This demo provides 3 text quality classifier to score the dataset.</p></li>
+</ul>
+</li>
+<li><p>Dataset splitting by language (<code class="docutils literal notranslate"><span class="pre">tool_dataset_splitting_by_language</span></code>)</p>
+<ul>
+<li><p>This demo splits a dataset to different sub-datasets by language.</p></li>
+</ul>
+</li>
+<li><p>Data mixture (<code class="docutils literal notranslate"><span class="pre">data_mixture</span></code>)</p>
+<ul>
+<li><p>This demo selects and mixes samples from multiple datasets and exports them into a new dataset.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

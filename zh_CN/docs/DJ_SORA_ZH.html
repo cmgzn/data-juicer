@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>动机 &mdash; data_juicer 1.3.2 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="../_static/documentation_options.js?v=6b324692"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+            <option value="../../en/docs/DJ_SORA.html" 
+                    
+                    >
+                English
+            </option>
+        
+            <option value="../../zh_CN/docs/DJ_SORA.html" 
+                    
+                    selected>
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DJ-cookbook.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick-start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">动机</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/docs/DJ_SORA_ZH.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>中文 | <a class="reference internal" href="DJ_SORA.html"><span class="std std-doc">English Page</span></a></p>
+<hr class="docutils" />
+<p>数据是SORA等前沿大模型的关键，如何高效科学地获取和处理数据面临新的挑战！DJ-SORA旨在创建一系列大规模高质量开源多模态数据集，助力开源社区数据理解和模型训练。</p>
+<p>DJ-SORA将基于Data-Juicer(包含上百个专用的视频、图像、音频、文本等多模态数据处理<a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md">算子</a>及工具)，形成一系列系统化可复用的多模态“数据菜谱”，用于分析、清洗及生成大规模高质量多模态数据。</p>
+<p>本项目正在积极更新和维护中，我们热切地邀请您参与，共同打造一个更开放、更高质的多模态数据生态系统，激发大模型无限潜能！</p>
+<p><img alt="Overview" src="https://img.alicdn.com/imgextra/i4/O1CN01XphcBN2ACXcS6S1JH_!!6000000008167-2-tps-2289-1620.png" /></p>
+<section id="id1">
+<h1>动机<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>SORA仅简略提及使用了DALLE-3来生成高质量caption，且模型输入数据有变化的时长、分辨率和宽高比。</p></li>
+<li><p>高质量大规模细粒度数据有助于稠密化数据点，帮助模型学好“文本 -&gt; spacetime token”的条件映射，解决text-2-video模型的一系列现有挑战：</p>
+<ul>
+<li><p>画面流畅性和一致性，部分生成的视频有丢帧及静止状态</p></li>
+<li><p>文本理解能力和细粒度，生成出的结果和prompt匹配度较低</p></li>
+<li><p>视频内容较短，大多只有~10s，且场景画面不会有大的改变</p></li>
+<li><p>生成内容存在变形扭曲和物理规则违背情况，特别是在实体做出动作时</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h1>路线图<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+<section id="id3">
+<h2>概览<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id4">支持视频数据的高性能加载和处理</a></p></li>
+<li><p><a class="reference internal" href="#id5">基础算子（视频时空维度）</a></p></li>
+<li><p><a class="reference internal" href="#id6">进阶算子（细粒度模态间匹配及生成）</a></p></li>
+<li><p><a class="reference internal" href="#id7">进阶算子（视频内容）</a></p></li>
+<li><p><a class="reference internal" href="#DJ-SORA%E6%95%B0%E6%8D%AE%E8%8F%9C%E8%B0%B1%E5%8F%8A%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="xref myst">DJ-SORA数据菜谱及数据集</span></a></p></li>
+<li><p><a class="reference internal" href="#DJ-SORA%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81%E5%8F%8A%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="xref myst">DJ-SORA数据验证及模型训练</span></a></p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>支持视频数据的高性能加载和处理<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>[✅] 并行化数据加载存储：</p>
+<ul>
+<li><p>[✅] lazy load with pyAV and ffmpeg</p></li>
+<li><p>[✅] 多模态数据路径签名</p></li>
+</ul>
+</li>
+<li><p>[✅] 并行化算子处理：</p>
+<ul>
+<li><p>[✅] 支持单机多核</p></li>
+<li><p>[✅] GPU调用</p></li>
+<li><p>[✅] Ray多机分布式</p></li>
+<li><p>[✅] 基于阿里云PAI-DLC和Slurm的多机分布式</p></li>
+</ul>
+</li>
+<li><p>[✅] 分布式调度优化（OP-aware、自动化负载均衡）--&gt;  Aliyun PAI-DLC</p></li>
+<li><p>[WIP] 视频相关算子的低精度加速支持, git tags: dj_op, dj_efficiency</p></li>
+<li><p>[WIP] 现有视频相关算子的SOTA模型增强, git tags: dj_op, dj_sota_models</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>基础算子（视频时空维度）<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>面向数据质量</p>
+<ul>
+<li><p>[✅] video_resolution_filter （在分辨率维度进行过滤）</p></li>
+<li><p>[✅] video_aspect_ratio_filter （在宽高比维度进行过滤）</p></li>
+<li><p>[✅] video_duration_filter （在时间维度进行过滤）</p></li>
+<li><p>[✅] video_motion_score_filter（在视频连续性维度过滤，计算光流，去除静态和极端动态）</p></li>
+<li><p>[✅] video_ocr_area_ratio_filter （移除文本区域过大的样本）</p></li>
+</ul>
+</li>
+<li><p>面向数据多样性及数量</p>
+<ul>
+<li><p>[✅] video_resize_resolution_mapper（在分辨率维度进行增强）</p></li>
+<li><p>[✅] video_resize_aspect_ratio_mapper（在宽高比维度进行增强）</p></li>
+<li><p>[✅] video_split_by_key_frame_mapper（基于关键帧进行切割）</p></li>
+<li><p>[✅] video_split_by_duration_mapper（在时间维度进行切割）</p></li>
+<li><p>[✅] video_split_by_scene_mapper (基于场景连续性进行切割)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id6">
+<h2>进阶算子（细粒度模态间匹配及生成）<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>面向数据质量</p>
+<ul>
+<li><p>[✅] video_frames_text_similarity_filter（在时空一致性维度过滤，计算关键/指定帧 和文本的匹配分）</p></li>
+</ul>
+</li>
+<li><p>面向数据多样性及数量</p>
+<ul>
+<li><p>[✅] video_tagging_from_frames_mapper (轻量图生文模型，密集帧生成空间  概要信息)</p></li>
+<li><p>[✅] video_captioning_from_frames_mapper（更重的图生文模型，少量帧生  成更详细空间信息）</p></li>
+<li><p>[✅] video_tagging_from_audio_mapper (引入audio classification/category等meta信息)</p></li>
+<li><p>[✅] video_captioning_from_audio_mapper（引入人声/对话等信息；  AudioCaption环境、场景等全局信息）</p></li>
+<li><p>[✅] video_captioning_from_video_mapper（视频生文模型，连续帧生成时序信息）</p></li>
+<li><p>[✅] video_captioning_from_summarizer_mapper（基于上述子能力的组合，使用纯文本大模型对不同种caption信息去噪、摘要）</p></li>
+<li><p>[ ] [WIP] video_interleaved_mapper（在ICL、时间和跨模态维度增强），<code class="docutils literal notranslate"><span class="pre">interleaved_modes</span></code> include</p>
+<ul>
+<li><p>text_image_interleaved（按时序交叉放置同一视频的的caption和frames）</p></li>
+<li><p>text_audio_interleaved（按时序交叉放置同一视频的的ASR文本和frames）</p></li>
+<li><p>text_image_audio_interleaved（交替拼接上述两种）</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id7">
+<h2>进阶算子（视频内容）<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>[✅] video_deduplicator （比较MD5哈希值在文件样本级别去重）</p></li>
+<li><p>[✅] video_aesthetic_filter（拆帧后，进行美学度打分过滤）</p></li>
+<li><p>[✅]兼容ffmpeg已有的video commands</p>
+<ul>
+<li><p>audio_ffmpeg_wrapped_mapper</p></li>
+<li><p>video_ffmpeg_wrapped_mapper</p></li>
+</ul>
+</li>
+<li><p>[WIP] 视频内容合规和隐私保护算子（图像、文字、音频）：</p>
+<ul>
+<li><p>[✅] 马赛克</p></li>
+<li><p>[✅] 版权水印</p></li>
+<li><p>[✅] 人脸模糊</p></li>
+<li><p>[✅] 黄暴恐</p></li>
+</ul>
+</li>
+<li><p>[ ] [TODO] (Beyond Interpolation) 增强数据真实性和稠密性</p>
+<ul>
+<li><p>碰撞、光影、重力、3D、场景切换（phase tranisition）、景深等</p></li>
+<li><p>[ ] Filter类算子: caption是否描述真实性，该描述的相关性得分/正确性得分</p></li>
+<li><p>[ ] Mapper类算子：增强video数据中对物理现象的文本描述</p></li>
+<li><p>[ ] ...</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="dj-sora">
+<h2>DJ-SORA数据菜谱及数据集<a class="headerlink" href="#dj-sora" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>支持代表性数据的统一加载和转换（other-data &lt;-&gt; dj-data），方便DJ算子处理及扩展数据集</p>
+<ul>
+<li><p>[✅] <strong>Video-ChatGPT</strong>: 100K video-instruction data:<code class="docutils literal notranslate"><span class="pre">{&lt;question,</span> <span class="pre">answer,</span> <span class="pre">youtube_id&gt;}</span></code></p></li>
+<li><p>[✅] <strong>Youku-mPLUG-CN</strong>: 36TB video-caption data：<code class="docutils literal notranslate"><span class="pre">{&lt;caption,</span> <span class="pre">video_id&gt;}</span></code></p></li>
+<li><p>[✅] <strong>InternVid</strong>: 234M data sample:<code class="docutils literal notranslate"><span class="pre">{&lt;caption,</span> <span class="pre">youtube_id,</span> <span class="pre">start/end_time&gt;}</span></code></p></li>
+<li><p>[✅] <strong>MSR-VTT</strong>: 10K video-caption data：<code class="docutils literal notranslate"><span class="pre">{&lt;caption,</span> <span class="pre">video_id&gt;}</span></code></p></li>
+<li><p>[✅] ModelScope数据集集成</p></li>
+<li><p>[✅] VideoInstruct-100K, Panda70M, ......</p></li>
+</ul>
+</li>
+<li><p>[ ] 大规模高质量DJ-SORA数据集</p>
+<ul>
+<li><p>[✅] (Data sandbox) 基于DJ-video算子构建和优化多模态数据菜谱 (算子同期持续完善)</p></li>
+<li><p>[✅] 数据源持续扩充：open-datasets, youku, web， ...</p></li>
+<li><p>[ ] 基于DJ菜谱规模化分析、清洗、生成高质量多模态数据集</p>
+<ul>
+<li><p>[WIP] 多场景、高动态</p></li>
+</ul>
+</li>
+<li><p>...</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id8">
+<h2>DJ-SORA数据验证及模型训练<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>[✅]  探索及完善多模态数据和模型的协同开发，形成benchmark和insights: <a class="reference external" href="https://arxiv.org/abs/2407.11784">paper</a></p></li>
+<li><p>[] [WIP] 类SORA模型训练pipeline集成</p>
+<ul>
+<li><p>[✅] <a class="reference external" href="https://github.com/aigc-apps/EasyAnimate">EasyAnimate</a></p></li>
+<li><p>[✅] <a class="reference external" href="https://t2v-turbo.github.io/">T2V</a></p></li>
+<li><p>[✅] <a class="reference external" href="https://vchitect.github.io/VBench-project/">V-Bench</a></p></li>
+<li><p>...</p></li>
+</ul>
+</li>
+<li><p>[✅] (Model-Data sandbox) 在相对小的模型和DJ-SORA数据集上，探索形成低开销、可迁移、有指导性的data-model co-design、配置及检查点</p></li>
+<li><p>[ ] [WIP] 更大规模、更多场景使用DJ-SORA数据训练类SORA模型，提高模型性能</p>
+<ul>
+<li><p>[✅] Data-Juicer-T2V, <a class="reference external" href="https://huggingface.co/datajuicer/Data-Juicer-T2V-v2">V-Bench Top1 model</a>。详情请参考<a class="reference internal" href="#./Sandbox-ZH.md"><span class="xref myst">这里</span></a>。</p></li>
+<li><p>...</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
