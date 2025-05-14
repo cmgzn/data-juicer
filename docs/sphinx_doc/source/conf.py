@@ -72,7 +72,7 @@ gettext_compact = False     # optional.
 # list of supported languages
 supported_languages = {
     'en': 'English',
-    'zh_CN': '简体中文',
+    'zh-CN': '简体中文',
     # 'ja': '日本語',
 }
 html_context = {
@@ -84,19 +84,31 @@ html_context = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# get the page path
-def get_page_path(app, pagename, templatename, context, doctree):
-    current_lang = app.config.language
-    
-    if current_lang == 'zh_CN':
-        # Check if there is a corresponding Chinese translation file
-        zh_page = f"{pagename}_ZH"
-        if os.path.exists(f"{app.srcdir}/{zh_page}.md"):
-            context['page_path'] = zh_page
-        else:
-            context['page_path'] = pagename
+def find_zh_exclusions(app, config):
+    """
+    Find Chinese translation files to exclude when building English documentation
+    """
+    if config.language == 'zh-CN':
+        zh_exclusions = []
+        for root, dirs, files in os.walk(app.srcdir):
+            for file in files:
+                # Check for files with English base names and corresponding _ZH versions
+                if not file.endswith('_ZH.md') and not file.endswith('_ZH.rst'):
+                    base_name, ext = os.path.splitext(file)
+                    zh_file = f"{base_name}_ZH{ext}"
+                    zh_file_path = os.path.join(root, zh_file)
+                    
+                    # If Chinese version exists, add to exclusions
+                    if os.path.exists(zh_file_path):
+                        # Convert to relative path from source directory
+                        rel_path = os.path.normpath(os.path.relpath(os.path.join(root, file), app.srcdir))
+                        rel_path = rel_path.replace("\\", "/")
+
+                        zh_exclusions.append(rel_path)
+        
+        config.exclude_patterns.extend(zh_exclusions)
     else:
-        context['page_path'] = pagename
+        config.exclude_patterns.extend(['*_ZH*', '**/*_ZH*'])
 
 
 def skip(app, what, name, obj, would_skip, options):
@@ -122,7 +134,7 @@ def process_doc_links(app, docname, source):
         
         return f'[{link_text}]({full_github_link})'
     
-    pattern = r'\[([^\]]+)\]\(([^)]*(?:.py|Operators.md|.ipynb))\)'
+    pattern = r'\[([^\]]+)\]\(([^)]*(?:.py|Operators.md|.ipynb|Dockerfile))\)'
     source[0] = re.sub(pattern, link_replacer, source[0])
     
     return source[0]
@@ -130,11 +142,10 @@ def process_doc_links(app, docname, source):
 def process_read(app, docname, source):
     source[0] = process_doc_links(app, docname, source)
     source[0] = source[0].replace('.md]', '.html]')
-    # auto_translate(app, docname, source)
-
+    source[0] = source[0].replace('#dj-cookbook', 'DJ-cookbook')
 
 def setup(app):
-    app.config.exclude_patterns = ['**/*_ZH.md', '**/*_ZH.rst'] if app.config.language != 'zh_CN' else []
+    app.config.root_doc = 'index_ZH' if app.config.language == 'zh-CN' else 'index'
+    app.connect('config-inited', find_zh_exclusions)
     app.connect('source-read', process_read)
-    app.connect('html-page-context', get_page_path)
     app.connect("autodoc-skip-member", skip)

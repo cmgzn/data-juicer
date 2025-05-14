@@ -5,13 +5,13 @@
 {% if supported_languages %}
 <div class="language-selector">
     <select onchange="window.location.href=this.value;">
+        {% set lang_map = {'en': ''} %}
         {% for lang_code, lang_name in supported_languages.items() %}
             <option value="{{ 
-                pathto('', 1) + '../' + lang_code + '/' + 
+                pathto('', 1).replace('build/html/' + language, 'build/html/' + lang_map.get(lang_code, lang_code)) + '/' + 
                 (pagename.replace('_ZH', '') + '.html' if language == 'zh-CN' and pagename.endswith('_ZH') else 
-                (pagename + '_ZH.html' if lang_code == 'zh_CN' else pagename + '.html'))
+                (pagename + '_ZH.html' if lang_code == 'zh-CN' and not pagename.endswith('_ZH') else pagename + '.html'))
             }}" 
-                    {% set lang_map = {'en': '', 'zh_CN': 'zh-CN'} %}
                     {% if language == lang_map.get(lang_code, lang_code) %}selected{% endif %}>
                 {{ lang_name }}
             </option>
