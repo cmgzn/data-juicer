@@ -162,7 +162,26 @@ References
 
 .. toctree::
    :maxdepth: 2
+   :caption: docs
+   :glob:
+   :hidden:
+
+   docs/*
+
+.. toctree::
+   :maxdepth: 2
+   :caption: tool
+   :glob:
+   :hidden:
+
+   tool/*
+
+.. toctree::
+   :maxdepth: 2
    :caption: API Reference
    :hidden:
 
    api
+
+
+

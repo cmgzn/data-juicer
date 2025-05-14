@@ -100,7 +100,7 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
 ------
 .. include:: README_ZH.md
     :start-after: ## 新消息
-    :end-before: ## DJ-Cookbook
+    :end-before: 目录
     :parser: myst_parser.sphinx_
 
 目录
@@ -127,7 +127,7 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
 
 .. include:: README_ZH.md
     :start-after: ## 为什么选择 Data-Juicer？
-    :end-before: ## 开源协议
+    :end-before: ## DJ-Cookbook
     :parser: myst_parser.sphinx_
 
 开源协议
@@ -160,6 +160,22 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
 .. include:: README_ZH.md
     :start-after: ## 参考文献
     :parser: myst_parser.sphinx_
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 帮助文档
+   :glob:
+   :hidden:
+
+   docs/*
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 工具
+   :glob:
+   :hidden:
+
+   tool/*
 
 .. toctree::
    :maxdepth: 2

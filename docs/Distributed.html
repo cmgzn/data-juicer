@@ -17,7 +17,9 @@
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Operator Schemas 算子提要" href="Operators.html" />
+    <link rel="prev" title="Dataset Configuration Guide" href="DatasetCfg.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -64,6 +66,40 @@
 <li class="toctree-l1"><a class="reference internal" href="../DJ-cookbook.html">DJ-Cookbook</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick-start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">docs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BadDataExhibition.html">Bad Data Exhibition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ_SORA.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ_SORA.html#roadmap">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ_service.html">DJ_service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatasetCfg.html">Dataset Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeveloperGuide.html">How-to Guide for Developers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Distributed Data Processing in Data-Juicer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation-and-optimizations">Implementation and Optimizations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ray-mode-in-data-juicer">Ray Mode in Data-Juicer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subset-splitting">Subset Splitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-reading-of-json-files">Streaming Reading of JSON Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deduplication">Deduplication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-results">Performance Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-processing-with-varied-scales">Data Processing with Varied Scales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distributed-deduplication-on-large-scale-datasets">Distributed Deduplication on Large-Scale Datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-example-of-ray-mode">Running Example of Ray Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-example-of-distributed-deduplication">Running Example of Distributed Deduplication</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sandbox.html">Sandbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -248,7 +284,10 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>demos/process_
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DatasetCfg.html" class="btn btn-neutral float-left" title="Dataset Configuration Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Operators.html" class="btn btn-neutral float-right" title="Operator Schemas 算子提要" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
