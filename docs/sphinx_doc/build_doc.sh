@@ -5,5 +5,5 @@ make clean
 languages=("en" "zh_CN")
 
 for lang in "${languages[@]}"; do
-    sphinx-build -D language=$lang -b html . build/html/$lang
+    sphinx-build -D language=$lang -b html source build/html/$lang
 done
