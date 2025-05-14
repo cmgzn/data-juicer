@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Motivation &mdash; data_juicer 1.3.3 documentation</title>
+  <title>DJ-SORA &mdash; data_juicer 1.3.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=4416e5ad" />
@@ -18,8 +18,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Dataset Configuration Guide" href="DatasetCfg.html" />
-    <link rel="prev" title="Quick Start" href="../quick-start.html" /> 
+    <link rel="next" title="DJ_service" href="DJ_service.html" />
+    <link rel="prev" title="“Bad” Data Exhibition" href="BadDataExhibition.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -70,15 +70,18 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="BadDataExhibition.html">“Bad” Data Exhibition</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#roadmap">Roadmap</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#advanced-operators-video-content">Advanced Operators (Video Content)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DJ-SORA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#roadmap">Roadmap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-operators-video-content">Advanced Operators (Video Content)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="DJ_service.html">DJ_service</a></li>
@@ -92,7 +95,16 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.format.html">data_juicer.format</a></li>
 </ul>
 
         </div>
@@ -109,7 +121,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Motivation</li>
+      <li class="breadcrumb-item active">DJ-SORA</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/docs/DJ_SORA.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -119,14 +131,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p>English | <span class="xref myst">中文页面</span></p>
+  <section id="dj-sora">
+<h1>DJ-SORA<a class="headerlink" href="#dj-sora" title="Link to this heading">¶</a></h1>
+<p>English | <span class="xref myst">中文页面</span></p>
 <hr class="docutils" />
 <p>Data is the key to the unprecedented development of large multi-modal models such as SORA. How to obtain and process data efficiently and scientifically faces new challenges! DJ-SORA aims to create a series of large-scale, high-quality open-source multi-modal data sets to assist the open-source community in data understanding and model training.</p>
 <p>DJ-SORA is based on Data-Juicer (including hundreds of dedicated video, image, audio, text and other multi-modal data processing <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md">operators</a> and tools) to form a series of systematic and reusable Multimodal “data recipes” for analyzing, cleaning, and generating large-scale, high-quality multimodal data.</p>
 <p>This project is being actively updated and maintained. We eagerly invite you to participate and jointly create a more open and higher-quality multi-modal data ecosystem to unleash the unlimited potential of large models!</p>
 <p><img alt="Overview" src="https://img.alicdn.com/imgextra/i2/O1CN01YMO2p31MsT5PKu7fh_!!6000000001490-0-tps-2134-1518.jpg" /></p>
 <section id="motivation">
-<h1>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">¶</a></h1>
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>SORA only briefly mentions using DALLE-3 to generate captions and can handle varying durations, resolutions and aspect ratios.</p></li>
 <li><p>High-quality large-scale fine-grained data helps to densify data points, aiding models to better learn the conditional mapping of “text -&gt; spacetime token”, and solve a series of existing challenges in text-to-video models:</p>
@@ -140,26 +154,26 @@
 </ul>
 </section>
 <section id="roadmap">
-<h1>Roadmap<a class="headerlink" href="#roadmap" title="Link to this heading">¶</a></h1>
+<h2>Roadmap<a class="headerlink" href="#roadmap" title="Link to this heading">¶</a></h2>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference internal" href="#motivation">Motivation</a></p></li>
-<li><p><a class="reference internal" href="#roadmap">Roadmap</a></p>
+<li><p><a class="reference internal" href="##motivation"><span class="xref myst">Motivation</span></a></p></li>
+<li><p><a class="reference internal" href="##roadmap"><span class="xref myst">Roadmap</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#overview">Overview</a></p></li>
-<li><p><a class="reference internal" href="#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></p></li>
-<li><p><a class="reference internal" href="#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></p></li>
-<li><p><a class="reference internal" href="#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></p></li>
-<li><p><a class="reference internal" href="#advanced-operators-video-content">Advanced Operators (Video Content)</a></p></li>
-<li><p><a class="reference internal" href="#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></p></li>
-<li><p><a class="reference internal" href="#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></p></li>
+<li><p><a class="reference internal" href="##overview"><span class="xref myst">Overview</span></a></p></li>
+<li><p><a class="reference internal" href="##support-high-performance-loading-and-processing-of-video-data"><span class="xref myst">Support high-performance loading and processing of video data</span></a></p></li>
+<li><p><a class="reference internal" href="##basic-operators-video-spatio-temporal-dimension"><span class="xref myst">Basic Operators (video spatio-temporal dimension)</span></a></p></li>
+<li><p><a class="reference internal" href="##advanced-operators-fine-grained-modal-matching-and-data-generation"><span class="xref myst">Advanced Operators (fine-grained modal matching and data generation)</span></a></p></li>
+<li><p><a class="reference internal" href="##advanced-operators-video-content"><span class="xref myst">Advanced Operators (Video Content)</span></a></p></li>
+<li><p><a class="reference internal" href="##dj-sora-data-recipes-and-datasets"><span class="xref myst">DJ-SORA Data Recipes and Datasets</span></a></p></li>
+<li><p><a class="reference internal" href="##dj-sora-data-validation-and-model-training"><span class="xref myst">DJ-SORA Data Validation and Model Training</span></a></p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="support-high-performance-loading-and-processing-of-video-data">
-<h2>Support high-performance loading and processing of video data<a class="headerlink" href="#support-high-performance-loading-and-processing-of-video-data" title="Link to this heading">¶</a></h2>
+<h3>Support high-performance loading and processing of video data<a class="headerlink" href="#support-high-performance-loading-and-processing-of-video-data" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>[✅] Parallelize data loading and storing:</p>
 <ul>
@@ -181,7 +195,7 @@
 </ul>
 </section>
 <section id="basic-operators-video-spatio-temporal-dimension">
-<h2>Basic Operators (video spatio-temporal dimension)<a class="headerlink" href="#basic-operators-video-spatio-temporal-dimension" title="Link to this heading">¶</a></h2>
+<h3>Basic Operators (video spatio-temporal dimension)<a class="headerlink" href="#basic-operators-video-spatio-temporal-dimension" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Towards Data Quality</p>
 <ul>
@@ -204,7 +218,7 @@
 </ul>
 </section>
 <section id="advanced-operators-fine-grained-modal-matching-and-data-generation">
-<h2>Advanced Operators (fine-grained modal matching and data generation)<a class="headerlink" href="#advanced-operators-fine-grained-modal-matching-and-data-generation" title="Link to this heading">¶</a></h2>
+<h3>Advanced Operators (fine-grained modal matching and data generation)<a class="headerlink" href="#advanced-operators-fine-grained-modal-matching-and-data-generation" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Towards Data Quality</p>
 <ul>
@@ -231,7 +245,7 @@
 </ul>
 </section>
 <section id="advanced-operators-video-content">
-<h2>Advanced Operators (Video Content)<a class="headerlink" href="#advanced-operators-video-content" title="Link to this heading">¶</a></h2>
+<h3>Advanced Operators (Video Content)<a class="headerlink" href="#advanced-operators-video-content" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>[✅] video_deduplicator (comparing hash values to deduplicate at the file sample level)</p></li>
 <li><p>[✅] video_aesthetic_filter (performing aesthetic scoring filters after frame decomposition)</p></li>
@@ -260,7 +274,7 @@
 </ul>
 </section>
 <section id="dj-sora-data-recipes-and-datasets">
-<h2>DJ-SORA Data Recipes and Datasets<a class="headerlink" href="#dj-sora-data-recipes-and-datasets" title="Link to this heading">¶</a></h2>
+<h3>DJ-SORA Data Recipes and Datasets<a class="headerlink" href="#dj-sora-data-recipes-and-datasets" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Support for unified loading and conversion of representative datasets (other-data &lt;-&gt; dj-data), facilitating DJ operator processing and dataset expansion.</p>
 <ul>
@@ -287,7 +301,7 @@
 </ul>
 </section>
 <section id="dj-sora-data-validation-and-model-training">
-<h2>DJ-SORA Data Validation and Model Training<a class="headerlink" href="#dj-sora-data-validation-and-model-training" title="Link to this heading">¶</a></h2>
+<h3>DJ-SORA Data Validation and Model Training<a class="headerlink" href="#dj-sora-data-validation-and-model-training" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>[ ] Exploring and refining the collaborative development of multimodal data and model, establishing benchmarks and insights. <a class="reference external" href="https://arxiv.org/abs/2407.11784">paper</a></p></li>
 <li><p>[ ] [WIP] Integration of SORA-like model training pipelines</p>
@@ -309,13 +323,14 @@
 </ul>
 </section>
 </section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../quick-start.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="DatasetCfg.html" class="btn btn-neutral float-right" title="Dataset Configuration Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="BadDataExhibition.html" class="btn btn-neutral float-left" title="“Bad” Data Exhibition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DJ_service.html" class="btn btn-neutral float-right" title="DJ_service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

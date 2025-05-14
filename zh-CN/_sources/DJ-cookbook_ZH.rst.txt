@@ -17,7 +17,7 @@ DJ-Cookbook
 
   * `DJ概览 <index>`_
   * `快速上手 <#快速上手>`_
-  * `配置 <docs/RecipeGallery>`_
+  * `配置 <docs/RecipeGallery_ZH>`_
   * `数据格式转换 <tools/fmt_conversion/README_ZH>`_
 
 * 信息速查

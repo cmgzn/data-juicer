@@ -70,8 +70,7 @@
 <p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html">动机</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id2">路线图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_service_ZH.html">API服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide_ZH.html">开发者指南</a></li>
@@ -82,63 +81,60 @@
 <li class="toctree-l1"><a class="reference internal" href="docs/awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">data_juicer.ops</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.load_ops"><code class="docutils literal notranslate"><span class="pre">load_ops()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Filter"><code class="docutils literal notranslate"><span class="pre">Filter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Filter.__init__"><code class="docutils literal notranslate"><span class="pre">Filter.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Filter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">Filter.compute_stats_batched()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Filter.process_batched"><code class="docutils literal notranslate"><span class="pre">Filter.process_batched()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Filter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">Filter.compute_stats_single()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Filter.process_single"><code class="docutils literal notranslate"><span class="pre">Filter.process_single()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Filter.run"><code class="docutils literal notranslate"><span class="pre">Filter.run()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">data_juicer.ops</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.load_ops"><code class="docutils literal notranslate"><span class="pre">load_ops()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.Filter"><code class="docutils literal notranslate"><span class="pre">Filter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Filter.__init__"><code class="docutils literal notranslate"><span class="pre">Filter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Filter.compute_stats_batched"><code class="docutils literal notranslate"><span class="pre">Filter.compute_stats_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Filter.process_batched"><code class="docutils literal notranslate"><span class="pre">Filter.process_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Filter.compute_stats_single"><code class="docutils literal notranslate"><span class="pre">Filter.compute_stats_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Filter.process_single"><code class="docutils literal notranslate"><span class="pre">Filter.process_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Filter.run"><code class="docutils literal notranslate"><span class="pre">Filter.run()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Mapper"><code class="docutils literal notranslate"><span class="pre">Mapper</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Mapper.__init__"><code class="docutils literal notranslate"><span class="pre">Mapper.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Mapper.process_batched"><code class="docutils literal notranslate"><span class="pre">Mapper.process_batched()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Mapper.process_single"><code class="docutils literal notranslate"><span class="pre">Mapper.process_single()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Mapper.run"><code class="docutils literal notranslate"><span class="pre">Mapper.run()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.Mapper"><code class="docutils literal notranslate"><span class="pre">Mapper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Mapper.__init__"><code class="docutils literal notranslate"><span class="pre">Mapper.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Mapper.process_batched"><code class="docutils literal notranslate"><span class="pre">Mapper.process_batched()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Mapper.process_single"><code class="docutils literal notranslate"><span class="pre">Mapper.process_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Mapper.run"><code class="docutils literal notranslate"><span class="pre">Mapper.run()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Deduplicator"><code class="docutils literal notranslate"><span class="pre">Deduplicator</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Deduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">Deduplicator.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Deduplicator.compute_hash"><code class="docutils literal notranslate"><span class="pre">Deduplicator.compute_hash()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Deduplicator.process"><code class="docutils literal notranslate"><span class="pre">Deduplicator.process()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Deduplicator.run"><code class="docutils literal notranslate"><span class="pre">Deduplicator.run()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.Deduplicator"><code class="docutils literal notranslate"><span class="pre">Deduplicator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Deduplicator.__init__"><code class="docutils literal notranslate"><span class="pre">Deduplicator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Deduplicator.compute_hash"><code class="docutils literal notranslate"><span class="pre">Deduplicator.compute_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Deduplicator.process"><code class="docutils literal notranslate"><span class="pre">Deduplicator.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Deduplicator.run"><code class="docutils literal notranslate"><span class="pre">Deduplicator.run()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Selector"><code class="docutils literal notranslate"><span class="pre">Selector</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Selector.__init__"><code class="docutils literal notranslate"><span class="pre">Selector.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Selector.process"><code class="docutils literal notranslate"><span class="pre">Selector.process()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Selector.run"><code class="docutils literal notranslate"><span class="pre">Selector.run()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.Selector"><code class="docutils literal notranslate"><span class="pre">Selector</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Selector.__init__"><code class="docutils literal notranslate"><span class="pre">Selector.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Selector.process"><code class="docutils literal notranslate"><span class="pre">Selector.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Selector.run"><code class="docutils literal notranslate"><span class="pre">Selector.run()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Grouper"><code class="docutils literal notranslate"><span class="pre">Grouper</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Grouper.__init__"><code class="docutils literal notranslate"><span class="pre">Grouper.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Grouper.process"><code class="docutils literal notranslate"><span class="pre">Grouper.process()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Grouper.run"><code class="docutils literal notranslate"><span class="pre">Grouper.run()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.Grouper"><code class="docutils literal notranslate"><span class="pre">Grouper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Grouper.__init__"><code class="docutils literal notranslate"><span class="pre">Grouper.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Grouper.process"><code class="docutils literal notranslate"><span class="pre">Grouper.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Grouper.run"><code class="docutils literal notranslate"><span class="pre">Grouper.run()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Aggregator"><code class="docutils literal notranslate"><span class="pre">Aggregator</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Aggregator.__init__"><code class="docutils literal notranslate"><span class="pre">Aggregator.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Aggregator.process_single"><code class="docutils literal notranslate"><span class="pre">Aggregator.process_single()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.ops.Aggregator.run"><code class="docutils literal notranslate"><span class="pre">Aggregator.run()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.Aggregator"><code class="docutils literal notranslate"><span class="pre">Aggregator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Aggregator.__init__"><code class="docutils literal notranslate"><span class="pre">Aggregator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Aggregator.process_single"><code class="docutils literal notranslate"><span class="pre">Aggregator.process_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.Aggregator.run"><code class="docutils literal notranslate"><span class="pre">Aggregator.run()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html">data_juicer.ops.common</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.analysis.html">data_juicer.analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html">data_juicer.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html">data_juicer.format</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.format.html">data_juicer.format</a></li>
 </ul>
 
         </div>
@@ -155,7 +151,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index_ZH.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="api.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="api.html">&lt;no title&gt;</a></li>
       <li class="breadcrumb-item active">data_juicer.ops</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/data_juicer.ops.rst.txt" rel="nofollow"> View page source</a>

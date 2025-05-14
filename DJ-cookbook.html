@@ -18,7 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Awesome Data-Model Co-Development of MLLMs" href="docs/awesome_llm_data.html" />
+    <link rel="next" title="Installation" href="Installation.html" />
     <link rel="prev" title="Data Processing for and with Foundation Models" href="index.html" /> 
 </head>
 
@@ -64,31 +64,8 @@
               <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">DJ-Cookbook</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#curated-resources">Curated Resources</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#basics">Basics</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="docs/RecipeGallery.html">Data Recipe Gallery</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#lookup-materials">Lookup Materials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#advanced">Advanced</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/postprocess/README.html">Postprocess tools</a></li>
-<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox.html">Sandbox</a></li>
-<li class="toctree-l4"><a class="reference internal" href="docs/DJ_service.html">DJ_service</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README.html">Data Scoring</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/evaluator/README.html">Auto Evaluation Toolkit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="thirdparty/LLM_ecosystems/README.html">LLM Ecosystems</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#curated-resources">Curated Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#use-cases-data-recipes">Use Cases &amp; Data Recipes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#interactive-examples">Interactive Examples</a></li>
 </ul>
@@ -99,8 +76,7 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html">Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html#roadmap">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
@@ -112,7 +88,16 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.format.html">data_juicer.format</a></li>
 </ul>
 
         </div>
@@ -148,37 +133,26 @@
 <li><p><a class="reference internal" href="docs/awesome_llm_data.html"><span class="doc">Awesome LLM-Data</span></a></p></li>
 <li><p><a class="reference internal" href="docs/BadDataExhibition.html"><span class="doc">“Bad” Data Exhibition</span></a></p></li>
 </ul>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 <section id="coding-with-data-juicer-dj">
 <h2>Coding with Data-Juicer (DJ)<a class="headerlink" href="#coding-with-data-juicer-dj" title="Link to this heading">¶</a></h2>
-<section id="basics">
-<h3>Basics<a class="headerlink" href="#basics" title="Link to this heading">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
+<li><p>Basics</p>
+<ul>
 <li><p><a class="reference internal" href="index.html"><span class="doc">Overview of DJ</span></a></p></li>
 <li><p><a class="reference internal" href="quick-start.html"><span class="doc">Quick Start</span></a></p></li>
 <li><p><a class="reference internal" href="docs/RecipeGallery.html"><span class="doc">Configuration</span></a></p></li>
 <li><p><a class="reference internal" href="tools/fmt_conversion/README.html"><span class="doc">Data Format Conversion</span></a></p></li>
 </ul>
-<div class="toctree-wrapper compound">
-</div>
-</div></blockquote>
-</section>
-<section id="lookup-materials">
-<h3>Lookup Materials<a class="headerlink" href="#lookup-materials" title="Link to this heading">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
+</li>
+<li><p>Lookup Materials</p>
+<ul>
 <li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md">DJ OperatorZoo</a></p></li>
 <li><p><a class="reference internal" href="api.html"><span class="doc">API references</span></a></p></li>
 </ul>
-</div></blockquote>
-</section>
-<section id="advanced">
-<h3>Advanced<a class="headerlink" href="#advanced" title="Link to this heading">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
+</li>
+<li><p>Advanced</p>
+<ul>
 <li><p><a class="reference internal" href="docs/DeveloperGuide.html"><span class="doc">Developer Guide</span></a></p></li>
 <li><p><a class="reference internal" href="tools/preprocess/README.html"><span class="doc">Preprocess Tools</span></a></p></li>
 <li><p><a class="reference internal" href="tools/postprocess/README.html"><span class="doc">Postprocess Tools</span></a></p></li>
@@ -188,10 +162,8 @@
 <li><p><a class="reference internal" href="tools/evaluator/README.html"><span class="doc">Auto Evaluation</span></a></p></li>
 <li><p><a class="reference internal" href="thirdparty/LLM_ecosystems/README.html"><span class="doc">Third-parties Integration</span></a></p></li>
 </ul>
-</div></blockquote>
-<div class="toctree-wrapper compound">
-</div>
-</section>
+</li>
+</ul>
 </section>
 <section id="use-cases-data-recipes">
 <h2>Use Cases &amp; Data Recipes<a class="headerlink" href="#use-cases-data-recipes" title="Link to this heading">¶</a></h2>
@@ -259,7 +231,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Data Processing for and with Foundation Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="docs/awesome_llm_data.html" class="btn btn-neutral float-right" title="Awesome Data-Model Co-Development of MLLMs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

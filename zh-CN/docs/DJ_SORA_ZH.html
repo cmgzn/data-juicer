@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>动机 &mdash; data_juicer 1.3.3 documentation</title>
+  <title>DJ-SORA &mdash; data_juicer 1.3.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=4416e5ad" />
@@ -70,15 +70,18 @@
 <p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="BadDataExhibition_ZH.html">“坏”数据展览</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">动机</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#id2">路线图</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id3">概览</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">支持视频数据的高性能加载和处理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">基础算子（视频时空维度）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">进阶算子（细粒度模态间匹配及生成）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">进阶算子（视频内容）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dj-sora">DJ-SORA数据菜谱及数据集</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">DJ-SORA数据验证及模型训练</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DJ-SORA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">动机</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">路线图</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">概览</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">支持视频数据的高性能加载和处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">基础算子（视频时空维度）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">进阶算子（细粒度模态间匹配及生成）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">进阶算子（视频内容）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">DJ-SORA数据菜谱及数据集</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">DJ-SORA数据验证及模型训练</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="DJ_service_ZH.html">API服务化</a></li>
@@ -91,7 +94,16 @@
 <li class="toctree-l1"><a class="reference internal" href="awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_juicer.format.html">data_juicer.format</a></li>
 </ul>
 
         </div>
@@ -108,7 +120,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index_ZH.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">动机</li>
+      <li class="breadcrumb-item active">DJ-SORA</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/docs/DJ_SORA_ZH.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -118,14 +130,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p>中文 | <span class="xref myst">English Page</span></p>
+  <section id="dj-sora">
+<h1>DJ-SORA<a class="headerlink" href="#dj-sora" title="Link to this heading">¶</a></h1>
+<p>中文 | <span class="xref myst">English Page</span></p>
 <hr class="docutils" />
 <p>数据是SORA等前沿大模型的关键，如何高效科学地获取和处理数据面临新的挑战！DJ-SORA旨在创建一系列大规模高质量开源多模态数据集，助力开源社区数据理解和模型训练。</p>
 <p>DJ-SORA将基于Data-Juicer(包含上百个专用的视频、图像、音频、文本等多模态数据处理<a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md">算子</a>及工具)，形成一系列系统化可复用的多模态“数据菜谱”，用于分析、清洗及生成大规模高质量多模态数据。</p>
 <p>本项目正在积极更新和维护中，我们热切地邀请您参与，共同打造一个更开放、更高质的多模态数据生态系统，激发大模型无限潜能！</p>
 <p><img alt="Overview" src="https://img.alicdn.com/imgextra/i4/O1CN01XphcBN2ACXcS6S1JH_!!6000000008167-2-tps-2289-1620.png" /></p>
 <section id="id1">
-<h1>动机<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<h2>动机<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>SORA仅简略提及使用了DALLE-3来生成高质量caption，且模型输入数据有变化的时长、分辨率和宽高比。</p></li>
 <li><p>高质量大规模细粒度数据有助于稠密化数据点，帮助模型学好“文本 -&gt; spacetime token”的条件映射，解决text-2-video模型的一系列现有挑战：</p>
@@ -139,20 +153,20 @@
 </ul>
 </section>
 <section id="id2">
-<h1>路线图<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
+<h2>路线图<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <section id="id3">
-<h2>概览<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<h3>概览<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference internal" href="#id4">支持视频数据的高性能加载和处理</a></p></li>
-<li><p><a class="reference internal" href="#id5">基础算子（视频时空维度）</a></p></li>
-<li><p><a class="reference internal" href="#id6">进阶算子（细粒度模态间匹配及生成）</a></p></li>
-<li><p><a class="reference internal" href="#id7">进阶算子（视频内容）</a></p></li>
-<li><p><a class="reference internal" href="#DJ-SORA%E6%95%B0%E6%8D%AE%E8%8F%9C%E8%B0%B1%E5%8F%8A%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="xref myst">DJ-SORA数据菜谱及数据集</span></a></p></li>
-<li><p><a class="reference internal" href="#DJ-SORA%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81%E5%8F%8A%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="xref myst">DJ-SORA数据验证及模型训练</span></a></p></li>
+<li><p><a class="reference internal" href="##%E6%94%AF%E6%8C%81%E8%A7%86%E9%A2%91%E6%95%B0%E6%8D%AE%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%A4%84%E7%90%86"><span class="xref myst">支持视频数据的高性能加载和处理</span></a></p></li>
+<li><p><a class="reference internal" href="##%E5%9F%BA%E7%A1%80%E7%AE%97%E5%AD%90%E8%A7%86%E9%A2%91%E6%97%B6%E7%A9%BA%E7%BB%B4%E5%BA%A6"><span class="xref myst">基础算子（视频时空维度）</span></a></p></li>
+<li><p><a class="reference internal" href="##%E8%BF%9B%E9%98%B6%E7%AE%97%E5%AD%90%E7%BB%86%E7%B2%92%E5%BA%A6%E6%A8%A1%E6%80%81%E9%97%B4%E5%8C%B9%E9%85%8D%E5%8F%8A%E7%94%9F%E6%88%90"><span class="xref myst">进阶算子（细粒度模态间匹配及生成）</span></a></p></li>
+<li><p><a class="reference internal" href="##%E8%BF%9B%E9%98%B6%E7%AE%97%E5%AD%90%E8%A7%86%E9%A2%91%E5%86%85%E5%AE%B9"><span class="xref myst">进阶算子（视频内容）</span></a></p></li>
+<li><p><a class="reference internal" href="##DJ-SORA%E6%95%B0%E6%8D%AE%E8%8F%9C%E8%B0%B1%E5%8F%8A%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="xref myst">DJ-SORA数据菜谱及数据集</span></a></p></li>
+<li><p><a class="reference internal" href="##DJ-SORA%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81%E5%8F%8A%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="xref myst">DJ-SORA数据验证及模型训练</span></a></p></li>
 </ul>
 </section>
 <section id="id4">
-<h2>支持视频数据的高性能加载和处理<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<h3>支持视频数据的高性能加载和处理<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>[✅] 并行化数据加载存储：</p>
 <ul>
@@ -174,7 +188,7 @@
 </ul>
 </section>
 <section id="id5">
-<h2>基础算子（视频时空维度）<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<h3>基础算子（视频时空维度）<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>面向数据质量</p>
 <ul>
@@ -197,7 +211,7 @@
 </ul>
 </section>
 <section id="id6">
-<h2>进阶算子（细粒度模态间匹配及生成）<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<h3>进阶算子（细粒度模态间匹配及生成）<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>面向数据质量</p>
 <ul>
@@ -224,7 +238,7 @@
 </ul>
 </section>
 <section id="id7">
-<h2>进阶算子（视频内容）<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<h3>进阶算子（视频内容）<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>[✅] video_deduplicator （比较MD5哈希值在文件样本级别去重）</p></li>
 <li><p>[✅] video_aesthetic_filter（拆帧后，进行美学度打分过滤）</p></li>
@@ -252,8 +266,8 @@
 </li>
 </ul>
 </section>
-<section id="dj-sora">
-<h2>DJ-SORA数据菜谱及数据集<a class="headerlink" href="#dj-sora" title="Link to this heading">¶</a></h2>
+<section id="id8">
+<h3>DJ-SORA数据菜谱及数据集<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>支持代表性数据的统一加载和转换（other-data &lt;-&gt; dj-data），方便DJ算子处理及扩展数据集</p>
 <ul>
@@ -279,8 +293,8 @@
 </li>
 </ul>
 </section>
-<section id="id8">
-<h2>DJ-SORA数据验证及模型训练<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h3>DJ-SORA数据验证及模型训练<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>[✅]  探索及完善多模态数据和模型的协同开发，形成benchmark和insights: <a class="reference external" href="https://arxiv.org/abs/2407.11784">paper</a></p></li>
 <li><p>[] [WIP] 类SORA模型训练pipeline集成</p>
@@ -299,6 +313,7 @@
 </ul>
 </li>
 </ul>
+</section>
 </section>
 </section>
 

@@ -170,11 +170,19 @@ References
 
 .. toctree::
    :maxdepth: 2
-   :caption: tool
+   :caption: tools
    :glob:
    :hidden:
 
-   tool/*
+   tools/*
+
+.. toctree::
+   :maxdepth: 2
+   :caption: thirdparty
+   :glob:
+   :hidden:
+
+   thirdparty/*
 
 .. toctree::
    :maxdepth: 2

@@ -9,41 +9,24 @@ Curated Resources
 * `KDD-Tutorial <https://modelscope.github.io/data-juicer/_static/tutorial_kdd24.html>`_
 * :doc:`Awesome LLM-Data <docs/awesome_llm_data>`
 * :doc:`"Bad" Data Exhibition <docs/BadDataExhibition>`
-.. toctree::
-   :hidden:
-   :maxdepth: 3
-   :caption: Curated Resources
-
-   docs/awesome_llm_data
-   docs/BadDataExhibition
 
 Coding with Data-Juicer (DJ)
 ----------------------------
 
 
-Basics
-~~~~~~
+* Basics
 
   * :doc:`Overview of DJ <index>`
   * :doc:`Quick Start <quick-start>`
   * :doc:`Configuration <docs/RecipeGallery>`
   * :doc:`Data Format Conversion <tools/fmt_conversion/README>`
-  .. toctree::
-    :maxdepth: 2
-    :hidden:
-    :caption: Basics
 
-    docs/RecipeGallery
-    tools/fmt_conversion/README
-
-Lookup Materials
-~~~~~~~~~~~~~~~~
+* Lookup Materials
 
   * `DJ OperatorZoo <https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md>`_
   * :doc:`API references <api>`
 
-Advanced
-~~~~~~~~
+* Advanced
 
   * :doc:`Developer Guide <docs/DeveloperGuide>`
   * :doc:`Preprocess Tools <tools/preprocess/README>`
@@ -53,20 +36,6 @@ Advanced
   * :doc:`Data Scoring <tools/quality_classifier/README>`
   * :doc:`Auto Evaluation <tools/evaluator/README>`
   * :doc:`Third-parties Integration <thirdparty/LLM_ecosystems/README>`
-
-.. toctree::
-  :maxdepth: 1
-  :hidden:
-  :caption: Advanced
-
-  docs/DeveloperGuide
-  tools/preprocess/README
-  tools/postprocess/README
-  docs/Sandbox
-  docs/DJ_service
-  tools/quality_classifier/README
-  tools/evaluator/README
-  thirdparty/LLM_ecosystems/README
 
 Use Cases & Data Recipes
 ------------------------

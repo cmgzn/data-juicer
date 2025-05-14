@@ -69,8 +69,7 @@
 <p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html">动机</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id2">路线图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_service_ZH.html">API服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide_ZH.html">开发者指南</a></li>
@@ -81,67 +80,64 @@
 <li class="toctree-l1"><a class="reference internal" href="docs/awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html">data_juicer.ops.common</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.analysis.html">data_juicer.analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html">data_juicer.config</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">data_juicer.format</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.JsonFormatter"><code class="docutils literal notranslate"><span class="pre">JsonFormatter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.JsonFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">JsonFormatter.SUFFIXES</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.JsonFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">JsonFormatter.__init__()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">data_juicer.format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.format.JsonFormatter"><code class="docutils literal notranslate"><span class="pre">JsonFormatter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.JsonFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">JsonFormatter.SUFFIXES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.JsonFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">JsonFormatter.__init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.LocalFormatter"><code class="docutils literal notranslate"><span class="pre">LocalFormatter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.LocalFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">LocalFormatter.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.LocalFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">LocalFormatter.load_dataset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.format.LocalFormatter"><code class="docutils literal notranslate"><span class="pre">LocalFormatter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.LocalFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">LocalFormatter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.LocalFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">LocalFormatter.load_dataset()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.RemoteFormatter"><code class="docutils literal notranslate"><span class="pre">RemoteFormatter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.RemoteFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">RemoteFormatter.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.RemoteFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">RemoteFormatter.load_dataset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.format.RemoteFormatter"><code class="docutils literal notranslate"><span class="pre">RemoteFormatter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.RemoteFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">RemoteFormatter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.RemoteFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">RemoteFormatter.load_dataset()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.TextFormatter"><code class="docutils literal notranslate"><span class="pre">TextFormatter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.TextFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">TextFormatter.SUFFIXES</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.TextFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">TextFormatter.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.TextFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">TextFormatter.load_dataset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.format.TextFormatter"><code class="docutils literal notranslate"><span class="pre">TextFormatter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.TextFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">TextFormatter.SUFFIXES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.TextFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">TextFormatter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.TextFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">TextFormatter.load_dataset()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.ParquetFormatter"><code class="docutils literal notranslate"><span class="pre">ParquetFormatter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.ParquetFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">ParquetFormatter.SUFFIXES</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.ParquetFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">ParquetFormatter.__init__()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.format.ParquetFormatter"><code class="docutils literal notranslate"><span class="pre">ParquetFormatter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.ParquetFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">ParquetFormatter.SUFFIXES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.ParquetFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">ParquetFormatter.__init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.CsvFormatter"><code class="docutils literal notranslate"><span class="pre">CsvFormatter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.CsvFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">CsvFormatter.SUFFIXES</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.CsvFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">CsvFormatter.__init__()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.format.CsvFormatter"><code class="docutils literal notranslate"><span class="pre">CsvFormatter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.CsvFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">CsvFormatter.SUFFIXES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.CsvFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">CsvFormatter.__init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.TsvFormatter"><code class="docutils literal notranslate"><span class="pre">TsvFormatter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.TsvFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">TsvFormatter.SUFFIXES</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.TsvFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">TsvFormatter.__init__()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.format.TsvFormatter"><code class="docutils literal notranslate"><span class="pre">TsvFormatter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.TsvFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">TsvFormatter.SUFFIXES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.TsvFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">TsvFormatter.__init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.EmptyFormatter"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.EmptyFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter.SUFFIXES</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.EmptyFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.EmptyFormatter.null_value"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter.null_value</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.EmptyFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter.load_dataset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.format.EmptyFormatter"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.EmptyFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter.SUFFIXES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.EmptyFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.EmptyFormatter.null_value"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter.null_value</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.EmptyFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">EmptyFormatter.load_dataset()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter.SUFFIXES</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter.null_value"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter.null_value</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter.load_dataset()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter.SUFFIXES"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter.SUFFIXES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter.__init__"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter.null_value"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter.null_value</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_juicer.format.RayEmptyFormatter.load_dataset"><code class="docutils literal notranslate"><span class="pre">RayEmptyFormatter.load_dataset()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -162,7 +158,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index_ZH.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="api.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="api.html">&lt;no title&gt;</a></li>
       <li class="breadcrumb-item active">data_juicer.format</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/data_juicer.format.rst.txt" rel="nofollow"> View page source</a>

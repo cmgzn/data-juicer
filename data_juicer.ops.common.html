@@ -70,8 +70,7 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html">Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html#roadmap">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
@@ -83,30 +82,27 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">data_juicer.ops.common</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.common.get_sentences_from_document"><code class="docutils literal notranslate"><span class="pre">get_sentences_from_document()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.common.get_words_from_document"><code class="docutils literal notranslate"><span class="pre">get_words_from_document()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.common.merge_on_whitespace_tab_newline"><code class="docutils literal notranslate"><span class="pre">merge_on_whitespace_tab_newline()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.common.split_on_newline_tab_whitespace"><code class="docutils literal notranslate"><span class="pre">split_on_newline_tab_whitespace()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.common.split_on_whitespace"><code class="docutils literal notranslate"><span class="pre">split_on_whitespace()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.common.strip"><code class="docutils literal notranslate"><span class="pre">strip()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.common.words_augmentation"><code class="docutils literal notranslate"><span class="pre">words_augmentation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.common.words_refinement"><code class="docutils literal notranslate"><span class="pre">words_refinement()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data_juicer.ops.common.split_text_by_punctuation"><code class="docutils literal notranslate"><span class="pre">split_text_by_punctuation()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">data_juicer.ops.common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.common.get_sentences_from_document"><code class="docutils literal notranslate"><span class="pre">get_sentences_from_document()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.common.get_words_from_document"><code class="docutils literal notranslate"><span class="pre">get_words_from_document()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.common.merge_on_whitespace_tab_newline"><code class="docutils literal notranslate"><span class="pre">merge_on_whitespace_tab_newline()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.common.split_on_newline_tab_whitespace"><code class="docutils literal notranslate"><span class="pre">split_on_newline_tab_whitespace()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.common.split_on_whitespace"><code class="docutils literal notranslate"><span class="pre">split_on_whitespace()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.common.strip"><code class="docutils literal notranslate"><span class="pre">strip()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.common.words_augmentation"><code class="docutils literal notranslate"><span class="pre">words_augmentation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.common.words_refinement"><code class="docutils literal notranslate"><span class="pre">words_refinement()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_juicer.ops.common.split_text_by_punctuation"><code class="docutils literal notranslate"><span class="pre">split_text_by_punctuation()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.analysis.html">data_juicer.analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html">data_juicer.config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.format.html">data_juicer.format</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_juicer.format.html">data_juicer.format</a></li>
 </ul>
 
         </div>
@@ -123,7 +119,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="api.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="api.html">&lt;no title&gt;</a></li>
       <li class="breadcrumb-item active">data_juicer.ops.common</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/data_juicer.ops.common.rst.txt" rel="nofollow"> View page source</a>
