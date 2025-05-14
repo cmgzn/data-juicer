@@ -175,7 +175,15 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
    :glob:
    :hidden:
 
-   tool/*
+   tools/*
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 第三方
+   :glob:
+   :hidden:
+
+   thirdparty/*
 
 .. toctree::
    :maxdepth: 2
