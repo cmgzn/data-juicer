@@ -1,5 +1,9 @@
 #!/bin/bash
 sphinx-apidoc -f -o source ../../data_juicer -t _templates
-make gettext
 python ./create_symlinks.py
-make clean html
+make clean
+languages=("en" "zh_CN")
+
+for lang in "${languages[@]}"; do
+    sphinx-build -D language=$lang -b html . build/html/$lang
+done

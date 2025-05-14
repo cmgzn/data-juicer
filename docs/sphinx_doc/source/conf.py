@@ -73,7 +73,7 @@ gettext_compact = False     # optional.
 supported_languages = {
     'en': 'English',
     'zh_CN': '简体中文',
-    'ja': '日本語',
+    # 'ja': '日本語',
 }
 html_context = {
     'supported_languages': supported_languages,
@@ -104,21 +104,31 @@ def skip(app, what, name, obj, would_skip, options):
         return False
     return would_skip
 
-def process_operators(app, docname, source):
-    operators_url = "https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md"
+def process_doc_links(app, docname, source):
+    repo_base_url = 'https://github.com/modelscope/data-juicer/blob/main/'
     
     import re
+    import os
     
-    def replace_operators_link(match):
+    def link_replacer(match):
         link_text = match.group(1)
-        return f'[{link_text}]({operators_url})'
-
-    pattern = r'\[([^\]]+)\]\([^)]*Operators\.md\)'
-    source[0] = re.sub(pattern, replace_operators_link, source[0])
+        relative_path = match.group(2)
+        
+        current_doc_dir = os.path.dirname(docname)
+        
+        absolute_path = os.path.normpath(os.path.join(current_doc_dir, relative_path))
+        
+        full_github_link = f'{repo_base_url}{absolute_path}'
+        
+        return f'[{link_text}]({full_github_link})'
+    
+    pattern = r'\[([^\]]+)\]\(([^)]*(?:.py|Operators.md|.ipynb))\)'
+    source[0] = re.sub(pattern, link_replacer, source[0])
+    
     return source[0]
 
 def process_read(app, docname, source):
-    source[0] = process_operators(app, docname, source)
+    source[0] = process_doc_links(app, docname, source)
     source[0] = source[0].replace('.md]', '.html]')
     # auto_translate(app, docname, source)
 
