@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redpajama 配置文件 &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="../../_static/documentation_options.js?v=6b324692"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+        
+            <option value="../../..//configs/reproduced_redpajama/README.html" 
+                    >
+                English
+            </option>
+        
+            <option value="../../../zh-CN/configs/reproduced_redpajama/README.html" 
+                    selected>
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index_ZH.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">使用手册</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../DJ-cookbook_ZH.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation_ZH.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quick-start_ZH.html">快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ZH.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index_ZH.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Redpajama 配置文件</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/configs/reproduced_redpajama/README_ZH.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="redpajama">
+<h1>Redpajama 配置文件<a class="headerlink" href="#redpajama" title="Link to this heading">¶</a></h1>
+<p>此文件夹包含的配置文件用于轻松复现 <a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep">Redpajama</a> 的处理流程。</p>
+<section id="arxiv">
+<h2>arXiv<a class="headerlink" href="#arxiv" title="Link to this heading">¶</a></h2>
+<p>原始数据文件从 <a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/arxiv">Redpajama/arXiv</a> 中相同的 AWS 链接下载。</p>
+<p>下载完成后，使用 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/preprocess/raw_arxiv_to_jsonl.py">raw_arxiv_to_jsonl.py</a> 将原始格式转换为 Data-Juicer 易于处理的格式：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_arxiv_to_jsonl.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--arxiv_src_dir<span class="w">       </span>&lt;arxiv_src_dir&gt;<span class="w">    </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">          </span>&lt;target_dir&gt;<span class="w">       </span><span class="se">\</span>
+<span class="w">    </span>--temp_dir<span class="w">            </span>&lt;temp_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">            </span>&lt;num_proc&gt;
+</pre></div>
+</div>
+<p>预处理完成后，修改 <a class="reference internal" href="#redpajama-arxiv.yaml"><span class="xref myst">redpajama-arxiv.yaml</span></a> 中的数据路径，执行以下命令复现 RedPajama 的处理流程：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>configs/reproduced_redpajama/redpajama-arxiv.yaml
+</pre></div>
+</div>
+<section id="id1">
+<h3>指标对比<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p>样本数</p></th>
+<th class="head text-center"><p>令牌数</p></th>
+<th class="head text-center"><p>峰值内存</p></th>
+<th class="head"><p>运行时间</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>redpajama</p></td>
+<td class="text-center"><p>1,724,497</p></td>
+<td class="text-center"><p>30,667,506,934</p></td>
+<td class="text-center"><p>35GB</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">total:</span> <span class="pre">11h52min</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Data-Juicer</p></td>
+<td class="text-center"><p>2,675,426</p></td>
+<td class="text-center"><p>30,338,153,178</p></td>
+<td class="text-center"><p>21GB</p></td>
+<td><p>preprocess: 5h21min<br>read+unify: 25min<br>remove_header_mapper: 5min<br>remove_comments_mapper: 3min<br> remove_bibliography_mapper: 4min<br>expand_macro_mapper: 5min19s<br>text_length_filter: 4min<br>export: 43min<br><code class="docutils literal notranslate"><span class="pre">total:</span> <span class="pre">6h53min</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="books">
+<h2>Books<a class="headerlink" href="#books" title="Link to this heading">¶</a></h2>
+<p>原始数据文件从 <a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/book">Redpajama/Books</a> 中相同的 HuggingFace 链接下载。</p>
+<p>下载完成后，修改 <a class="reference internal" href="#redpajama-books.yaml"><span class="xref myst">redpajama-books.yaml</span></a> 中的数据路径，执行以下命令复现 RedPajama 的处理流程：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>configs/reproduced_redpajama/redpajama-books.yaml
+</pre></div>
+</div>
+<section id="id2">
+<h3>指标对比<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p>样本数</p></th>
+<th class="head text-center"><p>令牌数</p></th>
+<th class="head text-center"><p>峰值内存</p></th>
+<th class="head"><p>运行时间</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>redpajama</p></td>
+<td class="text-center"><p>205,183</p></td>
+<td class="text-center"><p>25,962,395,123</p></td>
+<td class="text-center"><p>450GB</p></td>
+<td><p>split_for_dedup: 5min<br>dedup: 117min<br> <code class="docutils literal notranslate"><span class="pre">total:</span> <span class="pre">122min</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Data-Juicer</p></td>
+<td class="text-center"><p>207,902</p></td>
+<td class="text-center"><p>26,108,635,683</p></td>
+<td class="text-center"><p>96GB</p></td>
+<td><p>read+unify: 20min<br>compute_hash: 78min<br>dedup: 3min<br>export: 3min<br><code class="docutils literal notranslate"><span class="pre">total:</span> <span class="pre">114min</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="code">
+<h2>Code<a class="headerlink" href="#code" title="Link to this heading">¶</a></h2>
+<p>原始数据文件从 <a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/github">Redpajama/Code</a> 中相同的 Google BigQuery 获取。</p>
+<p>下载完成后，解压缩并删除扩展名不在以下白名单中的其他文件：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.asm, .bat, .cmd, .c, .h, .cs, .cpp, .hpp, .c++, .h++, .cc, .hh, .C, .H, .cmake, .css, .dockerfile, .f90, .f, .f03, .f08, .f77, .f95, .for, .fpp, .go, .hs, .html, .java, .js, .jl, .lua, .md, .markdown, .php, .php3, .php4, .php5, .phps, .phpt, .pl, .pm, .pod, .perl,  ps1, .psd1, .psm1, .py, .rb, .rs, .sql, .scala, .sh, .bash, .command, .zsh, .ts, .tsx, .tex, .vb, Dockerfile, Makefile, .xml, .rst, .m, .smali
+</pre></div>
+</div>
+<p>修改 <a class="reference internal" href="#redpajama-code.yaml"><span class="xref myst">redpajama-code.yaml</span></a> 中的数据路径，执行以下命令复现 redpajama 的处理流程：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>configs/redpajama/redpajama-code.yaml
+</pre></div>
+</div>
+<section id="id3">
+<h3>指标对比<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p>样本数</p></th>
+<th class="head text-center"><p>令牌数</p></th>
+<th class="head text-center"><p>峰值内存</p></th>
+<th class="head"><p>运行时间</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>redpajama</p></td>
+<td class="text-center"><p>73,208,524</p></td>
+<td class="text-center"><p>150,390,270,060</p></td>
+<td class="text-center"><p>212GB</p></td>
+<td><p>local-dedup: 37h<br>global-dedup: 1h<br>merge-dedup: 6h<br>filter: 17h<br><code class="docutils literal notranslate"><span class="pre">total:</span> <span class="pre">61h</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Data-Juicer</p></td>
+<td class="text-center"><p>73,169,889</p></td>
+<td class="text-center"><p>150,310,903,230</p></td>
+<td class="text-center"><p>370GB</p></td>
+<td><p>preprocess: 5h21min<br>read+unify: 12h<br>document_deduplicator: 20h<br>clean_copyright_mappe:  3h<br>maximum_line_length_filter: 2.5h<br>average_line_length_filter: 2h<br>alphanumeric_filter: 13h<br>export: 2.5h<br><code class="docutils literal notranslate"><span class="pre">total:</span> <span class="pre">59h</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stackexchange">
+<h2>StackExchange<a class="headerlink" href="#stackexchange" title="Link to this heading">¶</a></h2>
+<p>原始数据文件从 <a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/stack_exchange">Redpajama/Stack_exchange</a> 中相同的 Archive 链接获取。</p>
+<p>下载完成后，使用 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/preprocess/raw_stackexchange_to_jsonl.py">raw_stackexchange_to_jsonl.py</a> 将原始格式转换为 Data-Juicer 易于处理的格式：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_arxiv_stackexchange_to_jsonl.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">       </span>&lt;src_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">    </span>&lt;target_dir&gt;<span class="w">   </span><span class="se">\</span>
+<span class="w">    </span>--topk<span class="w">          </span>&lt;topk&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">      </span>&lt;num_proc&gt;<span class="w">     </span><span class="se">\</span>
+</pre></div>
+</div>
+<p>预处理完成后，修改 <a class="reference internal" href="#redpajama-stackexchange.yaml"><span class="xref myst">redpajama-stackexchange.yaml</span></a> 中的数据路径，执行以下命令复现 redpajama 的处理流程：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>configs/redpajama/redpajama-stackexchange.yaml
+</pre></div>
+</div>
+<section id="id4">
+<h3>指标对比<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p>样本数</p></th>
+<th class="head text-center"><p>令牌数</p></th>
+<th class="head text-center"><p>峰值内存</p></th>
+<th class="head"><p>运行时间</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>redpajama</p></td>
+<td class="text-center"><p>29,825,086</p></td>
+<td class="text-center"><p>20,502,757,123</p></td>
+<td class="text-center"><p>&gt;500GB</p></td>
+<td><p>filter: 170min<br>postprocess: 90min<br><code class="docutils literal notranslate"><span class="pre">total:</span> <span class="pre">260min</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Data-Juicer</p></td>
+<td class="text-center"><p>29,825,086</p></td>
+<td class="text-center"><p>20,628,082,262</p></td>
+<td class="text-center"><p>100GB</p></td>
+<td><p>preprocess: 210min<br>read+unify: 86min<br>clean_html: 15min<br>language_id_score_filter: 18min<br><code class="docutils literal notranslate"><span class="pre">total:</span> <span class="pre">391min</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

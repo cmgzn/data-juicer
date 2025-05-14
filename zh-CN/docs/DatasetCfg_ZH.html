@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数据集配置指南 &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="../_static/documentation_options.js?v=6b324692"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+        
+            <option value="../..//docs/DatasetCfg.html" 
+                    >
+                English
+            </option>
+        
+            <option value="../../zh-CN/docs/DatasetCfg.html" 
+                    selected>
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index_ZH.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">使用手册</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DJ-cookbook_ZH.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation_ZH.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick-start_ZH.html">快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index_ZH.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index_ZH.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">数据集配置指南</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/docs/DatasetCfg_ZH.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>数据集配置指南<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>本指南概述了如何在 Data-Juicer 框架中使用 YAML 格式配置数据集。允许您指定本地和远程数据集以及数据验证规则。</p>
+<section id="id2">
+<h2>支持的数据集格式<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>本地数据集<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">local_json.yaml</span></code> 配置文件用于指定以 JSON 格式本地存储的数据集。<em>path</em> 是必需的，用于指定本地数据集路径，可以是单个文件或目录。<em>format</em> 是可选的，用于指定数据集格式。
+对于本地文件，DJ 将自动检测文件格式并相应地加载数据集。支持 parquet、jsonl、json、csv、tsv、txt 和 jsonl.gz 等格式
+有关更多详细信息，请参阅 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/configs/datasets/local_json.yaml">local_json.yaml</a>。</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset</span><span class="p">:</span>
+<span class="nt">configs</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/your/local/dataset.json</span>
+<span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">json</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset</span><span class="p">:</span>
+<span class="nt">configs</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/your/local/dataset.parquet</span>
+<span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parquet</span>
+</pre></div>
+</div>
+</section>
+<section id="remote-huggingface">
+<h3>Remote Huggingface 数据集<a class="headerlink" href="#remote-huggingface" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">remote_huggingface.yaml</span></code> 配置文件用于指定 huggingface 数据集。<em>type</em> 和 <em>source</em> 固定为 ‘remote’ 和 ‘huggingface’，以定位 huggingface 加载逻辑。<em>path</em> 是必需的，用于标识 huggingface 数据集。<em>name</em>、<em>split</em> 和 <em>limit</em> 是可选的，用于指定数据集名称/拆分并限制要加载的样本数量。
+更多详细信息请参阅 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/configs/datasets/remote_huggingface.yaml">remote_huggingface.yaml</a>。</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset</span><span class="p">:</span>
+<span class="nt">configs</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;remote&#39;</span>
+<span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;huggingface&#39;</span>
+<span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;HuggingFaceFW/fineweb&quot;</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CC-MAIN-2024-10&quot;</span>
+<span class="nt">split</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;train&quot;</span>
+<span class="nt">limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</pre></div>
+</div>
+</section>
+<section id="arxiv">
+<h3>远程 Arxiv 数据集<a class="headerlink" href="#arxiv" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">remote_arxiv.yaml</span></code> 配置文件用于指定以 JSON 格式远程存储的数据集。<em>type</em> 和 <em>source</em> 固定为 ‘remote’ 和 ‘arxiv’，以定位 arxiv 加载逻辑。 <em>lang</em>、<em>dump_date</em>、<em>force_download</em> 和 <em>url_limit</em> 是可选的，用于指定数据集语言、转储日期、强制下载和 URL 限制。
+有关更多详细信息，请参阅 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/configs/datasets/remote_arxiv.yaml">remote_arxiv.yaml</a>。</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset</span><span class="p">:</span>
+<span class="nt">configs</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;remote&#39;</span>
+<span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;arxiv&#39;</span>
+<span class="nt">lang</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;en&#39;</span>
+<span class="nt">dump_date</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;latest&#39;</span>
+<span class="nt">force_download</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">url_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>其他支持的数据集格式<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>有关更多详细信息和支持的数据集格式，请参阅 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/https:/github.com/modelscope/data-juicer/blob/main/data_juicer/core/data/load_strategy.py">load_strategy.py</a>。</p>
+</section>
+</section>
+<section id="id5">
+<h2>其他功能<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>数据混合<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">mixture.yaml</span></code> 配置文件演示了如何指定数据混合规则。DJ 将通过对数据集的一部分进行采样并应用适当的权重来混合数据集。
+有关更多详细信息，请参阅 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/configs/datasets/mixture.yaml">mixture.yaml</a>。</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset</span><span class="p">:</span>
+<span class="nt">max_sample_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10000</span>
+<span class="nt">configs</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;local&#39;</span>
+<span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;path/to/json/file&#39;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;local&#39;</span>
+<span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;path/to/csv/file&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>数据验证<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">validator.yaml</span></code> 配置文件演示了如何指定数据验证规则。DJ 将通过对数据集的一部分进行采样并应用验证规则来验证数据集。
+有关更多详细信息和支持的验证器，请参阅 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/https:/github.com/modelscope/data-juicer/blob/main/data_juicer/core/data/data_validator.py">data_validator.py</a>。</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset</span><span class="p">:</span>
+<span class="nt">configs</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">path/to/data.json</span>
+
+<span class="nt">validators</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">swift_messages</span>
+<span class="nt">min_turns</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">max_turns</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="nt">sample_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">required_fields</span>
+<span class="nt">required_fields</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;text&quot;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;metadata&quot;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;language&quot;</span>
+<span class="nt">field_types</span><span class="p">:</span>
+<span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
+<span class="nt">metadata</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;dict&quot;</span>
+<span class="nt">language</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;str&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="dataset-path">
+<h3>旧版 dataset_path 配置<a class="headerlink" href="#dataset-path" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">dataset_path</span></code> 配置是指定数据集路径的历史版本方式。它简单易用，但缺乏灵活性。它可以在 yaml 或命令行输入中使用。一些示例：</p>
+<p>命令行输入：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 命令行输入</span>
+dj-process<span class="w"> </span>--dataset_path<span class="w"> </span>path/to/your/dataset.json
+
+<span class="c1"># 带权重的命令行输入</span>
+dj-process<span class="w"> </span>--dataset_path<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>path/to/your/dataset1.json<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>path/to/your/dataset2.json
+</pre></div>
+</div>
+<p>Yaml 输入：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">dataset_path：path/to/your/dataset.json</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

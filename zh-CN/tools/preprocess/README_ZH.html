@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>预处理工具 &mdash; data_juicer 1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=4416e5ad" />
+
+  
+      <script src="../../_static/documentation_options.js?v=6b324692"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+ 
+
+<div class="language-selector">
+    <select onchange="window.location.href=this.value;">
+        
+        
+            <option value="../../..//tools/preprocess/README.html" 
+                    >
+                English
+            </option>
+        
+            <option value="../../../zh-CN/tools/preprocess/README.html" 
+                    selected>
+                简体中文
+            </option>
+        
+    </select>
+</div>
+
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index_ZH.html" class="icon icon-home">
+            data_juicer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">使用手册</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../DJ-cookbook_ZH.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation_ZH.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quick-start_ZH.html">快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index_ZH.html">data_juicer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index_ZH.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">预处理工具</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tools/preprocess/README_ZH.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>预处理工具<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>此文件夹包含一些预处理脚本，用于在使用 Data-Juicer 之前对数据集进行处理。</p>
+<section id="id2">
+<h2>用法<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>按语言将数据集拆分为子数据集<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>该工具将根据语言信息将原始数据集拆分为不同的子数据集。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/dataset_split_by_language.py<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">             </span>&lt;src_dir&gt;<span class="w">          </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">          </span>&lt;target_dir&gt;<span class="w">       </span><span class="se">\</span>
+<span class="w">    </span>--suffixes<span class="w">            </span>&lt;suffixes&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--text_key<span class="w">            </span>&lt;text_key&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">            </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/dataset_split_by_language.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 将此参数设置为存储数据集的路径即可。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_key</span></code>: 存储示例文本的字段的 key，默认为 text。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffixes</span></code>: 待读取文件的后缀名，默认为 None。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+</section>
+<section id="arxiv-jsonl">
+<h3>将原始 arXiv 数据转换为 jsonl<a class="headerlink" href="#arxiv-jsonl" title="Link to this heading">¶</a></h3>
+<p>该工具用于将从 S3 下载的原始 arXiv 数据转换为对 Data-Juicer 友好的 jsonl 格式。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_arxiv_to_jsonl.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--arxiv_src_dir<span class="w">       </span>&lt;arxiv_src_dir&gt;<span class="w">    </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">          </span>&lt;target_dir&gt;<span class="w">       </span><span class="se">\</span>
+<span class="w">    </span>--temp_dir<span class="w">            </span>&lt;temp_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">            </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/raw_arxiv_to_jsonl.py<span class="w">  </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arxiv_src_dir</span></code>: 如果你像 Redpajama 一样下载原始 arXiv 数据，你将得到一个目录 src，其中包含数千个 tar 文件，其文件名类似于 <code class="docutils literal notranslate"><span class="pre">arXiv_src_yymm_xxx.tar</span></code>。 您只需将此参数设置为该目录的路径即可。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temp_dir</span></code>: 用于存储临时文件的目录，该目录将在转化结束时自动被删除，默认为 <code class="docutils literal notranslate"><span class="pre">./tmp</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+<p><strong>注意事项：</strong></p>
+<ul class="simple">
+<li><p>下载过程请参考<a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/arxiv">这里</a>。</p></li>
+<li><p>在下载、转换或处理之前，您需要确保您的硬盘空间足够大，可以存储原始数据（超过 3TB）、转换后的数据（超过 3TB）、最小处理后的数据（大约 500-600GB），以及处理期间的缓存数据。</p></li>
+</ul>
+</section>
+<section id="stack-exchange-jsonl">
+<h3>将原始 stack_exchange 数据转换为 jsonl<a class="headerlink" href="#stack-exchange-jsonl" title="Link to this heading">¶</a></h3>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">raw_stackexchange_to_jsonl.py</span></code> 来转化原始 stack_exchange 数据.</p>
+<p>该工具用于将从 <a class="reference external" href="https://archive.org/download/stackexchange">Archive</a> 下载的原始 Stack Exchange 数据转化为多个 jsonl 文件.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_arxiv_stackexchange_to_jsonl.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">       </span>&lt;src_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">    </span>&lt;target_dir&gt;<span class="w">   </span><span class="se">\</span>
+<span class="w">    </span>--topk<span class="w">          </span>&lt;topk&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">      </span>&lt;num_proc&gt;<span class="w">     </span><span class="se">\</span>
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/raw_stackexchange_to_jsonl.py<span class="w">  </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 如果像 Redpajama 一样下载原始 Stack Exchange 数据，你将得到一个目录 src，其中包含数百个 7z 文件，其文件名类似于 <code class="docutils literal notranslate"><span class="pre">*.*.com.7z</span></code>。 您需要解压这些文件并将 POSTs.xml 重命名为相应的压缩包名称并将其放在该目录中。更多详情请参考<a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/stack_exchange">这里</a>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topk</span></code> (可选): 选择内容最多的 k 个站点，默认为 28.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+<p><strong>注意事项：</strong> 在下载、转换或处理之前，您需要确保您的硬盘空间足够大，可以存储原始数据（超过 100GB）、转换后的数据（超过 100GB）</p>
+</section>
+<section id="alpaca-cot-jsonl">
+<h3>将原始 Alpaca-CoT 数据转换为 jsonl<a class="headerlink" href="#alpaca-cot-jsonl" title="Link to this heading">¶</a></h3>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">raw_alpaca_cot_merge_add_meta.py</span></code> 来转化原始 Alpaca-CoT 数据.</p>
+<p>该工具用于将从 <a class="reference external" href="https://huggingface.co/datasets/QingyiSi/Alpaca-CoT">HuggingFace</a> 下载的原始 Alpaca-Cot 数据转化为 jsonl 文件.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_alpaca_cot_merge_add_meta.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">       </span>&lt;src_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">    </span>&lt;target_dir&gt;<span class="w">   </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">      </span>&lt;num_proc&gt;<span class="w">     </span><span class="se">\</span>
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/raw_alpaca_cot_merge_add_meta.py<span class="w">  </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 将此参数设置为存储Alpaca-CoT数据集的路径。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+</section>
+<section id="csv-tsv">
+<h3>重新格式化 csv 或者 tsv 文件<a class="headerlink" href="#csv-tsv" title="Link to this heading">¶</a></h3>
+<p>此工具用于将某些字段中可能具有 NaN 值的 csv 或 tsv 文件格式化为多个 jsonl 文件。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/reformat_csv_nan_value.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--suffixes<span class="w">          </span>&lt;suffixes&gt;<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--is_tsv<span class="w">            </span>&lt;is_tsv&gt;<span class="w">          </span><span class="se">\</span>
+<span class="w">    </span>--keep_default_na<span class="w">   </span>&lt;keep_default_na&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/reformat_csv_nan_value.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 将此参数设置为存储数据集的路径，例如 <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> 或 <code class="docutils literal notranslate"><span class="pre">*.tsv</span></code> 即可。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffixes</span></code>: 待读取文件的后缀名，可指定多个，例如 <code class="docutils literal notranslate"><span class="pre">--suffixes</span> <span class="pre">'.tsv',</span> <span class="pre">'.csv'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_tsv</span></code>: 如果为 true，则分隔符将设置为 <code class="docutils literal notranslate"><span class="pre">\t</span></code>，否则默认设置为 <code class="docutils literal notranslate"><span class="pre">,</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keep_default_na</span></code>: 如果为 False，字符串将被解析为 NaN，否则仅使用默认的 NaN 值进行解析。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+</section>
+<section id="jsonl">
+<h3>重新格式化 jsonl 文件<a class="headerlink" href="#jsonl" title="Link to this heading">¶</a></h3>
+<p>该工具用于重新格式化某些字段中可能包含 Nan 值的 jsonl 文件。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/reformat_jsonl_nan_value.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/reformat_jsonl_nan_value.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 将此参数设置为存储数据集的路径，例如 <code class="docutils literal notranslate"><span class="pre">*.jsonl</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>序列化 jsonl 文件中的元字段<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>在一些jsonl文件中，不同的样本可能有不同的meta字段，甚至同一个meta字段中的数据类型也可能不同，这会导致使用 <a class="reference external" href="https://huggingface.co/docs/datasets/index">HuggingFace Dataset</a> 读取数据集失败。 该工具用于将这些jsonl文件中除 <code class="docutils literal notranslate"><span class="pre">text_key</span></code> 之外的所有元字段序列化为字符串，以方便后续的Data-juicer处理。 数据集处理后，通常需要配合使用 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/postprocess/deserialize_meta.py">deserialize_meta.py</a> 对其进行反序列化。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/serialize_meta.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--text_key<span class="w">          </span>&lt;text_key&gt;<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--serialized_key<span class="w">    </span>&lt;serialized_key&gt;<span class="w">  </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/serialize_meta.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 存储原始 jsonl 文件的路径。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 保存转换后的 jsonl 文件的路径。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_key</span></code>: 不会被序列化的字段对应的 key, 默认为 “text”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serialized_key</span></code>: 序列化后的信息保存的字段对应的 key, 默认为 “source_info”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Data-Juicer Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
