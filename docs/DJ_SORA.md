@@ -48,7 +48,7 @@ This project is being actively updated and maintained. We eagerly invite you to 
 - Towards Data Quality
   - [✅] video_resolution_filter (targeted resolution)
   - [✅] video_aspect_ratio_filter (targeted aspect ratio)
-  - [✅] video_duration_filter (targeted) duration)
+  - [✅] video_duration_filter (targeted duration)
   - [✅] video_motion_score_filter (video continuity dimension, calculating optical flow and removing statistics and extreme dynamics)
   - [✅] video_ocr_area_ratio_filter (remove samples with text areas that are too large)
 - Towards Data Diversity & Quantity

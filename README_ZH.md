@@ -141,7 +141,7 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
   - [预处理工具](tools/preprocess/README_ZH.md)
   - [后处理工具](tools/postprocess/README_ZH.md)
   - [沙盒](docs/Sandbox-ZH.md)
-  - [API服务化](docs/DJ_service_ZH.md))
+  - [API服务化](docs/DJ_service_ZH.md)
   - [给数据打分](tools/quality_classifier/README_ZH.md)
   - [自动评估](tools/evaluator/README_ZH.md)
   - [第三方集成](thirdparty/LLM_ecosystems/README_ZH.md)
