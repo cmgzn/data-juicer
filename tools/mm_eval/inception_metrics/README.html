@@ -34,7 +34,7 @@
         
         
             <option value="../../../tools/mm_eval/inception_metrics/README.html" 
-                    >
+                    selected>
                 English
             </option>
         
@@ -117,18 +117,15 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_SORA.html">DJ-SORA</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../docs/DJ_SORA.html#motivation">Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../docs/DJ_SORA.html#roadmap">Roadmap</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../docs/DJ_SORA.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../docs/DJ_SORA.html#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../docs/DJ_SORA.html#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../docs/DJ_SORA.html#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../docs/DJ_SORA.html#advanced-operators-video-content">Advanced Operators (Video Content)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../docs/DJ_SORA.html#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../docs/DJ_SORA.html#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_SORA.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_SORA.html#roadmap">Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/DJ_SORA.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/DJ_SORA.html#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/DJ_SORA.html#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/DJ_SORA.html#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/DJ_SORA.html#advanced-operators-video-content">Advanced Operators (Video Content)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/DJ_SORA.html#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/DJ_SORA.html#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_service.html">DJ_service</a><ul>
@@ -1645,35 +1642,35 @@ python<span class="w"> </span>tools/video_metrics/calc_metrics_for_dataset.py<sp
 <h2>Introduction of Metrics<a class="headerlink" href="#introduction-of-metrics" title="Link to this heading">¶</a></h2>
 <section id="fvd">
 <h3>FVD<a class="headerlink" href="#fvd" title="Link to this heading">¶</a></h3>
-<p>The Frechet Video Distance (FVD)<sup><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/#reference">1</a></sup> measures the distance of distribution of video features from real dataset and fake dataset, extracted by a video classifier. The video classifier is an I3D model, trained on Kinetics-400, containing 400 human action classes.</p>
+<p>The Frechet Video Distance (FVD)<sup><a class="reference internal" href="#reference"><span class="xref myst">1</span></a></sup> measures the distance of distribution of video features from real dataset and fake dataset, extracted by a video classifier. The video classifier is an I3D model, trained on Kinetics-400, containing 400 human action classes.</p>
 </section>
 <section id="kvd">
 <h3>KVD<a class="headerlink" href="#kvd" title="Link to this heading">¶</a></h3>
-<p>The Kernel Video Distance (KVD) is the video version of Frechet Inception Distance (FID)<sup><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/#reference">3</a></sup>, which extract features from videos by an I3D model, trained on Kinetics-400, containing 400 human action classes.</p>
+<p>The Kernel Video Distance (KVD) is the video version of Frechet Inception Distance (FID)<sup><a class="reference internal" href="#reference"><span class="xref myst">3</span></a></sup>, which extract features from videos by an I3D model, trained on Kinetics-400, containing 400 human action classes.</p>
 </section>
 <section id="isv">
 <h3>ISV<a class="headerlink" href="#isv" title="Link to this heading">¶</a></h3>
-<p>The Inception Score of Videos (ISV)<sup><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/#reference">2</a></sup> evaluates the generated videos based on their quality and diversity, with a preference for diversity. Utilizing a C3D video classification model trained on the UCF101 action recognition dataset, ISV assesses quality through the classification certainty of each video—specifically, by computing the sum of the negative entropy of individual predictions. Meanwhile, diversity is gauged by the entropy of the prediction averages.</p>
+<p>The Inception Score of Videos (ISV)<sup><a class="reference internal" href="#reference"><span class="xref myst">2</span></a></sup> evaluates the generated videos based on their quality and diversity, with a preference for diversity. Utilizing a C3D video classification model trained on the UCF101 action recognition dataset, ISV assesses quality through the classification certainty of each video—specifically, by computing the sum of the negative entropy of individual predictions. Meanwhile, diversity is gauged by the entropy of the prediction averages.</p>
 </section>
 <section id="prv">
 <h3>PRV<a class="headerlink" href="#prv" title="Link to this heading">¶</a></h3>
-<p>The Precision/Recall of Videos (PRV) is the video version of Precision/Recall (PR)<sup><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/#reference">5</a></sup>, which extract features from videos by an I3D model, trained on Kinetics-400, containing 400 human action classes.</p>
+<p>The Precision/Recall of Videos (PRV) is the video version of Precision/Recall (PR)<sup><a class="reference internal" href="#reference"><span class="xref myst">5</span></a></sup>, which extract features from videos by an I3D model, trained on Kinetics-400, containing 400 human action classes.</p>
 </section>
 <section id="fid">
 <h3>FID<a class="headerlink" href="#fid" title="Link to this heading">¶</a></h3>
-<p>The Frechet Inception Distance (FID)<sup><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/#reference">3</a></sup> shares similarities with FVD in its approach, evaluating videos by analyzing the features of individual frames derived from an image classification model trained on ImageNet.</p>
+<p>The Frechet Inception Distance (FID)<sup><a class="reference internal" href="#reference"><span class="xref myst">3</span></a></sup> shares similarities with FVD in its approach, evaluating videos by analyzing the features of individual frames derived from an image classification model trained on ImageNet.</p>
 </section>
 <section id="kid">
 <h3>KID<a class="headerlink" href="#kid" title="Link to this heading">¶</a></h3>
-<p>The Kernel Inception Distance (KID)<sup><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/#reference">4</a></sup> is similar to FID and quantifies the dissimilarity between two sets of videos by computing the squared maximum mean discrepancy of the features of frames through multiple samplings. Unlike FID, KID utilizes an unbiased estimator with a third-degree kernel, aligning more consistently with human perception. The applied image classification model is same as the model FID applied.</p>
+<p>The Kernel Inception Distance (KID)<sup><a class="reference internal" href="#reference"><span class="xref myst">4</span></a></sup> is similar to FID and quantifies the dissimilarity between two sets of videos by computing the squared maximum mean discrepancy of the features of frames through multiple samplings. Unlike FID, KID utilizes an unbiased estimator with a third-degree kernel, aligning more consistently with human perception. The applied image classification model is same as the model FID applied.</p>
 </section>
 <section id="is">
 <h3>IS<a class="headerlink" href="#is" title="Link to this heading">¶</a></h3>
-<p>The Inception Score (IS)<sup><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/#reference">2</a></sup> shares similarities with ISV in its approach, evaluating videos by analyzing the predictions of individual frames derived from an image classification model trained on ImageNet.</p>
+<p>The Inception Score (IS)<sup><a class="reference internal" href="#reference"><span class="xref myst">2</span></a></sup> shares similarities with ISV in its approach, evaluating videos by analyzing the predictions of individual frames derived from an image classification model trained on ImageNet.</p>
 </section>
 <section id="pr">
 <h3>PR<a class="headerlink" href="#pr" title="Link to this heading">¶</a></h3>
-<p>The Precision/Recall (PR)<sup><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/#reference">5</a></sup> estimates the distribution of features of frames in the feature space by demarcating a region within the distance to the k-nearest neighbor features. It then assesses the precision and recall of frame generation by determining whether samples fall within the distributions of the real and fake datasets. The features are extracted from the VGG image classification model<sup><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/#reference">6</a></sup> trained on ILSVRC-2012.</p>
+<p>The Precision/Recall (PR)<sup><a class="reference internal" href="#reference"><span class="xref myst">5</span></a></sup> estimates the distribution of features of frames in the feature space by demarcating a region within the distance to the k-nearest neighbor features. It then assesses the precision and recall of frame generation by determining whether samples fall within the distributions of the real and fake datasets. The features are extracted from the VGG image classification model<sup><a class="reference internal" href="#reference"><span class="xref myst">6</span></a></sup> trained on ILSVRC-2012.</p>
 <h2 id="reference">Reference:</h2>
 <ul class="simple">
 <li><p>[1] Unterthiner, Thomas, et al. “Towards accurate generative models of video: A new metric &amp; challenges.” arXiv preprint arXiv:1812.01717 (2018).</p></li>

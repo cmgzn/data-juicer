@@ -3,7 +3,7 @@
    :format: html
 
 
-`[英文主页] <index>`_ | `[DJ-Cookbook] <DJ-cookbook_ZH>`_ | `[算子池] <docs/Operators.md>`_ | `[API] <https://modelscope.github.io/data-juicer>`_ | `[Awesome LLM Data] <docs/awesome_llm_data.md>`_
+`[英文主页] <index>`_ | `[DJ-Cookbook] <DJ-cookbook_ZH>`_ | `[算子池] <docs/Operators>`_ | `[API] <https://modelscope.github.io/data-juicer>`_ | `[Awesome LLM Data] <docs/awesome_llm_data>`_
 
 Data Processing for and with Foundation Models
 ==============================================
@@ -69,16 +69,16 @@ Data Processing for and with Foundation Models
 
 
 .. image:: https://img.shields.io/badge/文档-DJ指南-blue?logo=Markdown
-   :target: README_ZH.md#dj-cookbook
+   :target: DJ-cookbook_ZH
    :alt: 文档列表
 
 
 .. image:: https://img.shields.io/badge/文档-算子池-blue?logo=Markdown
-   :target: docs/Operators.md
+   :target: docs/Operators
    :alt: 算子池
 
 
-.. image:: http://img.shields.io/badge/cs.LG-1.0Paper(SIGMOD'24
+.. image:: http://img.shields.io/badge/cs.LG-1.0Paper(SIGMOD'24)-B31B1B?logo=arxiv&logoColor=red
    :target: https://arxiv.org/abs/2309.02033
    :alt: Paper
 

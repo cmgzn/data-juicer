@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DJ-SORA" href="DJ_SORA.html" />
+    <link rel="next" title="Motivation" href="DJ_SORA.html" />
     <link rel="prev" title="Quick Start" href="../quick-start.html" /> 
 </head>
 
@@ -34,7 +34,7 @@
         
         
             <option value="../docs/BadDataExhibition.html" 
-                    >
+                    selected>
                 English
             </option>
         
@@ -117,18 +117,15 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="DJ_SORA.html">DJ-SORA</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="DJ_SORA.html#motivation">Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DJ_SORA.html#roadmap">Roadmap</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="DJ_SORA.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DJ_SORA.html#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DJ_SORA.html#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DJ_SORA.html#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DJ_SORA.html#advanced-operators-video-content">Advanced Operators (Video Content)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DJ_SORA.html#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DJ_SORA.html#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="DJ_SORA.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ_SORA.html#roadmap">Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DJ_SORA.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DJ_SORA.html#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DJ_SORA.html#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DJ_SORA.html#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DJ_SORA.html#advanced-operators-video-content">Advanced Operators (Video Content)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DJ_SORA.html#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DJ_SORA.html#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="DJ_service.html">DJ_service</a><ul>
@@ -1602,20 +1599,20 @@ some OPs work well on some datasets but might be useless on others.</p></li>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#involved-ops">Involved OPs</a></p></li>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#multimodal-datasets">Multimodal Datasets</a></p>
+<li><p><a class="reference internal" href="#involved-ops">Involved OPs</a></p></li>
+<li><p><a class="reference internal" href="#multimodal-datasets">Multimodal Datasets</a></p>
 <ul>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#lcs-558k">LCS-558K</a></p></li>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#mmc4">MMC4</a></p></li>
+<li><p><a class="reference internal" href="#lcs-558k">LCS-558K</a></p></li>
+<li><p><a class="reference internal" href="#mmc4">MMC4</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#text-only-datasets">Text-only Datasets</a></p>
+<li><p><a class="reference internal" href="#text-only-datasets">Text-only Datasets</a></p>
 <ul>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#wikipedia">Wikipedia</a></p></li>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#books">Books</a></p></li>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#stack-exchange">Stack Exchange</a></p></li>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#arxiv">ArXiv</a></p></li>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#github-code">Github Code</a></p></li>
+<li><p><a class="reference internal" href="#wikipedia">Wikipedia</a></p></li>
+<li><p><a class="reference internal" href="#books">Books</a></p></li>
+<li><p><a class="reference internal" href="#stack-exchange">Stack Exchange</a></p></li>
+<li><p><a class="reference internal" href="#arxiv">ArXiv</a></p></li>
+<li><p><a class="reference internal" href="#github-code">Github Code</a></p></li>
 </ul>
 </li>
 </ul>
@@ -1630,49 +1627,49 @@ some OPs work well on some datasets but might be useless on others.</p></li>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alphanumeric_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#llava-15-pretrain-dataset">LCS-558K</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#wikipedia">Wikipedia</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#books">Books</a></p></td>
+<td><p><a class="reference internal" href="#llava-15-pretrain-dataset"><span class="xref myst">LCS-558K</span></a>, <a class="reference internal" href="#wikipedia">Wikipedia</a>, <a class="reference internal" href="#books">Books</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">average_line_length_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#github-code">Github Code</a></p></td>
+<td><p><a class="reference internal" href="#github-code">Github Code</a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">character_repetition_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#llava-15-pretrain-dataset">LCS-558K</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#wikipedia">Wikipedia</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#books">Books</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#stack-exchange">Stack Exchange</a></p></td>
+<td><p><a class="reference internal" href="#llava-15-pretrain-dataset"><span class="xref myst">LCS-558K</span></a>, <a class="reference internal" href="#wikipedia">Wikipedia</a>, <a class="reference internal" href="#books">Books</a>, <a class="reference internal" href="#stack-exchange">Stack Exchange</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">flagged_words_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#llava-15-pretrain-dataset">LCS-558K</a></p></td>
+<td><p><a class="reference internal" href="#llava-15-pretrain-dataset"><span class="xref myst">LCS-558K</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">image_aspect_ratio_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#llava-15-pretrain-dataset">LCS-558K</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#mmc4">MMC4</a></p></td>
+<td><p><a class="reference internal" href="#llava-15-pretrain-dataset"><span class="xref myst">LCS-558K</span></a>, <a class="reference internal" href="#mmc4">MMC4</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">image_deduplicator</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#llava-15-pretrain-dataset">LCS-558K</a></p></td>
+<td><p><a class="reference internal" href="#llava-15-pretrain-dataset"><span class="xref myst">LCS-558K</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">image_shape_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#llava-15-pretrain-dataset">LCS-558K</a></p></td>
+<td><p><a class="reference internal" href="#llava-15-pretrain-dataset"><span class="xref myst">LCS-558K</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">image_size_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#llava-15-pretrain-dataset">LCS-558K</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#mmc4">MMC4</a></p></td>
+<td><p><a class="reference internal" href="#llava-15-pretrain-dataset"><span class="xref myst">LCS-558K</span></a>, <a class="reference internal" href="#mmc4">MMC4</a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">image_text_matching_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#llava-15-pretrain-dataset">LCS-558K</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#mmc4">MMC4</a></p></td>
+<td><p><a class="reference internal" href="#llava-15-pretrain-dataset"><span class="xref myst">LCS-558K</span></a>, <a class="reference internal" href="#mmc4">MMC4</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">language_id_score_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#books">Books</a></p></td>
+<td><p><a class="reference internal" href="#books">Books</a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">perplexity_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#llava-15-pretrain-dataset">LCS-558K</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#books">Books</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#arxiv">ArXiv</a></p></td>
+<td><p><a class="reference internal" href="#llava-15-pretrain-dataset"><span class="xref myst">LCS-558K</span></a>, <a class="reference internal" href="#books">Books</a>, <a class="reference internal" href="#arxiv">ArXiv</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">special_characters_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#wikipedia">Wikipedia</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#books">Books</a></p></td>
+<td><p><a class="reference internal" href="#wikipedia">Wikipedia</a>, <a class="reference internal" href="#books">Books</a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">text_length_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#wikipedia">Wikipedia</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#arxiv">ArXiv</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#github-code">Github Code</a></p></td>
+<td><p><a class="reference internal" href="#wikipedia">Wikipedia</a>, <a class="reference internal" href="#arxiv">ArXiv</a>, <a class="reference internal" href="#github-code">Github Code</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">words_num_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#stack-exchange">Stack Exchange</a></p></td>
+<td><p><a class="reference internal" href="#stack-exchange">Stack Exchange</a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">word_repetition_filter</span></code></p></td>
-<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#mmc4">MMC4</a>, <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/docs/#wikipedia">Wikipedia</a></p></td>
+<td><p><a class="reference internal" href="#mmc4">MMC4</a>, <a class="reference internal" href="#wikipedia">Wikipedia</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -2471,7 +2468,7 @@ some OPs work well on some datasets but might be useless on others.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../quick-start.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="DJ_SORA.html" class="btn btn-neutral float-right" title="DJ-SORA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="DJ_SORA.html" class="btn btn-neutral float-right" title="Motivation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

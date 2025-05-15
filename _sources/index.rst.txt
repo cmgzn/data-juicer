@@ -69,7 +69,7 @@ Data Processing for and with Foundation Models
 
 
 .. image:: https://img.shields.io/badge/文档-DJ指南-blue?logo=Markdown
-   :target: DJ-cookbook_ZH
+   :target: zh-CN/DJ-cookbook_ZH
    :alt: 文档列表
 
 
@@ -78,7 +78,7 @@ Data Processing for and with Foundation Models
    :alt: OpZoo
 
 
-.. image:: http://img.shields.io/badge/cs.LG-1.0Paper(SIGMOD'24
+.. image:: http://img.shields.io/badge/cs.LG-1.0Paper(SIGMOD'24)-B31B1B?logo=arxiv&logoColor=red
    :target: https://arxiv.org/abs/2309.02033
    :alt: Paper
 

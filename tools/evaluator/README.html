@@ -34,7 +34,7 @@
         
         
             <option value="../../tools/evaluator/README.html" 
-                    >
+                    selected>
                 English
             </option>
         
@@ -117,18 +117,15 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_SORA.html">DJ-SORA</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../docs/DJ_SORA.html#motivation">Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../docs/DJ_SORA.html#roadmap">Roadmap</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../docs/DJ_SORA.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../docs/DJ_SORA.html#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../docs/DJ_SORA.html#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../docs/DJ_SORA.html#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../docs/DJ_SORA.html#advanced-operators-video-content">Advanced Operators (Video Content)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../docs/DJ_SORA.html#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../docs/DJ_SORA.html#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_SORA.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_SORA.html#roadmap">Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/DJ_SORA.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/DJ_SORA.html#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/DJ_SORA.html#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/DJ_SORA.html#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/DJ_SORA.html#advanced-operators-video-content">Advanced Operators (Video Content)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/DJ_SORA.html#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/DJ_SORA.html#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_service.html">DJ_service</a><ul>
@@ -1615,7 +1612,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>: a yaml file containing various settings required to run the evaluation (see <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/evaluator/#configuration">Configuration</a> for details)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>: a yaml file containing various settings required to run the evaluation (see <a class="reference internal" href="#configuration">Configuration</a> for details)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">begin_iteration</span></code>: iteration of the first checkpoint to be evaluated</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">end_iteration</span></code>: iteration of the last checkpoint to be evaluated. If not set, continuously monitor the training process and evaluate the generated checkpoints.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">iteration_interval</span></code>: iteration interval between two checkpoints, default is 1000 iterations</p></li>
