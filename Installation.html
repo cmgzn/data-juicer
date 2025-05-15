@@ -79,9 +79,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#from-source-for-specific-scenarios">From Source for Specific Scenarios</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#from-source-for-specific-ops">From Source for Specific OPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-pip">Using pip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-docker">Using Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-check">Installation check</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#for-video-related-operators">For Video-related Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-docker">Using Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-check">Installation check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#for-video-related-operators">For Video-related Operators</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="quick-start.html">Quick Start</a><ul>
@@ -1671,18 +1673,20 @@ dj-install<span class="w"> </span>--config<span class="w"> </span>path_to_your_d
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>py-data-juicer
 </pre></div>
 </div>
-<ul class="simple">
-<li><p><strong>Note</strong>:</p>
+</section>
 <ul>
-<li><p>only the basic APIs in <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> and two basic tools
-(data <a class="reference internal" href="#data-processing"><span class="xref myst">processing</span></a> and <a class="reference internal" href="#data-analysis"><span class="xref myst">analysis</span></a>) are available in this way. If you want customizable
-and complete functions, we recommend you install <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> <a class="reference internal" href="#from-Source-for-specific-scenarios"><span class="xref myst">from source</span></a>.</p></li>
+<li><p><strong>Note</strong>:
+- only the basic APIs in <cite>data_juicer</cite> and two basic tools</p>
+<blockquote>
+<div><p>(data <a class="reference external" href="quick-start.html#data-processing">processing</a> and <a class="reference external" href="quick-start.html#data-analysis">analysis</a>) are available in this way. If you want customizable
+and complete functions, we recommend you install <cite>data_juicer</cite> <a class="reference external" href="#from-Source-for-specific-scenarios">from source</a>.</p>
+</div></blockquote>
+<ul class="simple">
 <li><p>The release versions from pypi have a certain lag compared to the latest version from source.
-So if you want to follow the latest functions of <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code>, we recommend you install <a class="reference internal" href="#from-Source-for-specific-scenarios"><span class="xref myst">from source</span></a>.</p></li>
+So if you want to follow the latest functions of <cite>data_juicer</cite>, we recommend you install <a class="reference external" href="#from-Source-for-specific-scenarios">from source</a>.</p></li>
 </ul>
 </li>
 </ul>
-</section>
 <section id="using-docker">
 <h2>Using Docker<a class="headerlink" href="#using-docker" title="Link to this heading">¶</a></h2>
 <ul>
@@ -1709,20 +1713,20 @@ latest <code class="docutils literal notranslate"><span class="pre">data-juicer<
 </ul>
 </li>
 </ul>
-</section>
 <section id="installation-check">
-<h2>Installation check<a class="headerlink" href="#installation-check" title="Link to this heading">¶</a></h2>
+<h3>Installation check<a class="headerlink" href="#installation-check" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">data_juicer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dj</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">dj</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="for-video-related-operators">
-<h2>For Video-related Operators<a class="headerlink" href="#for-video-related-operators" title="Link to this heading">¶</a></h2>
+<h3>For Video-related Operators<a class="headerlink" href="#for-video-related-operators" title="Link to this heading">¶</a></h3>
 <p>Before using video-related operators, <strong>FFmpeg</strong> should be installed and accessible via the $PATH environment variable.</p>
 <p>You can install FFmpeg using package managers(e.g. sudo apt install ffmpeg on Debian/Ubuntu, brew install ffmpeg on OS X) or visit the <a class="reference external" href="https://ffmpeg.org/download.html">official ffmpeg link</a>.</p>
 <p>Check if your environment path is set correctly by running the ffmpeg command from the terminal.</p>
 <p align="right"><a href="#table">🔼 back to index</a></p>
+</section>
 </section>
 </section>
 

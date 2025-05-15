@@ -3,7 +3,7 @@
    :format: html
 
 
-`[英文主页] <index>`_ | `[DJ-Cookbook] <DJ-cookbook_ZH>`_ | `[算子池] <docs/Operators>`_ | `[API] <https://modelscope.github.io/data-juicer>`_ | `[Awesome LLM Data] <docs/awesome_llm_data>`_
+`[英文主页] <index>`_ | `[DJ-Cookbook] <DJ-cookbook_ZH>`_ | `[算子池] <docs/Operators>`_ | `[API] <../api>`_ | `[Awesome LLM Data] <docs/awesome_llm_data>`_
 
 Data Processing for and with Foundation Models
 ==============================================
@@ -43,12 +43,12 @@ Data Processing for and with Foundation Models
 
 
 .. image:: https://img.shields.io/badge/DataModality-Text,Image,Audio,Video-brightgreen.svg
-   :target: #dj-cookbook
+   :target: ../DJ-cookbook
    :alt: DataModality
 
 
 .. image:: https://img.shields.io/badge/Usage-Cleaning,Synthesis,Analysis-FFD21E.svg
-   :target: #dj-cookbook
+   :target: ../DJ-cookbook
    :alt: Usage
 
 
@@ -64,7 +64,7 @@ Data Processing for and with Foundation Models
 
 
 .. image:: https://img.shields.io/badge/Doc-DJ_Cookbook-blue?logo=Markdown
-   :target: #dj-cookbook
+   :target: ../DJ-cookbook
    :alt: Document_List
 
 
@@ -107,8 +107,8 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
 ====
 
 
-* `新消息 <#新消息>`_
-* `为什么选择 Data-Juicer？ <#为什么选择-data-juicer>`_
+* `新消息 <#id7>`_
+* `为什么选择 Data-Juicer？ <#id14>`_
 .. toctree::
    :maxdepth: 2
    :caption: 教程
@@ -117,10 +117,10 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
    Installation_ZH
    quick-start_ZH
 
-* `开源协议 <#开源协议>`_
-* `贡献 <#贡献>`_
-* `致谢 <#致谢>`_
-* `参考文献 <#参考文献>`_
+* `开源协议 <#id15>`_
+* `贡献 <#id16>`_
+* `致谢 <#id17>`_
+* `参考文献 <#id18>`_
 
 为什么选择 Data-Juicer？
 ------------------------
@@ -135,30 +135,6 @@ Data-Juicer正在积极更新和维护中，我们将定期强化和新增更多
 
 .. include:: README_ZH.md
     :start-after: ## 开源协议
-    :end-before: ## 贡献
-    :parser: myst_parser.sphinx_
-
-贡献
-----
-
-.. include:: README_ZH.md
-    :start-after: ## 贡献
-    :end-before: ## 致谢
-    :parser: myst_parser.sphinx_
-
-致谢
-----
-
-.. include:: README_ZH.md
-    :start-after: ## 致谢
-    :end-before: ## 参考文献
-    :parser: myst_parser.sphinx_
-
-参考文献
---------
-
-.. include:: README_ZH.md
-    :start-after: ## 参考文献
     :parser: myst_parser.sphinx_
 
 .. toctree::
