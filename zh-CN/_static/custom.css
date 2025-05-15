@@ -20,15 +20,21 @@
     }
 }
 
-/* 多语言提示 */
-.rst-versions {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 300px;
-    z-index: 1000;
-    background: rgba(0,0,0,0.1);
-    border-top: solid 1px #ccc;
-    padding: 10px;
-    font-size: 12px;
+.caption-text {
+    cursor: pointer;
 }
+
+.caption-text:hover {
+    color: #2980B9;
+}
+
+/* Optional: Add a dropdown indicator */
+.caption-text::after {
+    content: ' ▼';
+    font-size: 0.8em;
+}
+
+.caption-text.collapsed::after {
+    content: ' ►';
+}
+

@@ -109,7 +109,7 @@ Table of Contents
 * `Why Data-Juicer?`_
 .. toctree::
    :maxdepth: 2
-   :caption: User Guide
+   :caption: Tutorial
 
    DJ-cookbook
    Installation
@@ -170,11 +170,21 @@ References
 
 .. toctree::
    :maxdepth: 2
+   :caption: demos
+   :glob:
+   :hidden:
+
+   demos/*
+   demos/**/*
+
+.. toctree::
+   :maxdepth: 2
    :caption: tools
    :glob:
    :hidden:
 
    tools/*
+   tools/**/*
 
 .. toctree::
    :maxdepth: 2
@@ -183,6 +193,7 @@ References
    :hidden:
 
    thirdparty/*
+   thirdparty/**/*
 
 .. toctree::
    :maxdepth: 2
