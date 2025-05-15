@@ -56,13 +56,15 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 html_theme_options = {
     "navigation_depth": 4,
-    "collapse_navigation": True,
+    "collapse_navigation": False,
+    "sticky_navigation": True,
 }
 
 html_css_files = [
     'custom.css',
 ]
 
+html_js_files = ['custom.js']
 
 # language settings
 language = 'en'
@@ -134,14 +136,13 @@ def process_doc_links(app, docname, source):
         
         return f'[{link_text}]({full_github_link})'
     
-    pattern = r'\[([^\]]+)\]\(([^)]*(?:.py|Operators.md|.ipynb|Dockerfile))\)'
+    pattern = r'\[([^\]]+)\]\((?!http)([^)]*(?<!\.md)|Operators\.md)\)'
     source[0] = re.sub(pattern, link_replacer, source[0])
     
     return source[0]
 
 def process_read(app, docname, source):
     source[0] = process_doc_links(app, docname, source)
-    source[0] = source[0].replace('.md]', '.html]')
     source[0] = source[0].replace('#dj-cookbook', 'DJ-cookbook')
 
 def setup(app):
