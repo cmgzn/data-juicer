@@ -1704,14 +1704,14 @@ bash<span class="w"> </span>setup_easyanimate.sh
 <section id="id6">
 <h4>准备沙盒配置文件<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
 <p>沙河实验总共会依次执行四类任务：数据/模型洞察（<code class="docutils literal notranslate"><span class="pre">probe_job_configs</span></code>）、基于洞察结果的数据菜谱微调迭代（<code class="docutils literal notranslate"><span class="pre">refine_recipe_job_configs</span></code>）、数据处理与模型训练（<code class="docutils literal notranslate"><span class="pre">execution_job_configs</span></code>）和数据/模型评估（<code class="docutils literal notranslate"><span class="pre">evaluation_job_configs</span></code>）。每类任务中，任务按照配置的任务列表依次执行。每个任务需要指定：挂载这个任务的钩子（<code class="docutils literal notranslate"><span class="pre">hook</span></code>），记录中间结果的标记名(<code class="docutils literal notranslate"><span class="pre">meta_name</span></code>)，Data-Juicer数据处理参数（<code class="docutils literal notranslate"><span class="pre">dj_configs</span></code>），以及该任务其他的特定参数（<code class="docutils literal notranslate"><span class="pre">extra_configs</span></code>）。这些参数中<code class="docutils literal notranslate"><span class="pre">hook</span></code>是必须指定的，其他允许置空。<code class="docutils literal notranslate"><span class="pre">dj_configs</span></code>可以参考完整的Data-Juicer数据处理参数 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/configs/config_all.yaml">config_all.yaml</a>。<code class="docutils literal notranslate"><span class="pre">extra_configs</span></code>为任务特定的参数，没有限定，可以是模型训练、推理、评测等参数，比如用<code class="docutils literal notranslate"><span class="pre">path_k_sigma_recipe</span></code>指定利用k-sigma方法微调后的数据菜谱保存路径。一个sandbox的配置文件示例可参考<code class="docutils literal notranslate"><span class="pre">configs/demo/sandbox/sandbox.yaml</span></code>：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1">## Sandbox config example</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sandbox config example</span>
 
-<span class="c1">## global parameters</span>
+<span class="c1"># global parameters</span>
 <span class="nt">project_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;demo-sandbox&#39;</span>
-<span class="nt">experiment_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;demo-sandbox-run0&#39;</span><span class="w">              </span><span class="c1">## for wandb tracer name</span>
-<span class="nt">hpo_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">                                  </span><span class="c1">## path to a configuration file when using auto-HPO tool.</span>
+<span class="nt">experiment_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;demo-sandbox-run0&#39;</span><span class="w">              </span><span class="c1"># for wandb tracer name</span>
+<span class="nt">hpo_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">                                  </span><span class="c1"># path to a configuration file when using auto-HPO tool.</span>
 
-<span class="c1">## configs for each job, the jobs will be executed according to the order in the list</span>
+<span class="c1"># configs for each job, the jobs will be executed according to the order in the list</span>
 <span class="nt">probe_job_configs</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hook</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ProbeViaAnalyzerHook&#39;</span>
 <span class="w">    </span><span class="nt">meta_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;analysis_ori_data&#39;</span>

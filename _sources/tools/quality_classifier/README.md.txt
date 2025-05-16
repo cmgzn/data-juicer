@@ -21,9 +21,9 @@ The whole toolkit is based on PySpark. And the basic structure of quality classi
 - feature extractor: [HashingTF](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.HashingTF.html##hashingtf)
 - classifier: [LogisticRegression](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.classification.LogisticRegression.html##logisticregression)
 
-#### Usage
+### Usage
 
-###### Predict with existing classifiers
+#### Predict with existing classifiers
 
 Use `predict.py` to predict a document score of "quality" and a label for each sample to indicate whether this sample should be kept according to the score.
 
@@ -50,7 +50,7 @@ python predict.py --help
 - `text_key`: (Optional. Default: "text") the field name to store texts to be classified in the input dataset.
 - `overall_stats`: (Optional. Default: False) whether to generate an overall stats report of document scores.
 
-###### Train your own quality classifier
+#### Train your own quality classifier
 
 Use `train.py` to train your own quality classifier for your datasets.
 
@@ -79,7 +79,7 @@ python train.py --help
 - `evaluation`: (Optional, Default: True) whether to evaluate the trained classifier using the test set after training.
 - `text_key`: (Optional. Default: "text") the field name to store texts to be classified in the input dataset.
 
-###### Evaluate a quality classifier
+#### Evaluate a quality classifier
 
 Use `eval.py` to evaluate a quality classifier to report Precision, Recall, and F1 metrics.
 
@@ -102,7 +102,7 @@ python eval.py --help
 - `tokenizer`: (Optional. Default: None) the tokenizer to tokenize texts to be classified. If it's None, the [standard Tokenizer](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.Tokenizer.html##tokenizer) of PySpark will be used. Besides, you can use one of the tokenizers we provide `[zh.sp.model, code.sp.model]`. Or you can set it to a path to your own [sentencepiece](https://github.com/google/sentencepiece) model.
 - `text_key`: (Optional. Default: "text") the field name to store texts to be classified in the input dataset.
 
-#### Model Zoo
+### Model Zoo
 
 We provide 3 models we trained before: `gpt3`, `chinese`, `code`. Each model has its tokenizer and keep method. Tokenizers "xx.sp.model" are trained on the training data using [sentencepiece](https://github.com/google/sentencepiece).
 
@@ -131,9 +131,9 @@ We provide 3 models we trained before: `gpt3`, `chinese`, `code`. Each model has
 | `gpt3`                               | 3.22%               | 1.41%               |
 | `chinese`                            | 1.81%               | -                   |
 
-#### More about Quality Classifier
+### More about Quality Classifier
 
-###### Method
+#### Method
 
 The quality classifiers here mainly refer to the GPT-3 quality classifier mentioned in the Appendix A of GPT-3 paper:
 
@@ -143,11 +143,11 @@ The quality classifiers here mainly refer to the GPT-3 quality classifier mentio
 >
 > We chose α = 9 in order to take mostly documents the classifier scored highly, but still include some documents that were out of distribution. α was chosen to match the distribution of scores from our classifier on WebText. We found this re-weighting increased quality as measured by loss on a range of out-of-distribution generative text samples.
 
-###### Tokenizers
+#### Tokenizers
 
 - Standard Tokenizer in Spark: split texts by whitespaces.
 - zh/code.sp.model: trained using sentencepiece.
 
-###### Keep Methods
+#### Keep Methods
 - label: `doc_score > 0.5`
 - pareto: `doc_score > 1 - np.random.pareto(α), α = 9`

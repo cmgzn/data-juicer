@@ -12,20 +12,20 @@ uvicorn service:app
 ## API Calls
 The API supports calling all functions and classes in Data-Juicer's `__init__.py` (including calling specific functions of a class). Functions are called via GET, while classes are called via POST.
 
-#### Protocol
+### Protocol
 
-###### URL Path
+#### URL Path
 For GET requests to call functions, the URL path corresponds to the function reference path in the Data-Juicer library. For example, `from data_juicer.config import init_configs` maps to the path `data_juicer/config/init_configs`. For POST requests to call a specific function of a class, the URL path is constructed by appending the function name to the class path in the Data-Juicer library. For instance, calling the `compute_stats_batched` function of the `TextLengthFilter` operator corresponds to the path `data_juicer/ops/filter/TextLengthFilter/compute_stats_batched`.
 
-###### Parameters
+#### Parameters
 When making GET and POST calls, parameters are automatically converted into lists. Additionally, query parameters do not support dictionary transmission. Therefore, if the value of a parameter is a list or dictionary, we uniformly transmit it using `json.dumps` and prepend a special symbol `<json_dumps>` to distinguish it from regular strings.
 
-###### Special Cases
+#### Special Cases
 1. For the `cfg` parameter, we default to transmitting it using `json.dumps`, without needing to prepend the special symbol `<json_dumps>`.
 2. For the `dataset` parameter, users can pass the path of the dataset on the server, and the server will load the dataset.
 3. Users can set the `skip_return` parameter. When set to `True`, the result of the function call will not be returned, avoiding errors caused by network transmission issues.
 
-#### Function Calls
+### Function Calls
 GET requests are used for function calls, with the URL path corresponding to the function reference path in the Data-Juicer library. Query parameters are used to pass the function arguments.
 
 For example, the following Python code can be used to call Data-Juicer's `init_configs` function to retrieve all parameters of Data-Juicer:
@@ -49,7 +49,7 @@ curl -G "http://localhost:8000/data_juicer/config/init_configs" \
      --data-urlencode "args=./configs/demo/process.yaml"
 ```
 
-#### Class Function Calls
+### Class Function Calls
 POST requests are used for class function calls, with the URL path constructed by appending the function name to the class path in the Data-Juicer library. Query parameters are used to pass the function arguments, while JSON fields are used to pass the arguments required for the class constructor.
 
 For example, the following Python code can be used to call Data-Juicer's `TextLengthFilter` operator:

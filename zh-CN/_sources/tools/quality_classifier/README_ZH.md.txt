@@ -21,9 +21,9 @@ Data-Juicer 提供了一组数据打分能力，可帮助您评估数据集。
 - feature extractor: [HashingTF](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.HashingTF.html##hashingtf)
 - classifier: [LogisticRegression](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.classification.LogisticRegression.html##logisticregression)
 
-#### 用法
+### 用法
 
-###### 使用现有的分类器进行预测
+#### 使用现有的分类器进行预测
 
 使用 `predict.py` 来预测一个文档的“质量”分数，并为每个样本添加一个标签，以根据分数判断是否应该保留该样本。
 
@@ -50,7 +50,7 @@ python predict.py --help
 - `text_key`: (可选，默认为 `text`) 用于存储输入数据集中需要被分类的文本的字段名称。
 - `overall_stats`: (可选，默认为 False) 是否生成文档分数的汇总统计报告。
 
-###### 训练自己的质量分类器
+#### 训练自己的质量分类器
 
 使用`train.py`在您的数据集上训练您自己的质量分类器。
 
@@ -79,7 +79,7 @@ python train.py --help
 - `evaluation`: (可选，默认值为 True) 是否在训练后使用测试集评估训练好的分类器。
 - `text_key`: (可选，默认值为 `text`) 用于存储输入数据集中需要被分类的文本的字段名称。
 
-###### 评估质量分类器
+#### 评估质量分类器
 
 使用`eval.py`以报告精度、召回率和 F1 指标来评估质量分类器。
 
@@ -102,7 +102,7 @@ python eval.py --help
 - `tokenizer`: (Optional. Default: None) the tokenizer to tokenize texts to be classified. If it's None, the [standard Tokenizer](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.Tokenizer.html##tokenizer) of PySpark will be used. Besides, you can use one of the tokenizers we provide `[zh.sp.model, code.sp.model]`. Or you can set it to a path to your own [sentencepiece](https://github.com/google/sentencepiece) model.
 - `text_key`: (Optional. Default: "text") the field name to store texts to be classified in the input dataset.
 
-#### Model Zoo
+### Model Zoo
 
 我们提供了已训练好的三个模型：`gpt3`，`chinese`，`code`。每个模型都有其 tokenizer 和 keep method。其中Tokenizer `xx.sp.model` 使用 [sentencepiece](https://github.com/google/sentencepiece) 的训练数据进行训练。
 
@@ -131,9 +131,9 @@ python eval.py --help
 | `gpt3`                               | 3.22%               | 1.41%               |
 | `chinese`                            | 1.81%               | -                   |
 
-#### 有关质量分类器的更多信息
+### 有关质量分类器的更多信息
 
-###### 方法
+#### 方法
 
 这里的质量分类器主要参考GPT-3论文附录A中提到的GPT-3质量分类器：
 
@@ -143,12 +143,12 @@ python eval.py --help
 >
 > We chose α = 9 in order to take mostly documents the classifier scored highly, but still include some documents that were out of distribution. α was chosen to match the distribution of scores from our classifier on WebText. We found this re-weighting increased quality as measured by loss on a range of out-of-distribution generative text samples.
 
-###### Tokenizers
+#### Tokenizers
 
 - Spark 中的标准 Tokenizer: 根据空白字符分割文本.
 - zh/code.sp.model: 使用 sentencepiece 训练得到。
 
-###### Keep Methods
+#### Keep Methods
 
 - label: `doc_score > 0.5`
 - pareto: `doc_score > 1 - np.random.pareto(α), α = 9`
