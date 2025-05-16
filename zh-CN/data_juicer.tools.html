@@ -1,26 +1,24 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
+<html class="writer-html5" lang="zh-CN" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DJ-Cookbook &mdash; data_juicer 1.3.3 documentation</title>
+  <title>data_juicer.tools &mdash; data_juicer 1.3.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=d8a0b946" />
 
   
-      <script src="_static/documentation_options.js?v=28d163b9"></script>
+      <script src="_static/documentation_options.js?v=79f47a88"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/custom.js?v=f379d6e5"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation" href="Installation.html" />
-    <link rel="prev" title="Data Processing for and with Foundation Models" href="index.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -32,13 +30,13 @@
 <div class="language-selector">
     <select onchange="window.location.href=this.value;">
         
-            <option value="en/DJ-cookbook.html" 
-                    selected>
+            <option value="../en/data_juicer.tools.html" 
+                    >
                 English
             </option>
         
-            <option value="zh-CN/DJ-cookbook_ZH.html" 
-                    >
+            <option value="../zh-CN/data_juicer.tools_ZH.html" 
+                    selected>
                 简体中文
             </option>
         
@@ -53,7 +51,7 @@
 
           
           
-          <a href="index.html" class="icon icon-home">
+          <a href="index_ZH.html" class="icon icon-home">
             data_juicer
           </a>
 <div role="search">
@@ -64,138 +62,137 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">DJ-Cookbook</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#curated-resources">Curated Resources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#coding-with-data-juicer-dj">Coding with Data-Juicer (DJ)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#use-cases-data-recipes">Use Cases &amp; Data Recipes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#interactive-examples">Interactive Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Installation.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Installation.html#from-source-for-specific-scenarios">From Source for Specific Scenarios</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Installation.html#from-source-for-specific-ops">From Source for Specific OPs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Installation.html#using-pip">Using pip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Installation.html#using-docker">Using Docker</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Installation.html#installation-check">Installation check</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Installation.html#for-video-related-operators">For Video-related Operators</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="quick-start.html">Quick Start</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quick-start.html#dataset-configuration">Dataset Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick-start.html#data-processing">Data Processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick-start.html#distributed-data-processing">Distributed Data Processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick-start.html#data-analysis">Data Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick-start.html#data-visualization">Data Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick-start.html#build-up-config-files">Build Up Config Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick-start.html#sandbox">Sandbox</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick-start.html#preprocess-raw-data-optional">Preprocess Raw Data (Optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick-start.html#for-docker-users">For Docker Users</a></li>
-</ul>
-</li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">docs</span></p>
+              <p class="caption" role="heading"><span class="caption-text">教程</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition.html">“Bad” Data Exhibition</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition.html#table-of-contents">Table of Contents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition.html#involved-ops">Involved OPs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition.html#multimodal-datasets">Multimodal Datasets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition.html#lcs-558k">LCS-558K</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition.html#mmc4">MMC4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ-cookbook_ZH.html">DJ-Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DJ-cookbook_ZH.html#id1">资源合集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DJ-cookbook_ZH.html#data-juicer-dj">编写Data-Juicer (DJ) 代码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DJ-cookbook_ZH.html#id15">用例与数据菜谱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DJ-cookbook_ZH.html#id17">交互类示例</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition.html#text-only-datasets">Text-only Datasets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition.html#wikipedia">Wikipedia</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition.html#books">Books</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition.html#stack-exchange">Stack Exchange</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition.html#arxiv">ArXiv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition.html#github-code">Github Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation_ZH.html">安装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Installation_ZH.html#id1">前置条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation_ZH.html#id2">从源码安装 (指定使用场景)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation_ZH.html#id3">从源码安装 (指定部分算子)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation_ZH.html#pip">使用 pip 安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation_ZH.html#docker">使用 Docker 安装</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick-start_ZH.html">快速上手</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quick-start_ZH.html#id1">数据集配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick-start_ZH.html#id2">数据处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick-start_ZH.html#id3">分布式数据处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick-start_ZH.html#id4">数据分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick-start_ZH.html#id5">数据可视化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick-start_ZH.html#id6">构建配置文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick-start_ZH.html#id7">沙盒实验室</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick-start_ZH.html#id8">预处理原始数据（可选）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick-start_ZH.html#docker">对于 Docker 用户</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html">Motivation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html#roadmap">Roadmap</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_SORA.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_SORA.html#support-high-performance-loading-and-processing-of-video-data">Support high-performance loading and processing of video data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_SORA.html#basic-operators-video-spatio-temporal-dimension">Basic Operators (video spatio-temporal dimension)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_SORA.html#advanced-operators-fine-grained-modal-matching-and-data-generation">Advanced Operators (fine-grained modal matching and data generation)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_SORA.html#advanced-operators-video-content">Advanced Operators (Video Content)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_SORA.html#dj-sora-data-recipes-and-datasets">DJ-SORA Data Recipes and Datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_SORA.html#dj-sora-data-validation-and-model-training">DJ-SORA Data Validation and Model Training</a></li>
+<p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition_ZH.html">“坏”数据展览</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#id2">目录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#id3">涉及算子</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#id4">多模态数据集</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#lcs-558k">LCS-558K</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#mmc4">MMC4</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_service.html">DJ_service</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_service.html#start-the-service">Start the Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_service.html#api-calls">API Calls</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/DJ_service.html#protocol">Protocol</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="docs/DJ_service.html#url-path">URL Path</a></li>
-<li class="toctree-l4"><a class="reference internal" href="docs/DJ_service.html#parameters">Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="docs/DJ_service.html#special-cases">Special Cases</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DJ_service.html#function-calls">Function Calls</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DJ_service.html#class-function-calls">Class Function Calls</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DJ_service.html#demonstration">Demonstration</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg.html">Dataset Configuration Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/DatasetCfg.html#supported-dataset-formats">Supported Dataset Formats</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg.html#local-dataset">Local Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg.html#remote-huggingface-dataset">Remote Huggingface Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg.html#remote-arxiv-dataset">Remote Arxiv Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg.html#other-supported-dataset-formats">Other Supported Dataset Formats</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DatasetCfg.html#other-features">Other features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg.html#data-mixture">Data Mixture</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg.html#data-validation">Data Validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg.html#legacy-dataset-path-configuration">Legacy dataset_path Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#id5">纯文本数据集</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#wikipedia">Wikipedia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#books">Books</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#stack-exchange">Stack Exchange</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#arxiv">ArXiv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#github-code">Github Code</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide.html">How-to Guide for Developers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/DeveloperGuide.html#coding-style">1. Coding Style</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DeveloperGuide.html#build-your-own-ops">2. Build Your Own OPs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/DeveloperGuide.html#building-illustration">2.1 Building Illustration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="docs/DeveloperGuide.html#providing-basic-op-functions-alpha-version">2.1.2 Providing Basic OP Functions (alpha version)</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DeveloperGuide.html#making-the-op-more-usable-beta-version">2.1.2 Making the OP More Usable (beta version)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DeveloperGuide.html#making-op-faster-more-complete-stable-version">2.1.3 Making OP Faster &amp; More complete (stable version)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DeveloperGuide.html#build-your-own-data-recipes-and-configs">3. Build Your Own Data Recipes and Configs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/DeveloperGuide.html#fruitful-config-sources-type-hints">3.1 Fruitful Config Sources &amp; Type Hints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/DeveloperGuide.html#hierarchical-configs-and-helps">3.2 Hierarchical Configs and Helps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html">DJ-SORA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id1">动机</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id2">路线图</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id3">概览</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id4">支持视频数据的高性能加载和处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id5">基础算子（视频时空维度）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id6">进阶算子（细粒度模态间匹配及生成）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id7">进阶算子（视频内容）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id8">DJ-SORA数据菜谱及数据集</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_SORA_ZH.html#id9">DJ-SORA数据验证及模型训练</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/Distributed.html">Distributed Data Processing in Data-Juicer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/Distributed.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Distributed.html#implementation-and-optimizations">Implementation and Optimizations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/Distributed.html#ray-mode-in-data-juicer">Ray Mode in Data-Juicer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Distributed.html#subset-splitting">Subset Splitting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Distributed.html#streaming-reading-of-json-files">Streaming Reading of JSON Files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Distributed.html#deduplication">Deduplication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_service_ZH.html">API服务化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/DJ_service_ZH.html#id1">启动服务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/DJ_service_ZH.html#id2">API调用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_service_ZH.html#id3">协议</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="docs/DJ_service_ZH.html#url">url路径</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs/DJ_service_ZH.html#id4">参数</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs/DJ_service_ZH.html#id5">特例</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Distributed.html#performance-results">Performance Results</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/Distributed.html#data-processing-with-varied-scales">Data Processing with Varied Scales</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Distributed.html#distributed-deduplication-on-large-scale-datasets">Distributed Deduplication on Large-Scale Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_service_ZH.html#id6">函数调用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DJ_service_ZH.html#id7">类的函数调用</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Distributed.html#quick-start">Quick Start</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/Distributed.html#running-example-of-ray-mode">Running Example of Ray Mode</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Distributed.html#running-example-of-distributed-deduplication">Running Example of Distributed Deduplication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/DJ_service_ZH.html#id8">演示</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg_ZH.html">数据集配置指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id2">支持的数据集格式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id3">本地数据集</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg_ZH.html#remote-huggingface">Remote Huggingface 数据集</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg_ZH.html#arxiv">远程 Arxiv 数据集</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id4">其他支持的数据集格式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id5">其他功能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id6">数据混合</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id7">数据验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DatasetCfg_ZH.html#dataset-path">旧版 dataset_path 配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide_ZH.html">开发者指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#id2">1.编码规范</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#id3">2.构建自己的算子</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#id4">2.1 构建示例</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#alpha">2.1.2 提供算子基本功能（alpha版本)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#beta">2.1.2 使算子更可用（beta版本)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#stable">2.1.3 使算子更快更完备（stable版本)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#id5">3. 构建自己的数据菜谱和配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#id6">3.1 丰富的配置源和类型提示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#id7">3.2 层次化的配置和帮助</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/Distributed_ZH.html">Data-Juicer 分布式数据处理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/Distributed_ZH.html#id1">概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Distributed_ZH.html#id2">实现与优化</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/Distributed_ZH.html#data-juicer-ray">Data-Juicer 的 Ray 处理模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Distributed_ZH.html#id3">数据子集分割</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Distributed_ZH.html#json">JSON 文件的流式读取</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Distributed_ZH.html#id4">去重</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Distributed_ZH.html#id5">性能结果</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/Distributed_ZH.html#id6">不同数据规模的数据处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Distributed_ZH.html#id7">大规模数据集分布式去重</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Distributed_ZH.html#id8">快速开始</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/Distributed_ZH.html#ray">运行 Ray 模式样例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Distributed_ZH.html#id9">运行分布式去重样例</a></li>
 </ul>
 </li>
 </ul>
@@ -212,46 +209,46 @@
 <li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#contributing">Contributing  贡献</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/RecipeGallery.html">Data Recipe Gallery</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery.html#data-juicer-minimal-example-recipe">1. Data-Juicer Minimal Example Recipe</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery.html#reproduce-open-source-text-datasets">2. Reproduce Open Source Text Datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery.html#improved-open-source-pre-training-text-datasets">3. Improved Open Source Pre-training Text Datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery.html#improved-open-source-post-tuning-text-dataset">4. Improved Open Source Post-tuning Text Dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery.html#synthetic-contrastive-learning-image-text-datasets">5. Synthetic Contrastive Learning Image-text datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery.html#improved-open-source-image-text-datasets">6. Improved Open Source Image-text datasets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/RecipeGallery.html#evaluation-and-verification">6.1. Evaluation and Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/RecipeGallery_ZH.html">数据菜谱Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery_ZH.html#data-juicer">1. Data-Juicer最小示例菜谱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id1">2. 复现开源文本数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id2">3. 改良开源文本预训练数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id3">4. 改良开源文本后处理数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id4">5. 合成对比学习图文数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id5">6. 改良开源图文数据集</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id6">6.1. 评测验证</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery.html#basic-example-recipes-for-video-data">7. Basic Example Recipes for Video Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery.html#synthesize-human-centric-video-benchmarks">8. Synthesize Human-centric Video Benchmarks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery.html#improve-existing-open-source-video-datasets">9. Improve Existing Open Source Video Datasets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/RecipeGallery.html#id1">9.1. Evaluation and Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id7">7. 面向视频数据的基础实例菜谱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id8">8. 合成以人为中心的视频评测集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id9">9. 改良现有开源视频数据集</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/RecipeGallery_ZH.html#id10">9.1. 评测验证</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/Sandbox.html">Sandbox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/Sandbox.html#user-guide">User Guide</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox.html#applications-and-achievements">Applications and Achievements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox.html#what-is-dj-sandbox">What is DJ-Sandbox?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox.html#quick-start">Quick Start</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox.html#requirements">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox.html#prepare-configuration-files-for-sandbox">Prepare Configuration Files for Sandbox</a></li>
-<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox.html#start-sandbox">Start Sandbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/Sandbox_ZH.html">沙盒</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/Sandbox_ZH.html#id2">用户指南</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#id3">应用和成果</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#dj-sandbox">什么是沙盒实验室（DJ-Sandbox）？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#id4">快速上手</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox_ZH.html#id5">依赖准备</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox_ZH.html#id6">准备沙盒配置文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox_ZH.html#id7">运行沙盒</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox.html#component-factory">Component Factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#id8">组件工厂</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Sandbox.html#developer-guide">Developer Guide</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox.html#the-internal-implementation-of-components">The Internal Implementation of Components</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox.html#executor">Executor</a></li>
-<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox.html#evaluator">Evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Sandbox_ZH.html#id9">开发者指南</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#id10">组件内部实现</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox_ZH.html#id11">执行器</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs/Sandbox_ZH.html#id12">评估器</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox.html#pipeline-hook">Pipeline Hook</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox.html#customized-sandbox-pipeline">Customized Sandbox Pipeline</a></li>
-<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox.html#watcher">Watcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#id13">流水线钩子</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#id14">自定义沙盒流水线</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#id15">监测器</a></li>
 </ul>
 </li>
 </ul>
@@ -284,66 +281,85 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">demos</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="demos/README.html">Demos</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="demos/README.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="demos/README.html#available-demos">Available Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos/README_ZH.html">演示</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demos/README_ZH.html#id2">用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/README_ZH.html#id3">可用的演示</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html">自动化评测：HELM 评测及可视化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#id1">什么是自动化评测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#id2">为什么要自动化评测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#helm-megatron-lm">如何使用自动化评测：以 HELM 和 Megatron-LM 为例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#id3">1. 准备环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#megatron-lm">2. 将数据集预处理为 Megatron-LM 可识别的格式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#id4">3. 启动 Megatron-LM 训练</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#id5">4. 启动自动化评测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#id6">5. 汇总评测结果</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="demos/process_video_on_ray/data/Note.html">Note for dataset path</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos/role_playing_system_prompt/README_ZH.html">为LLM构造角色扮演的system prompt</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demos/role_playing_system_prompt/README_ZH.html#id1">数据准备</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/role_playing_system_prompt/README_ZH.html#id2">执行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/role_playing_system_prompt/README_ZH.html#id3">生成样例</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">tools</span></p>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工具</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/distributed_deduplication/README.html#usage">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/distributed_deduplication/README_ZH.html">分布式模糊去重工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/distributed_deduplication/README_ZH.html#id2">使用方法</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/README.html">Auto Evaluation Toolkit</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/README.html#preparation">Preparation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/README.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/README.html#configuration">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/README_ZH.html">Auto Evaluation Toolkit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/README_ZH.html#id1">准备工作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/README_ZH.html#id2">用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/README_ZH.html#id3">配置</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/gpt_eval/README.html">GPT EVAL: Evaluate your model with OpenAI API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/gpt_eval/README.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/gpt_eval/README_ZH.html">GPT EVAL：使用 OpenAI API 评测大模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/gpt_eval/README_ZH.html#id1">快速上手</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/recorder/README.html">Evaluation Results Recorder</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/recorder/README.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/recorder/README.html#configuration">Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tools/evaluator/recorder/README.html#parse-from-helm-output">Parse from HELM output</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/evaluator/recorder/README.html#parse-from-configuration-file">Parse from configuration file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/evaluator/recorder/README.html#make-leaderboard">Make leaderboard</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#convert-absolute-path-to-relative-path">Convert Absolute Path to Relative Path</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#dataset-format-conversion">Dataset Format Conversion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#notice">Notice</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#llava-like">LLaVA-like</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#mmc4-like">MMC4-like</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#wavcaps-like">WavCaps-like</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#video-chatgpt-like">Video-ChatGPT-like</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#youku-mplug-like">Youku-mPLUG-like</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#internvid-like">InternVid-like</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html#msr-vtt-like">MSR-VTT-like</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html">Evaluation Results Recorder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html#id1">用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html#id2">配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html#helm">从 HELM 输出目录中提取评测结果</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html#id3">从配置文件中读取评测结果</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html#id4">构建排行榜</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/README_ZH.html">格式转换工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html">多模态工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#id2">绝对路径转相对路径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#id3">数据集格式转换</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#id4">注意事项</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#llava">类LLaVA格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#mmc4">类MMC4格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#wavcaps">类WavCaps格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#video-chatgpt">类Video-ChatGPT格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#youku-mplug">类Youku-mPLUG格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#internvid">类InternVid格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#msr-vtt">类MSR-VTT格式</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/fmt_conversion/post_tuning_dialog/README.html#usage">Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/hpo/README.html#auto-hpo-based-on-3-sigma-principles">Auto-HPO based on 3-Sigma principles</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools/hpo/README.html#auto-hpo-with-wandb">Auto-HPO with WandB</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tools/hpo/README.html#prerequisite">Prerequisite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/hpo/README.html#usage-and-customization">Usage and Customization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/fmt_conversion/post_tuning_dialog/README_ZH.html#id2">用法</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/hpo/README_ZH.html">数据菜谱的自动化超参优化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/hpo/README_ZH.html#sigmaauto-hpo">基于3-Sigma原则进行Auto-HPO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/hpo/README_ZH.html#wandbauto-hpo">基于WandB进行Auto-HPO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools/hpo/README_ZH.html#id2">前置条件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/hpo/README_ZH.html#id3">使用和定制化</a></li>
 </ul>
 </li>
 </ul>
@@ -361,72 +377,72 @@
 <li class="toctree-l2"><a class="reference internal" href="tools/humanops/README.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#introduction-of-metrics">Introduction of Metrics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#fvd">FVD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#kvd">KVD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#isv">ISV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#prv">PRV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#fid">FID</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#kid">KID</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#is">IS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html#pr">PR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#id2">用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#id3">指标介绍</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#fvd">FVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#kvd">KVD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#isv">ISV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#prv">PRV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#fid">FID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#kid">KID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#is">IS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#pr">PR</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tools/postprocess/README.html">Postprocess tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/postprocess/README.html#usage">Usage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tools/postprocess/README.html#count-tokens-for-datasets">Count tokens for datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/postprocess/README.html#mix-multiple-datasets-with-optional-weights">Mix multiple datasets with optional weights</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/postprocess/README.html#deserialize-meta-fields-in-jsonl-file">Deserialize meta fields in jsonl file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/postprocess/README_ZH.html">Postprocess tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/postprocess/README_ZH.html#id1">用法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools/postprocess/README_ZH.html#token">为数据集计算token数目</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/postprocess/README_ZH.html#id2">将多个数据集以可选的权重混合</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/postprocess/README_ZH.html#jsonl">反序列化 jsonl 文件中的元字段</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tools/preprocess/README.html">Preprocess Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/preprocess/README.html#usage">Usage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README.html#split-datasets-to-sub-datasets-by-language">Split datasets to sub-datasets by language</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README.html#convert-raw-arxiv-data-to-jsonl">Convert raw arXiv data to jsonl</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README.html#convert-raw-stack-exchange-data-to-jsonl">Convert raw stack_exchange data to jsonl</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README.html#convert-raw-alpaca-cot-data-to-jsonl">Convert raw Alpaca-CoT data to jsonl</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README.html#reformat-csv-or-tsv-file">Reformat csv or tsv file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README.html#reformat-jsonl-file">Reformat jsonl file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README.html#serialize-meta-fields-in-jsonl-file">Serialize meta fields in jsonl file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/preprocess/README_ZH.html">预处理工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/preprocess/README_ZH.html#id2">用法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README_ZH.html#id3">按语言将数据集拆分为子数据集</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README_ZH.html#arxiv-jsonl">将原始 arXiv 数据转换为 jsonl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README_ZH.html#stack-exchange-jsonl">将原始 stack_exchange 数据转换为 jsonl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README_ZH.html#alpaca-cot-jsonl">将原始 Alpaca-CoT 数据转换为 jsonl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README_ZH.html#csv-tsv">重新格式化 csv 或者 tsv 文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README_ZH.html#jsonl">重新格式化 jsonl 文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/preprocess/README_ZH.html#id4">序列化 jsonl 文件中的元字段</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tools/quality_classifier/README.html">Data Scoring</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools/quality_classifier/README.html#data-scoring-capabilities">Data Scoring Capabilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools/quality_classifier/README.html#quality-classifier-toolkit-gpt-3-reproduced">Quality Classifier Toolkit (GPT-3 Reproduced)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tools/quality_classifier/README.html#usage">Usage</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README.html#predict-with-existing-classifiers">Predict with existing classifiers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README.html#train-your-own-quality-classifier">Train your own quality classifier</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README.html#evaluate-a-quality-classifier">Evaluate a quality classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/quality_classifier/README_ZH.html">给数据打分</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#id2">数据打分能力</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#gpt3">复现GPT3的质量分类器套件</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#id3">用法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#id4">使用现有的分类器进行预测</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#id5">训练自己的质量分类器</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#id6">评估质量分类器</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="tools/quality_classifier/README.html#model-zoo">Model Zoo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tools/quality_classifier/README.html#more-about-quality-classifier">More about Quality Classifier</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README.html#method">Method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README.html#tokenizers">Tokenizers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README.html#keep-methods">Keep Methods</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#model-zoo">Model Zoo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#id7">有关质量分类器的更多信息</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#id8">方法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#tokenizers">Tokenizers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/quality_classifier/README_ZH.html#keep-methods">Keep Methods</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第三方</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="thirdparty/LLM_ecosystems/README.html">LLM Ecosystems</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="thirdparty/LLM_ecosystems/README.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thirdparty/LLM_ecosystems/README_ZH.html">大语言模型生态</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="thirdparty/LLM_ecosystems/README_ZH.html#id2">安装</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="thirdparty/models/README.html">Third-party Model Library</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="thirdparty/models/README.html#easyanimate">EasyAnimate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thirdparty/models/README_ZH.html">第三方模型库</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="thirdparty/models/README_ZH.html#easyanimate">EasyAnimate</a></li>
 </ul>
 </li>
 </ul>
@@ -1567,17 +1583,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">data_juicer</a>
+          <a href="index_ZH.html">data_juicer</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">DJ-Cookbook</li>
+      <li><a href="index_ZH.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">data_juicer.tools</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/DJ-cookbook.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/data_juicer.tools.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -1585,115 +1601,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="dj-cookbook">
-<h1>DJ-Cookbook<a class="headerlink" href="#dj-cookbook" title="Link to this heading">¶</a></h1>
-<section id="curated-resources">
-<h2>Curated Resources<a class="headerlink" href="#curated-resources" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://modelscope.github.io/data-juicer/_static/tutorial_kdd24.html">KDD-Tutorial</a></p></li>
-<li><p><a class="reference internal" href="docs/awesome_llm_data.html"><span class="doc">Awesome LLM-Data</span></a></p></li>
-<li><p><a class="reference internal" href="docs/BadDataExhibition.html"><span class="doc">“Bad” Data Exhibition</span></a></p></li>
-</ul>
-</section>
-<section id="coding-with-data-juicer-dj">
-<h2>Coding with Data-Juicer (DJ)<a class="headerlink" href="#coding-with-data-juicer-dj" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>Basics</p>
-<ul>
-<li><p><a class="reference internal" href="index.html"><span class="doc">Overview of DJ</span></a></p></li>
-<li><p><a class="reference internal" href="quick-start.html"><span class="doc">Quick Start</span></a></p></li>
-<li><p><a class="reference internal" href="docs/RecipeGallery.html"><span class="doc">Configuration</span></a></p></li>
-<li><p><a class="reference internal" href="tools/fmt_conversion/README.html"><span class="doc">Data Format Conversion</span></a></p></li>
-</ul>
-</li>
-<li><p>Lookup Materials</p>
-<ul>
-<li><p><a class="reference internal" href="docs/Operators.html"><span class="doc">DJ OperatorZoo</span></a></p></li>
-<li><p><a class="reference internal" href="api.html"><span class="doc">API references</span></a></p></li>
-</ul>
-</li>
-<li><p>Advanced</p>
-<ul>
-<li><p><a class="reference internal" href="docs/DeveloperGuide.html"><span class="doc">Developer Guide</span></a></p></li>
-<li><p><a class="reference internal" href="tools/preprocess/README.html"><span class="doc">Preprocess Tools</span></a></p></li>
-<li><p><a class="reference internal" href="tools/postprocess/README.html"><span class="doc">Postprocess Tools</span></a></p></li>
-<li><p><a class="reference internal" href="docs/Sandbox.html"><span class="doc">Sandbox</span></a></p></li>
-<li><p><a class="reference internal" href="docs/DJ_service.html"><span class="doc">API Service</span></a></p></li>
-<li><p><a class="reference internal" href="tools/quality_classifier/README.html"><span class="doc">Data Scoring</span></a></p></li>
-<li><p><a class="reference internal" href="tools/evaluator/README.html"><span class="doc">Auto Evaluation</span></a></p></li>
-<li><p><a class="reference internal" href="thirdparty/LLM_ecosystems/README.html"><span class="doc">Third-parties Integration</span></a></p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="use-cases-data-recipes">
-<h2>Use Cases &amp; Data Recipes<a class="headerlink" href="#use-cases-data-recipes" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="docs/RecipeGallery.html"><span class="doc">Data Recipe Gallery</span></a></p>
-<ul>
-<li><p>Data-Juicer Minimal Example Recipe</p></li>
-<li><p>Reproducing Open Source Text Datasets</p></li>
-<li><p>Improving Open Source Pre-training Text Datasets</p></li>
-<li><p>Improving Open Source Post-tuning Text Datasets</p></li>
-<li><p>Synthetic Contrastive Learning Image-text Datasets</p></li>
-<li><p>Improving Open Source Image-text Datasets</p></li>
-<li><p>Basic Example Recipes for Video Data</p></li>
-<li><p>Synthesizing Human-centric Video Benchmarks</p></li>
-<li><p>Improving Existing Open Source Video Datasets</p></li>
-</ul>
-</li>
-<li><p>Data-Juicer related Competitions</p>
-<ul>
-<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532251">Better Synth</a>, explore the impact of large model synthetic data on image understanding ability with DJ-Sandbox Lab and multimodal large models</p></li>
-<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532219">Modelscope-Sora Challenge</a>, based on Data-Juicer and <a class="reference external" href="https://github.com/aigc-apps/EasyAnimate">EasyAnimate</a> framework,  optimize data and train SORA-like small models to generate better videos</p></li>
-<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532174">Better Mixture</a>, only adjust data mixing and sampling strategies for given multiple candidate datasets</p></li>
-<li><p>FT-Data Ranker (<a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532157">1B Track</a>, <a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532158">7B Track</a>), For a specified candidate dataset, only adjust the data filtering and enhancement strategies</p></li>
-<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532254">Kolors-LoRA Stylized Story Challenge</a>, based on Data-Juicer and <a class="reference external" href="https://github.com/modelscope/DiffSynth-Studio">DiffSynth-Studio</a>framework, explore Diffusion model fine-tuning</p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="docs/DJ_SORA.html"><span class="doc">DJ-SORA</span></a></p></li>
-<li><p>Based on Data-Juicer and <a class="reference external" href="https://github.com/modelscope/agentscope">AgentScope</a> framework, leverage <cite>agents to call DJ Filters &lt;https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_filter_process.ipynb&gt;</cite> and <cite>call DJ Mappers &lt;https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_mapper_process.ipynb&gt;</cite></p></li>
-</ul>
-</section>
-<section id="interactive-examples">
-<h2>Interactive Examples<a class="headerlink" href="#interactive-examples" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>Introduction to Data-Juicer [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/overview_scan/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/overview_scan">HuggingFace</a>]</p></li>
-<li><p>Data Visualization:</p>
-<ul>
-<li><p>Basic Statistics [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_statistics/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_statistics">HuggingFace</a>]</p></li>
-<li><p>Lexical Diversity [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_diversity/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_diversity">HuggingFace</a>]</p></li>
-<li><p>Operator Insight (Single OP) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visualization_op_insight/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_op_insight">HuggingFace</a>]</p></li>
-<li><p>Operator Effect (Multiple OPs) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_op_effect/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_op_effect">HuggingFace</a>]</p></li>
-</ul>
-</li>
-<li><p>Data Processing:</p>
-<ul>
-<li><p>Scientific Literature (e.g. <a class="reference external" href="https://info.arxiv.org/help/bulk_data_s3.html">arXiv</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_sci_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_sci_data">HuggingFace</a>]</p></li>
-<li><p>Programming Code (e.g. <a class="reference external" href="https://huggingface.co/datasets/bigcode/the-stack">TheStack</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_code_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_code_data">HuggingFace</a>]</p></li>
-<li><p>Chinese Instruction Data (e.g. <a class="reference external" href="https://huggingface.co/datasets/QingyiSi/Alpaca-CoT">Alpaca-CoT</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_sft_zh_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_cft_zh_data">HuggingFace</a>]</p></li>
-</ul>
-</li>
-<li><p>Tool Pool:</p>
-<ul>
-<li><p>Dataset Splitting by Language [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/tool_dataset_splitting_by_language/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/tool_dataset_splitting_by_language">HuggingFace</a>]</p></li>
-<li><p>Quality Classifier for CommonCrawl [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/tool_quality_classifier/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/tool_quality_classifier">HuggingFace</a>]</p></li>
-<li><p>Auto Evaluation on <cite>HELM &lt;https://github.com/stanford-crfm/helm&gt;</cite> [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/auto_evaluation_helm/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/auto_evaluation_helm">HuggingFace</a>]</p></li>
-<li><p>Data Sampling and Mixture [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_mixture/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_mixture">HuggingFace</a>]</p></li>
-</ul>
-</li>
-<li><p>Data Processing Loop [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_process_loop/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_process_loop">HuggingFace</a>]</p></li>
-</ul>
-</section>
+  <section id="module-data_juicer.tools">
+<span id="data-juicer-tools"></span><h1>data_juicer.tools<a class="headerlink" href="#module-data_juicer.tools" title="Link to this heading">¶</a></h1>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Data Processing for and with Foundation Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

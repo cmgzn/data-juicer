@@ -5,14 +5,12 @@ DJ-Cookbook
 Curated Resources
 -----------------
 
-
 * `KDD-Tutorial <https://modelscope.github.io/data-juicer/_static/tutorial_kdd24.html>`_
 * :doc:`Awesome LLM-Data <docs/awesome_llm_data>`
 * :doc:`"Bad" Data Exhibition <docs/BadDataExhibition>`
 
 Coding with Data-Juicer (DJ)
 ----------------------------
-
 
 * Basics
 
@@ -23,7 +21,7 @@ Coding with Data-Juicer (DJ)
 
 * Lookup Materials
 
-  * `DJ OperatorZoo <https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md>`_
+  * :doc:`DJ OperatorZoo <docs/Operators>`
   * :doc:`API references <api>`
 
 * Advanced
@@ -39,7 +37,6 @@ Coding with Data-Juicer (DJ)
 
 Use Cases & Data Recipes
 ------------------------
-
 
 * :doc:`Data Recipe Gallery <docs/RecipeGallery>`
 
@@ -66,7 +63,6 @@ Use Cases & Data Recipes
 
 Interactive Examples
 --------------------
-
 
 * Introduction to Data-Juicer [\ `ModelScope <https://modelscope.cn/studios/Data-Juicer/overview_scan/summary>`_\ ] [\ `HuggingFace <https://huggingface.co/spaces/datajuicer/overview_scan>`_\ ]
 * Data Visualization:
