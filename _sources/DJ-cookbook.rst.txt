@@ -62,7 +62,7 @@ Use Cases & Data Recipes
   * `Kolors-LoRA Stylized Story Challenge <https://tianchi.aliyun.com/competition/entrance/532254>`_\ , based on Data-Juicer and `DiffSynth-Studio <https://github.com/modelscope/DiffSynth-Studio>`_\ framework, explore Diffusion model fine-tuning
 
 * :doc:`DJ-SORA <docs/DJ_SORA>`
-* Based on Data-Juicer and `AgentScope <https://github.com/modelscope/agentscope>`_ framework, leverage `agents to call DJ Filters <./demos/api_service/react_data_filter_process.ipynb>` and `call DJ Mappers <./demos/api_service/react_data_mapper_process.ipynb>`
+* Based on Data-Juicer and `AgentScope <https://github.com/modelscope/agentscope>`_ framework, leverage `agents to call DJ Filters <https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_filter_process.ipynb>` and `call DJ Mappers <https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_mapper_process.ipynb>`
 
 Interactive Examples
 --------------------
