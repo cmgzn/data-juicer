@@ -1608,8 +1608,8 @@
 <p>此文件夹包含一些测评脚本，用于测评模型生成的视频。</p>
 <section id="id2">
 <h2>用法<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>使用 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/calc_metrics_for_dataset.py">calc_metrics_for_dataset.py</a> 计算生成视频集的FVD或ISV</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/video_metrics/calc_metrics_for_dataset.py<span class="w">        </span><span class="se">\</span>
+<p>使用 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tools/mm_eval/inception_metrics/calc_metrics_for_videos.py">calc_metrics_for_videos.py</a> 计算生成视频集的FVD或ISV</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/video_metrics/calc_metrics_for_videos.py<span class="w">        </span><span class="se">\</span>
 <span class="w">    </span>--fake_data_path<span class="w">    </span>&lt;fake_data_path&gt;<span class="w">        </span><span class="se">\</span>
 <span class="w">    </span>--real_data_path<span class="w">    </span>&lt;real_data_path&gt;<span class="w">        </span><span class="se">\</span>
 <span class="w">    </span><span class="o">[</span>--fake_mm_dir<span class="w">      </span>&lt;fake_mm_dir&gt;<span class="o">]</span><span class="w">          </span><span class="se">\</span>
@@ -1625,7 +1625,7 @@
 <span class="w">    </span>--seed<span class="w">              </span>&lt;seed&gt;
 
 <span class="c1"># get help</span>
-python<span class="w"> </span>tools/video_metrics/calc_metrics_for_dataset.py<span class="w"> </span>--help
+python<span class="w"> </span>tools/video_metrics/calc_metrics_for_videos.py<span class="w"> </span>--help
 </pre></div>
 </div>
 <ul class="simple">
