@@ -78,7 +78,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#id2">从源码安装 (指定使用场景)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">从源码安装 (指定部分算子)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pip">使用 pip 安装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#docker">使用 Docker 安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker">使用 Docker 安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">安装校验</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">使用视频相关算子</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="quick-start_ZH.html">快速上手</a><ul>
@@ -229,7 +233,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/Sandbox_ZH.html">沙盒</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/Sandbox_ZH.html">沙盒实验室</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="docs/Sandbox_ZH.html#id2">用户指南</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#id3">应用和成果</a></li>
 <li class="toctree-l3"><a class="reference internal" href="docs/Sandbox_ZH.html#dj-sandbox">什么是沙盒实验室（DJ-Sandbox）？</a></li>
@@ -1703,39 +1707,42 @@ dj-install<span class="w"> </span>--config<span class="w"> </span>path_to_your_d
 <section id="docker">
 <h2>使用 Docker 安装<a class="headerlink" href="#docker" title="Link to this heading">¶</a></h2>
 <ul>
-<li><p>您可以选择
-- 从DockerHub直接拉取我们的预置镜像:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">`shell</span>
-<span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">datajuicer/data-juicer:&lt;version_tag&gt;</span>
-<span class="pre">`</span></code></p>
+<li><p>您可以选择</p>
+<ul>
+<li><p>从DockerHub直接拉取我们的预置镜像:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;
+</pre></div>
+</div>
 <ul class="simple">
 <li><p>如您无法连接到DockerHub，请使用其他可用的Docker镜像源拉取（可从互联网搜索获取）：</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
-<span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">&lt;其他可用镜像源&gt;/datajuicer/data-juicer:&lt;version_tag&gt;</span>
-<span class="pre">`</span></code></p>
-</div></blockquote>
-<ul>
-<li><p>或者运行如下命令用我们提供的 [Dockerfile](Dockerfile) 来构建包括最新版本的 <cite>data-juicer</cite> 的 docker 镜像：</p>
-<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
-<span class="pre">docker</span> <span class="pre">build</span> <span class="pre">-t</span> <span class="pre">datajuicer/data-juicer:&lt;version_tag&gt;</span> <span class="pre">.</span>
-<span class="pre">`</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>&lt;其他可用镜像源&gt;/datajuicer/data-juicer:&lt;version_tag&gt;
+</pre></div>
+</div>
 </li>
-<li><p><cite>&lt;version_tag&gt;`的格式类似于`v0.2.0</cite>，与发布（Release）的版本号相同。</p></li>
+<li><p>或者运行如下命令用我们提供的 <a class="reference internal" href="#Dockerfile"><span class="xref myst">Dockerfile</span></a> 来构建包括最新版本的 <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code> 的 docker 镜像：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;<span class="w"> </span>.
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;version_tag&gt;</span></code>的格式类似于<code class="docutils literal notranslate"><span class="pre">v0.2.0</span></code>，与发布（Release）的版本号相同。</p></li>
 </ul>
 </li>
 </ul>
-<p>### 安装校验</p>
-<p><code class="docutils literal notranslate"><span class="pre">`python</span>
-<span class="pre">import</span> <span class="pre">data_juicer</span> <span class="pre">as</span> <span class="pre">dj</span>
-<span class="pre">print(dj.__version__)</span>
-<span class="pre">`</span></code></p>
-<p>### 使用视频相关算子</p>
+<section id="id1">
+<h3>安装校验<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">data_juicer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dj</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dj</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>使用视频相关算子<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <p>在使用视频相关算子之前，应该安装 <strong>FFmpeg</strong> 并确保其可通过 $PATH 环境变量访问。</p>
-<p>你可以使用包管理器安装 FFmpeg（例如，在 Debian/Ubuntu 上使用 sudo apt install ffmpeg，在 OS X 上使用 brew install ffmpeg），或访问[官方FFmpeg链接](<a class="reference external" href="https://ffmpeg.org/download.html">https://ffmpeg.org/download.html</a>)。</p>
+<p>你可以使用包管理器安装 FFmpeg（例如，在 Debian/Ubuntu 上使用 sudo apt install ffmpeg，在 OS X 上使用 brew install ffmpeg），或访问<a class="reference external" href="https://ffmpeg.org/download.html">官方FFmpeg链接</a>。</p>
 <p>随后在终端运行 ffmpeg 命令检查环境是否设置正确。</p>
-<p>&lt;p align=”right”&gt;&lt;a href=”#table”&gt;🔼 back to index&lt;/a&gt;&lt;/p&gt;</p>
+<p align="right"><a href="#table">🔼 back to index</a></p>
+</section>
 </section>
 </section>
 
