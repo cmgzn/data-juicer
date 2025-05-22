@@ -249,38 +249,6 @@
 <li class="toctree-l1"><a class="reference internal" href="thirdparty/LLM_ecosystems/README_ZH.html">大语言模型生态</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thirdparty/models/README_ZH.html">第三方模型库</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="data_juicer.core.html">data_juicer.core package</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of data_juicer.core package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.data.html">data_juicer.core.data package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.core.executor.html">data_juicer.core.executor package</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="data_juicer.ops.html">data_juicer.ops package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of data_juicer.ops package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.aggregator.html">data_juicer.ops.aggregator package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.common.html">data_juicer.ops.common package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.grouper.html">data_juicer.ops.grouper package</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of data_juicer.ops.mapper package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="data_juicer.ops.mapper.annotation.html">data_juicer.ops.mapper.annotation package</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.filter.html">data_juicer.ops.filter package</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="data_juicer.ops.mapper.html">data_juicer.ops.mapper package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of data_juicer.ops.mapper package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_juicer.ops.mapper.annotation.html">data_juicer.ops.mapper.annotation package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.selector.html">data_juicer.ops.selector package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.ops.common.html">data_juicer.ops.common package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.analysis.html">data_juicer.analysis package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.config.html">data_juicer.config package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_juicer.format.html">data_juicer.format package</a></li>
-</ul>
 
 </div></div><div class="sidebar-bottom-menu">
     <div class="current-info">
@@ -357,71 +325,108 @@
 <section id="id1">
 <h2>前置条件<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>推荐 Python&gt;=3.9,&lt;=3.10</p></li>
-<li><p>gcc &gt;= 5 (at least C++14 support)</p></li>
+<li><p>Python &gt;= 3.10</p></li>
+<li><p>Git (用于源码安装)</p></li>
+<li><p>uv (推荐的包安装器)</p></li>
 </ul>
 </section>
 <section id="id2">
-<h2>从源码安装 (指定使用场景)<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>运行以下命令以安装 <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> 可编辑模式的最新基础版本</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;path_to_data_juicer&gt;
-pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.
+<h2>基础安装<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>Data-Juicer 现已上架 PyPI。最小安装包含核心数据处理能力：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>py-data-juicer
 </pre></div>
 </div>
+<p>这将提供：</p>
 <ul class="simple">
-<li><p>部分算子功能依赖于较大的或者平台兼容性不是很好的第三方库，因此用户可按需额外安装可选的依赖项:</p></li>
+<li><p>数据加载和操作</p></li>
+<li><p>文件系统操作</p></li>
+<li><p>并行处理</p></li>
+<li><p>基础 I/O 和工具</p></li>
 </ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;path_to_data_juicer&gt;
-pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.<span class="w">  </span><span class="c1"># 安装最小依赖，支持基础功能</span>
-pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>tools<span class="o">]</span><span class="w"> </span><span class="c1"># 安装部分工具库的依赖</span>
-</pre></div>
-</div>
-<p>依赖选项如下表所示:</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>标签</p></th>
-<th class="head"><p>描述</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.</span></code> 或 <code class="docutils literal notranslate"><span class="pre">.[mini]</span></code></p></td>
-<td><p>为基本 Data-Juicer 安装最小依赖项。</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[all]</span></code></p></td>
-<td><p>为除沙盒之外的所有 OP 安装依赖项。</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[sci]</span></code></p></td>
-<td><p>为与科学用途相关的 OP 安装依赖项。</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[dist]</span></code></p></td>
-<td><p>安装用于分布式数据处理的额外依赖项。</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[dev]</span></code></p></td>
-<td><p>安装作为贡献者开发软件包的依赖项。</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.[tools]</span></code></p></td>
-<td><p>安装专用工具（例如质量分类器）的依赖项。</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.[sandbox]</span></code></p></td>
-<td><p>安装沙盒的所有依赖项。</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 </section>
 <section id="id3">
-<h2>从源码安装 (指定部分算子)<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<h2>场景化安装<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>组件详情请参考 <a class="reference internal" href="#pyproject.toml"><span class="xref myst">pyproject.toml</span></a>。</p>
+<p><strong>核心 ML &amp; DL</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 通用 ML/DL 能力</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[generic]&quot;</span>
+</pre></div>
+</div>
+<p>包括：PyTorch、Transformers、VLLM 等。</p>
+<p><strong>领域特定功能</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 计算机视觉</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[vision]&quot;</span>
+
+<span class="c1"># 自然语言处理</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[nlp]&quot;</span>
+
+<span class="c1"># 音频处理</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[audio]&quot;</span>
+
+**附加组件**
+
+<span class="sb">```</span>bash
+<span class="c1"># 分布式计算</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[distributed]&quot;</span>
+
+<span class="c1"># AI 服务和 API</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[ai_services]&quot;</span>
+
+**开发工具**
+<span class="sb">```</span>bash
+<span class="c1"># 开发和测试</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[dev]&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2>常见安装模式<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p><strong>1. 文本处理设置</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[generic,nlp]&quot;</span>
+</pre></div>
+</div>
+<p><strong>2. 视觉处理设置</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[generic,vision]&quot;</span>
+</pre></div>
+</div>
+<p><strong>3. 完整处理流程</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[generic,nlp,vision,distributed]&quot;</span>
+</pre></div>
+</div>
+<p><strong>4. 完整安装</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 安装所有功能（除沙盒外）</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[all]&quot;</span>
+</pre></div>
+</div>
+<p><strong>5. 开发模式</strong></p>
+<p>对于贡献者和开发者：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 克隆仓库</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/modelscope/data-juicer.git
+<span class="nb">cd</span><span class="w"> </span>data-juicer
+
+<span class="c1"># 安装开发依赖</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+
+<span class="c1"># 可选：使用 uv 进行虚拟环境和依赖管理</span>
+curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w">   </span><span class="c1"># 安装 uv</span>
+uv<span class="w"> </span>venv<span class="w"> </span>--python<span class="w"> </span><span class="m">3</span>.10<span class="w">                             </span><span class="c1"># 使用 Python 3.10 初始化虚拟环境</span>
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">                         </span><span class="c1"># 激活虚拟环境</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w">                               </span><span class="c1"># 安装最小依赖</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>特定算子安装<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>除了基于场景的安装外，我们还提供基于算子和基于菜谱的安装方式。</p>
 <ul class="simple">
-<li><p>只安装部分算子依赖</p></li>
+<li><p>安装特定算子的依赖</p></li>
 </ul>
-<p>随着OP数量的增长，全OP环境的依赖安装会变得越来越重。为此，我们提供了两个替代的、更轻量的选项，作为使用命令<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-v</span> <span class="pre">-e</span> <span class="pre">.[sci]</span></code>安装所有依赖的替代：</p>
+<p>随着算子数量的增长，所有算子的依赖变得非常庞大。除了使用 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-v</span> <span class="pre">-e</span> <span class="pre">.[all]</span></code> 安装所有依赖外，
+我们提供了两个更轻量级的替代方案：</p>
 <ul>
-<li><p>自动最小依赖安装：在执行Data-Juicer的过程中，将自动安装最小依赖。也就是说你可以安装mini后直接执行，但这种方式可能会导致一些(滞后的)依赖冲突。</p></li>
-<li><p>手动最小依赖安装：可以通过如下指令手动安装适合特定执行配置的最小依赖，可以提前确定依赖冲突、使其更易解决:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 从源码安装</span>
+<li><p>自动最小依赖安装：在 Data-Juicer 执行过程中，将自动安装最小依赖。这允许立即执行，但可能会导致依赖冲突。</p></li>
+<li><p>手动最小依赖安装：要手动安装针对特定执行配置的最小依赖，请运行以下命令：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 仅适用于从源码安装</span>
 python<span class="w"> </span>tools/dj_install.py<span class="w"> </span>--config<span class="w"> </span>path_to_your_data-juicer_config_file
 
 <span class="c1"># 使用命令行工具</span>
@@ -431,65 +436,70 @@ dj-install<span class="w"> </span>--config<span class="w"> </span>path_to_your_d
 </li>
 </ul>
 </section>
-<section id="pip">
-<h2>使用 pip 安装<a class="headerlink" href="#pip" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>运行以下命令用 <code class="docutils literal notranslate"><span class="pre">pip</span></code> 安装 <code class="docutils literal notranslate"><span class="pre">data_juicer</span></code> 的最新发布版本：</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>py-data-juicer
-</pre></div>
-</div>
-</section>
-<ul>
-<li><p><strong>注意</strong>：
-* 使用这种方法安装时，只有 <cite>data_juicer</cite> 中的基础的 API 和2个基础工具</p>
-<blockquote>
-<div><p>（数据 <a href="#id4"><span class="problematic" id="id5">`处理 &lt;quick-start_ZH.html#id2&gt;`_与 `分析 (quick-start_ZH.html#id4&gt;`_</span></a>）可以使用。如需更定制化地使用完整功能，建议 <a class="reference external" href="#id2">从源码进行安装</a>)。</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>pypi 的发布版本较源码的最新版本有一定的滞后性，如需要随时跟进 <cite>data_juicer</cite> 的最新功能支持，建议 <a class="reference external" href="#id2">从源码进行安装</a>)。</p></li>
-</ul>
-</li>
-</ul>
 <section id="docker">
 <h2>使用 Docker 安装<a class="headerlink" href="#docker" title="Link to this heading">¶</a></h2>
 <ul>
-<li><p>您可以选择</p>
+<li><p>您可以</p>
 <ul>
-<li><p>从DockerHub直接拉取我们的预置镜像:</p>
+<li><p>从 DockerHub 拉取预构建镜像：</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>如您无法连接到DockerHub，请使用其他可用的Docker镜像源拉取（可从互联网搜索获取）：</p></li>
+<li><p>如果无法连接到 DockerHub，请使用其他镜像源（您可以在互联网上找到一些）：</p></li>
 </ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>&lt;其他可用镜像源&gt;/datajuicer/data-juicer:&lt;version_tag&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>&lt;other_registry_mirror&gt;/datajuicer/data-juicer:&lt;version_tag&gt;
 </pre></div>
 </div>
 </li>
-<li><p>或者运行如下命令用我们提供的 <a class="reference internal" href="#Dockerfile"><span class="xref myst">Dockerfile</span></a> 来构建包括最新版本的 <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code> 的 docker 镜像：</p>
+<li><p>或运行以下命令构建包含最新 <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code> 的 docker 镜像，使用提供的 <a class="reference internal" href="#Dockerfile"><span class="xref myst">Dockerfile</span></a>：</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;<span class="w"> </span>.
 </pre></div>
 </div>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;version_tag&gt;</span></code>的格式类似于<code class="docutils literal notranslate"><span class="pre">v0.2.0</span></code>，与发布（Release）的版本号相同。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;version_tag&gt;</span></code> 的格式类似于 <code class="docutils literal notranslate"><span class="pre">v0.2.0</span></code>，与发布版本标签相同。</p></li>
 </ul>
 </li>
 </ul>
-<section id="id1">
-<h3>安装校验<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+</section>
+<section id="id6">
+<h2>注意事项和故障排除<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple" start="0">
+<li><p><strong>安装检查</strong></p></li>
+</ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">data_juicer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dj</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">dj</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="id2">
-<h3>使用视频相关算子<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
-<p>在使用视频相关算子之前，应该安装 <strong>FFmpeg</strong> 并确保其可通过 $PATH 环境变量访问。</p>
-<p>你可以使用包管理器安装 FFmpeg（例如，在 Debian/Ubuntu 上使用 sudo apt install ffmpeg，在 OS X 上使用 brew install ffmpeg），或访问<a class="reference external" href="https://ffmpeg.org/download.html">官方FFmpeg链接</a>。</p>
-<p>随后在终端运行 ffmpeg 命令检查环境是否设置正确。</p>
-<p align="right"><a href="#table">🔼 back to index</a></p>
-</section>
+<ol class="arabic simple">
+<li><p><strong>模块化安装</strong></p>
+<ul class="simple">
+<li><p>只安装您需要的组件</p></li>
+<li><p>根据需要组合组件</p></li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">all</span></code> 进行完整安装</p></li>
+</ul>
+</li>
+<li><p><strong>沙盒环境</strong></p>
+<ul class="simple">
+<li><p>实验性功能的单独安装</p></li>
+<li><p>未来将作为微服务提供</p></li>
+</ul>
+</li>
+<li><p><strong>视频相关算子</strong></p>
+<ul class="simple">
+<li><p>在使用视频相关算子之前，需要安装 <strong>FFmpeg</strong> 并确保可以通过 $PATH 环境变量访问。</p></li>
+<li><p>您可以使用包管理器安装 FFmpeg（例如在 Debian/Ubuntu 上使用 sudo apt install ffmpeg，在 OS X 上使用 brew install ffmpeg）或访问 <a class="reference external" href="https://ffmpeg.org/download.html">官方 ffmpeg 链接</a>。</p></li>
+<li><p>通过从终端运行 ffmpeg 命令来检查您的环境路径是否正确设置。</p></li>
+</ul>
+</li>
+<li><p><strong>获取帮助</strong></p>
+<ul class="simple">
+<li><p>请先查看文档/问题</p></li>
+<li><p>必要时创建 GitHub issues</p></li>
+<li><p>加入社区频道进行讨论</p></li>
+</ul>
+</li>
+</ol>
 </section>
 </section>
 
@@ -550,14 +560,12 @@ dj-install<span class="w"> </span>--config<span class="w"> </span>path_to_your_d
             <ul>
 <li><a class="reference internal" href="#">安装</a><ul>
 <li><a class="reference internal" href="#id1">前置条件</a></li>
-<li><a class="reference internal" href="#id2">从源码安装 (指定使用场景)</a></li>
-<li><a class="reference internal" href="#id3">从源码安装 (指定部分算子)</a></li>
-<li><a class="reference internal" href="#pip">使用 pip 安装</a></li>
-<li><a class="reference internal" href="#docker">使用 Docker 安装</a><ul>
-<li><a class="reference internal" href="#id1">安装校验</a></li>
-<li><a class="reference internal" href="#id2">使用视频相关算子</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#id2">基础安装</a></li>
+<li><a class="reference internal" href="#id3">场景化安装</a></li>
+<li><a class="reference internal" href="#id4">常见安装模式</a></li>
+<li><a class="reference internal" href="#id5">特定算子安装</a></li>
+<li><a class="reference internal" href="#docker">使用 Docker 安装</a></li>
+<li><a class="reference internal" href="#id6">注意事项和故障排除</a></li>
 </ul>
 </li>
 </ul>

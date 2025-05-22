@@ -249,38 +249,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../thirdparty/LLM_ecosystems/README_ZH.html">大语言模型生态</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../thirdparty/models/README_ZH.html">第三方模型库</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../data_juicer.core.html">data_juicer.core package</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of data_juicer.core package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../data_juicer.core.data.html">data_juicer.core.data package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../data_juicer.core.executor.html">data_juicer.core.executor package</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../data_juicer.ops.html">data_juicer.ops package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of data_juicer.ops package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../data_juicer.ops.aggregator.html">data_juicer.ops.aggregator package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../data_juicer.ops.common.html">data_juicer.ops.common package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../data_juicer.ops.filter.html">data_juicer.ops.filter package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../data_juicer.ops.grouper.html">data_juicer.ops.grouper package</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../data_juicer.ops.mapper.html">data_juicer.ops.mapper package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of data_juicer.ops.mapper package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../data_juicer.ops.mapper.annotation.html">data_juicer.ops.mapper.annotation package</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../data_juicer.ops.selector.html">data_juicer.ops.selector package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.filter.html">data_juicer.ops.filter package</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../data_juicer.ops.mapper.html">data_juicer.ops.mapper package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of data_juicer.ops.mapper package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../data_juicer.ops.mapper.annotation.html">data_juicer.ops.mapper.annotation package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.selector.html">data_juicer.ops.selector package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data_juicer.ops.common.html">data_juicer.ops.common package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data_juicer.analysis.html">data_juicer.analysis package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data_juicer.config.html">data_juicer.config package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data_juicer.format.html">data_juicer.format package</a></li>
-</ul>
 
 </div></div><div class="sidebar-bottom-menu">
     <div class="current-info">
@@ -731,14 +699,15 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 </pre></div>
 </div>
 <ol class="arabic simple" start="5">
-<li><p>随着算子数量的增加，Data-Juicer的依赖也不断增多。为了防止Data-Juicer的依赖越来越重，我们为算子额外增加的依赖提供了一套延迟加载加上使用时安装依赖的策略。<code class="docutils literal notranslate"><span class="pre">LazyLoader</span></code>会检查加载的module对应的package有没有都安装，没有的话会动态自动安装。<code class="docutils literal notranslate"><span class="pre">AUTOINSTALL</span></code>用于安装额外的补丁。如下样例：</p></li>
+<li><p>随着算子数量的增加，Data-Juicer的依赖也不断增多。为了防止Data-Juicer的依赖越来越重，我们为算子额外增加的依赖提供了一套延迟加载加上使用时安装依赖的策略。<code class="docutils literal notranslate"><span class="pre">LazyLoader</span></code>会检查加载的module对应的package有没有都安装，没有的话会动态自动安装。如下样例：</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ... (import some library)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.lazy_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">LazyLoader</span><span class="p">,</span> <span class="n">AUTOINSTALL</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.lazy_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">LazyLoader</span>
 
 <span class="c1"># lazy import</span>
-<span class="n">kenlm</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s1">&#39;kenlm&#39;</span><span class="p">,</span> <span class="s1">&#39;kenlm&#39;</span><span class="p">)</span>
-<span class="n">sp</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s1">&#39;sp&#39;</span><span class="p">,</span> <span class="s1">&#39;sentencepiece&#39;</span><span class="p">)</span>
+<span class="n">torch</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s1">&#39;torch&#39;</span><span class="p">)</span>
+<span class="n">transformers</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s1">&#39;transformers&#39;</span><span class="p">)</span>
+<span class="n">nltk</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s1">&#39;nltk&#39;</span><span class="p">)</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">PerplexityFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -747,7 +716,7 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># auto install before init</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">AUTOINSTALL</span><span class="o">.</span><span class="n">check</span><span class="p">([</span><span class="s1">&#39;fasttext-wheel&#39;</span><span class="p">])</span>
+        <span class="n">LazyLoader</span><span class="o">.</span><span class="n">check_packages</span><span class="p">([</span><span class="s1">&#39;fasttext-wheel&#39;</span><span class="p">])</span>
         <span class="c1"># ... (some codes)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
@@ -815,11 +784,11 @@ optional arguments:
   --project_name PROJECT_NAME
                         name of your data process project. (type: str, default: null)
   --dataset_path DATASET_PATH
-                        path to your dataset file, relative with respect to the config file’s location (type: Path_fr, default: null)
+                        path to your dataset file, relative with respect to the config file&#39;s location (type: Path_fr, default: null)
   --dataset_dir DATASET_DIR
-                        path to your dataset(s) within a directory, relative with respect to the config file’s location (type: Path_drw, default: null)
+                        path to your dataset(s) within a directory, relative with respect to the config file&#39;s location (type: Path_drw, default: null)
   --export_path EXPORT_PATH
-                        path to the output processed dataset, relative with respect to the config file’s location (type: Path_fc, default: null)
+                        path to the output processed dataset, relative with respect to the config file&#39;s location (type: Path_fc, default: null)
   --process PROCESS, --process+ PROCESS
                         a list of several process operators with their arguments (type: List[Dict], default: null)
   --np NP               number of subprocess to process your dataset. (type: PositiveInt, default: null)
@@ -844,6 +813,95 @@ optional arguments:
 
 </pre></div>
 </div>
+</section>
+</section>
+<section id="id8">
+<h2>依赖管理<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<p>Data-Juicer 使用基于 <code class="docutils literal notranslate"><span class="pre">uv</span></code> 和 <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> 的现代依赖管理系统。依赖通过标准的 Python 打包格式 (PEP 621) 进行管理，并使用延迟加载系统按需安装。</p>
+<section id="uv">
+<h3>安装 uv<a class="headerlink" href="#uv" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">uv</span></code> 是一个快速的 Python 包安装器和解析器，用于替代 pip。您可以通过以下方式安装：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用 curl 安装</span>
+curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+
+<span class="c1"># 或使用 pip 安装</span>
+pip<span class="w"> </span>install<span class="w"> </span>uv
+</pre></div>
+</div>
+<p>安装完成后，您可以使用 <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">--version</span></code> 验证安装是否成功。</p>
+</section>
+<section id="id9">
+<h3>虚拟环境管理<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">uv</span></code> 提供了虚拟环境管理功能，可以替代 <code class="docutils literal notranslate"><span class="pre">venv</span></code> 和 <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>。以下是常用命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建新的虚拟环境</span>
+uv<span class="w"> </span>venv
+
+<span class="c1"># 创建指定 Python 版本的虚拟环境</span>
+uv<span class="w"> </span>venv<span class="w"> </span>--python<span class="w"> </span><span class="m">3</span>.10
+
+<span class="c1"># 激活虚拟环境</span>
+<span class="c1"># 在 Unix/macOS 上</span>
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+<span class="c1"># 在 Windows 上</span>
+.venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+
+<span class="c1"># 在虚拟环境中安装最小依赖</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3>添加新依赖<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>添加新依赖的方法：</p>
+<ol class="arabic simple">
+<li><p>将依赖添加到 <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> 的相应部分：</p>
+<ul class="simple">
+<li><p>核心依赖放在 <code class="docutils literal notranslate"><span class="pre">[project.dependencies]</span></code> 中</p></li>
+<li><p>可选依赖放在 <code class="docutils literal notranslate"><span class="pre">[project.optional-dependencies]</span></code> 的相应组中（ generic、dev、audio、video，etc.）</p></li>
+</ul>
+</li>
+<li><p>延迟加载系统会在首次使用时自动处理依赖安装。</p></li>
+</ol>
+<p>示例：</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[project.dependencies]</span>
+<span class="c1"># 核心依赖</span>
+<span class="n">numpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=1.26.4,&lt;2.0.0&quot;</span>
+
+<span class="k">[project.optional-dependencies]</span>
+<span class="n">generic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;torch&gt;=1.11.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;transformers&gt;=4.47.0,&lt;4.48.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="err">]</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3>开发环境设置<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>安装所有依赖：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[all]&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>或安装特定组：</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[generic]&quot;</span><span class="w">      </span><span class="c1"># 通用依赖</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span><span class="w">          </span><span class="c1"># 开发工具</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[ai_services]&quot;</span><span class="w">  </span><span class="c1"># 服务依赖</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>延迟加载<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<p>延迟加载系统在首次使用时自动安装依赖。这意味着：</p>
+<ul class="simple">
+<li><p>初始安装更快</p></li>
+<li><p>只安装必需的依赖</p></li>
+<li><p>依赖按需安装</p></li>
+<li><p>优先使用 <code class="docutils literal notranslate"><span class="pre">uv</span></code> 进行快速安装</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -917,6 +975,14 @@ optional arguments:
 <li><a class="reference internal" href="#id5">3. 构建自己的数据菜谱和配置</a><ul>
 <li><a class="reference internal" href="#id6">3.1 丰富的配置源和类型提示</a></li>
 <li><a class="reference internal" href="#id7">3.2 层次化的配置和帮助</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">依赖管理</a><ul>
+<li><a class="reference internal" href="#uv">安装 uv</a></li>
+<li><a class="reference internal" href="#id9">虚拟环境管理</a></li>
+<li><a class="reference internal" href="#id10">添加新依赖</a></li>
+<li><a class="reference internal" href="#id11">开发环境设置</a></li>
+<li><a class="reference internal" href="#id12">延迟加载</a></li>
 </ul>
 </li>
 </ul>
