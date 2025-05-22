@@ -39,7 +39,7 @@ myst_heading_anchors = 4
 smv_tag_whitelist = f'^(latest|stable)&'
 smv_branch_whitelist = r"^main$"
 smv_released_pattern = r"^refs/tags/v\d+\.\d+\.\d+$"
-smv_remote_whitelist = r'^upstream$'
+# smv_remote_whitelist = r'^upstream$'
 
 # apidoc settings
 apidoc_module_dir = "../../../data_juicer"
