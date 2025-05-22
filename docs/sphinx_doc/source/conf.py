@@ -41,7 +41,6 @@ extensions = [
 myst_heading_anchors = 4
 smv_tag_whitelist = r'^v\d+\.\d+\.\d+$'
 smv_branch_whitelist = r"^main$"
-smv_released_pattern = r"^tags/.*$"
 smv_released_pattern = r"^refs/tags/v\d+\.\d+\.\d+$"
 
 # apidoc set
