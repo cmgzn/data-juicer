@@ -37,6 +37,10 @@ jobs:
       run: |
         cd docs/sphinx_doc
         bash build_doc.sh
+    - name: Add redirect to stable doc
+      run: |
+        cp static/redirect.html build/index.html
+        sed -i "s/\[VERSION\]/$(python -c 'import data_juicer;print(data_juicer.__version__)')/g" build/index.html
     - name: Upload Documentation
       uses: actions/upload-artifact@v4
       with:

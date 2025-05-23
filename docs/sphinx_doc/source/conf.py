@@ -25,7 +25,7 @@ author = "Data-Juicer Team"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary", 
+    "sphinx.ext.autosummary",
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
     "sphinx.ext.autosectionlabel",
@@ -37,10 +37,19 @@ extensions = [
 
 # -- Extension configuration ------------------------------------------------
 myst_heading_anchors = 4
-smv_tag_whitelist = r'^v\d+\.\d+\.\d+$'
+myst_enable_extensions = ["substitution"]
+# Add links that cannot be automatically replaced in include mode
+myst_substitutions = {
+    "[pyproject.toml](pyproject.toml)": "[pyproject.toml](https://github.com/modelscope/data-juicer/blob/main/pyproject.toml)",
+    "[Dockerfile](Dockerfile)": "[Dockerfile](https://github.com/modelscope/data-juicer/blob/main/Dockerfile)",
+    "(./demos/api_service/react_data_mapper_process.ipynb)": "(https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_mapper_process.ipynb)",
+    "(./demos/api_service/react_data_filter_process.ipynb)": "(https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_filter_process.ipynb)",
+}
+
+# sphinx_multiversion configuration
+smv_tag_whitelist = r"^v\d+\.\d+\.\d+$"
 smv_branch_whitelist = r"^main$"
 smv_released_pattern = r"^refs/tags/v\d+\.\d+\.\d+$"
-# smv_remote_whitelist = r'^upstream$'
 
 # apidoc settings
 apidoc_module_dir = "../../../data_juicer"
@@ -67,7 +76,7 @@ html_title = "data-juicer"
 html_sidebars = {
     "**": [
         "sidebar/brand.html",
-        "sidebar/search.html", 
+        "sidebar/search.html",
         "sidebar/scroll-start.html",
         "sidebar/navigation.html",
         "sidebar/scroll-end.html",
@@ -93,28 +102,31 @@ supported_languages = {
     # 'ja': '日本語',
 }
 
+
 def get_lang_link(language, pagename, lang_code, non_zh_pages=[], current_version=""):
     """Generate language specific links for documentation pages"""
     base_path = "../../" if current_version else "../"
-    
+
     def norm_pagename(pagename):
         return os.path.normpath(pagename)
 
     norm_non_zh_pages = set(map(norm_pagename, non_zh_pages))
     target_page = pagename
-    
+
     if language == "zh-CN" and pagename.endswith("_ZH"):
         target_page = pagename[:-3]
     if lang_code == "zh-CN" and not pagename.endswith("_ZH"):
         if norm_pagename(pagename) not in norm_non_zh_pages:
             target_page += "_ZH"
-            
+
     return f"{base_path}{lang_code}/{current_version}{target_page}.html"
+
 
 html_context = {
     "supported_languages": supported_languages,
     "get_lang_link": get_lang_link,
 }
+
 
 def find_zh_exclusions(app, config):
     """
@@ -122,7 +134,7 @@ def find_zh_exclusions(app, config):
     """
     non_zh_pages = set()
     zh_exclusions = []
-    
+
     for root, dirs, files in os.walk(app.srcdir):
         for file in files:
             # Check for files with English base names and corresponding _ZH versions
@@ -133,7 +145,7 @@ def find_zh_exclusions(app, config):
                 rel_path = os.path.normpath(
                     os.path.relpath(os.path.join(root, file), app.srcdir)
                 )
-                
+
                 # If Chinese version exists, add to exclusions
                 if os.path.exists(zh_file_path):
                     zh_exclusions.append(rel_path)
@@ -151,11 +163,13 @@ def find_zh_exclusions(app, config):
 
     app.config.html_context.setdefault("non_zh_pages", set()).update(non_zh_pages)
 
+
 def skip(app, what, name, obj, would_skip, options):
     """Control which members to skip in documentation"""
     if name == "__init__":
         return False
     return would_skip
+
 
 def create_symlinks(app, config):
     """Create symbolic links for markdown files in the documentation"""
@@ -172,13 +186,14 @@ def create_symlinks(app, config):
 
         if not target.exists():
             target.symlink_to(os.path.relpath(md_file, target.parent))
-    
+
     find_zh_exclusions(app, config)
+
 
 def process_doc_links(app, docname, source):
     """Process and update documentation links"""
     repo_base = "https://github.com/modelscope/data-juicer/blob/main/"
-    
+
     def link_replacer(match):
         text, path = match.group(1), match.group(2)
         abs_path = os.path.normpath(os.path.join(os.path.dirname(docname), path))
@@ -188,30 +203,27 @@ def process_doc_links(app, docname, source):
     source[0] = re.sub(pattern, link_replacer, source[0])
     return source[0]
 
+
 def process_read(app, docname, source):
     """Process document during reading"""
     source[0] = process_doc_links(app, docname, source)
 
-def process_include(app, relative_path, parent_docname, source):
-    """Process included documents"""
-    print(f"Processing include: {relative_path} from {parent_docname}")
-    source[0] = process_doc_links(app, os.path.join(os.path.dirname(parent_docname), relative_path), source)
 
 def setup(app):
     """Setup Sphinx application hooks"""
-    current_version = app.config.smv_current_version
+    # current_version = app.config.smv_current_version
+    current_version = "main"
     app.connect("config-inited", create_symlinks)
     app.config.root_doc = "index_ZH" if app.config.language == "zh-CN" else "index"
-    
+
     if current_version != "main":
-        app.connect("builder-inited", lambda app: shutil.copytree(
-            os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")),
-            app.srcdir.parent.parent.parent / "docs",
-            dirs_exist_ok=True
-        ))
-        
+        app.connect(
+            "builder-inited",
+            lambda app: shutil.copytree(
+                os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")),
+                app.srcdir.parent.parent.parent / "docs",
+                dirs_exist_ok=True,
+            ),
+        )
     app.connect("source-read", process_read)
-    app.connect("include-read", process_include)
-    app.connect("include-read", lambda app, relative_path, parent_docname, source: 
-        print(f"Include event triggered: {relative_path}"))
     app.connect("autodoc-skip-member", skip)
