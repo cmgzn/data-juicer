@@ -10,6 +10,8 @@ import shutil
 from pathlib import Path
 from data_juicer import __version__ as version
 
+release = version
+
 # -- Path setup --------------------------------------------------------------
 sys.path.insert(0, os.path.abspath("../../"))
 
@@ -35,8 +37,7 @@ extensions = [
 
 # -- Extension configuration ------------------------------------------------
 myst_heading_anchors = 4
-# smv_tag_whitelist = r'^v\d+\.\d+\.\d+$'
-# smv_tag_whitelist = r'^(latest|stable)&'
+smv_tag_whitelist = r'^v\d+\.\d+\.\d+$'
 smv_branch_whitelist = r"^main$"
 smv_released_pattern = r"^refs/tags/v\d+\.\d+\.\d+$"
 # smv_remote_whitelist = r'^upstream$'
@@ -61,9 +62,6 @@ exclude_patterns = ["build"]
 # See the documentation for a list of builtin themes.
 html_theme = "furo"
 html_title = "data-juicer"
-html_css_files = ["custom.css"]
-html_js_files = ["custom.js"]
-html_static_path = ["_static"]
 
 # Sidebar configuration
 html_sidebars = {
@@ -76,6 +74,11 @@ html_sidebars = {
         "sidebar/bottom_menu.html",
     ],
 }
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_css_files = ["sidebar-bottom-menu.css"]
+html_static_path = ["_static"]
 
 # -- Internationalization settings ------------------------------------------
 # Language settings
@@ -112,11 +115,6 @@ html_context = {
     "supported_languages": supported_languages,
     "get_lang_link": get_lang_link,
 }
-
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
 
 def find_zh_exclusions(app, config):
     """
