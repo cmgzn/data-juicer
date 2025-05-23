@@ -276,9 +276,9 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                <a href="../v2.2.2/index.html">v2.2.2</a><br>
-                <a href="../v3.3.3/index.html">v3.3.3</a><br>
-                <a href="index.html">latest (main)</a><br>
+                <a href="../v2.2.2/index.html">v2.2.2</a>
+                <a href="../v3.3.3/index.html">v3.3.3</a>
+                <a href="index.html">latest (main)</a>
             </dd>
         </div>
         
@@ -322,43 +322,26 @@
           <p id="data-processing-for-and-with-foundation-models"><a class="reference external" href="zh-CN/index_ZH">[中文主页]</a> | <a class="reference external" href="DJ-cookbook">[DJ-Cookbook]</a> | <a class="reference external" href="docs/Operators">[OperatorZoo]</a> | <a class="reference external" href="api">[API]</a> | <a class="reference external" href="docs/awesome_llm_data">[Awesome LLM Data]</a></p>
 <section id="id2">
 <h1>Data Processing for and with Foundation Models<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h1>
-<blockquote>
-<div><p><span class="raw-html-m2r"><img src="https://img.alicdn.com/imgextra/i1/O1CN01fUfM5A1vPclzPQ6VI_!!6000000006165-0-tps-1792-1024.jpg" width = "533" height = "300" alt="Data-Juicer"/></span></p>
-</div></blockquote>
-<a class="reference external image-reference" href="https://img.shields.io/badge/language-Python-214870.svg"><img alt="" src="https://img.shields.io/badge/language-Python-214870.svg" />
-</a>
-<a class="reference external image-reference" href="https://img.shields.io/badge/license-Apache--2.0-000000.svg"><img alt="" src="https://img.shields.io/badge/license-Apache--2.0-000000.svg" />
-</a>
-<a class="reference external image-reference" href="https://pypi.org/project/py-data-juicer"><img alt="pypi version" src="https://img.shields.io/pypi/v/py-data-juicer?logo=pypi&amp;color=026cad" />
-</a>
-<a class="reference external image-reference" href="https://hub.docker.com/r/datajuicer/data-juicer"><img alt="Docker version" src="https://img.shields.io/docker/v/datajuicer/data-juicer?logo=docker&amp;label=Docker&amp;color=498bdf" />
-</a>
-<a class="reference external image-reference" href="https://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/data_juicer/docker_images/data-juicer-latest.tar.gz"><img alt="Docker on OSS" src="https://img.shields.io/badge/OSS%20latest-none?logo=docker&amp;label=Docker&amp;color=498bdf" />
-</a>
-<a class="reference external image-reference" href="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2FHYLcool%2Ff856b14416f08f73d05d32fd992a9c29%2Fraw%2Ftotal_cov.json"><img alt="" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2FHYLcool%2Ff856b14416f08f73d05d32fd992a9c29%2Fraw%2Ftotal_cov.json" />
-</a>
-<a class="reference external image-reference" href="DJ-cookbook"><img alt="DataModality" src="https://img.shields.io/badge/DataModality-Text,Image,Audio,Video-brightgreen.svg" />
-</a>
-<a class="reference external image-reference" href="DJ-cookbook"><img alt="Usage" src="https://img.shields.io/badge/Usage-Cleaning,Synthesis,Analysis-FFD21E.svg" />
-</a>
-<a class="reference external image-reference" href="https://modelscope.cn/studios?name=Data-Jiucer&amp;page=1&amp;sort=latest&amp;type=1"><img alt="ModelScope- Demos" src="https://img.shields.io/badge/ModelScope-Demos-4e29ff.svg?logo=data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjI0IDEyMS4zMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCTxwYXRoIGQ9Im0wIDQ3Ljg0aDI1LjY1djI1LjY1aC0yNS42NXoiIGZpbGw9IiM2MjRhZmYiIC8+Cgk8cGF0aCBkPSJtOTkuMTQgNzMuNDloMjUuNjV2MjUuNjVoLTI1LjY1eiIgZmlsbD0iIzYyNGFmZiIgLz4KCTxwYXRoIGQ9Im0xNzYuMDkgOTkuMTRoLTI1LjY1djIyLjE5aDQ3Ljg0di00Ny44NGgtMjIuMTl6IiBmaWxsPSIjNjI0YWZmIiAvPgoJPHBhdGggZD0ibTEyNC43OSA0Ny44NGgyNS42NXYyNS42NWgtMjUuNjV6IiBmaWxsPSIjMzZjZmQxIiAvPgoJPHBhdGggZD0ibTAgMjIuMTloMjUuNjV2MjUuNjVoLTI1LjY1eiIgZmlsbD0iIzM2Y2ZkMSIgLz4KCTxwYXRoIGQ9Im0xOTguMjggNDcuODRoMjUuNjV2MjUuNjVoLTI1LjY1eiIgZmlsbD0iIzYyNGFmZiIgLz4KCTxwYXRoIGQ9Im0xOTguMjggMjIuMTloMjUuNjV2MjUuNjVoLTI1LjY1eiIgZmlsbD0iIzM2Y2ZkMSIgLz4KCTxwYXRoIGQ9Im0xNTAuNDQgMHYyMi4xOWgyNS42NXYyNS42NWgyMi4xOXYtNDcuODR6IiBmaWxsPSIjNjI0YWZmIiAvPgoJPHBhdGggZD0ibTczLjQ5IDQ3Ljg0aDI1LjY1djI1LjY1aC0yNS42NXoiIGZpbGw9IiMzNmNmZDEiIC8+Cgk8cGF0aCBkPSJtNDcuODQgMjIuMTloMjUuNjV2LTIyLjE5aC00Ny44NHY0Ny44NGgyMi4xOXoiIGZpbGw9IiM2MjRhZmYiIC8+Cgk8cGF0aCBkPSJtNDcuODQgNzMuNDloLTIyLjE5djQ3Ljg0aDQ3Ljg0di0yMi4xOWgtMjUuNjV6IiBmaWxsPSIjNjI0YWZmIiAvPgo8L3N2Zz4K" />
-</a>
-<a class="reference external image-reference" href="https://huggingface.co/spaces?&amp;search=datajuicer"><img alt="HuggingFace- Demos" src="https://img.shields.io/badge/🤗HuggingFace-Demos-4e29ff.svg" />
-</a>
-<a class="reference external image-reference" href="DJ-cookbook"><img alt="Document_List" src="https://img.shields.io/badge/Doc-DJ_Cookbook-blue?logo=Markdown" />
-</a>
-<a class="reference external image-reference" href="zh-CN/DJ-cookbook_ZH"><img alt="文档列表" src="https://img.shields.io/badge/文档-DJ指南-blue?logo=Markdown" />
-</a>
-<a class="reference external image-reference" href="https://github.com/modelscope/data-juicer/blob/main/docs/Operators.md"><img alt="OpZoo" src="https://img.shields.io/badge/Doc-OperatorZoo-blue?logo=Markdown" />
-</a>
-<a class="reference external image-reference" href="https://arxiv.org/abs/2309.02033"><img alt="Paper" src="http://img.shields.io/badge/cs.LG-1.0Paper(SIGMOD'24)-B31B1B?logo=arxiv&amp;logoColor=red" />
-</a>
-<a class="reference external image-reference" href="https://arxiv.org/abs/2501.14755"><img alt="Paper" src="http://img.shields.io/badge/cs.AI-2.0Paper-B31B1B?logo=arxiv&amp;logoColor=red" />
-</a>
+ <img src="https://img.alicdn.com/imgextra/i1/O1CN01fUfM5A1vPclzPQ6VI_!!6000000006165-0-tps-1792-1024.jpg" width = "533" height = "300" alt="Data-Juicer"/>
+<p><img alt="" src="https://img.shields.io/badge/language-Python-214870.svg" />
+<img alt="" src="https://img.shields.io/badge/license-Apache--2.0-000000.svg" />
+<a class="reference external" href="https://pypi.org/project/py-data-juicer"><img alt="pypi version" src="https://img.shields.io/pypi/v/py-data-juicer?logo=pypi&amp;color=026cad" /></a>
+<a class="reference external" href="https://hub.docker.com/r/datajuicer/data-juicer"><img alt="Docker version" src="https://img.shields.io/docker/v/datajuicer/data-juicer?logo=docker&amp;label=Docker&amp;color=498bdf" /></a>
+<a class="reference external" href="https://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/data_juicer/docker_images/data-juicer-latest.tar.gz"><img alt="Docker on OSS" src="https://img.shields.io/badge/OSS%20latest-none?logo=docker&amp;label=Docker&amp;color=498bdf" /></a>
+<img alt="" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2FHYLcool%2Ff856b14416f08f73d05d32fd992a9c29%2Fraw%2Ftotal_cov.json" /></p>
+<p><a class="reference internal" href="#dj-cookbook"><span class="xref myst"><img alt="DataModality" src="https://img.shields.io/badge/DataModality-Text,Image,Audio,Video-brightgreen.svg" /></span></a>
+<a class="reference internal" href="#dj-cookbook"><span class="xref myst"><img alt="Usage" src="https://img.shields.io/badge/Usage-Cleaning,Synthesis,Analysis-FFD21E.svg" /></span></a>
+<a class="reference external" href="https://modelscope.cn/studios?name=Data-Jiucer&amp;amp;page=1&amp;amp;sort=latest&amp;amp;type=1"><img alt="ModelScope- Demos" src="https://img.shields.io/badge/ModelScope-Demos-4e29ff.svg?logo=data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjI0IDEyMS4zMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCTxwYXRoIGQ9Im0wIDQ3Ljg0aDI1LjY1djI1LjY1aC0yNS42NXoiIGZpbGw9IiM2MjRhZmYiIC8+Cgk8cGF0aCBkPSJtOTkuMTQgNzMuNDloMjUuNjV2MjUuNjVoLTI1LjY1eiIgZmlsbD0iIzYyNGFmZiIgLz4KCTxwYXRoIGQ9Im0xNzYuMDkgOTkuMTRoLTI1LjY1djIyLjE5aDQ3Ljg0di00Ny44NGgtMjIuMTl6IiBmaWxsPSIjNjI0YWZmIiAvPgoJPHBhdGggZD0ibTEyNC43OSA0Ny44NGgyNS42NXYyNS42NWgtMjUuNjV6IiBmaWxsPSIjMzZjZmQxIiAvPgoJPHBhdGggZD0ibTAgMjIuMTloMjUuNjV2MjUuNjVoLTI1LjY1eiIgZmlsbD0iIzM2Y2ZkMSIgLz4KCTxwYXRoIGQ9Im0xOTguMjggNDcuODRoMjUuNjV2MjUuNjVoLTI1LjY1eiIgZmlsbD0iIzYyNGFmZiIgLz4KCTxwYXRoIGQ9Im0xOTguMjggMjIuMTloMjUuNjV2MjUuNjVoLTI1LjY1eiIgZmlsbD0iIzM2Y2ZkMSIgLz4KCTxwYXRoIGQ9Im0xNTAuNDQgMHYyMi4xOWgyNS42NXYyNS42NWgyMi4xOXYtNDcuODR6IiBmaWxsPSIjNjI0YWZmIiAvPgoJPHBhdGggZD0ibTczLjQ5IDQ3Ljg0aDI1LjY1djI1LjY1aC0yNS42NXoiIGZpbGw9IiMzNmNmZDEiIC8+Cgk8cGF0aCBkPSJtNDcuODQgMjIuMTloMjUuNjV2LTIyLjE5aC00Ny44NHY0Ny44NGgyMi4xOXoiIGZpbGw9IiM2MjRhZmYiIC8+Cgk8cGF0aCBkPSJtNDcuODQgNzMuNDloLTIyLjE5djQ3Ljg0aDQ3Ljg0di0yMi4xOWgtMjUuNjV6IiBmaWxsPSIjNjI0YWZmIiAvPgo8L3N2Zz4K" /></a>
+<a class="reference external" href="https://huggingface.co/spaces?&amp;amp;search=datajuicer"><img alt="HuggingFace- Demos" src="https://img.shields.io/badge/%F0%9F%A4%97HuggingFace-Demos-4e29ff.svg" /></a></p>
+<p><a class="reference internal" href="#dj-cookbook"><span class="xref myst"><img alt="Document_List" src="https://img.shields.io/badge/Doc-DJ_Cookbook-blue?logo=Markdown" /></span></a>
+<span class="xref myst"><img alt="文档列表" src="https://img.shields.io/badge/%E6%96%87%E6%A1%A3-DJ%E6%8C%87%E5%8D%97-blue?logo=Markdown" /></span>
+<a class="reference internal" href="docs/Operators.html"><span class="std std-doc"><img alt="OpZoo" src="https://img.shields.io/badge/Doc-OperatorZoo-blue?logo=Markdown" /></span></a>
+<a class="reference external" href="https://arxiv.org/abs/2309.02033"><img alt="Paper" src="http://img.shields.io/badge/cs.LG-1.0Paper(SIGMOD'24)-B31B1B?logo=arxiv&amp;logoColor=red" /></a>
+<a class="reference external" href="https://arxiv.org/abs/2501.14755"><img alt="Paper" src="http://img.shields.io/badge/cs.AI-2.0Paper-B31B1B?logo=arxiv&amp;logoColor=red" /></a></p>
 <p>Data-Juicer is a one-stop system to process text and multimodal data for and with foundation models (typically LLMs).
-We provide a <a class="reference external" href="http://8.138.149.181/">playground</a> with a managed JupyterLab. <a class="reference external" href="http://8.138.149.181/">Try Data-Juicer</a> straight away in your browser! If you find Data-Juicer useful for your research or development, please kindly support us by starting it (then be instantly notified of our new releases) and citing our <a class="reference external" href="#references">works</a>.</p>
+We provide a <a class="reference external" href="http://8.138.149.181/">playground</a> with a managed JupyterLab. <a class="reference external" href="http://8.138.149.181/">Try Data-Juicer</a> straight away in your browser! If you find Data-Juicer useful for your research or development, please kindly support us by starting it (then be instantly notified of our new releases) and citing our <a class="reference internal" href="#references"><span class="xref myst">works</span></a>.</p>
 <p><a class="reference external" href="https://www.aliyun.com/product/bigdata/learn">Platform for AI of Alibaba Cloud (PAI)</a> has cited our work and integrated Data-Juicer into its data processing products. PAI is an AI Native large model and AIGC engineering platform that provides dataset management, computing power management, model tool chain, model development, model training, model deployment, and AI asset management. For documentation on data processing, please refer to: <a class="reference external" href="https://help.aliyun.com/zh/pai/user-guide/components-related-to-data-processing-for-foundation-models/?spm=a2c4g.11186623.0.0.3e9821a69kWdvX">PAI-Data Processing for Large Models</a>.</p>
-<p>Data-Juicer is being actively updated and maintained. We will periodically enhance and add more features, data recipes and datasets.  We welcome you to join us (via issues, PRs, <a class="reference external" href="https://join.slack.com/t/data-juicer/shared_invite/zt-23zxltg9d-Z4d3EJuhZbCLGwtnLWWUDg?spm=a2c22.12281976.0.0.7a8253f30mgpjw">Slack</a>  channel, <a class="reference external" href="https://qr.dingtalk.com/action/joingroup?code=v1,k1,YFIXM2leDEk7gJP5aMC95AfYT+Oo/EP/ihnaIEhMyJM=&amp;_dt_no_comment=1&amp;origin=11">DingDing</a> group, …), in promoting data-model co-development along with research and applications of foundation models!</p>
+<p>Data-Juicer is being actively updated and maintained. We will periodically enhance and add more features, data recipes and datasets.  We welcome you to join us (via issues, PRs, <a class="reference external" href="https://join.slack.com/t/data-juicer/shared_invite/zt-23zxltg9d-Z4d3EJuhZbCLGwtnLWWUDg?spm=a2c22.12281976.0.0.7a8253f30mgpjw">Slack</a>  channel, <a class="reference external" href="https://qr.dingtalk.com/action/joingroup?code=v1,k1,YFIXM2leDEk7gJP5aMC95AfYT+Oo/EP/ihnaIEhMyJM=&amp;amp;_dt_no_comment=1&amp;amp;origin=11">DingDing</a> group, …), in promoting data-model co-development along with research and applications of foundation models!</p>
 <section id="news">
 <h2>News<a class="headerlink" href="#news" title="Link to this heading">¶</a></h2>
 <ul class="simple">
