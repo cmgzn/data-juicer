@@ -22,15 +22,15 @@
             <dt>Version</dt>
             <dd>
                 {%- for item in versions %}
-                {% if item.is_released %}
-                show_version_name = {{ item.name }}
-                {% if latest_version and item == latest_version %}
-                show_version_name = {{ item.name }} (stable)
-                {% endif %}
-                {% else %}
-                show_version_name = latest ({{ item.name }})
-                {% endif %}
-                <a href="{{ item.url }}">{{ show_version_name }}</a>
+                {%- if item.is_released %}
+                {%- set show_version_name = item.name %}
+                {%- if latest_version and item == latest_version %}
+                {%- set show_version_name = item.name + " (stable)" %}
+                {%- endif %}
+                {%- else %}
+                {%- set show_version_name = "latest (" + item.name + ")" %}
+                {%- endif %}
+                <a href="{{ item.url }}">{{ show_version_name }}</a><br>
                 {%- endfor %}
             </dd>
         </div>
