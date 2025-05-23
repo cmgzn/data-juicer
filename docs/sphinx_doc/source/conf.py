@@ -32,19 +32,11 @@ extensions = [
     "myst_parser",
     "sphinx_copybutton",
     "sphinx_multiversion",
-    # 'sphinxcontrib.apidoc', # TODO: Replace with sphinx.ext.apidoc when sphinx>=8.2
+    'sphinxcontrib.apidoc', # TODO: Replace with sphinx.ext.apidoc when sphinx>=8.2
 ]
 
 # -- Extension configuration ------------------------------------------------
 myst_heading_anchors = 4
-myst_enable_extensions = ["substitution"]
-# Add links that cannot be automatically replaced in include mode
-myst_substitutions = {
-    "[pyproject.toml](pyproject.toml)": "[pyproject.toml](https://github.com/modelscope/data-juicer/blob/main/pyproject.toml)",
-    "[Dockerfile](Dockerfile)": "[Dockerfile](https://github.com/modelscope/data-juicer/blob/main/Dockerfile)",
-    "(./demos/api_service/react_data_mapper_process.ipynb)": "(https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_mapper_process.ipynb)",
-    "(./demos/api_service/react_data_filter_process.ipynb)": "(https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_filter_process.ipynb)",
-}
 
 # sphinx_multiversion configuration
 smv_tag_whitelist = r"^v\d+\.\d+\.\d+$"
