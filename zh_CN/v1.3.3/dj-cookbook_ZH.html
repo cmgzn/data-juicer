@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" />
+<link rel="index" title="索引" href="genindex.html" /><link rel="search" title="搜索" href="search.html" /><link rel="next" title="安装" href="installation_ZH.html" /><link rel="prev" title="Data Processing for and with Foundation Models" href="index_ZH.html" />
 
     <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
-        <title>安装 - data-juicer</title>
+        <title>DJ-Cookbook - data-juicer</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -202,7 +202,13 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
+  <p class="caption" role="heading"><span class="caption-text">教程</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_ZH.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start_ZH.html">快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
@@ -254,12 +260,12 @@
             <dt>Language</dt>
             <dd>
                 
-                <a href="./../../en/v1.3.3/installation_zh.html"
+                <a href="./../../en/v1.3.3/dj-cookbook_ZH.html"
                     >
                     English
                 </a>
                 
-                <a href="./../../zh_CN/v1.3.3/installation_zh.html"
+                <a href="./../../zh_CN/v1.3.3/dj-cookbook_ZH.html"
                     >
                     简体中文
                 </a>
@@ -272,7 +278,7 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                <a href="installation_zh.html">v1.3.3</a>
+                <a href="dj-cookbook_ZH.html">v1.3.3</a>
                 <a href="../main/index.html">latest (main)</a>
             </dd>
         </div>
@@ -294,7 +300,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/installation_zh.md.txt" title="View this page">
+  <a class="muted-link" href="_sources/dj-cookbook_ZH.md.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -314,186 +320,104 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="id1">
-<h1>安装<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<section id="id2">
-<h2>前置条件<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+          <section id="dj-cookbook">
+<h1>DJ-Cookbook<a class="headerlink" href="#dj-cookbook" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>资源合集<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Python &gt;= 3.10</p></li>
-<li><p>Git (用于源码安装)</p></li>
-<li><p>uv (推荐的包安装器)</p></li>
+<li><p><a class="reference external" href="https://modelscope.github.io/data-juicer/_static/tutorial_kdd24.html">KDD'24 相关教程</a></p></li>
+<li><p><a class="reference internal" href="docs/awesome_llm_data.html"><span class="std std-doc">Awesome LLM-Data</span></a></p></li>
+<li><p><a class="reference internal" href="docs/BadDataExhibition_ZH.html"><span class="std std-doc">&quot;坏&quot;数据展览</span></a></p></li>
+</ul>
+</section>
+<section id="data-juicer-dj">
+<h2>编写Data-Juicer (DJ) 代码<a class="headerlink" href="#data-juicer-dj" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>基础</p>
+<ul>
+<li><p><a class="reference internal" href="#%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="xref myst">快速上手</span></a></p></li>
+<li><p><a class="reference internal" href="docs/RecipeGallery_ZH.html"><span class="std std-doc">配置</span></a></p></li>
+<li><p><a class="reference internal" href="tools/fmt_conversion/README_ZH.html"><span class="std std-doc">数据格式转换</span></a></p></li>
+</ul>
+</li>
+<li><p>信息速查</p>
+<ul>
+<li><p><a class="reference internal" href="docs/Operators.html"><span class="std std-doc">算子库</span></a></p></li>
+<li><p><a class="reference internal" href="api.html"><span class="std std-doc">API参考</span></a></p></li>
+</ul>
+</li>
+<li><p>进阶</p>
+<ul>
+<li><p><a class="reference internal" href="docs/DeveloperGuide_ZH.html"><span class="std std-doc">开发者指南</span></a></p></li>
+<li><p><a class="reference internal" href="tools/preprocess/README_ZH.html"><span class="std std-doc">预处理工具</span></a></p></li>
+<li><p><a class="reference internal" href="tools/postprocess/README_ZH.html"><span class="std std-doc">后处理工具</span></a></p></li>
+<li><p><a class="reference internal" href="docs/Sandbox_ZH.html"><span class="std std-doc">沙盒</span></a></p></li>
+<li><p><a class="reference internal" href="docs/DJ_service_ZH.html"><span class="std std-doc">API服务化</span></a></p></li>
+<li><p><a class="reference internal" href="tools/quality_classifier/README_ZH.html"><span class="std std-doc">给数据打分</span></a></p></li>
+<li><p><a class="reference internal" href="tools/evaluator/README_ZH.html"><span class="std std-doc">自动评估</span></a></p></li>
+<li><p><a class="reference internal" href="thirdparty/LLM_ecosystems/README_ZH.html"><span class="std std-doc">第三方集成</span></a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h2>用例与数据菜谱<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><span class="xref myst">数据菜谱Gallery</span></p>
+<ul>
+<li><p>Data-Juicer 最小示例配方</p></li>
+<li><p>复现开源文本数据集</p></li>
+<li><p>改进开源文本预训练数据集</p></li>
+<li><p>改进开源文本后处理数据集</p></li>
+<li><p>合成对比学习图像文本数据集</p></li>
+<li><p>改进开源图像文本数据集</p></li>
+<li><p>视频数据的基本示例菜谱</p></li>
+<li><p>合成以人为中心的视频评测集</p></li>
+<li><p>改进现有的开源视频数据集</p></li>
+</ul>
+</li>
+<li><p>Data-Juicer相关竞赛</p>
+<ul>
+<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532251">Better Synth</a>，在DJ-沙盒实验室和多模态大模型上，探索大模型合成数据对图像理解能力的影响</p></li>
+<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532219">Modelscope-Sora挑战赛</a>，基于Data-Juicer和<a class="reference external" href="https://github.com/aigc-apps/EasyAnimate">EasyAnimate</a>框架，调优文本-视频数据集，在类SORA小模型上训练以生成更好的视频</p></li>
+<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532174">Better Mixture</a>，针对指定多个候选数据集，仅调整数据混合和采样策略</p></li>
+<li><p>FT-Data Ranker (<a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532157">1B Track</a>、 <a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532158">7B Track</a>)，针对指定候选数据集，仅调整数据过滤和增强策略</p></li>
+<li><p><a class="reference external" href="https://tianchi.aliyun.com/competition/entrance/532254">可图Kolors-LoRA风格故事挑战赛</a>，基于Data-Juicer和<a class="reference external" href="https://github.com/modelscope/DiffSynth-Studio">DiffSynth-Studio</a>框架，探索Diffusion模型微调</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="docs/DJ_SORA_ZH.html"><span class="std std-doc">DJ-SORA</span></a></p></li>
+<li><p>基于Data-Juicer和<a class="reference external" href="https://github.com/modelscope/agentscope">AgentScope</a>框架，通过<a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_filter_process.ipynb">智能体调用DJ Filters</a>和<a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/demos/api_service/react_data_mapper_process.ipynb">调用DJ Mappers</a></p></li>
 </ul>
 </section>
 <section id="id3">
-<h2>基础安装<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<p>Data-Juicer 现已上架 PyPI。最小安装包含核心数据处理能力：</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>py-data-juicer
-</pre></div>
-</div>
-<p>这将提供：</p>
+<h2>交互类示例<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>数据加载和操作</p></li>
-<li><p>文件系统操作</p></li>
-<li><p>并行处理</p></li>
-<li><p>基础 I/O 和工具</p></li>
-</ul>
-</section>
-<section id="id4">
-<h2>场景化安装<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
-<p>组件详情请参考 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/pyproject.toml">pyproject.toml</a>。</p>
-<p><strong>核心 ML &amp; DL</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 通用 ML/DL 能力</span>
-pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[generic]&quot;</span>
-</pre></div>
-</div>
-<p>包括：PyTorch、Transformers、VLLM 等。</p>
-<p><strong>领域特定功能</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 计算机视觉</span>
-pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[vision]&quot;</span>
-
-<span class="c1"># 自然语言处理</span>
-pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[nlp]&quot;</span>
-
-<span class="c1"># 音频处理</span>
-pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[audio]&quot;</span>
-
-**附加组件**
-
-<span class="sb">```</span>bash
-<span class="c1"># 分布式计算</span>
-pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[distributed]&quot;</span>
-
-<span class="c1"># AI 服务和 API</span>
-pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[ai_services]&quot;</span>
-
-**开发工具**
-<span class="sb">```</span>bash
-<span class="c1"># 开发和测试</span>
-pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[dev]&quot;</span>
-</pre></div>
-</div>
-</section>
-<section id="id5">
-<h2>常见安装模式<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
-<p><strong>1. 文本处理设置</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[generic,nlp]&quot;</span>
-</pre></div>
-</div>
-<p><strong>2. 视觉处理设置</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[generic,vision]&quot;</span>
-</pre></div>
-</div>
-<p><strong>3. 完整处理流程</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[generic,nlp,vision,distributed]&quot;</span>
-</pre></div>
-</div>
-<p><strong>4. 完整安装</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 安装所有功能（除沙盒外）</span>
-pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;py-data-juicer[all]&quot;</span>
-</pre></div>
-</div>
-<p><strong>5. 开发模式</strong></p>
-<p>对于贡献者和开发者：</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 克隆仓库</span>
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/modelscope/data-juicer.git
-<span class="nb">cd</span><span class="w"> </span>data-juicer
-
-<span class="c1"># 安装开发依赖</span>
-pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
-
-<span class="c1"># 可选：使用 uv 进行虚拟环境和依赖管理</span>
-curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w">   </span><span class="c1"># 安装 uv</span>
-uv<span class="w"> </span>venv<span class="w"> </span>--python<span class="w"> </span><span class="m">3</span>.10<span class="w">                             </span><span class="c1"># 使用 Python 3.10 初始化虚拟环境</span>
-<span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">                         </span><span class="c1"># 激活虚拟环境</span>
-uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w">                               </span><span class="c1"># 安装最小依赖</span>
-</pre></div>
-</div>
-</section>
-<section id="id6">
-<h2>特定算子安装<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
-<p>除了基于场景的安装外，我们还提供基于算子和基于菜谱的安装方式。</p>
-<ul class="simple">
-<li><p>安装特定算子的依赖</p></li>
-</ul>
-<p>随着算子数量的增长，所有算子的依赖变得非常庞大。除了使用 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-v</span> <span class="pre">-e</span> <span class="pre">.[all]</span></code> 安装所有依赖外，
-我们提供了两个更轻量级的替代方案：</p>
+<li><p>Data-Juicer 介绍 [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/overview_scan/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/overview_scan">HuggingFace</a>]</p></li>
+<li><p>数据可视化:</p>
 <ul>
-<li><p>自动最小依赖安装：在 Data-Juicer 执行过程中，将自动安装最小依赖。这允许立即执行，但可能会导致依赖冲突。</p></li>
-<li><p>手动最小依赖安装：要手动安装针对特定执行配置的最小依赖，请运行以下命令：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 仅适用于从源码安装</span>
-python<span class="w"> </span>tools/dj_install.py<span class="w"> </span>--config<span class="w"> </span>path_to_your_data-juicer_config_file
-
-<span class="c1"># 使用命令行工具</span>
-dj-install<span class="w"> </span>--config<span class="w"> </span>path_to_your_data-juicer_config_file
-</pre></div>
-</div>
-</li>
+<li><p>基础指标统计 [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_statistics/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_statistics">HuggingFace</a>]</p></li>
+<li><p>词汇多样性 [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_diversity/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_diversity">HuggingFace</a>]</p></li>
+<li><p>算子洞察（单OP） [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visualization_op_insight/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_op_insight">HuggingFace</a>]</p></li>
+<li><p>算子效果（多OP） [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_visulization_op_effect/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_visualization_op_effect">HuggingFace</a>]</p></li>
 </ul>
-</section>
-<section id="docker">
-<h2>使用 Docker 安装<a class="headerlink" href="#docker" title="Link to this heading">¶</a></h2>
+</li>
+<li><p>数据处理:</p>
 <ul>
-<li><p>您可以</p>
+<li><p>科学文献 (例如 <a class="reference external" href="https://info.arxiv.org/help/bulk_data_s3.html">arXiv</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_sci_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_sci_data">HuggingFace</a>]</p></li>
+<li><p>编程代码 (例如 <a class="reference external" href="https://huggingface.co/datasets/bigcode/the-stack">TheStack</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_code_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_code_data">HuggingFace</a>]</p></li>
+<li><p>中文指令数据 (例如 <a class="reference external" href="https://huggingface.co/datasets/QingyiSi/Alpaca-CoT">Alpaca-CoT</a>) [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/process_sft_zh_data/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/process_cft_zh_data">HuggingFace</a>]</p></li>
+</ul>
+</li>
+<li><p>工具池:</p>
 <ul>
-<li><p>从 DockerHub 拉取预构建镜像：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>如果无法连接到 DockerHub，请使用其他镜像源（您可以在互联网上找到一些）：</p></li>
-</ul>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>&lt;other_registry_mirror&gt;/datajuicer/data-juicer:&lt;version_tag&gt;
-</pre></div>
-</div>
-</li>
-<li><p>或运行以下命令构建包含最新 <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code> 的 docker 镜像，使用提供的 <a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/Dockerfile">Dockerfile</a>：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>datajuicer/data-juicer:&lt;version_tag&gt;<span class="w"> </span>.
-</pre></div>
-</div>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;version_tag&gt;</span></code> 的格式类似于 <code class="docutils literal notranslate"><span class="pre">v0.2.0</span></code>，与发布版本标签相同。</p></li>
+<li><p>按语言分割数据集 [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/tool_dataset_splitting_by_language/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/tool_dataset_splitting_by_language">HuggingFace</a>]</p></li>
+<li><p>CommonCrawl 质量分类器 [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/tool_quality_classifier/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/tool_quality_classifier">HuggingFace</a>]</p></li>
+<li><p>基于 <a class="reference external" href="https://github.com/stanford-crfm/helm">HELM</a> 的自动评测 [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/auto_evaluation_helm/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/auto_evaluation_helm">HuggingFace</a>]</p></li>
+<li><p>数据采样及混合 [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_mixture/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_mixture">HuggingFace</a>]</p></li>
 </ul>
 </li>
+<li><p>数据处理回路 [<a class="reference external" href="https://modelscope.cn/studios/Data-Juicer/data_process_loop/summary">ModelScope</a>] [<a class="reference external" href="https://huggingface.co/spaces/datajuicer/data_process_loop">HuggingFace</a>]</p></li>
 </ul>
-</section>
-<section id="id7">
-<h2>注意事项和故障排除<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
-<ol class="arabic simple" start="0">
-<li><p><strong>安装检查</strong></p></li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">data_juicer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dj</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dj</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-</pre></div>
-</div>
-<ol class="arabic simple">
-<li><p><strong>模块化安装</strong></p>
-<ul class="simple">
-<li><p>只安装您需要的组件</p></li>
-<li><p>根据需要组合组件</p></li>
-<li><p>使用 <code class="docutils literal notranslate"><span class="pre">all</span></code> 进行完整安装</p></li>
-</ul>
-</li>
-<li><p><strong>沙盒环境</strong></p>
-<ul class="simple">
-<li><p>实验性功能的单独安装</p></li>
-<li><p>未来将作为微服务提供</p></li>
-</ul>
-</li>
-<li><p><strong>视频相关算子</strong></p>
-<ul class="simple">
-<li><p>在使用视频相关算子之前，需要安装 <strong>FFmpeg</strong> 并确保可以通过 $PATH 环境变量访问。</p></li>
-<li><p>您可以使用包管理器安装 FFmpeg（例如在 Debian/Ubuntu 上使用 sudo apt install ffmpeg，在 OS X 上使用 brew install ffmpeg）或访问 <a class="reference external" href="https://ffmpeg.org/download.html">官方 ffmpeg 链接</a>。</p></li>
-<li><p>通过从终端运行 ffmpeg 命令来检查您的环境路径是否正确设置。</p></li>
-</ul>
-</li>
-<li><p><strong>获取帮助</strong></p>
-<ul class="simple">
-<li><p>请先查看文档/问题</p></li>
-<li><p>必要时创建 GitHub issues</p></li>
-<li><p>加入社区频道进行讨论</p></li>
-</ul>
-</li>
-</ol>
 </section>
 </section>
 
@@ -502,8 +426,26 @@ dj-install<span class="w"> </span>--config<span class="w"> </span>path_to_your_d
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="installation_ZH.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">安装</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index_ZH.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -534,14 +476,11 @@ dj-install<span class="w"> </span>--config<span class="w"> </span>path_to_your_d
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">安装</a><ul>
-<li><a class="reference internal" href="#id2">前置条件</a></li>
-<li><a class="reference internal" href="#id3">基础安装</a></li>
-<li><a class="reference internal" href="#id4">场景化安装</a></li>
-<li><a class="reference internal" href="#id5">常见安装模式</a></li>
-<li><a class="reference internal" href="#id6">特定算子安装</a></li>
-<li><a class="reference internal" href="#docker">使用 Docker 安装</a></li>
-<li><a class="reference internal" href="#id7">注意事项和故障排除</a></li>
+<li><a class="reference internal" href="#">DJ-Cookbook</a><ul>
+<li><a class="reference internal" href="#id1">资源合集</a></li>
+<li><a class="reference internal" href="#data-juicer-dj">编写Data-Juicer (DJ) 代码</a></li>
+<li><a class="reference internal" href="#id2">用例与数据菜谱</a></li>
+<li><a class="reference internal" href="#id3">交互类示例</a></li>
 </ul>
 </li>
 </ul>
