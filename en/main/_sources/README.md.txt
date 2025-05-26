@@ -1,4 +1,4 @@
-[[中文主页]](README_ZH.md) | [[DJ-Cookbook]](#dj-cookbook) | [[OperatorZoo]](docs/Operators.md) | [[API]](https://modelscope.github.io/data-juicer) | [[Awesome LLM Data]](docs/awesome_llm_data.md)
+[[中文主页]](README_ZH.md) | [[DJ-Cookbook]](#dj-cookbook) | [[OperatorZoo]](docs/Operators.md) | [[API]](https://modelscope.github.io/data-juicer/api) | [[Awesome LLM Data]](docs/awesome_llm_data.md)
 
 
 # Data Processing for and with Foundation Models
