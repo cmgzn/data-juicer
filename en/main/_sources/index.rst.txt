@@ -28,6 +28,7 @@ Table of Contents
    dj-cookbook
    installation
    quick_start
+   docs/my_test
 
 * `License`_
 * `Contributing`_
