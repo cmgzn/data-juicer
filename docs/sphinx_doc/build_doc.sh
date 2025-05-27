@@ -3,6 +3,6 @@ make clean
 languages=(en zh_CN)
 
 for lang in "${languages[@]}"; do
-    sphinx-multiversion source build/$lang -D "language=$lang"
+    sphinx-multiversion -j 4 source build/$lang -D "language=$lang"
 done
 
