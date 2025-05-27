@@ -326,8 +326,7 @@ def setup(app):
     current_version = app.config.smv_current_version
     print(f"Current version: {current_version}")
     app.config.smv_latest_version = f"v{release}"
-    if current_version != "main":
-        app.connect("config-inited", copy_sphinx_doc_to_build)
+    app.connect("config-inited", copy_sphinx_doc_to_build)
     app.connect("config-inited", rebuild_source_dir)
     app.config.root_doc = "index_ZH" if app.config.language == "zh_CN" else "index"
 
