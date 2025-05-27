@@ -52,6 +52,7 @@ myst_enable_extensions = [
 smv_tag_whitelist = rf"^v{release}$"
 smv_branch_whitelist = r"^main$"
 smv_released_pattern = r"^refs/tags/v\d+\.\d+\.\d+$"
+smv_remote_whitelist = r'^origin$'
 
 # apidoc settings
 apidoc_module_dir = "../../../data_juicer"
@@ -230,7 +231,7 @@ def update_metadata_docnames(app, config):
         )
         return
 
-    main_sourcedir = metadata[f"v{release}"].get("sourcedir")
+    main_sourcedir = metadata["main"].get("sourcedir")
     source_suffixes = config.source_suffix
     project = sphinx_project.Project(main_sourcedir, source_suffixes)
     updated_docnames = list(project.discover())
