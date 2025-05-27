@@ -66,7 +66,7 @@ autodoc_member_order = "bysource"
 
 # -- Templates and patterns -------------------------------------------------
 templates_path = ["_templates"]
-exclude_patterns = ["build", ".venv"]
+exclude_patterns = ["build"]
 
 # -- Options for HTML output ------------------------------------------------
 # The theme to use for HTML and HTML Help pages.
