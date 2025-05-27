@@ -231,7 +231,7 @@ def update_metadata_docnames(app, config):
         )
         return
 
-    main_sourcedir = metadata[f"v{release}"].get("sourcedir")
+    main_sourcedir = metadata["main"].get("sourcedir")
     source_suffixes = config.source_suffix
     project = sphinx_project.Project(main_sourcedir, source_suffixes)
     updated_docnames = list(project.discover())
