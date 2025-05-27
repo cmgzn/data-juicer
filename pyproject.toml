@@ -120,7 +120,7 @@ dev = [
     "pre-commit",  # pre-commit hooks
     "sphinx",
     "sphinx-autobuild",
-    "sphinx-multiversion",
+    "sphinx_multiversion @ git+https://github.com/cmgzn/multiversion.git",
     "sphinx_copybutton",
     "sphinxcontrib-apidoc",
     "furo",

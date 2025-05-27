@@ -36,7 +36,7 @@ extensions = [
     "myst_parser",
     "sphinx_copybutton",
     "sphinx_multiversion",
-    "sphinxcontrib.apidoc",  # TODO: Replace with sphinx.ext.apidoc when sphinx>=8.2
+    # "sphinxcontrib.apidoc",  # TODO: Replace with sphinx.ext.apidoc when sphinx>=8.2
 ]
 
 # -- Extension configuration ------------------------------------------------
@@ -48,8 +48,8 @@ myst_enable_extensions = [
 ]
 
 # sphinx_multiversion configuration
-# smv_tag_whitelist = r"^v\d+\.\d+\.\d+$"
-smv_tag_whitelist = rf"^v{release}$"
+smv_tag_whitelist = r"^v\d+\.\d+\.\d+$"
+# smv_tag_whitelist = rf"^v{release}$"
 smv_branch_whitelist = r"^main$"
 smv_released_pattern = r"^refs/tags/v\d+\.\d+\.\d+$"
 
