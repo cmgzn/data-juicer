@@ -1,0 +1,108 @@
+## Installation
+
+### Prerequisites
+
+- Recommend Python>=3.9,<=3.10
+- gcc >= 5 (at least C++14 support)
+
+### From Source for Specific Scenarios
+
+- Run the following commands to install the latest basic `data_juicer` version in
+  editable mode:
+```shell
+cd <path_to_data_juicer>
+pip install -v -e .
+```
+
+- Some OPs rely on some other too large or low-platform-compatibility third-party libraries. You can install optional dependencies as needed:
+
+```shell
+cd <path_to_data_juicer>
+pip install -v -e .  # Install minimal dependencies, which support the basic functions
+pip install -v -e .[tools] # Install a subset of tools dependencies
+```
+
+The dependency options are listed below:
+
+| Tag              | Description                                                            |
+|------------------|------------------------------------------------------------------------|
+| `.` or `.[mini]` | Install minimal dependencies for basic Data-Juicer.                    |
+| `.[all]`         | Install dependencies for all OPs except sandbox.                       |
+| `.[sci]`         | Install dependencies for OPs related to scientific usage.              |
+| `.[dist]`        | Install dependencies for additional distributed data processing.       |
+| `.[dev]`         | Install dependencies for developing the package as contributors.       |
+| `.[tools]`       | Install dependencies for dedicated tools, such as quality classifiers. |
+| `.[sandbox]`     | Install all dependencies for sandbox.                                  |
+
+### From Source for Specific OPs
+
+- Install dependencies for specific OPs
+
+With the growth of the number of OPs, the dependencies of all OPs become very heavy. Instead of using the command `pip install -v -e .[all]` to install all dependencies,
+we provide two alternative, lighter options:
+
+  - Automatic Minimal Dependency Installation: During the execution of Data-Juicer, minimal dependencies will be automatically installed. This allows for immediate execution, but may potentially lead to dependency conflicts.
+
+  - Manual Minimal Dependency Installation: To manually install minimal dependencies tailored to a specific execution configuration, run the following command:
+    ```shell
+    # only for installation from source
+    python tools/dj_install.py --config path_to_your_data-juicer_config_file
+
+    # use command line tool
+    dj-install --config path_to_your_data-juicer_config_file
+    ```
+
+### Using pip
+
+- Run the following command to install the latest released `data_juicer` using `pip`:
+
+```shell
+pip install py-data-juicer
+```
+
+- **Note**:
+  - only the basic APIs in `data_juicer` and two basic tools
+    (data [processing](#data-processing) and [analysis](#data-analysis)) are available in this way. If you want customizable
+    and complete functions, we recommend you install `data_juicer` [from source](#from-source).
+  - The release versions from pypi have a certain lag compared to the latest version from source.
+    So if you want to follow the latest functions of `data_juicer`, we recommend you install [from source](#from-source).
+
+### Using Docker
+
+- You can
+  - either pull our pre-built image from DockerHub:
+    ```shell
+    docker pull datajuicer/data-juicer:<version_tag>
+    ```
+  
+    - if you can not connect ot DockerHub, please use other registry mirrors (you can find some from the Internet):
+    ```shell
+    docker pull <other_registry_mirror>/datajuicer/data-juicer:<version_tag>
+    ```
+
+  - or run the following command to build the docker image including the
+    latest `data-juicer` with provided [Dockerfile](Dockerfile):
+
+    ```shell
+    docker build -t datajuicer/data-juicer:<version_tag> .
+    ```
+
+  - The format of `<version_tag>` is like `v0.2.0`, which is the same as the release version tag.
+
+### Installation check
+
+```python
+import data_juicer as dj
+print(dj.__version__)
+```
+
+### For Video-related Operators
+Before using video-related operators, **FFmpeg** should be installed and accessible via the $PATH environment variable.
+
+You can install FFmpeg using package managers(e.g. sudo apt install ffmpeg on Debian/Ubuntu, brew install ffmpeg on OS X) or visit the [official ffmpeg link](https://ffmpeg.org/download.html).
+
+Check if your environment path is set correctly by running the ffmpeg command from the terminal.
+
+
+<p align="right"><a href="#table">🔼 back to index</a></p>
+
