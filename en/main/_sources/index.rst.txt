@@ -13,6 +13,14 @@ Data Processing for and with Foundation Models
 
 .. toctree::
    :maxdepth: 2
+   :caption: Tutorial
+   :glob:
+   :hidden:
+
+   tutorial/*
+
+.. toctree::
+   :maxdepth: 2
    :caption: docs
    :glob:
    :hidden:
