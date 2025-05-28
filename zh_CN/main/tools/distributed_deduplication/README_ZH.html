@@ -370,7 +370,7 @@ python<span class="w"> </span>spark_dedup.py<span class="w"> </span>--help
 <li><p><code class="docutils literal notranslate"><span class="pre">tokenizer</span></code>：（可选。默认值：None）用于对将要分类的文本进行分词的分词器。如果为None，将使用PySpark的<a class="reference external" href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.Tokenizer.html#tokenizer">标准分词器</a>。此外，你可以使用我们提供的分词器<code class="docutils literal notranslate"><span class="pre">[zh.sp.model,</span> <span class="pre">code.sp.model]</span></code>中的一个，或者你可以将其设置为你自己的<a class="reference external" href="https://github.com/google/sentencepiece">sentencepiece</a>模型的路径。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">num_features</span></code>：HashingTF生成的特征数量。默认值为1047576，如megatron-turing-nlg论文中所述。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">num_hashtables</span></code>：（可选。默认值：10）MinHashLSH中使用的哈希数量。默认使用10个哈希，如GPT-3论文中所述。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">text_key</span></code>：（可选。默认值：“text”）输入数据集中用于存储待分类文本的字段名称。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_key</span></code>：（可选。默认值：&quot;text&quot;）输入数据集中用于存储待分类文本的字段名称。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">master_url</span></code>：（可选。默认值：None）用于Spark配置的master URL。如果为空，则默认运行在&quot;local[*]&quot;模式下。</p></li>
 </ul>
 </section>
