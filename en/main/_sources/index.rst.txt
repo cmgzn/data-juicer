@@ -22,12 +22,12 @@ Data Processing for and with Foundation Models
 .. toctree::
    :maxdepth: 2
    :caption: docs
+   :glob:
    :hidden:
 
    docs/Operators
    docs/RecipeGallery
    docs/DatasetCfg
-   :glob:
    docs/*
 
 .. toctree::
