@@ -272,6 +272,8 @@ def process_tutorial(app, docname, source):
         f"[{api_placeholder}](https://modelscope.github.io/data-juicer/)",
         f"[{api_placeholder}](api.rst)",
     )
+    pattern = r"^(?i)en[A-Za-z\s]{0,12}\|\s*\[\u4e2d\u6587[\u4e00-\u9fa5\s]{0,12}\]\([^)]+\.md\)|^\u4e2d\u6587[\u4e00-\u9fa5\s]{0,12}\|\s*\[(?i)en[A-Za-z\s]{0,12}\]\([^)]+\.md\)"
+    source[0] = re.sub(pattern, "", source[0])
     return source[0]
 
 
