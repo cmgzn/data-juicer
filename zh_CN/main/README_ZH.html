@@ -40,15 +40,6 @@
   <body>
     
 
-<p>
-  <strong>
-    
-    You're reading the documentation from the main branch.
-    For the latest released version, please have a look at <a href="../v1.3.3/README_ZH.html">v1.3.3</a>.
-    
-  </strong>
-</p>
-
 
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
@@ -292,7 +283,6 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                    <a href="../v1.3.3/README_ZH.html">v1.3.3</a>
                     <a href="README_ZH.html">main</a>
             </dd>
         </div>
@@ -360,13 +350,16 @@
 <section id="id1">
 <h2>新消息<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>🎉 [2025-05-06] 我们的 <a class="reference external" href="https://arxiv.org/abs/2407.11784">Data-Juicer Sandbox</a> 已被 <em>ICML 2025</em> 接收为 <strong>Spotlight</strong>（处于所有投稿中的前 2.6%）！</p></li>
-<li><p><img alt="new" src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png" /> [2025-03-13] 我们提出了一种新的数据合成方法 <em>MindGym</em>，该方法鼓励 LLM 自我生成具有挑战性的认知问题，实现优于 SOTA 基线的数据效率、跨模态泛化和 SFT 效果（例如，仅使用 <em>400 个样本</em> 即可在 <a class="reference external" href="https://mathllm.github.io/mathvision/#leaderboard">MathVision</a> 上获得 <em>16%</em> 的增益）。有关更多详细信息，请参阅<a class="reference external" href="https://arxiv.org/abs/2503.09499">MindGym: Enhancing Vision-Language Models via Synthetic Self-Challenging Questions</a>。</p></li>
-<li><p><img alt="new" src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png" /> [2025-02-28] DJ 已被集成到 <a class="reference external" href="https://docs.ray.io/en/latest/ray-overview/ray-libraries.html">Ray官方 Ecosystem</a> 和 <a class="reference external" href="https://docs.ray.io/en/latest/ray-more-libs/data_juicer_distributed_data_processing.html">Example Gallery</a>。此外，我们在 DJ2.0 中的流式 JSON 加载补丁已被 <a class="reference external" href="https://github.com/apache/arrow/pull/45084">Apache Arrow 官方集成</a>。</p></li>
-<li><p><img alt="new" src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png" /> [2025-02-27] 我们的对比数据合成工作， <a class="reference external" href="https://arxiv.org/pdf/2408.04594">ImgDiff</a>， 已被 <em>CVPR 2025</em> 接收！</p></li>
-<li><p><img alt="new" src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png" /> [2025-02-05] 我们提出了一种新的数据选择方法 <em>DaaR</em>，该方法基于理论指导，将数据多样性建模为奖励信号，在 7 个基准测试中，微调 SOTA LLMs 取得了更好的整体表现。有关更多详细信息，请参阅 <a class="reference external" href="https://www.arxiv.org/abs/2502.04380">Diversity as a Reward: Fine-Tuning LLMs on a Mixture of Domain-Undetermined Data</a> 。</p></li>
-<li><p><img alt="new" src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png" /> [2025-01-11] 我们发布了 2.0 版论文 <a class="reference external" href="https://arxiv.org/abs/2501.14755">Data-Juicer 2.0: Cloud-Scale Adaptive Data Processing for Foundation Models</a>。DJ现在可以使用阿里云集群中 50 个 Ray 节点上的 6400 个 CPU 核心在 2.1 小时内处理 70B 数据样本，并使用 8 个 Ray 节点上的 1280 个 CPU 核心在 2.8 小时内对 5TB 数据进行重复数据删除。</p></li>
-<li><p><img alt="new" src="https://img.alicdn.com/imgextra/i4/O1CN01kUiDtl1HVxN6G56vN_!!6000000000764-2-tps-43-19.png" /> [2025-01-03] 我们通过 20 多个相关的新 <a class="reference external" href="https://github.com/modelscope/data-juicer/releases/tag/v1.0.2">OP</a> 以及与 LLaMA-Factory 和 ModelScope-Swift 兼容的统一 <a class="reference external" href="https://github.com/modelscope/data-juicer/releases/tag/v1.0.3">数据集格式</a> 更好地支持Post-Tuning场景。</p></li>
+<li><p>🛠️ [2025-06-04] 如何在“经验时代”处理反馈数据？我们提出了 <a class="reference external" href="https://arxiv.org/abs/2505.17826">Trinity-RFT: A General-Purpose and Unified Framework for Reinforcement Fine-Tuning of LLMs</a>，该框架利用 Data-Juicer 为 RFT 场景量身定制数据处理管道。</p></li>
+<li><p>🎉 [2025-06-04] 我们的 <a class="reference external" href="https://ieeexplore.ieee.org/document/11027559">Data-Model Co-development 综述</a> 已被 IEEE Transactions on Pattern Analysis and Machine Intelligence（<strong>TPAMI</strong>）接收！欢迎探索并贡献<a class="reference external" href="https://modelscope.github.io/data-juicer/en/main/docs/awesome_llm_data.html">awesome-list</a>。</p></li>
+<li><p>🔎 [2025-06-04] 我们推出了 <a class="reference external" href="https://www.arxiv.org/abs/2505.16915">DetailMaster: Can Your Text-to-Image Model Handle Long Prompts?</a> 一项合成基准测试，揭示了大模型虽擅长处理短描述，但在长提示下性能显著下降的问题。</p></li>
+<li><p>🎉 [2025-05-06] 我们的 <a class="reference external" href="https://arxiv.org/abs/2407.11784">Data-Juicer Sandbox</a> 已被接收为 <strong>ICML'25 Spotlight</strong>（处于所有投稿中的前 2.6%）！</p></li>
+<li><p>💡 [2025-03-13] 我们提出<a class="reference external" href="https://arxiv.org/abs/2503.09499">MindGYM: What Matters in Question Synthesis for Thinking-Centric Fine-Tuning?</a>。一种新的数据合成方法鼓励大模型自我合成高质量、低方差数据，实现高效SFT（如仅使用 <em>400 个样本</em> 即可在 <a class="reference external" href="https://mathllm.github.io/mathvision/#leaderboard">MathVision</a> 上获得 <em>16%</em> 的增益）。</p></li>
+<li><p>🤝 [2025-02-28] DJ 已被集成到 <a class="reference external" href="https://docs.ray.io/en/latest/ray-overview/ray-libraries.html">Ray官方 Ecosystem</a> 和 <a class="reference external" href="https://docs.ray.io/en/latest/ray-more-libs/data_juicer_distributed_data_processing.html">Example Gallery</a>。此外，我们在 DJ2.0 中的流式 JSON 加载补丁已被 <a class="reference external" href="https://github.com/apache/arrow/pull/45084">Apache Arrow 官方集成</a>。</p></li>
+<li><p>🎉  [2025-02-27] 我们的对比数据合成工作， <a class="reference external" href="https://arxiv.org/pdf/2408.04594">ImgDiff</a>， 已被 <strong>CVPR'25</strong> 接收！</p></li>
+<li><p>💡 [2025-02-05] 我们提出了一种新的数据选择方法 <a class="reference external" href="https://www.arxiv.org/abs/2502.04380">Diversity as a Reward: Fine-Tuning LLMs on a Mixture of Domain-Undetermined Data</a>，该方法基于理论指导，将数据多样性建模为奖励信号，在 7 个基准测试中，微调 SOTA LLMs 取得了更好的整体表现。</p></li>
+<li><p>🚀 [2025-01-11] 我们发布了 2.0 版论文 <a class="reference external" href="https://arxiv.org/abs/2501.14755">Data-Juicer 2.0: Cloud-Scale Adaptive Data Processing for Foundation Models</a>。DJ现在可以使用阿里云集群中 50 个 Ray 节点上的 6400 个 CPU 核心在 2.1 小时内处理 70B 数据样本，并使用 8 个 Ray 节点上的 1280 个 CPU 核心在 2.8 小时内对 5TB 数据进行重复数据删除。</p></li>
+<li><p>🛠️ [2025-01-03] 我们通过 20 多个相关的新 <a class="reference external" href="https://github.com/modelscope/data-juicer/releases/tag/v1.0.2">OP</a> 以及与 LLaMA-Factory 和 ModelScope-Swift 兼容的统一 <a class="reference external" href="https://github.com/modelscope/data-juicer/releases/tag/v1.0.3">数据集格式</a> 更好地支持Post-Tuning场景。</p></li>
 </ul>
 <details>
 <summary> History News:
@@ -507,13 +500,14 @@
 <summary>更多Data-Juicer团队关于数据的论文:
 </summary>>
 <ul class="simple">
-<li><p><a class="reference external" href="https://arxiv.org/abs/2407.11784">Data-Juicer Sandbox: A Feedback-Driven Suite for Multimodal Data-Model Co-development</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/2408.04594">ImgDiff: Contrastive Data Synthesis for Vision Large Language Models</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/2412.17574">HumanVBench: Exploring Human-Centric Video Understanding Capabilities of MLLMs with Synthetic Benchmark Data</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/2407.08583">The Synergy between Data and Multi-Modal Large Language Models: A Survey from Co-Development Perspective</a></p></li>
-<li><p><a class="reference external" href="https://www.arxiv.org/abs/2502.04380">Diversity as a Reward: Fine-Tuning LLMs on a Mixture of Domain-Undetermined Data</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/2503.09499">MindGym: Enhancing Vision-Language Models via Synthetic Self-Challenging Questions</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/2405.14908">BiMix: A Bivariate Data Mixing Law for Language Model Pretraining</a></p></li>
+<li><p>(ICML'25 Spotlight) <a class="reference external" href="https://arxiv.org/abs/2407.11784">Data-Juicer Sandbox: A Feedback-Driven Suite for Multimodal Data-Model Co-development</a></p></li>
+<li><p>(CVPR'25) <a class="reference external" href="https://arxiv.org/abs/2408.04594">ImgDiff: Contrastive Data Synthesis for Vision Large Language Models</a></p></li>
+<li><p>(TPAMI'25) <a class="reference external" href="https://arxiv.org/abs/2407.08583">The Synergy between Data and Multi-Modal Large Language Models: A Survey from Co-Development Perspective</a></p></li>
+<li><p>(Benchmark Data) <a class="reference external" href="https://arxiv.org/abs/2412.17574">HumanVBench: Exploring Human-Centric Video Understanding Capabilities of MLLMs with Synthetic Benchmark Data</a></p></li>
+<li><p>(Benchmark Data) <a class="reference external" href="https://www.arxiv.org/abs/2505.16915">DetailMaster: Can Your Text-to-Image Model Handle Long Prompts?</a></p></li>
+<li><p>(Data Synthesis) <a class="reference external" href="https://www.arxiv.org/abs/2502.04380">Diversity as a Reward: Fine-Tuning LLMs on a Mixture of Domain-Undetermined Data</a></p></li>
+<li><p>(Data Synthesis) <a class="reference external" href="https://arxiv.org/abs/2503.09499">MindGYM: What Matters in Question Synthesis for Thinking-Centric Fine-Tuning?</a></p></li>
+<li><p>(Data Scaling) <a class="reference external" href="https://arxiv.org/abs/2405.14908">BiMix: A Bivariate Data Mixing Law for Language Model Pretraining</a></p></li>
 </ul>
 </details>
 </section>
@@ -576,7 +570,7 @@
     </aside>
   </div>
 </div>
-<script src="_static/documentation_options.js?v=79f47a88"></script>
+<script src="_static/documentation_options.js?v=2491dde2"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>
