@@ -1,6 +1,3 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: unittest-mgzn
 
 on:
@@ -11,63 +8,47 @@ permissions:
 
 jobs:
   unittest-single:
-    runs-on: [GPU, unittest]
-    environment: Testing
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
-        path: dj-${{ github.run_id }}
-        fetch-depth: 0
+        python-version: '3.10'
 
-    - name: Setup docker compose
-      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
+    - uses: astral-sh/setup-uv@v1
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/uv
+          ~/.cache/huggingface
+        key: ${{ runner.os }}-uv-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-uv-
+
+    - name: Install dependencies
       run: |
-        docker compose up -d
+        uv pip install --system --extra-index-url https://pypi.nvidia.com cudf-cu12
+        uv pip install --system -e .[dev]
+        uv pip install --system -e .[distributed]
 
-    - name: Install data-juicer
-      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
+    - name: Set environment variables
       run: |
-        docker compose exec ray-head bash -c '/root/.local/bin/uv pip install --system -e .\[all\]'
+        echo "HF_ENDPOINT=https://hf-mirror.com" >> $GITHUB_ENV
+        echo "PYTHONPATH=${{ github.workspace }}" >> $GITHUB_ENV
+        echo "HF_HOME=$HOME/.cache/huggingface" >> $GITHUB_ENV
 
-    - name: Print Pip Dependency Tree
-      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
+    - name: Run unittest
       run: |
-        docker compose exec ray-head bash -c '/root/.local/bin/uv pip install --system pipdeptree'
-        docker compose exec ray-head bash -c 'pipdeptree'
+        python tests/run.py --tag standalone --mode regression --pattern=test_*_gpt4v_mapper.py
+        coverage combine
 
-    - name: Clean dataset cache
-      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
-      run: |
-        docker compose exec ray-head rm -rf /data/huggingface/dataset
-
-    - name: Run unittest standalone
-      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
-      run: |
-        docker compose exec ray-head bash -c 'python tests/run.py --tag standalone --mode partial --pattern=test_*_deduplicator.py'
-
-    - name: Check coverage file
-      id: check_coverage
-      run: |
-        if [ -f "dj-${{ github.run_id }}/.coverage" ]; then
-          echo "coverage_path=dj-${{ github.run_id }}/.coverage" >> $GITHUB_OUTPUT
-        else
-          echo "coverage_path=dj-${{ github.run_id }}/.coverage.*" >> $GITHUB_OUTPUT
-        fi
-
-    - name: Upload coverage report of standalone
+    - name: Upload coverage report
       uses: actions/upload-artifact@v4
       with:
-        name: coverage_report_standalone
+        name: coverage_report
         include-hidden-files: true
-        path: ${{ steps.check_coverage.outputs.coverage_path }}
-
-    - name: Remove docker compose
-      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
-      if: always()
-      run: |
-        docker compose down --remove-orphans
-
-    - name: Cleanup workspace
-      if: always()
-      run: |
-        rm -rf  dj-${{ github.run_id }}
+        path: .coverage*
