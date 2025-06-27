@@ -43,7 +43,7 @@ jobs:
     - name: Run unittest standalone
       working-directory: dj-${{ github.run_id }}/.github/workflows/docker
       run: |
-        docker compose exec ray-head bash -c 'python tests/run.py --tag standalone --mode partial --pattern=test_*_deduplicator.py'
+        docker compose exec ray-head bash -c 'python tests/run.py --tag standalone --mode regression --pattern=test_*_deduplicator.py'
 
     - name: Check coverage file
       id: check_coverage
