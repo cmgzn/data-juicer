@@ -11,8 +11,7 @@ permissions:
 
 jobs:
   unittest-single:
-    runs-on: [GPU, unittest]
-    environment: Testing
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       with:
