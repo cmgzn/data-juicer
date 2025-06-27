@@ -1,0 +1,73 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: unittest-mgzn
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unittest-single:
+    runs-on: [GPU, unittest]
+    environment: Testing
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        path: dj-${{ github.run_id }}
+        fetch-depth: 0
+
+    - name: Setup docker compose
+      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
+      run: |
+        docker compose up -d
+
+    - name: Install data-juicer
+      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
+      run: |
+        docker compose exec ray-head bash -c '/root/.local/bin/uv pip install --system -e .\[all\]'
+
+    - name: Print Pip Dependency Tree
+      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
+      run: |
+        docker compose exec ray-head bash -c '/root/.local/bin/uv pip install --system pipdeptree'
+        docker compose exec ray-head bash -c 'pipdeptree'
+
+    - name: Clean dataset cache
+      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
+      run: |
+        docker compose exec ray-head rm -rf /data/huggingface/dataset
+
+    - name: Run unittest standalone
+      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
+      run: |
+        docker compose exec ray-head bash -c 'python tests/run.py --tag standalone --mode partial --pattern=test_*_deduplicator.py'
+
+    - name: Check coverage file
+      id: check_coverage
+      run: |
+        if [ -f "dj-${{ github.run_id }}/.coverage" ]; then
+          echo "coverage_path=dj-${{ github.run_id }}/.coverage" >> $GITHUB_OUTPUT
+        else
+          echo "coverage_path=dj-${{ github.run_id }}/.coverage.*" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Upload coverage report of standalone
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage_report_standalone
+        include-hidden-files: true
+        path: ${{ steps.check_coverage.outputs.coverage_path }}
+
+    - name: Remove docker compose
+      working-directory: dj-${{ github.run_id }}/.github/workflows/docker
+      if: always()
+      run: |
+        docker compose down --remove-orphans
+
+    - name: Cleanup workspace
+      if: always()
+      run: |
+        rm -rf  dj-${{ github.run_id }}

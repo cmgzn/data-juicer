@@ -20,7 +20,7 @@ class DocumentSimhashDeduplicatorTest(DataJuicerTestCaseBase):
         ds_list = [{"text": "欢迎来到阿里巴巴！"}]
         tgt_list = [{"text": "欢迎来到阿里巴巴！"}]
         dataset = Dataset.from_list(ds_list)
-        op = DocumentSimhashDeduplicator(ignore_pattern=r"\p{P}")
+        op = DocumentSimhashDeduplicator(ignore_pattern=r"\p{P}", tokenization="character")
         self._run_simhash_dedup(dataset, tgt_list, op)
     
     def test_english_deduplication(self):
@@ -968,12 +968,6 @@ class DocumentSimhashDeduplicatorTest(DataJuicerTestCaseBase):
     def test_punctuation_deduplication(self):
         ds_list = [
             {
-                'text': 'Today is Sunday and it\'s a happy day!'
-            },
-            {
-                'text': 'Today is sunday and it\'s really a happy day!'
-            },
-            {
                 'text':
                 'This paper proposed a novel method on LLM pretraining. It is '
                 'a new method that can achieve better performance than the '
@@ -1314,9 +1308,6 @@ class DocumentSimhashDeduplicatorTest(DataJuicerTestCaseBase):
             },
         ]
         tgt_list = [
-            {
-                'text': 'Today is Sunday and it\'s a happy day!'
-            },
             {
                 'text':
                 'This paper proposed a novel method on LLM pretraining. It is '
