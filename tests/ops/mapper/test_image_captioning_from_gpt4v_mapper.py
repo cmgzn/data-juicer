@@ -12,10 +12,6 @@ from data_juicer.utils.mm_utils import SpecialTokens
 from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 
 
-@patch(
-    "data_juicer.ops.mapper.image_captioning_from_gpt4v_mapper.call_gpt_vision_api",
-    autospec=True,
-)
 class ImageCaptioningFromGPT4VMapperTest(DataJuicerTestCaseBase):
 
     data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "data")
@@ -30,7 +26,8 @@ class ImageCaptioningFromGPT4VMapperTest(DataJuicerTestCaseBase):
         # as the generated content is not deterministic
         self.assertEqual(len(dataset_list), caption_num)
 
-    def test_no_eoc_special_token(self, mock_call_gpt_vision_api):
+    @patch("requests.post")
+    def test_no_eoc_special_token(self, mock_post):
 
         ds_list = [
             {
@@ -43,13 +40,15 @@ class ImageCaptioningFromGPT4VMapperTest(DataJuicerTestCaseBase):
             },
         ]
         dataset = Dataset.from_list(ds_list)
-        op = ImageCaptioningFromGPT4VMapper(
-            api_key="mock_api_key", image_key="images", text_key="text"
-        )
-        mock_call_gpt_vision_api.return_value = "Mocked caption"
+        # Multiprocess cannot be used because mock is used
+        op = ImageCaptioningFromGPT4VMapper(api_key="mock_api_key", image_key="images", text_key="text", num_proc=1)
+        mock_response = MagicMock()
+        mock_response.json.return_value = {"choices": [{"text": "Mocked caption"}]}
+        mock_post.return_value = mock_response
         self._run_mapper(dataset, op, caption_num=len(ds_list) * 2)
 
-    def test_eoc_special_token(self, mock_call_gpt_vision_api):
+    @patch("requests.post")
+    def test_eoc_special_token(self, mock_post):
 
         ds_list = [
             {
@@ -62,14 +61,15 @@ class ImageCaptioningFromGPT4VMapperTest(DataJuicerTestCaseBase):
             },
         ]
         dataset = Dataset.from_list(ds_list)
-        op = ImageCaptioningFromGPT4VMapper(
-            api_key="mock_api_key", image_key="images", text_key="text"
-        )
+        op = ImageCaptioningFromGPT4VMapper(api_key="mock_api_key", image_key="images", text_key="text", num_proc=1)
 
-        mock_call_gpt_vision_api.return_value = "Mocked caption"
+        mock_response = MagicMock()
+        mock_response.json.return_value = {"choices": [{"text": "Mocked caption"}]}
+        mock_post.return_value = mock_response
         self._run_mapper(dataset, op, caption_num=len(ds_list) * 2)
 
-    def test_keep_all(self, mock_call_gpt_vision_api):
+    @patch("requests.post")
+    def test_keep_all(self, mock_post):
 
         ds_list = [
             {
@@ -83,15 +83,15 @@ class ImageCaptioningFromGPT4VMapperTest(DataJuicerTestCaseBase):
         ]
         dataset = Dataset.from_list(ds_list)
         op = ImageCaptioningFromGPT4VMapper(
-            api_key="mock_api_key",
-            image_key="images",
-            text_key="text",
-            any_or_all="all",
+            api_key="mock_api_key", image_key="images", text_key="text", any_or_all="all", num_proc=1
         )
-        mock_call_gpt_vision_api.return_value = None
+        mock_response = MagicMock()
+        mock_response.json.return_value = {}
+        mock_post.return_value = mock_response
         self._run_mapper(dataset, op, caption_num=2)
 
-    def test_custom_mode(self, mock_call_gpt_vision_api):
+    @patch("requests.post")
+    def test_custom_mode(self, mock_post):
 
         ds_list = [
             {
@@ -113,22 +113,19 @@ class ImageCaptioningFromGPT4VMapperTest(DataJuicerTestCaseBase):
             system_prompt="test_system_prompt",
             user_prompt="test_user_prompt",
             user_prompt_key="prompt",
+            num_proc=1,
         )
-        mock_call_gpt_vision_api.return_value = "Mocked caption"
+        mock_response = MagicMock()
+        mock_response.json.return_value = {"choices": [{"text": "Mocked caption"}]}
+        mock_post.return_value = mock_response
         self._run_mapper(dataset, op, caption_num=4)
 
-    def test_error_mode(self, mock_call_gpt_vision_api):
+    def test_error_mode(self):
         with self.assertRaises(ValueError):
             op = ImageCaptioningFromGPT4VMapper(mode="error")
 
-
-@patch("requests.post", autospec=True)
-class CallGPTVisionAPITest(DataJuicerTestCaseBase):
-
     def _call_gpt_vision_api(self):
-        from data_juicer.ops.mapper.image_captioning_from_gpt4v_mapper import (
-            call_gpt_vision_api,
-        )
+        from data_juicer.ops.mapper.image_captioning_from_gpt4v_mapper import call_gpt_vision_api
 
         return call_gpt_vision_api(
             "test_key",
@@ -137,24 +134,7 @@ class CallGPTVisionAPITest(DataJuicerTestCaseBase):
             base64.b64encode(b"fake_image_data").decode("utf-8"),
         )
 
-    def test_call_gpt_vision_api_success(self, mock_post):
-        mock_response = MagicMock()
-        mock_response.json.return_value = {"choices": [{"text": "Generated text"}]}
-        mock_post.return_value = mock_response
-
-        result = self._call_gpt_vision_api()
-
-        self.assertEqual(result, "Generated text")
-        mock_post.assert_called_once()
-
-    def test_call_gpt_vision_api_no_choices(self, mock_post):
-        mock_response = MagicMock()
-        mock_response.json.return_value = {}
-        mock_post.return_value = mock_response
-        result = self._call_gpt_vision_api()
-        self.assertIsNone(result)
-        mock_post.assert_called_once()
-
+    @patch("requests.post")
     def test_call_gpt_vision_api_request_error(self, mock_post):
 
         mock_post.side_effect = requests.exceptions.RequestException("Test error")
@@ -164,6 +144,7 @@ class CallGPTVisionAPITest(DataJuicerTestCaseBase):
         self.assertIsNone(result)
         mock_post.assert_called_once()
 
+    @patch("requests.post")
     def test_call_gpt_vision_api_http_error_401(self, mock_post):
 
         http_error = requests.exceptions.HTTPError("Unauthorized")
@@ -173,6 +154,7 @@ class CallGPTVisionAPITest(DataJuicerTestCaseBase):
         self.assertIsNone(result)
         mock_post.assert_called_once()
 
+    @patch("requests.post")
     def test_call_gpt_vision_api_http_error_429(self, mock_post):
 
         http_error = requests.exceptions.HTTPError("Too Many Requests")
@@ -182,6 +164,7 @@ class CallGPTVisionAPITest(DataJuicerTestCaseBase):
         self.assertIsNone(result)
         mock_post.assert_called_once()
 
+    @patch("requests.post")
     def test_call_gpt_vision_api_connection_error(self, mock_post):
 
         mock_post.side_effect = requests.exceptions.ConnectionError()
@@ -189,6 +172,7 @@ class CallGPTVisionAPITest(DataJuicerTestCaseBase):
         self.assertIsNone(result)
         mock_post.assert_called_once()
 
+    @patch("requests.post")
     def test_call_gpt_vision_api_timeout_error(self, mock_post):
 
         mock_post.side_effect = requests.exceptions.Timeout()
@@ -196,6 +180,7 @@ class CallGPTVisionAPITest(DataJuicerTestCaseBase):
         self.assertIsNone(result)
         mock_post.assert_called_once()
 
+    @patch("requests.post")
     def test_call_gpt_vision_api_other_error(self, mock_post):
 
         mock_post.side_effect = Exception("Other error")

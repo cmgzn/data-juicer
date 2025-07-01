@@ -25,15 +25,14 @@ jobs:
         path: |
           ~/.cache/uv
           ~/.cache/huggingface
-        key: ${{ runner.os }}-uv-${{ hashFiles('**/requirements.txt') }}
+        key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}
         restore-keys: |
           ${{ runner.os }}-uv-
 
     - name: Install dependencies
       run: |
         uv pip install --system --extra-index-url https://pypi.nvidia.com cudf-cu12
-        uv pip install --system -e .[dev]
-        uv pip install --system -e .[distributed]
+        uv pip install --system -e .[all]
 
     - name: Set environment variables
       run: |
@@ -43,7 +42,7 @@ jobs:
 
     - name: Run unittest
       run: |
-        python tests/run.py --tag standalone --mode regression --pattern=test_*_gpt4v_mapper.py
+        python tests/run.py --tag standalone
         coverage combine
 
     - name: Upload coverage report
