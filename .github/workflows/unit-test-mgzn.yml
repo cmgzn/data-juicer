@@ -1,0 +1,53 @@
+name: unittest-mgzn
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unittest-single:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - uses: astral-sh/setup-uv@v1
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/uv
+          ~/.cache/huggingface
+        key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-uv-
+
+    - name: Install dependencies
+      run: |
+        uv pip install --system --extra-index-url https://pypi.nvidia.com cudf-cu12
+        uv pip install --system -e .[all]
+
+    - name: Set environment variables
+      run: |
+        echo "HF_ENDPOINT=https://hf-mirror.com" >> $GITHUB_ENV
+        echo "PYTHONPATH=${{ github.workspace }}" >> $GITHUB_ENV
+        echo "HF_HOME=$HOME/.cache/huggingface" >> $GITHUB_ENV
+
+    - name: Run unittest
+      run: |
+        python tests/run.py --tag standalone
+        coverage combine
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage_report
+        include-hidden-files: true
+        path: .coverage*
