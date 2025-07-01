@@ -34,7 +34,8 @@ jobs:
     - name: Install dependencies
       run: |
         uv pip install --system --extra-index-url https://pypi.nvidia.com cudf-cu12
-        uv pip install --system -e .[all]
+        uv pip install --system -e .[dev]
+        uv pip install --system -e .[distributed]
 
     - name: Set environment variables
       run: |
