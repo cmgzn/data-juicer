@@ -224,7 +224,7 @@
 <li class="toctree-l1"><a class="reference internal" href="DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BadDataExhibition_ZH.html">“坏”数据展览</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DJ_SORA_ZH.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DJ_service_ZH.html">API服务化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ_service_ZH.html">DJ_服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DeveloperGuide_ZH.html">开发者指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Sandbox_ZH.html">沙盒实验室</a></li>
@@ -649,7 +649,7 @@ Data-Juicer 中的算子分为以下 7 种类型。</p>
 </tr>
 <tr class="row-odd"><td><p>image_aspect_ratio_filter</p></td>
 <td><p>🏞Image 💻CPU 🟢Stable</p></td>
-<td><p>Filter to keep samples with image aspect ratio within a specific range. 过滤器，以保持样本的图像纵横比在特定范围内。</p></td>
+<td><p>Filter to keep samples with image aspect ratio within a specific range. 过滤器，以保持特定范围内的图像长宽比的样本。</p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/data_juicer/ops/filter/image_aspect_ratio_filter.py">code</a></p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tests/ops/filter/test_image_aspect_ratio_filter.py">tests</a></p></td>
 </tr>
@@ -703,7 +703,7 @@ Data-Juicer 中的算子分为以下 7 种类型。</p>
 </tr>
 <tr class="row-even"><td><p>image_watermark_filter</p></td>
 <td><p>🏞Image 💻CPU 🧩HF 🟢Stable</p></td>
-<td><p>Filter to keep samples whose images have no watermark with high probability. 过滤器以保持其图像没有水印的样本具有高概率。</p></td>
+<td><p>Filter to keep samples whose images have no watermark with high probability. 过滤器，以保留图像没有水印的样本。</p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/data_juicer/ops/filter/image_watermark_filter.py">code</a></p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tests/ops/filter/test_image_watermark_filter.py">tests</a></p></td>
 </tr>
@@ -942,7 +942,7 @@ Data-Juicer 中的算子分为以下 7 种类型。</p>
 </tr>
 <tr class="row-even"><td><p>text_formatter</p></td>
 <td><p>🔴Alpha</p></td>
-<td><p>The class is used to load and format text-type files. 类用于加载和格式化文本类型的文件。</p></td>
+<td><p>The class is used to load and format text-type files. 类用于加载和格式化文本类型文件。</p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/data_juicer/format/text_formatter.py">code</a></p></td>
 <td><p>-</p></td>
 </tr>
@@ -1173,10 +1173,10 @@ Data-Juicer 中的算子分为以下 7 种类型。</p>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tests/ops/mapper/test_image_blur_mapper.py">tests</a></p></td>
 </tr>
 <tr class="row-even"><td><p>image_captioning_from_gpt4v_mapper</p></td>
-<td><p>🔮Multimodal 💻CPU 🔴Alpha</p></td>
+<td><p>🔮Multimodal 💻CPU 🟡Beta</p></td>
 <td><p>Mapper to generate samples whose texts are generated based on gpt-4-vision and the image. Mapper生成样本，其文本基于gpt-4-vision和图像生成。</p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/data_juicer/ops/mapper/image_captioning_from_gpt4v_mapper.py">code</a></p></td>
-<td><p>-</p></td>
+<td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tests/ops/mapper/test_image_captioning_from_gpt4v_mapper.py">tests</a></p></td>
 </tr>
 <tr class="row-odd"><td><p>image_captioning_mapper</p></td>
 <td><p>🔮Multimodal 💻CPU 🧩HF 🟢Stable</p></td>
