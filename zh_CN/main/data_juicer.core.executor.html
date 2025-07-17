@@ -40,15 +40,6 @@
   <body>
     
 
-<p>
-  <strong>
-    
-    You're reading the documentation from the main branch.
-    For the latest released version, please have a look at <a href="../v1.4.0/index.html">v1.4.0</a>.
-    
-  </strong>
-</p>
-
 
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
@@ -321,7 +312,6 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                    <a href="../v1.4.0/index.html">v1.4.0</a>
                     <a href="data_juicer.core.executor.html">main</a>
             </dd>
         </div>
@@ -382,7 +372,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.core.executor.base.ExecutorBase.run">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_data_np</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Gt</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">gt</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_return</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_juicer/core/executor/base.html#ExecutorBase.run"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.core.executor.base.ExecutorBase.run" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Abstract method for ExecutorBase.run</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -461,7 +452,7 @@ Default is &quot;uniform&quot;.</p></li>
 <dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.core.executor.factory.ExecutorFactory.create_executor">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_executor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executor_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#data_juicer.core.executor.default_executor.DefaultExecutor" title="data_juicer.core.executor.default_executor.DefaultExecutor"><span class="pre">DefaultExecutor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#data_juicer.core.executor.ray_executor.RayExecutor" title="data_juicer.core.executor.ray_executor.RayExecutor"><span class="pre">RayExecutor</span></a></span></span><a class="reference internal" href="_modules/data_juicer/core/executor/factory.html#ExecutorFactory.create_executor"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.core.executor.factory.ExecutorFactory.create_executor" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_executor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executor_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_juicer/core/executor/factory.html#ExecutorFactory.create_executor"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.core.executor.factory.ExecutorFactory.create_executor" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -538,7 +529,8 @@ Default is &quot;uniform&quot;.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.core.executor.ExecutorBase.run">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_data_np</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Gt</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">gt</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_return</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_juicer/core/executor/base.html#ExecutorBase.run"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.core.executor.ExecutorBase.run" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Abstract method for ExecutorBase.run</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -548,7 +540,7 @@ Default is &quot;uniform&quot;.</p></li>
 <dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.core.executor.ExecutorFactory.create_executor">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_executor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executor_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#data_juicer.core.executor.default_executor.DefaultExecutor" title="data_juicer.core.executor.default_executor.DefaultExecutor"><span class="pre">DefaultExecutor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#data_juicer.core.executor.ray_executor.RayExecutor" title="data_juicer.core.executor.ray_executor.RayExecutor"><span class="pre">RayExecutor</span></a></span></span><a class="reference internal" href="_modules/data_juicer/core/executor/factory.html#ExecutorFactory.create_executor"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.core.executor.ExecutorFactory.create_executor" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_executor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executor_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_juicer/core/executor/factory.html#ExecutorFactory.create_executor"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.core.executor.ExecutorFactory.create_executor" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -742,7 +734,7 @@ Default is &quot;uniform&quot;.</p></li>
     </aside>
   </div>
 </div>
-<script src="_static/documentation_options.js?v=2491dde2"></script>
+<script src="_static/documentation_options.js?v=3657e1f8"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>

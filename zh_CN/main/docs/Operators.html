@@ -40,15 +40,6 @@
   <body>
     
 
-<p>
-  <strong>
-    
-    You're reading the documentation from the main branch.
-    For the latest released version, please have a look at <a href="../../v1.4.0/docs/Operators.html">v1.4.0</a>.
-    
-  </strong>
-</p>
-
 
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
@@ -321,7 +312,6 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                    <a href="../../v1.4.0/docs/Operators.html">v1.4.0</a>
                     <a href="Operators.html">main</a>
             </dd>
         </div>
@@ -1096,7 +1086,7 @@ Data-Juicer 中的算子分为以下 7 种类型。</p>
 </tr>
 <tr class="row-odd"><td><p>download_file_mapper</p></td>
 <td><p>💻CPU 🟡Beta</p></td>
-<td><p>Mapper to download url files to local files. 映射器将url文件下载到本地文件。</p></td>
+<td><p>Mapper to download url files to local files or load them into memory. 映射器将url文件下载到本地文件或将其加载到内存中。</p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/data_juicer/ops/mapper/download_file_mapper.py">code</a></p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tests/ops/mapper/test_download_file_mapper.py">tests</a></p></td>
 </tr>
@@ -1204,7 +1194,7 @@ Data-Juicer 中的算子分为以下 7 种类型。</p>
 </tr>
 <tr class="row-odd"><td><p>image_segment_mapper</p></td>
 <td><p>🏞Image 💻CPU 🟢Stable</p></td>
-<td><p>Perform segment-anything on images and return the bounding boxes. 对图像执行segment-任何操作并返回边界框。</p></td>
+<td><p>Perform segment-anything on images and return the bounding boxes. 在图像上执行segment-anything并返回边界框。</p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/data_juicer/ops/mapper/image_segment_mapper.py">code</a></p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/data-juicer/blob/main/tests/ops/mapper/test_image_segment_mapper.py">tests</a></p></td>
 </tr>
@@ -1626,7 +1616,7 @@ for Developers</span>.</p>
     </aside>
   </div>
 </div>
-<script src="../_static/documentation_options.js?v=2491dde2"></script>
+<script src="../_static/documentation_options.js?v=3657e1f8"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>

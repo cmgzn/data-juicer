@@ -39,15 +39,6 @@
   <body>
     
 
-<p>
-  <strong>
-    
-    You're reading the documentation from the main branch.
-    For the latest released version, please have a look at <a href="../../../../v1.4.0/index.html">v1.4.0</a>.
-    
-  </strong>
-</p>
-
 
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
@@ -318,7 +309,6 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                    <a href="../../../../v1.4.0/index.html">v1.4.0</a>
                     <a href="base_op.html">main</a>
             </dd>
         </div>
@@ -523,6 +513,8 @@
 <span class="sd">            to be processed</span>
 <span class="sd">        :param video_key: the key name of field that stores sample video list</span>
 <span class="sd">            to be processed</span>
+<span class="sd">        :param image_bytes_key: the key name of field that stores sample image bytes list</span>
+<span class="sd">            to be processed</span>
 <span class="sd">        :param query_key: the key name of field that stores sample queries</span>
 <span class="sd">        :param response_key: the key name of field that stores responses</span>
 <span class="sd">        :param history_key: the key name of field that stores history of</span>
@@ -536,6 +528,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">image_key</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image_key&quot;</span><span class="p">,</span> <span class="s2">&quot;images&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">audio_key</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;audio_key&quot;</span><span class="p">,</span> <span class="s2">&quot;audios&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">video_key</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;video_key&quot;</span><span class="p">,</span> <span class="s2">&quot;videos&quot;</span><span class="p">)</span>
+
+        <span class="c1"># extra mm bytes keys</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_bytes_key</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image_bytes_key&quot;</span><span class="p">,</span> <span class="s2">&quot;image_bytes&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">query_key</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;query_key&quot;</span><span class="p">,</span> <span class="s2">&quot;query&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">response_key</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response_key&quot;</span><span class="p">,</span> <span class="s2">&quot;response&quot;</span><span class="p">)</span>
@@ -699,6 +694,8 @@
 <span class="sd">            to be processed</span>
 <span class="sd">        :param video_key: the key name of field that stores sample video list</span>
 <span class="sd">            to be processed</span>
+<span class="sd">        :param image_bytes_key: the key name of field that stores sample image bytes list</span>
+<span class="sd">            to be processed</span>
 <span class="sd">        :param query_key: the key name of field that stores sample queries</span>
 <span class="sd">        :param response_key: the key name of field that stores responses</span>
 <span class="sd">        :param history_key: the key name of field that stores history of</span>
@@ -805,6 +802,8 @@
 <span class="sd">        :param audio_key: the key name of field that stores sample audio list</span>
 <span class="sd">            to be processed</span>
 <span class="sd">        :param video_key: the key name of field that stores sample video list</span>
+<span class="sd">            to be processed</span>
+<span class="sd">        :param image_bytes_key: the key name of field that stores sample image bytes list</span>
 <span class="sd">            to be processed</span>
 <span class="sd">        :param query_key: the key name of field that stores sample queries</span>
 <span class="sd">        :param response_key: the key name of field that stores responses</span>
@@ -936,6 +935,8 @@
 <span class="sd">            to be processed</span>
 <span class="sd">        :param video_key: the key name of field that stores sample video list</span>
 <span class="sd">            to be processed</span>
+<span class="sd">        :param image_bytes_key: the key name of field that stores sample image bytes list</span>
+<span class="sd">            to be processed</span>
 <span class="sd">        :param query_key: the key name of field that stores sample queries</span>
 <span class="sd">        :param response_key: the key name of field that stores responses</span>
 <span class="sd">        :param history_key: the key name of field that stores history of</span>
@@ -1015,6 +1016,8 @@
 <span class="sd">            to be processed</span>
 <span class="sd">        :param video_key: the key name of field that stores sample video list</span>
 <span class="sd">            to be processed</span>
+<span class="sd">        :param image_bytes_key: the key name of field that stores sample image bytes list</span>
+<span class="sd">            to be processed</span>
 <span class="sd">        :param query_key: the key name of field that stores sample queries</span>
 <span class="sd">        :param response_key: the key name of field that stores responses</span>
 <span class="sd">        :param history_key: the key name of field that stores history of</span>
@@ -1064,6 +1067,8 @@
 <span class="sd">        :param audio_key: the key name of field that stores sample audio list</span>
 <span class="sd">            to be processed</span>
 <span class="sd">        :param video_key: the key name of field that stores sample video list</span>
+<span class="sd">            to be processed</span>
+<span class="sd">        :param image_bytes_key: the key name of field that stores sample image bytes list</span>
 <span class="sd">            to be processed</span>
 <span class="sd">        :param query_key: the key name of field that stores sample queries</span>
 <span class="sd">        :param response_key: the key name of field that stores responses</span>
@@ -1117,6 +1122,8 @@
 <span class="sd">        :param audio_key: the key name of field that stores sample audio list</span>
 <span class="sd">            to be processed</span>
 <span class="sd">        :param video_key: the key name of field that stores sample video list</span>
+<span class="sd">            to be processed</span>
+<span class="sd">        :param image_bytes_key: the key name of field that stores sample image bytes list</span>
 <span class="sd">            to be processed</span>
 <span class="sd">        :param query_key: the key name of field that stores sample queries</span>
 <span class="sd">        :param response_key: the key name of field that stores responses</span>
@@ -1203,7 +1210,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../_static/documentation_options.js?v=9172181d"></script>
+<script src="../../../_static/documentation_options.js?v=350a9c04"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

@@ -39,15 +39,6 @@
   <body>
     
 
-<p>
-  <strong>
-    
-    You're reading the documentation from the main branch.
-    For the latest released version, please have a look at <a href="../../../../v1.4.0/index.html">v1.4.0</a>.
-    
-  </strong>
-</p>
-
 
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
@@ -320,7 +311,6 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                    <a href="../../../../v1.4.0/index.html">v1.4.0</a>
                     <a href="DJ_mcp_granular_ops.html">main</a>
             </dd>
         </div>
@@ -393,8 +383,8 @@
 <span class="sd">    This function dynamically creates a function that can be registered as an MCP tool,</span>
 <span class="sd">    with proper signature and documentation based on the operator&#39;s __init__ method.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">sig</span> <span class="o">=</span> <span class="n">op</span><span class="p">[</span><span class="s2">&quot;signature&quot;</span><span class="p">]</span>
-    <span class="n">docstring</span> <span class="o">=</span> <span class="n">op</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="n">op</span><span class="p">[</span><span class="s2">&quot;sig&quot;</span><span class="p">]</span>
+    <span class="n">docstring</span> <span class="o">=</span> <span class="n">op</span><span class="p">[</span><span class="s2">&quot;desc&quot;</span><span class="p">]</span>
     <span class="n">param_docstring</span> <span class="o">=</span> <span class="n">op</span><span class="p">[</span><span class="s2">&quot;param_desc&quot;</span><span class="p">]</span>
 
     <span class="c1"># Create new function signature with dataset_path as first parameter</span>
@@ -521,7 +511,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../_static/documentation_options.js?v=2491dde2"></script>
+<script src="../../../_static/documentation_options.js?v=3657e1f8"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>

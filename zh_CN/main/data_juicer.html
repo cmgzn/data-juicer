@@ -40,15 +40,6 @@
   <body>
     
 
-<p>
-  <strong>
-    
-    You're reading the documentation from the main branch.
-    For the latest released version, please have a look at <a href="../v1.4.0/index.html">v1.4.0</a>.
-    
-  </strong>
-</p>
-
 
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
@@ -321,7 +312,6 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                    <a href="../v1.4.0/index.html">v1.4.0</a>
                     <a href="data_juicer.html">main</a>
             </dd>
         </div>
@@ -518,6 +508,7 @@
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.prepare_side_configs"><code class="docutils literal notranslate"><span class="pre">prepare_side_configs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.get_default_cfg"><code class="docutils literal notranslate"><span class="pre">get_default_cfg()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.prepare_cfgs_for_export"><code class="docutils literal notranslate"><span class="pre">prepare_cfgs_for_export()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.update_op_attr"><code class="docutils literal notranslate"><span class="pre">update_op_attr()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -591,8 +582,6 @@
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.monitor.resource_monitor"><code class="docutils literal notranslate"><span class="pre">resource_monitor()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.monitor.Monitor"><code class="docutils literal notranslate"><span class="pre">Monitor</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.monitor.Monitor.DYNAMIC_FIELDS"><code class="docutils literal notranslate"><span class="pre">Monitor.DYNAMIC_FIELDS</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.monitor.Monitor.__init__"><code class="docutils literal notranslate"><span class="pre">Monitor.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.monitor.Monitor.monitor_all_resources"><code class="docutils literal notranslate"><span class="pre">Monitor.monitor_all_resources()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.monitor.Monitor.monitor_current_resources"><code class="docutils literal notranslate"><span class="pre">Monitor.monitor_current_resources()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.monitor.Monitor.draw_resource_util_graph"><code class="docutils literal notranslate"><span class="pre">Monitor.draw_resource_util_graph()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.monitor.Monitor.analyze_resource_util_list"><code class="docutils literal notranslate"><span class="pre">Monitor.analyze_resource_util_list()</span></code></a></li>
@@ -606,6 +595,9 @@
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.ray_exporter.RayExporter"><code class="docutils literal notranslate"><span class="pre">RayExporter</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.ray_exporter.RayExporter.__init__"><code class="docutils literal notranslate"><span class="pre">RayExporter.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.ray_exporter.RayExporter.export"><code class="docutils literal notranslate"><span class="pre">RayExporter.export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.ray_exporter.RayExporter.write_json"><code class="docutils literal notranslate"><span class="pre">RayExporter.write_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.ray_exporter.RayExporter.write_webdataset"><code class="docutils literal notranslate"><span class="pre">RayExporter.write_webdataset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.ray_exporter.RayExporter.write_others"><code class="docutils literal notranslate"><span class="pre">RayExporter.write_others()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -689,12 +681,13 @@
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.RayExporter"><code class="docutils literal notranslate"><span class="pre">RayExporter</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.RayExporter.__init__"><code class="docutils literal notranslate"><span class="pre">RayExporter.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.RayExporter.export"><code class="docutils literal notranslate"><span class="pre">RayExporter.export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.RayExporter.write_json"><code class="docutils literal notranslate"><span class="pre">RayExporter.write_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.RayExporter.write_webdataset"><code class="docutils literal notranslate"><span class="pre">RayExporter.write_webdataset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.RayExporter.write_others"><code class="docutils literal notranslate"><span class="pre">RayExporter.write_others()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Monitor"><code class="docutils literal notranslate"><span class="pre">Monitor</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Monitor.DYNAMIC_FIELDS"><code class="docutils literal notranslate"><span class="pre">Monitor.DYNAMIC_FIELDS</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Monitor.__init__"><code class="docutils literal notranslate"><span class="pre">Monitor.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Monitor.monitor_all_resources"><code class="docutils literal notranslate"><span class="pre">Monitor.monitor_all_resources()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Monitor.monitor_current_resources"><code class="docutils literal notranslate"><span class="pre">Monitor.monitor_current_resources()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Monitor.draw_resource_util_graph"><code class="docutils literal notranslate"><span class="pre">Monitor.draw_resource_util_graph()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.core.html#data_juicer.core.Monitor.analyze_resource_util_list"><code class="docutils literal notranslate"><span class="pre">Monitor.analyze_resource_util_list()</span></code></a></li>
@@ -1322,6 +1315,7 @@
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.common_utils.is_string_list"><code class="docutils literal notranslate"><span class="pre">is_string_list()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.common_utils.avg_split_string_list_under_limit"><code class="docutils literal notranslate"><span class="pre">avg_split_string_list_under_limit()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.common_utils.is_float"><code class="docutils literal notranslate"><span class="pre">is_float()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.common_utils.check_op_method_param"><code class="docutils literal notranslate"><span class="pre">check_op_method_param()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data_juicer.utils.html#module-data_juicer.utils.compress">data_juicer.utils.compress module</a><ul>
@@ -1598,6 +1592,7 @@
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.mm_utils.get_special_tokens"><code class="docutils literal notranslate"><span class="pre">get_special_tokens()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.mm_utils.remove_special_tokens"><code class="docutils literal notranslate"><span class="pre">remove_special_tokens()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.mm_utils.remove_non_special_tokens"><code class="docutils literal notranslate"><span class="pre">remove_non_special_tokens()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.mm_utils.load_mm_bytes_from_sample"><code class="docutils literal notranslate"><span class="pre">load_mm_bytes_from_sample()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.mm_utils.load_data_with_context"><code class="docutils literal notranslate"><span class="pre">load_data_with_context()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.mm_utils.load_images"><code class="docutils literal notranslate"><span class="pre">load_images()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.mm_utils.load_images_byte"><code class="docutils literal notranslate"><span class="pre">load_images_byte()</span></code></a></li>
@@ -1709,6 +1704,7 @@
 <li class="toctree-l2"><a class="reference internal" href="data_juicer.utils.html#module-data_juicer.utils.unittest_utils">data_juicer.utils.unittest_utils module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.TEST_TAG"><code class="docutils literal notranslate"><span class="pre">TEST_TAG()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.set_clear_model_flag"><code class="docutils literal notranslate"><span class="pre">set_clear_model_flag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.set_from_fork_flag"><code class="docutils literal notranslate"><span class="pre">set_from_fork_flag()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.setUpClass"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.setUpClass()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.tearDownClass"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.tearDownClass()</span></code></a></li>
@@ -1721,6 +1717,10 @@
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.get_diff_files"><code class="docutils literal notranslate"><span class="pre">get_diff_files()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.find_corresponding_test_file"><code class="docutils literal notranslate"><span class="pre">find_corresponding_test_file()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.get_partial_test_cases"><code class="docutils literal notranslate"><span class="pre">get_partial_test_cases()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_juicer.utils.html#module-data_juicer.utils.webdataset_utils">data_juicer.utils.webdataset_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.webdataset_utils.reconstruct_custom_webdataset_format"><code class="docutils literal notranslate"><span class="pre">reconstruct_custom_webdataset_format()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data_juicer.utils.html#module-data_juicer.utils">Module contents</a></li>
@@ -1800,7 +1800,7 @@
     </aside>
   </div>
 </div>
-<script src="_static/documentation_options.js?v=2491dde2"></script>
+<script src="_static/documentation_options.js?v=3657e1f8"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>

@@ -39,15 +39,6 @@
   <body>
     
 
-<p>
-  <strong>
-    
-    You're reading the documentation from the main branch.
-    For the latest released version, please have a look at <a href="../../../../../v1.4.0/index.html">v1.4.0</a>.
-    
-  </strong>
-</p>
-
 
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
@@ -320,7 +311,6 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                    <a href="../../../../../v1.4.0/index.html">v1.4.0</a>
                     <a href="factory.html">main</a>
             </dd>
         </div>
@@ -357,23 +347,21 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>data_juicer.core.executor.factory 源代码</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">.default_executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultExecutor</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.ray_executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">RayExecutor</span>
-
-
 <div class="viewcode-block" id="ExecutorFactory">
 <a class="viewcode-back" href="../../../../data_juicer.core.executor.html#data_juicer.core.ExecutorFactory">[文档]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExecutorFactory</span><span class="p">:</span>
+<span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExecutorFactory</span><span class="p">:</span>
 <div class="viewcode-block" id="ExecutorFactory.create_executor">
 <a class="viewcode-back" href="../../../../data_juicer.core.executor.html#data_juicer.core.ExecutorFactory.create_executor">[文档]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">create_executor</span><span class="p">(</span><span class="n">executor_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">DefaultExecutor</span><span class="p">,</span> <span class="n">RayExecutor</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_executor</span><span class="p">(</span><span class="n">executor_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">executor_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">DefaultExecutor</span><span class="p">()</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">.default_executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultExecutor</span>
+
+            <span class="k">return</span> <span class="n">DefaultExecutor</span>
         <span class="k">elif</span> <span class="n">executor_type</span> <span class="o">==</span> <span class="s2">&quot;ray&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">RayExecutor</span><span class="p">()</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">.ray_executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">RayExecutor</span>
+
+            <span class="k">return</span> <span class="n">RayExecutor</span>
         <span class="c1"># TODO: add nemo support</span>
         <span class="c1">#  elif executor_type == &quot;nemo&quot;:</span>
         <span class="c1">#    return NemoExecutor()</span>
@@ -417,7 +405,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../../_static/documentation_options.js?v=2491dde2"></script>
+<script src="../../../../_static/documentation_options.js?v=3657e1f8"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/furo.js?v=5fa4622c"></script>

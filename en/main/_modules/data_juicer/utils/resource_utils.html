@@ -39,15 +39,6 @@
   <body>
     
 
-<p>
-  <strong>
-    
-    You're reading the documentation from the main branch.
-    For the latest released version, please have a look at <a href="../../../../v1.4.0/index.html">v1.4.0</a>.
-    
-  </strong>
-</p>
-
 
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
@@ -318,7 +309,6 @@
         <div class="section">
             <dt>Version</dt>
             <dd>
-                    <a href="../../../../v1.4.0/index.html">v1.4.0</a>
                     <a href="resource_utils.html">main</a>
             </dd>
         </div>
@@ -358,8 +348,11 @@
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">ray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.lazy_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">LazyLoader</span>
+
+<span class="n">ray</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s2">&quot;ray&quot;</span><span class="p">)</span>
 
 <span class="n">NVSMI_REPORT</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -521,7 +514,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../_static/documentation_options.js?v=9172181d"></script>
+<script src="../../../_static/documentation_options.js?v=350a9c04"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=5fa4622c"></script>
