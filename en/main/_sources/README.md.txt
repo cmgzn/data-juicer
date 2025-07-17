@@ -34,27 +34,15 @@ We provide a [playground](http://8.138.149.181/) with a managed JupyterLab. [Try
 
 [Platform for AI of Alibaba Cloud (PAI)](https://www.aliyun.com/product/bigdata/learn) has cited our work and integrated Data-Juicer into its data processing products. PAI is an AI Native large model and AIGC engineering platform that provides dataset management, computing power management, model tool chain, model development, model training, model deployment, and AI asset management. For documentation on data processing, please refer to: [PAI-Data Processing for Large Models](https://help.aliyun.com/zh/pai/user-guide/components-related-to-data-processing-for-foundation-models/?spm=a2c4g.11186623.0.0.3e9821a69kWdvX).
 
-https://cloud.video.taobao.com/vod/jz-a5NVJa8-X4SSGgnSpzI_B6460ONzMf7aJGc02GFU.mp4
-
 Data-Juicer is being actively updated and maintained. We will periodically enhance and add more features, data recipes and datasets.  We welcome you to join us (via issues, PRs, [Slack](https://join.slack.com/t/data-juicer/shared_invite/zt-23zxltg9d-Z4d3EJuhZbCLGwtnLWWUDg?spm=a2c22.12281976.0.0.7a8253f30mgpjw)  channel, [DingDing](https://qr.dingtalk.com/action/joingroup?code=v1,k1,YFIXM2leDEk7gJP5aMC95AfYT+Oo/EP/ihnaIEhMyJM=&_dt_no_comment=1&origin=11) group, ...), in promoting data-model co-development along with research and applications of foundation models!
-
-http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/data_juicer/videos/agent.mp4
 
 [Demo Video] DataJuicer-Agent: Quick start your data processing journey!
 
-<video controls>
-  <source 
-    src="http://dail-wlcb.oss-cn-wulanchabu.aliyuncs.com/data_juicer/videos/agent.mp4" 
-    type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/58aea900-e51f-4ec2-b1c0-eead97967893
 
 [Demo Video] DataJuicer-Sandbox: Better data-model co-dev at a lower cost!
 
-<video controls>
-  <source 
-    src="https://cloud.video.taobao.com/vod/jz-a5NVJa8-X4SSGgnSpzI_B6460ONzMf7aJGc02GFU.mp4" 
-    type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/a45f0eee-0f0e-4ffe-9a42-d9a55370089d
 
 
 ## News
