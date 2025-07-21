@@ -37,17 +37,16 @@ We provide a [playground](http://8.138.149.181/) with a managed JupyterLab. [Try
 Data-Juicer is being actively updated and maintained. We will periodically enhance and add more features, data recipes and datasets.  We welcome you to join us (via issues, PRs, [Slack](https://join.slack.com/t/data-juicer/shared_invite/zt-23zxltg9d-Z4d3EJuhZbCLGwtnLWWUDg?spm=a2c22.12281976.0.0.7a8253f30mgpjw)  channel, [DingDing](https://qr.dingtalk.com/action/joingroup?code=v1,k1,YFIXM2leDEk7gJP5aMC95AfYT+Oo/EP/ihnaIEhMyJM=&_dt_no_comment=1&origin=11) group, ...), in promoting data-model co-development along with research and applications of foundation models!
 
 [Demo Video] DataJuicer-Agent: Quick start your data processing journey!
-
 <video controls width="100%" height="auto" muted playsinline>
   <source 
-    src="https://github.com/user-attachments/assets/f51420e7-0543-4ce4-8831-983cc99583e3" 
+    src="https://github.com/user-attachments/assets/20db1b8d-069b-49b4-8fdf-3fb85bed9e5c" 
     type="video/mp4">
 </video>
 
 [Demo Video] DataJuicer-Sandbox: Better data-model co-dev at a lower cost!
 <video controls width="100%" height="auto" muted playsinline>
   <source 
-    src="https://github.com/user-attachments/assets/a45f0eee-0f0e-4ffe-9a42-d9a55370089d" 
+    src="https://github.com/user-attachments/assets/f51420e7-0543-4ce4-8831-983cc99583e3" 
     type="video/mp4">
 </video>
 
