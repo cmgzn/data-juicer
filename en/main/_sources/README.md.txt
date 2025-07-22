@@ -38,7 +38,7 @@ Data-Juicer is being actively updated and maintained. We will periodically enhan
 
 [Demo Video] DataJuicer-Agent: Quick start your data processing journey!
 
-https://gist.github.com/user-attachments/assets/4feaeba3-87bd-4adf-9642-e3e9f549d45c
+https://github.com/user-attachments/assets/de283929-f0de-4d5e-b514-746b63908167
 
 [Demo Video] DataJuicer-Sandbox: Better data-model co-dev at a lower cost!
 
