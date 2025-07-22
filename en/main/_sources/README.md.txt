@@ -36,6 +36,8 @@ We provide a [playground](http://8.138.149.181/) with a managed JupyterLab. [Try
 
 Data-Juicer is being actively updated and maintained. We will periodically enhance and add more features, data recipes and datasets.  We welcome you to join us (via issues, PRs, [Slack](https://join.slack.com/t/data-juicer/shared_invite/zt-23zxltg9d-Z4d3EJuhZbCLGwtnLWWUDg?spm=a2c22.12281976.0.0.7a8253f30mgpjw)  channel, [DingDing](https://qr.dingtalk.com/action/joingroup?code=v1,k1,YFIXM2leDEk7gJP5aMC95AfYT+Oo/EP/ihnaIEhMyJM=&_dt_no_comment=1&origin=11) group, ...), in promoting data-model co-development along with research and applications of foundation models!
 
+https://github.com/user-attachments/assets/a37f4a9b-c6db-4a2e-b419-0b6eb369cfb9
+
 [Demo Video] DataJuicer-Agent: Quick start your data processing journey!
 
 https://github.com/user-attachments/assets/de283929-f0de-4d5e-b514-746b63908167
