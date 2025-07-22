@@ -38,20 +38,15 @@ Data-Juicer is being actively updated and maintained. We will periodically enhan
 
 [Demo Video] DataJuicer-Agent: Quick start your data processing journey!
 
-<video controls width="100%" height="auto" playsinline>
-  <source 
-    src="https://github.com/user-attachments/assets/f51420e7-0543-4ce4-8831-983cc99583e3" 
-    type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/f4c7b23b-c9e4-49ef-b5e6-acf29b16c925
 
 [Demo Video] DataJuicer-Sandbox: Better data-model co-dev at a lower cost!
 
-<video controls width="100%" height="auto" playsinline>
-  <source 
-    src="https://github.com/user-attachments/assets/20db1b8d-069b-49b4-8fdf-3fb85bed9e5c" 
-    type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/f51420e7-0543-4ce4-8831-983cc99583e3
 
+my_test
+
+https://github.com/user-attachments/assets/58aea900-e51f-4ec2-b1c0-eead97967893
 
 ## News
 - 🛠️ [2025-06-04] How to process feedback data in the "era of experience"? We propose [Trinity-RFT: A General-Purpose and Unified Framework for Reinforcement Fine-Tuning of LLMs](https://arxiv.org/abs/2505.17826), which leverages Data-Juicer for its data pipelines tailored for RFT scenarios.
