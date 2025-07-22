@@ -1,6 +1,6 @@
 [[中文主页]](README_ZH.md) | [[DJ-Cookbook]](docs/tutorial/DJ-Cookbook.md) | [[OperatorZoo]](docs/Operators.md) | [[API]](https://modelscope.github.io/data-juicer/en/main/api) | [[Awesome LLM Data]](docs/awesome_llm_data.md)
 
-
+https://github.com/user-attachments/assets/02ffa2d2-4925-49ea-83d5-49091bd82b16
 # Data Processing for and with Foundation Models
 
  <img src="https://img.alicdn.com/imgextra/i1/O1CN01fUfM5A1vPclzPQ6VI_!!6000000006165-0-tps-1792-1024.jpg" width = "533" height = "300" alt="Data-Juicer"/>
