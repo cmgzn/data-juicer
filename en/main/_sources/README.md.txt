@@ -1,5 +1,6 @@
 [[中文主页]](README_ZH.md) | [[DJ-Cookbook]](docs/tutorial/DJ-Cookbook.md) | [[OperatorZoo]](docs/Operators.md) | [[API]](https://modelscope.github.io/data-juicer/en/main/api) | [[Awesome LLM Data]](docs/awesome_llm_data.md)
 
+
 # Data Processing for and with Foundation Models
 
  <img src="https://img.alicdn.com/imgextra/i1/O1CN01fUfM5A1vPclzPQ6VI_!!6000000006165-0-tps-1792-1024.jpg" width = "533" height = "300" alt="Data-Juicer"/>
@@ -37,11 +38,19 @@ Data-Juicer is being actively updated and maintained. We will periodically enhan
 
 [Demo Video] DataJuicer-Agent: Quick start your data processing journey!
 
-https://github.com/user-attachments/assets/f4c7b23b-c9e4-49ef-b5e6-acf29b16c925
+https://gist.github.com/user-attachments/assets/4feaeba3-87bd-4adf-9642-e3e9f549d45c
 
 [Demo Video] DataJuicer-Sandbox: Better data-model co-dev at a lower cost!
 
 https://github.com/user-attachments/assets/f51420e7-0543-4ce4-8831-983cc99583e3
+
+my_test
+
+https://github.com/user-attachments/assets/58aea900-e51f-4ec2-b1c0-eead97967893
+
+2
+
+https://github.com/user-attachments/assets/a45f0eee-0f0e-4ffe-9a42-d9a55370089d
 
 ## News
 - 🛠️ [2025-06-04] How to process feedback data in the "era of experience"? We propose [Trinity-RFT: A General-Purpose and Unified Framework for Reinforcement Fine-Tuning of LLMs](https://arxiv.org/abs/2505.17826), which leverages Data-Juicer for its data pipelines tailored for RFT scenarios.
