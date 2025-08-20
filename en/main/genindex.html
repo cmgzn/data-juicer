@@ -212,6 +212,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html">DJ-SORA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_agent.html">DataJuicer-Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -673,13 +674,25 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageWatermarkFilter.__init__">(data_juicer.ops.filter.ImageWatermarkFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter.__init__">(data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.InContextInfluenceFilter.__init__">(data_juicer.ops.filter.InContextInfluenceFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.language_id_score_filter.LanguageIDScoreFilter.__init__">(data_juicer.ops.filter.language_id_score_filter.LanguageIDScoreFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LanguageIDScoreFilter.__init__">(data_juicer.ops.filter.LanguageIDScoreFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_analysis_filter.LLMAnalysisFilter.__init__">(data_juicer.ops.filter.llm_analysis_filter.LLMAnalysisFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_perplexity_filter.LLMPerplexityFilter.__init__">(data_juicer.ops.filter.llm_perplexity_filter.LLMPerplexityFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter.__init__">(data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMAnalysisFilter.__init__">(data_juicer.ops.filter.LLMAnalysisFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMPerplexityFilter.__init__">(data_juicer.ops.filter.LLMPerplexityFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMTaskRelevanceFilter.__init__">(data_juicer.ops.filter.LLMTaskRelevanceFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.maximum_line_length_filter.MaximumLineLengthFilter.__init__">(data_juicer.ops.filter.maximum_line_length_filter.MaximumLineLengthFilter method)</a>
 </li>
@@ -715,6 +728,8 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_action_filter.TextActionFilter.__init__">(data_juicer.ops.filter.text_action_filter.TextActionFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter.__init__">(data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_entity_dependency_filter.TextEntityDependencyFilter.__init__">(data_juicer.ops.filter.text_entity_dependency_filter.TextEntityDependencyFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_length_filter.TextLengthFilter.__init__">(data_juicer.ops.filter.text_length_filter.TextLengthFilter method)</a>
@@ -722,6 +737,8 @@
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_pair_similarity_filter.TextPairSimilarityFilter.__init__">(data_juicer.ops.filter.text_pair_similarity_filter.TextPairSimilarityFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextActionFilter.__init__">(data_juicer.ops.filter.TextActionFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEmbdSimilarityFilter.__init__">(data_juicer.ops.filter.TextEmbdSimilarityFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEntityDependencyFilter.__init__">(data_juicer.ops.filter.TextEntityDependencyFilter method)</a>
 </li>
@@ -1429,7 +1446,11 @@
         <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_analysis_filter.LLMAnalysisFilter.build_input">build_input() (data_juicer.ops.filter.llm_analysis_filter.LLMAnalysisFilter method)</a>
 
         <ul>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter.build_input">(data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMAnalysisFilter.build_input">(data_juicer.ops.filter.LLMAnalysisFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMTaskRelevanceFilter.build_input">(data_juicer.ops.filter.LLMTaskRelevanceFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.calibrate_qa_mapper.CalibrateQAMapper.build_input">(data_juicer.ops.mapper.calibrate_qa_mapper.CalibrateQAMapper method)</a>
 </li>
@@ -1750,8 +1771,6 @@
           <li><a href="data_juicer.ops.html#data_juicer.ops.op_fusion.FusedFilter.compute_stats_batched">(data_juicer.ops.op_fusion.FusedFilter method)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.ops.html#data_juicer.ops.base_op.Filter.compute_stats_single">compute_stats_single() (data_juicer.ops.base_op.Filter method)</a>
 
         <ul>
@@ -1817,6 +1836,14 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageWatermarkFilter.compute_stats_single">(data_juicer.ops.filter.ImageWatermarkFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter.compute_stats_single">(data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.InContextInfluenceFilter.compute_stats_single">(data_juicer.ops.filter.InContextInfluenceFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.instruction_following_difficulty_filter.InstructionFollowingDifficultyFilter.compute_stats_single">(data_juicer.ops.filter.instruction_following_difficulty_filter.InstructionFollowingDifficultyFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.InstructionFollowingDifficultyFilter.compute_stats_single">(data_juicer.ops.filter.InstructionFollowingDifficultyFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.language_id_score_filter.LanguageIDScoreFilter.compute_stats_single">(data_juicer.ops.filter.language_id_score_filter.LanguageIDScoreFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LanguageIDScoreFilter.compute_stats_single">(data_juicer.ops.filter.LanguageIDScoreFilter method)</a>
@@ -1825,13 +1852,21 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_difficulty_score_filter.LLMDifficultyScoreFilter.compute_stats_single">(data_juicer.ops.filter.llm_difficulty_score_filter.LLMDifficultyScoreFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_perplexity_filter.LLMPerplexityFilter.compute_stats_single">(data_juicer.ops.filter.llm_perplexity_filter.LLMPerplexityFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_quality_score_filter.LLMQualityScoreFilter.compute_stats_single">(data_juicer.ops.filter.llm_quality_score_filter.LLMQualityScoreFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter.compute_stats_single">(data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMAnalysisFilter.compute_stats_single">(data_juicer.ops.filter.LLMAnalysisFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMDifficultyScoreFilter.compute_stats_single">(data_juicer.ops.filter.LLMDifficultyScoreFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMPerplexityFilter.compute_stats_single">(data_juicer.ops.filter.LLMPerplexityFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMQualityScoreFilter.compute_stats_single">(data_juicer.ops.filter.LLMQualityScoreFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMTaskRelevanceFilter.compute_stats_single">(data_juicer.ops.filter.LLMTaskRelevanceFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.phrase_grounding_recall_filter.PhraseGroundingRecallFilter.compute_stats_single">(data_juicer.ops.filter.phrase_grounding_recall_filter.PhraseGroundingRecallFilter method)</a>
 </li>
@@ -1855,11 +1890,15 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_action_filter.TextActionFilter.compute_stats_single">(data_juicer.ops.filter.text_action_filter.TextActionFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter.compute_stats_single">(data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_entity_dependency_filter.TextEntityDependencyFilter.compute_stats_single">(data_juicer.ops.filter.text_entity_dependency_filter.TextEntityDependencyFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_pair_similarity_filter.TextPairSimilarityFilter.compute_stats_single">(data_juicer.ops.filter.text_pair_similarity_filter.TextPairSimilarityFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextActionFilter.compute_stats_single">(data_juicer.ops.filter.TextActionFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEmbdSimilarityFilter.compute_stats_single">(data_juicer.ops.filter.TextEmbdSimilarityFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEntityDependencyFilter.compute_stats_single">(data_juicer.ops.filter.TextEntityDependencyFilter method)</a>
 </li>
@@ -1910,6 +1949,8 @@
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoWatermarkFilter.compute_stats_single">(data_juicer.ops.filter.VideoWatermarkFilter method)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.config.html#data_juicer.config.config.config_backup">config_backup() (in module data_juicer.config.config)</a>
 </li>
         <li><a href="data_juicer.core.data.html#data_juicer.core.data.config_validator.ConfigValidator.CONFIG_VALIDATION_RULES">CONFIG_VALIDATION_RULES (data_juicer.core.data.config_validator.ConfigValidator attribute)</a>
@@ -2602,6 +2643,20 @@
 </li>
         </ul></li>
         <li>
+    data_juicer.ops.filter.in_context_influence_filter
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.in_context_influence_filter">module</a>
+</li>
+        </ul></li>
+        <li>
+    data_juicer.ops.filter.instruction_following_difficulty_filter
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.instruction_following_difficulty_filter">module</a>
+</li>
+        </ul></li>
+        <li>
     data_juicer.ops.filter.language_id_score_filter
 
         <ul>
@@ -2623,10 +2678,24 @@
 </li>
         </ul></li>
         <li>
+    data_juicer.ops.filter.llm_perplexity_filter
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_perplexity_filter">module</a>
+</li>
+        </ul></li>
+        <li>
     data_juicer.ops.filter.llm_quality_score_filter
 
         <ul>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_quality_score_filter">module</a>
+</li>
+        </ul></li>
+        <li>
+    data_juicer.ops.filter.llm_task_relevance_filter
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_task_relevance_filter">module</a>
 </li>
         </ul></li>
         <li>
@@ -2690,6 +2759,13 @@
 
         <ul>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_action_filter">module</a>
+</li>
+        </ul></li>
+        <li>
+    data_juicer.ops.filter.text_embd_similarity_filter
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_embd_similarity_filter">module</a>
 </li>
         </ul></li>
         <li>
@@ -3350,6 +3426,8 @@
           <li><a href="data_juicer.ops.mapper.html#module-data_juicer.ops.mapper.video_captioning_from_summarizer_mapper">module</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     data_juicer.ops.mapper.video_captioning_from_video_mapper
 
@@ -3364,8 +3442,6 @@
           <li><a href="data_juicer.ops.mapper.html#module-data_juicer.ops.mapper.video_extract_frames_mapper">module</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     data_juicer.ops.mapper.video_face_blur_mapper
 
@@ -3806,11 +3882,15 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_quality_score_filter.LLMQualityScoreFilter.DEFAULT_DIM_REQUIRED_KEYS">(data_juicer.ops.filter.llm_quality_score_filter.LLMQualityScoreFilter attribute)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter.DEFAULT_DIM_REQUIRED_KEYS">(data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter attribute)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMAnalysisFilter.DEFAULT_DIM_REQUIRED_KEYS">(data_juicer.ops.filter.LLMAnalysisFilter attribute)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMDifficultyScoreFilter.DEFAULT_DIM_REQUIRED_KEYS">(data_juicer.ops.filter.LLMDifficultyScoreFilter attribute)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMQualityScoreFilter.DEFAULT_DIM_REQUIRED_KEYS">(data_juicer.ops.filter.LLMQualityScoreFilter attribute)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMTaskRelevanceFilter.DEFAULT_DIM_REQUIRED_KEYS">(data_juicer.ops.filter.LLMTaskRelevanceFilter attribute)</a>
 </li>
         </ul></li>
         <li><a href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.extract_entity_relation_mapper.ExtractEntityRelationMapper.DEFAULT_ENTITY_PATTERN">DEFAULT_ENTITY_PATTERN (data_juicer.ops.mapper.extract_entity_relation_mapper.ExtractEntityRelationMapper attribute)</a>
@@ -4100,11 +4180,15 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_quality_score_filter.LLMQualityScoreFilter.DEFAULT_SYSTEM_PROMPT">(data_juicer.ops.filter.llm_quality_score_filter.LLMQualityScoreFilter attribute)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter.DEFAULT_SYSTEM_PROMPT">(data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter attribute)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMAnalysisFilter.DEFAULT_SYSTEM_PROMPT">(data_juicer.ops.filter.LLMAnalysisFilter attribute)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMDifficultyScoreFilter.DEFAULT_SYSTEM_PROMPT">(data_juicer.ops.filter.LLMDifficultyScoreFilter attribute)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMQualityScoreFilter.DEFAULT_SYSTEM_PROMPT">(data_juicer.ops.filter.LLMQualityScoreFilter attribute)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMTaskRelevanceFilter.DEFAULT_SYSTEM_PROMPT">(data_juicer.ops.filter.LLMTaskRelevanceFilter attribute)</a>
 </li>
           <li><a href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.calibrate_qa_mapper.CalibrateQAMapper.DEFAULT_SYSTEM_PROMPT">(data_juicer.ops.mapper.calibrate_qa_mapper.CalibrateQAMapper attribute)</a>
 </li>
@@ -4995,6 +5079,8 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.ray_bts_minhash_deduplicator.IdGenerator">IdGenerator (class in data_juicer.ops.deduplicator.ray_bts_minhash_deduplicator)</a>
 </li>
+        <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.ifd_score">ifd_score (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
+</li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.mm_utils.SpecialTokens.image">image (data_juicer.utils.mm_utils.SpecialTokens attribute)</a>
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.image_aesthetics_scores">image_aesthetics_scores (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
@@ -5101,14 +5187,14 @@
           <li><a href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.image_remove_background_mapper.ImageRemoveBackgroundMapper">(class in data_juicer.ops.mapper.image_remove_background_mapper)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageSegmentMapper">ImageSegmentMapper (class in data_juicer.ops.mapper)</a>
 
         <ul>
           <li><a href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.image_segment_mapper.ImageSegmentMapper">(class in data_juicer.ops.mapper.image_segment_mapper)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageShapeFilter">ImageShapeFilter (class in data_juicer.ops.filter)</a>
 
         <ul>
@@ -5145,6 +5231,14 @@
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.image_watermark_filter.ImageWatermarkFilter">(class in data_juicer.ops.filter.image_watermark_filter)</a>
 </li>
         </ul></li>
+        <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.in_context_influence">in_context_influence (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
+</li>
+        <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.InContextInfluenceFilter">InContextInfluenceFilter (class in data_juicer.ops.filter)</a>
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter">(class in data_juicer.ops.filter.in_context_influence_filter)</a>
+</li>
+        </ul></li>
         <li><a href="data_juicer.config.html#data_juicer.config.init_configs">init_configs() (in module data_juicer.config)</a>
 
         <ul>
@@ -5161,6 +5255,12 @@
 
         <ul>
           <li><a href="data_juicer.core.html#data_juicer.core.adapter.Adapter.insight_mining">(data_juicer.core.adapter.Adapter method)</a>
+</li>
+        </ul></li>
+        <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.InstructionFollowingDifficultyFilter">InstructionFollowingDifficultyFilter (class in data_juicer.ops.filter)</a>
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.instruction_following_difficulty_filter.InstructionFollowingDifficultyFilter">(class in data_juicer.ops.filter.instruction_following_difficulty_filter)</a>
 </li>
         </ul></li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.InterVars">InterVars (class in data_juicer.utils.constant)</a>
@@ -5295,9 +5395,15 @@
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_difficulty_score">llm_difficulty_score (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
 </li>
+        <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_perplexity">llm_perplexity (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
+</li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_quality_record">llm_quality_record (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_quality_score">llm_quality_score (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
+</li>
+        <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance">llm_task_relevance (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
+</li>
+        <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance_record">llm_task_relevance_record (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
 </li>
         <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMAnalysisFilter">LLMAnalysisFilter (class in data_juicer.ops.filter)</a>
 
@@ -5311,10 +5417,22 @@
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_difficulty_score_filter.LLMDifficultyScoreFilter">(class in data_juicer.ops.filter.llm_difficulty_score_filter)</a>
 </li>
         </ul></li>
+        <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMPerplexityFilter">LLMPerplexityFilter (class in data_juicer.ops.filter)</a>
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_perplexity_filter.LLMPerplexityFilter">(class in data_juicer.ops.filter.llm_perplexity_filter)</a>
+</li>
+        </ul></li>
         <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMQualityScoreFilter">LLMQualityScoreFilter (class in data_juicer.ops.filter)</a>
 
         <ul>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_quality_score_filter.LLMQualityScoreFilter">(class in data_juicer.ops.filter.llm_quality_score_filter)</a>
+</li>
+        </ul></li>
+        <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMTaskRelevanceFilter">LLMTaskRelevanceFilter (class in data_juicer.ops.filter)</a>
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter">(class in data_juicer.ops.filter.llm_task_relevance_filter)</a>
 </li>
         </ul></li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.mm_utils.load_audio">load_audio() (in module data_juicer.utils.mm_utils)</a>
@@ -5322,6 +5440,8 @@
         <li><a href="data_juicer.utils.html#data_juicer.utils.mm_utils.load_audios">load_audios() (in module data_juicer.utils.mm_utils)</a>
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.ckpt_utils.CheckpointManager.load_ckpt">load_ckpt() (data_juicer.utils.ckpt_utils.CheckpointManager method)</a>
+</li>
+        <li><a href="data_juicer.config.html#data_juicer.config.config.load_custom_operators">load_custom_operators() (in module data_juicer.config.config)</a>
 </li>
         <li><a href="data_juicer.core.data.html#data_juicer.core.data.load_strategy.DataLoadStrategy.load_data">load_data() (data_juicer.core.data.load_strategy.DataLoadStrategy method)</a>
 
@@ -5729,13 +5849,21 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.image_watermark_filter">data_juicer.ops.filter.image_watermark_filter</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.in_context_influence_filter">data_juicer.ops.filter.in_context_influence_filter</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.instruction_following_difficulty_filter">data_juicer.ops.filter.instruction_following_difficulty_filter</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.language_id_score_filter">data_juicer.ops.filter.language_id_score_filter</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_analysis_filter">data_juicer.ops.filter.llm_analysis_filter</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_difficulty_score_filter">data_juicer.ops.filter.llm_difficulty_score_filter</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_perplexity_filter">data_juicer.ops.filter.llm_perplexity_filter</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_quality_score_filter">data_juicer.ops.filter.llm_quality_score_filter</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_task_relevance_filter">data_juicer.ops.filter.llm_task_relevance_filter</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.maximum_line_length_filter">data_juicer.ops.filter.maximum_line_length_filter</a>
 </li>
@@ -5754,6 +5882,8 @@
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.suffix_filter">data_juicer.ops.filter.suffix_filter</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_action_filter">data_juicer.ops.filter.text_action_filter</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_embd_similarity_filter">data_juicer.ops.filter.text_embd_similarity_filter</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_entity_dependency_filter">data_juicer.ops.filter.text_entity_dependency_filter</a>
 </li>
@@ -6406,6 +6536,20 @@
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.model_utils.prepare_spacy_model">prepare_spacy_model() (in module data_juicer.utils.model_utils)</a>
 </li>
+        <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter.prepare_valid_feature">prepare_valid_feature() (data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter method)</a>
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.InContextInfluenceFilter.prepare_valid_feature">(data_juicer.ops.filter.InContextInfluenceFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter.prepare_valid_feature">(data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMTaskRelevanceFilter.prepare_valid_feature">(data_juicer.ops.filter.LLMTaskRelevanceFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter.prepare_valid_feature">(data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEmbdSimilarityFilter.prepare_valid_feature">(data_juicer.ops.filter.TextEmbdSimilarityFilter method)</a>
+</li>
+        </ul></li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.model_utils.prepare_video_blip_model">prepare_video_blip_model() (in module data_juicer.utils.model_utils)</a>
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.model_utils.prepare_vllm_model">prepare_vllm_model() (in module data_juicer.utils.model_utils)</a>
@@ -6815,6 +6959,14 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.ImageWatermarkFilter.process_single">(data_juicer.ops.filter.ImageWatermarkFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter.process_single">(data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.InContextInfluenceFilter.process_single">(data_juicer.ops.filter.InContextInfluenceFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.instruction_following_difficulty_filter.InstructionFollowingDifficultyFilter.process_single">(data_juicer.ops.filter.instruction_following_difficulty_filter.InstructionFollowingDifficultyFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.InstructionFollowingDifficultyFilter.process_single">(data_juicer.ops.filter.InstructionFollowingDifficultyFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.language_id_score_filter.LanguageIDScoreFilter.process_single">(data_juicer.ops.filter.language_id_score_filter.LanguageIDScoreFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LanguageIDScoreFilter.process_single">(data_juicer.ops.filter.LanguageIDScoreFilter method)</a>
@@ -6823,13 +6975,21 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_difficulty_score_filter.LLMDifficultyScoreFilter.process_single">(data_juicer.ops.filter.llm_difficulty_score_filter.LLMDifficultyScoreFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_perplexity_filter.LLMPerplexityFilter.process_single">(data_juicer.ops.filter.llm_perplexity_filter.LLMPerplexityFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_quality_score_filter.LLMQualityScoreFilter.process_single">(data_juicer.ops.filter.llm_quality_score_filter.LLMQualityScoreFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter.process_single">(data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMAnalysisFilter.process_single">(data_juicer.ops.filter.LLMAnalysisFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMDifficultyScoreFilter.process_single">(data_juicer.ops.filter.LLMDifficultyScoreFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMPerplexityFilter.process_single">(data_juicer.ops.filter.LLMPerplexityFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMQualityScoreFilter.process_single">(data_juicer.ops.filter.LLMQualityScoreFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMTaskRelevanceFilter.process_single">(data_juicer.ops.filter.LLMTaskRelevanceFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.phrase_grounding_recall_filter.PhraseGroundingRecallFilter.process_single">(data_juicer.ops.filter.phrase_grounding_recall_filter.PhraseGroundingRecallFilter method)</a>
 </li>
@@ -6853,11 +7013,15 @@
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_action_filter.TextActionFilter.process_single">(data_juicer.ops.filter.text_action_filter.TextActionFilter method)</a>
 </li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter.process_single">(data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter method)</a>
+</li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_entity_dependency_filter.TextEntityDependencyFilter.process_single">(data_juicer.ops.filter.text_entity_dependency_filter.TextEntityDependencyFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_pair_similarity_filter.TextPairSimilarityFilter.process_single">(data_juicer.ops.filter.text_pair_similarity_filter.TextPairSimilarityFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextActionFilter.process_single">(data_juicer.ops.filter.TextActionFilter method)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEmbdSimilarityFilter.process_single">(data_juicer.ops.filter.TextEmbdSimilarityFilter method)</a>
 </li>
           <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEntityDependencyFilter.process_single">(data_juicer.ops.filter.TextEntityDependencyFilter method)</a>
 </li>
@@ -7472,6 +7636,12 @@
           <li><a href="data_juicer.core.executor.html#data_juicer.core.executor.DefaultExecutor.sample_data">(data_juicer.core.executor.DefaultExecutor method)</a>
 </li>
         </ul></li>
+        <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_perplexity_filter.LLMPerplexityFilter.sample_with_messages">sample_with_messages() (data_juicer.ops.filter.llm_perplexity_filter.LLMPerplexityFilter method)</a>
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMPerplexityFilter.sample_with_messages">(data_juicer.ops.filter.LLMPerplexityFilter method)</a>
+</li>
+        </ul></li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.InterVars.sampled_frames">sampled_frames (data_juicer.utils.constant.InterVars attribute)</a>
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.ckpt_utils.CheckpointManager.save_ckpt">save_ckpt() (data_juicer.utils.ckpt_utils.CheckpointManager method)</a>
@@ -7550,6 +7720,8 @@
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.unittest_utils.set_from_fork_flag">set_from_fork_flag() (in module data_juicer.utils.unittest_utils)</a>
 </li>
+        <li><a href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.setUp">setUp() (data_juicer.utils.unittest_utils.DataJuicerTestCaseBase method)</a>
+</li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.logger_utils.setup_logger">setup_logger() (in module data_juicer.utils.logger_utils)</a>
 </li>
         <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.video_motion_score_filter.VideoMotionScoreFilter.setup_model">setup_model() (data_juicer.ops.filter.video_motion_score_filter.VideoMotionScoreFilter method)</a>
@@ -7594,12 +7766,12 @@
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.MetaKeys.source_entity">source_entity (data_juicer.utils.constant.MetaKeys attribute)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.Fields.source_file">source_file (data_juicer.utils.constant.Fields attribute)</a>
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.special_char_ratio">special_char_ratio (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.SpecialCharactersFilter">SpecialCharactersFilter (class in data_juicer.ops.filter)</a>
 
         <ul>
@@ -7768,6 +7940,8 @@
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.unittest_utils.TEST_TAG">TEST_TAG() (in module data_juicer.utils.unittest_utils)</a>
 </li>
+        <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.text_embd_similarity">text_embd_similarity (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
+</li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.text_len">text_len (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
 </li>
         <li><a href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.text_pair_similarity">text_pair_similarity (data_juicer.utils.constant.StatsKeysConstant attribute)</a>
@@ -7782,6 +7956,12 @@
 
         <ul>
           <li><a href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.text_chunk_mapper.TextChunkMapper">(class in data_juicer.ops.mapper.text_chunk_mapper)</a>
+</li>
+        </ul></li>
+        <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEmbdSimilarityFilter">TextEmbdSimilarityFilter (class in data_juicer.ops.filter)</a>
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter">(class in data_juicer.ops.filter.text_embd_similarity_filter)</a>
 </li>
         </ul></li>
         <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEntityDependencyFilter">TextEntityDependencyFilter (class in data_juicer.ops.filter)</a>
@@ -7822,14 +8002,14 @@
 </li>
         <li><a href="data_juicer.tools.html#data_juicer.tools.op_search.OPRecord.to_dict">to_dict() (data_juicer.tools.op_search.OPRecord method)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.core.html#data_juicer.core.Exporter.to_json">to_json() (data_juicer.core.Exporter static method)</a>
 
         <ul>
           <li><a href="data_juicer.core.html#data_juicer.core.exporter.Exporter.to_json">(data_juicer.core.exporter.Exporter static method)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.core.html#data_juicer.core.Exporter.to_jsonl">to_jsonl() (data_juicer.core.Exporter static method)</a>
 
         <ul>
@@ -7974,6 +8154,20 @@
   <h2>V</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter.valid_feature_ready">valid_feature_ready (data_juicer.ops.filter.in_context_influence_filter.InContextInfluenceFilter property)</a>
+
+        <ul>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.InContextInfluenceFilter.valid_feature_ready">(data_juicer.ops.filter.InContextInfluenceFilter property)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter.valid_feature_ready">(data_juicer.ops.filter.llm_task_relevance_filter.LLMTaskRelevanceFilter property)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.LLMTaskRelevanceFilter.valid_feature_ready">(data_juicer.ops.filter.LLMTaskRelevanceFilter property)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter.valid_feature_ready">(data_juicer.ops.filter.text_embd_similarity_filter.TextEmbdSimilarityFilter property)</a>
+</li>
+          <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.TextEmbdSimilarityFilter.valid_feature_ready">(data_juicer.ops.filter.TextEmbdSimilarityFilter property)</a>
+</li>
+        </ul></li>
         <li><a href="data_juicer.core.data.html#data_juicer.core.data.data_validator.BaseConversationValidator.validate">validate() (data_juicer.core.data.data_validator.BaseConversationValidator method)</a>
 
         <ul>
@@ -8070,6 +8264,8 @@
           <li><a href="data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.video_deduplicator.VideoDeduplicator">(class in data_juicer.ops.deduplicator.video_deduplicator)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.ops.filter.html#data_juicer.ops.filter.VideoDurationFilter">VideoDurationFilter (class in data_juicer.ops.filter)</a>
 
         <ul>
@@ -8082,8 +8278,6 @@
           <li><a href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.video_extract_frames_mapper.VideoExtractFramesMapper">(class in data_juicer.ops.mapper.video_extract_frames_mapper)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoFaceBlurMapper">VideoFaceBlurMapper (class in data_juicer.ops.mapper)</a>
 
         <ul>
@@ -8329,7 +8523,7 @@
     </aside>
   </div>
 </div>
-<script src="_static/documentation_options.js?v=350a9c04"></script>
+<script src="_static/documentation_options.js?v=02f2166e"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

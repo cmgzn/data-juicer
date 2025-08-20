@@ -214,6 +214,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_agent_ZH.html">DataJuicer-Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_service_ZH.html">DJ_服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide_ZH.html">开发者指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
@@ -364,6 +365,12 @@
 <dt class="sig sig-object py" id="data_juicer.config.config.timing_context">
 <span class="sig-prename descclassname"><span class="pre">data_juicer.config.config.</span></span><span class="sig-name descname"><span class="pre">timing_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_juicer/config/config.html#timing_context"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.config.config.timing_context" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_juicer.config.config.load_custom_operators">
+<span class="sig-prename descclassname"><span class="pre">data_juicer.config.config.</span></span><span class="sig-name descname"><span class="pre">load_custom_operators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_juicer/config/config.html#load_custom_operators"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.config.config.load_custom_operators" title="Link to this definition">¶</a></dt>
+<dd><p>Dynamically load custom operator modules or packages in the specified path.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_juicer.config.config.init_configs">
@@ -723,6 +730,7 @@ yaml, yml or json format</p>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-data_juicer.config.config">data_juicer.config.config module</a><ul>
 <li><a class="reference internal" href="#data_juicer.config.config.timing_context"><code class="docutils literal notranslate"><span class="pre">timing_context()</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.config.config.load_custom_operators"><code class="docutils literal notranslate"><span class="pre">load_custom_operators()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.config.config.init_configs"><code class="docutils literal notranslate"><span class="pre">init_configs()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.config.config.update_ds_cache_dir_and_related_vars"><code class="docutils literal notranslate"><span class="pre">update_ds_cache_dir_and_related_vars()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.config.config.init_setup_from_cfg"><code class="docutils literal notranslate"><span class="pre">init_setup_from_cfg()</span></code></a></li>
@@ -764,7 +772,7 @@ yaml, yml or json format</p>
     </aside>
   </div>
 </div>
-<script src="_static/documentation_options.js?v=3657e1f8"></script>
+<script src="_static/documentation_options.js?v=011da5d6"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

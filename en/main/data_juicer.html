@@ -214,6 +214,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html">DJ-SORA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_agent.html">DataJuicer-Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -480,6 +481,7 @@
 <li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_juicer.config.html#module-data_juicer.config.config">data_juicer.config.config module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.config.timing_context"><code class="docutils literal notranslate"><span class="pre">timing_context()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.config.load_custom_operators"><code class="docutils literal notranslate"><span class="pre">load_custom_operators()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.config.init_configs"><code class="docutils literal notranslate"><span class="pre">init_configs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.config.update_ds_cache_dir_and_related_vars"><code class="docutils literal notranslate"><span class="pre">update_ds_cache_dir_and_related_vars()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.config.html#data_juicer.config.config.init_setup_from_cfg"><code class="docutils literal notranslate"><span class="pre">init_setup_from_cfg()</span></code></a></li>
@@ -948,10 +950,14 @@
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.image_text_matching_filter">data_juicer.ops.filter.image_text_matching_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.image_text_similarity_filter">data_juicer.ops.filter.image_text_similarity_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.image_watermark_filter">data_juicer.ops.filter.image_watermark_filter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.in_context_influence_filter">data_juicer.ops.filter.in_context_influence_filter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.instruction_following_difficulty_filter">data_juicer.ops.filter.instruction_following_difficulty_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.language_id_score_filter">data_juicer.ops.filter.language_id_score_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_analysis_filter">data_juicer.ops.filter.llm_analysis_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_difficulty_score_filter">data_juicer.ops.filter.llm_difficulty_score_filter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_perplexity_filter">data_juicer.ops.filter.llm_perplexity_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_quality_score_filter">data_juicer.ops.filter.llm_quality_score_filter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.llm_task_relevance_filter">data_juicer.ops.filter.llm_task_relevance_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.maximum_line_length_filter">data_juicer.ops.filter.maximum_line_length_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.perplexity_filter">data_juicer.ops.filter.perplexity_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.phrase_grounding_recall_filter">data_juicer.ops.filter.phrase_grounding_recall_filter module</a></li>
@@ -961,6 +967,7 @@
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.stopwords_filter">data_juicer.ops.filter.stopwords_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.suffix_filter">data_juicer.ops.filter.suffix_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_action_filter">data_juicer.ops.filter.text_action_filter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_embd_similarity_filter">data_juicer.ops.filter.text_embd_similarity_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_entity_dependency_filter">data_juicer.ops.filter.text_entity_dependency_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_length_filter">data_juicer.ops.filter.text_length_filter module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.ops.filter.html#module-data_juicer.ops.filter.text_pair_similarity_filter">data_juicer.ops.filter.text_pair_similarity_filter module</a></li>
@@ -1432,6 +1439,8 @@
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.avg_line_length"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.avg_line_length</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.char_rep_ratio"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.char_rep_ratio</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.flagged_words_ratio"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.flagged_words_ratio</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.in_context_influence"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.in_context_influence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.ifd_score"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.ifd_score</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.lang"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.lang</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.lang_score"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.lang_score</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.max_line_length"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.max_line_length</span></code></a></li>
@@ -1439,6 +1448,7 @@
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.special_char_ratio"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.special_char_ratio</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.stopwords_ratio"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.stopwords_ratio</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.text_len"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.text_len</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.text_embd_similarity"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.text_embd_similarity</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.text_pair_similarity"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.text_pair_similarity</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.num_action"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.num_action</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.num_dependency_edges"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.num_dependency_edges</span></code></a></li>
@@ -1451,6 +1461,9 @@
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_quality_record"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_quality_record</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_difficulty_score"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_difficulty_score</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_difficulty_record"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_difficulty_record</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_perplexity"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_perplexity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_task_relevance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance_record"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_task_relevance_record</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.aspect_ratios"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.aspect_ratios</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.image_width"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.image_width</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.constant.StatsKeysConstant.image_height"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.image_height</span></code></a></li>
@@ -1707,6 +1720,7 @@
 <li class="toctree-l3"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.setUpClass"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.setUpClass()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.tearDownClass"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.tearDownClass()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.setUp"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.setUp()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.tearDown"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.tearDown()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.generate_dataset"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.generate_dataset()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="data_juicer.utils.html#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.run_single_op"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.run_single_op()</span></code></a></li>
@@ -1799,7 +1813,7 @@
     </aside>
   </div>
 </div>
-<script src="_static/documentation_options.js?v=350a9c04"></script>
+<script src="_static/documentation_options.js?v=02f2166e"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

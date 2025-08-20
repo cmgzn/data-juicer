@@ -214,6 +214,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_agent_ZH.html">DataJuicer-Agent</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_service_ZH.html">DJ_服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DeveloperGuide_ZH.html">开发者指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
@@ -356,12 +357,10 @@
           <section id="llmsystem-prompt">
 <h1>为LLM构造角色扮演的system prompt<a class="headerlink" href="#llmsystem-prompt" title="Link to this heading">¶</a></h1>
 <p>在该Demo中，我们展示了如何通过Data-Juicer的菜谱，生成让LLM扮演剧本中给定角色的system prompt。我们这里以《西游记》为例。下面是在少量剧本上的演示：</p>
-<p>
-<video controls width="100%" height="auto" playsinline>
-<source src="https://github.com/user-attachments/assets/20499385-1791-4089-8074-cebefe8c7e80" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-</p>
+<p><video controls width="100%" height="auto" playsinline>
+  <source src="https://github.com/user-attachments/assets/20499385-1791-4089-8074-cebefe8c7e80" type="video/mp4">
+  Your browser does not support the video tag.
+</video></p>
 <section id="id1">
 <h2>数据准备<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <p>将《西游记》按章节划分，按顺序每个章节对应Data-Juicer的一个sample，放到“text”关键字下。如下json格式：</p>
@@ -480,7 +479,7 @@ Your browser does not support the video tag.
     </aside>
   </div>
 </div>
-<script src="../../_static/documentation_options.js?v=3657e1f8"></script>
+<script src="../../_static/documentation_options.js?v=011da5d6"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>

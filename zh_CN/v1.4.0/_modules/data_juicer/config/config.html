@@ -349,6 +349,7 @@
           <h1>data_juicer.config.config 源代码</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.util</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
@@ -389,6 +390,68 @@
     <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
     <span class="c1"># Use a consistent format that won&#39;t be affected by logger reconfiguration</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">description</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_generate_module_name</span><span class="p">(</span><span class="n">abs_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a unique module name based on the absolute path of the file.&quot;&quot;&quot;</span>
+    <span class="n">abs_path_without_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">abs_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># handle path delimiters for different operating systems</span>
+    <span class="n">normalized_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">abs_path_without_ext</span><span class="p">)</span>
+    <span class="n">module_name</span> <span class="o">=</span> <span class="n">normalized_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">module_name</span>
+
+
+<div class="viewcode-block" id="load_custom_operators">
+<a class="viewcode-back" href="../../../data_juicer.config.html#data_juicer.config.config.load_custom_operators">[文档]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_custom_operators</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dynamically load custom operator modules or packages in the specified path.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+        <span class="n">abs_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_path</span><span class="p">):</span>
+            <span class="n">module_name</span> <span class="o">=</span> <span class="n">_generate_module_name</span><span class="p">(</span><span class="n">abs_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">module_name</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+                <span class="n">existing_path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span><span class="o">.</span><span class="vm">__file__</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Module &#39;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&#39; already loaded from &#39;</span><span class="si">{</span><span class="n">existing_path</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Conflict detected while loading &#39;</span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_file_location</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="n">abs_path</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to create spec for &#39;</span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+                <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+                <span class="c1"># register the module first to avoid recursive import issues</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">module</span>
+                <span class="n">spec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error loading &#39;</span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2">&#39; as &#39;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">abs_path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">abs_path</span><span class="p">,</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Package directory &#39;</span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2">&#39; must contain __init__.py&quot;</span><span class="p">)</span>
+            <span class="n">package_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">abs_path</span><span class="p">)</span>
+            <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">abs_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">package_name</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+                <span class="n">existing_path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">package_name</span><span class="p">]</span><span class="o">.</span><span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Package &#39;</span><span class="si">{</span><span class="n">package_name</span><span class="si">}</span><span class="s2">&#39; already loaded from &#39;</span><span class="si">{</span><span class="n">existing_path</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Conflict detected while loading &#39;</span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+                <span class="p">)</span>
+            <span class="n">original_sys_path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
+                <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+                <span class="c1"># record the loading path of the package (for subsequent conflict detection)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">package_name</span><span class="p">]</span><span class="o">.</span><span class="n">__loaded_from__</span> <span class="o">=</span> <span class="n">abs_path</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error loading package &#39;</span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">original_sys_path</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Path &#39;</span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2">&#39; is neither a file nor a directory&quot;</span><span class="p">)</span></div>
 
 
 
@@ -813,7 +876,9 @@
                 <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Whether to save all stats to only one file. Only used in &quot;</span> <span class="s2">&quot;Analysis.&quot;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--ray_address&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The address of the Ray cluster.&quot;</span><span class="p">)</span>
-
+            <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+                <span class="s2">&quot;--custom-operator-paths&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Paths to custom operator scripts or directories.&quot;</span>
+            <span class="p">)</span>
             <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--debug&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Whether to run in debug mode.&quot;</span><span class="p">)</span>
 
             <span class="c1"># Filter out non-essential arguments for initial parsing</span>
@@ -860,6 +925,9 @@
             <span class="c1"># Parse all arguments</span>
             <span class="k">with</span> <span class="n">timing_context</span><span class="p">(</span><span class="s2">&quot;Parsing arguments&quot;</span><span class="p">):</span>
                 <span class="n">cfg</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">custom_operator_paths</span><span class="p">:</span>
+                    <span class="n">load_custom_operators</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">custom_operator_paths</span><span class="p">)</span>
 
                 <span class="c1"># check the entry</span>
                 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core.analyzer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span>
@@ -1025,12 +1093,6 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">cfg</span><span class="o">.</span><span class="n">ds_cache_dir</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">HF_DATASETS_CACHE</span><span class="p">)</span>
 
-    <span class="c1"># update special tokens</span>
-    <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image_special_token&quot;</span><span class="p">,</span> <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">image</span><span class="p">)</span>
-    <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">audio</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;audio_special_token&quot;</span><span class="p">,</span> <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">audio</span><span class="p">)</span>
-    <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">video</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;video_special_token&quot;</span><span class="p">,</span> <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">video</span><span class="p">)</span>
-    <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">eoc</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eoc_special_token&quot;</span><span class="p">,</span> <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">eoc</span><span class="p">)</span>
-
     <span class="c1"># add all filters that produce stats</span>
     <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
         <span class="n">cfg</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">load_ops_with_stats_meta</span><span class="p">()</span>
@@ -1053,6 +1115,10 @@
         <span class="s2">&quot;turbo&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;turbo&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
         <span class="s2">&quot;skip_op_error&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;skip_op_error&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
         <span class="s2">&quot;work_dir&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">work_dir</span><span class="p">,</span>
+        <span class="s2">&quot;image_special_token&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;image_special_token&quot;</span><span class="p">,</span> <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">image</span><span class="p">),</span>
+        <span class="s2">&quot;audio_special_token&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;audio_special_token&quot;</span><span class="p">,</span> <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">audio</span><span class="p">),</span>
+        <span class="s2">&quot;video_special_token&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;video_special_token&quot;</span><span class="p">,</span> <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">video</span><span class="p">),</span>
+        <span class="s2">&quot;eoc_special_token&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eoc_special_token&quot;</span><span class="p">,</span> <span class="n">SpecialTokens</span><span class="o">.</span><span class="n">eoc</span><span class="p">),</span>
     <span class="p">}</span>
     <span class="n">cfg</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">update_op_attr</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">process</span><span class="p">,</span> <span class="n">op_attrs</span><span class="p">)</span>
 
@@ -1542,7 +1608,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../_static/documentation_options.js?v=3657e1f8"></script>
+<script src="../../../_static/documentation_options.js?v=011da5d6"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

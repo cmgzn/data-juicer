@@ -1180,6 +1180,16 @@ print(res) # {“AlphanumericFilter”: [“alnum_ratio”, “alpha_token_ratio
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="data_juicer.utils.constant.StatsKeysConstant.in_context_influence">
+<span class="sig-name descname"><span class="pre">in_context_influence</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'in_context_influence'</span></em><a class="headerlink" href="#data_juicer.utils.constant.StatsKeysConstant.in_context_influence" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_juicer.utils.constant.StatsKeysConstant.ifd_score">
+<span class="sig-name descname"><span class="pre">ifd_score</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ifd_score'</span></em><a class="headerlink" href="#data_juicer.utils.constant.StatsKeysConstant.ifd_score" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="data_juicer.utils.constant.StatsKeysConstant.lang">
 <span class="sig-name descname"><span class="pre">lang</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lang'</span></em><a class="headerlink" href="#data_juicer.utils.constant.StatsKeysConstant.lang" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -1212,6 +1222,11 @@ print(res) # {“AlphanumericFilter”: [“alnum_ratio”, “alpha_token_ratio
 <dl class="py attribute">
 <dt class="sig sig-object py" id="data_juicer.utils.constant.StatsKeysConstant.text_len">
 <span class="sig-name descname"><span class="pre">text_len</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'text_len'</span></em><a class="headerlink" href="#data_juicer.utils.constant.StatsKeysConstant.text_len" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_juicer.utils.constant.StatsKeysConstant.text_embd_similarity">
+<span class="sig-name descname"><span class="pre">text_embd_similarity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'text_embd_similarity'</span></em><a class="headerlink" href="#data_juicer.utils.constant.StatsKeysConstant.text_embd_similarity" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1272,6 +1287,21 @@ print(res) # {“AlphanumericFilter”: [“alnum_ratio”, “alpha_token_ratio
 <dl class="py attribute">
 <dt class="sig sig-object py" id="data_juicer.utils.constant.StatsKeysConstant.llm_difficulty_record">
 <span class="sig-name descname"><span class="pre">llm_difficulty_record</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'llm_difficulty_record'</span></em><a class="headerlink" href="#data_juicer.utils.constant.StatsKeysConstant.llm_difficulty_record" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_juicer.utils.constant.StatsKeysConstant.llm_perplexity">
+<span class="sig-name descname"><span class="pre">llm_perplexity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'llm_perplexity'</span></em><a class="headerlink" href="#data_juicer.utils.constant.StatsKeysConstant.llm_perplexity" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance">
+<span class="sig-name descname"><span class="pre">llm_task_relevance</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'llm_task_relevance'</span></em><a class="headerlink" href="#data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance_record">
+<span class="sig-name descname"><span class="pre">llm_task_relevance_record</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'llm_task_relevance_record'</span></em><a class="headerlink" href="#data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance_record" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1651,12 +1681,22 @@ generated multimodal data. The pattern is
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_juicer.utils.file_utils.transfer_filename">
-<span class="sig-prename descclassname"><span class="pre">data_juicer.utils.file_utils.</span></span><span class="sig-name descname"><span class="pre">transfer_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">op_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_juicer/utils/file_utils.html#transfer_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.utils.file_utils.transfer_filename" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_juicer.utils.file_utils.</span></span><span class="sig-name descname"><span class="pre">transfer_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">op_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_juicer/utils/file_utils.html#transfer_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.utils.file_utils.transfer_filename" title="Link to this definition">¶</a></dt>
 <dd><p>According to the op and hashing its parameters ‘op_kwargs’ addition
 to the process id and current time as the ‘hash_val’, map the
 original_filepath to another unique file path. E.g.</p>
-<blockquote>
-<div><ol class="arabic simple">
+<dl class="simple">
+<dt>When <cite>save_dir</cite> is provided: ‘/save_dir/path/to/data/’</dt><dd><dl class="simple">
+<dt>/path/to/abc.jpg –&gt;</dt><dd><p>/save_dir/path/to/data/abc__dj_hash_#{hash_val}#.jpg</p>
+</dd>
+</dl>
+</dd>
+<dt>When environment variable <cite>DJ_PRODUCED_DATA_DIR</cite> is provided: ‘/environment/path/to/data/’</dt><dd><dl class="simple">
+<dt>/path/to/abc.jpg –&gt;</dt><dd><p>/environment/path/to/data/{op_name}/abc__dj_hash_#{hash_val}#.jpg</p>
+</dd>
+</dl>
+</dd>
+<dt>When neither <cite>save_dir</cite> nor <cite>DJ_PRODUCED_DATA_DIR</cite> is provided:</dt><dd><ol class="arabic simple">
 <li><dl class="simple">
 <dt>abc.jpg –&gt;</dt><dd><p>__dj__produced_data__/{op_name}/
 abc__dj_hash_#{hash_val}#.jpg</p>
@@ -1683,7 +1723,9 @@ abc__dj_hash_#{hash_val2}#.jpg</p>
 </dl>
 </li>
 </ol>
-</div></blockquote>
+</dd>
+</dl>
+<p>Priority: <cite>save_dir</cite> &gt; <cite>DJ_PRODUCED_DATA_DIR</cite> &gt; original data directory (default)</p>
 </dd></dl>
 
 <dl class="py function">
@@ -3165,6 +3207,12 @@ Currently, <cite>standalone</cite>, <cite>ray</cite> are supported.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_juicer/utils/unittest_utils.html#DataJuicerTestCaseBase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.setUp" title="Link to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.tearDown">
 <span class="sig-name descname"><span class="pre">tearDown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_juicer/utils/unittest_utils.html#DataJuicerTestCaseBase.tearDown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.tearDown" title="Link to this definition">¶</a></dt>
 <dd><p>Hook method for deconstructing the test fixture after testing it.</p>
@@ -3410,6 +3458,8 @@ Currently, <cite>standalone</cite>, <cite>ray</cite> are supported.</p>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.avg_line_length"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.avg_line_length</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.char_rep_ratio"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.char_rep_ratio</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.flagged_words_ratio"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.flagged_words_ratio</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.in_context_influence"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.in_context_influence</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.ifd_score"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.ifd_score</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.lang"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.lang</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.lang_score"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.lang_score</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.max_line_length"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.max_line_length</span></code></a></li>
@@ -3417,6 +3467,7 @@ Currently, <cite>standalone</cite>, <cite>ray</cite> are supported.</p>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.special_char_ratio"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.special_char_ratio</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.stopwords_ratio"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.stopwords_ratio</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.text_len"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.text_len</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.text_embd_similarity"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.text_embd_similarity</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.text_pair_similarity"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.text_pair_similarity</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.num_action"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.num_action</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.num_dependency_edges"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.num_dependency_edges</span></code></a></li>
@@ -3429,6 +3480,9 @@ Currently, <cite>standalone</cite>, <cite>ray</cite> are supported.</p>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.llm_quality_record"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_quality_record</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.llm_difficulty_score"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_difficulty_score</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.llm_difficulty_record"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_difficulty_record</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.llm_perplexity"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_perplexity</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_task_relevance</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.llm_task_relevance_record"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.llm_task_relevance_record</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.aspect_ratios"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.aspect_ratios</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.image_width"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.image_width</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.constant.StatsKeysConstant.image_height"><code class="docutils literal notranslate"><span class="pre">StatsKeysConstant.image_height</span></code></a></li>
@@ -3685,6 +3739,7 @@ Currently, <cite>standalone</cite>, <cite>ray</cite> are supported.</p>
 <li><a class="reference internal" href="#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase</span></code></a><ul>
 <li><a class="reference internal" href="#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.setUpClass"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.setUpClass()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.tearDownClass"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.tearDownClass()</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.setUp"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.setUp()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.tearDown"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.tearDown()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.generate_dataset"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.generate_dataset()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.utils.unittest_utils.DataJuicerTestCaseBase.run_single_op"><code class="docutils literal notranslate"><span class="pre">DataJuicerTestCaseBase.run_single_op()</span></code></a></li>
@@ -3709,7 +3764,7 @@ Currently, <cite>standalone</cite>, <cite>ray</cite> are supported.</p>
     </aside>
   </div>
 </div>
-<script src="_static/documentation_options.js?v=350a9c04"></script>
+<script src="_static/documentation_options.js?v=02f2166e"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
