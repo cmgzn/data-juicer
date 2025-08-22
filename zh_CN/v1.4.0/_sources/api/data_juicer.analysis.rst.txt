@@ -1,0 +1,23 @@
+data\_juicer.analysis package
+=============================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.analysis.collector
+   data_juicer.analysis.column_wise_analysis
+   data_juicer.analysis.diversity_analysis
+   data_juicer.analysis.draw
+   data_juicer.analysis.measure
+   data_juicer.analysis.overall_analysis
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.analysis
+   :members:
+   :show-inheritance:
+   :undoc-members:

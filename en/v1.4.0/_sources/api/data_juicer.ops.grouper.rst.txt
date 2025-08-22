@@ -1,0 +1,20 @@
+data\_juicer.ops.grouper package
+================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.ops.grouper.key_value_grouper
+   data_juicer.ops.grouper.naive_grouper
+   data_juicer.ops.grouper.naive_reverse_grouper
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.ops.grouper
+   :members:
+   :show-inheritance:
+   :undoc-members:

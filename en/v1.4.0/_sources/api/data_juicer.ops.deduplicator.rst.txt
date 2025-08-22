@@ -1,0 +1,27 @@
+data\_juicer.ops.deduplicator package
+=====================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.ops.deduplicator.document_deduplicator
+   data_juicer.ops.deduplicator.document_minhash_deduplicator
+   data_juicer.ops.deduplicator.document_simhash_deduplicator
+   data_juicer.ops.deduplicator.image_deduplicator
+   data_juicer.ops.deduplicator.ray_basic_deduplicator
+   data_juicer.ops.deduplicator.ray_bts_minhash_deduplicator
+   data_juicer.ops.deduplicator.ray_document_deduplicator
+   data_juicer.ops.deduplicator.ray_image_deduplicator
+   data_juicer.ops.deduplicator.ray_video_deduplicator
+   data_juicer.ops.deduplicator.video_deduplicator
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.ops.deduplicator
+   :members:
+   :show-inheritance:
+   :undoc-members:

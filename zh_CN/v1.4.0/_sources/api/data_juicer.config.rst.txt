@@ -1,0 +1,18 @@
+data\_juicer.config package
+===========================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.config.config
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.config
+   :members:
+   :show-inheritance:
+   :undoc-members:

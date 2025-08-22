@@ -1,0 +1,31 @@
+data\_juicer.core package
+=========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.core.data
+   data_juicer.core.executor
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.core.adapter
+   data_juicer.core.analyzer
+   data_juicer.core.exporter
+   data_juicer.core.monitor
+   data_juicer.core.tracer
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.core
+   :members:
+   :show-inheritance:
+   :undoc-members:

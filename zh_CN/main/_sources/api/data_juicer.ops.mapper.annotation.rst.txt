@@ -1,0 +1,19 @@
+data\_juicer.ops.mapper.annotation package
+==========================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.ops.mapper.annotation.annotation_mapper
+   data_juicer.ops.mapper.annotation.human_preference_annotation_mapper
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.ops.mapper.annotation
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,21 @@
+data\_juicer.tools package
+==========================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.tools.DJ_mcp_granular_ops
+   data_juicer.tools.DJ_mcp_recipe_flow
+   data_juicer.tools.mcp_tool
+   data_juicer.tools.op_search
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.tools
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,24 @@
+data\_juicer.core.data package
+==============================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.core.data.config_validator
+   data_juicer.core.data.data_validator
+   data_juicer.core.data.dataset_builder
+   data_juicer.core.data.dj_dataset
+   data_juicer.core.data.load_strategy
+   data_juicer.core.data.ray_dataset
+   data_juicer.core.data.schema
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.core.data
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,22 @@
+data\_juicer.ops.selector package
+=================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.ops.selector.frequency_specified_field_selector
+   data_juicer.ops.selector.random_selector
+   data_juicer.ops.selector.range_specified_field_selector
+   data_juicer.ops.selector.tags_specified_field_selector
+   data_juicer.ops.selector.topk_specified_field_selector
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.ops.selector
+   :members:
+   :show-inheritance:
+   :undoc-members:

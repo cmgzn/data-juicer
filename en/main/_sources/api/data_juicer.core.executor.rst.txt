@@ -1,0 +1,21 @@
+data\_juicer.core.executor package
+==================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.core.executor.base
+   data_juicer.core.executor.default_executor
+   data_juicer.core.executor.factory
+   data_juicer.core.executor.ray_executor
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.core.executor
+   :members:
+   :show-inheritance:
+   :undoc-members:

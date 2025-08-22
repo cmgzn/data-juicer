@@ -1,0 +1,21 @@
+data\_juicer.ops.aggregator package
+===================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.ops.aggregator.entity_attribute_aggregator
+   data_juicer.ops.aggregator.meta_tags_aggregator
+   data_juicer.ops.aggregator.most_relevant_entities_aggregator
+   data_juicer.ops.aggregator.nested_aggregator
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.ops.aggregator
+   :members:
+   :show-inheritance:
+   :undoc-members:

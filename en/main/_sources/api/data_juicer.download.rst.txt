@@ -1,0 +1,21 @@
+data\_juicer.download package
+=============================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.download.arxiv
+   data_juicer.download.commoncrawl
+   data_juicer.download.downloader
+   data_juicer.download.wikipedia
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.download
+   :members:
+   :show-inheritance:
+   :undoc-members:

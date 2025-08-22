@@ -1,0 +1,71 @@
+data\_juicer.ops.filter package
+===============================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   data_juicer.ops.filter.alphanumeric_filter
+   data_juicer.ops.filter.audio_duration_filter
+   data_juicer.ops.filter.audio_nmf_snr_filter
+   data_juicer.ops.filter.audio_size_filter
+   data_juicer.ops.filter.average_line_length_filter
+   data_juicer.ops.filter.character_repetition_filter
+   data_juicer.ops.filter.flagged_words_filter
+   data_juicer.ops.filter.general_field_filter
+   data_juicer.ops.filter.image_aesthetics_filter
+   data_juicer.ops.filter.image_aspect_ratio_filter
+   data_juicer.ops.filter.image_face_count_filter
+   data_juicer.ops.filter.image_face_ratio_filter
+   data_juicer.ops.filter.image_nsfw_filter
+   data_juicer.ops.filter.image_pair_similarity_filter
+   data_juicer.ops.filter.image_shape_filter
+   data_juicer.ops.filter.image_size_filter
+   data_juicer.ops.filter.image_text_matching_filter
+   data_juicer.ops.filter.image_text_similarity_filter
+   data_juicer.ops.filter.image_watermark_filter
+   data_juicer.ops.filter.in_context_influence_filter
+   data_juicer.ops.filter.instruction_following_difficulty_filter
+   data_juicer.ops.filter.language_id_score_filter
+   data_juicer.ops.filter.llm_analysis_filter
+   data_juicer.ops.filter.llm_difficulty_score_filter
+   data_juicer.ops.filter.llm_perplexity_filter
+   data_juicer.ops.filter.llm_quality_score_filter
+   data_juicer.ops.filter.llm_task_relevance_filter
+   data_juicer.ops.filter.maximum_line_length_filter
+   data_juicer.ops.filter.perplexity_filter
+   data_juicer.ops.filter.phrase_grounding_recall_filter
+   data_juicer.ops.filter.special_characters_filter
+   data_juicer.ops.filter.specified_field_filter
+   data_juicer.ops.filter.specified_numeric_field_filter
+   data_juicer.ops.filter.stopwords_filter
+   data_juicer.ops.filter.suffix_filter
+   data_juicer.ops.filter.text_action_filter
+   data_juicer.ops.filter.text_embd_similarity_filter
+   data_juicer.ops.filter.text_entity_dependency_filter
+   data_juicer.ops.filter.text_length_filter
+   data_juicer.ops.filter.text_pair_similarity_filter
+   data_juicer.ops.filter.token_num_filter
+   data_juicer.ops.filter.video_aesthetics_filter
+   data_juicer.ops.filter.video_aspect_ratio_filter
+   data_juicer.ops.filter.video_duration_filter
+   data_juicer.ops.filter.video_frames_text_similarity_filter
+   data_juicer.ops.filter.video_motion_score_filter
+   data_juicer.ops.filter.video_motion_score_raft_filter
+   data_juicer.ops.filter.video_nsfw_filter
+   data_juicer.ops.filter.video_ocr_area_ratio_filter
+   data_juicer.ops.filter.video_resolution_filter
+   data_juicer.ops.filter.video_tagging_from_frames_filter
+   data_juicer.ops.filter.video_watermark_filter
+   data_juicer.ops.filter.word_repetition_filter
+   data_juicer.ops.filter.words_num_filter
+
+Module contents
+---------------
+
+.. automodule:: data_juicer.ops.filter
+   :members:
+   :show-inheritance:
+   :undoc-members:
