@@ -1,43 +1,5 @@
-data\_juicer.core.executor package
-==================================
-
-Submodules
-----------
-
-data\_juicer.core.executor.base module
---------------------------------------
-
-.. automodule:: data_juicer.core.executor.base
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-data\_juicer.core.executor.default\_executor module
----------------------------------------------------
-
-.. automodule:: data_juicer.core.executor.default_executor
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-data\_juicer.core.executor.factory module
------------------------------------------
-
-.. automodule:: data_juicer.core.executor.factory
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-data\_juicer.core.executor.ray\_executor module
------------------------------------------------
-
-.. automodule:: data_juicer.core.executor.ray_executor
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-Module contents
----------------
+data_juicer.core.executor
+=========================
 
 .. automodule:: data_juicer.core.executor
    :members:

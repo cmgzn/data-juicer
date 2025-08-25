@@ -1,43 +1,5 @@
-data\_juicer.tools package
-==========================
-
-Submodules
-----------
-
-data\_juicer.tools.DJ\_mcp\_granular\_ops module
-------------------------------------------------
-
-.. automodule:: data_juicer.tools.DJ_mcp_granular_ops
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-data\_juicer.tools.DJ\_mcp\_recipe\_flow module
------------------------------------------------
-
-.. automodule:: data_juicer.tools.DJ_mcp_recipe_flow
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-data\_juicer.tools.mcp\_tool module
------------------------------------
-
-.. automodule:: data_juicer.tools.mcp_tool
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-data\_juicer.tools.op\_search module
-------------------------------------
-
-.. automodule:: data_juicer.tools.op_search
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-Module contents
----------------
+data_juicer.tools
+=================
 
 .. automodule:: data_juicer.tools
    :members:
