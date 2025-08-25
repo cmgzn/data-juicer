@@ -4,14 +4,45 @@ data\_juicer.ops.selector package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+data\_juicer.ops.selector.frequency\_specified\_field\_selector module
+----------------------------------------------------------------------
 
-   data_juicer.ops.selector.frequency_specified_field_selector
-   data_juicer.ops.selector.random_selector
-   data_juicer.ops.selector.range_specified_field_selector
-   data_juicer.ops.selector.tags_specified_field_selector
-   data_juicer.ops.selector.topk_specified_field_selector
+.. automodule:: data_juicer.ops.selector.frequency_specified_field_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.ops.selector.random\_selector module
+-------------------------------------------------
+
+.. automodule:: data_juicer.ops.selector.random_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.ops.selector.range\_specified\_field\_selector module
+------------------------------------------------------------------
+
+.. automodule:: data_juicer.ops.selector.range_specified_field_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.ops.selector.tags\_specified\_field\_selector module
+-----------------------------------------------------------------
+
+.. automodule:: data_juicer.ops.selector.tags_specified_field_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.ops.selector.topk\_specified\_field\_selector module
+-----------------------------------------------------------------
+
+.. automodule:: data_juicer.ops.selector.topk_specified_field_selector
+   :members:
+   :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------

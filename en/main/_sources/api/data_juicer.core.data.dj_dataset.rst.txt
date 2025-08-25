@@ -1,7 +1,0 @@
-data\_juicer.core.data.dj\_dataset module
-=========================================
-
-.. automodule:: data_juicer.core.data.dj_dataset
-   :members:
-   :show-inheritance:
-   :undoc-members:

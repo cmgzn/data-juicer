@@ -1,7 +1,0 @@
-data\_juicer.core.executor.factory module
-=========================================
-
-.. automodule:: data_juicer.core.executor.factory
-   :members:
-   :show-inheritance:
-   :undoc-members:

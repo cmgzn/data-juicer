@@ -1,7 +1,0 @@
-data\_juicer.ops.filter.character\_repetition\_filter module
-============================================================
-
-.. automodule:: data_juicer.ops.filter.character_repetition_filter
-   :members:
-   :show-inheritance:
-   :undoc-members:

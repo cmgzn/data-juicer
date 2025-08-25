@@ -4,16 +4,61 @@ data\_juicer.core.data package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+data\_juicer.core.data.config\_validator module
+-----------------------------------------------
 
-   data_juicer.core.data.config_validator
-   data_juicer.core.data.data_validator
-   data_juicer.core.data.dataset_builder
-   data_juicer.core.data.dj_dataset
-   data_juicer.core.data.load_strategy
-   data_juicer.core.data.ray_dataset
-   data_juicer.core.data.schema
+.. automodule:: data_juicer.core.data.config_validator
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.data.data\_validator module
+---------------------------------------------
+
+.. automodule:: data_juicer.core.data.data_validator
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.data.dataset\_builder module
+----------------------------------------------
+
+.. automodule:: data_juicer.core.data.dataset_builder
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.data.dj\_dataset module
+-----------------------------------------
+
+.. automodule:: data_juicer.core.data.dj_dataset
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.data.load\_strategy module
+--------------------------------------------
+
+.. automodule:: data_juicer.core.data.load_strategy
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.data.ray\_dataset module
+------------------------------------------
+
+.. automodule:: data_juicer.core.data.ray_dataset
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.data.schema module
+------------------------------------
+
+.. automodule:: data_juicer.core.data.schema
+   :members:
+   :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------

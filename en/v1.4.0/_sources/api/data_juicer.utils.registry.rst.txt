@@ -1,7 +1,0 @@
-data\_juicer.utils.registry module
-==================================
-
-.. automodule:: data_juicer.utils.registry
-   :members:
-   :show-inheritance:
-   :undoc-members:

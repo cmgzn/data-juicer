@@ -1,7 +1,0 @@
-data\_juicer.core.monitor module
-================================
-
-.. automodule:: data_juicer.core.monitor
-   :members:
-   :show-inheritance:
-   :undoc-members:

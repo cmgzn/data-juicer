@@ -13,14 +13,45 @@ Subpackages
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+data\_juicer.core.adapter module
+--------------------------------
 
-   data_juicer.core.adapter
-   data_juicer.core.analyzer
-   data_juicer.core.exporter
-   data_juicer.core.monitor
-   data_juicer.core.tracer
+.. automodule:: data_juicer.core.adapter
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.analyzer module
+---------------------------------
+
+.. automodule:: data_juicer.core.analyzer
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.exporter module
+---------------------------------
+
+.. automodule:: data_juicer.core.exporter
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.monitor module
+--------------------------------
+
+.. automodule:: data_juicer.core.monitor
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.tracer module
+-------------------------------
+
+.. automodule:: data_juicer.core.tracer
+   :members:
+   :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------

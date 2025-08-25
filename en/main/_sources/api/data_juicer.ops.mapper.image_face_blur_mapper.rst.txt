@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.image\_face\_blur\_mapper module
-========================================================
-
-.. automodule:: data_juicer.ops.mapper.image_face_blur_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

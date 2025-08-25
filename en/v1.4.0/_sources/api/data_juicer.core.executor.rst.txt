@@ -4,13 +4,37 @@ data\_juicer.core.executor package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+data\_juicer.core.executor.base module
+--------------------------------------
 
-   data_juicer.core.executor.base
-   data_juicer.core.executor.default_executor
-   data_juicer.core.executor.factory
-   data_juicer.core.executor.ray_executor
+.. automodule:: data_juicer.core.executor.base
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.executor.default\_executor module
+---------------------------------------------------
+
+.. automodule:: data_juicer.core.executor.default_executor
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.executor.factory module
+-----------------------------------------
+
+.. automodule:: data_juicer.core.executor.factory
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.core.executor.ray\_executor module
+-----------------------------------------------
+
+.. automodule:: data_juicer.core.executor.ray_executor
+   :members:
+   :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------

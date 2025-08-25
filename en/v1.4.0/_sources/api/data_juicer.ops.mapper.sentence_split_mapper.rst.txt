@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.sentence\_split\_mapper module
-======================================================
-
-.. automodule:: data_juicer.ops.mapper.sentence_split_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

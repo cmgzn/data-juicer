@@ -4,12 +4,29 @@ data\_juicer.ops.common package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+data\_juicer.ops.common.helper\_func module
+-------------------------------------------
 
-   data_juicer.ops.common.helper_func
-   data_juicer.ops.common.prompt2prompt_pipeline
-   data_juicer.ops.common.special_characters
+.. automodule:: data_juicer.ops.common.helper_func
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.ops.common.prompt2prompt\_pipeline module
+------------------------------------------------------
+
+.. automodule:: data_juicer.ops.common.prompt2prompt_pipeline
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.ops.common.special\_characters module
+--------------------------------------------------
+
+.. automodule:: data_juicer.ops.common.special_characters
+   :members:
+   :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------

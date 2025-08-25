@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.punctuation\_normalization\_mapper module
-=================================================================
-
-.. automodule:: data_juicer.ops.mapper.punctuation_normalization_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

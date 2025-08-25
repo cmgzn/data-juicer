@@ -4,15 +4,53 @@ data\_juicer.analysis package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+data\_juicer.analysis.collector module
+--------------------------------------
 
-   data_juicer.analysis.collector
-   data_juicer.analysis.column_wise_analysis
-   data_juicer.analysis.diversity_analysis
-   data_juicer.analysis.draw
-   data_juicer.analysis.measure
-   data_juicer.analysis.overall_analysis
+.. automodule:: data_juicer.analysis.collector
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.analysis.column\_wise\_analysis module
+---------------------------------------------------
+
+.. automodule:: data_juicer.analysis.column_wise_analysis
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.analysis.diversity\_analysis module
+------------------------------------------------
+
+.. automodule:: data_juicer.analysis.diversity_analysis
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.analysis.draw module
+---------------------------------
+
+.. automodule:: data_juicer.analysis.draw
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.analysis.measure module
+------------------------------------
+
+.. automodule:: data_juicer.analysis.measure
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+data\_juicer.analysis.overall\_analysis module
+----------------------------------------------
+
+.. automodule:: data_juicer.analysis.overall_analysis
+   :members:
+   :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
