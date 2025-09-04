@@ -341,12 +341,12 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_cuda_available</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.constant</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fields</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.mm_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">SpecialTokens</span><span class="p">,</span> <span class="n">size_to_bytes</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.model_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">free_models</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.process_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Registry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.resource_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_cuda_available</span>
 
 <span class="n">OPERATORS</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">(</span><span class="s2">&quot;Operators&quot;</span><span class="p">)</span>
 <span class="n">UNFORKABLE</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">(</span><span class="s2">&quot;Unforkable&quot;</span><span class="p">)</span>
@@ -676,10 +676,10 @@
 
 
 <div class="viewcode-block" id="Mapper">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Mapper">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Mapper</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Mapper.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Mapper.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that conducts data editing.</span>
@@ -728,7 +728,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Mapper.process_batched">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Mapper.process_batched">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper.process_batched">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_batched</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">keys</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
         <span class="n">first_key</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
@@ -754,7 +754,7 @@
 
 
 <div class="viewcode-block" id="Mapper.process_single">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Mapper.process_single">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper.process_single">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For sample level, sample --&gt; sample</span>
@@ -766,7 +766,7 @@
 
 
 <div class="viewcode-block" id="Mapper.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Mapper.run">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Mapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
@@ -785,10 +785,10 @@
 
 
 <div class="viewcode-block" id="Filter">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Filter">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Filter</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Filter.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Filter.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that removes specific info.</span>
@@ -807,9 +807,24 @@
 <span class="sd">        :param response_key: the key name of field that stores responses</span>
 <span class="sd">        :param history_key: the key name of field that stores history of</span>
 <span class="sd">            queries and responses</span>
+
+<span class="sd">        :param min_closed_interval: whether the min_val of the specified filter range is a closed interval. It&#39;s True</span>
+<span class="sd">            by default.</span>
+<span class="sd">        :param max_closed_interval: whether the max_val of the specified filter range is a closed interval. It&#39;s True</span>
+<span class="sd">            by default.</span>
+<span class="sd">        :param reversed_range: whether to reverse the target range [min_val, max_val] to (-∞, min_val) or (max_val, +∞).</span>
+<span class="sd">            It&#39;s False by default.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Filter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stats_export_path</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stats_export_path&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># filter strategy related</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_closed_interval</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_closed_interval&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_closed_interval</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_closed_interval&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reversed_range</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reversed_range&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reversed_range</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_closed_interval</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_closed_interval</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_closed_interval</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_closed_interval</span>
 
         <span class="c1"># runtime wrappers</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_batched_op</span><span class="p">():</span>
@@ -843,8 +858,21 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
+<div class="viewcode-block" id="Filter.get_keep_boolean">
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.get_keep_boolean">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_keep_boolean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_val</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">res_bool</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">min_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res_bool</span> <span class="o">=</span> <span class="n">res_bool</span> <span class="ow">and</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;=</span> <span class="n">min_val</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_closed_interval</span> <span class="k">else</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">min_val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">max_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res_bool</span> <span class="o">=</span> <span class="n">res_bool</span> <span class="ow">and</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;=</span> <span class="n">max_val</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_closed_interval</span> <span class="k">else</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">max_val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reversed_range</span><span class="p">:</span>
+            <span class="n">res_bool</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">res_bool</span>
+        <span class="k">return</span> <span class="n">res_bool</span></div>
+
+
 <div class="viewcode-block" id="Filter.compute_stats_batched">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Filter.compute_stats_batched">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.compute_stats_batched">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats_batched</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">keys</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
         <span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">])</span>
@@ -859,13 +887,13 @@
 
 
 <div class="viewcode-block" id="Filter.process_batched">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Filter.process_batched">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.process_batched">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_batched</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">stat</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_single</span><span class="p">({</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">:</span> <span class="n">stat</span><span class="p">}),</span> <span class="n">samples</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="Filter.compute_stats_single">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Filter.compute_stats_single">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.compute_stats_single">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute stats for the sample which is used as a metric to decide</span>
@@ -880,7 +908,7 @@
 
 
 <div class="viewcode-block" id="Filter.process_single">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Filter.process_single">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.process_single">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For sample level, sample --&gt; Boolean.</span>
@@ -892,7 +920,7 @@
 
 
 <div class="viewcode-block" id="Filter.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Filter.run">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Filter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
@@ -917,10 +945,10 @@
 
 
 <div class="viewcode-block" id="Deduplicator">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Deduplicator">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Deduplicator</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Deduplicator.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Deduplicator.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that conducts deduplication.</span>
@@ -954,7 +982,7 @@
 
 
 <div class="viewcode-block" id="Deduplicator.compute_hash">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Deduplicator.compute_hash">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator.compute_hash">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute hash values for the sample.</span>
@@ -966,7 +994,7 @@
 
 
 <div class="viewcode-block" id="Deduplicator.process">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Deduplicator.process">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator.process">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">show_num</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For doc-level, dataset --&gt; dataset.</span>
@@ -980,7 +1008,7 @@
 
 
 <div class="viewcode-block" id="Deduplicator.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Deduplicator.run">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Deduplicator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
@@ -998,10 +1026,10 @@
 
 
 <div class="viewcode-block" id="Selector">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Selector">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Selector">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Selector</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Selector.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Selector.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Selector.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that conducts selection in dataset-level.</span>
@@ -1025,7 +1053,7 @@
 
 
 <div class="viewcode-block" id="Selector.process">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Selector.process">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Selector.process">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dataset --&gt; dataset.</span>
@@ -1037,7 +1065,7 @@
 
 
 <div class="viewcode-block" id="Selector.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Selector.run">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Selector.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Selector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">new_dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
@@ -1050,10 +1078,10 @@
 
 
 <div class="viewcode-block" id="Grouper">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Grouper">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Grouper">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Grouper</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Grouper.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Grouper.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Grouper.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that group samples.</span>
@@ -1077,7 +1105,7 @@
 
 
 <div class="viewcode-block" id="Grouper.process">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Grouper.process">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Grouper.process">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dataset --&gt; dataset.</span>
@@ -1089,7 +1117,7 @@
 
 
 <div class="viewcode-block" id="Grouper.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Grouper.run">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Grouper.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Grouper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">batched_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
@@ -1105,10 +1133,10 @@
 
 
 <div class="viewcode-block" id="Aggregator">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Aggregator">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Aggregator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Aggregator</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Aggregator.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Aggregator.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Aggregator.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that group samples.</span>
@@ -1135,7 +1163,7 @@
 
 
 <div class="viewcode-block" id="Aggregator.process_single">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Aggregator.process_single">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Aggregator.process_single">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For sample level, batched sample --&gt; sample,</span>
@@ -1148,7 +1176,7 @@
 
 
 <div class="viewcode-block" id="Aggregator.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.Aggregator.run">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Aggregator.run">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Aggregator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="c1"># add batched meta field for OPs that produce aggregations</span>

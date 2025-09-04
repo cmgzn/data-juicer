@@ -351,10 +351,16 @@
 <a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.text_entity_dependency_filter.html#data_juicer.ops.filter.text_entity_dependency_filter.TextEntityDependencyFilter">[文档]</a>
 <span class="nd">@OPERATORS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">TextEntityDependencyFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Identify the entities in the text which are independent with other token,</span>
-<span class="sd">    and filter them. The text containing no entities will be omitted.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identify and filter text samples based on entity dependencies.</span>
+
+<span class="sd">    This operator uses a spaCy model to detect entities in the text and evaluates their</span>
+<span class="sd">    dependency relationships. It filters out samples where entities have fewer than a</span>
+<span class="sd">    specified number of dependency edges. The key metric is &#39;num_dependency_edges&#39;, which</span>
+<span class="sd">    counts the number of edges for each entity in the dependency tree. Samples with no</span>
+<span class="sd">    detected entities are omitted. The operator supports &#39;any&#39; or &#39;all&#39; strategies: &#39;any&#39;</span>
+<span class="sd">    keeps samples if at least one entity meets the dependency threshold, while &#39;all&#39;</span>
+<span class="sd">    requires all entities to meet the threshold. Supported languages are English (&#39;en&#39;) and</span>
+<span class="sd">    Chinese (&#39;zh&#39;).&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TextEntityDependencyFilter.__init__">
 <a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.text_entity_dependency_filter.html#data_juicer.ops.filter.text_entity_dependency_filter.TextEntityDependencyFilter.__init__">[文档]</a>
@@ -364,7 +370,7 @@
 
 <span class="sd">        :param lang: language of the text in the samples. &#39;en&#39; for detection of</span>
 <span class="sd">            entities in English and &#39;zh&#39; for detection of entities in Chinese.</span>
-<span class="sd">        :param mini_dependency_num: The min token number in the filtering.</span>
+<span class="sd">        :param min_dependency_num: The min token number in the filtering.</span>
 <span class="sd">            Objects is independent if their number of edges in the dependency</span>
 <span class="sd">            tree is below this parameter.</span>
 <span class="sd">        :param any_or_all: keep this sample with &#39;any&#39; or &#39;all&#39; strategy.</span>
@@ -427,7 +433,9 @@
 <a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.text_entity_dependency_filter.html#data_juicer.ops.filter.text_entity_dependency_filter.TextEntityDependencyFilter.process_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
         <span class="n">num_dependency_edges</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">][</span><span class="n">StatsKeys</span><span class="o">.</span><span class="n">num_dependency_edges</span><span class="p">]</span>
-        <span class="n">keep_bools</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">min_dependency_num</span> <span class="o">&lt;=</span> <span class="n">num_edge</span> <span class="k">for</span> <span class="n">num_edge</span> <span class="ow">in</span> <span class="n">num_dependency_edges</span><span class="p">])</span>
+        <span class="n">keep_bools</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_keep_boolean</span><span class="p">(</span><span class="n">num_edge</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_dependency_num</span><span class="p">)</span> <span class="k">for</span> <span class="n">num_edge</span> <span class="ow">in</span> <span class="n">num_dependency_edges</span><span class="p">]</span>
+        <span class="p">)</span>
         <span class="c1"># omit the samples without entity</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keep_bools</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>

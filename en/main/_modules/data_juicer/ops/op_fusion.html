@@ -335,7 +335,7 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for data_juicer.ops.op_fusion</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
@@ -539,15 +539,30 @@
 <a class="viewcode-back" href="../../../api/data_juicer.ops.op_fusion.html#data_juicer.ops.op_fusion.GeneralFusedOP">[docs]</a>
 <span class="nd">@OPERATORS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="s2">&quot;general_fused_op&quot;</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">GeneralFusedOP</span><span class="p">(</span><span class="n">Mapper</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;An explicitly fused operator designed to execute multiple sequential</span>
-<span class="sd">    operations (OPs) on the same batch, enabling fine-grained control over</span>
-<span class="sd">    data processing.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An explicitly fused operator designed to execute multiple sequential operations (OPs) on</span>
+<span class="sd">    the same batch, enabling fine-grained control over data processing.</span>
+
+<span class="sd">    This operator allows for the chaining of multiple data processing steps, such as mappers</span>
+<span class="sd">    and filters, into a single pass. It processes each batch of samples sequentially through</span>
+<span class="sd">    the defined operations, ensuring that all specified transformations are applied in</span>
+<span class="sd">    order. The operator supports both mappers, which transform data, and filters, which</span>
+<span class="sd">    remove or keep samples based on computed statistics. Context variables can be passed</span>
+<span class="sd">    between operations if needed. The accelerator is set to &#39;cuda&#39; if any of the fused</span>
+<span class="sd">    operations use it. The number of processes is determined by the minimum value among all</span>
+<span class="sd">    fused operations. After processing, any temporary context variables, such as those used</span>
+<span class="sd">    for video containers, are cleaned up.&quot;&quot;&quot;</span>
 
     <span class="n">_batched_op</span> <span class="o">=</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="GeneralFusedOP.__init__">
 <a class="viewcode-back" href="../../../api/data_juicer.ops.op_fusion.html#data_juicer.ops.op_fusion.GeneralFusedOP.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fused_op_list</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fused_op_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialization.</span>
+
+<span class="sd">        :param batch_size: the batch size of the input samples.</span>
+<span class="sd">        :param fused_op_list: a list of OPs to be fused.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
         <span class="k">if</span> <span class="n">fused_op_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>

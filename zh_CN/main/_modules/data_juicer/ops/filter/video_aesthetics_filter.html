@@ -361,19 +361,26 @@
 
 
 <div class="viewcode-block" id="VideoAestheticsFilter">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoAestheticsFilter">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.video_aesthetics_filter.html#data_juicer.ops.filter.video_aesthetics_filter.VideoAestheticsFilter">[文档]</a>
 <span class="nd">@OPERATORS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="nd">@LOADED_VIDEOS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="nd">@INTER_SAMPLED_FRAMES</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">VideoAestheticsFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter to keep data samples with aesthetics scores for specified frames</span>
-<span class="sd">    in the videos within a specific range.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter to keep data samples with aesthetics scores for specified frames in the videos</span>
+<span class="sd">    within a specific range.</span>
+
+<span class="sd">    This operator evaluates the aesthetic quality of video frames using a Hugging Face</span>
+<span class="sd">    model. It keeps samples where the aesthetics scores of the specified frames fall within</span>
+<span class="sd">    a given range. The key metric, &#39;video_frames_aesthetics_score&#39;, is computed by</span>
+<span class="sd">    averaging, taking the max, or min of the frame scores, depending on the reduce mode.</span>
+<span class="sd">    Frame sampling can be done uniformly or by extracting all keyframes. The filter applies</span>
+<span class="sd">    a &#39;any&#39; or &#39;all&#39; strategy to decide if a sample should be kept based on the scores of</span>
+<span class="sd">    multiple videos.&quot;&quot;&quot;</span>
 
     <span class="n">_accelerator</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span>
 
 <div class="viewcode-block" id="VideoAestheticsFilter.__init__">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoAestheticsFilter.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.video_aesthetics_filter.html#data_juicer.ops.filter.video_aesthetics_filter.VideoAestheticsFilter.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">hf_scorer_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -422,7 +429,7 @@
 <span class="sd">        :param args: Extra positional arguments.</span>
 <span class="sd">        :param kwargs: Extra keyword arguments.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;mem_required&quot;</span><span class="p">,</span> <span class="s2">&quot;1500MB&quot;</span><span class="p">)</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mem_required&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;1500MB&quot;</span> <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mem_required&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;mem_required&quot;</span><span class="p">]</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">hf_scorer_model</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="n">hf_scorer_model</span> <span class="o">=</span> <span class="s2">&quot;shunk031/aesthetics-predictor-v2-sac-logos-ava1-l14-linearMSE&quot;</span>
@@ -461,7 +468,7 @@
 
 
 <div class="viewcode-block" id="VideoAestheticsFilter.compute_stats_single">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoAestheticsFilter.compute_stats_single">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.video_aesthetics_filter.html#data_juicer.ops.filter.video_aesthetics_filter.VideoAestheticsFilter.compute_stats_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># check if it&#39;s computed already</span>
         <span class="k">if</span> <span class="n">StatsKeys</span><span class="o">.</span><span class="n">video_frames_aesthetics_score</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">]:</span>
@@ -532,14 +539,17 @@
 
 
 <div class="viewcode-block" id="VideoAestheticsFilter.process_single">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoAestheticsFilter.process_single">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.video_aesthetics_filter.html#data_juicer.ops.filter.video_aesthetics_filter.VideoAestheticsFilter.process_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
         <span class="n">aesthetics_scores</span> <span class="o">=</span> <span class="p">(</span><span class="n">sample</span><span class="p">)[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">][</span><span class="n">StatsKeys</span><span class="o">.</span><span class="n">video_frames_aesthetics_score</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">aesthetics_scores</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
 
         <span class="n">keep_bools</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">min_score</span> <span class="o">&lt;=</span> <span class="n">aesthetics_score</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="k">for</span> <span class="n">aesthetics_score</span> <span class="ow">in</span> <span class="n">aesthetics_scores</span><span class="p">]</span>
+            <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_keep_boolean</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_score</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">aesthetics_score</span> <span class="ow">in</span> <span class="n">aesthetics_scores</span>
+            <span class="p">]</span>
         <span class="p">)</span>
 
         <span class="c1"># different strategies</span>

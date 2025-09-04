@@ -342,9 +342,9 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">PositiveFloat</span><span class="p">,</span> <span class="n">PositiveInt</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer</span><span class="w"> </span><span class="kn">import</span> <span class="n">cuda_device_count</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops.filter.video_motion_score_filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">VideoMotionScoreFilter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.lazy_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">LazyLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.resource_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">cuda_device_count</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">..base_op</span><span class="w"> </span><span class="kn">import</span> <span class="n">OPERATORS</span><span class="p">,</span> <span class="n">UNFORKABLE</span>
 
@@ -356,13 +356,25 @@
 
 
 <div class="viewcode-block" id="VideoMotionScoreRaftFilter">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoMotionScoreRaftFilter">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.video_motion_score_raft_filter.html#data_juicer.ops.filter.video_motion_score_raft_filter.VideoMotionScoreRaftFilter">[文档]</a>
 <span class="nd">@UNFORKABLE</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="nd">@OPERATORS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">VideoMotionScoreRaftFilter</span><span class="p">(</span><span class="n">VideoMotionScoreFilter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter to keep samples with video motion scores within a specified range.</span>
-<span class="sd">    This operator utilizes the RAFT (Recurrent All-Pairs Field Transforms)</span>
-<span class="sd">    model from torchvision to predict optical flow between video frames.</span>
+
+<span class="sd">    This operator utilizes the RAFT (Recurrent All-Pairs Field Transforms) model from</span>
+<span class="sd">    torchvision to predict optical flow between video frames. It keeps samples where the</span>
+<span class="sd">    video motion score is within the given min and max score range. The motion score is</span>
+<span class="sd">    computed based on the optical flow between frames, which is estimated using the RAFT</span>
+<span class="sd">    model. The operator can sample frames at a specified FPS and apply transformations to</span>
+<span class="sd">    the frames before computing the flow.</span>
+
+<span class="sd">    - The RAFT model is used to estimate the optical flow.</span>
+<span class="sd">    - Frames are preprocessed using a series of transformations including normalization and</span>
+<span class="sd">      color channel flipping.</span>
+<span class="sd">    - The motion score is calculated from the optical flow data.</span>
+<span class="sd">    - The operator can be configured to filter based on any or all frames in the video.</span>
+<span class="sd">    - The device for model inference (CPU or CUDA) is automatically detected and set.</span>
 
 <span class="sd">    For further details, refer to the official torchvision documentation:</span>
 <span class="sd">    https://pytorch.org/vision/main/models/raft.html</span>
@@ -375,7 +387,7 @@
     <span class="n">_default_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="VideoMotionScoreRaftFilter.__init__">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoMotionScoreRaftFilter.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.video_motion_score_raft_filter.html#data_juicer.ops.filter.video_motion_score_raft_filter.VideoMotionScoreRaftFilter.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">min_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
@@ -395,7 +407,7 @@
 
 
 <div class="viewcode-block" id="VideoMotionScoreRaftFilter.setup_model">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoMotionScoreRaftFilter.setup_model">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.video_motion_score_raft_filter.html#data_juicer.ops.filter.video_motion_score_raft_filter.VideoMotionScoreRaftFilter.setup_model">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">setup_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">tvm</span><span class="o">.</span><span class="n">optical_flow</span><span class="o">.</span><span class="n">raft_large</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">tvm</span><span class="o">.</span><span class="n">optical_flow</span><span class="o">.</span><span class="n">Raft_Large_Weights</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">():</span>
@@ -417,7 +429,7 @@
 
 
 <div class="viewcode-block" id="VideoMotionScoreRaftFilter.compute_flow">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoMotionScoreRaftFilter.compute_flow">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.video_motion_score_raft_filter.html#data_juicer.ops.filter.video_motion_score_raft_filter.VideoMotionScoreRaftFilter.compute_flow">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prev_frame</span><span class="p">,</span> <span class="n">curr_frame</span><span class="p">):</span>
         <span class="n">curr_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">(</span><span class="n">curr_frame</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">prev_frame</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>

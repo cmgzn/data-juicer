@@ -337,6 +337,8 @@
           <h1>data_juicer.ops.filter.specified_field_filter 源代码</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.constant</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fields</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">..base_op</span><span class="w"> </span><span class="kn">import</span> <span class="n">NON_STATS_FILTERS</span><span class="p">,</span> <span class="n">OPERATORS</span><span class="p">,</span> <span class="n">Filter</span>
 
 <span class="n">OP_NAME</span> <span class="o">=</span> <span class="s2">&quot;specified_field_filter&quot;</span>
@@ -347,12 +349,18 @@
 <span class="nd">@NON_STATS_FILTERS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="nd">@OPERATORS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SpecifiedFieldFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Filter based on specified field information.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter samples based on the specified field information.</span>
 
-<span class="sd">    If the specified field information in the sample is not within the</span>
-<span class="sd">    specified target value, the sample will be filtered.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    This operator checks if the value of a specified field in each sample is within a given</span>
+<span class="sd">    target value range. If the field value is not within the target range, the sample is</span>
+<span class="sd">    filtered out. The field can be a multi-level key, with levels separated by dots. The</span>
+<span class="sd">    target value is a list of acceptable values for the field. If the field value is not a</span>
+<span class="sd">    list or tuple, it is converted to a list for comparison. Samples are retained if all</span>
+<span class="sd">    values in the field match any of the target values.</span>
+
+<span class="sd">    - Uses the &#39;field_key&#39; and &#39;target_value&#39; parameters.</span>
+<span class="sd">    - Supports multi-level field keys, e.g., &#39;level1.level2&#39;.</span>
+<span class="sd">    - Converts non-list/tuple field values to a list for comparison.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="SpecifiedFieldFilter.__init__">
 <a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.specified_field_filter.html#data_juicer.ops.filter.specified_field_filter.SpecifiedFieldFilter.__init__">[文档]</a>
@@ -377,6 +385,14 @@
 <div class="viewcode-block" id="SpecifiedFieldFilter.compute_stats_single">
 <a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.specified_field_filter.html#data_juicer.ops.filter.specified_field_filter.SpecifiedFieldFilter.compute_stats_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
+        <span class="c1"># get the value from the original field</span>
+        <span class="n">field_value</span> <span class="o">=</span> <span class="n">sample</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">field_value</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; not in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">field_value</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">field_value</span> <span class="o">=</span> <span class="n">field_value</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="c1"># copy it into the stats field</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">]:</span>
+            <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">field_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_value</span>
         <span class="k">return</span> <span class="n">sample</span></div>
 
 
@@ -386,17 +402,17 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field_key</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_value</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
 
-        <span class="n">field_value</span> <span class="o">=</span> <span class="n">sample</span>
-        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">field_value</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;&#39;</span><span class="si">{}</span><span class="s2">&#39; not in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">field_value</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-            <span class="n">field_value</span> <span class="o">=</span> <span class="n">field_value</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="n">field_value</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">field_key</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">field_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field_value</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="n">field_value</span> <span class="o">=</span> <span class="p">[</span><span class="n">field_value</span><span class="p">]</span>
+        <span class="n">res_bool</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">field_value</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_value</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
+                <span class="n">res_bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reversed_range</span><span class="p">:</span>
+            <span class="n">res_bool</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">res_bool</span>
+        <span class="k">return</span> <span class="n">res_bool</span></div>
 </div>
 
 </pre></div>
