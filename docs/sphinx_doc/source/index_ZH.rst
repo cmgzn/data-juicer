@@ -14,61 +14,10 @@ Data Processing for and with Foundation Models
 
 .. toctree::
    :maxdepth: 2
-   :caption: 教程
-   :glob:
-   :hidden:
 
-   docs/tutorial/*
+   docs_index/index_ZH
 
 .. toctree::
    :maxdepth: 2
-   :caption: 帮助文档
-   :glob:
-   :hidden:
-
-   docs/Operators
-   docs/DatasetCfg_ZH
-   docs/*
-
-.. toctree::
-   :maxdepth: 2
-   :caption: demos
-   :glob:
-   :hidden:
-
-   demos/*
-   demos/**/*
-
-.. toctree::
-   :maxdepth: 2
-   :caption: hub
-   :glob:
-   :hidden:
-
-   docs/hub/RecipeGallery_ZH
-   docs/hub/*
-
-.. toctree::
-   :maxdepth: 2
-   :caption: 工具
-   :glob:
-   :hidden:
-
-   tools/*
-   tools/**/*
-
-.. toctree::
-   :maxdepth: 2
-   :caption: 第三方
-   :glob:
-   :hidden:
-
-   thirdparty/*
-   thirdparty/**/*
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: API Reference
 
    api

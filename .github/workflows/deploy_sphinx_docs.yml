@@ -4,12 +4,12 @@ on:
   pull_request:
     types: [opened, synchronize]
     paths:
-      - 'docs/sphinx_doc/**/*'
+      - "docs/sphinx_doc/**/*"
   push:
     branches:
       - main
     tags:
-      - '*'
+      - "*"
   workflow_dispatch:
 
 jobs:
@@ -19,47 +19,61 @@ jobs:
       matrix:
         python-version: ["3.11"]
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    - name: Get git tags
-      run: |
-        git fetch --all --tags
-        git branch -a
-        git tag
-    - name: Setup Python ${{ matrix.python-version }}
-      uses: actions/setup-python@master
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install uv
-      uses: astral-sh/setup-uv@v7
-      with:
-        enable-cache: true
-    - name: Install dependencies with uv
-      run: |
-        uv pip install --system --upgrade pip
-        uv pip install --system -e .[all]
-    - id: build
-      name: Build Documentation
-      run: |
-        cd docs/sphinx_doc
-        bash build_doc.sh
-    - name: Redirect index.html
-      run: |
-        REPOSITORY_OWNER="${GITHUB_REPOSITORY_OWNER}"
-        cd docs/sphinx_doc
-        cp ./redirect.html build/index.html
-        sed -i "s/\[VERSION\]/$(python -c 'import data_juicer;print(data_juicer.__version__)')/g" build/index.html
-        sed -i "s/\[REPOSITORY_OWNER\]/${REPOSITORY_OWNER}/g" build/index.html
-        cp build/index.html build/404.html
-    - name: Upload Documentation
-      uses: actions/upload-artifact@v4
-      with:
-        name: SphinxDoc
-        path: 'docs/sphinx_doc/build'
-    - uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')) }}
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: 'docs/sphinx_doc/build'
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@master
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+      - name: Install dependencies with uv
+        run: |
+          uv pip install --system --upgrade pip
+          uv pip install --system -e .[all]
+      - name: Fetch Data-Juicer Sphinx Template
+        run: |
+          git clone --depth=1 https://github.com/cmgzn/data-juicer-sphinx.git /tmp/template
+          uv pip install --system -e /tmp/template
+          mkdir -p docs
+          for f in index.rst index_ZH.rst external_links.yaml docs_index/index.rst docs_index/index_ZH.rst; do
+            if [ -f "docs/sphinx_doc/source/$f" ]; then
+              cp "docs/sphinx_doc/source/$f" "/tmp/template/docs/sphinx_doc/source/$f"
+            fi
+          done
+          rm -rf docs/sphinx_doc
+          mv /tmp/template/docs/sphinx_doc docs/sphinx_doc
+      - name: Get git tags
+        run: |
+          git fetch --all --tags
+          git branch -a
+          git tag
+      - id: build
+        name: Build Documentation
+        env:
+          PROJECT: data-juicer
+        run: |
+          cd docs/sphinx_doc
+          python build_versions.py --tags -A
+      - name: Redirect index.html
+        run: |
+          REPOSITORY_OWNER="${GITHUB_REPOSITORY_OWNER}"
+          cd docs/sphinx_doc
+          cp ./redirect.html build/index.html
+          sed -i "s/\[VERSION\]/$(python -c 'import data_juicer;print(data_juicer.__version__)')/g" build/index.html
+          sed -i "s/\[REPOSITORY_OWNER\]/${REPOSITORY_OWNER}/g" build/index.html
+          cp build/index.html build/404.html
+      - name: Upload Documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: SphinxDoc
+          path: "docs/sphinx_doc/build"
+      - uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')) }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: "docs/sphinx_doc/build"
