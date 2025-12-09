@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+
+
+<html lang="zh-CN" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>自动化评测：HELM 评测及可视化 &#8212; Data Juicer</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=0f2a0175" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=91bfbbb6"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/translations.js?v=beaddf03"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs_index/demos/auto_evaluation_helm/README_ZH';</script>
+    <link rel="icon" href="../../../_static/icon.png"/>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search docs..."
+         aria-label="Search docs..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="版本警告"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index_ZH.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/icon.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/icon.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">Data Juicer</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index_ZH.html">
+    文档
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
+    Sandbox
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
+    Hub
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
+    Agents
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cmgzn/data-juicer" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="亮色"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="暗色"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><div class="navbar-switcher-container">
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        🌐 zh-CN
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content">
+        
+        <a href="../../../../../en/main/docs_index/demos/auto_evaluation_helm/README.html"
+           class="dropdown-item ">
+          English
+        </a>
+        
+        <a href="../../../../../zh_CN/main/docs_index/demos/auto_evaluation_helm/README_ZH.html"
+           class="dropdown-item ">
+          简体中文
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        📦 main
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content version-list">
+        
+        <a href="../../../../main/docs_index/demos/auto_evaluation_helm/README_ZH.html"
+           class="dropdown-item active">
+          main
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="当前页面">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index_ZH.html">
+    文档
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
+    Sandbox
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
+    Hub
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
+    Agents
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cmgzn/data-juicer" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="亮色"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="暗色"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><div class="navbar-switcher-container">
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        🌐 zh-CN
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content">
+        
+        <a href="../../../../../en/main/docs_index/demos/auto_evaluation_helm/README.html"
+           class="dropdown-item ">
+          English
+        </a>
+        
+        <a href="../../../../../zh_CN/main/docs_index/demos/auto_evaluation_helm/README_ZH.html"
+           class="dropdown-item ">
+          简体中文
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        📦 main
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content version-list">
+        
+        <a href="../../../../main/docs_index/demos/auto_evaluation_helm/README_ZH.html"
+           class="dropdown-item active">
+          main
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index_ZH.html" class="nav-link" aria-label="初始页面">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">自动化评测：HELM 评测及可视化</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="helm">
+<h1>自动化评测：HELM 评测及可视化<a class="headerlink" href="#helm" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>什么是自动化评测<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>这里的自动化评测是指对模型训练过程中得到的检查点自动使用评测数据集执行评测并记录评测结果。</p>
+</section>
+<section id="id2">
+<h2>为什么要自动化评测<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>在大模型训练过程中仅通过训练 loss 难以准确评估模型的实际性能，需要使用多种评测数据集从各维度评价模型的能力，实时持续监控各项指标随训练迭代的变化情况，并与其他基线模型做比较，从而判断模型是否还有继续训练的价值，节省训练开销。</p>
+<p>但上述的评测流程重复繁琐且易于出错（例如：检查是否有新检查点、运行评测、记录评测结果、结果可视化等），而本自动化评测工具则能够提供一键式的解决方案，节省大量人力成本。</p>
+<p>将自动化评测与数据预处理结合可及时通过评测结果判断数据预处理阶段配置的合理性，形成反馈循环，更快地找出更合理的数据预处理方法。</p>
+</section>
+<section id="helm-megatron-lm">
+<h2>如何使用自动化评测：以 HELM 和 Megatron-LM 为例<a class="headerlink" href="#helm-megatron-lm" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>HELM 是 Stanford 开源的一套评测框架，包含了丰富的测试数据集以及多种评测指标，现已评测了超过 50 种可公开访问的大模型</p></li>
+<li><p>Megatron-LM 是 Nvidia 开源的 Transformer 训练框架，支持大规模分布式训练且性能极高，是多个知名大模型训练框架 (GPT-Neox, Megatron-Deepspeed等) 的基础</p></li>
+</ul>
+</div></blockquote>
+<p>本节介绍如何使用本工具中的 HELM 评测框架自动化评测 Megatron-LM 训练得到的 GPT2 模型，运行该样例需要至少一张 V100 或其他更高规格的显卡，该样例在计算资源允许的情况下可以扩展支持更大的模型。</p>
+<section id="id3">
+<h3>1. 准备环境<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>由于 HELM 和 Megatron-LM 的依赖项繁杂，为了减少安装过程中遇到的依赖问题，推荐基于 NGC 的 Pytorch 容器 (<code class="docutils literal notranslate"><span class="pre">nvcr.io/nvidia/pytorch:22.12-py3</span></code>) 构建环境。</p>
+<p>假设您的数据集 jsonl 文件路径为 <code class="docutils literal notranslate"><span class="pre">/dataset/dataset.jsonl</span></code>，Data-Juicer 的代码路径为 <code class="docutils literal notranslate"><span class="pre">/code/data-juicer</span></code>，只需执行如下指令:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>nvcr.io/nvidia/pytorch:22.12-py3
+docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--ipc<span class="o">=</span>host<span class="w"> </span>--ulimit<span class="w"> </span><span class="nv">memlock</span><span class="o">=</span>-1<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span>/dataset:/workspace/data<span class="w"> </span>-v<span class="w"> </span>/code/data-juicer:/worksapce/data-juicer<span class="w"> </span>nvcr.io/nvidia/pytorch:22.12-py3
+</pre></div>
+</div>
+<p>docker 容器成功运行后在容器内运行安装脚本并登录 wandb：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/workspace/data-juicer/thirdparty/LLM_ecosystems
+./setup_megatron.sh
+./setup_helm.sh
+wandb<span class="w"> </span>login
+</pre></div>
+</div>
+<p>安装完成后在容器外运行如下指令将容器保存下来方便后续使用，其中的 <code class="docutils literal notranslate"><span class="pre">container_id</span></code> 可通过 <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span></code> 获取</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>commit<span class="w"> </span>&lt;container_id&gt;<span class="w"> </span>data-juicer-eval
+</pre></div>
+</div>
+</section>
+<section id="megatron-lm">
+<h3>2. 将数据集预处理为 Megatron-LM 可识别的格式<a class="headerlink" href="#megatron-lm" title="Link to this heading">#</a></h3>
+<p>进入 Megatron-LM 目录并执行数据预处理脚本，该脚本会将 data-juicer 处理好的 jsonline（假设路径为 <code class="docutils literal notranslate"><span class="pre">/workspace/data/dataset.jsonl</span></code>）文件转化为二进制格式，并保存为 <code class="docutils literal notranslate"><span class="pre">/workspace.data/dataset_text_document.bin</span></code> 和 <code class="docutils literal notranslate"><span class="pre">/workspace.data/dataset_text_document.idx</span></code> 两个文件。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/workspace/data-juicer/thirdparty/LLM_ecosystems/Megatron-LM
+python<span class="w"> </span>tools/preprocess_data.py<span class="w">              </span><span class="se">\</span>
+<span class="w">       </span>--input<span class="w"> </span>/workspace/data/dataset.jsonl<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>--output-prefix<span class="w"> </span>dataset<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>--vocab<span class="w"> </span>/workspace/data-juicer/demos/gpt2-vocab.json<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>--dataset-impl<span class="w"> </span>mmap<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>--tokenizer-type<span class="w"> </span>GPT2BPETokenizer<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>--split-sentences
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>3. 启动 Megatron-LM 训练<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>进入 Megatron-LM 目录并执行如下指令</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/workspace/data-juicer/thirdparty/LLM_ecosystems/Megatron-LM
+nohup<span class="w"> </span>bash<span class="w"> </span>/workspace/data-juicer/demos/auto_eval_helm/pretrain_example.sh<span class="w"> </span>&gt;<span class="w"> </span>train.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">pretrain_example.sh</span></code> 会执行 GPT2 模型的训练，从 <code class="docutils literal notranslate"><span class="pre">/workspace/data</span></code> 路径获取 <code class="docutils literal notranslate"><span class="pre">.bin</span></code> 和 <code class="docutils literal notranslate"><span class="pre">.idx</span></code> 二进制数据集文件，训练 200000 个 iteration，并每隔 2000 个 iteration 将模型以检查点形式保存在 <code class="docutils literal notranslate"><span class="pre">/workspace/data/checkpoints/GPT2</span></code> 目录下。
+可通过修改 <code class="docutils literal notranslate"><span class="pre">pretrain_example.sh</span></code> 来调整模型的规模、数据集路径、检查点路径等参数，更详细的配置信息请参考 <a class="reference external" href="https://github.com/NVIDIA/Megatron-LM">Megatron-LM 官方仓库</a>。</p>
+</div></blockquote>
+</section>
+<section id="id5">
+<h3>4. 启动自动化评测<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>进入 data-juicer 的自动评测工具库目录并执行如下指令：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/workspace/data-juicer/tools/eval
+python<span class="w"> </span>evaluator.py<span class="w"> </span>--config<span class="w"> </span>/workspace/data-juicer/demos/evaluator.yaml<span class="w"> </span>--begin-iteration<span class="w"> </span><span class="m">2000</span><span class="w"> </span>--end-iteration<span class="w"> </span><span class="m">200000</span><span class="w"> </span>--interation-interval<span class="w"> </span><span class="m">2000</span><span class="w"> </span>--check-interval<span class="w"> </span><span class="m">30</span>
+</pre></div>
+</div>
+<p>该脚本会每隔 30 分钟检测一次 <code class="docutils literal notranslate"><span class="pre">/workspace/data/checkpoints/GPT2</span></code> 目录，并从 2000 iteration 开始每隔 2000 iteration 对检查点执行一次 HELM 评测并将评测结果记录至 wandb，直到评测完 200000 iteration 对应的检查点为止，您可以在 wandb 上查看已完成的评测结果，下图展示了模型训练到 140000 iteration 时 wandb 上的可视化展示结果。</p>
+<p><img alt="训练过程中的评测结果展示" src="https://github.com/cmgzn/data-juicer/blob/main/demos/auto_evaluation_helm/imgs/eval-02.png" /></p>
+<blockquote>
+<div><p>本示例运行的 HELM 测试集配置位于 <code class="docutils literal notranslate"><span class="pre">/workspace/data-juicer/demos/helm_spec_template.conf</span></code> 中，这里仅选用了 MMLU 的一个子集、boolq、narrative_qa 以及 hellaswag 作为样例，完整的测试集配置位于 <code class="docutils literal notranslate"><span class="pre">/workspace/data-juicer/tools/eval/config/helm_spec_template.conf</span></code> 中。</p>
+</div></blockquote>
+</section>
+<section id="id6">
+<h3>5. 汇总评测结果<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>为了体现模型训练效果，可以借助 <code class="docutils literal notranslate"><span class="pre">wandb_writer.py</span></code> 将多个模型的评测结果汇总到同一个排行榜上进行比较。</p>
+<p>首先，将基线模型的各项评测结果直接记录到 wandb：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/workspace/data-juicer/tools/eval/recorder
+python<span class="w"> </span>wandb_writer.py<span class="w"> </span>--config<span class="w"> </span>/workspace/data-juicer/demos/baselines.yaml
+</pre></div>
+</div>
+<p>在确保所有参与排行榜的模型的评测结果都已经记录到 wandb 之后，使用 <code class="docutils literal notranslate"><span class="pre">leaderboard.yaml</span></code> 构建排行榜：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/workspace/data-juicer/tools/eval/recorder
+python<span class="w"> </span>wandb_writer.py<span class="w"> </span>--config<span class="w"> </span>/workspace/data-juicer/demos/leaderboard.yaml
+</pre></div>
+</div>
+<p><img alt="排行榜" src="https://github.com/cmgzn/data-juicer/blob/main/demos/auto_evaluation_helm/imgs/eval-01.png" /></p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 当前页面
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">什么是自动化评测</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">为什么要自动化评测</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helm-megatron-lm">如何使用自动化评测：以 HELM 和 Megatron-LM 为例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1. 准备环境</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#megatron-lm">2. 将数据集预处理为 Megatron-LM 可识别的格式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3. 启动 Megatron-LM 训练</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">4. 启动自动化评测</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">5. 汇总评测结果</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/docs_index/demos/auto_evaluation_helm/README_ZH.md.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Data-Juicer Team.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3创建。
+    <br/>
+  </p>
+</div>
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  使用 <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1构建.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
