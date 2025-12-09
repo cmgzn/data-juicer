@@ -1,7 +1,0 @@
-data\_juicer.ops.filter.alphanumeric\_filter module
-===================================================
-
-.. automodule:: data_juicer.ops.filter.alphanumeric_filter
-   :members:
-   :show-inheritance:
-   :undoc-members:

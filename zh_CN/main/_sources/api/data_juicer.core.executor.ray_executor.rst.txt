@@ -1,7 +1,0 @@
-data\_juicer.core.executor.ray\_executor module
-===============================================
-
-.. automodule:: data_juicer.core.executor.ray_executor
-   :members:
-   :show-inheritance:
-   :undoc-members:

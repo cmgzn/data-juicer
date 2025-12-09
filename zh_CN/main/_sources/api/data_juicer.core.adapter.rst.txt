@@ -1,7 +1,0 @@
-data\_juicer.core.adapter module
-================================
-
-.. automodule:: data_juicer.core.adapter
-   :members:
-   :show-inheritance:
-   :undoc-members:

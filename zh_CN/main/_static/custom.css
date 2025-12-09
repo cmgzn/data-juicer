@@ -1,0 +1,144 @@
+.navbar-switcher-container {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.navbar-dropdown {
+    position: relative;
+}
+
+.navbar-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--pst-color-text-base);
+    background: transparent;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.navbar-dropdown-trigger:hover {
+    background: var(--pst-color-surface);
+    color: var(--pst-color-primary);
+}
+
+.navbar-dropdown-trigger .dropdown-icon {
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+}
+
+.navbar-dropdown-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 160px;
+    margin-top: 0.25rem; 
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    padding-top: 0.25rem;
+}
+
+.navbar-dropdown:hover .navbar-dropdown-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-content {
+    background: var(--pst-color-background);
+    border: 1px solid var(--pst-color-border);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    overflow: hidden;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: var(--pst-color-text-base);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.dropdown-item:hover {
+    background: var(--pst-color-surface);
+    color: var(--pst-color-primary);
+}
+
+.dropdown-item.active {
+    background: var(--pst-color-primary);
+    color: white;
+    font-weight: 600;
+}
+
+.dropdown-content.version-list {
+    max-height: 320px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--pst-color-border) transparent;
+}
+
+.dropdown-content.version-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown-content.version-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dropdown-content.version-list::-webkit-scrollbar-thumb {
+    background: var(--pst-color-border);
+    border-radius: 3px;
+}
+
+.dropdown-content.version-list::-webkit-scrollbar-thumb:hover {
+    background: var(--pst-color-text-muted);
+}
+
+/* 左側邊欄 */
+.bd-sidebar-primary {
+    max-width: 20% !important;
+}
+
+/* 主內容 */
+.bd-main .bd-content .bd-article-container {
+    max-width: 100%;
+}
+
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    
+    .navbar-switcher-container {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .navbar-dropdown-panel {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        right: auto;
+    }
+    
+    .navbar-dropdown:hover .navbar-dropdown-panel {
+        transform: translateX(-50%) translateY(0);
+    }
+}

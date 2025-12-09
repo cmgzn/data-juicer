@@ -1,7 +1,0 @@
-data\_juicer.utils.asset\_utils module
-======================================
-
-.. automodule:: data_juicer.utils.asset_utils
-   :members:
-   :show-inheritance:
-   :undoc-members:

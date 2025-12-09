@@ -1,7 +1,0 @@
-data\_juicer.ops.deduplicator.ray\_image\_deduplicator module
-=============================================================
-
-.. automodule:: data_juicer.ops.deduplicator.ray_image_deduplicator
-   :members:
-   :show-inheritance:
-   :undoc-members:

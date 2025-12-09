@@ -1,7 +1,0 @@
-data\_juicer.tools.mcp\_tool module
-===================================
-
-.. automodule:: data_juicer.tools.mcp_tool
-   :members:
-   :show-inheritance:
-   :undoc-members:

@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+
+
+<html lang="zh-CN" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>预处理工具 &#8212; Data Juicer</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=0f2a0175" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=91bfbbb6"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/translations.js?v=beaddf03"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs_index/tools/preprocess/README_ZH';</script>
+    <link rel="icon" href="../../../_static/icon.png"/>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search docs..."
+         aria-label="Search docs..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="版本警告"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index_ZH.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/icon.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/icon.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">Data Juicer</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index_ZH.html">
+    文档
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
+    Sandbox
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
+    Hub
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
+    Agents
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cmgzn/data-juicer" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="亮色"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="暗色"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><div class="navbar-switcher-container">
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        🌐 zh-CN
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content">
+        
+        <a href="../../../../../en/main/docs_index/tools/preprocess/README.html"
+           class="dropdown-item ">
+          English
+        </a>
+        
+        <a href="../../../../../zh_CN/main/docs_index/tools/preprocess/README_ZH.html"
+           class="dropdown-item ">
+          简体中文
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        📦 main
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content version-list">
+        
+        <a href="../../../../main/docs_index/tools/preprocess/README_ZH.html"
+           class="dropdown-item active">
+          main
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="当前页面">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index_ZH.html">
+    文档
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
+    Sandbox
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
+    Hub
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
+    Agents
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cmgzn/data-juicer" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="亮色"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="暗色"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><div class="navbar-switcher-container">
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        🌐 zh-CN
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content">
+        
+        <a href="../../../../../en/main/docs_index/tools/preprocess/README.html"
+           class="dropdown-item ">
+          English
+        </a>
+        
+        <a href="../../../../../zh_CN/main/docs_index/tools/preprocess/README_ZH.html"
+           class="dropdown-item ">
+          简体中文
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        📦 main
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content version-list">
+        
+        <a href="../../../../main/docs_index/tools/preprocess/README_ZH.html"
+           class="dropdown-item active">
+          main
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index_ZH.html" class="nav-link" aria-label="初始页面">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">预处理工具</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>预处理工具<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>此文件夹包含一些预处理脚本，用于在使用 Data-Juicer 之前对数据集进行处理。</p>
+<section id="id2">
+<h2>用法<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>按语言将数据集拆分为子数据集<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>该工具将根据语言信息将原始数据集拆分为不同的子数据集。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/dataset_split_by_language.py<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">             </span>&lt;src_dir&gt;<span class="w">          </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">          </span>&lt;target_dir&gt;<span class="w">       </span><span class="se">\</span>
+<span class="w">    </span>--suffixes<span class="w">            </span>&lt;suffixes&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--text_key<span class="w">            </span>&lt;text_key&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">            </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/dataset_split_by_language.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 将此参数设置为存储数据集的路径即可。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_key</span></code>: 存储示例文本的字段的 key，默认为 text。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffixes</span></code>: 待读取文件的后缀名，默认为 None。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+</section>
+<section id="arxiv-jsonl">
+<h3>将原始 arXiv 数据转换为 jsonl<a class="headerlink" href="#arxiv-jsonl" title="Link to this heading">#</a></h3>
+<p>该工具用于将从 S3 下载的原始 arXiv 数据转换为对 Data-Juicer 友好的 jsonl 格式。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_arxiv_to_jsonl.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--arxiv_src_dir<span class="w">       </span>&lt;arxiv_src_dir&gt;<span class="w">    </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">          </span>&lt;target_dir&gt;<span class="w">       </span><span class="se">\</span>
+<span class="w">    </span>--temp_dir<span class="w">            </span>&lt;temp_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">            </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/raw_arxiv_to_jsonl.py<span class="w">  </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arxiv_src_dir</span></code>: 如果你像 Redpajama 一样下载原始 arXiv 数据，你将得到一个目录 src，其中包含数千个 tar 文件，其文件名类似于 <code class="docutils literal notranslate"><span class="pre">arXiv_src_yymm_xxx.tar</span></code>。 您只需将此参数设置为该目录的路径即可。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temp_dir</span></code>: 用于存储临时文件的目录，该目录将在转化结束时自动被删除，默认为 <code class="docutils literal notranslate"><span class="pre">./tmp</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+<p><strong>注意事项：</strong></p>
+<ul class="simple">
+<li><p>下载过程请参考<a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/arxiv">这里</a>。</p></li>
+<li><p>在下载、转换或处理之前，您需要确保您的硬盘空间足够大，可以存储原始数据（超过 3TB）、转换后的数据（超过 3TB）、最小处理后的数据（大约 500-600GB），以及处理期间的缓存数据。</p></li>
+</ul>
+</section>
+<section id="stack-exchange-jsonl">
+<h3>将原始 stack_exchange 数据转换为 jsonl<a class="headerlink" href="#stack-exchange-jsonl" title="Link to this heading">#</a></h3>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">raw_stackexchange_to_jsonl.py</span></code> 来转化原始 stack_exchange 数据.</p>
+<p>该工具用于将从 <a class="reference external" href="https://archive.org/download/stackexchange">Archive</a> 下载的原始 Stack Exchange 数据转化为多个 jsonl 文件.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_arxiv_stackexchange_to_jsonl.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">       </span>&lt;src_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">    </span>&lt;target_dir&gt;<span class="w">   </span><span class="se">\</span>
+<span class="w">    </span>--topk<span class="w">          </span>&lt;topk&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">      </span>&lt;num_proc&gt;<span class="w">     </span><span class="se">\</span>
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/raw_stackexchange_to_jsonl.py<span class="w">  </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 如果像 Redpajama 一样下载原始 Stack Exchange 数据，你将得到一个目录 src，其中包含数百个 7z 文件，其文件名类似于 <code class="docutils literal notranslate"><span class="pre">*.*.com.7z</span></code>。 您需要解压这些文件并将 POSTs.xml 重命名为相应的压缩包名称并将其放在该目录中。更多详情请参考<a class="reference external" href="https://github.com/togethercomputer/RedPajama-Data/tree/rp_v1/data_prep/stack_exchange">这里</a>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topk</span></code> (可选): 选择内容最多的 k 个站点，默认为 28.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+<p><strong>注意事项：</strong> 在下载、转换或处理之前，您需要确保您的硬盘空间足够大，可以存储原始数据（超过 100GB）、转换后的数据（超过 100GB）</p>
+</section>
+<section id="alpaca-cot-jsonl">
+<h3>将原始 Alpaca-CoT 数据转换为 jsonl<a class="headerlink" href="#alpaca-cot-jsonl" title="Link to this heading">#</a></h3>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">raw_alpaca_cot_merge_add_meta.py</span></code> 来转化原始 Alpaca-CoT 数据.</p>
+<p>该工具用于将从 [HuggingFace](<a class="github reference external" href="https://github.com/cmgzn/data-juicer/blob/main/tools/preprocess/">cmgzn/data-juicer</a> https:/huggingface.co/datasets/QingyiSi/Alpaca-CoT) 下载的原始 Alpaca-Cot 数据转化为 jsonl 文件.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_alpaca_cot_merge_add_meta.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">       </span>&lt;src_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">    </span>&lt;target_dir&gt;<span class="w">   </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">      </span>&lt;num_proc&gt;<span class="w">     </span><span class="se">\</span>
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/raw_alpaca_cot_merge_add_meta.py<span class="w">  </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 将此参数设置为存储Alpaca-CoT数据集的路径。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+</section>
+<section id="csv-tsv">
+<h3>重新格式化 csv 或者 tsv 文件<a class="headerlink" href="#csv-tsv" title="Link to this heading">#</a></h3>
+<p>此工具用于将某些字段中可能具有 NaN 值的 csv 或 tsv 文件格式化为多个 jsonl 文件。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/reformat_csv_nan_value.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--suffixes<span class="w">          </span>&lt;suffixes&gt;<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--is_tsv<span class="w">            </span>&lt;is_tsv&gt;<span class="w">          </span><span class="se">\</span>
+<span class="w">    </span>--keep_default_na<span class="w">   </span>&lt;keep_default_na&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/reformat_csv_nan_value.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 将此参数设置为存储数据集的路径，例如 <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> 或 <code class="docutils literal notranslate"><span class="pre">*.tsv</span></code> 即可。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffixes</span></code>: 待读取文件的后缀名，可指定多个，例如 <code class="docutils literal notranslate"><span class="pre">--suffixes</span> <span class="pre">'.tsv',</span> <span class="pre">'.csv'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_tsv</span></code>: 如果为 true，则分隔符将设置为 <code class="docutils literal notranslate"><span class="pre">\t</span></code>，否则默认设置为 <code class="docutils literal notranslate"><span class="pre">,</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keep_default_na</span></code>: 如果为 False，字符串将被解析为 NaN，否则仅使用默认的 NaN 值进行解析。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+</section>
+<section id="jsonl">
+<h3>重新格式化 jsonl 文件<a class="headerlink" href="#jsonl" title="Link to this heading">#</a></h3>
+<p>该工具用于重新格式化某些字段中可能包含 Nan 值的 jsonl 文件。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/reformat_jsonl_nan_value.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/reformat_jsonl_nan_value.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 将此参数设置为存储数据集的路径，例如 <code class="docutils literal notranslate"><span class="pre">*.jsonl</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 用于存储转换后的 jsonl 文件的结果目录。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1。</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>序列化 jsonl 文件中的元字段<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>在一些jsonl文件中，不同的样本可能有不同的meta字段，甚至同一个meta字段中的数据类型也可能不同，这会导致使用 <a class="reference external" href="https://huggingface.co/docs/datasets/index">HuggingFace Dataset</a> 读取数据集失败。 该工具用于将这些jsonl文件中除 <code class="docutils literal notranslate"><span class="pre">text_key</span></code> 之外的所有元字段序列化为字符串，以方便后续的Data-juicer处理。 数据集处理后，通常需要配合使用 <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/tools/postprocess/deserialize_meta.py">deserialize_meta.py</a> 对其进行反序列化。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/serialize_meta.py<span class="w">           </span><span class="se">\</span>
+<span class="w">    </span>--src_dir<span class="w">           </span>&lt;src_dir&gt;<span class="w">         </span><span class="se">\</span>
+<span class="w">    </span>--target_dir<span class="w">        </span>&lt;target_dir&gt;<span class="w">      </span><span class="se">\</span>
+<span class="w">    </span>--text_key<span class="w">          </span>&lt;text_key&gt;<span class="w">        </span><span class="se">\</span>
+<span class="w">    </span>--serialized_key<span class="w">    </span>&lt;serialized_key&gt;<span class="w">  </span><span class="se">\</span>
+<span class="w">    </span>--num_proc<span class="w">          </span>&lt;num_proc&gt;
+
+<span class="c1"># get help</span>
+python<span class="w"> </span>tools/preprocess/serialize_meta.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src_dir</span></code>: 存储原始 jsonl 文件的路径。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_dir</span></code>: 保存转换后的 jsonl 文件的路径。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_key</span></code>: 不会被序列化的字段对应的 key, 默认为 “text”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serialized_key</span></code>: 序列化后的信息保存的字段对应的 key, 默认为 “source_info”。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_proc</span></code> (可选): worker 进程数量，默认为 1</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 当前页面
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">用法</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">按语言将数据集拆分为子数据集</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arxiv-jsonl">将原始 arXiv 数据转换为 jsonl</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stack-exchange-jsonl">将原始 stack_exchange 数据转换为 jsonl</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alpaca-cot-jsonl">将原始 Alpaca-CoT 数据转换为 jsonl</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-tsv">重新格式化 csv 或者 tsv 文件</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonl">重新格式化 jsonl 文件</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">序列化 jsonl 文件中的元字段</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/docs_index/tools/preprocess/README_ZH.md.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Data-Juicer Team.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3创建。
+    <br/>
+  </p>
+</div>
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  使用 <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1构建.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

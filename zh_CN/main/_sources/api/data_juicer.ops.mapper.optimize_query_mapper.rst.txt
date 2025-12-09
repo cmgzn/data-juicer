@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.optimize\_query\_mapper module
-======================================================
-
-.. automodule:: data_juicer.ops.mapper.optimize_query_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

@@ -1,7 +1,0 @@
-data\_juicer.utils.webdataset\_utils module
-===========================================
-
-.. automodule:: data_juicer.utils.webdataset_utils
-   :members:
-   :show-inheritance:
-   :undoc-members:

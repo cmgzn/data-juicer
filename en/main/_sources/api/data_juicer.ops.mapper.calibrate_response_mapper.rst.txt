@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.calibrate\_response\_mapper module
-==========================================================
-
-.. automodule:: data_juicer.ops.mapper.calibrate_response_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:
