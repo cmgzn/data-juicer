@@ -109,41 +109,7 @@ Besides, our paper is also updated to [v3](https://arxiv.org/abs/2309.02033).
 
 ## Documentation
 
-- Tutorial
-  - [DJ-Cookbook](docs/tutorial/DJ-Cookbook.md)
-  - [Installation](docs/tutorial/Installation.md)
-  - [Quick Start](docs/tutorial/QuickStart.md)
-- Useful documents
-  - [Operator Schemas](docs/Operators.md)
-  - [Data Recipe Gallery](docs/hub/RecipeGallery.md)
-  - [Dataset Configuration Guide](docs/DatasetCfg.md)
-  - [Awesome Data-Model Co-Development of MLLMs](docs/awesome_llm_data.md)
-  - ["Bad" Data Exhibition](docs/BadDataExhibition.md)
-  - [DJ-SORA](docs/DJ_SORA.md)
-  - [DJ_service](docs/DJ_service.md)
-  - [How-to Guide for Developers](docs/DeveloperGuide.md)
-  - [Distributed Data Processing in Data-Juicer](docs/Distributed.md)
-  - [Sandbox](docs/Sandbox.md)
-  - [Data-Juicer Agents](docs/DJ_agents.md)
-- Demos
-  - [demos](demos/README.md)
-- Tools
-  - [Distributed Fuzzy Deduplication Tools](tools/distributed_deduplication/README.md)
-  - [Auto Evaluation Toolkit](tools/evaluator/README.md)
-    - [GPT EVAL: Evaluate your model with OpenAI API](tools/evaluator/gpt_eval/README.md)
-    - [Evaluation Results Recorder](tools/evaluator/recorder/README.md)
-  - [Format Conversion Tools](tools/fmt_conversion/README.md)
-    - [Multimodal Tools](tools/fmt_conversion/multimodal/README.md)
-    - [Post Tuning Tools](tools/fmt_conversion/post_tuning_dialog/README.md)
-  - [Hyper-parameter Optimization for Data Recipe](data_juicer/tools/hpo/README.md)
-  - [Label Studio Service Utility](tools/humanops/README.md)
-  - [Metrics for video generation](tools/mm_eval/inception_metrics/README.md)
-  - [Postprocess Tools](tools/postprocess/README.md)
-  - [Preprocess Tools](tools/preprocess/README.md)
-  - [Data Scoring](data_juicer/tools/quality_classifier/README.md)
-- Third-party
-  - [LLM Ecosystems](thirdparty/LLM_ecosystems/README.md)
-  - [Third-party Model Library](thirdparty/models/README.md)
+[Here](https://datajuicer.github.io/data-juicer)
 
 ## License
 Data-Juicer is released under Apache License 2.0.

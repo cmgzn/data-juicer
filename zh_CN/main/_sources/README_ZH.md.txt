@@ -102,44 +102,7 @@ https://github.com/user-attachments/assets/a45f0eee-0f0e-4ffe-9a42-d9a55370089d
 
 ## 文档
 
-- 教程
-  - [DJ-Cookbook](docs/tutorial/DJ-Cookbook_ZH.md)
-  - [安装](docs/tutorial/Installation_ZH.md)
-  - [快速上手](docs/tutorial/QuickStart_ZH.md)
-- 其他帮助文档
-  - [算子提要](docs/Operators.md)
-  - [数据菜谱Gallery](docs/hub/RecipeGallery_ZH.md)
-  - [数据集配置指南](docs/DatasetCfg_ZH.md)
-  - [Awesome Data-Model Co-Development of MLLMs](docs/awesome_llm_data.md)
-  - [“坏”数据展览](docs/BadDataExhibition_ZH.md)
-  - [DJ-SORA](docs/DJ_SORA_ZH.md)
-  - [API服务化](docs/DJ_service_ZH.md)
-  - [开发者指南](docs/DeveloperGuide_ZH.md)
-  - [Data-Juicer分布式数据处理](docs/Distributed_ZH.md)
-  - [沙盒实验室](docs/Sandbox_ZH.md)
-  - [Data-Juicer Agents](docs/DJ_agents_ZH.md)
-- Demos
-  - [演示](demos/README_ZH.md)
-    - [自动化评测：HELM 评测及可视化](demos/auto_evaluation_helm/README_ZH.md)
-    - [为LLM构造角色扮演的system prompt](demos/role_playing_system_prompt/README_ZH.md)
-- 工具
-  - [分布式模糊去重工具](tools/distributed_deduplication/README_ZH.md)
-  - [Auto Evaluation Toolkit](tools/evaluator/README_ZH.md)
-    - [GPT EVAL: 使用OpenAI API评测大模型](tools/evaluator/gpt_eval/README_ZH.md)
-    - [Evaluation Results Recorder](tools/evaluator/recorder/README_ZH.md)
-  - [格式转换工具](tools/fmt_conversion/README_ZH.md)
-    - [多模态工具](tools/fmt_conversion/multimodal/README_ZH.md)
-    - [后微调工具](tools/fmt_conversion/post_tuning_dialog/README_ZH.md)
-  - [数据菜谱的自动化超参优化](data_juicer/tools/hpo/README_ZH.md)
-  - [Label Studio Service Utility](tools/humanops/README.md)
-  - [视频生成评测工具](tools/mm_eval/inception_metrics/README_ZH.md)
-  - [后处理工具](tools/postprocess/README_ZH.md)
-  - [预处理工具](tools/preprocess/README_ZH.md)
-  - [给数据打分](data_juicer/tools/quality_classifier/README_ZH.md)
-- 第三方
-  - [大语言模型生态](thirdparty/LLM_ecosystems/README_ZH.md)
-  - [第三方模型库](thirdparty/models/README_ZH.md)
-
+[此处](https://datajuicer.github.io/data-juicer/zh_CN/main/index_ZH.html)
 
 ## 开源协议
 
