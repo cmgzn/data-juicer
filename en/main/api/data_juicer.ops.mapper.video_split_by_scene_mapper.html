@@ -189,7 +189,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -208,11 +208,10 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/RecipeGallery.html">Data Recipe Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DJ_SORA.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/DJ_agent.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/DJ_agents.html">DataJuicer Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -223,6 +222,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../demos/README.html">Demos</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/AlpacaCOT.html">Refine Alpaca-CoT Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/BLOOM.html">BLOOM Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/RedPajama.html">Redpajama Config Files</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a></li>
@@ -232,13 +239,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/vbench_metrics/README.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/postprocess/README.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/quality_classifier/README.html">Data Scoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
 <ul>
@@ -354,8 +359,8 @@ directory or the same directory as the input files if no save directory is provi
 operator also updates the text field in the sample to reflect the new video clips. If a
 video does not contain any scenes, it remains unchanged.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="data_juicer.ops.mapper.video_split_by_scene_mapper.VideoSplitBySceneMapper.avaliable_detectors">
-<span class="sig-name descname"><span class="pre">avaliable_detectors</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'AdaptiveDetector':</span> <span class="pre">['window_width',</span> <span class="pre">'min_content_val',</span> <span class="pre">'weights',</span> <span class="pre">'luma_only',</span> <span class="pre">'kernel_size',</span> <span class="pre">'video_manager',</span> <span class="pre">'min_delta_hsv'],</span> <span class="pre">'ContentDetector':</span> <span class="pre">['weights',</span> <span class="pre">'luma_only',</span> <span class="pre">'kernel_size'],</span> <span class="pre">'ThresholdDetector':</span> <span class="pre">['fade_bias',</span> <span class="pre">'add_final_scene',</span> <span class="pre">'method',</span> <span class="pre">'block_size']}</span></em><a class="headerlink" href="#data_juicer.ops.mapper.video_split_by_scene_mapper.VideoSplitBySceneMapper.avaliable_detectors" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="data_juicer.ops.mapper.video_split_by_scene_mapper.VideoSplitBySceneMapper.available_detectors">
+<span class="sig-name descname"><span class="pre">available_detectors</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'AdaptiveDetector':</span> <span class="pre">['window_width',</span> <span class="pre">'min_content_val',</span> <span class="pre">'weights',</span> <span class="pre">'luma_only',</span> <span class="pre">'kernel_size',</span> <span class="pre">'video_manager',</span> <span class="pre">'min_delta_hsv'],</span> <span class="pre">'ContentDetector':</span> <span class="pre">['weights',</span> <span class="pre">'luma_only',</span> <span class="pre">'kernel_size'],</span> <span class="pre">'ThresholdDetector':</span> <span class="pre">['fade_bias',</span> <span class="pre">'add_final_scene',</span> <span class="pre">'method',</span> <span class="pre">'block_size']}</span></em><a class="headerlink" href="#data_juicer.ops.mapper.video_split_by_scene_mapper.VideoSplitBySceneMapper.available_detectors" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -438,7 +443,7 @@ This path can alternatively be defined by setting the <cite>DJ_PRODUCED_DATA_DIR
 <li><a class="reference internal" href="#">data_juicer.ops.mapper.video_split_by_scene_mapper module</a><ul>
 <li><a class="reference internal" href="#data_juicer.ops.mapper.video_split_by_scene_mapper.replace_func"><code class="docutils literal notranslate"><span class="pre">replace_func()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.ops.mapper.video_split_by_scene_mapper.VideoSplitBySceneMapper"><code class="docutils literal notranslate"><span class="pre">VideoSplitBySceneMapper</span></code></a><ul>
-<li><a class="reference internal" href="#data_juicer.ops.mapper.video_split_by_scene_mapper.VideoSplitBySceneMapper.avaliable_detectors"><code class="docutils literal notranslate"><span class="pre">VideoSplitBySceneMapper.avaliable_detectors</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.ops.mapper.video_split_by_scene_mapper.VideoSplitBySceneMapper.available_detectors"><code class="docutils literal notranslate"><span class="pre">VideoSplitBySceneMapper.available_detectors</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.ops.mapper.video_split_by_scene_mapper.VideoSplitBySceneMapper.__init__"><code class="docutils literal notranslate"><span class="pre">VideoSplitBySceneMapper.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.ops.mapper.video_split_by_scene_mapper.VideoSplitBySceneMapper.process_single"><code class="docutils literal notranslate"><span class="pre">VideoSplitBySceneMapper.process_single()</span></code></a></li>
 </ul>
@@ -455,7 +460,7 @@ This path can alternatively be defined by setting the <cite>DJ_PRODUCED_DATA_DIR
     </aside>
   </div>
 </div>
-<script src="../_static/documentation_options.js?v=a68a9277"></script>
+<script src="../_static/documentation_options.js?v=6d0302ba"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

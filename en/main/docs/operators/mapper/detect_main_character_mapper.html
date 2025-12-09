@@ -189,7 +189,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -208,11 +208,10 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../RecipeGallery.html">Data Recipe Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DJ_SORA.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../DJ_agent.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DJ_agents.html">DataJuicer Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -223,6 +222,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/README.html">Demos</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/AlpacaCOT.html">Refine Alpaca-CoT Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/BLOOM.html">BLOOM Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/RedPajama.html">Redpajama Config Files</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a></li>
@@ -232,13 +239,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/mm_eval/vbench_metrics/README.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/postprocess/README.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tools/quality_classifier/README.html">Data Scoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
 <ul>
@@ -340,7 +345,7 @@
 <p>根据给定的图像及其图像描述，提取所有主要角色的名字。</p>
 <p>该算子使用多模态语言模型生成给定图像中主要角色的描述。然后解析生成的JSON以提取主要角色列表。算子会过滤掉主要角色数量少于指定阈值的样本。多模态语言模型的默认参数包括使用特定生成参数的Hugging Face模型。关键指标<code class="docutils literal notranslate"><span class="pre">main_character_list</span></code>存储在样本的元数据中。</p>
 <p>Type 算子类型: <strong>mapper</strong></p>
-<p>Tags 标签: cpu</p>
+<p>Tags 标签: gpu</p>
 <section id="parameter-configuration">
 <h2>🔧 Parameter Configuration 参数配置<a class="headerlink" href="#parameter-configuration" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -444,7 +449,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../_static/documentation_options.js?v=a68a9277"></script>
+<script src="../../../_static/documentation_options.js?v=6d0302ba"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

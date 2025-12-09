@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="How-to Guide for Developers" href="DeveloperGuide.html"><link rel="prev" title="DataJuicer-Agent" href="DJ_agent.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="How-to Guide for Developers" href="DeveloperGuide.html"><link rel="prev" title="DataJuicer Agents" href="DJ_agents.html">
         <link rel="prefetch" href="../_static/logo.png" as="image">
 
     <link rel="shortcut icon" href="../_static/icon.png"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
@@ -189,7 +189,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -208,11 +208,10 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RecipeGallery.html">Data Recipe Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DJ_SORA.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DJ_agent.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ_agents.html">DataJuicer Agents</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -223,6 +222,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../demos/README.html">Demos</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hub/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hub/AlpacaCOT.html">Refine Alpaca-CoT Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hub/BLOOM.html">BLOOM Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hub/RedPajama.html">Redpajama Config Files</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a></li>
@@ -232,13 +239,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/vbench_metrics/README.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/postprocess/README.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/quality_classifier/README.html">Data Scoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
 <ul>
@@ -376,7 +381,7 @@
 
 <span class="n">json_prefix</span> <span class="o">=</span> <span class="s1">&#39;&lt;json_dumps&gt;&#39;</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8000/data_juicer/config/init_configs&#39;</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="n">json_prefix</span> <span class="o">+</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="s1">&#39;./configs/demo/process.yaml&#39;</span><span class="p">])}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="n">json_prefix</span> <span class="o">+</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="s1">&#39;./demos/process_simple/process.yaml&#39;</span><span class="p">])}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
@@ -384,7 +389,7 @@
 <p>The corresponding curl command is as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;http://localhost:8000/data_juicer/config/init_configs&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--data-urlencode<span class="w"> </span><span class="s2">&quot;args=--config&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--data-urlencode<span class="w"> </span><span class="s2">&quot;args=./configs/demo/process.yaml&quot;</span>
+<span class="w">     </span>--data-urlencode<span class="w"> </span><span class="s2">&quot;args=./demos/process_simple/process.yaml&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -468,7 +473,15 @@
 <p>To control the operator tools returned by the MCP server, specify the environment variable <code class="docutils literal notranslate"><span class="pre">DJ_OPS_LIST_PATH</span></code>:</p>
 <ol class="arabic simple">
 <li><p>Create a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file.</p></li>
-<li><p>Add operator names to the file, e.g., <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/configs/mcp/ops_list_example.txt">ops_list_example.txt</a>.</p></li>
+<li><p>Add operator names to the file. For example:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>text_length_filter
+flagged_words_filter
+image_nsfw_filter
+text_pair_similarity_filter
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
 <li><p>Set the path to the operator list as the environment variable <code class="docutils literal notranslate"><span class="pre">DJ_OPS_LIST_PATH</span></code>.</p></li>
 </ol>
 </section>
@@ -634,14 +647,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="DJ_agent.html">
+          <a class="prev-page" href="DJ_agents.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">DataJuicer-Agent</div>
+                <div class="title">DataJuicer Agents</div>
                 
               </div>
             </a>
@@ -719,7 +732,7 @@
     </aside>
   </div>
 </div>
-<script src="../_static/documentation_options.js?v=a68a9277"></script>
+<script src="../_static/documentation_options.js?v=6d0302ba"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

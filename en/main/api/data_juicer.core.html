@@ -189,7 +189,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -208,11 +208,10 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/RecipeGallery.html">Data Recipe Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DJ_SORA.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/DJ_agent.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/DJ_agents.html">DataJuicer Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -223,6 +222,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../demos/README.html">Demos</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/AlpacaCOT.html">Refine Alpaca-CoT Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/BLOOM.html">BLOOM Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/RedPajama.html">Redpajama Config Files</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a></li>
@@ -232,13 +239,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/vbench_metrics/README.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/postprocess/README.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/quality_classifier/README.html">Data Scoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
 <ul>
@@ -527,6 +532,12 @@ can be accessed by nested manner.</p>
 <span class="sig-name descname"><span class="pre">cleanup_cache_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/core/data/dj_dataset.html#NestedDataset.cleanup_cache_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.core.NestedDataset.cleanup_cache_files" title="Link to this definition">¶</a></dt>
 <dd><p>Override the cleanup_cache_files func, clear raw and compressed
 cache files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_juicer.core.NestedDataset.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/data_juicer/core/data/dj_dataset.html#NestedDataset.count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.core.NestedDataset.count" title="Link to this definition">¶</a></dt>
+<dd><p>return the count of the dataset</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1272,6 +1283,7 @@ modification by the Mapper</p>
 <li><a class="reference internal" href="#data_juicer.core.NestedDataset.__init__"><code class="docutils literal notranslate"><span class="pre">NestedDataset.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.core.NestedDataset.add_column"><code class="docutils literal notranslate"><span class="pre">NestedDataset.add_column()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.core.NestedDataset.cleanup_cache_files"><code class="docutils literal notranslate"><span class="pre">NestedDataset.cleanup_cache_files()</span></code></a></li>
+<li><a class="reference internal" href="#data_juicer.core.NestedDataset.count"><code class="docutils literal notranslate"><span class="pre">NestedDataset.count()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.core.NestedDataset.filter"><code class="docutils literal notranslate"><span class="pre">NestedDataset.filter()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.core.NestedDataset.from_dict"><code class="docutils literal notranslate"><span class="pre">NestedDataset.from_dict()</span></code></a></li>
 <li><a class="reference internal" href="#data_juicer.core.NestedDataset.from_list"><code class="docutils literal notranslate"><span class="pre">NestedDataset.from_list()</span></code></a></li>
@@ -1349,7 +1361,7 @@ modification by the Mapper</p>
     </aside>
   </div>
 </div>
-<script src="../_static/documentation_options.js?v=a68a9277"></script>
+<script src="../_static/documentation_options.js?v=6d0302ba"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

@@ -189,7 +189,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -208,11 +208,10 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../RecipeGallery.html">Data Recipe Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DJ_SORA.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../DJ_agent.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DJ_agents.html">DataJuicer Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -223,6 +222,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/README.html">Demos</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/AlpacaCOT.html">Refine Alpaca-CoT Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/BLOOM.html">BLOOM Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hub/RedPajama.html">Redpajama Config Files</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a></li>
@@ -232,13 +239,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/mm_eval/vbench_metrics/README.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/postprocess/README.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tools/quality_classifier/README.html">Data Scoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
 <ul>
@@ -354,7 +359,7 @@
 <li><p>VGGT模型从提供的路径加载，如果可用，算子将在CUDA模式下运行。</p></li>
 </ul>
 <p>Type 算子类型: <strong>mapper</strong></p>
-<p>Tags 标签: cpu, video</p>
+<p>Tags 标签: gpu, video</p>
 <section id="parameter-configuration">
 <h2>🔧 Parameter Configuration 参数配置<a class="headerlink" href="#parameter-configuration" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -389,7 +394,7 @@
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frame_dir</span></code></p></td>
 <td><p>&lt;class ‘str’&gt;</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">'/home/cmgzn/.cache/data_juicer/assets'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DATA_JUICER_ASSETS_CACHE</span></code></p></td>
 <td><p>Output directory to save extracted frames.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">if_output_camera_parameters</span></code></p></td>
@@ -452,25 +457,6 @@
 VggtMapper算子处理视频数据以提取各种3D信息，如相机参数、深度图和点轨迹。输入包括视频文件和查询点。输出包含每个视频的详细3D信息，例如相机参数、深度图和点轨迹的形状。此示例展示了典型的使用场景，其中算子处理带有多个查询点的单个视频，并输出相应的3D信息。</p>
 </section>
 </section>
-<section id="test-mul-proc">
-<h3>test_mul_proc<a class="headerlink" href="#test-mul-proc" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VggtMapper</span><span class="p">(</span><span class="n">vggt_model_path</span><span class="o">=</span><span class="s1">&#39;facebook/VGGT-1B&#39;</span><span class="p">,</span> <span class="n">frame_num</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">frame_dir</span><span class="o">=</span><span class="n">DATA_JUICER_ASSETS_CACHE</span><span class="p">,</span> <span class="n">if_output_camera_parameters</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">if_output_depth_maps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">if_output_point_maps_from_projection</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">if_output_point_maps_from_unprojection</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">if_output_point_tracks</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<section id="id1">
-<h4>📥 input data 输入数据<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
-<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> 1 video</div><div class="media-section" style="margin-bottom:8px;"><div class="media-label" style="font-size:0.85em; color:#666; margin-bottom:4px; font-weight:500;">video11.mp4:</div><div class="video-grid"><video src="../../../tests/ops/data/video11.mp4" controls width="320" style="margin:4px;"></video></div></div><div class='meta' style='margin:6px 0;'><table class='meta-table' style='border-collapse:collapse; width:100%; border:1px solid #e3e3e3;'><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>query_points</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[[320.0, 200.0], [500.72, 100.94]]</td></tr></table></div></div><div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 2:</strong> 1 video</div><div class="media-section" style="margin-bottom:8px;"><div class="media-label" style="font-size:0.85em; color:#666; margin-bottom:4px; font-weight:500;">video10.mp4:</div><div class="video-grid"><video src="../../../tests/ops/data/video10.mp4" controls width="320" style="margin:4px;"></video></div></div><div class='meta' style='margin:6px 0;'><table class='meta-table' style='border-collapse:collapse; width:100%; border:1px solid #e3e3e3;'><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>query_points</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[[50.72, 100.94]]</td></tr></table></div></div>
-</section>
-<section id="id2">
-<h4>📤 output data 输出数据<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
-<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> empty</div><div class='meta' style='margin:6px 0;'><table class='meta-table' style='border-collapse:collapse; width:100%; border:1px solid #e3e3e3;'><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>camera_parameters_extrinsic</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 10, 3, 4]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>camera_parameters_intrinsic</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 10, 3, 3]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>depth_maps_depth_maps</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 10, 294, 518, 1]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>depth_maps_depth_conf</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 10, 294, 518]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_maps_from_projection_point_map</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 10, 294, 518, 3]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_maps_from_projection_point_conf</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 10, 294, 518]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_maps_from_unprojection_point_maps_from_unprojection</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[10, 294, 518, 3]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_tracks_track_list</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 10, 2, 2]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_tracks_vis_score</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 10, 2]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_tracks_conf_score</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 10, 2]</td></tr></table></div></div><div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 2:</strong> empty</div><div class='meta' style='margin:6px 0;'><table class='meta-table' style='border-collapse:collapse; width:100%; border:1px solid #e3e3e3;'><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>camera_parameters_extrinsic</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 18, 3, 4]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>camera_parameters_intrinsic</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 18, 3, 3]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>depth_maps_depth_maps</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 18, 392, 518, 1]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>depth_maps_depth_conf</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 18, 392, 518]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_maps_from_projection_point_map</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 18, 392, 518, 3]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_maps_from_projection_point_conf</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 18, 392, 518]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_maps_from_unprojection_point_maps_from_unprojection</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[18, 392, 518, 3]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_tracks_track_list</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 18, 1, 2]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_tracks_vis_score</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 18, 1]</td></tr><tr><th colspan='2' style='text-align:left; vertical-align:top; padding:6px 8px; font-weight:600; border-bottom:1px solid #e3e3e3;'>point_tracks_conf_score</th></tr><tr><td colspan='2' style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:22px; border-bottom:1px solid #e3e3e3;'>[1, 18, 1]</td></tr></table></div></div>
-</section>
-<section id="id3">
-<h4>✨ explanation 解释<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
-<p>The VggtMapper operator is used to process video data in a multi-processing environment. The input consists of video files and query points. The output includes detailed 3D information for each video, such as the shape of the camera parameters, depth maps, and point tracks. This example demonstrates an important edge case where the operator is run in a multi-processing environment, ensuring that it can handle multiple videos efficiently and produce the expected 3D information.
-VggtMapper算子用于在多进程环境中处理视频数据。输入包括视频文件和查询点。输出包含每个视频的详细3D信息，例如相机参数、深度图和点轨迹的形状。此示例展示了一个重要的边缘情况，即算子在多进程环境中运行，确保它可以高效地处理多个视频并生成预期的3D信息。</p>
-</section>
-</section>
 </section>
 <section id="related-links">
 <h2>🔗 related links 相关链接<a class="headerlink" href="#related-links" title="Link to this heading">¶</a></h2>
@@ -528,12 +514,6 @@ VggtMapper算子用于在多进程环境中处理视频数据。输入包括视�
 <li><a class="reference internal" href="#explanation">✨ explanation 解释</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#test-mul-proc">test_mul_proc</a><ul>
-<li><a class="reference internal" href="#id1">📥 input data 输入数据</a></li>
-<li><a class="reference internal" href="#id2">📤 output data 输出数据</a></li>
-<li><a class="reference internal" href="#id3">✨ explanation 解释</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#related-links">🔗 related links 相关链接</a></li>
@@ -549,7 +529,7 @@ VggtMapper算子用于在多进程环境中处理视频数据。输入包括视�
     </aside>
   </div>
 </div>
-<script src="../../../_static/documentation_options.js?v=a68a9277"></script>
+<script src="../../../_static/documentation_options.js?v=6d0302ba"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

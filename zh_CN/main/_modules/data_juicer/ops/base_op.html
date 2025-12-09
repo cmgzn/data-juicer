@@ -188,7 +188,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -207,11 +207,10 @@
 <p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../docs/RecipeGallery_ZH.html">数据菜谱Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_agent_ZH.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_agents_ZH.html">DataJuicer 智能体</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_service_ZH.html">DJ_服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DeveloperGuide_ZH.html">开发者指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
@@ -224,6 +223,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/auto_evaluation_helm/README_ZH.html">自动化评测：HELM 评测及可视化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/role_playing_system_prompt/README_ZH.html">为LLM构造角色扮演的system prompt</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/RecipeGallery_ZH.html">数据菜谱Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/AlpacaCOT_ZH.html">Alpaca-CoT 完善配置文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/BLOOM_ZH.html">BLOOM 配置文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/RedPajama_ZH.html">Redpajama 配置文件</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
@@ -233,13 +240,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/README_ZH.html">格式转换工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/multimodal/README_ZH.html">多模态工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tools/hpo/README_ZH.html">数据菜谱的自动化超参优化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/postprocess/README_ZH.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/preprocess/README_ZH.html">预处理工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tools/quality_classifier/README_ZH.html">给数据打分</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">第三方</span></p>
 <ul>
@@ -352,7 +357,7 @@
 
 
 <div class="viewcode-block" id="convert_list_dict_to_dict_list">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.convert_list_dict_to_dict_list">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.convert_list_dict_to_dict_list">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convert_list_dict_to_dict_list</span><span class="p">(</span><span class="n">samples</span><span class="p">):</span>
     <span class="c1"># reconstruct samples from &quot;list of dicts&quot; to &quot;dict of lists&quot;</span>
     <span class="n">keys</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
@@ -364,7 +369,7 @@
 
 
 <div class="viewcode-block" id="convert_dict_list_to_list_dict">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.convert_dict_list_to_list_dict">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.convert_dict_list_to_list_dict">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convert_dict_list_to_list_dict</span><span class="p">(</span><span class="n">samples</span><span class="p">):</span>
     <span class="c1"># reconstruct samples from &quot;dict of lists&quot; to &quot;list of dicts&quot;</span>
     <span class="n">reconstructed_samples</span> <span class="o">=</span> <span class="p">[]</span>
@@ -377,7 +382,7 @@
 
 
 <div class="viewcode-block" id="convert_arrow_to_python">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.convert_arrow_to_python">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.convert_arrow_to_python">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convert_arrow_to_python</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -390,7 +395,7 @@
 
 
 <div class="viewcode-block" id="catch_map_batches_exception">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.catch_map_batches_exception">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.catch_map_batches_exception">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">catch_map_batches_exception</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">skip_op_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">op_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    For batched-map sample-level fault tolerance.</span>
@@ -426,7 +431,7 @@
 
 
 <div class="viewcode-block" id="catch_map_single_exception">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.catch_map_single_exception">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.catch_map_single_exception">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">catch_map_single_exception</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">return_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_op_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">op_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    For single-map sample-level fault tolerance.</span>
@@ -480,13 +485,13 @@
 
 
 <div class="viewcode-block" id="OP">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">OP</span><span class="p">:</span>
     <span class="n">_accelerator</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
     <span class="n">_batched_op</span> <span class="o">=</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="OP.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class of operators.</span>
@@ -506,8 +511,26 @@
 <span class="sd">        :param history_key: the key name of field that stores history of</span>
 <span class="sd">            queries and responses</span>
 <span class="sd">        :param index_key: index the samples before process if not None</span>
+<span class="sd">        :param system_key: the key name of field that stores system prompts</span>
+<span class="sd">        :param instruction_key: the key name of field that stores instruction</span>
+<span class="sd">        :param index_key: the key name of field that stores index</span>
 <span class="sd">        :param batch_size: the batch size for processing</span>
 <span class="sd">        :param work_dir: the working directory for this operator</span>
+<span class="sd">        :param skip_op_error: whether to skip the error when processing samples</span>
+
+<span class="sd">        # Ray related parameters</span>
+<span class="sd">        :param num_cpus: number of CPUs required for this operator, only used when</span>
+<span class="sd">            running in Ray mode</span>
+<span class="sd">        :param num_gpus: number of GPUs required for this operator, only used when</span>
+<span class="sd">            running in Ray mode</span>
+<span class="sd">        :param memory: memory size required for this operator, only used when</span>
+<span class="sd">            running in Ray mode</span>
+<span class="sd">        :param runtime_env: runtime environment for this operator, only used when</span>
+<span class="sd">            running in Ray mode. More details can be found in Ray documentation.</span>
+<span class="sd">        :param ray_execution_mode: execution mode in Ray, can be &quot;actor&quot; or &quot;task&quot; or None,</span>
+<span class="sd">            if None, the &quot;actor&quot; mode is used when the operator is a CUDA operator,</span>
+<span class="sd">            and the &quot;task&quot; mode is used if the operator is a CPU operator.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># init data keys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">text_key</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text_key&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">)</span>
@@ -552,6 +575,38 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mem_required</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mem_required</span> <span class="o">=</span> <span class="n">size_to_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mem_required</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_cpus</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_cpus&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_gpus</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_gpus&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">size_to_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span>
+        <span class="c1"># Optional[Union[Dict[str, Any], &quot;RuntimeEnv&quot;]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_env</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;runtime_env&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ray_execution_mode</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ray_execution_mode&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">ray_execution_mode</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;actor&quot;</span><span class="p">,</span> <span class="s2">&quot;task&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Local import to avoid logger being serialized in multiprocessing</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu_required</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;The argument ``cpu_required`` will be deprecated. Please specify argument ``num_cpus`` instead.&quot;</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_cpus</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_cpus</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu_required</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpu_required</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;The argument ``gpu_required`` will be deprecated. Please specify argument ``num_gpus`` instead.&quot;</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_gpus</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_gpus</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpu_required</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mem_required</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;The argument ``mem_required`` will be deprecated. Please specify argument ``memory`` instead.&quot;</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mem_required</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">turbo</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;turbo&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
         <span class="c1"># nested wrappers</span>
@@ -566,7 +621,7 @@
 
 
 <div class="viewcode-block" id="OP.use_auto_proc">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.use_auto_proc">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.use_auto_proc">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">use_auto_proc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">is_ray_mode</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">():</span>  <span class="c1"># ray task</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_proc</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
@@ -575,32 +630,39 @@
 
 
 <div class="viewcode-block" id="OP.is_batched_op">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.is_batched_op">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.is_batched_op">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_batched_op</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batched_op</span></div>
 
 
+<div class="viewcode-block" id="OP.use_ray_actor">
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.use_ray_actor">[文档]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_ray_actor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ray_execution_mode</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ray_execution_mode</span> <span class="o">==</span> <span class="s2">&quot;actor&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">()</span></div>
+
+
 <div class="viewcode-block" id="OP.process">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.process">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.process">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
 <div class="viewcode-block" id="OP.use_cuda">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.use_cuda">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.use_cuda">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">use_cuda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">accelerator</span> <span class="o">==</span> <span class="s2">&quot;cuda&quot;</span> <span class="ow">and</span> <span class="n">is_cuda_available</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="OP.runtime_np">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.runtime_np">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.runtime_np">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">runtime_np</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Local import to avoid logger being serialized in multiprocessing</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
 
-        <span class="n">op_proc</span> <span class="o">=</span> <span class="n">calculate_np</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mem_required</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu_required</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">gpu_required</span>
-        <span class="p">)</span>
+        <span class="n">op_proc</span> <span class="o">=</span> <span class="n">calculate_np</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_cpus</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_gpus</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_auto_proc</span><span class="p">():</span>
             <span class="n">op_proc</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">op_proc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_proc</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Op [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">] running with number of procs:</span><span class="si">{</span><span class="n">op_proc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -608,7 +670,7 @@
 
 
 <div class="viewcode-block" id="OP.remove_extra_parameters">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.remove_extra_parameters">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.remove_extra_parameters">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">remove_extra_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_dict</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        at the beginning of the init of the mapper op, call</span>
@@ -625,7 +687,7 @@
 
 
 <div class="viewcode-block" id="OP.add_parameters">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.add_parameters">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.add_parameters">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_parameter_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_param_dict</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        add parameters for each sample, need to keep extra_param_dict</span>
@@ -637,7 +699,7 @@
 
 
 <div class="viewcode-block" id="OP.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.run">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.run">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
 
@@ -679,7 +741,7 @@
 
 
 <div class="viewcode-block" id="OP.empty_history">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.OP.empty_history">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.OP.empty_history">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">empty_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">is_ray_mode</span><span class="p">():</span>
             <span class="k">return</span> <span class="p">[]</span>
@@ -690,10 +752,10 @@
 
 
 <div class="viewcode-block" id="Mapper">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Mapper">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Mapper</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Mapper.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Mapper.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that conducts data editing.</span>
@@ -742,7 +804,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Mapper.process_batched">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper.process_batched">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Mapper.process_batched">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_batched</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">keys</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
         <span class="n">first_key</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
@@ -768,7 +830,7 @@
 
 
 <div class="viewcode-block" id="Mapper.process_single">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper.process_single">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Mapper.process_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For sample level, sample --&gt; sample</span>
@@ -780,7 +842,7 @@
 
 
 <div class="viewcode-block" id="Mapper.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Mapper.run">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Mapper.run">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Mapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
@@ -799,10 +861,10 @@
 
 
 <div class="viewcode-block" id="Filter">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Filter">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Filter</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Filter.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Filter.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that removes specific info.</span>
@@ -873,7 +935,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Filter.get_keep_boolean">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.get_keep_boolean">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Filter.get_keep_boolean">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_keep_boolean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">min_val</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_val</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">res_bool</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">min_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -886,7 +948,7 @@
 
 
 <div class="viewcode-block" id="Filter.compute_stats_batched">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.compute_stats_batched">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Filter.compute_stats_batched">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats_batched</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">keys</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
         <span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">])</span>
@@ -901,13 +963,13 @@
 
 
 <div class="viewcode-block" id="Filter.process_batched">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.process_batched">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Filter.process_batched">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_batched</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">stat</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_single</span><span class="p">({</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">:</span> <span class="n">stat</span><span class="p">}),</span> <span class="n">samples</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="Filter.compute_stats_single">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.compute_stats_single">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Filter.compute_stats_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute stats for the sample which is used as a metric to decide</span>
@@ -922,7 +984,7 @@
 
 
 <div class="viewcode-block" id="Filter.process_single">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.process_single">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Filter.process_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For sample level, sample --&gt; Boolean.</span>
@@ -934,7 +996,7 @@
 
 
 <div class="viewcode-block" id="Filter.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Filter.run">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Filter.run">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Filter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
@@ -959,10 +1021,10 @@
 
 
 <div class="viewcode-block" id="Deduplicator">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Deduplicator">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Deduplicator</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Deduplicator.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Deduplicator.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that conducts deduplication.</span>
@@ -996,7 +1058,7 @@
 
 
 <div class="viewcode-block" id="Deduplicator.compute_hash">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator.compute_hash">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Deduplicator.compute_hash">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute hash values for the sample.</span>
@@ -1008,7 +1070,7 @@
 
 
 <div class="viewcode-block" id="Deduplicator.process">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator.process">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Deduplicator.process">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">show_num</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For doc-level, dataset --&gt; dataset.</span>
@@ -1022,7 +1084,7 @@
 
 
 <div class="viewcode-block" id="Deduplicator.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Deduplicator.run">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Deduplicator.run">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Deduplicator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
@@ -1040,10 +1102,10 @@
 
 
 <div class="viewcode-block" id="Selector">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Selector">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Selector">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Selector</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Selector.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Selector.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Selector.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that conducts selection in dataset-level.</span>
@@ -1067,7 +1129,7 @@
 
 
 <div class="viewcode-block" id="Selector.process">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Selector.process">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Selector.process">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dataset --&gt; dataset.</span>
@@ -1079,7 +1141,7 @@
 
 
 <div class="viewcode-block" id="Selector.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Selector.run">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Selector.run">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Selector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">new_dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
@@ -1092,10 +1154,10 @@
 
 
 <div class="viewcode-block" id="Grouper">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Grouper">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Grouper">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Grouper</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Grouper.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Grouper.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Grouper.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that group samples.</span>
@@ -1119,7 +1181,7 @@
 
 
 <div class="viewcode-block" id="Grouper.process">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Grouper.process">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Grouper.process">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dataset --&gt; dataset.</span>
@@ -1131,7 +1193,7 @@
 
 
 <div class="viewcode-block" id="Grouper.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Grouper.run">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Grouper.run">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Grouper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="n">batched_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
@@ -1147,10 +1209,10 @@
 
 
 <div class="viewcode-block" id="Aggregator">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Aggregator">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Aggregator">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Aggregator</span><span class="p">(</span><span class="n">OP</span><span class="p">):</span>
 <div class="viewcode-block" id="Aggregator.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Aggregator.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Aggregator.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class that group samples.</span>
@@ -1177,7 +1239,7 @@
 
 
 <div class="viewcode-block" id="Aggregator.process_single">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Aggregator.process_single">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Aggregator.process_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        For sample level, batched sample --&gt; sample,</span>
@@ -1190,7 +1252,7 @@
 
 
 <div class="viewcode-block" id="Aggregator.run">
-<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.Aggregator.run">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.ops.base_op.html#data_juicer.ops.base_op.Aggregator.run">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Aggregator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="c1"># add batched meta field for OPs that produce aggregations</span>
@@ -1250,7 +1312,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../_static/documentation_options.js?v=13db99cc"></script>
+<script src="../../../_static/documentation_options.js?v=6f892d8a"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

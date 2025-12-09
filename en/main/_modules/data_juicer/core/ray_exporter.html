@@ -188,7 +188,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -207,11 +207,10 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../docs/RecipeGallery.html">Data Recipe Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_SORA.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_agent.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_agents.html">DataJuicer Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -222,6 +221,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/README.html">Demos</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/AlpacaCOT.html">Refine Alpaca-CoT Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/BLOOM.html">BLOOM Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/hub/RedPajama.html">Redpajama Config Files</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a></li>
@@ -231,13 +238,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/mm_eval/vbench_metrics/README.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/postprocess/README.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tools/quality_classifier/README.html">Data Scoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
 <ul>
@@ -392,6 +397,29 @@
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
 
+        <span class="c1"># Check if export_path is S3 and create filesystem if needed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s3_filesystem</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">export_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s3://&quot;</span><span class="p">):</span>
+            <span class="c1"># Extract AWS credentials from export_extra_args (if provided)</span>
+            <span class="n">s3_config</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="s2">&quot;aws_access_key_id&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="p">:</span>
+                <span class="n">s3_config</span><span class="p">[</span><span class="s2">&quot;aws_access_key_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;aws_access_key_id&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;aws_secret_access_key&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="p">:</span>
+                <span class="n">s3_config</span><span class="p">[</span><span class="s2">&quot;aws_secret_access_key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;aws_secret_access_key&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;aws_session_token&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="p">:</span>
+                <span class="n">s3_config</span><span class="p">[</span><span class="s2">&quot;aws_session_token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;aws_session_token&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;aws_region&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="p">:</span>
+                <span class="n">s3_config</span><span class="p">[</span><span class="s2">&quot;aws_region&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;aws_region&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;endpoint_url&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="p">:</span>
+                <span class="n">s3_config</span><span class="p">[</span><span class="s2">&quot;endpoint_url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;endpoint_url&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Create PyArrow S3FileSystem with credentials</span>
+            <span class="c1"># This matches the pattern used in RayS3DataLoadStrategy</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.s3_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_pyarrow_s3_filesystem</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">s3_filesystem</span> <span class="o">=</span> <span class="n">create_pyarrow_s3_filesystem</span><span class="p">(</span><span class="n">s3_config</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Detected S3 export path: </span><span class="si">{</span><span class="n">export_path</span><span class="si">}</span><span class="s2">. S3 filesystem configured.&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">max_shard_size_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
         <span class="c1"># get the string format of shard size</span>
@@ -465,6 +493,9 @@
             <span class="s2">&quot;export_extra_args&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span><span class="p">,</span>
             <span class="s2">&quot;export_format&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_format</span><span class="p">,</span>
         <span class="p">}</span>
+        <span class="c1"># Add S3 filesystem if available</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">s3_filesystem</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">export_kwargs</span><span class="p">[</span><span class="s2">&quot;export_extra_args&quot;</span><span class="p">][</span><span class="s2">&quot;filesystem&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s3_filesystem</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_shard_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="c1"># compute the min_rows_per_file for export methods</span>
             <span class="n">dataset_nbytes</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">size_bytes</span><span class="p">()</span>
@@ -502,6 +533,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">export_extra_args</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;export_extra_args&quot;</span><span class="p">,</span> <span class="p">{})</span>
         <span class="n">filtered_kwargs</span> <span class="o">=</span> <span class="n">filter_arguments</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">write_json</span><span class="p">,</span> <span class="n">export_extra_args</span><span class="p">)</span>
+        <span class="c1"># Add S3 filesystem if available</span>
+        <span class="k">if</span> <span class="s2">&quot;filesystem&quot;</span> <span class="ow">in</span> <span class="n">export_extra_args</span><span class="p">:</span>
+            <span class="n">filtered_kwargs</span><span class="p">[</span><span class="s2">&quot;filesystem&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">export_extra_args</span><span class="p">[</span><span class="s2">&quot;filesystem&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="n">force_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">filtered_kwargs</span><span class="p">)</span></div>
 
 
@@ -526,6 +560,9 @@
             <span class="n">reconstruct_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">reconstruct_custom_webdataset_format</span><span class="p">,</span> <span class="n">field_mapping</span><span class="o">=</span><span class="n">field_mapping</span><span class="p">)</span>
             <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">reconstruct_func</span><span class="p">)</span>
         <span class="n">filtered_kwargs</span> <span class="o">=</span> <span class="n">filter_arguments</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">write_webdataset</span><span class="p">,</span> <span class="n">export_extra_args</span><span class="p">)</span>
+        <span class="c1"># Add S3 filesystem if available</span>
+        <span class="k">if</span> <span class="s2">&quot;filesystem&quot;</span> <span class="ow">in</span> <span class="n">export_extra_args</span><span class="p">:</span>
+            <span class="n">filtered_kwargs</span><span class="p">[</span><span class="s2">&quot;filesystem&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">export_extra_args</span><span class="p">[</span><span class="s2">&quot;filesystem&quot;</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">write_webdataset</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="n">encoder</span><span class="o">=</span><span class="n">_custom_default_encoder</span><span class="p">,</span> <span class="o">**</span><span class="n">filtered_kwargs</span><span class="p">)</span></div>
 
@@ -546,7 +583,10 @@
         <span class="n">write_method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;write_</span><span class="si">{</span><span class="n">export_format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">export_extra_args</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;export_extra_args&quot;</span><span class="p">,</span> <span class="p">{})</span>
         <span class="n">filtered_kwargs</span> <span class="o">=</span> <span class="n">filter_arguments</span><span class="p">(</span><span class="n">write_method</span><span class="p">,</span> <span class="n">export_extra_args</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;write_</span><span class="si">{</span><span class="n">export_format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)(</span><span class="n">export_path</span><span class="p">,</span> <span class="o">**</span><span class="n">filtered_kwargs</span><span class="p">)</span></div>
+        <span class="c1"># Add S3 filesystem if available</span>
+        <span class="k">if</span> <span class="s2">&quot;filesystem&quot;</span> <span class="ow">in</span> <span class="n">export_extra_args</span><span class="p">:</span>
+            <span class="n">filtered_kwargs</span><span class="p">[</span><span class="s2">&quot;filesystem&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">export_extra_args</span><span class="p">[</span><span class="s2">&quot;filesystem&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">write_method</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="o">**</span><span class="n">filtered_kwargs</span><span class="p">)</span></div>
 
 
     <span class="c1"># suffix to export method</span>
@@ -600,7 +640,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../_static/documentation_options.js?v=a68a9277"></script>
+<script src="../../../_static/documentation_options.js?v=6d0302ba"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>

@@ -177,7 +177,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -189,7 +189,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -208,11 +208,10 @@
 <p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/RecipeGallery_ZH.html">数据菜谱Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/DJ_agent_ZH.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/DJ_agents_ZH.html">DataJuicer 智能体</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DJ_service_ZH.html">DJ_服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DeveloperGuide_ZH.html">开发者指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
@@ -225,6 +224,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../demos/auto_evaluation_helm/README_ZH.html">自动化评测：HELM 评测及可视化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demos/role_playing_system_prompt/README_ZH.html">为LLM构造角色扮演的system prompt</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/RecipeGallery_ZH.html">数据菜谱Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/AlpacaCOT_ZH.html">Alpaca-CoT 完善配置文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/BLOOM_ZH.html">BLOOM 配置文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/RedPajama_ZH.html">Redpajama 配置文件</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
@@ -234,13 +241,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/README_ZH.html">格式转换工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/multimodal/README_ZH.html">多模态工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/hpo/README_ZH.html">数据菜谱的自动化超参优化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/postprocess/README_ZH.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/preprocess/README_ZH.html">预处理工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/quality_classifier/README_ZH.html">给数据打分</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">第三方</span></p>
 <ul>
@@ -330,79 +335,13 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="module-data_juicer.ops.selector.range_specified_field_selector">
-<span id="data-juicer-ops-selector-range-specified-field-selector-module"></span><h1>data_juicer.ops.selector.range_specified_field_selector module<a class="headerlink" href="#module-data_juicer.ops.selector.range_specified_field_selector" title="Link to this heading">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="data_juicer.ops.selector.range_specified_field_selector.RangeSpecifiedFieldSelector">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.selector.range_specified_field_selector.</span></span><span class="sig-name descname"><span class="pre">RangeSpecifiedFieldSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_percentile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">annotation</span></span><span class="o"><span class="pre">=</span></span><span class="pre">NoneType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="k"><span class="pre">True</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Ge</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">ge</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Le</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">le</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_percentile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">annotation</span></span><span class="o"><span class="pre">=</span></span><span class="pre">NoneType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="k"><span class="pre">True</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Ge</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">ge</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Le</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">le</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_rank</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Gt</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">gt</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_rank</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Gt</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">gt</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/selector/range_specified_field_selector.html#RangeSpecifiedFieldSelector"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.ops.selector.range_specified_field_selector.RangeSpecifiedFieldSelector" title="Link to this definition">¶</a></dt>
-<dd><p>基类：<a class="reference internal" href="data_juicer.ops.base_op.html#data_juicer.ops.base_op.Selector" title="data_juicer.ops.base_op.Selector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Selector</span></code></a></p>
-<p>Selects a range of samples based on the sorted values of a specified field.</p>
-<p>This operator selects samples whose values for a specified field fall within a given
-range. The range can be defined using percentiles or ranks, and the operator will use
-the more inclusive bounds if both are provided. The field values are first sorted in
-ascending order, and then the samples are selected based on the lower and upper bounds.
-If no bounds are provided, the original dataset is returned. The operator ensures that
-the specified field exists in the dataset and handles multi-level fields by separating
-keys with dots.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="data_juicer.ops.selector.range_specified_field_selector.RangeSpecifiedFieldSelector.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_percentile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">annotation</span></span><span class="o"><span class="pre">=</span></span><span class="pre">NoneType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="k"><span class="pre">True</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Ge</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">ge</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Le</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">le</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_percentile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">annotation</span></span><span class="o"><span class="pre">=</span></span><span class="pre">NoneType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">required</span></span><span class="o"><span class="pre">=</span></span><span class="k"><span class="pre">True</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Ge</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">ge</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Le</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">le</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_rank</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Gt</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">gt</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_rank</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Gt</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">gt</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/selector/range_specified_field_selector.html#RangeSpecifiedFieldSelector.__init__"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.ops.selector.range_specified_field_selector.RangeSpecifiedFieldSelector.__init__" title="Link to this definition">¶</a></dt>
-<dd><p>Initialization method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>field_key</strong> -- Selector based on the specified value
-corresponding to the target key. The target key
-corresponding to multi-level field information need to be
-separated by '.'.</p></li>
-<li><p><strong>lower_percentile</strong> -- The lower bound of the percentile to
-be sample, samples will be selected if their specified field
-values are greater than this lower bound. When both
-lower_percentile and lower_rank are set, the value corresponding
-to the larger number of samples will be applied.</p></li>
-<li><p><strong>upper_percentile</strong> -- The upper bound of the percentile to
-be sample, samples will be selected if their specified field
-values are less or equal to the upper bound. When both
-upper_percentile and upper_rank are set, the value corresponding
-to the smaller number of samples will be applied.</p></li>
-<li><p><strong>lower_rank</strong> -- The lower bound of the rank to be sample,
-samples will be selected if their specified field values are
-greater than this lower bound. When both lower_percentile and
-lower_rank are set, the value corresponding to the larger number
-of samples will be applied.</p></li>
-<li><p><strong>upper_rank</strong> -- The upper bound of the rank to be sample,
-samples will be selected if their specified field values are
-less or equal to the upper bound. When both upper_percentile and
-upper_rank are set, the value corresponding to the smaller number
-of samples will be applied.</p></li>
-<li><p><strong>args</strong> -- extra args</p></li>
-<li><p><strong>kwargs</strong> -- extra args</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="data_juicer.ops.selector.range_specified_field_selector.RangeSpecifiedFieldSelector.process">
-<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/selector/range_specified_field_selector.html#RangeSpecifiedFieldSelector.process"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.ops.selector.range_specified_field_selector.RangeSpecifiedFieldSelector.process" title="Link to this definition">¶</a></dt>
-<dd><p>Dataset --&gt; dataset.</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dataset</strong> -- input dataset</p>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>selected dataset.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+          <section id="data-juicer-ops-selector-range-specified-field-selector-module">
+<h1>data_juicer.ops.selector.range_specified_field_selector module<a class="headerlink" href="#data-juicer-ops-selector-range-specified-field-selector-module" title="Link to this heading">¶</a></h1>
 </section>
 
         </article>
@@ -430,37 +369,14 @@ of samples will be applied.</p></li>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">data_juicer.ops.selector.range_specified_field_selector module</a><ul>
-<li><a class="reference internal" href="#data_juicer.ops.selector.range_specified_field_selector.RangeSpecifiedFieldSelector"><code class="docutils literal notranslate"><span class="pre">RangeSpecifiedFieldSelector</span></code></a><ul>
-<li><a class="reference internal" href="#data_juicer.ops.selector.range_specified_field_selector.RangeSpecifiedFieldSelector.__init__"><code class="docutils literal notranslate"><span class="pre">RangeSpecifiedFieldSelector.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#data_juicer.ops.selector.range_specified_field_selector.RangeSpecifiedFieldSelector.process"><code class="docutils literal notranslate"><span class="pre">RangeSpecifiedFieldSelector.process()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
   </div>
 </div>
-<script src="../_static/documentation_options.js?v=13db99cc"></script>
+<script src="../_static/documentation_options.js?v=6f892d8a"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

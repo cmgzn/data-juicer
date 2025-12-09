@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="索引" href="../genindex.html"><link rel="search" title="搜索" href="../search.html"><link rel="next" title="开发者指南" href="DeveloperGuide_ZH.html"><link rel="prev" title="DataJuicer-Agent" href="DJ_agent_ZH.html">
+<link rel="index" title="索引" href="../genindex.html"><link rel="search" title="搜索" href="../search.html"><link rel="next" title="开发者指南" href="DeveloperGuide_ZH.html"><link rel="prev" title="DataJuicer 智能体" href="DJ_agents_ZH.html">
         <link rel="prefetch" href="../_static/logo.png" as="image">
 
     <link rel="shortcut icon" href="../_static/icon.png"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
@@ -189,7 +189,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -208,11 +208,10 @@
 <p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RecipeGallery_ZH.html">数据菜谱Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BadDataExhibition_ZH.html">“坏”数据展览</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DJ_SORA_ZH.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DJ_agent_ZH.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ_agents_ZH.html">DataJuicer 智能体</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">DJ_服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DeveloperGuide_ZH.html">开发者指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
@@ -225,6 +224,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../demos/auto_evaluation_helm/README_ZH.html">自动化评测：HELM 评测及可视化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demos/role_playing_system_prompt/README_ZH.html">为LLM构造角色扮演的system prompt</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hub/RecipeGallery_ZH.html">数据菜谱Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hub/AlpacaCOT_ZH.html">Alpaca-CoT 完善配置文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hub/BLOOM_ZH.html">BLOOM 配置文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hub/RedPajama_ZH.html">Redpajama 配置文件</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
@@ -234,13 +241,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/README_ZH.html">格式转换工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/multimodal/README_ZH.html">多模态工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/hpo/README_ZH.html">数据菜谱的自动化超参优化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/postprocess/README_ZH.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/preprocess/README_ZH.html">预处理工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/quality_classifier/README_ZH.html">给数据打分</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">第三方</span></p>
 <ul>
@@ -378,7 +383,7 @@
 
 <span class="n">json_prefix</span> <span class="o">=</span> <span class="s1">&#39;&lt;json_dumps&gt;&#39;</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8000/data_juicer/config/init_configs&#39;</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="n">json_prefix</span> <span class="o">+</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="s1">&#39;./configs/demo/process.yaml&#39;</span><span class="p">])}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="n">json_prefix</span> <span class="o">+</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="s1">&#39;./demos/process_simple/process.yaml&#39;</span><span class="p">])}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
@@ -386,7 +391,7 @@
 <p>对应的curl代码如下：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;http://localhost:8000/data_juicer/config/init_configs&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--data-urlencode<span class="w"> </span><span class="s2">&quot;args=--config&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--data-urlencode<span class="w"> </span><span class="s2">&quot;args=./configs/demo/process.yaml&quot;</span>
+<span class="w">     </span>--data-urlencode<span class="w"> </span><span class="s2">&quot;args=./demos/process_simple/process.yaml&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -470,7 +475,15 @@
 <p>可通过指定环境变量 <code class="docutils literal notranslate"><span class="pre">DJ_OPS_LIST_PATH</span></code> 控制 MCP 服务器返回的算子工具：</p>
 <ol class="arabic simple">
 <li><p>创建一个 <code class="docutils literal notranslate"><span class="pre">.txt</span></code> 文件</p></li>
-<li><p>将算子名称添加到文件中，例如：<a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/configs/mcp/ops_list_example.txt">ops_list_example.txt</a></p></li>
+<li><p>将算子名称添加到文件中，例如：</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>text_length_filter
+flagged_words_filter
+image_nsfw_filter
+text_pair_similarity_filter
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
 <li><p>将算子列表的路径设置为环境变量 <code class="docutils literal notranslate"><span class="pre">DJ_OPS_LIST_PATH</span></code></p></li>
 </ol>
 </section>
@@ -636,14 +649,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="DJ_agent_ZH.html">
+          <a class="prev-page" href="DJ_agents_ZH.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">DataJuicer-Agent</div>
+                <div class="title">DataJuicer 智能体</div>
                 
               </div>
             </a>
@@ -725,7 +738,7 @@
     </aside>
   </div>
 </div>
-<script src="../_static/documentation_options.js?v=13db99cc"></script>
+<script src="../_static/documentation_options.js?v=6f892d8a"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

@@ -188,7 +188,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../../../../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -207,11 +207,10 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../docs/RecipeGallery.html">Data Recipe Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/DJ_SORA.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../docs/DJ_agent.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/DJ_agents.html">DataJuicer Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -222,6 +221,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../demos/README.html">Demos</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/AlpacaCOT.html">Refine Alpaca-CoT Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/BLOOM.html">BLOOM Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/RedPajama.html">Redpajama Config Files</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a></li>
@@ -231,13 +238,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/mm_eval/vbench_metrics/README.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/postprocess/README.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../tools/quality_classifier/README.html">Data Scoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
 <ul>
@@ -334,8 +339,10 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ray</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">jsonargparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">Namespace</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ray.data._internal.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_compute_strategy</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DJDataset</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core.data.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schema</span>
@@ -343,11 +350,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops.base_op</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_BATCH_SIZE</span><span class="p">,</span> <span class="n">TAGGING_OPS</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.constant</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fields</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_remote_path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.lazy_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">LazyLoader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.resource_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">cuda_device_count</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.webdataset_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_custom_default_decoder</span>
-
-<span class="n">ray</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s2">&quot;ray&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="get_abs_path">
@@ -534,8 +538,9 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="s2">&quot;batch_size&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">is_batched_op</span><span class="p">()</span> <span class="k">else</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">Mapper</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">use_ray_actor</span><span class="p">():</span>
                     <span class="n">op_kwargs</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">_op_cfg</span><span class="p">[</span><span class="n">op</span><span class="o">.</span><span class="n">_name</span><span class="p">]</span>
+                    <span class="n">compute</span> <span class="o">=</span> <span class="n">get_compute_strategy</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">map_batches</span><span class="p">(</span>
                         <span class="n">op</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span>
                         <span class="n">fn_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -543,18 +548,22 @@
                         <span class="n">fn_constructor_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">fn_constructor_kwargs</span><span class="o">=</span><span class="n">op_kwargs</span><span class="p">,</span>
                         <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
-                        <span class="n">num_cpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">cpu_required</span><span class="p">,</span>
-                        <span class="n">num_gpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">gpu_required</span><span class="p">,</span>
-                        <span class="n">concurrency</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">,</span>
+                        <span class="n">num_cpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_cpus</span><span class="p">,</span>
+                        <span class="n">num_gpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_gpus</span><span class="p">,</span>
+                        <span class="n">compute</span><span class="o">=</span><span class="n">compute</span><span class="p">,</span>
                         <span class="n">batch_format</span><span class="o">=</span><span class="s2">&quot;pyarrow&quot;</span><span class="p">,</span>
+                        <span class="n">runtime_env</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">runtime_env</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
+                    <span class="n">compute</span> <span class="o">=</span> <span class="n">get_compute_strategy</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">process</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">map_batches</span><span class="p">(</span>
                         <span class="n">op</span><span class="o">.</span><span class="n">process</span><span class="p">,</span>
                         <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
                         <span class="n">batch_format</span><span class="o">=</span><span class="s2">&quot;pyarrow&quot;</span><span class="p">,</span>
-                        <span class="n">num_cpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">cpu_required</span><span class="p">,</span>
-                        <span class="n">concurrency</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">,</span>
+                        <span class="n">num_cpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_cpus</span><span class="p">,</span>
+                        <span class="n">num_gpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_gpus</span><span class="p">,</span>
+                        <span class="n">compute</span><span class="o">=</span><span class="n">compute</span><span class="p">,</span>
+                        <span class="n">runtime_env</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">runtime_env</span><span class="p">,</span>
                     <span class="p">)</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">Filter</span><span class="p">):</span>
                 <span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">()</span>
@@ -568,8 +577,9 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">map_batches</span><span class="p">(</span>
                         <span class="n">process_batch_arrow</span><span class="p">,</span> <span class="n">batch_format</span><span class="o">=</span><span class="s2">&quot;pyarrow&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">DEFAULT_BATCH_SIZE</span>
                     <span class="p">)</span>
-                <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">use_ray_actor</span><span class="p">():</span>
                     <span class="n">op_kwargs</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">_op_cfg</span><span class="p">[</span><span class="n">op</span><span class="o">.</span><span class="n">_name</span><span class="p">]</span>
+                    <span class="n">compute</span> <span class="o">=</span> <span class="n">get_compute_strategy</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">map_batches</span><span class="p">(</span>
                         <span class="n">op</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span>
                         <span class="n">fn_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -577,18 +587,22 @@
                         <span class="n">fn_constructor_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">fn_constructor_kwargs</span><span class="o">=</span><span class="n">op_kwargs</span><span class="p">,</span>
                         <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
-                        <span class="n">num_cpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">cpu_required</span><span class="p">,</span>
-                        <span class="n">num_gpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">gpu_required</span><span class="p">,</span>
-                        <span class="n">concurrency</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">,</span>
+                        <span class="n">num_cpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_cpus</span><span class="p">,</span>
+                        <span class="n">num_gpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_gpus</span><span class="p">,</span>
+                        <span class="n">compute</span><span class="o">=</span><span class="n">compute</span><span class="p">,</span>
                         <span class="n">batch_format</span><span class="o">=</span><span class="s2">&quot;pyarrow&quot;</span><span class="p">,</span>
+                        <span class="n">runtime_env</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">runtime_env</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
+                    <span class="n">compute</span> <span class="o">=</span> <span class="n">get_compute_strategy</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">map_batches</span><span class="p">(</span>
                         <span class="n">op</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">,</span>
                         <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
                         <span class="n">batch_format</span><span class="o">=</span><span class="s2">&quot;pyarrow&quot;</span><span class="p">,</span>
-                        <span class="n">num_cpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">cpu_required</span><span class="p">,</span>
-                        <span class="n">concurrency</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">,</span>
+                        <span class="n">num_cpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_cpus</span><span class="p">,</span>
+                        <span class="n">num_gpus</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">num_gpus</span><span class="p">,</span>
+                        <span class="n">compute</span><span class="o">=</span><span class="n">compute</span><span class="p">,</span>
+                        <span class="n">runtime_env</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">runtime_env</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">stats_export_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">stats_export_path</span><span class="p">,</span> <span class="n">force_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -601,9 +615,13 @@
                         <span class="n">batch_format</span><span class="o">=</span><span class="s2">&quot;pyarrow&quot;</span><span class="p">,</span>
                         <span class="n">zero_copy_batch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                         <span class="n">batch_size</span><span class="o">=</span><span class="n">DEFAULT_BATCH_SIZE</span><span class="p">,</span>
+                        <span class="n">runtime_env</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">runtime_env</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">process</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                        <span class="n">op</span><span class="o">.</span><span class="n">process</span><span class="p">,</span>
+                        <span class="n">runtime_env</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">runtime_env</span><span class="p">,</span>
+                    <span class="p">)</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">Deduplicator</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -615,6 +633,12 @@
 
             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
             <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RayDataset.count">
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.ray_dataset.html#data_juicer.core.data.ray_dataset.RayDataset.count">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">count</span><span class="p">()</span></div>
+
 
 <div class="viewcode-block" id="RayDataset.read">
 <a class="viewcode-back" href="../../../../api/data_juicer.core.data.ray_dataset.html#data_juicer.core.data.ray_dataset.RayDataset.read">[docs]</a>
@@ -671,7 +695,7 @@
 
 <div class="viewcode-block" id="JSONStreamDatasource">
 <a class="viewcode-back" href="../../../../api/data_juicer.core.data.ray_dataset.html#data_juicer.core.data.ray_dataset.JSONStreamDatasource">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">JSONStreamDatasource</span><span class="p">(</span><span class="n">ray</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_api</span><span class="o">.</span><span class="n">JSONDatasource</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">JSONStreamDatasource</span><span class="p">(</span><span class="n">ray</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_api</span><span class="o">.</span><span class="n">ArrowJSONDatasource</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A temp Datasource for reading json stream.</span>
 
@@ -681,7 +705,22 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_read_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="s2">&quot;pyarrow.NativeFile&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">pyarrow.json</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_json</span>
+        <span class="c1"># Check if open_json is available (PyArrow 20.0.0+)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyarrow.json</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_json</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="c1"># Fall back to read_json for older PyArrow versions</span>
+            <span class="c1"># This will read the entire file into memory, but works with older PyArrow</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow.json</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">js</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Read the entire file as a table</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">js</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">arrow_json_args</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">table</span><span class="o">.</span><span class="n">num_rows</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">table</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to read JSON file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">. Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+            <span class="k">return</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reader</span> <span class="o">=</span> <span class="n">open_json</span><span class="p">(</span>
@@ -724,6 +763,17 @@
     <span class="n">override_num_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">arrow_json_args</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ray</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
+    <span class="c1"># Check if open_json is available (PyArrow 20.0.0+)</span>
+    <span class="c1"># If not, fall back to ray.data.read_json which works with older PyArrow</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow.json</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">js</span>
+
+        <span class="n">js</span><span class="o">.</span><span class="n">open_json</span>  <span class="c1"># Check if attribute exists</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+        <span class="c1"># Fall back to standard ray.data.read_json for older PyArrow versions</span>
+        <span class="c1"># This works with filesystem parameter for S3</span>
+        <span class="k">return</span> <span class="n">ray</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">filesystem</span><span class="o">=</span><span class="n">filesystem</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">meta_provider</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">meta_provider</span> <span class="o">=</span> <span class="n">ray</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">read_api</span><span class="o">.</span><span class="n">DefaultFileMetadataProvider</span><span class="p">()</span>
 
@@ -781,7 +831,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../../_static/documentation_options.js?v=a68a9277"></script>
+<script src="../../../../_static/documentation_options.js?v=6d0302ba"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>

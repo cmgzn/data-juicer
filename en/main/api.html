@@ -189,7 +189,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -208,11 +208,10 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/RecipeGallery.html">Data Recipe Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DJ_agent.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DJ_agents.html">DataJuicer Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -223,6 +222,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="demos/README.html">Demos</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/hub/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/hub/AlpacaCOT.html">Refine Alpaca-CoT Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/hub/BLOOM.html">BLOOM Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/hub/RedPajama.html">Redpajama Config Files</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a></li>
@@ -232,13 +239,11 @@
 <li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools/mm_eval/vbench_metrics/README.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools/postprocess/README.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools/quality_classifier/README.html">Data Scoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
 <ul>
@@ -489,14 +494,19 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.SentenceAugmentationMapper"><code class="docutils literal notranslate"><span class="pre">SentenceAugmentationMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.SentenceSplitMapper"><code class="docutils literal notranslate"><span class="pre">SentenceSplitMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.TextChunkMapper"><code class="docutils literal notranslate"><span class="pre">TextChunkMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.TextTaggingByPromptMapper"><code class="docutils literal notranslate"><span class="pre">TextTaggingByPromptMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VggtMapper"><code class="docutils literal notranslate"><span class="pre">VggtMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromAudioMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromAudioMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromFramesMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromFramesMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromSummarizerMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromSummarizerMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromVideoMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromVideoMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromVLMMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromVLMMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoDepthEstimationMapper"><code class="docutils literal notranslate"><span class="pre">VideoDepthEstimationMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoExtractFramesMapper"><code class="docutils literal notranslate"><span class="pre">VideoExtractFramesMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoFFmpegWrappedMapper"><code class="docutils literal notranslate"><span class="pre">VideoFFmpegWrappedMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoHandReconstructionMapper"><code class="docutils literal notranslate"><span class="pre">VideoHandReconstructionMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoFaceBlurMapper"><code class="docutils literal notranslate"><span class="pre">VideoFaceBlurMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoObjectSegmentingMapper"><code class="docutils literal notranslate"><span class="pre">VideoObjectSegmentingMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoRemoveWatermarkMapper"><code class="docutils literal notranslate"><span class="pre">VideoRemoveWatermarkMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoResizeAspectRatioMapper"><code class="docutils literal notranslate"><span class="pre">VideoResizeAspectRatioMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoResizeResolutionMapper"><code class="docutils literal notranslate"><span class="pre">VideoResizeResolutionMapper</span></code></a></li>
@@ -505,12 +515,14 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoSplitBySceneMapper"><code class="docutils literal notranslate"><span class="pre">VideoSplitBySceneMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoTaggingFromAudioMapper"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromAudioMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoTaggingFromFramesMapper"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromFramesMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoWholeBodyPoseEstimationMapper"><code class="docutils literal notranslate"><span class="pre">VideoWholeBodyPoseEstimationMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.WhitespaceNormalizationMapper"><code class="docutils literal notranslate"><span class="pre">WhitespaceNormalizationMapper</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentDeduplicator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentMinhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentMinhashDeduplicatorWithUid"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicatorWithUid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentSimhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentSimhashDeduplicator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.ImageDeduplicator"><code class="docutils literal notranslate"><span class="pre">ImageDeduplicator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayBasicDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayBasicDeduplicator</span></code></a></li>
@@ -518,6 +530,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayImageDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayImageDeduplicator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayVideoDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayVideoDeduplicator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.RayBTSMinhashDeduplicatorWithUid"><code class="docutils literal notranslate"><span class="pre">RayBTSMinhashDeduplicatorWithUid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.VideoDeduplicator"><code class="docutils literal notranslate"><span class="pre">VideoDeduplicator</span></code></a></li>
 </ul>
 </li>
@@ -625,7 +638,7 @@
     </aside>
   </div>
 </div>
-<script src="_static/documentation_options.js?v=a68a9277"></script>
+<script src="_static/documentation_options.js?v=6d0302ba"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>

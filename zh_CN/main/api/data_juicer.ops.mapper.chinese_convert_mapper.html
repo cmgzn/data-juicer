@@ -177,7 +177,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -189,7 +189,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -208,11 +208,10 @@
 <p class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/RecipeGallery_ZH.html">数据菜谱Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/DJ_agent_ZH.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/DJ_agents_ZH.html">DataJuicer 智能体</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DJ_service_ZH.html">DJ_服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/DeveloperGuide_ZH.html">开发者指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
@@ -225,6 +224,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../demos/auto_evaluation_helm/README_ZH.html">自动化评测：HELM 评测及可视化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demos/role_playing_system_prompt/README_ZH.html">为LLM构造角色扮演的system prompt</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/RecipeGallery_ZH.html">数据菜谱Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/AlpacaCOT_ZH.html">Alpaca-CoT 完善配置文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/BLOOM_ZH.html">BLOOM 配置文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/hub/RedPajama_ZH.html">Redpajama 配置文件</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
@@ -234,13 +241,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/README_ZH.html">格式转换工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/multimodal/README_ZH.html">多模态工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/hpo/README_ZH.html">数据菜谱的自动化超参优化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/postprocess/README_ZH.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/preprocess/README_ZH.html">预处理工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/quality_classifier/README_ZH.html">给数据打分</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">第三方</span></p>
 <ul>
@@ -330,76 +335,13 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="module-data_juicer.ops.mapper.chinese_convert_mapper">
-<span id="data-juicer-ops-mapper-chinese-convert-mapper-module"></span><h1>data_juicer.ops.mapper.chinese_convert_mapper module<a class="headerlink" href="#module-data_juicer.ops.mapper.chinese_convert_mapper" title="Link to this heading">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="data_juicer.ops.mapper.chinese_convert_mapper.prepare_converter">
-<span class="sig-prename descclassname"><span class="pre">data_juicer.ops.mapper.chinese_convert_mapper.</span></span><span class="sig-name descname"><span class="pre">prepare_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/mapper/chinese_convert_mapper.html#prepare_converter"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.ops.mapper.chinese_convert_mapper.prepare_converter" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="data_juicer.ops.mapper.chinese_convert_mapper.ChineseConvertMapper">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.mapper.chinese_convert_mapper.</span></span><span class="sig-name descname"><span class="pre">ChineseConvertMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'s2t'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/mapper/chinese_convert_mapper.html#ChineseConvertMapper"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.ops.mapper.chinese_convert_mapper.ChineseConvertMapper" title="Link to this definition">¶</a></dt>
-<dd><p>基类：<a class="reference internal" href="data_juicer.ops.base_op.html#data_juicer.ops.base_op.Mapper" title="data_juicer.ops.base_op.Mapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapper</span></code></a></p>
-<p>Mapper to convert Chinese text between Traditional, Simplified, and Japanese Kanji.</p>
-<p>This operator converts Chinese text based on the specified mode. It supports conversions
-between Simplified Chinese, Traditional Chinese (including Taiwan and Hong Kong
-variants), and Japanese Kanji. The conversion is performed using a pre-defined set of
-rules. The available modes include 's2t' for Simplified to Traditional, 't2s' for
-Traditional to Simplified, and other specific variants like 's2tw', 'tw2s', 's2hk',
-'hk2s', 's2twp', 'tw2sp', 't2tw', 'tw2t', 'hk2t', 't2hk', 't2jp', and 'jp2t'. The
-operator processes text in batches and applies the conversion to the specified text key
-in the samples.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="data_juicer.ops.mapper.chinese_convert_mapper.ChineseConvertMapper.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'s2t'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/mapper/chinese_convert_mapper.html#ChineseConvertMapper.__init__"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.ops.mapper.chinese_convert_mapper.ChineseConvertMapper.__init__" title="Link to this definition">¶</a></dt>
-<dd><p>Initialization method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mode</strong> -- <p>Choose the mode to convert Chinese:</p>
-<p>s2t: Simplified Chinese to Traditional Chinese,</p>
-<p>t2s: Traditional Chinese to Simplified Chinese,</p>
-<p>s2tw: Simplified Chinese to Traditional Chinese (Taiwan Standard),</p>
-<p>tw2s: Traditional Chinese (Taiwan Standard) to Simplified Chinese,</p>
-<p>s2hk: Simplified Chinese to Traditional Chinese
-(Hong Kong variant),</p>
-<p>hk2s: Traditional Chinese (Hong Kong variant) to Simplified
-Chinese,</p>
-<p>s2twp: Simplified Chinese to Traditional Chinese (Taiwan Standard)
-with Taiwanese idiom,</p>
-<p>tw2sp: Traditional Chinese (Taiwan Standard) to Simplified Chinese
-with Mainland Chinese idiom,</p>
-<p>t2tw: Traditional Chinese to Traditional Chinese (Taiwan Standard),</p>
-<p>tw2t: Traditional Chinese (Taiwan standard) to Traditional Chinese,</p>
-<p>hk2t: Traditional Chinese (Hong Kong variant) to Traditional
-Chinese,</p>
-<p>t2hk: Traditional Chinese to Traditional Chinese
-(Hong Kong variant),</p>
-<p>t2jp: Traditional Chinese Characters (Kyūjitai) to New Japanese
-Kanji,</p>
-<p>jp2t: New Japanese Kanji (Shinjitai) to Traditional Chinese
-Characters,</p>
-</p></li>
-<li><p><strong>args</strong> -- extra args</p></li>
-<li><p><strong>kwargs</strong> -- extra args</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="data_juicer.ops.mapper.chinese_convert_mapper.ChineseConvertMapper.process_batched">
-<span class="sig-name descname"><span class="pre">process_batched</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/mapper/chinese_convert_mapper.html#ChineseConvertMapper.process_batched"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#data_juicer.ops.mapper.chinese_convert_mapper.ChineseConvertMapper.process_batched" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+          <section id="data-juicer-ops-mapper-chinese-convert-mapper-module">
+<h1>data_juicer.ops.mapper.chinese_convert_mapper module<a class="headerlink" href="#data-juicer-ops-mapper-chinese-convert-mapper-module" title="Link to this heading">¶</a></h1>
 </section>
 
         </article>
@@ -427,38 +369,14 @@ Characters,</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">data_juicer.ops.mapper.chinese_convert_mapper module</a><ul>
-<li><a class="reference internal" href="#data_juicer.ops.mapper.chinese_convert_mapper.prepare_converter"><code class="docutils literal notranslate"><span class="pre">prepare_converter()</span></code></a></li>
-<li><a class="reference internal" href="#data_juicer.ops.mapper.chinese_convert_mapper.ChineseConvertMapper"><code class="docutils literal notranslate"><span class="pre">ChineseConvertMapper</span></code></a><ul>
-<li><a class="reference internal" href="#data_juicer.ops.mapper.chinese_convert_mapper.ChineseConvertMapper.__init__"><code class="docutils literal notranslate"><span class="pre">ChineseConvertMapper.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#data_juicer.ops.mapper.chinese_convert_mapper.ChineseConvertMapper.process_batched"><code class="docutils literal notranslate"><span class="pre">ChineseConvertMapper.process_batched()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
   </div>
 </div>
-<script src="../_static/documentation_options.js?v=13db99cc"></script>
+<script src="../_static/documentation_options.js?v=6f892d8a"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

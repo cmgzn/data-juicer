@@ -188,7 +188,7 @@
     <div class="sidebar-logo-container">
       <img class="sidebar-logo" src="../../../../_static/logo.png" alt="Logo"/>
     </div>
-    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">DataJuicer</text>
+    <svg class="sidebar-brand-text" viewBox="0 0 200 30"><text x="100" y="15" dominant-baseline="middle" text-anchor="middle">Data-Juicer</text>
     </svg>
 
   
@@ -207,11 +207,10 @@
 <p class="caption" role="heading"><span class="caption-text">docs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../docs/RecipeGallery.html">Data Recipe Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/BadDataExhibition.html">“Bad” Data Exhibition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/DJ_SORA.html">DJ-SORA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../docs/DJ_agent.html">DataJuicer-Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/DJ_agents.html">DataJuicer Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docs/Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -222,6 +221,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../demos/README.html">Demos</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">hub</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/RecipeGallery.html">Data Recipe Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/AlpacaCOT.html">Refine Alpaca-CoT Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/AnnotationNotificationSystem.html">Notification System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/BLOOM.html">BLOOM Config Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/hub/RedPajama.html">Redpajama Config Files</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">tools</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/distributed_deduplication/README.html">Distributed Fuzzy Deduplication Tools</a></li>
@@ -231,13 +238,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/fmt_conversion/README.html">Format Conversion Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/fmt_conversion/multimodal/README.html">Multimodal Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/fmt_conversion/post_tuning_dialog/README.html">Post Tuning Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../tools/hpo/README.html">Hyper-parameter Optimization for Data Recipe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/mm_eval/inception_metrics/README.html">Metrics for video generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/mm_eval/vbench_metrics/README.html">VBench metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/postprocess/README.html">Postprocess tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tools/preprocess/README.html">Preprocess Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../tools/quality_classifier/README.html">Data Scoring</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">thirdparty</span></p>
 <ul>
@@ -372,7 +377,7 @@
 <span class="sd">    video does not contain any scenes, it remains unchanged.&quot;&quot;&quot;</span>
 
     <span class="c1"># Define shared detector keys and their properties</span>
-    <span class="n">avaliable_detectors</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">available_detectors</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;ContentDetector&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;weights&quot;</span><span class="p">,</span> <span class="s2">&quot;luma_only&quot;</span><span class="p">,</span> <span class="s2">&quot;kernel_size&quot;</span><span class="p">],</span>
         <span class="s2">&quot;AdaptiveDetector&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="s2">&quot;window_width&quot;</span><span class="p">,</span>
@@ -416,10 +421,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_init_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_extra_parameters</span><span class="p">(</span><span class="nb">locals</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_init_parameters</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;save_dir&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">detector</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">avaliable_detectors</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">detector</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_detectors</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Scene detector </span><span class="si">{</span><span class="n">detector</span><span class="si">}</span><span class="s2"> is not supported. &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Can only be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avaliable_detectors</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Can only be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">available_detectors</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">detector</span> <span class="o">=</span> <span class="n">detector</span>
@@ -429,9 +434,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">save_dir</span> <span class="o">=</span> <span class="n">save_dir</span>
 
         <span class="c1"># prepare detector args</span>
-        <span class="n">avaliable_kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">avaliable_detectors</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="p">]</span>
+        <span class="n">available_kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_detectors</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">detector_class</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">scenedetect</span><span class="o">.</span><span class="n">detectors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">detector_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">avaliable_kwargs</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">}</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detector_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">available_kwargs</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="VideoSplitBySceneMapper.process_single">
@@ -528,7 +533,7 @@
     </aside>
   </div>
 </div>
-<script src="../../../../_static/documentation_options.js?v=a68a9277"></script>
+<script src="../../../../_static/documentation_options.js?v=6d0302ba"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>
