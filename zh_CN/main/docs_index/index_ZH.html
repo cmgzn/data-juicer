@@ -50,7 +50,7 @@
     <link rel="icon" href="../_static/icon.png"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="“坏”数据展览" href="docs/BadDataExhibition_ZH.html" />
+    <link rel="next" title="DJ-Cookbook" href="docs/tutorial/DJ-Cookbook_ZH.html" />
     <link rel="prev" title="Data Processing for and with Foundation Models" href="../index_ZH.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="zh-CN"/>
@@ -141,6 +141,13 @@
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="#">
     文档
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api.html">
+    API
   </a>
 </li>
 
@@ -307,6 +314,13 @@
 
 
 <li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
   <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
     Sandbox
   </a>
@@ -418,17 +432,51 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="章节导航">
   <p class="bd-links__title" role="heading" aria-level="1">章节导航</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">教程</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="docs/tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/tutorial/Installation_ZH.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html">快速上手</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="docs/Operators.html">Operator Schemas 算子提要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_agents_ZH.html">DataJuicer 智能体</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DJ_service_ZH.html">DJ_服务化</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide_ZH.html">开发者指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs/Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/Sandbox_ZH.html">沙盒实验室</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs/awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">demos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="demos/README_ZH.html">演示</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html">自动化评测：HELM 评测及可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos/process_video_on_ray/data/Note.html">Note for dataset path</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos/role_playing_system_prompt/README_ZH.html">为LLM构造角色扮演的system prompt</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tools/distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/README_ZH.html">Auto Evaluation Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/gpt_eval/README_ZH.html">GPT EVAL：使用 OpenAI API 评测大模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html">Evaluation Results Recorder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/README_ZH.html">格式转换工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html">多模态工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/humanops/README.html">Label Studio Service Utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/postprocess/README_ZH.html">Postprocess tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/preprocess/README_ZH.html">预处理工具</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第三方</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="thirdparty/LLM_ecosystems/README_ZH.html">大语言模型生态</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thirdparty/models/README_ZH.html">第三方模型库</a></li>
 </ul>
 </div>
 </nav></div>
@@ -488,11 +536,60 @@
                   
   <section id="id1">
 <h1>文档<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p>该项目的文件</p>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">教程</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/DJ-Cookbook_ZH.html#id1">资源合集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/DJ-Cookbook_ZH.html#data-juicer-dj">编写Data-Juicer (DJ) 代码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/DJ-Cookbook_ZH.html#id2">用例与数据菜谱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/DJ-Cookbook_ZH.html#id3">交互类示例</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/tutorial/Installation_ZH.html">安装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/Installation_ZH.html#id2">前置条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/Installation_ZH.html#id3">基础安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/Installation_ZH.html#id4">场景化安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/Installation_ZH.html#id5">常见安装模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/Installation_ZH.html#id6">特定算子安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/Installation_ZH.html#docker">使用 Docker 安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/Installation_ZH.html#id7">注意事项和故障排除</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html">快速上手</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html#id2">数据集配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html#id3">数据处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html#id4">分布式数据处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html#id5">数据分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html#id6">数据可视化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html#id7">构建配置文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html#id8">沙盒实验室</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html#id9">预处理原始数据（可选）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/tutorial/QuickStart_ZH.html#docker">对于 Docker 用户</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/Operators.html">Operator Schemas 算子提要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#overview">Overview  概览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#aggregator">aggregator <a name="aggregator"/></a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#deduplicator">deduplicator <a name="deduplicator"/></a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#filter">filter <a name="filter"/></a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#formatter">formatter <a name="formatter"/></a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#grouper">grouper <a name="grouper"/></a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#mapper">mapper <a name="mapper"/></a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#selector">selector <a name="selector"/></a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#contributing">Contributing  贡献</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg_ZH.html">数据集配置指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id2">支持的数据集格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id5">其他功能</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="docs/BadDataExhibition_ZH.html">“坏”数据展览</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#id2">目录</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/BadDataExhibition_ZH.html#id3">涉及算子</a></li>
@@ -523,11 +620,6 @@
 <li class="toctree-l2"><a class="reference internal" href="docs/DJ_service_ZH.html#mcp">MCP服务器</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/DatasetCfg_ZH.html">数据集配置指南</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id2">支持的数据集格式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/DatasetCfg_ZH.html#id5">其他功能</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="docs/DeveloperGuide_ZH.html">开发者指南</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#id2">1. 快速构建你自己的算子</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/DeveloperGuide_ZH.html#id3">2. 构建你自己的数据菜谱和配置项</a></li>
@@ -542,18 +634,6 @@
 <li class="toctree-l2"><a class="reference internal" href="docs/Distributed_ZH.html#id8">快速开始</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="docs/Operators.html">Operator Schemas 算子提要</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#overview">Overview  概览</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#aggregator">aggregator <a name="aggregator"/></a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#deduplicator">deduplicator <a name="deduplicator"/></a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#filter">filter <a name="filter"/></a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#formatter">formatter <a name="formatter"/></a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#grouper">grouper <a name="grouper"/></a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#mapper">mapper <a name="mapper"/></a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#selector">selector <a name="selector"/></a></li>
-<li class="toctree-l2"><a class="reference internal" href="docs/Operators.html#contributing">Contributing  贡献</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="docs/Sandbox_ZH.html">沙盒实验室</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="docs/Sandbox_ZH.html#id2">用户指南</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/Sandbox_ZH.html#id10">开发者指南</a></li>
@@ -566,6 +646,102 @@
 <li class="toctree-l2"><a class="reference internal" href="docs/awesome_llm_data.html#paper-list">Paper List</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/awesome_llm_data.html#contribution-to-this-survey">Contribution to This Survey</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/awesome_llm_data.html#section-mentioned-papers-retrieval-list">&quot;Section - Mentioned Papers&quot; Retrieval List</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">demos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="demos/README_ZH.html">演示</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demos/README_ZH.html#id2">用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/README_ZH.html#id3">可用的演示</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html">自动化评测：HELM 评测及可视化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#id1">什么是自动化评测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#id2">为什么要自动化评测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/auto_evaluation_helm/README_ZH.html#helm-megatron-lm">如何使用自动化评测：以 HELM 和 Megatron-LM 为例</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="demos/process_video_on_ray/data/Note.html">Note for dataset path</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos/role_playing_system_prompt/README_ZH.html">为LLM构造角色扮演的system prompt</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demos/role_playing_system_prompt/README_ZH.html#id1">数据准备</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/role_playing_system_prompt/README_ZH.html#id2">执行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos/role_playing_system_prompt/README_ZH.html#id3">生成样例</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools/distributed_deduplication/README_ZH.html">分布式模糊去重工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/distributed_deduplication/README_ZH.html#id2">使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/README_ZH.html">Auto Evaluation Toolkit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/README_ZH.html#id1">准备工作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/README_ZH.html#id2">用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/README_ZH.html#id3">配置</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/gpt_eval/README_ZH.html">GPT EVAL：使用 OpenAI API 评测大模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/gpt_eval/README_ZH.html#id1">快速上手</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html">Evaluation Results Recorder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html#id1">用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/evaluator/recorder/README_ZH.html#id2">配置</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/README_ZH.html">格式转换工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html">多模态工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#id2">绝对路径转相对路径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/fmt_conversion/multimodal/README_ZH.html#id3">数据集格式转换</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/fmt_conversion/post_tuning_dialog/README_ZH.html#id2">用法</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/humanops/README.html">Label Studio Service Utility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/humanops/README.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/humanops/README.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/humanops/README.html#connection-file-label-studio-localhost-connection-json">Connection File: <code class="docutils literal notranslate"><span class="pre">label_studio_localhost_connection.json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/humanops/README.html#enabling-legacy-token-authentication">Enabling Legacy Token Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/humanops/README.html#label-studio-version">Label Studio Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/humanops/README.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/humanops/README.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#id2">用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/mm_eval/inception_metrics/README_ZH.html#id3">指标介绍</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/postprocess/README_ZH.html">Postprocess tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/postprocess/README_ZH.html#id1">用法</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/preprocess/README_ZH.html">预处理工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/preprocess/README_ZH.html#id2">用法</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第三方</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="thirdparty/LLM_ecosystems/README_ZH.html">大语言模型生态</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="thirdparty/LLM_ecosystems/README_ZH.html#id2">安装</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="thirdparty/models/README_ZH.html">第三方模型库</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="thirdparty/models/README_ZH.html#easyanimate">EasyAnimate</a></li>
 </ul>
 </li>
 </ul>
@@ -592,11 +768,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="docs/BadDataExhibition_ZH.html"
+       href="docs/tutorial/DJ-Cookbook_ZH.html"
        title="下一页">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">下一页</p>
-        <p class="prev-next-title">“坏”数据展览</p>
+        <p class="prev-next-title">DJ-Cookbook</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

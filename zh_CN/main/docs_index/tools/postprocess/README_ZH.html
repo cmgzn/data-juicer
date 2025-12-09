@@ -50,6 +50,8 @@
     <link rel="icon" href="../../../_static/icon.png"/>
     <link rel="index" title="索引" href="../../../genindex.html" />
     <link rel="search" title="搜索" href="../../../search.html" />
+    <link rel="next" title="预处理工具" href="../preprocess/README_ZH.html" />
+    <link rel="prev" title="VBench metrics" href="../mm_eval/vbench_metrics/README_ZH.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="zh-CN"/>
   <meta name="docsearch:version" content="" />
@@ -136,9 +138,16 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
+<li class="nav-item current active">
   <a class="nav-link nav-internal" href="../../index_ZH.html">
     文档
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
   </a>
 </li>
 
@@ -281,10 +290,8 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -299,9 +306,16 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
+<li class="nav-item current active">
   <a class="nav-link nav-internal" href="../../index_ZH.html">
     文档
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
   </a>
 </li>
 
@@ -413,6 +427,61 @@
     
   </div>
   
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="章节导航">
+  <p class="bd-links__title" role="heading" aria-level="1">章节导航</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">教程</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/Installation_ZH.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/QuickStart_ZH.html">快速上手</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">帮助文档</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../docs/Operators.html">Operator Schemas 算子提要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DatasetCfg_ZH.html">数据集配置指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_agents_ZH.html">DataJuicer 智能体</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_service_ZH.html">DJ_服务化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DeveloperGuide_ZH.html">开发者指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/Sandbox_ZH.html">沙盒实验室</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">demos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../demos/README_ZH.html">演示</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../demos/auto_evaluation_helm/README_ZH.html">自动化评测：HELM 评测及可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../demos/process_video_on_ray/data/Note.html">Note for dataset path</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../demos/role_playing_system_prompt/README_ZH.html">为LLM构造角色扮演的system prompt</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluator/README_ZH.html">Auto Evaluation Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluator/gpt_eval/README_ZH.html">GPT EVAL：使用 OpenAI API 评测大模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluator/recorder/README_ZH.html">Evaluation Results Recorder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fmt_conversion/README_ZH.html">格式转换工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fmt_conversion/multimodal/README_ZH.html">多模态工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../humanops/README.html">Label Studio Service Utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Postprocess tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess/README_ZH.html">预处理工具</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">第三方</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../thirdparty/LLM_ecosystems/README_ZH.html">大语言模型生态</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thirdparty/models/README_ZH.html">第三方模型库</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
       <div class="sidebar-primary-item">
@@ -448,6 +517,9 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
+    
+    <li class="breadcrumb-item"><a href="../../index_ZH.html" class="nav-link">文档</a></li>
+    
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Postprocess tools</span></li>
   </ul>
 </nav>
@@ -547,6 +619,24 @@ python<span class="w"> </span>tools/postprocess/deserialize_meta.py<span class="
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../mm_eval/vbench_metrics/README_ZH.html"
+       title="上一页">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">上一页</p>
+        <p class="prev-next-title">VBench metrics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../preprocess/README_ZH.html"
+       title="下一页">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title">预处理工具</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
