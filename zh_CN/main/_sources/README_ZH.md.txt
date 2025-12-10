@@ -101,7 +101,7 @@ https://github.com/user-attachments/assets/a45f0eee-0f0e-4ffe-9a42-d9a55370089d
 
 ## 文档
 
-[此处](https://datajuicer.github.io/data-juicer/zh_CN/main/index_ZH.html)
+详细文档请看[此处](https://datajuicer.github.io/data-juicer/zh_CN/main/docs_index_ZH.html)。
 
 ## 开源协议
 

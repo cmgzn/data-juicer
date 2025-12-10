@@ -106,7 +106,7 @@ Besides, our paper is also updated to [v3](https://arxiv.org/abs/2309.02033).
 
 ## Documentation
 
-[Here](https://datajuicer.github.io/data-juicer)
+For detailed documentation, please see [here](https://datajuicer.github.io/data-juicer/en/main/docs_index.html).
 
 ## License
 Data-Juicer is released under Apache License 2.0.
