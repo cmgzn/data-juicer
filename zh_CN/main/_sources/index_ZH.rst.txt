@@ -12,6 +12,9 @@ Data Processing for and with Foundation Models
     :start-after: # Data Processing for and with Foundation Models
     :parser: myst_parser.sphinx_
 
+Documentation Index
+-------------------
+
 .. toctree::
    :maxdepth: 2
 
