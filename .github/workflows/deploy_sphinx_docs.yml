@@ -21,6 +21,7 @@ jobs:
     env:
       PROJECT: ${{ github.event.repository.name }}
       REPO_OWNER: ${{ github.repository_owner }}
+      MIN_VERSION: "v1.4.0"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -65,7 +66,7 @@ jobs:
         name: Build Documentation
         run: |
           cd docs/sphinx_doc
-          python build_versions.py --tags -A
+          python build_versions.py --tags
       - name: Redirect index.html
         run: |
           REPOSITORY_OWNER="${GITHUB_REPOSITORY_OWNER}"
