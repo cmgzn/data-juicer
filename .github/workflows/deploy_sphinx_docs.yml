@@ -72,7 +72,6 @@ jobs:
           REPOSITORY_OWNER="${GITHUB_REPOSITORY_OWNER}"
           cd docs/sphinx_doc
           cp ./redirect.html build/index.html
-          sed -i "s/\[VERSION\]/$(python -c 'import data_juicer;print(data_juicer.__version__)')/g" build/index.html
           sed -i "s/\[REPOSITORY_OWNER\]/${REPOSITORY_OWNER}/g" build/index.html
           sed -i "s/\[PROJECT\]/${PROJECT}/g" build/index.html
           cp build/index.html build/404.html
@@ -82,7 +81,6 @@ jobs:
           name: SphinxDoc
           path: "docs/sphinx_doc/build"
       - uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')) }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: "docs/sphinx_doc/build"
