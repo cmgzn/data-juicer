@@ -1,0 +1,729 @@
+
+<!DOCTYPE html>
+
+
+<html lang="zh-CN" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>image_text_matching_filter &#8212; Data Juicer</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=b26f9bd0" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=91bfbbb6"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/translations.js?v=beaddf03"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/operators/filter/image_text_matching_filter';</script>
+    <script src="../../../_static/sidebar.js?v=9ff78125"></script>
+    <link rel="icon" href="../../../_static/icon.png"/>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search docs..."
+         aria-label="Search docs..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="版本警告"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index_ZH.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/icon.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/icon.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">Data Juicer</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../docs_index_ZH.html">
+    文档
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
+    Sandbox
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
+    Hub
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
+    Agents
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cmgzn/data-juicer" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="亮色"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="暗色"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><div class="navbar-switcher-container">
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        🌐 zh-CN
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content">
+        
+        <a href="../../../../../en/main/docs/operators/filter/image_text_matching_filter.html"
+           class="dropdown-item ">
+          English
+        </a>
+        
+        <a href="../../../../../zh_CN/main/docs/operators/filter/image_text_matching_filter.html"
+           class="dropdown-item ">
+          简体中文
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        📦 main
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content version-list">
+        
+        <a href="../../../../main/docs/operators/filter/image_text_matching_filter.html"
+           class="dropdown-item active">
+          main
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="当前页面">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../docs_index_ZH.html">
+    文档
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
+    Sandbox
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
+    Hub
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
+    Agents
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cmgzn/data-juicer" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="亮色"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="暗色"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><div class="navbar-switcher-container">
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        🌐 zh-CN
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content">
+        
+        <a href="../../../../../en/main/docs/operators/filter/image_text_matching_filter.html"
+           class="dropdown-item ">
+          English
+        </a>
+        
+        <a href="../../../../../zh_CN/main/docs/operators/filter/image_text_matching_filter.html"
+           class="dropdown-item ">
+          简体中文
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+
+  
+  <div class="navbar-dropdown">
+    <div class="navbar-dropdown-trigger">
+      <span class="dropdown-label">
+        📦 main
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+    </div>
+    <div class="navbar-dropdown-panel">
+      <div class="dropdown-content version-list">
+        
+        <a href="../../../../main/docs/operators/filter/image_text_matching_filter.html"
+           class="dropdown-item active">
+          main
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="章节导航">
+  <p class="bd-links__title" role="heading" aria-level="1">章节导航</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index_ZH.html" class="nav-link" aria-label="初始页面">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">image_text_matching_filter</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="image-text-matching-filter">
+<h1>image_text_matching_filter<a class="headerlink" href="#image-text-matching-filter" title="Link to this heading">#</a></h1>
+<p>Filter to keep samples with image-text matching scores within a specific range.</p>
+<p>This operator uses a Hugging Face BLIP model to compute the matching score between images and text. It keeps samples where the matching score falls within the specified <code class="docutils literal notranslate"><span class="pre">min_score</span></code> and <code class="docutils literal notranslate"><span class="pre">max_score</span></code> range. The key metric, <code class="docutils literal notranslate"><span class="pre">image_text_matching_score</span></code>, is computed for each image-text pair. If multiple images are associated with a single text, the scores can be reduced using 'avg', 'max', or 'min' modes. The operator supports horizontal and vertical flipping of images. Samples are kept based on either 'any' or 'all' strategy: 'any' keeps the sample if any image meets the condition, while 'all' keeps the sample only if all images meet the condition.</p>
+<p>用来保留图像-文本匹配分数在特定范围内的样本的过滤器。</p>
+<p>该算子使用 Hugging Face BLIP 模型计算图像和文本之间的匹配分数。它保留匹配分数落在指定 <code class="docutils literal notranslate"><span class="pre">min_score</span></code> 和 <code class="docutils literal notranslate"><span class="pre">max_score</span></code> 范围内的样本。关键指标 <code class="docutils literal notranslate"><span class="pre">image_text_matching_score</span></code> 为每个图像-文本对计算。如果多个图像与单个文本相关联，可以使用 'avg'、'max' 或 'min' 模式来归约分数。该算子支持图像的水平和垂直翻转。根据 'any' 或 'all' 策略保留样本：'any' 表示只要有任何一个图像满足条件就保留样本，而 'all' 则表示只有当所有图像都满足条件时才保留样本。</p>
+<p>Type 算子类型: <strong>filter</strong></p>
+<p>Tags 标签: cpu, hf, multimodal</p>
+<section id="parameter-configuration">
+<h2>🔧 Parameter Configuration 参数配置<a class="headerlink" href="#parameter-configuration" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>name 参数名</p></th>
+<th class="head"><p>type 类型</p></th>
+<th class="head"><p>default 默认值</p></th>
+<th class="head"><p>desc 说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hf_blip</span></code></p></td>
+<td><p>&lt;class 'str'&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'Salesforce/blip-itm-base-coco'</span></code></p></td>
+<td><p>blip model name on huggingface to compute the matching score between image and text.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">trust_remote_code</span></code></p></td>
+<td><p>&lt;class 'bool'&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>whether to trust the remote code of HF models.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min_score</span></code></p></td>
+<td><p>&lt;class 'float'&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.003</span></code></p></td>
+<td><p>The min matching score to keep samples.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_score</span></code></p></td>
+<td><p>&lt;class 'float'&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></td>
+<td><p>The max matching score to keep samples.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">horizontal_flip</span></code></p></td>
+<td><p>&lt;class 'bool'&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Flip image horizontally (left to right).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vertical_flip</span></code></p></td>
+<td><p>&lt;class 'bool'&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>Flip image vertically (top to bottom).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">any_or_all</span></code></p></td>
+<td><p>&lt;class 'str'&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'any'</span></code></p></td>
+<td><p>keep this sample with 'any' or 'all' strategy of all images. 'any': keep this sample if any images meet the condition. 'all': keep this sample only if all images meet the condition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reduce_mode</span></code></p></td>
+<td><p>&lt;class 'str'&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'avg'</span></code></p></td>
+<td><p>reduce mode when one text corresponds to multiple images in a chunk. 'avg': Take the average of multiple values 'max': Take the max of multiple values 'min': Take the min of multiple values</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">args</span></code></p></td>
+<td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
+<td><p>extra args</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">kwargs</span></code></p></td>
+<td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
+<td><p>extra args</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="effect-demonstration">
+<h2>📊 Effect demonstration 效果演示<a class="headerlink" href="#effect-demonstration" title="Link to this heading">#</a></h2>
+<section id="test-keep-any">
+<h3>test_keep_any<a class="headerlink" href="#test-keep-any" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ImageTextMatchingFilter</span><span class="p">(</span><span class="n">hf_blip</span><span class="o">=</span><span class="s1">&#39;Salesforce/blip-itm-base-coco&#39;</span><span class="p">,</span> <span class="n">reduce_mode</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span> <span class="n">any_or_all</span><span class="o">=</span><span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="n">min_score</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span> <span class="n">max_score</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="input-data">
+<h4>📥 input data 输入数据<a class="headerlink" href="#input-data" title="Link to this heading">#</a></h4>
+<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> text | 2 images</div><pre style="padding:6px; background:#f6f8fa; border-radius:4px; overflow-x:auto; white-space:pre; word-wrap:normal;">&lt;__dj__image&gt;a woman sitting on the beach with a dog &lt;|__dj__eoc|&gt; &lt;__dj__image&gt;a man sitting on the grass with a cat &lt;|__dj__eoc|&gt;</pre><div class="media-section" style="margin-bottom:8px;"><div class="media-label" style="font-size:0.85em; color:#666; margin-bottom:4px; font-weight:500;">blip.jpg|blip.jpg:</div><div class="image-grid"><img src="../../../tests/ops/data/blip.jpg" width="160" style="margin:4px;"/><img src="../../../tests/ops/data/blip.jpg" width="160" style="margin:4px;"/></div></div></div>
+</section>
+<section id="output-data">
+<h4>📤 output data 输出数据<a class="headerlink" href="#output-data" title="Link to this heading">#</a></h4>
+<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> text | 2 images</div><pre style="padding:6px; background:#f6f8fa; border-radius:4px; overflow-x:auto; white-space:pre; word-wrap:normal;">&lt;__dj__image&gt;a woman sitting on the beach with a dog &lt;|__dj__eoc|&gt; &lt;__dj__image&gt;a man sitting on the grass with a cat &lt;|__dj__eoc|&gt;</pre><div class="media-section" style="margin-bottom:8px;"><div class="media-label" style="font-size:0.85em; color:#666; margin-bottom:4px; font-weight:500;">blip.jpg|blip.jpg:</div><div class="image-grid"><img src="../../../tests/ops/data/blip.jpg" width="160" style="margin:4px;"/><img src="../../../tests/ops/data/blip.jpg" width="160" style="margin:4px;"/></div></div></div>
+</section>
+<section id="explanation">
+<h4>✨ explanation 解释<a class="headerlink" href="#explanation" title="Link to this heading">#</a></h4>
+<p>The operator keeps samples if any of the image-text pairs have a matching score within the specified range. In this case, at least one of the image-text pairs meets the criteria, so the sample is kept.
+算子在任何图像-文本对的匹配分数落在指定范围内时保留样本。此例中，至少有一组图像-文本对满足条件，因此该样本被保留。</p>
+</section>
+</section>
+<section id="test-keep-all">
+<h3>test_keep_all<a class="headerlink" href="#test-keep-all" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ImageTextMatchingFilter</span><span class="p">(</span><span class="n">hf_blip</span><span class="o">=</span><span class="s1">&#39;Salesforce/blip-itm-base-coco&#39;</span><span class="p">,</span> <span class="n">reduce_mode</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span> <span class="n">any_or_all</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">min_score</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span> <span class="n">max_score</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id1">
+<h4>📥 input data 输入数据<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> text | 2 images</div><pre style="padding:6px; background:#f6f8fa; border-radius:4px; overflow-x:auto; white-space:pre; word-wrap:normal;">&lt;__dj__image&gt;a woman sitting on the beach with a dog &lt;|__dj__eoc|&gt; &lt;__dj__image&gt;a man sitting on the grass with a cat &lt;|__dj__eoc|&gt;</pre><div class="media-section" style="margin-bottom:8px;"><div class="media-label" style="font-size:0.85em; color:#666; margin-bottom:4px; font-weight:500;">blip.jpg|blip.jpg:</div><div class="image-grid"><img src="../../../tests/ops/data/blip.jpg" width="160" style="margin:4px;"/><img src="../../../tests/ops/data/blip.jpg" width="160" style="margin:4px;"/></div></div></div>
+</section>
+<section id="id2">
+<h4>📤 output data 输出数据<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> text</div><pre style="padding:6px; background:#f6f8fa; border-radius:4px; overflow-x:auto; white-space:pre; word-wrap:normal;">[]</pre></div>
+</section>
+<section id="id3">
+<h4>✨ explanation 解释<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<p>The operator only keeps samples if all of the image-text pairs have a matching score within the specified range. In this case, not all image-text pairs meet the criteria, so the sample is removed.
+算子仅在所有图像-文本对的匹配分数都落在指定范围内时才保留样本。此例中，并非所有的图像-文本对都满足条件，因此该样本被移除。</p>
+</section>
+</section>
+</section>
+<section id="related-links">
+<h2>🔗 related links 相关链接<a class="headerlink" href="#related-links" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/data_juicer/ops/filter/image_text_matching_filter.py">source code 源代码</a></p></li>
+<li><p><a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/tests/ops/filter/test_image_text_matching_filter.py">unit test 单元测试</a></p></li>
+<li><p><a class="reference internal" href="../../Operators.html"><span class="std std-doc">Return operator list 返回算子列表</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 当前页面
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-configuration">🔧 Parameter Configuration 参数配置</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-demonstration">📊 Effect demonstration 效果演示</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-keep-any">test_keep_any</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">📥 input data 输入数据</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-data">📤 output data 输出数据</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation">✨ explanation 解释</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-keep-all">test_keep_all</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">📥 input data 输入数据</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">📤 output data 输出数据</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">✨ explanation 解释</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-links">🔗 related links 相关链接</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/docs/operators/filter/image_text_matching_filter.md.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Data-Juicer Team.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3创建。
+    <br/>
+  </p>
+</div>
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  使用 <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1构建.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -15,7 +15,7 @@ Data Processing for and with Foundation Models
    :maxdepth: 2
    :hidden:
 
-   docs_index/index
+   docs_index
 
 .. toctree::
    :maxdepth: 2
