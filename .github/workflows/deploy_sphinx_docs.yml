@@ -57,6 +57,7 @@ jobs:
           echo "Restoring custom files..."
           cp -rf /tmp/custom_files/source/* docs/sphinx_doc/source
           echo "Done!"
+          df -h
       - name: Get git tags
         run: |
           git fetch --all --tags
@@ -67,6 +68,7 @@ jobs:
         run: |
           cd docs/sphinx_doc
           python build_versions.py --tags
+          df -h
       - name: Redirect index.html
         run: |
           REPOSITORY_OWNER="${GITHUB_REPOSITORY_OWNER}"
@@ -75,6 +77,7 @@ jobs:
           sed -i "s/\[REPOSITORY_OWNER\]/${REPOSITORY_OWNER}/g" build/index.html
           sed -i "s/\[PROJECT\]/${PROJECT}/g" build/index.html
           cp build/index.html build/404.html
+          df -h
       - name: Upload Documentation
         uses: actions/upload-artifact@v4
         with:
