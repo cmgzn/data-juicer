@@ -27,6 +27,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: free disk space
+        run: | 
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo apt clean
+          docker rmi $(docker image ls -aq)
+          df -h
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@master
         with:
@@ -39,6 +46,14 @@ jobs:
         run: |
           uv pip install --system --upgrade pip
           uv pip install --system -e .[all]
+          df -h
+      - name: Inspect biggest packages
+        run: |
+          set -euxo pipefail
+          df -h
+          sudo du -h -d1 /usr/local/lib/python3.11/site-packages 2>/dev/null | sort -hr | head -n 80 || true
+          sudo du -h -d2 /usr/local/lib/python3.11/site-packages 2>/dev/null | sort -hr | head -n 80 || true
+          du -h -d2 ~/.cache 2>/dev/null | sort -hr | head -n 50 || true
       - name: Fetch Data-Juicer Sphinx Template
         run: |
           set -e
