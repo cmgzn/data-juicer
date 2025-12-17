@@ -23,13 +23,15 @@ jobs:
       REPO_OWNER: ${{ github.repository_owner }}
       MIN_TAG: v1.4.0
     steps:
-      - name: Mount /mnt into workspace
+      - name: Mount /mnt into workspace (writable)
         run: |
           set -euxo pipefail
           sudo mkdir -p /mnt/repo
+          sudo chown -R "$USER:$USER" /mnt/repo
           mkdir -p "$GITHUB_WORKSPACE/repo"
           sudo mount --bind /mnt/repo "$GITHUB_WORKSPACE/repo"
-          df -h
+          sudo chown -R "$USER:$USER" "$GITHUB_WORKSPACE/repo"
+          ls -ld /mnt/repo "$GITHUB_WORKSPACE/repo"
       - name: Checkout
         uses: actions/checkout@v4
         with:
