@@ -573,7 +573,7 @@
 <ul>
 <li><p><a class="reference internal" href="#providing-basic-op-functions-alpha-version">4.3.1 Providing Basic OP Functions (alpha version)</a></p></li>
 <li><p><a class="reference internal" href="#making-the-op-more-usable-beta-version">4.3.2 Making the OP More Usable (beta version)</a></p></li>
-<li><p><a class="reference internal" href="#making-op-faster-more-complete-stable-version">4.3.2 Making OP Faster &amp; More complete (stable version)</a></p></li>
+<li><p><a class="reference internal" href="#making-op-faster-more-complete-stable-version">4.3.3 Making OP Faster &amp; More complete (stable version)</a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#contribute-your-new-recipes">4.4 Contribute Your New Recipes</a></p></li>
@@ -986,7 +986,7 @@ and ② execute <code class="docutils literal notranslate"><span class="pre">pre
 </ul>
 </section>
 <section id="making-op-faster-more-complete-stable-version">
-<h4>4.3.2 Making OP Faster &amp; More complete (stable version)<a class="headerlink" href="#making-op-faster-more-complete-stable-version" title="Link to this heading">#</a></h4>
+<h4>4.3.3 Making OP Faster &amp; More complete (stable version)<a class="headerlink" href="#making-op-faster-more-complete-stable-version" title="Link to this heading">#</a></h4>
 <ul>
 <li><p>(<img alt="stable" src="https://img.shields.io/badge/stable-green?style=plastic" />) If Hugging Face models are used within an operator, you might want to leverage GPU acceleration. To achieve this, declare <code class="docutils literal notranslate"><span class="pre">_accelerator</span> <span class="pre">=</span> <span class="pre">'cuda'</span></code> in the OP’s constructor, and ensure that <code class="docutils literal notranslate"><span class="pre">compute_stats_single/batched</span></code> and <code class="docutils literal notranslate"><span class="pre">process_single/batched</span></code> methods accept an additional positional argument <code class="docutils literal notranslate"><span class="pre">rank</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ... (same as above)</span>
@@ -1276,7 +1276,7 @@ it’s calculated by this new OP.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contribute-your-new-ops-to-the-open-source-community">4.3 Contribute Your New OPs to the Open-Source Community</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-basic-op-functions-alpha-version">4.3.1 Providing Basic OP Functions (alpha version)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#making-the-op-more-usable-beta-version">4.3.2 Making the OP More Usable (beta version)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#making-op-faster-more-complete-stable-version">4.3.2 Making OP Faster &amp; More complete (stable version)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#making-op-faster-more-complete-stable-version">4.3.3 Making OP Faster &amp; More complete (stable version)</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contribute-your-new-recipes">4.4 Contribute Your New Recipes</a></li>

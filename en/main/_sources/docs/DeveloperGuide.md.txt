@@ -17,7 +17,7 @@
     - [4.3 Contribute Your New OPs to the Open-Source Community](#43-contribute-your-new-ops-to-the-open-source-community)
       - [4.3.1 Providing Basic OP Functions (alpha version)](#431-providing-basic-op-functions-alpha-version)
       - [4.3.2 Making the OP More Usable (beta version)](#432-making-the-op-more-usable-beta-version)
-      - [4.3.2 Making OP Faster \& More complete (stable version)](#432-making-op-faster--more-complete-stable-version)
+      - [4.3.3 Making OP Faster \& More complete (stable version)](#433-making-op-faster--more-complete-stable-version)
     - [4.4 Contribute Your New Recipes](#44-contribute-your-new-recipes)
 
 ## 1. Build Your Own OPs Quickly
@@ -403,7 +403,7 @@ if __name__ == '__main__':
    ```
 
 
-#### 4.3.2 Making OP Faster & More complete (stable version)
+#### 4.3.3 Making OP Faster & More complete (stable version)
 
 
 - (![stable](https://img.shields.io/badge/stable-green?style=plastic)) If Hugging Face models are used within an operator, you might want to leverage GPU acceleration. To achieve this, declare `_accelerator = 'cuda'` in the OP's constructor, and ensure that `compute_stats_single/batched` and `process_single/batched` methods accept an additional positional argument `rank`.
