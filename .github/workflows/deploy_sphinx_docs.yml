@@ -23,14 +23,31 @@ jobs:
       REPO_OWNER: ${{ github.repository_owner }}
       MIN_TAG: v1.4.0
     steps:
+      - name: Mount /mnt into workspace
+        run: |
+          set -euxo pipefail
+          sudo mkdir -p /mnt/repo
+          mkdir -p "$GITHUB_WORKSPACE/repo"
+          sudo mount --bind /mnt/repo "$GITHUB_WORKSPACE/repo"
+          df -h
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          path: repo
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@master
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Free disk space
+        run: | 
+          sudo swapoff -a
+          sudo rm -f /swapfile  
+          sudo apt-get autoremove -y >/dev/null 2>&1
+          sudo apt-get autoclean -y >/dev/null 2>&1
+          sudo rm -rf /usr/local/lib/android >/dev/null 2>&1
+          sudo apt clean
+          df -h
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
@@ -39,16 +56,13 @@ jobs:
         run: |
           uv pip install --system --upgrade pip
           uv pip install --system -e .[all]
-          df -h
-      - name: Inspect biggest packages
+      - name: Check disk
         run: |
           set -euxo pipefail
           df -h
-          sudo du -h -d1 /usr/local/lib/python3.11/site-packages 2>/dev/null | sort -hr | head -n 80 || true
-          sudo du -h -d2 /usr/local/lib/python3.11/site-packages 2>/dev/null | sort -hr | head -n 80 || true
-          du -h -d2 ~/.cache 2>/dev/null | sort -hr | head -n 50 || true
       - name: Fetch Data-Juicer Sphinx Template
         run: |
+          cd repo
           set -e
           echo "Cloning sphinx template..."
           git clone --depth=1 https://github.com/datajuicer/data-juicer-sphinx.git /tmp/template
@@ -74,13 +88,13 @@ jobs:
       - id: build
         name: Build Documentation
         run: |
-          cd docs/sphinx_doc
+          cd repo/docs/sphinx_doc
           python build_versions.py --tags
           df -h
       - name: Redirect index.html
         run: |
           REPOSITORY_OWNER="${GITHUB_REPOSITORY_OWNER}"
-          cd docs/sphinx_doc
+          cd repo/docs/sphinx_doc
           cp ./redirect.html build/index.html
           sed -i "s/\[REPOSITORY_OWNER\]/${REPOSITORY_OWNER}/g" build/index.html
           sed -i "s/\[PROJECT\]/${PROJECT}/g" build/index.html
@@ -90,9 +104,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SphinxDoc
-          path: "docs/sphinx_doc/build"
+          path: "repo/docs/sphinx_doc/build"
       - uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')) }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: "docs/sphinx_doc/build"
+          publish_dir: "repo/docs/sphinx_doc/build"
