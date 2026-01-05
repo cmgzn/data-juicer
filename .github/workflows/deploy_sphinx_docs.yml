@@ -22,6 +22,7 @@ jobs:
       PROJECT: ${{ github.event.repository.name }}
       REPO_OWNER: ${{ github.repository_owner }}
       MIN_TAG: v1.4.0
+      JUICER_API_URL: ${{ vars.JUICER_API_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,7 +44,7 @@ jobs:
         run: |
           set -e
           echo "Cloning sphinx template..."
-          git clone --depth=1 https://github.com/datajuicer/data-juicer-sphinx.git /tmp/template
+          git clone --depth=1 https://github.com/cmgzn/data-juicer-sphinx.git /tmp/template
           uv pip install --system -e /tmp/template
           if [ -d "docs/sphinx_doc/source" ]; then
             echo "Backing up custom files..."
