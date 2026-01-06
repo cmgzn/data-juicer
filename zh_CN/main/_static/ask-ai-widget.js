@@ -803,6 +803,15 @@ class AskAIWidget {
         ${escapedText}
       </h${token.depth}>`;
       };
+
+      renderer.link = (token) => {
+      const href = token.href;
+      const title = token.title ? ` title="${this.escapeHtml(token.title)}"` : '';
+      const text = token.text;
+      // open link in new tab
+      return `<a href="${href}"${title} target="_blank" rel="noopener noreferrer">${text}</a>`;
+    };
+
       return marked.parse(text, { renderer });
     } catch (error) {
       console.error('Markdown rendering error:', error);
