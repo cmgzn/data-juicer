@@ -416,6 +416,123 @@
   }
 }
 
+/* Tool Calls Inline (inside message bubble) */
+.tool-calls-inline {
+  margin-bottom: 12px;
+  background: rgba(102, 126, 234, 0.03);
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tool-calls-inline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: rgba(102, 126, 234, 0.08);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.tool-calls-inline-header:hover {
+  background: rgba(102, 126, 234, 0.12);
+}
+
+.tool-calls-inline-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #667eea;
+}
+
+.tool-calls-inline-toggle {
+  background: none;
+  border: none;
+  color: #667eea;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.tool-calls-inline-content {
+  padding: 8px;
+  display: block;
+}
+
+.tool-call-inline {
+  background: transparent;
+  border-left: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.tool-call-inline:last-child {
+  margin-bottom: 0;
+}
+
+.tool-inline-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tool-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.tool-name-inline {
+  font-weight: 600;
+  font-size: 12px;
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+.tool-status-inline {
+  font-size: 11px;
+  font-weight: 400;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #666;
+}
+
+.tool-status-inline.running::before {
+  content: '⏳';
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tool-args-preview {
+  font-size: 11px;
+  color: #666;
+  margin-top: 4px;
+  font-family: 'Courier New', monospace;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
 /* Dark mode support - follows page theme */
 .ask-ai-modal.theme-dark {
   background: #1e1e1e;
@@ -497,6 +614,48 @@
   border-radius: 8px;
   padding: 12px;
   overflow-x: auto;
+}
+
+/* Tool Calls Inline - Dark Mode */
+.ask-ai-modal.theme-dark .tool-calls-inline {
+  background: rgba(102, 126, 234, 0.08);
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+.ask-ai-modal.theme-dark .tool-calls-inline-header {
+  background: rgba(102, 126, 234, 0.15);
+}
+
+.ask-ai-modal.theme-dark .tool-calls-inline-header:hover {
+  background: rgba(102, 126, 234, 0.2);
+}
+
+.ask-ai-modal.theme-dark .tool-calls-inline-title {
+  color: #8fa4f3;
+}
+
+.ask-ai-modal.theme-dark .tool-calls-inline-toggle {
+  color: #8fa4f3;
+}
+
+.ask-ai-modal.theme-dark .tool-call-inline {
+  background: transparent;
+}
+
+.ask-ai-modal.theme-dark .tool-name-inline {
+  color: #e0e0e0;
+}
+
+.ask-ai-modal.theme-dark .tool-status-inline {
+  color: #999;
+}
+
+.ask-ai-modal.theme-dark .tool-status-inline.done::before {
+  color: #4caf50;
+}
+
+.ask-ai-modal.theme-dark .tool-args-preview {
+  color: #aaa;
 }
 
 .ask-ai-modal.theme-dark pre code {
