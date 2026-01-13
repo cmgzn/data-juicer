@@ -74,6 +74,9 @@ class AskAIWidget {
       onSend: () => this.sendMessage(),
     });
 
+    // Bind feedback button events
+    this.bindFeedbackEvents();
+
     // Observe theme changes
     this.ui.observeThemeChanges();
 
@@ -85,6 +88,107 @@ class AskAIWidget {
 
     // Add welcome message
     this.addWelcomeMessage();
+  }
+
+  /**
+   * Bind feedback button events using event delegation
+   */
+  bindFeedbackEvents() {
+    this.ui.messagesContainer.addEventListener('click', async (e) => {
+      const target = e.target.closest('.ask-ai-feedback-btn');
+      if (!target) return;
+
+      const messageWrapper = target.closest('.ask-ai-message-wrapper');
+      const messageDiv = messageWrapper?.querySelector('.ask-ai-message');
+      const messageId = messageDiv?.getAttribute('data-message-id');
+      
+      if (!messageId) {
+        console.warn('No message ID found for feedback');
+        return;
+      }
+
+      const feedbackType = target.getAttribute('data-feedback');
+
+      // Handle copy button
+      if (target.classList.contains('copy')) {
+        const feedbackDiv = target.closest('.ask-ai-feedback-actions');
+        const content = feedbackDiv?.getAttribute('data-content') || '';
+        await this.copyToClipboard(content);
+        return;
+      }
+
+      // Handle like/dislike buttons
+      if (feedbackType && messageId) {
+        await this.handleFeedback(target, messageId, feedbackType);
+        console.log('Submitting feedback with message ID:', messageId);
+      }
+    });
+  }
+
+  /**
+   * Handle feedback submission
+   * @param {HTMLElement} button - Feedback button element
+   * @param {string} messageId - Message ID
+   * @param {string} feedbackType - Feedback type ('like' or 'dislike')
+   */
+  async handleFeedback(button, messageId, feedbackType) {
+    // Get all feedback buttons for this message
+    const feedbackDiv = button.closest('.ask-ai-feedback-actions');
+    const allButtons = feedbackDiv.querySelectorAll('.ask-ai-feedback-btn[data-feedback]');
+
+    // Check if clicking the same button again (toggle off)
+    if (button.classList.contains('active')) {
+      button.classList.remove('active');
+      return;
+    }
+
+    // Remove active state from all feedback buttons
+    allButtons.forEach(btn => btn.classList.remove('active'));
+
+    // Add active state to clicked button
+    button.classList.add('active');
+
+    // Submit feedback to backend
+    const success = await this.api.submitFeedback(messageId, feedbackType);
+
+    if (success) {
+      console.log(`Feedback "${feedbackType}" submitted for message ${messageId}`);
+    } else {
+      console.error('Failed to submit feedback');
+      // Remove active state on failure
+      button.classList.remove('active');
+    }
+  }
+
+  /**
+   * Copy content to clipboard
+   * @param {string} content - Content to copy
+   */
+  async copyToClipboard(content) {
+    try {
+      await navigator.clipboard.writeText(content);
+      console.log('Content copied to clipboard');
+      
+      // Show a brief success message (optional)
+      // You could add a toast notification here if desired
+    } catch (error) {
+      console.error('Failed to copy to clipboard:', error);
+      
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = content;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        console.log('Content copied to clipboard (fallback)');
+      } catch (err) {
+        console.error('Fallback copy failed:', err);
+      }
+      document.body.removeChild(textArea);
+    }
   }
 
   /**
@@ -171,7 +275,7 @@ class AskAIWidget {
           }
         },
         // onComplete
-        (finalContent, serverMessageId) => {
+        (userMessage, assistantMessage) => {
           // Mark all remaining tools as done
           activeToolCalls.forEach(toolId => {
             this.ui.markToolCallDone(toolId);
@@ -181,18 +285,57 @@ class AskAIWidget {
           assistantMessageDiv.classList.remove('typing');
           // Remove the typingIndicator ID to prevent it from being deleted
           assistantMessageDiv.removeAttribute('id');
-          this.ui.updateMessageContent(assistantMessageDiv, finalContent);
-          if (serverMessageId) {
-            assistantMessageDiv.setAttribute('data-message-id', serverMessageId);
+          
+          // Extract content from assistantMessage
+          let finalContent = '';
+          if (typeof assistantMessage.content === 'string') {
+            finalContent = assistantMessage.content;
+          } else if (Array.isArray(assistantMessage.content)) {
+            finalContent = assistantMessage.content
+              .filter(c => c.type === "text")
+              .map(c => c.text)
+              .join('');
           }
+          
+          // Update with verified content
+          this.ui.updateMessageContent(assistantMessageDiv, finalContent);
+          
+          // Update with server-provided message ID
+          if (assistantMessage.id) {
+            assistantMessageDiv.setAttribute('data-message-id', assistantMessage.id);
+          }
+
+          const messageWrapper = assistantMessageDiv.parentNode;
+          const hasFeedbackButtons = messageWrapper?.classList.contains('ask-ai-message-wrapper') && 
+                                    messageWrapper.querySelector('.ask-ai-feedback-actions');
+          
+          if (!hasFeedbackButtons && assistantMessage.id) {
+            console.log('Adding feedback buttons in onComplete');
+            this.ui.addFeedbackButtons(assistantMessageDiv, assistantMessage.id, finalContent);
+          } else if (hasFeedbackButtons) {
+            // Update feedback buttons' message ID
+            const feedbackButtons = messageWrapper.querySelectorAll('.ask-ai-feedback-btn[data-message-id]');
+            feedbackButtons.forEach(btn => {
+              btn.setAttribute('data-message-id', assistantMessage.id);
+            });
+            
+            // Update stored content for copying
+            const feedbackDiv = messageWrapper.querySelector('.ask-ai-feedback-actions');
+            if (feedbackDiv) {
+              feedbackDiv.setAttribute('data-content', finalContent);
+            }
+          }
+          
           // Mark typing as complete
           this.ui.isTyping = false;
           this.ui.sendBtn.disabled = false;
+          
+          // Store message with server ID
           this.ui.messages.push({
             content: finalContent,
             type: 'assistant',
             timestamp: Date.now(),
-            messageId: serverMessageId || messageId
+            messageId: assistantMessage.id
           });
         },
         // onError
@@ -223,6 +366,7 @@ class AskAIWidget {
       console.error('Send message error:', error);
     }
   }
+
 
   /**
    * Clear conversation history

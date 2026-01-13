@@ -32,7 +32,13 @@ var AskAIWidget = (function () {
       usingTool: 'Using',
       toolCalls: 'Tool Calls',
       done: 'Done',
-      running: 'Running'
+      running: 'Running',
+      like: 'Like',
+      dislike: 'Dislike',
+      copyMarkdown: 'Copy Markdown',
+      feedbackSuccess: 'Thank you for your feedback!',
+      feedbackError: 'Failed to submit feedback',
+      copiedSuccess: 'Copied to clipboard!'
     },
     zh_CN: {
       title: 'Data-Juicer Q&A Copilot',
@@ -56,7 +62,13 @@ var AskAIWidget = (function () {
       usingTool: '正在调用',
       toolCalls: '工具调用',
       done: '完成',
-      running: '执行中'
+      running: '执行中',
+      like: '点赞',
+      dislike: '点踩',
+      copyMarkdown: '复制 Markdown',
+      feedbackSuccess: '感谢您的反馈！',
+      feedbackError: '提交反馈失败',
+      copiedSuccess: '已复制到剪贴板！'
     }
   };
 
@@ -110,25 +122,18 @@ var AskAIWidget = (function () {
       this.apiConnected = false;
     }
 
-    /**
-     * Get the API base URL from configuration
-     * @returns {string} API base URL
-     */
     getApiBaseUrl() {
-      // Prefer configuration from meta tags
       const metaApiUrl = document.querySelector('meta[name="juicer-api-url"]');
       if (metaApiUrl && metaApiUrl.content) {
         return metaApiUrl.content;
       }
 
-      // Get configuration from global variables
       if (window.JUICER_API_URL) {
         return window.JUICER_API_URL;
       }
 
       const currentHost = window.location.hostname;
 
-      // Default to localhost for development
       if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
         return 'http://localhost:8080';
       }
@@ -136,10 +141,6 @@ var AskAIWidget = (function () {
       return 'http://localhost:8080';
     }
 
-    /**
-     * Check if API service is available
-     * @returns {Promise<boolean>} True if API is connected
-     */
     async checkApiConnection() {
       try {
         const response = await fetch(`${this.getApiBaseUrl()}/health`, {
@@ -163,12 +164,13 @@ var AskAIWidget = (function () {
     }
 
     /**
-     * Load conversation history from server
-     * @returns {Promise<Array>} Array of historical messages
+     * Get the latest messages from server memory
+     * @param {number} limit - Number of recent messages to fetch (default: 10)
+     * @returns {Promise<Array>} Array of messages with complete metadata
      */
-    async loadConversationHistory() {
+    async getMemory(limit = 10) {
       if (!this.apiConnected) {
-        console.log('API not connected, skipping history load');
+        console.log('API not connected, skipping memory fetch');
         return [];
       }
 
@@ -188,7 +190,8 @@ var AskAIWidget = (function () {
           session_id: this.sessionId,
           user_id: this.sessionId,
         };
-        console.log('Loading conversation history for session:', this.sessionId);
+        
+        console.log('Fetching memory for session:', this.sessionId);
 
         const response = await fetch(`${this.getApiBaseUrl()}/memory`, {
           method: 'POST',
@@ -201,22 +204,30 @@ var AskAIWidget = (function () {
         if (response.ok) {
           const data = await response.json();
           const messages = data.messages || [];
-          console.log('Loaded', messages.length, 'historical messages');
-          return messages;
+          console.log('Memory fetched:', messages.length, 'messages');
+          
+          // Return latest messages if limit is specified
+          return limit > 0 ? messages.slice(-limit) : messages;
         } else {
-          console.warn('Failed to load conversation history:', response.status);
+          console.warn('Failed to fetch memory:', response.status);
           return [];
         }
       } catch (error) {
-        console.warn('Error loading conversation history:', error);
+        console.warn('Error fetching memory:', error);
         return [];
       }
     }
 
     /**
-     * Clear conversation history on server
-     * @returns {Promise<boolean>} True if successful
+     * Load conversation history from server
+     * @returns {Promise<Array>} Array of historical messages
      */
+    async loadConversationHistory() {
+      const messages = await this.getMemory(0); // Get all messages
+      console.log('Loaded', messages.length, 'historical messages');
+      return messages;
+    }
+
     async clearConversation() {
       try {
         const requestBody = {
@@ -258,18 +269,19 @@ var AskAIWidget = (function () {
     }
 
     /**
-     * Get AI response using streaming
+     * Get AI response using streaming, then sync with server memory
      * @param {string} message - User message
      * @param {Function} onContentUpdate - Callback for content updates (text)
      * @param {Function} onToolUse - Callback for tool usage (toolName, toolArgs, callId)
-     * @param {Function} onComplete - Callback when stream completes (finalContent, messageId)
+     * @param {Function} onComplete - Callback when complete with verified messages (userMessage, assistantMessage)
      * @param {Function} onError - Callback for errors (error)
      * @param {Function} onToolComplete - Callback when tool execution completes (callId)
      */
     async getAIResponseStream(message, onContentUpdate, onToolUse, onComplete, onError, onToolComplete) {
       let currentStreamContent = '';
-      let messageId = `temp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      let streamMessageId = `temp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       let hasReceivedContent = false;
+      let streamCompletedSuccessfully = false;
 
       try {
         const requestBody = {
@@ -289,7 +301,6 @@ var AskAIWidget = (function () {
         };
 
         console.log('Sending streaming request to:', `${this.getApiBaseUrl()}/process`);
-        console.log('Request body:', requestBody);
 
         const response = await fetch(`${this.getApiBaseUrl()}/process`, {
           method: 'POST',
@@ -308,6 +319,7 @@ var AskAIWidget = (function () {
         const decoder = new TextDecoder();
         let buffer = '';
 
+        // Process stream
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
@@ -324,11 +336,11 @@ var AskAIWidget = (function () {
 
             try {
               const data = JSON.parse(jsonString);
-              console.log('Parsed SSE event:', data);
 
               // End of stream
               if (data.object === "response" && data.status === "completed") {
                 console.log('Stream ended normally.');
+                streamCompletedSuccessfully = true;
                 break;
               }
 
@@ -337,12 +349,9 @@ var AskAIWidget = (function () {
                 throw new Error(data.error.message || 'An error occurred during processing.');
               }
 
-              // Handle tool use: plugin_call
+              // Handle tool use
               if (data.object === "message" && data.type === "plugin_call") {
                 if (Array.isArray(data.content)) {
-                  // content is an array with 2 elements:
-                  // index 0: has name, call_id, but empty arguments
-                  // index 1: has complete arguments
                   const toolCallWithId = data.content[0]?.type === "data" ? data.content[0].data : null;
                   const toolCallWithArgs = data.content.length > 1 ? data.content[1] : data.content[0];
                   const toolCall = toolCallWithArgs?.type === "data" ? toolCallWithArgs.data : null;
@@ -351,7 +360,6 @@ var AskAIWidget = (function () {
                     const toolName = toolCall.name || 'Unknown Tool';
                     let toolArgs = toolCall.arguments || {};
                     
-                    // Parse arguments if it's a JSON string
                     if (typeof toolArgs === 'string') {
                       try {
                         toolArgs = JSON.parse(toolArgs);
@@ -361,16 +369,14 @@ var AskAIWidget = (function () {
                       }
                     }
                     
-                    // Get call_id from the first element
                     const callId = toolCallWithId?.call_id || null;
-                    
                     console.log('Tool call detected:', { toolName, toolArgs, callId });
                     onToolUse(toolName, toolArgs, callId);
                   }
                 }
               }
 
-              // Handle tool output: plugin_call_output
+              // Handle tool output
               if (data.object === "message" && data.type === "plugin_call_output") {
                 if (Array.isArray(data.content)) {
                   const outputData = data.content.find(item => item.type === "data")?.data;
@@ -421,42 +427,127 @@ var AskAIWidget = (function () {
                   }
                 }
 
-                // Use server-provided message ID
                 if (data.id) {
-                  messageId = data.id;
-                  console.log('Using server message ID:', data.id);
+                  streamMessageId = data.id;
+                  console.log('Received message ID from stream:', data.id);
                 }
               }
             } catch (parseError) {
-              console.warn('Failed to parse SSE data:', parseError, 'Raw:', jsonString);
+              console.warn('Failed to parse SSE data:', parseError);
             }
           }
         }
 
-        // Final callback
+        // Validate stream completion
         if (!hasReceivedContent || !currentStreamContent.trim()) {
+          console.warn('Stream completed but no content received, will fetch from memory');
           currentStreamContent = this.i18n.noResponse;
         }
+
+        // ✨ Fetch from memory to get verified messages with complete metadata
+        console.log('Stream ended, fetching latest messages from memory...');
+        const recentMessages = await this.getMemory(2); // Get last 2 messages (user + assistant)
         
+        if (recentMessages.length >= 2) {
+          const userMessage = recentMessages[recentMessages.length - 2];
+          const assistantMessage = recentMessages[recentMessages.length - 1];
+          
+          // Validate these are the messages we expect
+          if (userMessage.role === 'user' && assistantMessage.role === 'assistant') {
+            console.log('✓ Memory sync successful');
+            console.log('  User message ID:', userMessage.id);
+            console.log('  Assistant message ID:', assistantMessage.id);
+            
+            // Extract assistant content
+            let verifiedContent = '';
+            if (Array.isArray(assistantMessage.content)) {
+              verifiedContent = assistantMessage.content
+                .filter(c => c.type === "text")
+                .map(c => c.text)
+                .join('');
+            }
+            
+            // Use verified content if stream was incomplete or network was unstable
+            if (verifiedContent && (!streamCompletedSuccessfully || verifiedContent !== currentStreamContent)) {
+              console.log('⚠ Stream content differs from server, using server version');
+              currentStreamContent = verifiedContent;
+              // Update UI with correct content
+              if (onContentUpdate) {
+                onContentUpdate(currentStreamContent);
+              }
+            }
+            
+            if (onComplete) {
+              onComplete(userMessage, assistantMessage);
+            }
+            return;
+          }
+        }
+        
+        // Fallback: memory sync failed, use stream data
+        console.warn('⚠ Could not verify messages from memory, using stream data');
         if (onComplete) {
-          onComplete(currentStreamContent, messageId);
+          // Create message objects from stream data
+          const fallbackUserMessage = {
+            id: `user_${streamMessageId}`,
+            role: 'user',
+            content: [{ type: 'text', text: message.trim() }]
+          };
+          const fallbackAssistantMessage = {
+            id: streamMessageId,
+            role: 'assistant',
+            content: [{ type: 'text', text: currentStreamContent }]
+          };
+          onComplete(fallbackUserMessage, fallbackAssistantMessage);
         }
 
       } catch (error) {
-        console.error('Fetch error:', error);
+        console.error('Stream error:', error);
         if (onError) {
           onError(error);
         }
       }
     }
 
-    /**
-     * Get offline response when API is not available
-     * @param {string} message - User message (unused)
-     * @returns {string} Offline response message
-     */
     getOfflineResponse(message) {
       return this.i18n.offlineResponse;
+    }
+
+    async submitFeedback(messageId, feedbackType, comment = '') {
+      try {
+        const requestBody = {
+          session_id: this.sessionId,
+          user_id: this.sessionId,
+          data: {
+            feedback_type: feedbackType,
+            message_id: messageId,
+            comment: comment
+          }
+        };
+
+        console.log('Submitting feedback:', requestBody);
+
+        const response = await fetch(`${this.getApiBaseUrl()}/feedback`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-session-id': this.sessionId
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Feedback submitted successfully:', data);
+          return data.status === 'ok';
+        } else {
+          console.error('Failed to submit feedback:', response.status);
+          return false;
+        }
+      } catch (error) {
+        console.error('Error submitting feedback:', error);
+        return false;
+      }
     }
   }
 
@@ -697,6 +788,10 @@ var AskAIWidget = (function () {
       const messageDiv = document.createElement('div');
       messageDiv.className = `ask-ai-message ${type}`;
 
+      // Generate unique message ID if not provided
+      const msgId = messageId || `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      messageDiv.setAttribute('data-message-id', msgId);
+
       // For assistant messages, render as markdown; for user messages, keep as plain text
       if (type === 'assistant') {
         messageDiv.innerHTML = this.renderMarkdown(content);
@@ -704,11 +799,17 @@ var AskAIWidget = (function () {
         messageDiv.textContent = content;
       }
 
-      // Generate unique message ID if not provided
-      const msgId = messageId || `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      messageDiv.setAttribute('data-message-id', msgId);
-
+      // Add to DOM first
       this.messagesContainer.appendChild(messageDiv);
+
+      // Then add feedback buttons for assistant messages after DOM insertion
+      if (type === 'assistant') {
+        // Use setTimeout to ensure DOM is fully updated
+        setTimeout(() => {
+          this.addFeedbackButtons(messageDiv, msgId, content);
+        }, 0);
+      }
+
       this.scrollToBottom();
 
       // Store message
@@ -716,6 +817,63 @@ var AskAIWidget = (function () {
 
       return messageDiv;
     }
+
+    /**
+     * Add feedback buttons to assistant message
+     * @param {HTMLElement} messageDiv - Message element
+     * @param {string} messageId - Message ID
+     * @param {string} content - Message content for copying
+     */
+    addFeedbackButtons(messageDiv, messageId, content) {
+      if (!messageDiv || !messageDiv.parentNode) {
+        console.warn('Message div not in DOM yet, retrying...');
+        // Retry after a short delay
+        setTimeout(() => {
+          if (messageDiv && messageDiv.parentNode) {
+            this.addFeedbackButtons(messageDiv, messageId, content);
+          }
+        }, 10);
+        return;
+      }
+
+      // Check if wrapper already exists to avoid duplicate creation
+      let messageWrapper = messageDiv.parentNode;
+      if (!messageWrapper || !messageWrapper.classList.contains('ask-ai-message-wrapper')) {
+        // Create wrapper
+        messageWrapper = document.createElement('div');
+        messageWrapper.className = 'ask-ai-message-wrapper';
+
+        // Insert wrapper and move message
+        const parentContainer = messageDiv.parentNode;
+        parentContainer.insertBefore(messageWrapper, messageDiv);
+        messageWrapper.appendChild(messageDiv);
+      }
+
+      // Check if feedback buttons already exist to avoid duplicate addition
+      let feedbackDiv = messageWrapper.querySelector('.ask-ai-feedback-actions');
+      if (!feedbackDiv) {
+        feedbackDiv = document.createElement('div');
+        feedbackDiv.className = 'ask-ai-feedback-actions';
+        feedbackDiv.innerHTML = `
+        <button class="ask-ai-feedback-btn like" data-feedback="like" title="${this.i18n.like}">
+          <i class="fa-regular fa-thumbs-up"></i>
+        </button>
+        <button class="ask-ai-feedback-btn dislike" data-feedback="dislike" title="${this.i18n.dislike}">
+          <i class="fa-regular fa-thumbs-down"></i>
+        </button>
+        <button class="ask-ai-feedback-btn copy" title="${this.i18n.copyMarkdown}">
+          <i class="fa-regular fa-copy"></i>
+        </button>
+      `;
+
+        // Append to wrapper
+        messageWrapper.appendChild(feedbackDiv);
+      }
+
+      // Store content for copying
+      feedbackDiv.setAttribute('data-content', content);
+    }
+
 
     /**
      * Update an existing assistant message
@@ -731,29 +889,47 @@ var AskAIWidget = (function () {
     }
 
     /**
-     * Update message content while preserving tool calls
+     * Update message content while preserving tool calls and feedback buttons
      * @param {HTMLElement} messageDiv - Message element
      * @param {string} content - New content
      */
     updateMessageContent(messageDiv, content) {
       if (!messageDiv) return;
 
-      // Check if there's a tool calls container
-      const toolContainer = messageDiv.querySelector('.tool-calls-inline');
+      const messageId = messageDiv.getAttribute('data-message-id');
       
-      if (toolContainer) {
+      // Check if there's a tool calls container or feedback buttons
+      const toolContainer = messageDiv.querySelector('.tool-calls-inline');
+      const feedbackContainer = messageDiv.querySelector('.ask-ai-feedback');
+      
+      if (toolContainer || feedbackContainer) {
         // Find or create content wrapper
         let contentWrapper = messageDiv.querySelector('.message-content');
         if (!contentWrapper) {
           contentWrapper = document.createElement('div');
           contentWrapper.className = 'message-content';
-          messageDiv.appendChild(contentWrapper);
+          // Insert before tool container or feedback buttons
+          if (toolContainer) {
+            messageDiv.insertBefore(contentWrapper, toolContainer.nextSibling);
+          } else if (feedbackContainer) {
+            messageDiv.insertBefore(contentWrapper, feedbackContainer);
+          } else {
+            messageDiv.appendChild(contentWrapper);
+          }
         }
         // Update only the content part
         contentWrapper.innerHTML = this.renderMarkdown(content);
       } else {
-        // No tool calls, safe to replace entire innerHTML
+        // No tool calls or feedback, replace innerHTML and add feedback buttons
         messageDiv.innerHTML = this.renderMarkdown(content);
+        if (messageId) {
+          this.addFeedbackButtons(messageDiv, messageId, content);
+        }
+      }
+      
+      // Update stored content for copying
+      if (feedbackContainer) {
+        feedbackContainer.setAttribute('data-content', content);
       }
       
       this.scrollToBottom();
@@ -904,7 +1080,7 @@ var AskAIWidget = (function () {
      */
     clearMessages() {
       this.messages = [];
-      const existingMessages = this.messagesContainer.querySelectorAll('.ask-ai-message');
+      const existingMessages = this.messagesContainer.querySelectorAll('.ask-ai-message, .ask-ai-message-wrapper');
       existingMessages.forEach(msg => msg.remove());
 
       // Remove welcome message if it exists
@@ -1119,6 +1295,9 @@ var AskAIWidget = (function () {
         onSend: () => this.sendMessage(),
       });
 
+      // Bind feedback button events
+      this.bindFeedbackEvents();
+
       // Observe theme changes
       this.ui.observeThemeChanges();
 
@@ -1130,6 +1309,107 @@ var AskAIWidget = (function () {
 
       // Add welcome message
       this.addWelcomeMessage();
+    }
+
+    /**
+     * Bind feedback button events using event delegation
+     */
+    bindFeedbackEvents() {
+      this.ui.messagesContainer.addEventListener('click', async (e) => {
+        const target = e.target.closest('.ask-ai-feedback-btn');
+        if (!target) return;
+
+        const messageWrapper = target.closest('.ask-ai-message-wrapper');
+        const messageDiv = messageWrapper?.querySelector('.ask-ai-message');
+        const messageId = messageDiv?.getAttribute('data-message-id');
+        
+        if (!messageId) {
+          console.warn('No message ID found for feedback');
+          return;
+        }
+
+        const feedbackType = target.getAttribute('data-feedback');
+
+        // Handle copy button
+        if (target.classList.contains('copy')) {
+          const feedbackDiv = target.closest('.ask-ai-feedback-actions');
+          const content = feedbackDiv?.getAttribute('data-content') || '';
+          await this.copyToClipboard(content);
+          return;
+        }
+
+        // Handle like/dislike buttons
+        if (feedbackType && messageId) {
+          await this.handleFeedback(target, messageId, feedbackType);
+          console.log('Submitting feedback with message ID:', messageId);
+        }
+      });
+    }
+
+    /**
+     * Handle feedback submission
+     * @param {HTMLElement} button - Feedback button element
+     * @param {string} messageId - Message ID
+     * @param {string} feedbackType - Feedback type ('like' or 'dislike')
+     */
+    async handleFeedback(button, messageId, feedbackType) {
+      // Get all feedback buttons for this message
+      const feedbackDiv = button.closest('.ask-ai-feedback-actions');
+      const allButtons = feedbackDiv.querySelectorAll('.ask-ai-feedback-btn[data-feedback]');
+
+      // Check if clicking the same button again (toggle off)
+      if (button.classList.contains('active')) {
+        button.classList.remove('active');
+        return;
+      }
+
+      // Remove active state from all feedback buttons
+      allButtons.forEach(btn => btn.classList.remove('active'));
+
+      // Add active state to clicked button
+      button.classList.add('active');
+
+      // Submit feedback to backend
+      const success = await this.api.submitFeedback(messageId, feedbackType);
+
+      if (success) {
+        console.log(`Feedback "${feedbackType}" submitted for message ${messageId}`);
+      } else {
+        console.error('Failed to submit feedback');
+        // Remove active state on failure
+        button.classList.remove('active');
+      }
+    }
+
+    /**
+     * Copy content to clipboard
+     * @param {string} content - Content to copy
+     */
+    async copyToClipboard(content) {
+      try {
+        await navigator.clipboard.writeText(content);
+        console.log('Content copied to clipboard');
+        
+        // Show a brief success message (optional)
+        // You could add a toast notification here if desired
+      } catch (error) {
+        console.error('Failed to copy to clipboard:', error);
+        
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = content;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          console.log('Content copied to clipboard (fallback)');
+        } catch (err) {
+          console.error('Fallback copy failed:', err);
+        }
+        document.body.removeChild(textArea);
+      }
     }
 
     /**
@@ -1216,7 +1496,7 @@ var AskAIWidget = (function () {
             }
           },
           // onComplete
-          (finalContent, serverMessageId) => {
+          (userMessage, assistantMessage) => {
             // Mark all remaining tools as done
             activeToolCalls.forEach(toolId => {
               this.ui.markToolCallDone(toolId);
@@ -1226,18 +1506,57 @@ var AskAIWidget = (function () {
             assistantMessageDiv.classList.remove('typing');
             // Remove the typingIndicator ID to prevent it from being deleted
             assistantMessageDiv.removeAttribute('id');
-            this.ui.updateMessageContent(assistantMessageDiv, finalContent);
-            if (serverMessageId) {
-              assistantMessageDiv.setAttribute('data-message-id', serverMessageId);
+            
+            // Extract content from assistantMessage
+            let finalContent = '';
+            if (typeof assistantMessage.content === 'string') {
+              finalContent = assistantMessage.content;
+            } else if (Array.isArray(assistantMessage.content)) {
+              finalContent = assistantMessage.content
+                .filter(c => c.type === "text")
+                .map(c => c.text)
+                .join('');
             }
+            
+            // Update with verified content
+            this.ui.updateMessageContent(assistantMessageDiv, finalContent);
+            
+            // Update with server-provided message ID
+            if (assistantMessage.id) {
+              assistantMessageDiv.setAttribute('data-message-id', assistantMessage.id);
+            }
+
+            const messageWrapper = assistantMessageDiv.parentNode;
+            const hasFeedbackButtons = messageWrapper?.classList.contains('ask-ai-message-wrapper') && 
+                                      messageWrapper.querySelector('.ask-ai-feedback-actions');
+            
+            if (!hasFeedbackButtons && assistantMessage.id) {
+              console.log('Adding feedback buttons in onComplete');
+              this.ui.addFeedbackButtons(assistantMessageDiv, assistantMessage.id, finalContent);
+            } else if (hasFeedbackButtons) {
+              // Update feedback buttons' message ID
+              const feedbackButtons = messageWrapper.querySelectorAll('.ask-ai-feedback-btn[data-message-id]');
+              feedbackButtons.forEach(btn => {
+                btn.setAttribute('data-message-id', assistantMessage.id);
+              });
+              
+              // Update stored content for copying
+              const feedbackDiv = messageWrapper.querySelector('.ask-ai-feedback-actions');
+              if (feedbackDiv) {
+                feedbackDiv.setAttribute('data-content', finalContent);
+              }
+            }
+            
             // Mark typing as complete
             this.ui.isTyping = false;
             this.ui.sendBtn.disabled = false;
+            
+            // Store message with server ID
             this.ui.messages.push({
               content: finalContent,
               type: 'assistant',
               timestamp: Date.now(),
-              messageId: serverMessageId || messageId
+              messageId: assistantMessage.id
             });
           },
           // onError
@@ -1268,6 +1587,7 @@ var AskAIWidget = (function () {
         console.error('Send message error:', error);
       }
     }
+
 
     /**
      * Clear conversation history

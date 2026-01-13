@@ -235,6 +235,10 @@ export class AskAIUI {
     const messageDiv = document.createElement('div');
     messageDiv.className = `ask-ai-message ${type}`;
 
+    // Generate unique message ID if not provided
+    const msgId = messageId || `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    messageDiv.setAttribute('data-message-id', msgId);
+
     // For assistant messages, render as markdown; for user messages, keep as plain text
     if (type === 'assistant') {
       messageDiv.innerHTML = this.renderMarkdown(content);
@@ -242,11 +246,17 @@ export class AskAIUI {
       messageDiv.textContent = content;
     }
 
-    // Generate unique message ID if not provided
-    const msgId = messageId || `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    messageDiv.setAttribute('data-message-id', msgId);
-
+    // Add to DOM first
     this.messagesContainer.appendChild(messageDiv);
+
+    // Then add feedback buttons for assistant messages after DOM insertion
+    if (type === 'assistant') {
+      // Use setTimeout to ensure DOM is fully updated
+      setTimeout(() => {
+        this.addFeedbackButtons(messageDiv, msgId, content);
+      }, 0);
+    }
+
     this.scrollToBottom();
 
     // Store message
@@ -254,6 +264,63 @@ export class AskAIUI {
 
     return messageDiv;
   }
+
+  /**
+   * Add feedback buttons to assistant message
+   * @param {HTMLElement} messageDiv - Message element
+   * @param {string} messageId - Message ID
+   * @param {string} content - Message content for copying
+   */
+  addFeedbackButtons(messageDiv, messageId, content) {
+    if (!messageDiv || !messageDiv.parentNode) {
+      console.warn('Message div not in DOM yet, retrying...');
+      // Retry after a short delay
+      setTimeout(() => {
+        if (messageDiv && messageDiv.parentNode) {
+          this.addFeedbackButtons(messageDiv, messageId, content);
+        }
+      }, 10);
+      return;
+    }
+
+    // Check if wrapper already exists to avoid duplicate creation
+    let messageWrapper = messageDiv.parentNode;
+    if (!messageWrapper || !messageWrapper.classList.contains('ask-ai-message-wrapper')) {
+      // Create wrapper
+      messageWrapper = document.createElement('div');
+      messageWrapper.className = 'ask-ai-message-wrapper';
+
+      // Insert wrapper and move message
+      const parentContainer = messageDiv.parentNode;
+      parentContainer.insertBefore(messageWrapper, messageDiv);
+      messageWrapper.appendChild(messageDiv);
+    }
+
+    // Check if feedback buttons already exist to avoid duplicate addition
+    let feedbackDiv = messageWrapper.querySelector('.ask-ai-feedback-actions');
+    if (!feedbackDiv) {
+      feedbackDiv = document.createElement('div');
+      feedbackDiv.className = 'ask-ai-feedback-actions';
+      feedbackDiv.innerHTML = `
+        <button class="ask-ai-feedback-btn like" data-feedback="like" title="${this.i18n.like}">
+          <i class="fa-regular fa-thumbs-up"></i>
+        </button>
+        <button class="ask-ai-feedback-btn dislike" data-feedback="dislike" title="${this.i18n.dislike}">
+          <i class="fa-regular fa-thumbs-down"></i>
+        </button>
+        <button class="ask-ai-feedback-btn copy" title="${this.i18n.copyMarkdown}">
+          <i class="fa-regular fa-copy"></i>
+        </button>
+      `;
+
+      // Append to wrapper
+      messageWrapper.appendChild(feedbackDiv);
+    }
+
+    // Store content for copying
+    feedbackDiv.setAttribute('data-content', content);
+  }
+
 
   /**
    * Update an existing assistant message
@@ -269,29 +336,47 @@ export class AskAIUI {
   }
 
   /**
-   * Update message content while preserving tool calls
+   * Update message content while preserving tool calls and feedback buttons
    * @param {HTMLElement} messageDiv - Message element
    * @param {string} content - New content
    */
   updateMessageContent(messageDiv, content) {
     if (!messageDiv) return;
 
-    // Check if there's a tool calls container
-    const toolContainer = messageDiv.querySelector('.tool-calls-inline');
+    const messageId = messageDiv.getAttribute('data-message-id');
     
-    if (toolContainer) {
+    // Check if there's a tool calls container or feedback buttons
+    const toolContainer = messageDiv.querySelector('.tool-calls-inline');
+    const feedbackContainer = messageDiv.querySelector('.ask-ai-feedback');
+    
+    if (toolContainer || feedbackContainer) {
       // Find or create content wrapper
       let contentWrapper = messageDiv.querySelector('.message-content');
       if (!contentWrapper) {
         contentWrapper = document.createElement('div');
         contentWrapper.className = 'message-content';
-        messageDiv.appendChild(contentWrapper);
+        // Insert before tool container or feedback buttons
+        if (toolContainer) {
+          messageDiv.insertBefore(contentWrapper, toolContainer.nextSibling);
+        } else if (feedbackContainer) {
+          messageDiv.insertBefore(contentWrapper, feedbackContainer);
+        } else {
+          messageDiv.appendChild(contentWrapper);
+        }
       }
       // Update only the content part
       contentWrapper.innerHTML = this.renderMarkdown(content);
     } else {
-      // No tool calls, safe to replace entire innerHTML
+      // No tool calls or feedback, replace innerHTML and add feedback buttons
       messageDiv.innerHTML = this.renderMarkdown(content);
+      if (messageId) {
+        this.addFeedbackButtons(messageDiv, messageId, content);
+      }
+    }
+    
+    // Update stored content for copying
+    if (feedbackContainer) {
+      feedbackContainer.setAttribute('data-content', content);
     }
     
     this.scrollToBottom();
@@ -442,7 +527,7 @@ export class AskAIUI {
    */
   clearMessages() {
     this.messages = [];
-    const existingMessages = this.messagesContainer.querySelectorAll('.ask-ai-message');
+    const existingMessages = this.messagesContainer.querySelectorAll('.ask-ai-message, .ask-ai-message-wrapper');
     existingMessages.forEach(msg => msg.remove());
 
     // Remove welcome message if it exists

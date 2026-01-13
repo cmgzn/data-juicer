@@ -25,7 +25,13 @@ export const I18N = {
     usingTool: 'Using',
     toolCalls: 'Tool Calls',
     done: 'Done',
-    running: 'Running'
+    running: 'Running',
+    like: 'Like',
+    dislike: 'Dislike',
+    copyMarkdown: 'Copy Markdown',
+    feedbackSuccess: 'Thank you for your feedback!',
+    feedbackError: 'Failed to submit feedback',
+    copiedSuccess: 'Copied to clipboard!'
   },
   zh_CN: {
     title: 'Data-Juicer Q&A Copilot',
@@ -49,7 +55,13 @@ export const I18N = {
     usingTool: '正在调用',
     toolCalls: '工具调用',
     done: '完成',
-    running: '执行中'
+    running: '执行中',
+    like: '点赞',
+    dislike: '点踩',
+    copyMarkdown: '复制 Markdown',
+    feedbackSuccess: '感谢您的反馈！',
+    feedbackError: '提交反馈失败',
+    copiedSuccess: '已复制到剪贴板！'
   }
 };
 
