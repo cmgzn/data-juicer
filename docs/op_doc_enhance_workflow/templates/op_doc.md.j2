@@ -13,8 +13,8 @@ Tags 标签: {{ tags | join(', ') }}
 | `{{ p.name }}` | {{ p.type }} | `{{ p.default }}` | {{ p.desc }} |
 {% endfor %}
 
-## 📊 Effect demonstration 效果演示
 {% if examples %}
+## 📊 Effect demonstration 效果演示
 {% for example in examples %}
 ### {{ example.method }}
 {% if example.op_code %}
@@ -37,8 +37,6 @@ Tags 标签: {{ tags | join(', ') }}
 {% endif %}
 
 {% endfor %}
-{% else %}
-not available 暂无
 {% endif %}
 
 ## 🔗 related links 相关链接
