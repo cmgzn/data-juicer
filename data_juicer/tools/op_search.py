@@ -7,17 +7,16 @@ import re
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from loguru import logger
 from docstring_parser import parse
+from loguru import logger
 
 from data_juicer.format.formatter import FORMATTERS
 from data_juicer.ops import OPERATORS
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
-op_type_list = [
-    "aggregator", "deduplicator", "filter", "grouper", "mapper", "pipeline", "selector", "formatter"
-]
+op_type_list = ["aggregator", "deduplicator", "filter", "grouper", "mapper", "pipeline", "selector", "formatter"]
+
 
 def get_source_path(cls):
     abs_path = Path(inspect.getfile(cls))
@@ -37,7 +36,7 @@ def find_test_by_searching_content(tests_dir, test_class_name):
             with open(file, "r", encoding="utf-8") as f:
                 if test_class_name in f.read():
                     return Path(file).relative_to(PROJECT_ROOT)
-        except:
+        except Exception:
             continue
     return None
 
@@ -73,7 +72,7 @@ def analyze_resource_tag(cls):
     """
     if "_accelerator" in cls.__dict__:
         accelerator_val = cls._accelerator
-        if accelerator_val == 'cuda':
+        if accelerator_val == "cuda":
             return ["gpu"]
         else:
             return ["cpu"]
