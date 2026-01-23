@@ -169,7 +169,7 @@ class OPRecord:
         self.name = name
         self.type = op_type or op_cls.__module__.split(".")[2].lower()
         if self.type not in op_type_list:
-            self.type = op_cls.__base__.__name__.lower()
+            self.type = self._search_mro_for_type(op_cls)
         self.desc = op_cls.__doc__ or ""
         self.tags = analyze_tag_from_cls(op_cls, name)
         self.sig = inspect.signature(op_cls.__init__)
@@ -185,6 +185,15 @@ class OPRecord:
             test_path = find_test_by_searching_content(PROJECT_ROOT / "tests", op_cls.__name__ + "Test")
             if test_path:
                 self.test_path = str(test_path)
+
+    def _search_mro_for_type(self, op_cls: type) -> str:
+        """Traverse the inheritance chain to find a valid base class name"""
+        for base in op_cls.__mro__:
+            base_name = base.__name__.lower()
+            if base_name in op_type_list:
+                return base_name
+
+        return "unknown"
 
     def _parse_param_desc(self):
         """
@@ -230,7 +239,7 @@ class OPSearcher:
                 op_cls = OPERATORS.modules[op_name]
             record = OPRecord(name=op_name, op_cls=op_cls, op_type=op_type)
             records.append(record)
-            self.all_ops[op_name] = record.__dict__
+            self.all_ops[op_name] = record.to_dict()
         return records
 
     def _scan_all_ops(self, include_formatter: bool = False) -> List[OPRecord]:
