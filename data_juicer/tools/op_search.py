@@ -186,6 +186,12 @@ class OPRecord:
             if test_path:
                 self.test_path = str(test_path)
 
+    def __getitem__(self, item):
+        try:
+            return getattr(self, item)
+        except AttributeError:
+            raise KeyError(f"OPRecord has no attribute: {item}")
+
     def _search_mro_for_type(self, op_cls: type) -> str:
         """Traverse the inheritance chain to find a valid base class name"""
         for base in op_cls.__mro__:
@@ -239,7 +245,7 @@ class OPSearcher:
                 op_cls = OPERATORS.modules[op_name]
             record = OPRecord(name=op_name, op_cls=op_cls, op_type=op_type)
             records.append(record)
-            self.all_ops[op_name] = record.to_dict()
+            self.all_ops[op_name] = record
         return records
 
     def _scan_all_ops(self, include_formatter: bool = False) -> List[OPRecord]:
@@ -299,7 +305,8 @@ def main(tags, op_type):
         print(f"Signature: {op['sig']}")
         print("-" * 50)
 
-    print(searcher.records_map["nlpaug_en_mapper"])
+    print(searcher.records_map["nlpaug_en_mapper"]["source_path"])
+    print(searcher.records_map["nlpaug_en_mapper"].test_path)
 
 
 if __name__ == "__main__":
