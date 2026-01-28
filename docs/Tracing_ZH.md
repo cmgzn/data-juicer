@@ -8,7 +8,7 @@ Data-Juicer 提供了 **Tracer（追踪器）** 功能，允许你追踪和可�
 - Mapper 算子对文本做了哪些修改
 - Filter 算子过滤掉了哪些样本
 - Deduplicator 算子检测到了哪些重复样本对
-- data-juicer 对数据的整体影响
+- Data-Juicer 对数据的整体影响
 
 > **算子支持说明**：追踪器目前支持 Mapper、Filter 和 Deduplicator 算子。Selector、Grouper、Aggregator 和 Pipeline 类型的算子暂不支持追踪功能。
 
@@ -85,7 +85,7 @@ dj-process --config your_config.yaml
 当 Filter 算子过滤样本时，追踪器会记录：
 - 被过滤掉的完整样本（包含所有字段和统计信息）
 
-追踪输出会包含 __dj__stats__ 字段，其中记录了该样本的统计指标值（如文本长度、特殊字符占比等），便于分析样本被过滤的具体原因。
+追踪输出会包含 `__dj__stats__` 字段，其中记录了该样本的统计指标值（如文本长度、特殊字符占比等），便于分析样本被过滤的具体原因。
 
 以 `text_length_filter` 算子为例，追踪文件（`sample_trace-text_length_filter.jsonl`）会显示被过滤的完整样本：
 
@@ -97,7 +97,7 @@ dj-process --config your_config.yaml
 ### Deduplicator 算子
 
 当 Deduplicator 算子检测到重复样本时，追踪器会记录：
-- 重复样本对（`dup1` 和 `dup2`），包含完整样本信息和 __dj__hash__ 哈希值
+- 重复样本对（`dup1` 和 `dup2`），包含完整样本信息和 `__dj__hash` 哈希值
 - 记录的样本对数量由 `trace_num` 控制
 
 这有助于你了解哪些样本被认为是重复的，并验证去重逻辑。哈希值字段展示了用于判断重复的具体特征值。

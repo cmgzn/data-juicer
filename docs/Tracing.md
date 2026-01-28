@@ -8,7 +8,7 @@ When enabled, the tracer records sample-level changes before and after each oper
 - What text modifications the Mapper operators made
 - Which samples the Filter operators filtered out
 - Which duplicate sample pairs the Deduplicator operator detected
-- The overall impact of data-juicer on your data
+- The overall impact of Data-Juicer on your data
 
 > **Operator Support Note**: The tracer currently supports Mapper, Filter, and Deduplicator operators. Tracing is not yet supported for Selector, Grouper, Aggregator, and Pipeline type operators.
 
@@ -85,7 +85,7 @@ For example, with the `chinese_convert_mapper` operator, the trace file (`sample
 When a Filter operator filters out samples, the tracer records:
 - Complete filtered samples (including all fields and statistical information)
 
-The tracing output includes a __dj__stats__ field that records statistical metric values for the sample (such as text length, proportion of special characters, etc.), facilitating analysis of why the sample was filtered.
+The tracing output includes a `__dj__stats__` field that records statistical metric values for the sample (such as text length, proportion of special characters, etc.), facilitating analysis of why the sample was filtered.
 
 For example, with the `text_length_filter` operator, the trace file (`sample_trace-text_length_filter.jsonl`) shows complete filtered samples:
 
@@ -97,7 +97,7 @@ For example, with the `text_length_filter` operator, the trace file (`sample_tra
 ### Deduplicator Operators
 
 When a Deduplicator operator detects duplicate samples, the tracer records:
-- Duplicate sample pairs (`dup1` and `dup2`), including complete sample information and __dj__hash__ hash values
+- Duplicate sample pairs (`dup1` and `dup2`), including complete sample information and `__dj__hash` hash values
 - The number of recorded sample pairs is controlled by `trace_num`
 
 This helps you understand which samples are considered duplicates and validate the deduplication logic. The hash value field shows the specific characteristic values used to determine duplicates.
