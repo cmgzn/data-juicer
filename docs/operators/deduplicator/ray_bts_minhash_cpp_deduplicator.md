@@ -1,8 +1,16 @@
 # ray_bts_minhash_cpp_deduplicator
 
-A basic exact matching deduplicator for RAY. Although its functionality is deduplication, it is implemented as Filter sub-class.
+A MinHash LSH deduplicator that operates in Ray distributed mode with C++ acceleration.
 
-一个适用于 RAY 的基础精确匹配去重器。尽管其功能是去重，但其实现为 Filter 的子类。
+Same as ray_bts_minhash_deduplicator but with tokenization and MinHash signature computation implemented in C++ for improved performance.
+
+This operator uses the MinHash LSH technique to identify and remove near-duplicate samples from a dataset. It supports various tokenization methods, including space, punctuation, character, and sentencepiece. The Jaccard similarity threshold is used to determine if two samples are considered duplicates. If the Jaccard similarity of two samples is greater than or equal to the specified threshold, one of the samples is filtered out. The operator computes the MinHash values for each sample and uses a union- find algorithm to group similar samples. The key metric, Jaccard similarity, is computed based on the shingling of the text.
+
+一种在 Ray 分布式模式下运行并采用 C++ 加速的 MinHash LSH 去重器。
+
+与 ray_bts_minhash_deduplicator 相同，但其分词和 MinHash 签名计算使用 C++ 实现，以提升性能。
+
+该算子使用 MinHash LSH 技术识别并从数据集中移除近似重复样本。它支持多种分词方法，包括空格、标点符号、字符和 sentencepiece。使用 Jaccard 相似度阈值来判断两个样本是否被视为重复：若两个样本的 Jaccard 相似度大于或等于指定阈值，则其中一个样本将被过滤掉。该算子为每个样本计算 MinHash 值，并使用并查集算法对相似样本进行分组。关键指标 Jaccard 相似度基于文本的 shingling 计算得出。
 
 Type 算子类型: **deduplicator**
 

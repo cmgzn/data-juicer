@@ -28,7 +28,7 @@ Tags 标签: cpu, multimodal
 ## 📊 Effect demonstration 效果演示
 ### test
 ```python
-VideoSplitByKeyFrameMapper(keep_original_sample=False)
+VideoSplitByKeyFrameMapper(keep_original_sample=False, save_dir='tempfile.TemporaryDirectory().name')
 ```
 
 #### 📥 input data 输入数据
@@ -43,7 +43,7 @@ This example demonstrates the basic functionality of the VideoSplitByKeyFrameMap
 
 ### test_keep_ori_sample
 ```python
-VideoSplitByKeyFrameMapper(ffmpeg_extra_args='-movflags frag_keyframe+empty_moov')
+VideoSplitByKeyFrameMapper(save_dir='tempfile.TemporaryDirectory().name', ffmpeg_extra_args='-movflags frag_keyframe+empty_moov')
 ```
 
 #### 📥 input data 输入数据

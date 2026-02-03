@@ -13,13 +13,7 @@ Tags 标签: gpu, vllm, hf, text
 |--------|------|--------|------|
 | `hf_model` | <class 'str'> | `'Qwen/Qwen2.5-7B-Instruct'` |  |
 | `trust_remote_code` | <class 'bool'> | `False` |  |
-| `prompt` | <class 'str'> | `'
-请对下面的example文本回复的任务类别进行检测,并进行分类。
-备选的分类包括：{tag_list}。
-只回复对应的分类,不回复其他内容。
-example文本:
-{text}
-'` |  |
+| `prompt` | <class 'str'> | `'\n请对下面的example文本回复的任务类别进行检测,并进行分类。\n备选的分类包括：{tag_list}。\n只回复对应的分类,不回复其他内容。\nexample文本:\n{text}\n'` |  |
 | `tag_list` | typing.List[str] | `['数学', '代码', '翻译', '角色扮演', '开放领域问答', '特定领域问答', '提取', '生成', '头脑风暴', '分类', '总结', '改写', '其他']` |  |
 | `enable_vllm` | <class 'bool'> | `True` |  |
 | `tensor_parallel_size` | <class 'int'> | `None` |  |

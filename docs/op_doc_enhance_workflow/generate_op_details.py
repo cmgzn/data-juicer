@@ -128,7 +128,8 @@ class DocGenerator:
         )
         self.cache = {}
         if CACHE_PATH.exists():
-            self.cache = json.loads(CACHE_PATH.read_text(encoding="utf-8"))
+            raw_cache = json.loads(CACHE_PATH.read_text(encoding="utf-8"))
+            self.cache = self._absolutize(raw_cache)
 
     def rewrite_op_doc(self, op_name):
         """Placeholder for actual docstring rewrite logic."""
@@ -178,11 +179,34 @@ class DocGenerator:
             for m in select_methods
         ]
 
+    def _de_absolutize(self, data):
+        """Turn absolute path strings in data into placeholders"""
+        root_str = str(ROOT)
+        if isinstance(data, dict):
+            return {k: self._de_absolutize(v) for k, v in data.items()}
+        elif isinstance(data, list):
+            return [self._de_absolutize(i) for i in data]
+        elif isinstance(data, str):
+            # Replace the absolute path contained in the string
+            return data.replace(root_str, "{PROJECT_ROOT}")
+        return data
+
+    def _absolutize(self, data):
+        """Absolute path to return placeholder to current environment"""
+        root_str = str(ROOT)
+        if isinstance(data, dict):
+            return {k: self._absolutize(v) for k, v in data.items()}
+        elif isinstance(data, list):
+            return [self._absolutize(i) for i in data]
+        elif isinstance(data, str):
+            return data.replace("{PROJECT_ROOT}", root_str)
+        return data
+
     def handle_one(self, op_info, existing_md, explain_examples):
         params = param_signature_to_list(op_info["sig"], op_info["param_desc_map"])
         examples_list = []
 
-        if op_info["test_path"]:
+        if op_info["test_path"] and Path(op_info["test_path"]).exists():
             test_path = ROOT / Path(op_info["test_path"])
             test_content = test_path.read_text(encoding="utf-8")[:5000]
             new_ex = extract_test_info_from_path(test_path)
@@ -199,7 +223,7 @@ class DocGenerator:
                 else:
                     final_ex[m] = info
 
-            self.cache[op_info["name"]] = final_ex
+            self.cache[op_info["name"]] = self._de_absolutize(final_ex)
             examples_list = self.process_example_list(
                 final_ex,
                 extract_class_attr_paths(test_path),
@@ -208,6 +232,8 @@ class DocGenerator:
                 existing_md.get("examples") if existing_md else None,
                 explain_examples,
             )
+        else:
+            op_info["test_path"] = None
 
         # Template Data
         op_dir = (OPS_DOCS_DIR / op_info["type"]).relative_to(ROOT)
@@ -259,6 +285,7 @@ class DocGenerator:
             op_detail_list.append((op_info["name"], op_tmpl, ex_list))
 
         # Save Cache
+        self.cache = self._de_absolutize(self.cache)
         CACHE_PATH.write_text(json.dumps(self.cache, indent=4, ensure_ascii=False), encoding="utf-8")
 
         # Bilingual Batch Processing
@@ -278,4 +305,5 @@ class DocGenerator:
 
 
 if __name__ == "__main__":
-    fire.Fire(DocGenerator)
+    # fire.Fire(DocGenerator)
+    DocGenerator().gen(rewrite_docstring=False, explain_examples=False)

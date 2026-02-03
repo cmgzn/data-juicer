@@ -179,18 +179,19 @@ class OPRecord:
         self.test_path = None
 
         test_path = f"tests/ops/{self.type}/test_{self.name}.py"
-        if (PROJECT_ROOT / test_path).exists():
-            self.test_path = str(test_path)
-        else:
-            test_path = find_test_by_searching_content(PROJECT_ROOT / "tests", op_cls.__name__ + "Test")
-            if test_path:
-                self.test_path = str(test_path)
+        if not (PROJECT_ROOT / test_path).exists():
+            test_path = find_test_by_searching_content(PROJECT_ROOT / "tests", op_cls.__name__ + "Test") or test_path
+
+        self.test_path = str(test_path)
 
     def __getitem__(self, item):
         try:
             return getattr(self, item)
         except AttributeError:
             raise KeyError(f"OPRecord has no attribute: {item}")
+
+    def __setitem__(self, key, value):
+        setattr(self, key, value)
 
     def _search_mro_for_type(self, op_cls: type) -> str:
         """Traverse the inheritance chain to find a valid base class name"""
