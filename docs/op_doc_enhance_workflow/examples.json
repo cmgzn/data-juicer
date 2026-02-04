@@ -2809,6 +2809,18 @@
             "ds": "[{'text': f'{SpecialTokens.image}a photo of a cat', 'images': ['{PROJECT_ROOT}/tests/ops/data/cat.jpg']}] * 10",
             "tgt": null,
             "samples": null
+        },
+        "test_gpu_batch_size_parameter": {
+            "op_code": "ImageCaptioningMapper(hf_img2seq='Salesforce/blip2-opt-2.7b', caption_num=1, gpu_batch_size=4)",
+            "ds": null,
+            "tgt": null,
+            "samples": null
+        },
+        "test_gpu_batch_size_with_large_dataset": {
+            "op_code": "ImageCaptioningMapper(hf_img2seq='Salesforce/blip2-opt-2.7b', caption_num=1, keep_candidate_mode='random_any', gpu_batch_size=4)",
+            "ds": "[{'text': f'{SpecialTokens.image}a photo of a cat', 'images': ['{PROJECT_ROOT}/tests/ops/data/cat.jpg']}] * 20",
+            "tgt": null,
+            "samples": null
         }
     },
     "image_detection_yolo_mapper": {
@@ -5062,6 +5074,48 @@
         "test_tsv_path": {
             "op_code": null,
             "ds": null,
+            "tgt": null,
+            "samples": null
+        }
+    },
+    "video_camera_calibration_static_deepcalib_mapper": {
+        "test": {
+            "op_code": "VideoCameraCalibrationStaticDeepcalibMapper(model_path='weights_10_0.02.h5', frame_num=1, duration=1, frame_dir=DATA_JUICER_ASSETS_CACHE, if_output_info=True, output_info_dir=DATA_JUICER_ASSETS_CACHE)",
+            "ds": "[{'videos': ['{PROJECT_ROOT}/tests/ops/data/video3.mp4']}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video4.mp4']}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video12.mp4']}]",
+            "tgt": "[{'frame_names_shape': [49], 'intrinsics_list_shape': [49, 3, 3], 'xi_list_shape': [49], 'hfov_list_shape': [49], 'vfov_list_shape': [49]}, {'frame_names_shape': [22], 'intrinsics_list_shape': [22, 3, 3], 'xi_list_shape': [22], 'hfov_list_shape': [22], 'vfov_list_shape': [22]}, {'frame_names_shape': [3], 'intrinsics_list_shape': [3, 3, 3], 'xi_list_shape': [3], 'hfov_list_shape': [3], 'vfov_list_shape': [3]}]",
+            "samples": null
+        },
+        "test_mul_proc": {
+            "op_code": "VideoCameraCalibrationStaticDeepcalibMapper(model_path='weights_10_0.02.h5', frame_num=1, duration=1, frame_dir=DATA_JUICER_ASSETS_CACHE, if_output_info=True, output_info_dir=DATA_JUICER_ASSETS_CACHE)",
+            "ds": "[{'videos': ['{PROJECT_ROOT}/tests/ops/data/video3.mp4']}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video4.mp4']}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video12.mp4']}]",
+            "tgt": "[{'frame_names_shape': [49], 'intrinsics_list_shape': [49, 3, 3], 'xi_list_shape': [49], 'hfov_list_shape': [49], 'vfov_list_shape': [49]}, {'frame_names_shape': [22], 'intrinsics_list_shape': [22, 3, 3], 'xi_list_shape': [22], 'hfov_list_shape': [22], 'vfov_list_shape': [22]}, {'frame_names_shape': [3], 'intrinsics_list_shape': [3, 3, 3], 'xi_list_shape': [3], 'hfov_list_shape': [3], 'vfov_list_shape': [3]}]",
+            "samples": null
+        }
+    },
+    "video_camera_calibration_static_moge_mapper": {
+        "test": {
+            "op_code": "VideoCameraCalibrationStaticMogeMapper(model_path='Ruicheng/moge-2-vitl', frame_num=1, duration=1, frame_dir=DATA_JUICER_ASSETS_CACHE, if_output_info=True, output_info_dir=DATA_JUICER_ASSETS_CACHE, if_output_points_info=True, if_output_depth_info=True, if_output_mask_info=True)",
+            "ds": "[{'videos': ['{PROJECT_ROOT}/tests/ops/data/video3.mp4']}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video4.mp4']}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video12.mp4']}]",
+            "tgt": "[{'frame_names_shape': [49], 'intrinsics_list_shape': [49, 3, 3], 'hfov_list_shape': [49], 'vfov_list_shape': [49], 'points_list_shape': [49, 640, 362, 3], 'depth_list_shape': [49, 640, 362], 'mask_list_shape': [49, 640, 362]}, {'frame_names_shape': [22], 'intrinsics_list_shape': [22, 3, 3], 'hfov_list_shape': [22], 'vfov_list_shape': [22], 'points_list_shape': [22, 360, 480, 3], 'depth_list_shape': [22, 360, 480], 'mask_list_shape': [22, 360, 480]}, {'frame_names_shape': [3], 'intrinsics_list_shape': [3, 3, 3], 'hfov_list_shape': [3], 'vfov_list_shape': [3], 'points_list_shape': [3, 1080, 1920, 3], 'depth_list_shape': [3, 1080, 1920], 'mask_list_shape': [3, 1080, 1920]}]",
+            "samples": null
+        },
+        "test_mul_proc": {
+            "op_code": "VideoCameraCalibrationStaticMogeMapper(model_path='Ruicheng/moge-2-vitl', frame_num=1, duration=1, frame_dir=DATA_JUICER_ASSETS_CACHE, if_output_info=True, output_info_dir=DATA_JUICER_ASSETS_CACHE, if_output_points_info=True, if_output_depth_info=True, if_output_mask_info=True)",
+            "ds": "[{'videos': ['{PROJECT_ROOT}/tests/ops/data/video3.mp4']}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video4.mp4']}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video12.mp4']}]",
+            "tgt": "[{'frame_names_shape': [49], 'intrinsics_list_shape': [49, 3, 3], 'hfov_list_shape': [49], 'vfov_list_shape': [49], 'points_list_shape': [49, 640, 362, 3], 'depth_list_shape': [49, 640, 362], 'mask_list_shape': [49, 640, 362]}, {'frame_names_shape': [22], 'intrinsics_list_shape': [22, 3, 3], 'hfov_list_shape': [22], 'vfov_list_shape': [22], 'points_list_shape': [22, 360, 480, 3], 'depth_list_shape': [22, 360, 480], 'mask_list_shape': [22, 360, 480]}, {'frame_names_shape': [3], 'intrinsics_list_shape': [3, 3, 3], 'hfov_list_shape': [3], 'vfov_list_shape': [3], 'points_list_shape': [3, 1080, 1920, 3], 'depth_list_shape': [3, 1080, 1920], 'mask_list_shape': [3, 1080, 1920]}]",
+            "samples": null
+        }
+    },
+    "video_undistort_mapper": {
+        "test": {
+            "op_code": "VideoUndistortMapper(output_video_dir=os.path.join(DATA_JUICER_ASSETS_CACHE, 'output_video1'))",
+            "ds": "[{'videos': ['{PROJECT_ROOT}/tests/ops/data/video3.mp4'], 'intrinsics': [[465.4728460758426, 0, 181.0], [0, 465.4728460758426, 320.0], [0, 0, 1]], 'distortion_coefficients': None, 'xi': 0.203957462310791, 'rotation_matrix': None, 'intrinsics_new': None}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video12.mp4'], 'intrinsics': [[1227.3657989501953, 0, 960.0], [0, 1227.3657989501953, 540.0], [0, 0, 1]], 'distortion_coefficients': None, 'xi': 0.33518279, 'rotation_matrix': None, 'intrinsics_new': None}]",
+            "tgt": null,
+            "samples": null
+        },
+        "test_mul_proc": {
+            "op_code": "VideoUndistortMapper(output_video_dir=os.path.join(DATA_JUICER_ASSETS_CACHE, 'output_video1'))",
+            "ds": "[{'videos': ['{PROJECT_ROOT}/tests/ops/data/video3.mp4'], 'intrinsics': [[465.4728460758426, 0, 181.0], [0, 465.4728460758426, 320.0], [0, 0, 1]], 'distortion_coefficients': None, 'xi': 0.203957462310791, 'rotation_matrix': None, 'intrinsics_new': None}, {'videos': ['{PROJECT_ROOT}/tests/ops/data/video12.mp4'], 'intrinsics': [[1227.3657989501953, 0, 960.0], [0, 1227.3657989501953, 540.0], [0, 0, 1]], 'distortion_coefficients': None, 'xi': 0.33518279, 'rotation_matrix': None, 'intrinsics_new': None}]",
             "tgt": null,
             "samples": null
         }
