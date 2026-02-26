@@ -42,3 +42,20 @@ def execute_op(dj_cfg: Dict):
     except Exception:
         error_msg = traceback.format_exc()
         return f"Occur error when executing Data-Juicer: {error_msg}"
+
+
+def execute_analyze(dj_cfg: Dict):
+
+    try:
+        from data_juicer.core.analyzer import Analyzer
+
+        dj_cfg = add_extra_cfg(dj_cfg)
+        logger.info(f"DJ analyzer config in MCP server: {str(dj_cfg)}")
+        dj_cfg = get_init_configs(dj_cfg, load_configs_only=False)
+        analyzer = Analyzer(dj_cfg)
+        analyzer.run()
+        analysis_path = os.path.join(dj_cfg["work_dir"], "analysis")
+        return f"Analysis complete. " f"Analysis results (stats, figures) are saved in: {analysis_path}"
+    except Exception:
+        error_msg = traceback.format_exc()
+        return f"Occur error when executing Data-Juicer Analyzer: {error_msg}"
