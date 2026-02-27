@@ -35,16 +35,36 @@ def get_global_config_schema() -> dict:
 
     :returns: A dict mapping config parameter names to their schema info
     """
+    import tempfile
+
+    import yaml
+
     from data_juicer.config.config import global_parser, init_configs
 
-    # Ensure the parser is initialized
-    if global_parser is None:
+    parser = global_parser
+
+    # Ensure the parser is initialized by creating a minimal temp config
+    # file. We cannot use `--auto` because init_configs raises
+    # NotImplementedError when `--auto` is used without an Analyzer entry,
+    # and the global_parser assignment happens *after* that check, so the
+    # parser is never stored on the module when the exception is caught.
+    if parser is None:
         try:
-            init_configs(["--auto"])
+            minimal_config = {
+                "dataset_path": "",
+                "process": [],
+            }
+            with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as tmp_file:
+                yaml.dump(minimal_config, tmp_file)
+                tmp_path = tmp_file.name
+            try:
+                init_configs(["--config", tmp_path], load_configs_only=True)
+            finally:
+                os.remove(tmp_path)
         except (SystemExit, Exception):
             pass
 
-    from data_juicer.config.config import global_parser as parser
+        from data_juicer.config.config import global_parser as parser
 
     if parser is None:
         return {"error": "Failed to initialize config parser"}

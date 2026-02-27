@@ -6,6 +6,7 @@ from typing import Dict
 from loguru import logger
 
 from data_juicer.config import get_init_configs
+from data_juicer.core.analyzer import Analyzer
 from data_juicer.core.executor import DefaultExecutor
 
 DEFAULT_OUTPUT_DIR = "./outputs"
@@ -47,7 +48,6 @@ def execute_op(dj_cfg: Dict):
 def execute_analyze(dj_cfg: Dict):
 
     try:
-        from data_juicer.core.analyzer import Analyzer
 
         dj_cfg = add_extra_cfg(dj_cfg)
         logger.info(f"DJ analyzer config in MCP server: {str(dj_cfg)}")
