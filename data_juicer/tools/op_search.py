@@ -101,19 +101,6 @@ def analyze_model_tags(cls):
     return tags
 
 
-# def analyze_tag_from_code(content, op_name):
-#     """
-#     Analyze the tags for the OP from the given code.
-#     """
-#     tags = []
-#     op_prefix = op_name.split('_')[0]
-
-#     tags.extend(analyze_modality_tag(content, op_prefix))
-#     tags.extend(analyze_resource_tag(content))
-#     tags.extend(analyze_model_tags(content))
-#     return tags
-
-
 def analyze_tag_with_inheritance(op_cls, analyze_func, default_tags=[], other_parm=dict()):
     """
     Universal inheritance chain label analysis function
@@ -303,6 +290,7 @@ class OPSearcher:
         tags: Optional[List[str]] = None,
         op_type: Optional[str] = None,
         match_all: bool = True,
+        mode: str = "basic",
     ) -> List[Dict]:
         """
         Search operators by tag and type criteria.
@@ -310,12 +298,13 @@ class OPSearcher:
         :param tags: List of tags to match
         :param op_type: Operator type (mapper/filter/etc)
         :param match_all: True requires matching all tags, False matches any
+        :param mode: Search mode, 
         :return: List of matched operator record dicts
         """
         filtered = self._filter_by_tags_and_type(self.op_records, tags, op_type, match_all)
         return [record.to_dict() for record in filtered]
 
-    def search_by_keyword(
+    def search_by_regex(
         self,
         query: str,
         fields: Optional[List[str]] = None,
@@ -324,17 +313,16 @@ class OPSearcher:
         match_all: bool = True,
     ) -> List[Dict]:
         """
-        Search operators by keyword or regex pattern matching.
+        Search operators using a Python regex pattern.
 
-        The query is matched against the specified fields of each operator.
-        Supports both plain keyword matching (case-insensitive) and regex
-        patterns.
+        The pattern is matched against the specified fields of each operator.
+        If the query is not a valid regex, an empty list is returned.
 
-        :param query: Keyword or regex pattern to search for
+        :param query: Regex pattern to search for
         :param fields: List of OPRecord fields to search in.
             Defaults to ["name", "desc", "param_desc"]
-        :param tags: Optional tag filter applied before keyword search
-        :param op_type: Optional type filter applied before keyword search
+        :param tags: Optional tag filter applied before regex search
+        :param op_type: Optional type filter applied before regex search
         :param match_all: Tag matching mode (all vs any)
         :return: List of matched operator record dicts
         """
@@ -345,9 +333,9 @@ class OPSearcher:
 
         try:
             pattern = re.compile(query, re.IGNORECASE)
-        except re.error:
-            # Fall back to literal matching if the query is not valid regex
-            pattern = re.compile(re.escape(query), re.IGNORECASE)
+        except re.error as error:
+            logger.error(f"Invalid regex pattern '{query}': {error}")
+            return []
 
         results = []
         for record in candidates:

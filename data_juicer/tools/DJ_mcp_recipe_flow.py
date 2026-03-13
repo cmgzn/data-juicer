@@ -164,9 +164,9 @@ def search_ops(
     modification, cleaning, filtering, deduplication, etc.
 
     Supports multiple search modes:
-    - "tags": filter by op_type and/or tags (default, original behavior).
+    - "basic": filter by op_type and/or tags (default, original behavior).
       If both tags and op_type are None, returns all operators.
-    - "keyword": exact keyword or regex pattern matching against OP names,
+    - "regex": Python regex pattern matching against OP names,
       descriptions, and parameters. Requires the query parameter.
     - "bm25": BM25 text relevance ranking for natural language queries.
       Returns top_k most relevant operators. Requires the query parameter.
@@ -202,9 +202,9 @@ def search_ops(
         - vllm: equipped with models supported by vLLM.
         - hf: equipped with models from HuggingFace Hub.
 
-    :param query: Search query string. Required for "keyword" and "bm25"
-        modes. For "keyword" mode, this can be a plain keyword or a regex
-        pattern. For "bm25" mode, this should be a natural language
+    :param query: Search query string. Required for "regex" and "bm25"
+        modes. For "regex" mode, this should be a Python regex pattern.
+        For "bm25" mode, this should be a natural language
         description of the desired functionality.
     :param op_type: The type of data processing operator to filter by.
         If None, no type-based filtering is applied. Defaults to None.
@@ -214,16 +214,16 @@ def search_ops(
         are returned. If False, operators matching any tag are returned.
         Defaults to True.
     :param search_mode: The search strategy to use. One of "tags",
-        "keyword", or "bm25". Defaults to "tags".
+        "regex", or "bm25". Defaults to "tags".
     :param top_k: Maximum number of results to return for "bm25" mode.
         Defaults to 10. Ignored for other modes.
     :returns: A dict containing detailed information about the matched
         operators, keyed by operator name.
     """
-    if search_mode == "keyword":
+    if search_mode == "regex":
         if not query:
-            return {"error": "query is required for keyword search mode"}
-        op_results = searcher.search_by_keyword(
+            return {"error": "query is required for regex search mode"}
+        op_results = searcher.search_by_regex(
             query=query,
             tags=tags,
             op_type=op_type,
