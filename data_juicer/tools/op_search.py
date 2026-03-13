@@ -290,7 +290,6 @@ class OPSearcher:
         tags: Optional[List[str]] = None,
         op_type: Optional[str] = None,
         match_all: bool = True,
-        mode: str = "basic",
     ) -> List[Dict]:
         """
         Search operators by tag and type criteria.
