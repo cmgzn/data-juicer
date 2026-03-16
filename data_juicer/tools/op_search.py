@@ -101,10 +101,14 @@ def analyze_model_tags(cls):
     return tags
 
 
-def analyze_tag_with_inheritance(op_cls, analyze_func, default_tags=[], other_parm=dict()):
+def analyze_tag_with_inheritance(op_cls, analyze_func, default_tags=None, other_parm=None):
     """
     Universal inheritance chain label analysis function
     """
+    if default_tags is None:
+        default_tags = []
+    if other_parm is None:
+        other_parm = {}
 
     mro_classes = op_cls.__mro__[:3]
     for cls in mro_classes:

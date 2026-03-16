@@ -107,7 +107,7 @@ def build_base_parser() -> ArgumentParser:
     required_group.add_argument(
         "--auto",
         action="store_true",
-        help="Weather to use an auto analyzing "
+        help="Whether to use an auto analyzing "
         "strategy instead of a specific data "
         "recipe. If a specific config file is "
         "given by --config arg, this arg is "

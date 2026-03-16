@@ -105,7 +105,7 @@ The Recipe-Flow mode provides the following MCP tools:
   - `op_type` (str, optional): The type of data processing operator to filter by (aggregator / deduplicator / filter / grouper / mapper / selector / pipeline)
   - `tags` (List[str], optional): A list of tags to filter operators (Modality: text / image / audio / video / multimodal; Resource: cpu / gpu; Model: api / vllm / hf)
   - `match_all` (bool): Whether all specified tags must match. Default is True
-  - `search_mode` (str): Search strategy — "tags" (filter by type and tags, default), "keyword" (keyword/regex matching), or "bm25" (BM25 text relevance ranking)
+  - `search_mode` (str): Search strategy — "tags" (filter by type and tags, default), "regex" (regex pattern matching), or "bm25" (BM25 text relevance ranking)
   - `top_k` (int): Maximum number of results for "bm25" mode. Default is 10
 - Returns: A dictionary containing details about the matched operators
 

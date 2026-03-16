@@ -105,7 +105,7 @@ Recipe-Flow 模式提供以下 MCP 工具：
   - `op_type` (str, optional): 要检索的数据处理算子类型（aggregator / deduplicator / filter / grouper / mapper / selector / pipeline）
   - `tags` (List[str], optional): 用于过滤算子的标签列表（模态标签：text / image / audio / video / multimodal；资源标签：cpu / gpu；模型标签：api / vllm / hf）
   - `match_all` (bool): 是否所有指定的标签都必须匹配。默认为 True
-  - `search_mode` (str): 搜索策略，可选 "tags"（按类型和标签过滤，默认）、"keyword"（关键词/正则匹配）、"bm25"（BM25 文本相关性排序）
+  - `search_mode` (str): 搜索策略，可选 "tags"（按类型和标签过滤，默认）、"regex"（正则表达式匹配）、"bm25"（BM25 文本相关性排序）
   - `top_k` (int): "bm25" 模式下返回的最大结果数。默认为 10
 - 返回：包含匹配算子详细信息的字典
 
