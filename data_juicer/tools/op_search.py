@@ -301,7 +301,6 @@ class OPSearcher:
         :param tags: List of tags to match
         :param op_type: Operator type (mapper/filter/etc)
         :param match_all: True requires matching all tags, False matches any
-        :param mode: Search mode, 
         :return: List of matched operator record dicts
         """
         filtered = self._filter_by_tags_and_type(self.op_records, tags, op_type, match_all)

@@ -351,7 +351,7 @@ def build_base_parser() -> ArgumentParser:
         "--suffixes",
         type=Union[str, List[str]],
         default=[],
-        help="Suffixes of files that will be find and loaded. If not set, we "  # noqa: E251
+        help="Suffixes of files that will be found and loaded. If not set, we "  # noqa: E251
         "will find all suffix files, and select a suitable formatter "
         "with the most files as default.",
     )
@@ -536,7 +536,7 @@ def build_base_parser() -> ArgumentParser:
         help="Which OPs will be applied on the dataset to mine the insights "  # noqa: E251
         "in their stats changes. Only those OPs that produce stats or "
         "meta are valid. If it's empty, all OPs that produce stats and "
-        "meta will be involved. Only available when filter_list_to_mine "
+        "meta will be involved. Only available when open_insight_mining "
         "is true.",
     )
     parser.add_argument(
@@ -606,7 +606,7 @@ def build_base_parser() -> ArgumentParser:
         default=False,
         help="whether to export the original dataset with stats. If you only "  # noqa: E251
         "need the stats of the dataset, setting it to false could speed "
-        "up the exporting..",
+        "up the exporting.",
     )
     parser.add_argument(
         "--save_stats_in_one_file",
