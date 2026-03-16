@@ -150,9 +150,7 @@ def build_base_parser() -> ArgumentParser:
     # "dw": "path to a directory that exists and is writeable")
     # "dc": "path to a directory that can be created if it does not exist")
     # "drw": "path to a directory that exists and is readable and writeable")
-    parser.add_argument(
-        "--project_name", type=str, default="hello_world", help="Name of your data process project."
-    )
+    parser.add_argument("--project_name", type=str, default="hello_world", help="Name of your data process project.")
     parser.add_argument(
         "--executor_type",
         type=str,
