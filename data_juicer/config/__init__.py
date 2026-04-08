@@ -11,6 +11,18 @@ from .config import (
     update_op_attr,
     validate_work_dir_config,
 )
+from .schema import (
+    CheckpointConfig,
+    DatasetConfig,
+    DJConfig,
+    EventLoggingConfig,
+    IntermediateStorageConfig,
+    PartitionConfig,
+    ResourceOptimizationConfig,
+    flatten_nested_namespaces,
+    get_defaults,
+    get_json_schema,
+)
 
 __all__ = [
     "init_configs",
@@ -24,4 +36,14 @@ __all__ = [
     "validate_work_dir_config",
     "resolve_job_id",
     "resolve_job_directories",
+    "DJConfig",
+    "DatasetConfig",
+    "CheckpointConfig",
+    "PartitionConfig",
+    "ResourceOptimizationConfig",
+    "IntermediateStorageConfig",
+    "EventLoggingConfig",
+    "flatten_nested_namespaces",
+    "get_defaults",
+    "get_json_schema",
 ]

@@ -20,78 +20,24 @@ searcher = OPSearcher(ops_list)
 
 def get_global_config_schema() -> dict:
     """
-    Get the full schema of all available global configuration options
+    Get the full JSON Schema of all available global configuration options
     for Data-Juicer.
 
-    Returns a dictionary where each key is a config parameter name,
-    and the value is a dict containing:
-    - type: the expected type of the parameter (e.g. "bool", "int", "str")
-    - default: the default value
-    - description: a human-readable description of the parameter
+    Returns the complete JSON Schema generated from the ``DJConfig``
+    Pydantic model.  This includes all top-level parameters and nested
+    sub-structures (e.g. ``dataset.max_sample_num``,
+    ``checkpoint.strategy``).  External agents can use this to discover
+    every configurable parameter, its type, default value, and
+    description.
 
     Use this tool to discover what configuration options can be passed
-    to run_data_recipe via the extra_config parameter. This dynamically
-    reflects the latest Data-Juicer configuration, so it will always
-    be up-to-date even as new config options are added.
+    to run_data_recipe via the extra_config parameter.
 
-    :returns: A dict mapping config parameter names to their schema info
+    :returns: A JSON Schema dict (Draft 2020-12 compatible)
     """
-    from data_juicer.config.config import build_base_parser
+    from data_juicer.config.schema import get_json_schema
 
-    parser = build_base_parser()
-
-    if parser is None:
-        return {"error": "Failed to initialize config parser"}
-
-    # Internal parameters that should not be exposed to users
-    excluded_params = {
-        "config",
-        "auto",
-        "help",
-        "print_config",
-    }
-
-    schema = {}
-    for action in parser._actions:
-        # Skip suppressed or internal actions
-        if not action.option_strings:
-            continue
-
-        # Use the longest option string as the parameter name
-        param_name = max(action.option_strings, key=len).lstrip("-")
-        dest = action.dest
-
-        if dest in excluded_params or param_name in excluded_params:
-            continue
-
-        # Determine type name
-        type_name = "str"
-        if action.type is not None:
-            if hasattr(action.type, "__name__"):
-                type_name = action.type.__name__
-            elif hasattr(action.type, "__class__"):
-                type_name = str(action.type)
-            else:
-                type_name = str(action.type)
-        elif isinstance(action.const, bool):
-            type_name = "bool"
-
-        # Handle choices
-        choices = None
-        if action.choices:
-            choices = list(action.choices)
-
-        entry = {
-            "type": type_name,
-            "default": action.default,
-            "description": action.help or "",
-        }
-        if choices:
-            entry["choices"] = choices
-
-        schema[param_name] = entry
-
-    return schema
+    return get_json_schema()
 
 
 def get_dataset_load_strategies() -> dict:
@@ -109,24 +55,36 @@ def get_dataset_load_strategies() -> dict:
       field that maps to a data source strategy (e.g., 'local', 'huggingface')
     - max_sample_num: optional max number of samples to load
 
-    Each dataset config dict should follow the required/optional fields
-    described in the returned strategy information.
+    Each strategy's returned fields are already merged with common fields
+    from ``DataLoadStrategy.BASE_CONFIG_RULES`` (e.g. 'weight', 'type').
 
-    :returns: A dict mapping strategy identifiers to their configuration info
+    :returns: A dict mapping strategy identifiers to their merged
+              configuration info (including both common and strategy-specific
+              fields).
     """
     from data_juicer.core.data.load_strategy import DataLoadStrategyRegistry
 
     strategies_info = {}
-
     for strategy_key, strategy_class in DataLoadStrategyRegistry._strategies.items():
         identifier = f"{strategy_key.executor_type}/" f"{strategy_key.data_type}/" f"{strategy_key.data_source}"
 
-        # Extract CONFIG_VALIDATION_RULES if available
-        validation_rules = getattr(strategy_class, "CONFIG_VALIDATION_RULES", {})
+        # Use _get_merged_rules() to get combined base + subclass rules
+        instance = strategy_class.__new__(strategy_class)
+        merged_rules = instance._get_merged_rules()
 
-        # Extract class docstring
         description = strategy_class.__doc__ or ""
         description = description.strip()
+
+        # Convert field_types to string representation for serialization
+        field_types = merged_rules.get("field_types", {})
+        field_types_serialized = {
+            key: (
+                " | ".join(t.__name__ for t in val)
+                if isinstance(val, tuple)
+                else (val.__name__ if hasattr(val, "__name__") else str(val))
+            )
+            for key, val in field_types.items()
+        }
 
         entry = {
             "executor_type": strategy_key.executor_type,
@@ -134,16 +92,10 @@ def get_dataset_load_strategies() -> dict:
             "data_source": strategy_key.data_source,
             "description": description,
             "class_name": strategy_class.__name__,
+            "required_fields": merged_rules.get("required_fields", []),
+            "optional_fields": merged_rules.get("optional_fields", []),
+            "field_types": field_types_serialized,
         }
-
-        if validation_rules:
-            entry["required_fields"] = validation_rules.get("required_fields", [])
-            entry["optional_fields"] = validation_rules.get("optional_fields", [])
-            # Convert field_types to string representation for serialization
-            field_types = validation_rules.get("field_types", {})
-            entry["field_types"] = {
-                key: (val.__name__ if hasattr(val, "__name__") else str(val)) for key, val in field_types.items()
-            }
 
         strategies_info[identifier] = entry
 

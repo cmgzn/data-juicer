@@ -52,11 +52,35 @@ class DataLoadStrategy(ABC, ConfigValidator):
     abstract class for data load strategy
     """
 
+    # Common fields consumed by the base class for all strategies.
+    # Subclasses define their own CONFIG_VALIDATION_RULES which will
+    # be merged with these base rules during validation.
+    BASE_CONFIG_RULES = {
+        "optional_fields": ["weight", "type"],
+        "field_types": {"weight": (int, float), "type": str},
+        "field_defaults": {"weight": 1.0},
+        "field_descriptions": {
+            "weight": (
+                "Sampling weight for dataset mixing. When multiple "
+                "datasets are configured, this controls the relative "
+                "proportion of samples drawn from each source."
+            ),
+            "type": (
+                "Dataset type that determines which load strategy to "
+                "use. Common values: 'local', 'huggingface', "
+                "'modelscope', 'arxiv', 'commoncrawl', 's3'."
+            ),
+        },
+    }
+
     def __init__(self, ds_config: Dict, cfg: Namespace):
         self.validate_config(ds_config)
         self.ds_config = ds_config
         self.cfg = cfg
-        self.weight = ds_config.get("weight", 1.0)  # default weight is 1.0
+        self.weight = ds_config.get(
+            "weight",
+            self.BASE_CONFIG_RULES["field_defaults"]["weight"],
+        )
 
     @abstractmethod
     def load_data(self, **kwargs) -> DJDataset:

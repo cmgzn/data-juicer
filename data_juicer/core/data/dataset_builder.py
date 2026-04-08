@@ -65,8 +65,10 @@ class DatasetBuilder(object):
             raise ConfigValidationError('Dataset config should have a "configs" key')
         if not isinstance(ds_configs["configs"], list) or len(ds_configs["configs"]) == 0:
             raise ConfigValidationError('Dataset config "configs" should be a non-empty list')
-        if "max_sample_num" in ds_configs and (
-            not isinstance(ds_configs["max_sample_num"], int) or ds_configs["max_sample_num"] <= 0
+        if (
+            "max_sample_num" in ds_configs
+            and ds_configs["max_sample_num"] is not None
+            and (not isinstance(ds_configs["max_sample_num"], int) or ds_configs["max_sample_num"] <= 0)
         ):
             raise ConfigValidationError('Dataset config "max_sample_num" should be a positive integer')
         for ds_config in ds_configs["configs"]:
@@ -95,7 +97,7 @@ class DatasetBuilder(object):
             logger.error(f"No data load strategies found for {ds_configs}")
             raise ConfigValidationError("No data load strategies found")
 
-        # initialzie the sample numbers
+        # initialize the sample numbers
         self.max_sample_num = ds_configs.get("max_sample_num", None)
         # get weights and sample numbers
         if self.max_sample_num:

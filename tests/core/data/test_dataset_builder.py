@@ -421,7 +421,8 @@ class DatasetBuilderTest(DataJuicerTestCaseBase):
             self.assertIsInstance(cfg, Namespace)
             self.assertEqual(cfg.project_name, 'dataset-local-json')
             self.assertEqual(cfg.dataset,
-                             {'configs': [{'path': 'sample.jsonl', 'type': 'local'}]})
+                             {'configs': [{'path': 'sample.jsonl', 'type': 'local'}],
+                              'max_sample_num': None})
             self.assertEqual(not cfg.dataset_path, True)
 
     def test_builder_ondisk_config_list(self):
@@ -436,7 +437,8 @@ class DatasetBuilderTest(DataJuicerTestCaseBase):
                              {'configs': [
                                 {'path': 'sample.jsonl', 'type': 'local'},
                                 {'path': 'sample.txt', 'type': 'local'}
-                                ]})
+                                ],
+                              'max_sample_num': None})
             self.assertEqual(not cfg.dataset_path, True)
 
     def test_builder_with_max_samples(self):
@@ -538,7 +540,8 @@ class DatasetBuilderTest(DataJuicerTestCaseBase):
             'configs': [{
                 'type': 'local',
                 'path': './test_data/sample.jsonl'
-            }]
+            }],
+            'max_sample_num': None
         })
         
         # Create builder and verify

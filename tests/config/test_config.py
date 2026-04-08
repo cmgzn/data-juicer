@@ -410,7 +410,7 @@ class ConfigTest(DataJuicerTestCaseBase):
                 self.assertIn(base_param_key, params)
 
     def test_get_default_cfg(self):
-        """Test getting default configuration from config_min.yaml"""
+        """Test getting default configuration from schema definitions"""
         # Get default config
         cfg = get_default_cfg()
         
@@ -422,8 +422,8 @@ class ConfigTest(DataJuicerTestCaseBase):
         self.assertEqual(cfg.ray_address, 'auto')
         self.assertEqual(cfg.text_keys, 'text')
         self.assertEqual(cfg.add_suffix, False)
-        self.assertEqual(cfg.export_path, './outputs/')
-        self.assertEqual(cfg.suffixes, None)
+        self.assertEqual(cfg.export_path, './outputs/hello_world/hello_world.jsonl')
+        self.assertEqual(cfg.suffixes, [])
         
         # Test default values are of correct type
         self.assertIsInstance(cfg.executor_type, str)
