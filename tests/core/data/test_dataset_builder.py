@@ -505,7 +505,8 @@ class DatasetBuilderTest(DataJuicerTestCaseBase):
 
     def test_invalid_max_sample_num(self):
         """Test handling of invalid max_sample_num"""
-        invalid_values = [-1, 0, "100", None]
+        # Note: None is a valid value (means no limit), not included here
+        invalid_values = [-1, 0, "100"]
         
         for value in invalid_values:
             self.base_cfg.dataset = {
