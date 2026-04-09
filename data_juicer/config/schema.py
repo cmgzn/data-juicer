@@ -298,11 +298,20 @@ class DJConfig(BaseModel):
             "available options."
         ),
     )
+    read_options: Dict = Field(
+        default_factory=dict,
+        description=(
+            "Read options passed through to PyArrow reading functions "
+            "(e.g., block_size for JSON reading). This configuration is "
+            "especially useful when reading large JSON files."
+        ),
+    )
     suffixes: List[str] = Field(
         default_factory=list,
         description=(
-            "Suffixes of files that will be find and loaded. If not set, "
-            "we will find all suffix files under the dataset_path."
+            "Suffixes of files that will be found and loaded. If not set, "
+            "we will find all suffix files, and select a suitable formatter "
+            "with the most files as default."
         ),
     )
     add_suffix: bool = Field(
