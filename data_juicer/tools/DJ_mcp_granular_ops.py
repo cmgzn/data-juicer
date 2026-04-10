@@ -35,27 +35,36 @@ def create_operator_function(op, mcp):
     docstring = op["desc"]
     param_docstring = op["param_desc"]
 
-    # Create new function signature with dataset_path as first parameter
-    # Consider adding other common parameters later, such as export_psth
-    new_parameters = [
-        inspect.Parameter("dataset_path", inspect.Parameter.POSITIONAL_OR_KEYWORD, annotation=str),
-        inspect.Parameter(
-            "export_path",
-            inspect.Parameter.POSITIONAL_OR_KEYWORD,
-            annotation=Optional[str],
-            default=None,
-        ),
-        inspect.Parameter(
-            "np",
-            inspect.Parameter.POSITIONAL_OR_KEYWORD,
-            annotation=Optional[int],
-            default=None,
-        ),
-    ] + [
+    # Separate operator parameters into those with and without defaults
+    operator_params = [
         process_parameter(name, param)
         for name, param in sig.parameters.items()
         if name not in ("args", "kwargs", "self")
     ]
+    params_no_default = [p for p in operator_params if p.default == inspect.Parameter.empty]
+    params_with_default = [p for p in operator_params if p.default != inspect.Parameter.empty]
+
+    # Create new function signature with dataset_path first (no default)
+    # followed by operator params without defaults, then optional params with defaults
+    new_parameters = (
+        [inspect.Parameter("dataset_path", inspect.Parameter.POSITIONAL_OR_KEYWORD, annotation=str)]
+        + params_no_default
+        + [
+            inspect.Parameter(
+                "export_path",
+                inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                annotation=Optional[str],
+                default=None,
+            ),
+            inspect.Parameter(
+                "np",
+                inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                annotation=Optional[int],
+                default=None,
+            ),
+        ]
+        + params_with_default
+    )
     new_signature = sig.replace(parameters=new_parameters, return_annotation=str)
 
     def func(*args, **kwargs):
