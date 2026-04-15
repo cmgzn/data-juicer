@@ -33,7 +33,7 @@
 
 除了上述每次运行时指定 `--custom-operator-paths` 的方式外，Data-Juicer 还提供了**持久化自定义算子注册表**，使外部开发的算子能够跨进程、跨会话持续生效，无需重复配置。
 
-注册表存储在 `~/.data_juicer/op_registry.json`（可通过环境变量 `DJ_OP_REGISTRY` 覆盖路径）。通过 CLI 管理：
+注册表存储在 `~/.data_juicer/custom_op.json`（可通过环境变量 `DJ_CUSTOM_OP_REGISTRY` 覆盖路径）。通过 CLI 管理：
 
 ```bash
 # 注册自定义算子 — 支持文件或目录路径

@@ -33,7 +33,7 @@
 
 In addition to the per-run `--custom-operator-paths` approach above, Data-Juicer provides a **persistent custom operator registry** so that externally developed operators survive across processes and sessions without repeating configuration.
 
-The registry is stored at `~/.data_juicer/op_registry.json` (override with the `DJ_OP_REGISTRY` environment variable). Manage it via the CLI:
+The registry is stored at `~/.data_juicer/custom_op.json` (override with the `DJ_CUSTOM_OP_REGISTRY` environment variable). Manage it via the CLI:
 
 ```bash
 # Register custom operator(s) — accepts file or directory paths
