@@ -2,7 +2,7 @@
 Custom Operator Management
 ===========================
 
-Manages a persistent JSON registry at ``~/.data_juicer/op_registry.json``
+Manages a persistent JSON registry at ``~/.data_juicer/custom_op.json``
 so that custom operators survive across processes.
 
 The registry file stores source-file paths keyed by operator name.
@@ -97,13 +97,13 @@ def load_custom_operators(paths):
 def get_registry_path() -> Path:
     """Return the path to the persistent op registry JSON file.
 
-    Defaults to ``~/.data_juicer/op_registry.json``.
-    Override with the ``DJ_OP_REGISTRY`` environment variable.
+    Defaults to ``~/.data_juicer/custom_op.json``.
+    Override with the ``DJ_CUSTOM_OP_REGISTRY`` environment variable.
     """
-    override = os.environ.get("DJ_OP_REGISTRY")
+    override = os.environ.get("DJ_CUSTOM_OP_REGISTRY")
     if override:
         return Path(override)
-    return Path.home() / ".data_juicer" / "op_registry.json"
+    return Path.home() / ".data_juicer" / "custom_op.json"
 
 
 # ---------------------------------------------------------------------------

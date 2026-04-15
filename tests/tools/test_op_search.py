@@ -263,11 +263,11 @@ class OpSearchCLIListTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp_dir = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp_dir.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp_dir.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
 
     def tearDown(self):
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp_dir.cleanup()
 
     def test_list(self):
@@ -279,11 +279,11 @@ class OpSearchCLIInfoTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp_dir = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp_dir.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp_dir.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
 
     def tearDown(self):
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp_dir.cleanup()
 
     def test_info_builtin(self):
@@ -300,11 +300,11 @@ class OpSearchCLISearchTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp_dir = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp_dir.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp_dir.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
 
     def tearDown(self):
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp_dir.cleanup()
 
     def test_search_bm25(self):

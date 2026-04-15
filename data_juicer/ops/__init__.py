@@ -16,7 +16,7 @@ def timing_context(description):
 with timing_context('Importing operator modules'):
     # 1. Built-in operators (registered via @OPERATORS.register_module decorators
     #    that fire as each sub-package is imported)
-    # 2. Persistent custom operators (loaded from ~/.data_juicer/op_registry.json;
+    # 2. Persistent custom operators (loaded from ~/.data_juicer/custom_op.json;
     #    no-op when the registry file does not exist)
     from data_juicer.utils.custom_op import (
         load_persistent_custom_ops as _load_persistent,

@@ -78,34 +78,34 @@ class RegistryPathTest(DataJuicerTestCaseBase):
     """Test get_registry_path with and without env override."""
 
     def test_default_path(self):
-        env_backup = os.environ.pop("DJ_OP_REGISTRY", None)
+        env_backup = os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         try:
             path = get_registry_path()
-            self.assertTrue(str(path).endswith("op_registry.json"))
+            self.assertTrue(str(path).endswith("custom_op.json"))
             self.assertIn(".data_juicer", str(path))
         finally:
             if env_backup is not None:
-                os.environ["DJ_OP_REGISTRY"] = env_backup
+                os.environ["DJ_CUSTOM_OP_REGISTRY"] = env_backup
 
     def test_env_override(self):
         with tempfile.TemporaryDirectory() as tmp:
             custom_path = os.path.join(tmp, "custom_reg.json")
-            os.environ["DJ_OP_REGISTRY"] = custom_path
+            os.environ["DJ_CUSTOM_OP_REGISTRY"] = custom_path
             try:
                 self.assertEqual(str(get_registry_path()), custom_path)
             finally:
-                del os.environ["DJ_OP_REGISTRY"]
+                del os.environ["DJ_CUSTOM_OP_REGISTRY"]
 
 class ReadWriteRegistryTest(DataJuicerTestCaseBase):
     """Test _read_registry / _write_registry helpers."""
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
 
     def tearDown(self):
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_read_empty(self):
@@ -135,15 +135,15 @@ class RegisterPersistentTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
         self._op_name = "test_reg_mapper"
         self._op_file = _make_custom_op_file(self._tmp.name, self._op_name)
 
     def tearDown(self):
         OPERATORS.unregister_module(self._op_name)
         sys.modules.pop(self._op_name, None)
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_register_and_json(self):
@@ -168,8 +168,8 @@ class UnregisterOpsTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
         self._op_name = "test_unreg_mapper"
         self._op_file = _make_custom_op_file(self._tmp.name, self._op_name)
         register_persistent([self._op_file])
@@ -177,7 +177,7 @@ class UnregisterOpsTest(DataJuicerTestCaseBase):
     def tearDown(self):
         OPERATORS.unregister_module(self._op_name)
         sys.modules.pop(self._op_name, None)
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_unregister_existing(self):
@@ -199,8 +199,8 @@ class ResetRegistryTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
         self._op_name = "test_reset_mapper"
         self._op_file = _make_custom_op_file(self._tmp.name, self._op_name)
         register_persistent([self._op_file])
@@ -208,7 +208,7 @@ class ResetRegistryTest(DataJuicerTestCaseBase):
     def tearDown(self):
         OPERATORS.unregister_module(self._op_name)
         sys.modules.pop(self._op_name, None)
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_reset_clears_all(self):
@@ -224,11 +224,11 @@ class ListRegisteredTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
 
     def tearDown(self):
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_list_empty(self):
@@ -251,11 +251,11 @@ class LoadPersistentCustomOpsTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
 
     def tearDown(self):
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_load_valid(self):
@@ -298,8 +298,8 @@ class CrossProcessVisibilityTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
         self._op_name = "test_xproc_mapper"
         self._op_file = _make_custom_op_file(self._tmp.name, self._op_name)
         register_persistent([self._op_file])
@@ -307,14 +307,14 @@ class CrossProcessVisibilityTest(DataJuicerTestCaseBase):
     def tearDown(self):
         OPERATORS.unregister_module(self._op_name)
         sys.modules.pop(self._op_name, None)
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_cross_process(self):
         """Spawn a subprocess that loads the registry and checks the op."""
         script = textwrap.dedent(f"""\
             import os, sys, json
-            os.environ["DJ_OP_REGISTRY"] = "{self._reg_path}"
+            os.environ["DJ_CUSTOM_OP_REGISTRY"] = "{self._reg_path}"
             from data_juicer.utils.custom_op import load_persistent_custom_ops
             from data_juicer.ops.base_op import OPERATORS
             result = load_persistent_custom_ops()
@@ -342,11 +342,11 @@ class CustomOpCLIListTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
 
     def tearDown(self):
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_list_empty(self):
@@ -358,15 +358,15 @@ class CustomOpCLIRegisterTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
         self._op_name = "cli_reg_mapper"
         self._op_file = _make_custom_op_file(self._tmp.name, self._op_name)
 
     def tearDown(self):
         OPERATORS.unregister_module(self._op_name)
         sys.modules.pop(self._op_name, None)
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_register(self):
@@ -379,8 +379,8 @@ class CustomOpCLIUnregisterTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
         self._op_name = "cli_unreg_mapper"
         self._op_file = _make_custom_op_file(self._tmp.name, self._op_name)
         register_persistent([self._op_file])
@@ -388,7 +388,7 @@ class CustomOpCLIUnregisterTest(DataJuicerTestCaseBase):
     def tearDown(self):
         OPERATORS.unregister_module(self._op_name)
         sys.modules.pop(self._op_name, None)
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_unregister(self):
@@ -401,8 +401,8 @@ class CustomOpCLIResetTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp.name, "op_registry.json")
-        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+        self._reg_path = os.path.join(self._tmp.name, "custom_op.json")
+        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
         self._op_name = "cli_reset_mapper"
         self._op_file = _make_custom_op_file(self._tmp.name, self._op_name)
         register_persistent([self._op_file])
@@ -410,7 +410,7 @@ class CustomOpCLIResetTest(DataJuicerTestCaseBase):
     def tearDown(self):
         OPERATORS.unregister_module(self._op_name)
         sys.modules.pop(self._op_name, None)
-        os.environ.pop("DJ_OP_REGISTRY", None)
+        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp.cleanup()
 
     def test_reset(self):
