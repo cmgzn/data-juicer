@@ -906,27 +906,23 @@ def _is_pydantic_model_annotation(annotation) -> bool:
     return False
 
 
-# Field names whose values are Pydantic sub-models and therefore
-# arrive as jsonargparse Namespace objects after parsing.  We convert
-# them back to plain dicts so that downstream code can keep using
-# the established dict-access pattern (e.g. cfg.dataset["configs"]).
-_NESTED_MODEL_FIELDS = frozenset(
-    field_name
-    for field_name, field_info in DJConfig.model_fields.items()
-    if _is_pydantic_model_annotation(field_info.annotation)
-)
+# Fields that must be converted from jsonargparse Namespace to plain dict
+# after parsing, because downstream code uses isinstance(x, dict) checks.
+# Other nested sub-model fields (partition, checkpoint, event_logging, etc.)
+# are kept as Namespace objects, which natively support both attribute access
+# (cfg.partition.target_size_mb) and dict-style access (cfg.partition["mode"]).
+_DICT_CONVERT_FIELDS = frozenset({"dataset"})
 
 
 def flatten_nested_namespaces(cfg) -> None:
-    """Convert nested Namespace values back to plain dicts **in-place**.
+    """Convert selected nested Namespace values back to plain dicts **in-place**.
 
     After ``jsonargparse`` parses a config that contains Pydantic
-    sub-models, those fields become ``Namespace`` objects.  The rest
-    of the Data-Juicer codebase expects them to be plain ``dict``s
-    (e.g. ``cfg.dataset["configs"]``).
-
-    Call this once right before ``init_configs`` returns so that all
-    downstream consumers see dicts, not Namespaces.
+    sub-models, those fields become ``Namespace`` objects.  Only fields
+    listed in ``_DICT_CONVERT_FIELDS`` are converted to plain dicts
+    (because downstream code relies on ``isinstance(x, dict)`` checks).
+    All other nested fields are left as ``Namespace`` objects, which
+    natively support both attribute and dict-style access.
     """
     from jsonargparse import Namespace as JAPNamespace
 
@@ -941,7 +937,7 @@ def flatten_nested_namespaces(cfg) -> None:
             return [_namespace_to_dict_recursive(item) for item in obj]
         return obj
 
-    for field_name in _NESTED_MODEL_FIELDS:
+    for field_name in _DICT_CONVERT_FIELDS:
         value = getattr(cfg, field_name, None)
         if value is not None and isinstance(value, JAPNamespace):
             setattr(cfg, field_name, _namespace_to_dict_recursive(value))
