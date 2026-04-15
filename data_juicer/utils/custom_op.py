@@ -259,19 +259,23 @@ def unregister_ops(names: List[str]) -> dict:
 
     for name in names:
         if name in registry["custom_operators"]:
+            meta = registry["custom_operators"][name]
             del registry["custom_operators"][name]
             removed.append(name)
+
+            # Also remove from in-process registry.
+            OPERATORS.unregister_module(name)
+
+            # Remove from sys.modules using the source file stem for
+            # precise matching — avoids accidentally removing built-in
+            # modules that happen to share a suffix.
+            src = meta.get("source_path")
+            if src:
+                module_name = os.path.splitext(os.path.basename(src))[0]
+                if module_name in sys.modules:
+                    del sys.modules[module_name]
         else:
             not_found.append(name)
-
-        # Also remove from in-process registry.
-        OPERATORS.unregister_module(name)
-
-        # Remove from sys.modules if present.
-        # The module name is typically the stem of the source file.
-        to_remove = [k for k in sys.modules if k == name or k.endswith(f".{name}")]
-        for k in to_remove:
-            del sys.modules[k]
 
     _write_registry(registry)
     return {"removed": removed, "not_found": not_found}
@@ -288,11 +292,14 @@ def reset_registry() -> dict:
     registry = _read_registry()
     removed = sorted(registry["custom_operators"].keys())
 
+    custom_ops = registry["custom_operators"]
     for name in removed:
         OPERATORS.unregister_module(name)
-        to_remove = [k for k in sys.modules if k == name or k.endswith(f".{name}")]
-        for k in to_remove:
-            del sys.modules[k]
+        meta = custom_ops.get(name)
+        if meta and "source_path" in meta:
+            module_name = os.path.splitext(os.path.basename(meta["source_path"]))[0]
+            if module_name in sys.modules:
+                del sys.modules[module_name]
 
     registry["custom_operators"] = {}
     _write_registry(registry)

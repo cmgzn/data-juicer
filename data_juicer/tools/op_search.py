@@ -183,8 +183,11 @@ class OPRecord:
         # --- source path: handling for custom ops ---
         try:
             self.source_path = str(get_source_path(op_cls))
-        except ValueError:
-            self.source_path = str(Path(inspect.getfile(op_cls)))
+        except (ValueError, TypeError, OSError):
+            try:
+                self.source_path = str(Path(inspect.getfile(op_cls)))
+            except (TypeError, OSError):
+                self.source_path = "unknown"
 
         # --- test path: handling for custom ops ---
         try:
