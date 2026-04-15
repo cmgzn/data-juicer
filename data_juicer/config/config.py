@@ -1,6 +1,5 @@
 import argparse
 import copy
-import importlib.util
 import json
 import os
 import shutil
@@ -51,51 +50,14 @@ def _generate_module_name(abs_path):
 
 
 def load_custom_operators(paths):
-    """Dynamically load custom operator modules or packages in the specified path."""
-    for path in paths:
-        abs_path = os.path.abspath(path)
-        if os.path.isfile(abs_path):
-            module_name = _generate_module_name(abs_path)
-            if module_name in sys.modules:
-                existing_path = sys.modules[module_name].__file__
-                raise RuntimeError(
-                    f"Module '{module_name}' already loaded from '{existing_path}'. "
-                    f"Conflict detected while loading '{abs_path}'."
-                )
-            try:
-                spec = importlib.util.spec_from_file_location(module_name, abs_path)
-                if spec is None:
-                    raise RuntimeError(f"Failed to create spec for '{abs_path}'")
-                module = importlib.util.module_from_spec(spec)
-                # register the module first to avoid recursive import issues
-                sys.modules[module_name] = module
-                spec.loader.exec_module(module)
-            except Exception as e:
-                raise RuntimeError(f"Error loading '{abs_path}' as '{module_name}': {e}")
+    """Dynamically load custom operator modules or packages in the specified path.
 
-        elif os.path.isdir(abs_path):
-            if not os.path.isfile(os.path.join(abs_path, "__init__.py")):
-                raise ValueError(f"Package directory '{abs_path}' must contain __init__.py")
-            package_name = os.path.basename(abs_path)
-            parent_dir = os.path.dirname(abs_path)
-            if package_name in sys.modules:
-                existing_path = sys.modules[package_name].__path__[0]
-                raise RuntimeError(
-                    f"Package '{package_name}' already loaded from '{existing_path}'. "
-                    f"Conflict detected while loading '{abs_path}'."
-                )
-            original_sys_path = sys.path.copy()
-            try:
-                sys.path.insert(0, parent_dir)
-                importlib.import_module(package_name)
-                # record the loading path of the package (for subsequent conflict detection)
-                sys.modules[package_name].__loaded_from__ = abs_path
-            except Exception as e:
-                raise RuntimeError(f"Error loading package '{abs_path}': {e}")
-            finally:
-                sys.path = original_sys_path
-        else:
-            raise ValueError(f"Path '{abs_path}' is neither a file nor a directory")
+    This is a re-export from ``data_juicer.utils.custom_op`` kept here for
+    backward compatibility.
+    """
+    from data_juicer.utils.custom_op import load_custom_operators as _impl
+
+    _impl(paths)
 
 
 def build_base_parser() -> ArgumentParser:
