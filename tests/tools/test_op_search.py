@@ -1,7 +1,10 @@
+import os
+import tempfile
 import unittest
 
 from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 from data_juicer.tools.op_search import OPSearcher
+from data_juicer.tools.op_search import main as op_search_main
 
 
 class OPRecordTest(DataJuicerTestCaseBase):
@@ -249,6 +252,83 @@ class OPSearcherSpecifiedOpsTest(DataJuicerTestCaseBase):
         records_map = searcher.records_map
         self.assertEqual(records_map, searcher.all_ops)
 
+
+# ---------------------------------------------------------------------------
+# CLI tests
+# ---------------------------------------------------------------------------
+
+
+class OpSearchCLIListTest(DataJuicerTestCaseBase):
+    """Test the 'list' CLI sub-command."""
+
+    def setUp(self):
+        self._tmp_dir = tempfile.TemporaryDirectory()
+        self._reg_path = os.path.join(self._tmp_dir.name, "op_registry.json")
+        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+
+    def tearDown(self):
+        os.environ.pop("DJ_OP_REGISTRY", None)
+        self._tmp_dir.cleanup()
+
+    def test_list(self):
+        rc = op_search_main(["list"])
+        self.assertEqual(rc, 0)
+
+class OpSearchCLIInfoTest(DataJuicerTestCaseBase):
+    """Test the 'info' CLI sub-command."""
+
+    def setUp(self):
+        self._tmp_dir = tempfile.TemporaryDirectory()
+        self._reg_path = os.path.join(self._tmp_dir.name, "op_registry.json")
+        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+
+    def tearDown(self):
+        os.environ.pop("DJ_OP_REGISTRY", None)
+        self._tmp_dir.cleanup()
+
+    def test_info_builtin(self):
+        """Info on a built-in op should succeed."""
+        rc = op_search_main(["info", "text_length_filter"])
+        self.assertEqual(rc, 0)
+
+    def test_info_not_found(self):
+        rc = op_search_main(["info", "no_such_op_xyz"])
+        self.assertEqual(rc, 1)
+
+class OpSearchCLISearchTest(DataJuicerTestCaseBase):
+    """Test the 'search' CLI sub-command."""
+
+    def setUp(self):
+        self._tmp_dir = tempfile.TemporaryDirectory()
+        self._reg_path = os.path.join(self._tmp_dir.name, "op_registry.json")
+        os.environ["DJ_OP_REGISTRY"] = self._reg_path
+
+    def tearDown(self):
+        os.environ.pop("DJ_OP_REGISTRY", None)
+        self._tmp_dir.cleanup()
+
+    def test_search_bm25(self):
+        rc = op_search_main(["search", "text length"])
+        self.assertEqual(rc, 0)
+
+    def test_search_regex(self):
+        rc = op_search_main(["search", "text.*filter", "--mode", "regex"])
+        self.assertEqual(rc, 0)
+
+    def test_search_by_tags(self):
+        rc = op_search_main(["search", "--tags", "cpu"])
+        self.assertEqual(rc, 0)
+
+    def test_search_by_type(self):
+        rc = op_search_main(["search", "--type", "mapper"])
+        self.assertEqual(rc, 0)
+
+class OpSearchCLINoCommandTest(DataJuicerTestCaseBase):
+    """Test calling op_search CLI with no command."""
+
+    def test_no_command(self):
+        rc = op_search_main([])
+        self.assertEqual(rc, 1)
 
 if __name__ == '__main__':
     unittest.main()

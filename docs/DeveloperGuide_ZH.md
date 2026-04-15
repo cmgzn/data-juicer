@@ -2,6 +2,8 @@
 
 - [开发者指南](#开发者指南)
   - [1. 快速构建你自己的算子](#1-快速构建你自己的算子)
+    - [持久化自定义算子注册](#持久化自定义算子注册)
+    - [逐步构建一个算子](#逐步构建一个算子)
   - [2. 构建你自己的数据菜谱和配置项](#2-构建你自己的数据菜谱和配置项)
     - [2.1 丰富的配置源和类型提示](#21-丰富的配置源和类型提示)
     - [2.2 层次化的配置和帮助](#22-层次化的配置和帮助)
@@ -26,6 +28,43 @@
 - 在实现新的算子之前，请参考已有 [算子池](Operators.md) 以避免不必要的重复。
 
 > 以下示例的开发过程以直接在源码对应模块中添加算子为例。如果外部添加算子，可以通过传参`--custom-operator-paths` 或 yaml配置文件中配置`custom_operator_paths`参数注册新算子，例如：`custom_operator_paths: ['/path/to/new/op.py', '/path/to/new/ops/directory/]`。
+
+### 持久化自定义算子注册
+
+除了上述每次运行时指定 `--custom-operator-paths` 的方式外，Data-Juicer 还提供了**持久化自定义算子注册表**，使外部开发的算子能够跨进程、跨会话持续生效，无需重复配置。
+
+注册表存储在 `~/.data_juicer/op_registry.json`（可通过环境变量 `DJ_OP_REGISTRY` 覆盖路径）。通过 CLI 管理：
+
+```bash
+# 注册自定义算子 — 支持文件或目录路径
+python -m data_juicer.utils.custom_op register /path/to/my_mapper.py
+
+# 列出所有已注册的自定义算子
+python -m data_juicer.utils.custom_op list
+
+# 按算子名称取消注册
+python -m data_juicer.utils.custom_op unregister my_mapper
+
+# 清除所有自定义算子注册
+python -m data_juicer.utils.custom_op reset
+```
+
+注册完成后，自定义算子会在每次 Data-Juicer 启动时**自动加载**。源文件已不存在的失效条目会被自动清理。
+
+你还可以使用算子搜索工具查询和检视内置算子与自定义算子：
+
+```bash
+# 列出所有算子（内置 + 自定义）
+python -m data_juicer.tools.op_search list
+
+# 查看某个算子的详细信息
+python -m data_juicer.tools.op_search info my_mapper
+
+# 按关键词搜索算子
+python -m data_juicer.tools.op_search search "text length"
+```
+
+### 逐步构建一个算子
 
 下面以 "TextLengthFilter" 的算子（过滤仅包含预期文本长度的样本语料）为例，展示相应开发构建过程。
 
@@ -121,7 +160,13 @@ process:
       max_len: 1000
 ```
 
-6. 社区贡献者可在alpha状态后就提相应算子PR。此后该贡献者可以与Data-Juicer团队一起在后续PR中，将其渐进完善到beta和stable版本。更多细节请参考下方第4节。我们非常欢迎共建，并会[高亮致谢](https://github.com/datajuicer/data-juicer?tab=readme-ov-file#contribution-and-acknowledgements)！
+6. （可选）如果你在 Data-Juicer 源码树之外开发自定义算子，可以**持久化注册**它们，这样在后续所有会话中都可以直接使用，无需每次都添加 `custom_operator_paths`：
+
+    ```bash
+    python -m data_juicer.utils.custom_op register /path/to/text_length_filter.py
+    ```
+
+7. 社区贡献者可在alpha状态后就提相应算子PR。此后该贡献者可以与Data-Juicer团队一起在后续PR中，将其渐进完善到beta和stable版本。更多细节请参考下方第4节。我们非常欢迎共建，并会[高亮致谢](https://github.com/datajuicer/data-juicer?tab=readme-ov-file#contribution-and-acknowledgements)！
 
 ## 2. 构建你自己的数据菜谱和配置项
 

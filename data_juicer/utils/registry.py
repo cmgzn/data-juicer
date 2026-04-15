@@ -82,6 +82,17 @@ class Registry(object):
         self._modules[module_name] = module_cls
         module_cls._name = module_name
 
+    def unregister_module(self, module_name: str) -> bool:
+        """Remove a module from the registry by name.
+
+        :param module_name: name of the module to remove
+        :return: True if removed, False if not found.
+        """
+        if module_name in self._modules:
+            del self._modules[module_name]
+            return True
+        return False
+
     def register_module(self, module_name: str = None, module_cls: type = None, force=False):
         """
         Register module class object to registry with the specified modulename.

@@ -14,7 +14,18 @@ def timing_context(description):
 
 # yapf: disable
 with timing_context('Importing operator modules'):
+    # 1. Built-in operators (registered via @OPERATORS.register_module decorators
+    #    that fire as each sub-package is imported)
+    # 2. Persistent custom operators (loaded from ~/.data_juicer/op_registry.json;
+    #    no-op when the registry file does not exist)
+    from data_juicer.utils.custom_op import (
+        load_persistent_custom_ops as _load_persistent,
+    )
+
     from . import aggregator, deduplicator, filter, grouper, mapper, pipeline, selector
+    _load_persistent()
+    del _load_persistent
+
     from .base_op import (
         ATTRIBUTION_FILTERS,
         NON_STATS_FILTERS,
@@ -39,21 +50,21 @@ with timing_context('Importing operator modules'):
     )
 
 __all__ = [
-    'load_ops',
-    'Filter',
-    'Mapper',
-    'Deduplicator',
-    'Selector',
-    'Grouper',
-    'Aggregator',
-    'UNFORKABLE',
-    'NON_STATS_FILTERS',
-    'OPERATORS',
-    'TAGGING_OPS',
-    'Pipeline',
-    'OPEnvSpec',
-    'op_requirements_to_op_env_spec',
-    'OPEnvManager',
-    'analyze_lazy_loaded_requirements',
-    'analyze_lazy_loaded_requirements_for_code_file',
+    "load_ops",
+    "Filter",
+    "Mapper",
+    "Deduplicator",
+    "Selector",
+    "Grouper",
+    "Aggregator",
+    "UNFORKABLE",
+    "NON_STATS_FILTERS",
+    "OPERATORS",
+    "TAGGING_OPS",
+    "Pipeline",
+    "OPEnvSpec",
+    "op_requirements_to_op_env_spec",
+    "OPEnvManager",
+    "analyze_lazy_loaded_requirements",
+    "analyze_lazy_loaded_requirements_for_code_file",
 ]

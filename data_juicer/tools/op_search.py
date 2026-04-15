@@ -159,22 +159,42 @@ class OPRecord:
 
     def __init__(self, name: str, op_cls: type, op_type: Optional[str] = None):
         self.name = name
-        self.type = op_type or op_cls.__module__.split(".")[2].lower()
+
+        # --- module path:
+        # handling for custom ops ---
+        if op_type:
+            self.type = op_type
+        else:
+            module_parts = op_cls.__module__.split(".")
+            if len(module_parts) >= 3:
+                self.type = module_parts[2].lower()
+            else:
+                self.type = self._search_mro_for_type(op_cls)
         if self.type not in op_type_list:
             self.type = self._search_mro_for_type(op_cls)
+
         self.desc = op_cls.__doc__ or ""
         self.tags = analyze_tag_from_cls(op_cls, name)
         self.sig = inspect.signature(op_cls.__init__)
         self.param_desc = extract_param_docstring(op_cls.__init__.__doc__ or "")
         self.param_desc_map = self._parse_param_desc()
-        self.source_path = str(get_source_path(op_cls))
-        self.test_path = None
 
-        test_path = f"tests/ops/{self.type}/test_{self.name}.py"
-        if not (PROJECT_ROOT / test_path).exists():
-            test_path = find_test_by_searching_content(PROJECT_ROOT / "tests", op_cls.__name__ + "Test") or test_path
+        # --- source path: handling for custom ops ---
+        try:
+            self.source_path = str(get_source_path(op_cls))
+        except ValueError:
+            self.source_path = str(Path(inspect.getfile(op_cls)))
 
-        self.test_path = str(test_path)
+        # --- test path: handling for custom ops ---
+        try:
+            test_path = f"tests/ops/{self.type}/test_{self.name}.py"
+            if not (PROJECT_ROOT / test_path).exists():
+                test_path = (
+                    find_test_by_searching_content(PROJECT_ROOT / "tests", op_cls.__name__ + "Test") or test_path
+                )
+            self.test_path = str(test_path)
+        except Exception:
+            self.test_path = None
 
     def __getitem__(self, item):
         try:
@@ -441,26 +461,176 @@ class OPSearcher:
         return self.all_ops
 
 
-def main(query, tags, op_type):
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+
+def _build_parser():
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        prog="python -m data_juicer.tools.op_search",
+        description="Data-Juicer Operator Search & Query Tool",
+    )
+    sub = parser.add_subparsers(dest="command", help="Available commands")
+
+    # --- list ---
+    sub.add_parser(
+        "list",
+        help="List all operators (built-in + custom)",
+    )
+
+    # --- info ---
+    p_info = sub.add_parser(
+        "info",
+        help="Show detailed information about an operator",
+    )
+    p_info.add_argument("name", help="Operator name")
+
+    # --- search ---
+    p_search = sub.add_parser(
+        "search",
+        help="Search operators by keyword, regex, or tags",
+    )
+    p_search.add_argument(
+        "query",
+        nargs="?",
+        default=None,
+        help="Search query (natural language or regex pattern)",
+    )
+    p_search.add_argument(
+        "--mode",
+        choices=["bm25", "regex"],
+        default="bm25",
+        help="Search mode (default: bm25)",
+    )
+    p_search.add_argument(
+        "--tags",
+        nargs="+",
+        default=None,
+        help="Filter by tags (e.g., gpu, cpu, text, image)",
+    )
+    p_search.add_argument(
+        "--type",
+        dest="op_type",
+        default=None,
+        help="Filter by operator type (e.g., mapper, filter)",
+    )
+    p_search.add_argument(
+        "--top-k",
+        type=int,
+        default=10,
+        help="Maximum number of results (default: 10)",
+    )
+
+    return parser
+
+
+def _cmd_list(args) -> int:
+    """List all operators (built-in + custom)."""
+    from data_juicer.utils.custom_op import list_registered
+
+    custom_info = list_registered()
+    custom_names = set(custom_info.get("custom_operators", {}).keys())
+    all_names = sorted(OPERATORS.modules.keys())
+
+    print(f"Total operators: {len(all_names)}")
+    print(f"  Built-in: {len(all_names) - len(custom_names)}")
+    print(f"  Custom:   {len(custom_names)}")
+    print()
+    for name in all_names:
+        marker = " [custom]" if name in custom_names else ""
+        print(f"  {name}{marker}")
+    return 0
+
+
+def _cmd_info(args) -> int:
+    """Show detailed information about an operator."""
+    import sys
+
+    op_cls = OPERATORS.modules.get(args.name)
+    if op_cls is None:
+        print(f"Operator '{args.name}' not found.", file=sys.stderr)
+        return 1
+
+    record = OPRecord(name=args.name, op_cls=op_cls)
+    info = record.to_dict()
+
+    print(f"Name:        {info['name']}")
+    print(f"Type:        {info['type']}")
+    print(f"Tags:        {', '.join(info['tags']) if info['tags'] else 'none'}")
+    print(f"Source:      {info['source_path']}")
+    print(f"Test:        {info['test_path'] or 'none'}")
+    print(f"Signature:   {info['sig']}")
+    print()
+    if info["desc"]:
+        print("Description:")
+        print(f"  {info['desc'].strip()}")
+        print()
+    if info["param_desc_map"]:
+        print("Parameters:")
+        for pname, pdesc in info["param_desc_map"].items():
+            print(f"  {pname}: {pdesc}")
+
+    return 0
+
+
+def _cmd_search(args) -> int:
+    """Search operators by keyword, regex, or tags."""
     searcher = OPSearcher(include_formatter=True)
 
-    results = searcher.search_by_bm25(query=query, tags=tags, op_type=op_type)
+    query = args.query
+    tags = args.tags
+    op_type = args.op_type
 
-    print(f"\nFound {len(results)} operators:")
+    if args.mode == "regex" and query:
+        results = searcher.search_by_regex(query=query, tags=tags, op_type=op_type)
+    elif query:
+        results = searcher.search_by_bm25(query=query, tags=tags, op_type=op_type, top_k=args.top_k)
+    else:
+        results = searcher.search(tags=tags, op_type=op_type)
+
+    print(f"Found {len(results)} operator(s):")
     for op in results:
-        print(f"\n[{op['type'].upper()}] {op['name']}")
-        print(f"Tags: {', '.join(op['tags'])}")
-        print(f"Description: {op['desc']}")
-        print(f"Parameters: {op['param_desc']}")
-        print(f"Parameter Descriptions: {op['param_desc_map']}")
-        print(f"Signature: {op['sig']}")
-        print("-" * 50)
+        print(f"\n  [{op['type'].upper()}] {op['name']}")
+        print(f"    Tags: {', '.join(op['tags'])}")
+        desc = (op.get("desc") or "").strip()
+        if desc:
+            first_line = desc.split("\n")[0].strip()
+            if len(first_line) > 80:
+                first_line = first_line[:77] + "..."
+            print(f"    Desc: {first_line}")
 
-    print(searcher.records_map["nlpaug_en_mapper"]["source_path"])
-    print(searcher.records_map["nlpaug_en_mapper"].test_path)
+    return 0
+
+
+_COMMAND_MAP = {
+    "list": _cmd_list,
+    "info": _cmd_info,
+    "search": _cmd_search,
+}
+
+
+def main(argv=None) -> int:
+    """CLI entry point for operator search & query."""
+
+    parser = _build_parser()
+    args = parser.parse_args(argv)
+
+    if not args.command:
+        parser.print_help()
+        return 1
+
+    handler = _COMMAND_MAP.get(args.command)
+    if handler is None:
+        parser.print_help()
+        return 1
+
+    return handler(args)
 
 
 if __name__ == "__main__":
-    tags = []
-    op_type = "formatter"
-    main(query="json", tags=tags, op_type=op_type)
+    import sys
+
+    sys.exit(main())

@@ -2,6 +2,8 @@
 
 - [How-to Guide for Developers](#how-to-guide-for-developers)
   - [1. Build Your Own OPs Quickly](#1-build-your-own-ops-quickly)
+    - [Persistent Custom Operator Registration](#persistent-custom-operator-registration)
+    - [Build an OP Step by Step](#build-an-op-step-by-step)
   - [2. Build Your Own Data Recipes and Configs](#2-build-your-own-data-recipes-and-configs)
     - [2.1 Fruitful Config Sources \& Type Hints](#21-fruitful-config-sources--type-hints)
     - [2.2 Hierarchical Configs and Helps](#22-hierarchical-configs-and-helps)
@@ -26,6 +28,43 @@
 - Before implementing a new OP, please refer to existing [OperatorsZoo](Operators.md) to avoid unnecessary duplication.
 
 > The development process of the following example takes directly adding operators in the corresponding module of the source code as an example. If an operator is added externally, the new operator can be registered by passing the parameter `--custom-operator-paths` or configuring the `custom_operator_paths` parameter in the yaml file, for example: `custom_operator_paths: ['/path/to/new/op.py', '/path/to/new/ops/directory/]`.
+
+### Persistent Custom Operator Registration
+
+In addition to the per-run `--custom-operator-paths` approach above, Data-Juicer provides a **persistent custom operator registry** so that externally developed operators survive across processes and sessions without repeating configuration.
+
+The registry is stored at `~/.data_juicer/op_registry.json` (override with the `DJ_OP_REGISTRY` environment variable). Manage it via the CLI:
+
+```bash
+# Register custom operator(s) — accepts file or directory paths
+python -m data_juicer.utils.custom_op register /path/to/my_mapper.py
+
+# List all registered custom operators
+python -m data_juicer.utils.custom_op list
+
+# Unregister by operator name
+python -m data_juicer.utils.custom_op unregister my_mapper
+
+# Clear all custom operator registrations
+python -m data_juicer.utils.custom_op reset
+```
+
+Once registered, custom operators are **automatically loaded** on every Data-Juicer startup. Stale entries (whose source files no longer exist) are cleaned up automatically.
+
+You can also search and inspect both built-in and custom operators with the operator search tool:
+
+```bash
+# List all operators (built-in + custom)
+python -m data_juicer.tools.op_search list
+
+# Show detailed info for a specific operator
+python -m data_juicer.tools.op_search info my_mapper
+
+# Search operators by keyword
+python -m data_juicer.tools.op_search search "text length"
+```
+
+### Build an OP Step by Step
 
 Assuming we want to add a new Filter operator called "TextLengthFilter" to get corpus of expected text length, we can follow the following steps to build it.
 
@@ -120,7 +159,13 @@ process:
       max_len: 1000
 ```
 
-6. Community contributors can submit corresponding operator PRs and work with the Data-Juicer team to gradually improve it in subsequent PRs. Please see more details [below](#4-contribution-to-the-open-source-community). We greatly welcome co-construction and will [highlight acknowledgements](https://github.com/datajuicer/data-juicer?tab=readme-ov-file#contribution-and-acknowledgements)!
+6. (Optional) If you develop custom operators outside the Data-Juicer source tree, you can **persistently register** them so they are available across all future sessions without adding `custom_operator_paths` every time:
+
+    ```bash
+    python -m data_juicer.utils.custom_op register /path/to/text_length_filter.py
+    ```
+
+7. Community contributors can submit corresponding operator PRs and work with the Data-Juicer team to gradually improve it in subsequent PRs. Please see more details [below](#4-contribution-to-the-open-source-community). We greatly welcome co-construction and will [highlight acknowledgements](https://github.com/datajuicer/data-juicer?tab=readme-ov-file#contribution-and-acknowledgements)!
 
 
 ## 2. Build Your Own Data Recipes and Configs
