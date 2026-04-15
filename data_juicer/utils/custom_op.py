@@ -62,6 +62,8 @@ def load_custom_operators(paths):
                 sys.modules[module_name] = module
                 spec.loader.exec_module(module)
             except Exception as e:
+                # Clean up partially-initialized module to avoid stale entries
+                sys.modules.pop(module_name, None)
                 raise RuntimeError(f"Error loading '{abs_path}' as '{module_name}': {e}")
 
         elif os.path.isdir(abs_path):

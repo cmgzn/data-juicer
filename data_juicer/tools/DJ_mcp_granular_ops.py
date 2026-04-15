@@ -65,7 +65,7 @@ def create_operator_function(op, mcp):
     param_docstring = op["param_desc"]
 
     # Create new function signature with dataset_path as first parameter
-    # Consider adding other common parameters later, such as export_psth
+    # Consider adding other common parameters later, such as export_path
     fixed_params = [
         inspect.Parameter("dataset_path", inspect.Parameter.POSITIONAL_OR_KEYWORD, annotation=str),
         inspect.Parameter(
