@@ -18,14 +18,7 @@ with timing_context('Importing operator modules'):
     #    that fire as each sub-package is imported)
     # 2. Persistent custom operators (loaded from ~/.data_juicer/custom_op.json;
     #    no-op when the registry file does not exist)
-    from data_juicer.utils.custom_op import (
-        load_persistent_custom_ops as _load_persistent,
-    )
-
     from . import aggregator, deduplicator, filter, grouper, mapper, pipeline, selector
-    _load_persistent()
-    del _load_persistent
-
     from .base_op import (
         ATTRIBUTION_FILTERS,
         NON_STATS_FILTERS,
@@ -48,6 +41,10 @@ with timing_context('Importing operator modules'):
         analyze_lazy_loaded_requirements_for_code_file,
         op_requirements_to_op_env_spec,
     )
+
+    from data_juicer.utils.custom_op import load_persistent_custom_ops as _load_persistent  # isort: skip  # noqa: E501
+    _load_persistent()
+    del _load_persistent
 
 __all__ = [
     "load_ops",

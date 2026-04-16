@@ -42,8 +42,8 @@ python -m data_juicer.utils.custom_op register /path/to/my_mapper.py
 # List all registered custom operators
 python -m data_juicer.utils.custom_op list
 
-# Unregister by operator name
-python -m data_juicer.utils.custom_op unregister my_mapper
+# Unregister by registration path
+python -m data_juicer.utils.custom_op unregister /path/to/my_mapper.py
 
 # Clear all custom operator registrations
 python -m data_juicer.utils.custom_op reset

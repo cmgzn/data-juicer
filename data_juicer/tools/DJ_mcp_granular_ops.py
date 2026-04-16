@@ -24,7 +24,7 @@ def resolve_signature_annotations(func, sig: inspect.Signature) -> inspect.Signa
     try:
         module = sys.modules.get(func.__module__, None) if hasattr(func, "__module__") else None
         globalns = module.__dict__ if module else {}
-        hints = get_type_hints(func, globalns=globalns, localns=globalns)
+        hints = get_type_hints(func, globalns=globalns)
     except Exception:
         hints = {}
 

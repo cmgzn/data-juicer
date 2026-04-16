@@ -44,11 +44,6 @@ def timing_context(description):
     logger.debug(f"{description} took {elapsed_time:.2f} seconds")
 
 
-def _generate_module_name(abs_path):
-    """Generate a module name based on the absolute path of the file."""
-    return os.path.splitext(os.path.basename(abs_path))[0]
-
-
 def load_custom_operators(paths):
     """Dynamically load custom operator modules or packages in the specified path.
 

@@ -26,15 +26,16 @@ from data_juicer.utils.custom_op import (
     main as custom_op_main,
     register_persistent,
     reset_registry,
-    unregister_ops,
+    unregister_paths,
 )
 from data_juicer.utils.registry import Registry
 from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 
+
 def _make_custom_op_file(tmp_dir: str, op_name: str = "my_test_mapper") -> str:
     """Create a minimal custom mapper .py file and return its path."""
     code = textwrap.dedent(f"""\
-        from data_juicer.ops.base_op import OPERATORS, Mapper
+        from data_juicer.ops import OPERATORS, Mapper
 
         @OPERATORS.register_module('{op_name}')
         class MyTestMapper(Mapper):
@@ -50,9 +51,11 @@ def _make_custom_op_file(tmp_dir: str, op_name: str = "my_test_mapper") -> str:
         f.write(code)
     return path
 
+
 # ---------------------------------------------------------------------------
 # Unit tests for low-level API
 # ---------------------------------------------------------------------------
+
 
 class RegistryUnregisterTest(DataJuicerTestCaseBase):
     """Test Registry.unregister_module (new method)."""
@@ -73,6 +76,7 @@ class RegistryUnregisterTest(DataJuicerTestCaseBase):
         reg = Registry("test_unreg2")
         result = reg.unregister_module("no_such_op")
         self.assertFalse(result)
+
 
 class RegistryPathTest(DataJuicerTestCaseBase):
     """Test get_registry_path with and without env override."""
@@ -96,6 +100,7 @@ class RegistryPathTest(DataJuicerTestCaseBase):
             finally:
                 del os.environ["DJ_CUSTOM_OP_REGISTRY"]
 
+
 class ReadWriteRegistryTest(DataJuicerTestCaseBase):
     """Test _read_registry / _write_registry helpers."""
 
@@ -110,14 +115,17 @@ class ReadWriteRegistryTest(DataJuicerTestCaseBase):
 
     def test_read_empty(self):
         data = _read_registry()
-        self.assertEqual(data["version"], 1)
-        self.assertEqual(data["custom_operators"], {})
+        self.assertEqual(data["version"], 2)
+        self.assertEqual(data["registrations"], {})
 
     def test_write_and_read(self):
         payload = {
-            "version": 1,
-            "custom_operators": {
-                "foo": {"source_path": "/tmp/foo.py", "registered_at": "2026-01-01T00:00:00"}
+            "version": 2,
+            "registrations": {
+                "/tmp/foo.py": {
+                    "type": "file",
+                    "registered_at": "2026-01-01T00:00:00",
+                }
             },
         }
         _write_registry(payload)
@@ -128,7 +136,8 @@ class ReadWriteRegistryTest(DataJuicerTestCaseBase):
         with open(self._reg_path, "w") as f:
             f.write("not json")
         data = _read_registry()
-        self.assertEqual(data["custom_operators"], {})
+        self.assertEqual(data["registrations"], {})
+
 
 class RegisterPersistentTest(DataJuicerTestCaseBase):
     """Test register_persistent end-to-end."""
@@ -151,20 +160,24 @@ class RegisterPersistentTest(DataJuicerTestCaseBase):
         self.assertIn(self._op_name, result["registered"])
         self.assertIn(self._op_name, OPERATORS.modules)
 
+        # Registry should store the path, not operator names.
         data = _read_registry()
-        self.assertIn(self._op_name, data["custom_operators"])
-        self.assertEqual(
-            data["custom_operators"][self._op_name]["source_path"],
-            os.path.abspath(self._op_file),
-        )
+        abs_file = os.path.abspath(self._op_file)
+        self.assertIn(abs_file, data["registrations"])
+        meta = data["registrations"][abs_file]
+        self.assertEqual(meta["type"], "file")
+        self.assertIn("registered_at", meta)
+        # No "operators" key in the persisted data.
+        self.assertNotIn("operators", meta)
 
     def test_register_nonexistent_path(self):
         result = register_persistent(["/no/such/path.py"])
         self.assertEqual(result["registered"], [])
         self.assertGreater(len(result["warnings"]), 0)
 
-class UnregisterOpsTest(DataJuicerTestCaseBase):
-    """Test unregister_ops."""
+
+class UnregisterPathsTest(DataJuicerTestCaseBase):
+    """Test unregister_paths."""
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
@@ -181,18 +194,20 @@ class UnregisterOpsTest(DataJuicerTestCaseBase):
         self._tmp.cleanup()
 
     def test_unregister_existing(self):
-        result = unregister_ops([self._op_name])
-        self.assertIn(self._op_name, result["removed"])
+        abs_file = os.path.abspath(self._op_file)
+        result = unregister_paths([abs_file])
+        self.assertIn(abs_file, result["removed"])
         self.assertEqual(result["not_found"], [])
         self.assertNotIn(self._op_name, OPERATORS.modules)
 
         data = _read_registry()
-        self.assertNotIn(self._op_name, data["custom_operators"])
+        self.assertNotIn(abs_file, data["registrations"])
 
     def test_unregister_nonexistent(self):
-        result = unregister_ops(["no_such_op"])
+        result = unregister_paths(["/no/such/path.py"])
         self.assertEqual(result["removed"], [])
-        self.assertIn("no_such_op", result["not_found"])
+        self.assertIn("/no/such/path.py", result["not_found"])
+
 
 class ResetRegistryTest(DataJuicerTestCaseBase):
     """Test reset_registry."""
@@ -212,12 +227,14 @@ class ResetRegistryTest(DataJuicerTestCaseBase):
         self._tmp.cleanup()
 
     def test_reset_clears_all(self):
+        abs_file = os.path.abspath(self._op_file)
         result = reset_registry()
-        self.assertIn(self._op_name, result["removed"])
+        self.assertIn(abs_file, result["removed"])
         self.assertNotIn(self._op_name, OPERATORS.modules)
 
         data = _read_registry()
-        self.assertEqual(data["custom_operators"], {})
+        self.assertEqual(data["registrations"], {})
+
 
 class ListRegisteredTest(DataJuicerTestCaseBase):
     """Test list_registered."""
@@ -233,6 +250,7 @@ class ListRegisteredTest(DataJuicerTestCaseBase):
 
     def test_list_empty(self):
         result = list_registered()
+        self.assertEqual(result["registrations"], {})
         self.assertEqual(result["custom_operators"], {})
 
     def test_list_after_register(self):
@@ -241,10 +259,17 @@ class ListRegisteredTest(DataJuicerTestCaseBase):
         register_persistent([op_file])
         try:
             result = list_registered()
+            # Check the flattened view (live from OPERATORS)
             self.assertIn(op_name, result["custom_operators"])
+            # Check the path-keyed view
+            abs_file = os.path.abspath(op_file)
+            self.assertIn(abs_file, result["registrations"])
+            # The live "operators" list should contain the op
+            self.assertIn(op_name, result["registrations"][abs_file]["operators"])
         finally:
             OPERATORS.unregister_module(op_name)
             sys.modules.pop(op_name, None)
+
 
 class LoadPersistentCustomOpsTest(DataJuicerTestCaseBase):
     """Test load_persistent_custom_ops including stale-entry cleanup."""
@@ -276,10 +301,10 @@ class LoadPersistentCustomOpsTest(DataJuicerTestCaseBase):
 
     def test_load_cleans_stale(self):
         payload = {
-            "version": 1,
-            "custom_operators": {
-                "stale_op": {
-                    "source_path": "/no/such/file.py",
+            "version": 2,
+            "registrations": {
+                "/no/such/file.py": {
+                    "type": "file",
                     "registered_at": "2026-01-01T00:00:00",
                 }
             },
@@ -287,11 +312,12 @@ class LoadPersistentCustomOpsTest(DataJuicerTestCaseBase):
         _write_registry(payload)
 
         result = load_persistent_custom_ops()
-        self.assertIn("stale_op", result["cleaned"])
+        self.assertIn("/no/such/file.py", result["cleaned"])
         self.assertGreater(len(result["warnings"]), 0)
 
         data = _read_registry()
-        self.assertNotIn("stale_op", data["custom_operators"])
+        self.assertNotIn("/no/such/file.py", data["registrations"])
+
 
 class CrossProcessVisibilityTest(DataJuicerTestCaseBase):
     """Test that a custom op registered in one process is visible in another."""
@@ -333,9 +359,11 @@ class CrossProcessVisibilityTest(DataJuicerTestCaseBase):
         self.assertEqual(proc.returncode, 0, f"stderr: {proc.stderr}")
         self.assertIn("OK", proc.stdout)
 
+
 # ---------------------------------------------------------------------------
 # CLI tests
 # ---------------------------------------------------------------------------
+
 
 class CustomOpCLIListTest(DataJuicerTestCaseBase):
     """Test the 'list' CLI sub-command."""
@@ -352,6 +380,7 @@ class CustomOpCLIListTest(DataJuicerTestCaseBase):
     def test_list_empty(self):
         rc = custom_op_main(["list"])
         self.assertEqual(rc, 0)
+
 
 class CustomOpCLIRegisterTest(DataJuicerTestCaseBase):
     """Test the 'register' CLI sub-command."""
@@ -374,6 +403,7 @@ class CustomOpCLIRegisterTest(DataJuicerTestCaseBase):
         self.assertEqual(rc, 0)
         self.assertIn(self._op_name, OPERATORS.modules)
 
+
 class CustomOpCLIUnregisterTest(DataJuicerTestCaseBase):
     """Test the 'unregister' CLI sub-command."""
 
@@ -392,9 +422,11 @@ class CustomOpCLIUnregisterTest(DataJuicerTestCaseBase):
         self._tmp.cleanup()
 
     def test_unregister(self):
-        rc = custom_op_main(["unregister", self._op_name])
+        abs_file = os.path.abspath(self._op_file)
+        rc = custom_op_main(["unregister", abs_file])
         self.assertEqual(rc, 0)
         self.assertNotIn(self._op_name, OPERATORS.modules)
+
 
 class CustomOpCLIResetTest(DataJuicerTestCaseBase):
     """Test the 'reset' CLI sub-command."""
@@ -418,12 +450,14 @@ class CustomOpCLIResetTest(DataJuicerTestCaseBase):
         self.assertEqual(rc, 0)
         self.assertNotIn(self._op_name, OPERATORS.modules)
 
+
 class CustomOpCLINoCommandTest(DataJuicerTestCaseBase):
     """Test calling custom_op CLI with no command."""
 
     def test_no_command(self):
         rc = custom_op_main([])
         self.assertEqual(rc, 1)
+
 
 if __name__ == "__main__":
     unittest.main()

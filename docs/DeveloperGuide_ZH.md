@@ -42,8 +42,8 @@ python -m data_juicer.utils.custom_op register /path/to/my_mapper.py
 # 列出所有已注册的自定义算子
 python -m data_juicer.utils.custom_op list
 
-# 按算子名称取消注册
-python -m data_juicer.utils.custom_op unregister my_mapper
+# 按注册路径取消注册
+python -m data_juicer.utils.custom_op unregister /path/to/my_mapper.py
 
 # 清除所有自定义算子注册
 python -m data_juicer.utils.custom_op reset
