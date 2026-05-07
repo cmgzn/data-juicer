@@ -10,12 +10,10 @@ class CustomBuildHook(BuildHookInterface):
     """Custom build hook to compile C++ extensions."""
 
     def initialize(self, version, build_data):
-        """Compile C++ extensions before building the wheel."""
-        if self.target_name not in ("wheel", "sdist"):
-            return
-
-        # Only compile for wheel builds; skip on macOS (C++/OpenMP toolchain issues)
-        if self.target_name == "wheel" and sys.platform != "darwin":
+        """Compile C++ extensions before building the wheel or during editable installs."""
+        # Build extensions for wheel, sdist, and editable installs
+        # Skip on macOS (C++/OpenMP toolchain issues)
+        if self.target_name in ("wheel", "sdist", "editable") and sys.platform != "darwin":
             self._build_extensions()
 
     def _build_extensions(self):

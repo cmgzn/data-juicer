@@ -317,9 +317,14 @@ class MinhashCalculator:
         elif self.tokenization == "punctuation":
             self.tokenization_func = lambda x: [s.encode("utf-8") for s in self.punctuation_pattern.split(x)]
         elif self.tokenization == "space":
-            from .tokenize import split_on_whitespace
+            try:
+                from .tokenize import split_on_whitespace
 
-            self.tokenization_func = split_on_whitespace
+                self.tokenization_func = split_on_whitespace
+            except ImportError as e:
+                logger.error(f"Failed to import split_on_whitespace from tokenize module: {e}")
+                logger.error("This usually indicates the C++ extensions were not built during installation.")
+                raise
         elif self.tokenization == "sentencepiece":
             self.tokenization_func = lambda x: self.tokenizer.encode(x, out_type=str)
         else:
@@ -353,8 +358,14 @@ class MinhashCalculator:
         self.empty_hash_table_id = int(MAX_HASH % self.union_find_parallel_num)
 
     def calc_minhash(self, text_list: pa.Array, uid_begin: int, thread_num: int = 4) -> pa.Table:
-        from .minhash import calc_minhash_batch_c
-        from .tokenize import n_grams
+        try:
+            from .minhash import calc_minhash_batch_c
+            from .tokenize import n_grams
+        except ImportError as e:
+            logger.error(f"Failed to import C++ extensions: {e}")
+            logger.error("This usually indicates the C++ extensions were not built during installation.")
+            logger.error("Please ensure you have built the extensions with: pip install -e . --verbose")
+            raise
 
         tokens = [n_grams(self.tokenization_func(text.as_py()), self.window_size) for text in text_list]
         pairs = calc_minhash_batch_c(
