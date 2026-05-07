@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -42,16 +42,16 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../../../_static/documentation_options.js?v=91bfbbb6"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../../_static/translations.js?v=540d3cec"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/data_juicer/ops/op_fusion';</script>
     <script src="../../../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../../../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../../../_static/icon.png"/>
     <link rel="index" title="索引" href="../../../genindex.html" />
     <link rel="search" title="搜索" href="../../../search.html" />
@@ -156,21 +156,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
     Agents
   </a>
 </li>
@@ -338,21 +338,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
     Agents
   </a>
 </li>
@@ -525,6 +525,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops.load</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_ops</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.common_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_op_method_param</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.constant</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fields</span><span class="p">,</span> <span class="n">InterVars</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.lazy_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">LazyLoader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Registry</span>
 
 <span class="c1"># Type of intermediate vars</span>
@@ -678,7 +679,9 @@
 <div class="viewcode-block" id="FusedFilter.compute_stats_batched">
 <a class="viewcode-back" href="../../../api/data_juicer.ops.op_fusion.html#data_juicer.ops.op_fusion.FusedFilter.compute_stats_batched">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats_batched</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">av</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.video_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_av</span>
+
+        <span class="n">av</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s2">&quot;av&quot;</span><span class="p">,</span> <span class="n">post_import</span><span class="o">=</span><span class="n">setup_av</span><span class="p">)</span>
 
         <span class="c1"># context for the intermediate vars</span>
         <span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">])</span>
@@ -765,7 +768,9 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">process_batched</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
 
-        <span class="kn">import</span><span class="w"> </span><span class="nn">av</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.video_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_av</span>
+
+        <span class="n">av</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s2">&quot;av&quot;</span><span class="p">,</span> <span class="n">post_import</span><span class="o">=</span><span class="n">setup_av</span><span class="p">)</span>
 
         <span class="n">tmp_samples</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
 
@@ -780,7 +785,7 @@
                 <span class="k">if</span> <span class="n">check_op_method_param</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">process</span><span class="p">,</span> <span class="s2">&quot;context&quot;</span><span class="p">):</span>
                     <span class="c1"># add context param only when the core process method of this OP contains this param</span>
                     <span class="n">process_args</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">samples</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">process_batched</span><span class="p">(</span><span class="n">tmp_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">process_args</span><span class="p">)</span>
+                <span class="n">tmp_samples</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">process_batched</span><span class="p">(</span><span class="n">tmp_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">process_args</span><span class="p">)</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">Filter</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">check_op_method_param</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">,</span> <span class="s2">&quot;context&quot;</span><span class="p">):</span>
                     <span class="c1"># add context param only when the core process method of this OP contains this param</span>
@@ -887,7 +892,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3创建。
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4创建。
     <br/>
   </p>
 </div>

@@ -72,6 +72,7 @@ class AskAIWidget {
       onClear: () => this.clearConversation(),
       onExpand: () => this.ui.toggleExpand(),
       onSend: () => this.sendMessage(),
+      onThinkingToggle: () => this.ui.toggleThinking(),
     });
 
     // Bind feedback button events
@@ -193,27 +194,61 @@ class AskAIWidget {
 
   /**
    * Load conversation history from API
+   * Merges consecutive assistant messages into single messages
    */
   async loadConversationHistory() {
     const messages = await this.api.loadConversationHistory();
 
     if (messages && messages.length > 0) {
-      messages.forEach(msg => {
-        if (msg.content && typeof msg.content === 'string') {
-          const isUser = msg.role === 'user';
-          const content = msg.content.trim();
-
-          // Skip JSON array messages (tool calls)
-          if (!(content.startsWith('[{') && content.endsWith('}]'))) {
-            if (content) {
-              const messageId = msg.id || `history_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-              this.ui.addMessage(content, isUser ? 'user' : 'assistant', messageId);
-            }
-          }
+      // Group messages by conversation turn
+      const turns = [];
+      let currentTurn = null;
+      
+      for (let i = 0; i < messages.length; i++) {
+        const msg = messages[i];
+        
+        if (!msg.content || typeof msg.content !== 'string') continue;
+        
+        const content = msg.content.trim();
+        if (!content) continue;
+        
+        // Skip JSON array messages (tool calls - not rendered in history)
+        let isJsonArray = false;
+        try {
+          const parsed = JSON.parse(content);
+          isJsonArray = Array.isArray(parsed);
+        } catch (e) {
+          // Not valid JSON
+        }
+        if (isJsonArray) continue;
+        
+        if (msg.role === 'user') {
+          currentTurn = {
+            user: { content: content, id: msg.id },
+            assistantTexts: []
+          };
+          turns.push(currentTurn);
+        } else if (msg.role === 'assistant' && currentTurn) {
+          currentTurn.assistantTexts.push(content);
+        }
+      }
+      
+      // Render each turn
+      turns.forEach(turn => {
+        // Render user message
+        const userMessageId = turn.user.id || 'history_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        this.ui.addMessage(turn.user.content, 'user', userMessageId);
+        
+        // Render merged assistant message
+        if (turn.assistantTexts.length > 0) {
+          const mergedText = turn.assistantTexts.join('\n\n');
+          const assistantMessageId = 'history_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+          const contentWithSuffix = mergedText + (this.i18n.helpSuffix || '');
+          this.ui.addMessage(contentWithSuffix, 'assistant', assistantMessageId);
         }
       });
 
-      if (messages.length > 0) {
+      if (turns.length > 0) {
         this.ui.scrollToBottom();
       }
     }
@@ -245,6 +280,13 @@ class AskAIWidget {
 
     // Track active tool calls by call_id
     const activeToolCalls = new Map();
+    // Track the currently active thinking container
+    let activeThinkingContainer = null;
+
+    // Build model_config based on thinking toggle state
+    const modelConfig = {
+      enable_thinking: this.ui.enableThinking
+    };
 
     try {
       // Get AI response with streaming
@@ -254,6 +296,13 @@ class AskAIWidget {
         (content) => {
           // Remove typing class when we start receiving content
           assistantMessageDiv.classList.remove('typing');
+          // Finalize thinking panel if it was open (thinking phase ended, text phase started)
+          if (activeThinkingContainer) {
+            this.ui.finalizeThinking(activeThinkingContainer);
+            activeThinkingContainer = null;
+          }
+          // Collapse completed tool containers when text content arrives
+          this.ui.collapseCompletedToolContainers(assistantMessageDiv);
           this.ui.updateMessageContent(assistantMessageDiv, content);
         },
         // onToolUse
@@ -264,6 +313,12 @@ class AskAIWidget {
           const typingIndicator = assistantMessageDiv.querySelector('.typing-indicator');
           if (typingIndicator) {
             typingIndicator.remove();
+          }
+
+          // Finalize thinking panel if it was open before tool call
+          if (activeThinkingContainer) {
+            this.ui.finalizeThinking(activeThinkingContainer);
+            activeThinkingContainer = null;
           }
           
           // Add tool call to panel
@@ -280,6 +335,12 @@ class AskAIWidget {
           activeToolCalls.forEach(toolId => {
             this.ui.markToolCallDone(toolId);
           });
+
+          // Finalize any remaining active thinking container
+          if (activeThinkingContainer) {
+            this.ui.finalizeThinking(activeThinkingContainer);
+            activeThinkingContainer = null;
+          }
           
           // Ensure typing class is removed
           assistantMessageDiv.classList.remove('typing');
@@ -297,8 +358,8 @@ class AskAIWidget {
               .join('');
           }
           
-          // Update with verified content
-          this.ui.updateMessageContent(assistantMessageDiv, finalContent);
+          // Update with verified content and add helpSuffix at the end
+          this.ui.finalizeMessage(assistantMessageDiv, finalContent);
           
           // Update with server-provided message ID
           if (assistantMessage.id) {
@@ -313,12 +374,6 @@ class AskAIWidget {
             console.log('Adding feedback buttons in onComplete');
             this.ui.addFeedbackButtons(assistantMessageDiv, assistantMessage.id, finalContent);
           } else if (hasFeedbackButtons) {
-            // Update feedback buttons' message ID
-            const feedbackButtons = messageWrapper.querySelectorAll('.ask-ai-feedback-btn[data-message-id]');
-            feedbackButtons.forEach(btn => {
-              btn.setAttribute('data-message-id', assistantMessage.id);
-            });
-            
             // Update stored content for copying
             const feedbackDiv = messageWrapper.querySelector('.ask-ai-feedback-actions');
             if (feedbackDiv) {
@@ -355,6 +410,24 @@ class AskAIWidget {
             this.ui.markToolCallDone(toolId);
             console.log('Tool completed:', callId, '-> toolId:', toolId);
           }
+        },
+        // modelConfig
+        modelConfig,
+        // onThinkingUpdate
+        (thinkingText) => {
+          // Remove typing class when we start receiving thinking content
+          assistantMessageDiv.classList.remove('typing');
+          const typingIndicator = assistantMessageDiv.querySelector('.typing-indicator');
+          if (typingIndicator) {
+            typingIndicator.remove();
+          }
+          // Collapse completed tool containers when thinking phase starts
+          this.ui.collapseCompletedToolContainers(assistantMessageDiv);
+          // Create a new thinking container if none is active
+          if (!activeThinkingContainer) {
+            activeThinkingContainer = this.ui.createThinkingContainer(assistantMessageDiv);
+          }
+          this.ui.appendThinkingContent(thinkingText, activeThinkingContainer);
         }
       );
     } catch (error) {
@@ -383,10 +456,7 @@ class AskAIWidget {
       this.ui.clearMessages();
 
       // Add welcome message back
-      const welcomeDiv = document.createElement('div');
-      welcomeDiv.className = 'ask-ai-welcome';
-      welcomeDiv.innerHTML = this.i18n.welcomeMessage;
-      this.ui.messagesContainer.appendChild(welcomeDiv);
+      this.addWelcomeMessage();
 
       console.log('Conversation cleared successfully');
     } else {

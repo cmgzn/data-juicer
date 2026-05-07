@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -42,15 +42,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../../../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/data_juicer/ops/load';</script>
     <script src="../../../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../../../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../../../_static/icon.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -155,21 +155,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -337,21 +337,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -520,12 +520,14 @@
 
 <div class="viewcode-block" id="load_ops">
 <a class="viewcode-back" href="../../../api/data_juicer.ops.html#data_juicer.ops.load_ops">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">load_ops</span><span class="p">(</span><span class="n">process_list</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_ops</span><span class="p">(</span><span class="n">process_list</span><span class="p">,</span> <span class="n">op_env_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Load op list according to the process list from config file.</span>
 
 <span class="sd">    :param process_list: A process list. Each item is an op name and its</span>
 <span class="sd">        arguments.</span>
+<span class="sd">    :param op_env_manager: The OPEnvManager to try to merge environment specs of different OPs that have common</span>
+<span class="sd">        dependencies. Only available when min_common_dep_num_to_combine &gt;= 0.</span>
 <span class="sd">    :return: The op instance list.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ops</span> <span class="o">=</span> <span class="p">[]</span>
@@ -539,6 +541,22 @@
     <span class="c1"># store the OP configs into each OP</span>
     <span class="k">for</span> <span class="n">op_cfg</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">new_process_list</span><span class="p">,</span> <span class="n">ops</span><span class="p">):</span>
         <span class="n">op</span><span class="o">.</span><span class="n">_op_cfg</span> <span class="o">=</span> <span class="n">op_cfg</span>
+
+    <span class="c1"># update op runtime environment if OPEnvManager is enabled</span>
+    <span class="k">if</span> <span class="n">op_env_manager</span><span class="p">:</span>
+        <span class="c1"># first round: record and merge possible common env specs</span>
+        <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">ops</span><span class="p">:</span>
+            <span class="n">op_name</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">_name</span>
+            <span class="n">op_env_spec</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">get_env_spec</span><span class="p">()</span>
+            <span class="n">op_env_manager</span><span class="o">.</span><span class="n">record_op_env_spec</span><span class="p">(</span><span class="n">op_name</span><span class="p">,</span> <span class="n">op_env_spec</span><span class="p">)</span>
+        <span class="c1"># second round: update op runtime environment</span>
+        <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">ops</span><span class="p">:</span>
+            <span class="n">op_name</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">_name</span>
+            <span class="n">op_env_spec</span> <span class="o">=</span> <span class="n">op_env_manager</span><span class="o">.</span><span class="n">get_op_env_spec</span><span class="p">(</span><span class="n">op_name</span><span class="p">)</span>
+            <span class="n">op</span><span class="o">.</span><span class="n">_requirements</span> <span class="o">=</span> <span class="n">op_env_spec</span><span class="o">.</span><span class="n">pip_pkgs</span>
+            <span class="c1"># if the runtime_env is not set for this OP, update the runtime_env as well</span>
+            <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">runtime_env</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">op</span><span class="o">.</span><span class="n">runtime_env</span> <span class="o">=</span> <span class="n">op_env_spec</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">ops</span></div>
 
@@ -598,7 +616,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

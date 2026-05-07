@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -42,16 +42,16 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../../../_static/documentation_options.js?v=91bfbbb6"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../_static/translations.js?v=beaddf03"></script>
+    <script src="../../../_static/translations.js?v=540d3cec"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/data_juicer/utils/process_utils';</script>
     <script src="../../../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../../../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../../../_static/icon.png"/>
     <link rel="index" title="索引" href="../../../genindex.html" />
     <link rel="search" title="搜索" href="../../../search.html" />
@@ -156,21 +156,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
     Agents
   </a>
 </li>
@@ -338,21 +338,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/zh_CN/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/zh_CN/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/zh_CN/main/">
     Agents
   </a>
 </li>
@@ -535,6 +535,44 @@
 <span class="c1"># A safety fraction to avoid OOM by not allocating all available memory to operators.</span>
 <span class="c1"># This leaves some memory for Ray&#39;s overhead and other system processes.</span>
 <span class="n">_OPS_MEMORY_LIMIT_FRACTION</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="c1"># Track whether worker threads have been configured</span>
+<span class="n">_WORKER_THREADS_CONFIGURED</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="setup_worker_threads">
+<a class="viewcode-back" href="../../../api/data_juicer.utils.process_utils.html#data_juicer.utils.process_utils.setup_worker_threads">[文档]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_worker_threads</span><span class="p">(</span><span class="n">num_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Configure thread limits for worker processes to prevent thread over-subscription.</span>
+
+<span class="sd">    When running with multiple worker processes (e.g., num_proc &gt; 1), each worker</span>
+<span class="sd">    using multiple threads leads to severe performance degradation due to thread</span>
+<span class="sd">    contention. This function limits threads per worker to prevent this issue.</span>
+
+<span class="sd">    :param num_threads: Number of threads per worker process (default: 1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_WORKER_THREADS_CONFIGURED</span>
+
+    <span class="c1"># Only configure once per process</span>
+    <span class="k">if</span> <span class="n">_WORKER_THREADS_CONFIGURED</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Set PyTorch thread limits directly (works even after torch is imported)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+        <span class="n">torch</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="n">num_threads</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">set_num_interop_threads</span><span class="p">(</span><span class="n">num_threads</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set torch threads to </span><span class="si">{</span><span class="n">num_threads</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># torch.set_num_interop_threads can only be called once</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not set torch interop threads: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">_WORKER_THREADS_CONFIGURED</span> <span class="o">=</span> <span class="kc">True</span></div>
+
 
 
 <div class="viewcode-block" id="setup_mp">
@@ -771,6 +809,21 @@
     <span class="n">total_gpu</span> <span class="o">=</span> <span class="n">ray_gpu_count</span><span class="p">()</span>
     <span class="n">available_mem</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ray_available_memories</span><span class="p">())</span> <span class="o">*</span> <span class="n">_OPS_MEMORY_LIMIT_FRACTION</span> <span class="o">/</span> <span class="mi">1024</span>  <span class="c1"># Convert MB to GB</span>
     <span class="n">available_gpu_mem</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ray_available_gpu_memories</span><span class="p">())</span> <span class="o">*</span> <span class="n">_OPS_MEMORY_LIMIT_FRACTION</span> <span class="o">/</span> <span class="mi">1024</span>  <span class="c1"># Convert MB to GB</span>
+
+    <span class="c1"># Validate cluster resources to prevent divide-by-zero</span>
+    <span class="k">if</span> <span class="n">total_cpu</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="s2">&quot;Ray cluster has no CPU resources available (ray_cpu_count() returned 0). &quot;</span>
+            <span class="s2">&quot;This typically indicates the Ray cluster is not properly initialized. &quot;</span>
+            <span class="s2">&quot;Please ensure the Ray cluster has active worker nodes.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">available_mem</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="s2">&quot;Ray cluster has no memory resources available. &quot;</span>
+            <span class="s2">&quot;Please verify the Ray cluster status with ray.cluster_resources().&quot;</span>
+        <span class="p">)</span>
+
     <span class="n">resource_configs</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">op_idx</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">operators</span><span class="p">):</span>
@@ -797,6 +850,18 @@
         <span class="n">cpu_required_frac</span><span class="p">,</span> <span class="n">gpu_required_frac</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
         <span class="c1"># GPU operator calculations</span>
         <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">total_gpu</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Op[</span><span class="si">{</span><span class="n">op</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">] requires GPU but no GPUs are available in Ray cluster &quot;</span>
+                    <span class="s2">&quot;(ray_gpu_count() returned 0). &quot;</span>
+                    <span class="s2">&quot;Please ensure GPU nodes are configured in the Ray cluster.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">available_gpu_mem</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Op[</span><span class="si">{</span><span class="n">op</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">] requires GPU but no GPU memory is available. &quot;</span>
+                    <span class="s2">&quot;Please verify GPU nodes are properly configured.&quot;</span>
+                <span class="p">)</span>
+
             <span class="n">gpu_req</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">num_gpus</span>
             <span class="n">gpu_mem_req</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">memory</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">gpu_req</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">gpu_mem_req</span><span class="p">:</span>
@@ -836,11 +901,6 @@
                     <span class="p">)</span>
                 <span class="c1"># if no cpu is specified, ray will apply for 1 cpu by default</span>
                 <span class="n">cpu_required_frac</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">total_cpu</span>
-            <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">&quot;Op[</span><span class="si">{</span><span class="n">op</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">] is running in ray task mode, ``num_proc`` is expected to be set as an integer but got: </span><span class="si">{</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="si">}</span><span class="s2">.&quot;</span>
-                    <span class="p">)</span>
             <span class="c1"># set concurrency to none, using the default autoscaler of ray to ensure performance</span>
             <span class="k">if</span> <span class="n">op</span><span class="o">.</span><span class="n">num_proc</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
                 <span class="n">op</span><span class="o">.</span><span class="n">num_proc</span> <span class="o">=</span> <span class="kc">None</span>
@@ -855,7 +915,7 @@
             <span class="s2">&quot;gpu_required_frac&quot;</span><span class="p">:</span> <span class="n">gpu_required_frac</span><span class="p">,</span>
             <span class="s2">&quot;num_proc&quot;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">op</span><span class="o">.</span><span class="n">num_proc</span><span class="p">,</span>
             <span class="s2">&quot;auto_proc&quot;</span><span class="p">:</span> <span class="n">op</span><span class="o">.</span><span class="n">use_auto_proc</span><span class="p">(),</span>
-            <span class="s2">&quot;is_actor&quot;</span><span class="p">:</span> <span class="n">op</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">(),</span>
+            <span class="s2">&quot;is_actor&quot;</span><span class="p">:</span> <span class="n">op</span><span class="o">.</span><span class="n">use_ray_actor</span><span class="p">(),</span>
         <span class="p">}</span>
 
     <span class="n">fixed_min_cpu</span> <span class="o">=</span> <span class="n">fixed_max_cpu</span> <span class="o">=</span> <span class="n">fixed_min_gpu</span> <span class="o">=</span> <span class="n">fixed_max_gpu</span> <span class="o">=</span> <span class="mi">0</span>
@@ -935,7 +995,7 @@
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">auto_resource_frac_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># (cpu, gpu)</span>
                 <span class="n">op_resources_gpu</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">op_resources_cpu</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="n">best_combination_cpu</span><span class="p">,</span> <span class="n">best_combination_gpu</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
@@ -984,7 +1044,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">max_proc</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_frac_cpu</span> <span class="o">/</span> <span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;cpu_required_frac&quot;</span><span class="p">]))</span>
 
-                <span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;num_proc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_proc</span> <span class="k">if</span> <span class="n">min_proc</span> <span class="o">==</span> <span class="n">max_proc</span> <span class="k">else</span> <span class="p">(</span><span class="n">min_proc</span><span class="p">,</span> <span class="n">max_proc</span><span class="p">)</span>
+                <span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;num_proc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_proc</span> <span class="k">if</span> <span class="n">min_proc</span> <span class="o">&gt;=</span> <span class="n">max_proc</span> <span class="k">else</span> <span class="p">(</span><span class="n">min_proc</span><span class="p">,</span> <span class="n">max_proc</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">op_idx</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">operators</span><span class="p">):</span>
         <span class="n">cfg</span> <span class="o">=</span> <span class="n">resource_configs</span><span class="p">[</span><span class="n">op</span><span class="o">.</span><span class="n">_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">op_idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
@@ -1065,7 +1125,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3创建。
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4创建。
     <br/>
   </p>
 </div>

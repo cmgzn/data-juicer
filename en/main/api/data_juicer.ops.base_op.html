@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -43,15 +43,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/data_juicer.ops.base_op';</script>
     <script src="../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../_static/icon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -156,21 +156,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -342,21 +342,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -540,6 +540,51 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="data_juicer.ops.base_op.sample_to_dict">
+<span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">sample_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#sample_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.sample_to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Convert sample to dict.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_juicer.ops.base_op.wrap_mapper_with_tracer">
+<span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">wrap_mapper_with_tracer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tracer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_batched_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#wrap_mapper_with_tracer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.wrap_mapper_with_tracer" title="Link to this definition">#</a></dt>
+<dd><p>Wrap a mapper’s process method to collect sample-level changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_method</strong> – the original process method (single or batched)</p></li>
+<li><p><strong>op_name</strong> – the operator name</p></li>
+<li><p><strong>text_key</strong> – the text key to compare</p></li>
+<li><p><strong>tracer</strong> – the tracer instance</p></li>
+<li><p><strong>is_batched_op</strong> – whether this is a batched operator</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wrapped process method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_juicer.ops.base_op.wrap_filter_with_tracer">
+<span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">wrap_filter_with_tracer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tracer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_batched_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#wrap_filter_with_tracer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.wrap_filter_with_tracer" title="Link to this definition">#</a></dt>
+<dd><p>Wrap a filter’s process method to collect sample-level changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_method</strong> – the original process method (single or batched)</p></li>
+<li><p><strong>op_name</strong> – the operator name</p></li>
+<li><p><strong>tracer</strong> – the tracer instance</p></li>
+<li><p><strong>is_batched_op</strong> – whether this is a batched operator</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wrapped process method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.catch_map_single_exception">
 <span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">catch_map_single_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_op_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#catch_map_single_exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.catch_map_single_exception" title="Link to this definition">#</a></dt>
 <dd><p>For single-map sample-level fault tolerance.
@@ -547,8 +592,14 @@ The input sample is expected batch_size = 1.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="data_juicer.ops.base_op.OPMetaClass">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">OPMetaClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="positional-only-separator o"><abbr title="Positional-only parameter separator (PEP 570)"><span class="pre">/</span></abbr></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#OPMetaClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.OPMetaClass" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.OP">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">OP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#OP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.OP" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">OP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#OP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.OP" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.OP.__init__">
@@ -602,6 +653,11 @@ and the “task” mode is used if the operator is a CPU operator.</p></li>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_juicer.ops.base_op.OP.get_env_spec">
+<span class="sig-name descname"><span class="pre">get_env_spec</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="data_juicer.ops.op_env.html#data_juicer.ops.op_env.OPEnvSpec" title="data_juicer.ops.op_env.OPEnvSpec"><span class="pre">OPEnvSpec</span></a></span></span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#OP.get_env_spec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.OP.get_env_spec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.OP.use_auto_proc">
@@ -662,7 +718,7 @@ and init_parameter_dict unchanged.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Mapper">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Mapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Mapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Mapper" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Mapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Mapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Mapper" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#data_juicer.ops.base_op.OP" title="data_juicer.ops.base_op.OP"><code class="xref py py-class docutils literal notranslate"><span class="pre">OP</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Mapper.__init__">
@@ -718,7 +774,7 @@ queries and responses</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Filter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Filter" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Filter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#data_juicer.ops.base_op.OP" title="data_juicer.ops.base_op.OP"><code class="xref py py-class docutils literal notranslate"><span class="pre">OP</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Filter.__init__">
@@ -809,7 +865,7 @@ vars in the sample temporarily.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Deduplicator">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Deduplicator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Deduplicator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Deduplicator" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Deduplicator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Deduplicator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Deduplicator" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#data_juicer.ops.base_op.OP" title="data_juicer.ops.base_op.OP"><code class="xref py py-class docutils literal notranslate"><span class="pre">OP</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Deduplicator.__init__">
@@ -878,7 +934,7 @@ open.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Selector">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Selector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Selector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Selector" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Selector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Selector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Selector" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#data_juicer.ops.base_op.OP" title="data_juicer.ops.base_op.OP"><code class="xref py py-class docutils literal notranslate"><span class="pre">OP</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Selector.__init__">
@@ -929,7 +985,7 @@ queries and responses</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Grouper">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Grouper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Grouper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Grouper" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Grouper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Grouper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Grouper" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#data_juicer.ops.base_op.OP" title="data_juicer.ops.base_op.OP"><code class="xref py py-class docutils literal notranslate"><span class="pre">OP</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Grouper.__init__">
@@ -980,7 +1036,7 @@ queries and responses</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Aggregator">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Aggregator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Aggregator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Aggregator" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Aggregator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Aggregator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Aggregator" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#data_juicer.ops.base_op.OP" title="data_juicer.ops.base_op.OP"><code class="xref py py-class docutils literal notranslate"><span class="pre">OP</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Aggregator.__init__">
@@ -1032,7 +1088,7 @@ the input must be the output of some Grouper OP.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="data_juicer.ops.base_op.Pipeline">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Pipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Pipeline" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.base_op.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/base_op.html#Pipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.base_op.Pipeline" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#data_juicer.ops.base_op.OP" title="data_juicer.ops.base_op.OP"><code class="xref py py-class docutils literal notranslate"><span class="pre">OP</span></code></a></p>
 <p>Base class for Operators that represent a data processing pipeline.</p>
 <dl class="py method">
@@ -1105,9 +1161,14 @@ queries and responses</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.convert_dict_list_to_list_dict"><code class="docutils literal notranslate"><span class="pre">convert_dict_list_to_list_dict()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.convert_arrow_to_python"><code class="docutils literal notranslate"><span class="pre">convert_arrow_to_python()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.catch_map_batches_exception"><code class="docutils literal notranslate"><span class="pre">catch_map_batches_exception()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.sample_to_dict"><code class="docutils literal notranslate"><span class="pre">sample_to_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.wrap_mapper_with_tracer"><code class="docutils literal notranslate"><span class="pre">wrap_mapper_with_tracer()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.wrap_filter_with_tracer"><code class="docutils literal notranslate"><span class="pre">wrap_filter_with_tracer()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.catch_map_single_exception"><code class="docutils literal notranslate"><span class="pre">catch_map_single_exception()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.OPMetaClass"><code class="docutils literal notranslate"><span class="pre">OPMetaClass</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.OP"><code class="docutils literal notranslate"><span class="pre">OP</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.OP.__init__"><code class="docutils literal notranslate"><span class="pre">OP.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.OP.get_env_spec"><code class="docutils literal notranslate"><span class="pre">OP.get_env_spec()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.OP.use_auto_proc"><code class="docutils literal notranslate"><span class="pre">OP.use_auto_proc()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.OP.is_batched_op"><code class="docutils literal notranslate"><span class="pre">OP.is_batched_op()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data_juicer.ops.base_op.OP.use_ray_actor"><code class="docutils literal notranslate"><span class="pre">OP.use_ray_actor()</span></code></a></li>
@@ -1219,7 +1280,7 @@ queries and responses</p></li>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

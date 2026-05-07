@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -42,15 +42,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../../../../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/data_juicer/ops/mapper/image_sam_3d_body_mapper';</script>
     <script src="../../../../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../../../../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../../../../_static/icon.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -155,21 +155,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -337,21 +337,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -534,7 +534,7 @@
 <span class="n">OP_NAME</span> <span class="o">=</span> <span class="s2">&quot;image_sam_3d_body_mapper&quot;</span>
 
 
-<span class="n">cv2</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s2">&quot;cv2&quot;</span><span class="p">,</span> <span class="s2">&quot;opencv-python&quot;</span><span class="p">)</span>
+<span class="n">cv2</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s2">&quot;cv2&quot;</span><span class="p">,</span> <span class="s2">&quot;opencv-contrib-python&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="ImageSAM3DBodyMapper">
@@ -637,7 +637,7 @@
             <span class="p">[</span>
                 <span class="s2">&quot;pytorch-lightning&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;pyrender&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;opencv-python&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;opencv-contrib-python&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;yacs&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;scikit-image&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;einops&quot;</span><span class="p">,</span>
@@ -739,7 +739,18 @@
                     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">visualization_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                     <span class="n">vis_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">visualization_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">img_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_vis.jpg&quot;</span><span class="p">)</span>
                     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
-                    <span class="n">rend_img</span> <span class="o">=</span> <span class="n">vis_utils</span><span class="o">.</span><span class="n">visualize_sample_together</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">estimator</span><span class="o">.</span><span class="n">faces</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">rend_img</span> <span class="o">=</span> <span class="n">vis_utils</span><span class="o">.</span><span class="n">visualize_sample_together</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">estimator</span><span class="o">.</span><span class="n">faces</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="s2">&quot;EGL&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                                <span class="s2">&quot;Visualization requires EGL for offscreen rendering, but EGL &quot;</span>
+                                <span class="s2">&quot;library was not found. To fix this:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                <span class="s2">&quot;  - On Ubuntu/Debian: apt-get install libegl1-mesa libegl1-mesa-dev</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                <span class="s2">&quot;  - On headless servers: also install libgl1-mesa-dri</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                <span class="s2">&quot;  - Or disable visualization by not setting visualization_dir&quot;</span>
+                            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+                        <span class="k">raise</span>
                     <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span>
                         <span class="n">vis_path</span><span class="p">,</span>
                         <span class="n">rend_img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span>
@@ -809,7 +820,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

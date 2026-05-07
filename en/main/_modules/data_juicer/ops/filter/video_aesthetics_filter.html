@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -42,15 +42,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../../../../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/data_juicer/ops/filter/video_aesthetics_filter';</script>
     <script src="../../../../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../../../../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../../../../_static/icon.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -155,21 +155,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -337,21 +337,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -515,7 +515,9 @@
                 <article class="bd-article">
                   
   <h1>Source code for data_juicer.ops.filter.video_aesthetics_filter</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">PositiveInt</span>
 
@@ -526,6 +528,7 @@
     <span class="n">extract_key_frames</span><span class="p">,</span>
     <span class="n">extract_video_frames_uniformly</span><span class="p">,</span>
     <span class="n">load_data_with_context</span><span class="p">,</span>
+    <span class="n">load_image</span><span class="p">,</span>
     <span class="n">load_video</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -565,6 +568,7 @@
         <span class="n">trust_remote_code</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">min_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span>
         <span class="n">max_score</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">frame_field</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">frame_sampling_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
         <span class="n">frame_num</span><span class="p">:</span> <span class="n">PositiveInt</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
         <span class="n">any_or_all</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;any&quot;</span><span class="p">,</span>
@@ -582,6 +586,8 @@
 <span class="sd">        :param trust_remote_code: whether to trust the remote code of HF models.</span>
 <span class="sd">        :param min_score: Min score for the predicted aesthetics in a video.</span>
 <span class="sd">        :param max_score: Max score for the predicted aesthetics in a video.</span>
+<span class="sd">        :param frame_field: the field name of video frames to calculate the aesthetic score.</span>
+<span class="sd">            If frame_field is None, extract frames from the video field.</span>
 <span class="sd">        :param frame_sampling_method: sampling method of extracting frame</span>
 <span class="sd">            images from the videos.</span>
 <span class="sd">            Should be one of [&quot;all_keyframes&quot;, &quot;uniform&quot;].</span>
@@ -591,8 +597,8 @@
 <span class="sd">            keyframes can be large while their difference is usually small</span>
 <span class="sd">            in terms of their aesthetics.</span>
 <span class="sd">        :param frame_num: the number of frames to be extracted uniformly from</span>
-<span class="sd">            the video. Only works when frame_sampling_method is &quot;uniform&quot;. If</span>
-<span class="sd">            it&#39;s 1, only the middle frame will be extracted. If it&#39;s 2, only</span>
+<span class="sd">            the video. Only works when frame_sampling_method is &quot;uniform&quot; or &quot;frame_field&quot; is given.</span>
+<span class="sd">            If it&#39;s 1, only the middle frame will be extracted. If it&#39;s 2, only</span>
 <span class="sd">            the first and the last frames will be extracted. If it&#39;s larger</span>
 <span class="sd">            than 2, in addition to the first and the last frames, other frames</span>
 <span class="sd">            will be extracted uniformly within the video duration.</span>
@@ -614,6 +620,7 @@
             <span class="n">hf_scorer_model</span> <span class="o">=</span> <span class="s2">&quot;shunk031/aesthetics-predictor-v2-sac-logos-ava1-l14-linearMSE&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_score</span> <span class="o">=</span> <span class="n">min_score</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">=</span> <span class="n">max_score</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_field</span> <span class="o">=</span> <span class="n">frame_field</span>
 
         <span class="k">if</span> <span class="n">frame_sampling_method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;all_keyframes&quot;</span><span class="p">,</span> <span class="s2">&quot;uniform&quot;</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -637,7 +644,7 @@
             <span class="n">trust_remote_code</span><span class="o">=</span><span class="n">trust_remote_code</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="c1"># the original score predicted by laion-ai&#39;s scorer is within [0, 10]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">need_normalized_by_ten</span> <span class="o">=</span> <span class="s2">&quot;shunk031/aesthetics-predictor&quot;</span> <span class="ow">in</span> <span class="n">hf_scorer_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">need_normalized_by_ten</span> <span class="o">=</span> <span class="s2">&quot;aesthetics-predictor&quot;</span> <span class="ow">in</span> <span class="n">hf_scorer_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame_sampling_method</span> <span class="o">=</span> <span class="n">frame_sampling_method</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame_num</span> <span class="o">=</span> <span class="n">frame_num</span>
 
@@ -646,6 +653,28 @@
         <span class="p">)</span></div>
 
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame_images</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">processor</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frame_images</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># compute aesthetics_scores</span>
+            <span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">frame_images</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_normalized_by_ten</span><span class="p">:</span>
+                <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">logits</span> <span class="o">/</span> <span class="mf">10.0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">logits</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce_mode</span> <span class="o">==</span> <span class="s2">&quot;avg&quot;</span><span class="p">:</span>
+                <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce_mode</span> <span class="o">==</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span>
+                <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="p">)</span>
+
 <div class="viewcode-block" id="VideoAestheticsFilter.compute_stats_single">
 <a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoAestheticsFilter.compute_stats_single">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -653,66 +682,63 @@
         <span class="k">if</span> <span class="n">StatsKeys</span><span class="o">.</span><span class="n">video_frames_aesthetics_score</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">]:</span>
             <span class="k">return</span> <span class="n">sample</span>
 
-        <span class="c1"># there is no video in this sample</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">video_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sample</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">sample</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">video_key</span><span class="p">]:</span>
-            <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">][</span><span class="n">StatsKeys</span><span class="o">.</span><span class="n">video_frames_aesthetics_score</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">sample</span>
+        <span class="c1"># priority to get frames from frame_field</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_field</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_field</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+            <span class="n">videos_frames_path_list</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_field</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># there is no video in this sample</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">video_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sample</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">sample</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">video_key</span><span class="p">]:</span>
+                <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">][</span><span class="n">StatsKeys</span><span class="o">.</span><span class="n">video_frames_aesthetics_score</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">sample</span>
 
-        <span class="c1"># load videos</span>
-        <span class="n">loaded_video_keys</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">video_key</span><span class="p">]</span>
-        <span class="n">sample</span><span class="p">,</span> <span class="n">videos</span> <span class="o">=</span> <span class="n">load_data_with_context</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">loaded_video_keys</span><span class="p">,</span> <span class="n">load_video</span><span class="p">)</span>
-
+        <span class="n">model</span><span class="p">,</span> <span class="n">processor</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_key</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> <span class="n">use_cuda</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">())</span>
         <span class="n">aesthetics_scores</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">video</span> <span class="ow">in</span> <span class="n">videos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">sampled_frames_key</span> <span class="o">=</span> <span class="n">key</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampled_frames_key_suffix</span>
-            <span class="k">if</span> <span class="n">video</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="k">elif</span> <span class="n">context</span> <span class="ow">and</span> <span class="n">sampled_frames_key</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">context</span><span class="p">]:</span>
-                <span class="c1"># sampled frames can be found in the context</span>
-                <span class="n">frames</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">context</span><span class="p">][</span><span class="n">sampled_frames_key</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># extract frame images</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_sampling_method</span> <span class="o">==</span> <span class="s2">&quot;all_keyframes&quot;</span><span class="p">:</span>
-                    <span class="n">frames</span> <span class="o">=</span> <span class="n">extract_key_frames</span><span class="p">(</span><span class="n">video</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_sampling_method</span> <span class="o">==</span> <span class="s2">&quot;uniform&quot;</span><span class="p">:</span>
-                    <span class="n">frames</span> <span class="o">=</span> <span class="n">extract_video_frames_uniformly</span><span class="p">(</span><span class="n">video</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_num</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_field</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_field</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">frames_path</span> <span class="ow">in</span> <span class="n">videos_frames_path_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_num</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">frames_path</span><span class="p">):</span>
+                    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">frames_path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_num</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+                    <span class="n">frames_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">frames_path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
+
+                <span class="n">frame_images</span> <span class="o">=</span> <span class="p">[</span><span class="n">load_image</span><span class="p">(</span><span class="n">frame_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">frame_path</span> <span class="ow">in</span> <span class="n">frames_path</span><span class="p">]</span>
+                <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_score</span><span class="p">(</span><span class="n">frame_images</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">processor</span><span class="p">)</span>
+                <span class="n">aesthetics_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># extract frames from videos</span>
+            <span class="c1"># load videos</span>
+            <span class="n">loaded_video_keys</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">video_key</span><span class="p">]</span>
+            <span class="n">sample</span><span class="p">,</span> <span class="n">videos</span> <span class="o">=</span> <span class="n">load_data_with_context</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">loaded_video_keys</span><span class="p">,</span> <span class="n">load_video</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">video</span> <span class="ow">in</span> <span class="n">videos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">sampled_frames_key</span> <span class="o">=</span> <span class="n">key</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampled_frames_key_suffix</span>
+                <span class="k">if</span> <span class="n">video</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="n">context</span> <span class="ow">and</span> <span class="n">sampled_frames_key</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">context</span><span class="p">]:</span>
+                    <span class="c1"># sampled frames can be found in the context</span>
+                    <span class="n">frames</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">context</span><span class="p">][</span><span class="n">sampled_frames_key</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="c1"># extract frame images</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_sampling_method</span> <span class="o">==</span> <span class="s2">&quot;all_keyframes&quot;</span><span class="p">:</span>
+                        <span class="n">frames</span> <span class="o">=</span> <span class="n">extract_key_frames</span><span class="p">(</span><span class="n">video</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_sampling_method</span> <span class="o">==</span> <span class="s2">&quot;uniform&quot;</span><span class="p">:</span>
+                        <span class="n">frames</span> <span class="o">=</span> <span class="n">extract_video_frames_uniformly</span><span class="p">(</span><span class="n">video</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame_num</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
 
-                <span class="c1"># store the sampled frames in the context</span>
-                <span class="k">if</span> <span class="n">context</span><span class="p">:</span>
-                    <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">context</span><span class="p">][</span><span class="n">sampled_frames_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">frames</span>
-            <span class="n">frame_images</span> <span class="o">=</span> <span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">to_image</span><span class="p">()</span> <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">]</span>
+                    <span class="c1"># store the sampled frames in the context</span>
+                    <span class="k">if</span> <span class="n">context</span><span class="p">:</span>
+                        <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">context</span><span class="p">][</span><span class="n">sampled_frames_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">frames</span>
+                <span class="n">frame_images</span> <span class="o">=</span> <span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">to_image</span><span class="p">()</span> <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">]</span>
+                <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_score</span><span class="p">(</span><span class="n">frame_images</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">processor</span><span class="p">)</span>
+                <span class="n">aesthetics_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frame_images</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="c1"># compute aesthetics_scores</span>
-                <span class="n">model</span><span class="p">,</span> <span class="n">processor</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_key</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> <span class="n">use_cuda</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span><span class="p">())</span>
-                <span class="n">inputs</span> <span class="o">=</span> <span class="n">processor</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">frame_images</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-                <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-                    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">need_normalized_by_ten</span><span class="p">:</span>
-                    <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">logits</span> <span class="o">/</span> <span class="mf">10.0</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">logits</span>
-
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce_mode</span> <span class="o">==</span> <span class="s2">&quot;avg&quot;</span><span class="p">:</span>
-                    <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce_mode</span> <span class="o">==</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span>
-                    <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">aesthetics_score</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-            <span class="n">aesthetics_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aesthetics_score</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">context</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">vid_key</span> <span class="ow">in</span> <span class="n">videos</span><span class="p">:</span>
+                    <span class="n">close_video</span><span class="p">(</span><span class="n">videos</span><span class="p">[</span><span class="n">vid_key</span><span class="p">])</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;aesthetics_score: </span><span class="si">{</span><span class="n">aesthetics_scores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">][</span><span class="n">StatsKeys</span><span class="o">.</span><span class="n">video_frames_aesthetics_score</span><span class="p">]</span> <span class="o">=</span> <span class="n">aesthetics_scores</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">context</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">vid_key</span> <span class="ow">in</span> <span class="n">videos</span><span class="p">:</span>
-                <span class="n">close_video</span><span class="p">(</span><span class="n">videos</span><span class="p">[</span><span class="n">vid_key</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">sample</span></div>
 
@@ -794,7 +820,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

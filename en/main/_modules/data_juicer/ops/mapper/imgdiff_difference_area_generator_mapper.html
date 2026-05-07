@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -42,15 +42,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../../../../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/data_juicer/ops/mapper/imgdiff_difference_area_generator_mapper';</script>
     <script src="../../../../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../../../../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../../../../_static/icon.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -155,21 +155,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -337,21 +337,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -532,7 +532,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.lazy_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">LazyLoader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.mm_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">SpecialTokens</span>
 
-<span class="n">cv2</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s2">&quot;cv2&quot;</span><span class="p">,</span> <span class="s2">&quot;opencv-python&quot;</span><span class="p">)</span>
+<span class="n">cv2</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s2">&quot;cv2&quot;</span><span class="p">,</span> <span class="s2">&quot;opencv-contrib-python&quot;</span><span class="p">)</span>
 <span class="n">nltk</span> <span class="o">=</span> <span class="n">LazyLoader</span><span class="p">(</span><span class="s2">&quot;nltk&quot;</span><span class="p">)</span>
 
 
@@ -878,12 +878,8 @@
             <span class="n">crop_image1_samples</span> <span class="o">=</span> <span class="n">crop_image1_samples</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span>
                 <span class="n">name</span><span class="o">=</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="p">[{}]</span> <span class="o">*</span> <span class="n">crop_image1_samples</span><span class="o">.</span><span class="n">num_rows</span>
             <span class="p">)</span>
-        <span class="n">crop_image1_filtered</span> <span class="o">=</span> <span class="n">crop_image1_samples</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">image_text_matching_filter_args</span><span class="p">[</span><span class="s2">&quot;num_proc&quot;</span><span class="p">],</span> <span class="n">with_rank</span><span class="o">=</span><span class="kc">True</span>
-        <span class="p">)</span>
-        <span class="n">crop_image1_filtered</span> <span class="o">=</span> <span class="n">crop_image1_filtered</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">process</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">image_text_matching_filter_args</span><span class="p">[</span><span class="s2">&quot;num_proc&quot;</span><span class="p">]</span>
-        <span class="p">)</span>
+        <span class="n">crop_image1_filtered</span> <span class="o">=</span> <span class="n">crop_image1_samples</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">with_rank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">crop_image1_filtered</span> <span class="o">=</span> <span class="n">crop_image1_filtered</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">process</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="n">crop_image1_filtered</span> <span class="o">=</span> <span class="n">crop_image1_filtered</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
         <span class="n">crop_image2_samples</span> <span class="o">=</span> <span class="n">data_juicer</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">crop_image2_samples</span><span class="p">)</span>
@@ -891,12 +887,8 @@
             <span class="n">crop_image2_samples</span> <span class="o">=</span> <span class="n">crop_image2_samples</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span>
                 <span class="n">name</span><span class="o">=</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="p">[{}]</span> <span class="o">*</span> <span class="n">crop_image2_samples</span><span class="o">.</span><span class="n">num_rows</span>
             <span class="p">)</span>
-        <span class="n">crop_image2_filtered</span> <span class="o">=</span> <span class="n">crop_image2_samples</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">image_text_matching_filter_args</span><span class="p">[</span><span class="s2">&quot;num_proc&quot;</span><span class="p">],</span> <span class="n">with_rank</span><span class="o">=</span><span class="kc">True</span>
-        <span class="p">)</span>
-        <span class="n">crop_image2_filtered</span> <span class="o">=</span> <span class="n">crop_image2_filtered</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">process</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">image_text_matching_filter_args</span><span class="p">[</span><span class="s2">&quot;num_proc&quot;</span><span class="p">]</span>
-        <span class="p">)</span>
+        <span class="n">crop_image2_filtered</span> <span class="o">=</span> <span class="n">crop_image2_samples</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">with_rank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">crop_image2_filtered</span> <span class="o">=</span> <span class="n">crop_image2_filtered</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">process</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="n">crop_image2_filtered</span> <span class="o">=</span> <span class="n">crop_image2_filtered</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
         <span class="n">crop_image2_filtered_bbox_id</span> <span class="o">=</span> <span class="p">[]</span>
@@ -933,11 +925,9 @@
                 <span class="n">name</span><span class="o">=</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="p">[{}]</span> <span class="o">*</span> <span class="n">filtered_sub_image_pairs</span><span class="o">.</span><span class="n">num_rows</span>
             <span class="p">)</span>
         <span class="n">filtered_sub_image_pairs</span> <span class="o">=</span> <span class="n">filtered_sub_image_pairs</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">image_pair_similarity_filter_args</span><span class="p">[</span><span class="s2">&quot;num_proc&quot;</span><span class="p">],</span> <span class="n">with_rank</span><span class="o">=</span><span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">compute_stats</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">with_rank</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
-        <span class="n">filtered_sub_image_pairs</span> <span class="o">=</span> <span class="n">filtered_sub_image_pairs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">process</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">image_pair_similarity_filter_args</span><span class="p">[</span><span class="s2">&quot;num_proc&quot;</span><span class="p">]</span>
-        <span class="p">)</span>
+        <span class="n">filtered_sub_image_pairs</span> <span class="o">=</span> <span class="n">filtered_sub_image_pairs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fused_ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">process</span><span class="p">,</span> <span class="n">num_proc</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="n">filtered_sub_image_pairs</span> <span class="o">=</span> <span class="n">filtered_sub_image_pairs</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_sub_image_pairs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1024,7 +1014,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

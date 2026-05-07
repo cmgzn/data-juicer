@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -43,15 +43,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/data_juicer.ops.mapper.image_tagging_vlm_mapper';</script>
     <script src="../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../_static/icon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -156,21 +156,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -342,21 +342,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -520,7 +520,7 @@
 <span id="data-juicer-ops-mapper-image-tagging-vlm-mapper-module"></span><h1>data_juicer.ops.mapper.image_tagging_vlm_mapper module<a class="headerlink" href="#module-data_juicer.ops.mapper.image_tagging_vlm_mapper" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="data_juicer.ops.mapper.image_tagging_vlm_mapper.ImageTaggingVLMMapper">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.mapper.image_tagging_vlm_mapper.</span></span><span class="sig-name descname"><span class="pre">ImageTaggingVLMMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_or_hf_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Qwen/Qwen2.5-VL-7B-Instruct'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_api_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag_field_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'image_tags'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">try_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Annotated</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Gt</span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">gt</span></span><span class="o"><span class="pre">=</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/mapper/image_tagging_vlm_mapper.html#ImageTaggingVLMMapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.mapper.image_tagging_vlm_mapper.ImageTaggingVLMMapper" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">data_juicer.ops.mapper.image_tagging_vlm_mapper.</span></span><span class="sig-name descname"><span class="pre">ImageTaggingVLMMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_juicer/ops/mapper/image_tagging_vlm_mapper.html#ImageTaggingVLMMapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_juicer.ops.mapper.image_tagging_vlm_mapper.ImageTaggingVLMMapper" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="data_juicer.ops.base_op.html#data_juicer.ops.base_op.Mapper" title="data_juicer.ops.base_op.Mapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapper</span></code></a></p>
 <p>Mapper to generates image tags.
 This operator generates tags based on the content of given images.
@@ -528,12 +528,12 @@ The tags are generated using a vlm model and stored in the specified field name.
 If the tags are already present in the sample, the operator skips processing.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="data_juicer.ops.mapper.image_tagging_vlm_mapper.ImageTaggingVLMMapper.DEFAULT_SYSTEM_PROMPT">
-<span class="sig-name descname"><span class="pre">DEFAULT_SYSTEM_PROMPT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\nGenerate</span> <span class="pre">comprehensive</span> <span class="pre">and</span> <span class="pre">specific</span> <span class="pre">descriptive</span> <span class="pre">tags</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">provided</span> <span class="pre">image(s)</span> <span class="pre">following</span> <span class="pre">these</span> <span class="pre">rules:\n1.</span> <span class="pre">Tags</span> <span class="pre">should</span> <span class="pre">be</span> <span class="pre">concise</span> <span class="pre">English</span> <span class="pre">phrases</span> <span class="pre">(nouns</span> <span class="pre">or</span> <span class="pre">gerunds)\n2.</span> <span class="pre">Use</span> <span class="pre">lowercase</span> <span class="pre">and</span> <span class="pre">hyphenate</span> <span class="pre">multi-word</span> <span class="pre">tags\n3.</span> <span class="pre">Include</span> <span class="pre">objects,</span> <span class="pre">actions,</span> <span class="pre">colors,</span> <span class="pre">materials,</span> <span class="pre">styles,</span> <span class="pre">emotions,</span> <span class="pre">and</span> <span class="pre">context\n4.</span> <span class="pre">Prioritize</span> <span class="pre">prominent</span> <span class="pre">and</span> <span class="pre">distinctive</span> <span class="pre">elements\n5.</span> <span class="pre">Output</span> <span class="pre">exactly</span> <span class="pre">5-10</span> <span class="pre">most</span> <span class="pre">relevant</span> <span class="pre">tags\n6.</span> <span class="pre">Format</span> <span class="pre">strictly</span> <span class="pre">as:</span> <span class="pre">{&quot;tags&quot;:</span> <span class="pre">[&quot;tag1&quot;,</span> <span class="pre">&quot;tag2&quot;,</span> <span class="pre">...]}\n\nExample</span> <span class="pre">valid</span> <span class="pre">responses:\n{&quot;tags&quot;:</span> <span class="pre">[&quot;red-apple&quot;,</span> <span class="pre">&quot;wooden-table&quot;,</span> <span class="pre">&quot;natural-lighting&quot;,</span> <span class="pre">&quot;food-photography&quot;,</span> <span class="pre">&quot;fresh-fruit&quot;]}\n{&quot;tags&quot;:</span> <span class="pre">[&quot;mountain-landscape&quot;,</span> <span class="pre">&quot;snowy-peaks&quot;,</span> <span class="pre">&quot;sunset-glow&quot;,</span> <span class="pre">&quot;alpine-lake&quot;,</span> <span class="pre">&quot;conifer-forest&quot;]}\n'</span></em><a class="headerlink" href="#data_juicer.ops.mapper.image_tagging_vlm_mapper.ImageTaggingVLMMapper.DEFAULT_SYSTEM_PROMPT" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULT_SYSTEM_PROMPT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\nGenerate</span> <span class="pre">comprehensive</span> <span class="pre">and</span> <span class="pre">specific</span> <span class="pre">descriptive</span> <span class="pre">tags</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">provided</span> <span class="pre">image(s)</span> <span class="pre">following</span> <span class="pre">these</span> <span class="pre">rules:\n1.</span> <span class="pre">Tags</span> <span class="pre">should</span> <span class="pre">be</span> <span class="pre">concise</span> <span class="pre">English</span> <span class="pre">phrases</span> <span class="pre">(nouns</span> <span class="pre">or</span> <span class="pre">gerunds)\n2.</span> <span class="pre">Use</span> <span class="pre">lowercase</span> <span class="pre">and</span> <span class="pre">hyphenate</span> <span class="pre">multi-word</span> <span class="pre">tags\n3.</span> <span class="pre">Include</span> <span class="pre">objects,</span> <span class="pre">actions,</span> <span class="pre">colors,</span> <span class="pre">materials,</span> <span class="pre">styles,</span> <span class="pre">emotions,</span> <span class="pre">and</span> <span class="pre">context\n4.</span> <span class="pre">Prioritize</span> <span class="pre">prominent</span> <span class="pre">and</span> <span class="pre">distinctive</span> <span class="pre">elements\n5.</span> <span class="pre">Output</span> <span class="pre">exactly</span> <span class="pre">5-10</span> <span class="pre">most</span> <span class="pre">relevant</span> <span class="pre">tags\n6.</span> <span class="pre">Format</span> <span class="pre">strictly</span> <span class="pre">as:</span> <span class="pre">{&quot;tags&quot;:</span> <span class="pre">[&quot;tag1&quot;,</span> <span class="pre">&quot;tag2&quot;,</span> <span class="pre">...]}\n\nExample</span> <span class="pre">valid</span> <span class="pre">responses:\n{&quot;tags&quot;:</span> <span class="pre">[&quot;red-apple&quot;,</span> <span class="pre">&quot;wooden-table&quot;,</span> <span class="pre">&quot;natural-lighting&quot;,</span> <span class="pre">&quot;food-photography&quot;,</span> <span class="pre">&quot;fresh-fruit&quot;]}\n{&quot;tags&quot;:</span> <span class="pre">[&quot;mountain-landscape&quot;,</span> <span class="pre">&quot;snowy-peaks&quot;,</span> <span class="pre">&quot;sunset-glow&quot;,</span> <span class="pre">&quot;alpine-lake&quot;,</span> <span class="pre">&quot;conifer-forest&quot;]}\n'</span></span><a class="headerlink" href="#data_juicer.ops.mapper.image_tagging_vlm_mapper.ImageTaggingVLMMapper.DEFAULT_SYSTEM_PROMPT" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="data_juicer.ops.mapper.image_tagging_vlm_mapper.ImageTaggingVLMMapper.DEFAULT_INPUT_TEMPLATE">
-<span class="sig-name descname"><span class="pre">DEFAULT_INPUT_TEMPLATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\nAnalyze</span> <span class="pre">both</span> <span class="pre">the</span> <span class="pre">provided</span> <span class="pre">image</span> <span class="pre">and</span> <span class="pre">its</span> <span class="pre">associated</span> <span class="pre">text</span> <span class="pre">description</span> <span class="pre">(if</span> <span class="pre">available)</span> <span class="pre">to</span> <span class="pre">generate</span> <span class="pre">comprehensive</span> <span class="pre">tags.\nText</span> <span class="pre">description:</span> <span class="pre">{text}\nVerify</span> <span class="pre">text</span> <span class="pre">relevance</span> <span class="pre">before</span> <span class="pre">combining</span> <span class="pre">with</span> <span class="pre">visual</span> <span class="pre">elements.</span> <span class="pre">If</span> <span class="pre">text</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">or</span> <span class="pre">irrelevant,</span> <span class="pre">generate</span> <span class="pre">tags</span> <span class="pre">based</span> <span class="pre">solely</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">image.\n'</span></em><a class="headerlink" href="#data_juicer.ops.mapper.image_tagging_vlm_mapper.ImageTaggingVLMMapper.DEFAULT_INPUT_TEMPLATE" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">DEFAULT_INPUT_TEMPLATE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\nAnalyze</span> <span class="pre">both</span> <span class="pre">the</span> <span class="pre">provided</span> <span class="pre">image</span> <span class="pre">and</span> <span class="pre">its</span> <span class="pre">associated</span> <span class="pre">text</span> <span class="pre">description</span> <span class="pre">(if</span> <span class="pre">available)</span> <span class="pre">to</span> <span class="pre">generate</span> <span class="pre">comprehensive</span> <span class="pre">tags.\nText</span> <span class="pre">description:</span> <span class="pre">{text}\nVerify</span> <span class="pre">text</span> <span class="pre">relevance</span> <span class="pre">before</span> <span class="pre">combining</span> <span class="pre">with</span> <span class="pre">visual</span> <span class="pre">elements.</span> <span class="pre">If</span> <span class="pre">text</span> <span class="pre">is</span> <span class="pre">missing</span> <span class="pre">or</span> <span class="pre">irrelevant,</span> <span class="pre">generate</span> <span class="pre">tags</span> <span class="pre">based</span> <span class="pre">solely</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">image.\n'</span></span><a class="headerlink" href="#data_juicer.ops.mapper.image_tagging_vlm_mapper.ImageTaggingVLMMapper.DEFAULT_INPUT_TEMPLATE" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -676,7 +676,7 @@ call error or output parsing error.</p></li>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

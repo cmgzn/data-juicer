@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -43,15 +43,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/DatasetCfg';</script>
     <script src="../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../_static/icon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -158,21 +158,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -342,21 +342,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -480,10 +480,15 @@
 <li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="BadDataExhibition.html">“Bad” Data Exhibition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cache.html">Cache Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DJ_SORA.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Export.html">Dataset Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobManagement.html">Job Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PartitionAndCheckpoint.html">Partitioned Processing with Checkpointing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tracing.html">Data Tracing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">operators</span></p>
@@ -495,11 +500,19 @@
 <li class="toctree-l1"><a class="reference internal" href="operators/formatter/index.html">Formatter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operators/grouper/index.html">Grouper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operators/selector/index.html">Selector</a></li>
-<li class="toctree-l1"><a class="reference internal" href="operators/op/index.html">Op</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators/pipeline/index.html">Pipeline</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">demos</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../demos/README.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/agent/BAD_CASE_INSIGHTS.html">Agent 交互数据：Bad case 洞察</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/agent/BAD_CASE_REPORT.html">Bad case 自助报告（简化入口）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/agent/PERFORMANCE_LLM.html">Agent 流水线里 LLM 算子：加速与超参</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/agent/QUICKSTART_BAD_CASE.html">Bad case 流水线：一键运行与端到端指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/agent/README.html">Agent quality &amp; bad-case docs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../demos/agent/minimal_configs/README.html">Agent 流水线最小可运行配置（便于逐项调试）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/agent/scripts/README.html">Agent pipeline 后分析脚本</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demos/process_video_on_ray/data/Note.html">Note for dataset path</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">tools</span></p>
@@ -685,6 +698,37 @@ Refer to <a class="reference external" href="https://github.com/datajuicer/data-
 </pre></div>
 </div>
 </section>
+<section id="jsonl-per-line-fault-tolerance-skip-bad-lines">
+<h3>JSONL per-line fault tolerance (skip bad lines)<a class="headerlink" href="#jsonl-per-line-fault-tolerance-skip-bad-lines" title="Link to this heading">#</a></h3>
+<p>For a few corrupted lines or parser failures in the HuggingFace JSON/ujson path, enable <strong>lenient JSONL loading</strong>: read with stdlib :func:<code class="docutils literal notranslate"><span class="pre">json.loads</span></code> <strong>line by line</strong>, <strong>skip</strong> lines that fail parsing (with warnings), and keep the rest. The result is still a HuggingFace <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>, so downstream ops behave like normal JSONL.</p>
+<p><strong>Enable (either works):</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">load_jsonl_lenient</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">DATA_JUICER_JSONL_LENIENT</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>dj-process<span class="w"> </span>--config<span class="w"> </span>path/to/config.yaml
+</pre></div>
+</div>
+<p><strong>Constraints:</strong></p>
+<ul class="simple">
+<li><p>Only <code class="docutils literal notranslate"><span class="pre">.jsonl</span></code> / <code class="docutils literal notranslate"><span class="pre">.jsonl.gz</span></code> / <code class="docutils literal notranslate"><span class="pre">.jsonl.zst</span></code> shards are read. Other matched files (e.g. <code class="docutils literal notranslate"><span class="pre">.json</span></code> in the same folder) are <strong>skipped</strong> with a warning so the loader does <strong>not</strong> fall back to HuggingFace/ujson (which would hit <code class="docutils literal notranslate"><span class="pre">Value</span> <span class="pre">is</span> <span class="pre">too</span> <span class="pre">big!</span></code> again). Use <code class="docutils literal notranslate"><span class="pre">suffixes:</span> <span class="pre">['.jsonl']</span></code> if needed.</p></li>
+<li><p>Intended for <strong>DefaultExecutor</strong> local JSONL; unrelated to Parquet.</p></li>
+<li><p>Search logs for <code class="docutils literal notranslate"><span class="pre">[lenient</span> <span class="pre">jsonl]</span></code> for skipped lines.</p></li>
+</ul>
+</section>
+<section id="json-jsonl-load-error-value-is-too-big">
+<h3>JSON / JSONL load error: <code class="docutils literal notranslate"><span class="pre">Value</span> <span class="pre">is</span> <span class="pre">too</span> <span class="pre">big!</span></code><a class="headerlink" href="#json-jsonl-load-error-value-is-too-big" title="Link to this heading">#</a></h3>
+<p>When loading local JSONL, HuggingFace <code class="docutils literal notranslate"><span class="pre">datasets</span></code> may parse lines with <code class="docutils literal notranslate"><span class="pre">ujson</span></code> (via pandas). <strong>Very large JSON integers</strong> (e.g. long numeric IDs) can exceed what ujson supports and raise <code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">Value</span> <span class="pre">is</span> <span class="pre">too</span> <span class="pre">big!</span></code>. This is usually about <strong>numeric fields</strong>, not necessarily huge strings.</p>
+<p><strong>Mitigations:</strong></p>
+<ol class="arabic">
+<li><p><strong>Preferred (no data rewrite):</strong> force stdlib <code class="docutils literal notranslate"><span class="pre">json</span></code> before running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">DATA_JUICER_USE_STDLIB_JSON</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>dj-process<span class="w"> </span>--config<span class="w"> </span>path/to/config.yaml
+</pre></div>
+</div>
+</li>
+<li><p><strong>At source:</strong> export problematic fields as <strong>strings</strong> (quoted in JSON).</p></li>
+<li><p><strong>Other formats:</strong> e.g. Parquet, to avoid this JSON code path.</p></li>
+</ol>
+</section>
 <section id="legacy-dataset-path-configuration">
 <h3>Legacy dataset_path Configuration<a class="headerlink" href="#legacy-dataset-path-configuration" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">dataset_path</span></code> configuration is the original way to specify the dataset path. It’s simplistic and easy to use, but lacks flexibility. It can be used in yaml or command line input. Some examples:</p>
@@ -761,6 +805,8 @@ dj-process<span class="w"> </span>--dataset_path<span class="w"> </span><span cl
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-features">Other features</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-mixture">Data Mixture</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation">Data Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jsonl-per-line-fault-tolerance-skip-bad-lines">JSONL per-line fault tolerance (skip bad lines)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-jsonl-load-error-value-is-too-big">JSON / JSONL load error: <code class="docutils literal notranslate"><span class="pre">Value</span> <span class="pre">is</span> <span class="pre">too</span> <span class="pre">big!</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legacy-dataset-path-configuration">Legacy dataset_path Configuration</a></li>
 </ul>
 </li>
@@ -816,7 +862,7 @@ dj-process<span class="w"> </span>--dataset_path<span class="w"> </span><span cl
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

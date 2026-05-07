@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -43,15 +43,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../../../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/operators/mapper/pair_preference_mapper';</script>
     <script src="../../../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../../../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../../../_static/icon.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -158,21 +158,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -342,21 +342,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -480,10 +480,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../BadDataExhibition.html">“Bad” Data Exhibition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Cache.html">Cache Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DJ_SORA.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Export.html">Dataset Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../JobManagement.html">Job Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PartitionAndCheckpoint.html">Partitioned Processing with Checkpointing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Tracing.html">Data Tracing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">operators</span></p>
@@ -520,20 +525,26 @@
 <li class="toctree-l2"><a class="reference internal" href="extract_support_text_mapper.html">extract_support_text_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="extract_tables_from_html_mapper.html">extract_tables_from_html_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_unicode_mapper.html">fix_unicode_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_fused_op.html">general_fused_op</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_qa_from_examples_mapper.html">generate_qa_from_examples_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_qa_from_text_mapper.html">generate_qa_from_text_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="human_preference_annotation_mapper.html">human_preference_annotation_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_blur_mapper.html">image_blur_mapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="image_captioning_from_gpt4v_mapper.html">image_captioning_from_gpt4v_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_captioning_mapper.html">image_captioning_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_detection_yolo_mapper.html">image_detection_yolo_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_diffusion_mapper.html">image_diffusion_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_face_blur_mapper.html">image_face_blur_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_mmpose_mapper.html">image_mmpose_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_remove_background_mapper.html">image_remove_background_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_sam_3d_body_mapper.html">image_sam_3d_body_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_segment_mapper.html">image_segment_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_tagging_mapper.html">image_tagging_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_tagging_vlm_mapper.html">image_tagging_vlm_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="imgdiff_difference_area_generator_mapper.html">imgdiff_difference_area_generator_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="imgdiff_difference_caption_generator_mapper.html">imgdiff_difference_caption_generator_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="latex_figure_context_extractor_mapper.html">latex_figure_context_extractor_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="latex_merge_tex_mapper.html">latex_merge_tex_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_extract_mapper.html">llm_extract_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mllm_mapper.html">mllm_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nlpaug_en_mapper.html">nlpaug_en_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nlpcda_zh_mapper.html">nlpcda_zh_mapper</a></li>
@@ -559,18 +570,27 @@
 <li class="toctree-l2"><a class="reference internal" href="remove_table_text_mapper.html">remove_table_text_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remove_words_with_incorrect_substrings_mapper.html">remove_words_with_incorrect_substrings_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replace_content_mapper.html">replace_content_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3_download_file_mapper.html">s3_download_file_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3_upload_file_mapper.html">s3_upload_file_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdxl_prompt2prompt_mapper.html">sdxl_prompt2prompt_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sentence_augmentation_mapper.html">sentence_augmentation_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sentence_split_mapper.html">sentence_split_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_chunk_mapper.html">text_chunk_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text_tagging_by_prompt_mapper.html">text_tagging_by_prompt_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vggt_mapper.html">vggt_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_camera_calibration_static_deepcalib_mapper.html">video_camera_calibration_static_deepcalib_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_camera_calibration_static_moge_mapper.html">video_camera_calibration_static_moge_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_audio_mapper.html">video_captioning_from_audio_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_frames_mapper.html">video_captioning_from_frames_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_summarizer_mapper.html">video_captioning_from_summarizer_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_video_mapper.html">video_captioning_from_video_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_captioning_from_vlm_mapper.html">video_captioning_from_vlm_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_depth_estimation_mapper.html">video_depth_estimation_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_extract_frames_mapper.html">video_extract_frames_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_face_blur_mapper.html">video_face_blur_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_ffmpeg_wrapped_mapper.html">video_ffmpeg_wrapped_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_hand_reconstruction_mapper.html">video_hand_reconstruction_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_object_segmenting_mapper.html">video_object_segmenting_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_remove_watermark_mapper.html">video_remove_watermark_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_resize_aspect_ratio_mapper.html">video_resize_aspect_ratio_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_resize_resolution_mapper.html">video_resize_resolution_mapper</a></li>
@@ -579,17 +599,27 @@
 <li class="toctree-l2"><a class="reference internal" href="video_split_by_scene_mapper.html">video_split_by_scene_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_tagging_from_audio_mapper.html">video_tagging_from_audio_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_tagging_from_frames_mapper.html">video_tagging_from_frames_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_undistort_mapper.html">video_undistort_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_whole_body_pose_estimation_mapper.html">video_whole_body_pose_estimation_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="whitespace_normalization_mapper.html">whitespace_normalization_mapper</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../formatter/index.html">Formatter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../grouper/index.html">Grouper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../selector/index.html">Selector</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../op/index.html">Op</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">Pipeline</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">demos</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/README.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/BAD_CASE_INSIGHTS.html">Agent 交互数据：Bad case 洞察</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/BAD_CASE_REPORT.html">Bad case 自助报告（简化入口）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/PERFORMANCE_LLM.html">Agent 流水线里 LLM 算子：加速与超参</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/QUICKSTART_BAD_CASE.html">Bad case 流水线：一键运行与端到端指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/README.html">Agent quality &amp; bad-case docs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/minimal_configs/README.html">Agent 流水线最小可运行配置（便于逐项调试）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/scripts/README.html">Agent pipeline 后分析脚本</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/process_video_on_ray/data/Note.html">Note for dataset path</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">tools</span></p>
@@ -759,7 +789,36 @@
 </section>
 <section id="effect-demonstration">
 <h2>📊 Effect demonstration 效果演示<a class="headerlink" href="#effect-demonstration" title="Link to this heading">#</a></h2>
-<p>not available 暂无</p>
+<section id="test">
+<h3>test<a class="headerlink" href="#test" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PairPreferenceMapper</span><span class="p">(</span><span class="n">api_model</span><span class="o">=</span><span class="s1">&#39;qwen2.5-72b-instruct&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="input-data">
+<h4>📥 input data 输入数据<a class="headerlink" href="#input-data" title="Link to this heading">#</a></h4>
+<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> text</div><pre style="padding:6px; background:#f6f8fa; border-radius:4px; overflow-x:auto; white-space:pre; word-wrap:normal;">王八十娘：小远城王八十的娘亲，李莲花刚到小远城时被方多病偷掉钱袋找小乞丐问路时，刚好发现王八十娘被另一个小乞丐撞到便将她扶起，结识了王八十。
+朴二黄：灵山派管家，方多病小厮旺福的父亲。真实身份是金鸳盟的奔雷手辛雷，离开金鸳盟后，用假名朴二黄在灵山派当管家。因害怕王青山看穿他的身份，设计杀死了灵山派的王青山。被捕后识破了李莲花的真实身份，最后在攻击李莲花的时候被方多病情急之下杀死。</pre><div class='meta' style='margin:6px 0;'><table class='meta-table' style='border-collapse:collapse; width:100%; border:1px solid #e3e3e3;'><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>query</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>李莲花，你认识方多病吗?</td></tr><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>response</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>方多病啊，那可是我的好友。</td></tr></table></div></div>
+</section>
+<section id="output-data">
+<h4>📤 output data 输出数据<a class="headerlink" href="#output-data" title="Link to this heading">#</a></h4>
+<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> text</div><pre style="padding:6px; background:#f6f8fa; border-radius:4px; overflow-x:auto; white-space:pre; word-wrap:normal;">王八十娘：小远城王八十的娘亲，李莲花刚到小远城时被方多病偷掉钱袋找小乞丐问路时，刚好发现王八十娘被另一个小乞丐撞到便将她扶起，结识了王八十。
+朴二黄：灵山派管家，方多病小厮旺福的父亲。真实身份是金鸳盟的奔雷手辛雷，离开金鸳盟后，用假名朴二黄在灵山派当管家。因害怕王青山看穿他的身份，设计杀死了灵山派的王青山。被捕后识破了李莲花的真实身份，最后在攻击李莲花的时候被方多病情急之下杀死。</pre><div class='meta' style='margin:6px 0;'><table class='meta-table' style='border-collapse:collapse; width:100%; border:1px solid #e3e3e3;'><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>query</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>李莲花，你认识方多病吗?</td></tr><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>response</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>方多病啊，那可是我的好友。</td></tr><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>rejected_response</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>方多病？我可不认识他，我们之间没有任何交集。</td></tr><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>reason</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>为了与原回答的友好关系相反，新回答中李莲花表示对方多病完全不认识，强调两人之间没有关系。</td></tr></table></div></div>
+</section>
+</section>
+<section id="test-no-reference">
+<h3>test_no_reference<a class="headerlink" href="#test-no-reference" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PairPreferenceMapper</span><span class="p">(</span><span class="n">api_model</span><span class="o">=</span><span class="s1">&#39;qwen2.5-72b-instruct&#39;</span><span class="p">,</span> <span class="n">system_prompt</span><span class="o">=</span><span class="s1">&#39;修改问答对中的回答，在语言风格、事实性、人物身份、立场等任一方面与原回答相反。必须按照以下标记格式输出，不要输出其他多余内容。</span><span class="se">\n</span><span class="s1">【回答】</span><span class="se">\n</span><span class="s1">生成的新回答</span><span class="se">\n</span><span class="s1">【原因】</span><span class="se">\n</span><span class="s1">生成该回答的原因&#39;</span><span class="p">,</span> <span class="n">input_template</span><span class="o">=</span><span class="s1">&#39;以下是原始问答对：</span><span class="se">\n</span><span class="s1">【问题】</span><span class="se">\n</span><span class="si">{query}</span><span class="se">\n</span><span class="s1">【回答】</span><span class="se">\n</span><span class="si">{response}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id1">
+<h4>📥 input data 输入数据<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> empty</div><div class='meta' style='margin:6px 0;'><table class='meta-table' style='border-collapse:collapse; width:100%; border:1px solid #e3e3e3;'><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>query</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>李莲花，你认识方多病吗?</td></tr><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>response</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>方多病啊，那可是我的好友。</td></tr></table></div></div>
+</section>
+<section id="id2">
+<h4>📤 output data 输出数据<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<div class="sample-card" style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:6px; background:#fafafa; box-shadow:0 1px 3px rgba(0,0,0,0.1);"><div class="sample-header" style="background:#f8f9fa; padding:4px 8px; margin-bottom:6px; border-radius:3px; font-size:0.9em; color:#666; border-left:3px solid #007acc;"><strong>Sample 1:</strong> empty</div><div class='meta' style='margin:6px 0;'><table class='meta-table' style='border-collapse:collapse; width:100%; border:1px solid #e3e3e3;'><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>query</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>李莲花，你认识方多病吗?</td></tr><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>response</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>方多病啊，那可是我的好友。</td></tr><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>rejected_response</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>方多病？我不认识他，我们之间没有任何交集。</td></tr><tr><td style='text-align:left; vertical-align:top; padding:4px 8px; padding-left:8px; font-weight:500; color:#444; border-bottom:1px solid #e3e3e3; white-space:nowrap;'>reason</td><td style='text-align:left; vertical-align:top; padding:4px 6px; padding-left:4px; border-bottom:1px solid #e3e3e3;'>改变回答以体现李莲花与方多病之间不存在任何关系，与原回答的友好关系相反。</td></tr></table></div></div>
+</section>
+</section>
 </section>
 <section id="related-links">
 <h2>🔗 related links 相关链接<a class="headerlink" href="#related-links" title="Link to this heading">#</a></h2>
@@ -819,7 +878,19 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-configuration">🔧 Parameter Configuration 参数配置</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-demonstration">📊 Effect demonstration 效果演示</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-demonstration">📊 Effect demonstration 效果演示</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test">test</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">📥 input data 输入数据</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-data">📤 output data 输出数据</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-no-reference">test_no_reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">📥 input data 输入数据</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">📤 output data 输出数据</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-links">🔗 related links 相关链接</a></li>
 </ul>
   </nav></div>
@@ -873,7 +944,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

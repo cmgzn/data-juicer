@@ -11,7 +11,7 @@ var AskAIWidget = (function () {
 
   const I18N = {
     en: {
-      title: 'Data-Juicer Q&A Copilot',
+      title: 'Data-Juicer Q&A Copilot [Beta]',
       buttonTitle: 'Ask Juicer',
       clearTitle: 'Restart conversation',
       expandTitle: 'Expand/Collapse',
@@ -19,9 +19,9 @@ var AskAIWidget = (function () {
       minimizeTitle: 'Minimize',
       sendTitle: 'Send message',
       inputPlaceholder: 'Type your question here...',
-      welcomeMessage: '👋 Hi! I\'m Juicer. Ask me anything about Data-Juicer!',
-      welcomeConnected: '👋 Hi! I\'m Juicer. <span style="color: #28a745;">🟢 Connected</span><br>Ask me anything about Data-Juicer!',
-      welcomeOffline: '👋 Hi! I\'m Juicer. <span style="color: #dc3545;">🔴 Offline Mode</span><br>Please ensure the API service is running.',
+      welcomeMessage: '👋 Hi! I\'m Juicer. Ask me anything about Data-Juicer!<br><br><small style="color: #888;">Powered by <a href="https://github.com/datajuicer/data-juicer-agents" target="_blank" style="color: #667eea; text-decoration: none;">data-juicer-agents</a> · Results are AI-generated and for reference only.</small>',
+      welcomeConnected: '👋 Hi! I\'m Juicer. <span style="color: #28a745;">🟢 Connected</span><br>Ask me anything about Data-Juicer!<br><br><small style="color: #888;">Powered by <a href="https://github.com/datajuicer/data-juicer-agents" target="_blank" style="color: #667eea; text-decoration: none;">data-juicer-agents</a> · Results are AI-generated and for reference only.</small>',
+      welcomeOffline: '👋 Hi! I\'m Juicer. <span style="color: #dc3545;">🔴 Offline Mode</span><br>Please ensure the API service is running.<br><br><small style="color: #888;">Powered by <a href="https://github.com/datajuicer/data-juicer-agents" target="_blank" style="color: #667eea; text-decoration: none;">data-juicer-agents</a> · Results are AI-generated and for reference only.</small>',
       clearConfirm: 'Are you sure you want to clear the conversation history? This action cannot be undone.',
       clearFailed: 'Failed to clear conversation history. Please try again.',
       clearError: 'Error clearing conversation history. Please check your connection and try again.',
@@ -38,10 +38,14 @@ var AskAIWidget = (function () {
       copyMarkdown: 'Copy Markdown',
       feedbackSuccess: 'Thank you for your feedback!',
       feedbackError: 'Failed to submit feedback',
-      copiedSuccess: 'Copied to clipboard!'
+      copiedSuccess: 'Copied to clipboard!',
+      thinking: 'Thinking',
+      thinkingTitle: 'Enable/Disable Thinking',
+      thinkingContent: 'Thinking',
+      helpSuffix: '\n\n---\n*If you have any questions, please visit [data-juicer issues](https://github.com/datajuicer/data-juicer/issues) or [data-juicer-agents issues](https://github.com/datajuicer/data-juicer-agents/issues)*'
     },
     zh_CN: {
-      title: 'Data-Juicer Q&A Copilot',
+      title: 'Data-Juicer Q&A Copilot [Beta]',
       buttonTitle: '询问 Juicer',
       clearTitle: '重新开始对话',
       expandTitle: '展开/收起',
@@ -49,9 +53,9 @@ var AskAIWidget = (function () {
       minimizeTitle: '最小化',
       sendTitle: '发送消息',
       inputPlaceholder: '在此输入您的问题...',
-      welcomeMessage: '👋 你好！我是 Juicer。问我任何关于 Data-Juicer 的问题！',
-      welcomeConnected: '👋 你好！我是 Juicer。<span style="color: #28a745;">🟢 已连接</span><br>问我任何关于 Data-Juicer 的问题！',
-      welcomeOffline: '👋 你好！我是 Juicer。<span style="color: #dc3545;">🔴 离线模式</span><br>请确保 API 服务正在运行。',
+      welcomeMessage: '👋 你好！我是 Juicer。问我任何关于 Data-Juicer 的问题！<br><br><small style="color: #888;">技术支持：<a href="https://github.com/datajuicer/data-juicer-agents" target="_blank" style="color: #667eea; text-decoration: none;">data-juicer-agents</a> · 结果由 AI 生成，仅供参考。</small>',
+      welcomeConnected: '👋 你好！我是 Juicer。<span style="color: #28a745;">🟢 已连接</span><br>问我任何关于 Data-Juicer 的问题！<br><br><small style="color: #888;">技术支持：<a href="https://github.com/datajuicer/data-juicer-agents" target="_blank" style="color: #667eea; text-decoration: none;">data-juicer-agents</a> · 结果由 AI 生成，仅供参考。</small>',
+      welcomeOffline: '👋 你好！我是 Juicer。<span style="color: #dc3545;">🔴 离线模式</span><br>请确保 API 服务正在运行。<br><br><small style="color: #888;">技术支持：<a href="https://github.com/datajuicer/data-juicer-agents" target="_blank" style="color: #667eea; text-decoration: none;">data-juicer-agents</a> · 结果由 AI 生成，仅供参考。</small>',
       clearConfirm: '确定要清除对话历史吗？此操作无法撤销。',
       clearFailed: '清除对话历史失败。请重试。',
       clearError: '清除对话历史时出错。请检查您的连接并重试。',
@@ -68,7 +72,11 @@ var AskAIWidget = (function () {
       copyMarkdown: '复制 Markdown',
       feedbackSuccess: '感谢您的反馈！',
       feedbackError: '提交反馈失败',
-      copiedSuccess: '已复制到剪贴板！'
+      copiedSuccess: '已复制到剪贴板！',
+      thinking: '思考',
+      thinkingTitle: '开启/关闭思考模式',
+      thinkingContent: '思考',
+      helpSuffix: '\n\n---\n*如果您有任何问题，请访问 [data-juicer issues](https://github.com/datajuicer/data-juicer/issues) 或 [data-juicer-agents issues](https://github.com/datajuicer/data-juicer-agents/issues)*'
     }
   };
 
@@ -132,12 +140,6 @@ var AskAIWidget = (function () {
         return window.JUICER_API_URL;
       }
 
-      const currentHost = window.location.hostname;
-
-      if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
-        return 'http://localhost:8080';
-      }
-
       return 'http://localhost:8080';
     }
 
@@ -190,7 +192,7 @@ var AskAIWidget = (function () {
           session_id: this.sessionId,
           user_id: this.sessionId,
         };
-        
+
         console.log('Fetching memory for session:', this.sessionId);
 
         const response = await fetch(`${this.getApiBaseUrl()}/memory`, {
@@ -205,7 +207,7 @@ var AskAIWidget = (function () {
           const data = await response.json();
           const messages = data.messages || [];
           console.log('Memory fetched:', messages.length, 'messages');
-          
+
           // Return latest messages if limit is specified
           return limit > 0 ? messages.slice(-limit) : messages;
         } else {
@@ -276,12 +278,15 @@ var AskAIWidget = (function () {
      * @param {Function} onComplete - Callback when complete with verified messages (userMessage, assistantMessage)
      * @param {Function} onError - Callback for errors (error)
      * @param {Function} onToolComplete - Callback when tool execution completes (callId)
+     * @param {Object} modelConfig - Optional model configuration (e.g., { enable_thinking: true })
+     * @param {Function} onThinkingUpdate - Callback for thinking content updates (thinkingText)
      */
-    async getAIResponseStream(message, onContentUpdate, onToolUse, onComplete, onError, onToolComplete) {
+    async getAIResponseStream(message, onContentUpdate, onToolUse, onComplete, onError, onToolComplete, modelConfig = null, onThinkingUpdate = null) {
       let currentStreamContent = '';
       let streamMessageId = `temp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       let hasReceivedContent = false;
       let streamCompletedSuccessfully = false;
+      let isInReasoningPhase = false;
 
       try {
         const requestBody = {
@@ -299,6 +304,10 @@ var AskAIWidget = (function () {
           session_id: this.sessionId,
           user_id: this.sessionId,
         };
+
+        if (modelConfig && typeof modelConfig === 'object') {
+          requestBody.model_params = modelConfig;
+        }
 
         console.log('Sending streaming request to:', `${this.getApiBaseUrl()}/process`);
 
@@ -355,11 +364,11 @@ var AskAIWidget = (function () {
                   const toolCallWithId = data.content[0]?.type === "data" ? data.content[0].data : null;
                   const toolCallWithArgs = data.content.length > 1 ? data.content[1] : data.content[0];
                   const toolCall = toolCallWithArgs?.type === "data" ? toolCallWithArgs.data : null;
-                  
+
                   if (toolCall && onToolUse) {
                     const toolName = toolCall.name || 'Unknown Tool';
                     let toolArgs = toolCall.arguments || {};
-                    
+
                     if (typeof toolArgs === 'string') {
                       try {
                         toolArgs = JSON.parse(toolArgs);
@@ -368,7 +377,7 @@ var AskAIWidget = (function () {
                         toolArgs = {};
                       }
                     }
-                    
+
                     const callId = toolCallWithId?.call_id || null;
                     console.log('Tool call detected:', { toolName, toolArgs, callId });
                     onToolUse(toolName, toolArgs, callId);
@@ -382,7 +391,7 @@ var AskAIWidget = (function () {
                   const outputData = data.content.find(item => item.type === "data")?.data;
                   const callId = outputData?.call_id || null;
                   const output = outputData?.output;
-                  
+
                   if (output && callId && onToolComplete) {
                     console.log('Tool output received for call_id:', callId);
                     onToolComplete(callId);
@@ -390,35 +399,77 @@ var AskAIWidget = (function () {
                 }
               }
 
-              // Handle incremental text content
+              // Handle reasoning phase: object="message", type="reasoning"
+              if (data.object === "message" && data.type === "reasoning") {
+                if (data.status === "in_progress") {
+                  isInReasoningPhase = true;
+                  console.log('Entering reasoning phase, msg_id:', data.id);
+                } else if (data.status === "completed") {
+                  // Reasoning phase completed - ignore entirely (skip all further processing)
+                  isInReasoningPhase = false;
+                  console.log('Reasoning phase completed, msg_id:', data.id);
+                  continue;
+                }
+              }
+
+              // Handle normal message phase start: object="message", type="message"
+              // This signals the end of reasoning and start of normal response
+              if (data.object === "message" && data.type === "message" && data.status === "in_progress") {
+                if (isInReasoningPhase) {
+                  isInReasoningPhase = false;
+                  console.log('Exiting reasoning phase, entering message phase');
+                }
+              }
+
+              // Skip non-delta content events (e.g., completed content summaries from reasoning)
+              if (
+                data.object === "content" &&
+                data.type === "text" &&
+                data.delta !== true &&
+                data.status === "completed"
+              ) {
+                console.log('Skipping completed content summary, sequence:', data.sequence_number);
+                continue;
+              }
+
+              // Handle incremental text content (used for both reasoning and normal text)
               if (
                 data.object === "content" &&
                 data.type === "text" &&
                 data.delta === true &&
                 data.text !== undefined
               ) {
-                if (!hasReceivedContent) {
-                  currentStreamContent = '';
-                  hasReceivedContent = true;
-                }
-                currentStreamContent += data.text;
-                if (onContentUpdate) {
-                  onContentUpdate(currentStreamContent);
+                if (isInReasoningPhase) {
+                  // Route to thinking callback during reasoning phase
+                  if (onThinkingUpdate) {
+                    onThinkingUpdate(data.text);
+                  }
+                } else {
+                  // Route to normal content callback
+                  if (!hasReceivedContent) {
+                    currentStreamContent = '';
+                    hasReceivedContent = true;
+                  }
+                  currentStreamContent += data.text;
+                  if (onContentUpdate) {
+                    onContentUpdate(currentStreamContent);
+                  }
                 }
               }
 
-              // Final message delivery
+              // Final message delivery (skip reasoning messages to avoid showing thinking as normal text)
               if (
                 data.object === "message" &&
                 data.status === "completed" &&
                 data.role === "assistant" &&
+                data.type !== "reasoning" &&
                 Array.isArray(data.content)
               ) {
                 const fullText = data.content
                   .filter(c => c.type === "text")
                   .map(c => c.text)
                   .join('');
-                
+
                 if (fullText && !hasReceivedContent) {
                   currentStreamContent = fullText;
                   hasReceivedContent = true;
@@ -446,50 +497,66 @@ var AskAIWidget = (function () {
 
         // ✨ Fetch from memory to get verified messages with complete metadata
         console.log('Stream ended, fetching latest messages from memory...');
-        const recentMessages = await this.getMemory(2); // Get last 2 messages (user + assistant)
-        
-        if (recentMessages.length >= 2) {
-          const userMessage = recentMessages[recentMessages.length - 2];
-          const assistantMessage = recentMessages[recentMessages.length - 1];
-          
-          // Validate these are the messages we expect
-          if (userMessage.role === 'user' && assistantMessage.role === 'assistant') {
-            console.log('✓ Memory sync successful');
-            console.log('  User message ID:', userMessage.id);
-            console.log('  Assistant message ID:', assistantMessage.id);
-            
-            // Extract assistant content
-            let verifiedContent = '';
-            if (Array.isArray(assistantMessage.content)) {
-              verifiedContent = assistantMessage.content
-                .filter(c => c.type === "text")
-                .map(c => c.text)
-                .join('');
-            }
-            
-            // Use verified content if stream was incomplete or network was unstable
-            if (verifiedContent && (!streamCompletedSuccessfully || verifiedContent !== currentStreamContent)) {
-              console.log('⚠ Stream content differs from server, using server version');
-              currentStreamContent = verifiedContent;
-              // Update UI with correct content
-              if (onContentUpdate) {
-                onContentUpdate(currentStreamContent);
-              }
-            }
-            
-            if (onComplete) {
-              onComplete(userMessage, assistantMessage);
-            }
-            return;
+        const recentMessages = await this.getMemory(10); // Get more messages to debug
+
+        // Find the last user message and last assistant message
+        const extractText = (content) => {
+          if (Array.isArray(content)) {
+            return content.filter(c => c.type === 'text').map(c => c.text).join('').trim();
           }
+          return (content || '').trim();
+        };
+
+        // Get the last user message and last assistant message from memory
+        let lastUserMessage = null;
+        let lastAssistantMessage = null;
+
+        for (let i = recentMessages.length - 1; i >= 0; i--) {
+          const msg = recentMessages[i];
+          if (!lastAssistantMessage && msg.role === 'assistant') {
+            lastAssistantMessage = msg;
+          }
+          if (!lastUserMessage && msg.role === 'user') {
+            lastUserMessage = msg;
+          }
+          if (lastUserMessage && lastAssistantMessage) break;
         }
-        
+
+        const expectedContent = message.trim();
+        const lastUserContent = lastUserMessage ? extractText(lastUserMessage.content) : '';
+
+        if (lastUserMessage && lastAssistantMessage && lastUserContent === expectedContent) {
+          const assistantContent = extractText(lastAssistantMessage.content);
+
+          console.log('✓ Memory sync successful');
+          console.log('  User message ID:', lastUserMessage.id);
+          console.log('  Assistant message ID:', lastAssistantMessage.id);
+
+          // Use server content if stream was incomplete or content differs
+          if (assistantContent && (!streamCompletedSuccessfully)) {
+            console.log('⚠ Stream content differs from server, using server version');
+            currentStreamContent = assistantContent;
+            if (onContentUpdate) {
+              onContentUpdate(currentStreamContent);
+            }
+          }
+
+          if (onComplete) {
+            onComplete(lastUserMessage, lastAssistantMessage);
+          }
+          return;
+        } else {
+          console.warn('⚠ Could not verify messages from memory');
+          console.log('  Expected user content:', expectedContent.substring(0, 50));
+          console.log('  Found user content:', lastUserContent.substring(0, 50));
+        }
+
         // Fallback: memory sync failed, use stream data
         console.warn('⚠ Could not verify messages from memory, using stream data');
         if (onComplete) {
           // Create message objects from stream data
           const fallbackUserMessage = {
-            id: `user_${streamMessageId}`,
+            id: 'user_' + streamMessageId,
             role: 'user',
             content: [{ type: 'text', text: message.trim() }]
           };
@@ -561,6 +628,7 @@ var AskAIWidget = (function () {
       this.isOpen = false;
       this.isExpanded = false;
       this.isTyping = false;
+      this.enableThinking = false;
       this.messages = [];
       
       // DOM references (will be set after createWidget)
@@ -569,6 +637,7 @@ var AskAIWidget = (function () {
       this.closeBtn = null;
       this.clearBtn = null;
       this.expandBtn = null;
+      this.thinkingBtn = null;
       this.messagesContainer = null;
       this.input = null;
       this.sendBtn = null;
@@ -583,7 +652,7 @@ var AskAIWidget = (function () {
       widget.innerHTML = `
       <!-- Ask AI Button -->
       <button class="ask-ai-button" id="askAiButton" title="${this.i18n.buttonTitle}">
-        🤖
+        <span class="ask-ai-button-text">Ask AI</span>
       </button>
 
       <!-- Chat Modal -->
@@ -607,15 +676,23 @@ var AskAIWidget = (function () {
 
         <!-- Input Area -->
         <div class="ask-ai-input-area">
-          <textarea 
-            class="ask-ai-input" 
-            id="askAiInput" 
-            placeholder="${this.i18n.inputPlaceholder}"
-            rows="1"
-          ></textarea>
-          <button class="ask-ai-send" id="askAiSend" title="${this.i18n.sendTitle}">
-            ➤
-          </button>
+          <div class="ask-ai-input-row">
+            <textarea 
+              class="ask-ai-input" 
+              id="askAiInput" 
+              placeholder="${this.i18n.inputPlaceholder}"
+              rows="1"
+            ></textarea>
+            <button class="ask-ai-send" id="askAiSend" title="${this.i18n.sendTitle}">
+              ➤
+            </button>
+          </div>
+          <div class="ask-ai-input-options">
+            <button class="ask-ai-thinking-toggle" id="askAiThinkingToggle" title="${this.i18n.thinkingTitle}">
+              <i class="fa-solid fa-brain"></i>
+              <span class="ask-ai-thinking-label">${this.i18n.thinking}</span>
+            </button>
+          </div>
         </div>
       </div>
     `;
@@ -628,6 +705,7 @@ var AskAIWidget = (function () {
       this.closeBtn = document.getElementById('askAiClose');
       this.clearBtn = document.getElementById('askAiClear');
       this.expandBtn = document.getElementById('askAiExpand');
+      this.thinkingBtn = document.getElementById('askAiThinkingToggle');
       this.messagesContainer = document.getElementById('askAiMessages');
       this.input = document.getElementById('askAiInput');
       this.sendBtn = document.getElementById('askAiSend');
@@ -644,7 +722,8 @@ var AskAIWidget = (function () {
         onClear,
         onExpand,
         onSend,
-        onInputChange
+        onInputChange,
+        onThinkingToggle
       } = callbacks;
 
       // Toggle modal
@@ -689,6 +768,14 @@ var AskAIWidget = (function () {
         });
       }
 
+      // Toggle thinking mode
+      if (onThinkingToggle) {
+        this.thinkingBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          onThinkingToggle();
+        });
+      }
+
       // Auto-resize textarea
       this.input.addEventListener('input', () => this.autoResizeInput());
       if (onInputChange) {
@@ -696,13 +783,11 @@ var AskAIWidget = (function () {
       }
 
       // Close modal when clicking outside
+      // Note: expandBtn, closeBtn, and clearBtn checks are redundant since they are children of this.modal
       document.addEventListener('click', (e) => {
         if (this.isOpen &&
           !this.modal.contains(e.target) &&
-          !this.button.contains(e.target) &&
-          !this.expandBtn.contains(e.target) &&
-          !this.closeBtn.contains(e.target) &&
-          !this.clearBtn.contains(e.target)) {
+          !this.button.contains(e.target)) {
           if (onClose) onClose();
         }
       });
@@ -876,60 +961,163 @@ var AskAIWidget = (function () {
 
 
     /**
-     * Update an existing assistant message
-     * @param {string} messageId - Message ID to update
-     * @param {string} content - New content
+     * Update message content while preserving tool calls and feedback buttons
+     * Content is organized in segments: each tool call creates a new segment
+     * @param {HTMLElement} messageDiv - Message element
+     * @param {string} content - New content (cumulative from stream)
+     * @param {boolean} addSuffix - Whether to add helpSuffix (default: false, used during streaming)
      */
-    updateMessage(messageId, content) {
-      const messageDiv = this.messagesContainer.querySelector(`[data-message-id="${messageId}"]`);
-      if (messageDiv) {
-        messageDiv.innerHTML = this.renderMarkdown(content);
-        this.scrollToBottom();
+    updateMessageContent(messageDiv, content, addSuffix = false) {
+      if (!messageDiv) return;
+
+      // Remove typing indicator if present
+      const typingIndicator = messageDiv.querySelector('.typing-indicator');
+      if (typingIndicator) {
+        typingIndicator.remove();
       }
+      
+      // Only append helpSuffix when explicitly requested (at the end of response)
+      const contentToRender = addSuffix ? content + (this.i18n.helpSuffix || '') : content;
+      
+      // Find the last "block" element (tool container or thinking panel)
+      // Content should always be placed after the last block element
+      const toolContainers = messageDiv.querySelectorAll('.tool-calls-inline');
+      const thinkingContainers = messageDiv.querySelectorAll('.thinking-inline');
+      const lastToolContainer = toolContainers.length > 0 ? toolContainers[toolContainers.length - 1] : null;
+      const lastThinkingContainer = thinkingContainers.length > 0 ? thinkingContainers[thinkingContainers.length - 1] : null;
+      
+      // Determine the last block element by comparing DOM positions
+      let lastBlockElement = null;
+      if (lastToolContainer && lastThinkingContainer) {
+        // Both exist - find which one comes last in DOM order
+        const position = lastToolContainer.compareDocumentPosition(lastThinkingContainer);
+        lastBlockElement = (position & Node.DOCUMENT_POSITION_FOLLOWING) ? lastThinkingContainer : lastToolContainer;
+      } else {
+        lastBlockElement = lastThinkingContainer || lastToolContainer;
+      }
+      
+      if (lastBlockElement) {
+        // Find or create content wrapper AFTER the last block element
+        let contentWrapper = lastBlockElement.nextElementSibling;
+        if (!contentWrapper || !contentWrapper.classList.contains('message-content-segment')) {
+          contentWrapper = document.createElement('div');
+          contentWrapper.className = 'message-content-segment';
+          lastBlockElement.after(contentWrapper);
+        }
+        
+        // Calculate what content belongs to this segment
+        const segmentContent = this.extractContentAfterTools(messageDiv, content);
+        contentWrapper.innerHTML = this.renderMarkdown(segmentContent);
+      } else {
+        // No block elements - find or create the first content segment
+        let contentWrapper = messageDiv.querySelector('.message-content-segment');
+        if (!contentWrapper) {
+          contentWrapper = document.createElement('div');
+          contentWrapper.className = 'message-content-segment';
+          messageDiv.appendChild(contentWrapper);
+        }
+        contentWrapper.innerHTML = this.renderMarkdown(contentToRender);
+      }
+      
+      // Store full content for copying
+      messageDiv.setAttribute('data-full-content', content);
+      
+      this.scrollToBottom();
     }
 
     /**
-     * Update message content while preserving tool calls and feedback buttons
+     * Extract content that should appear after the last tool call
+     * This handles the cumulative content from streaming
      * @param {HTMLElement} messageDiv - Message element
-     * @param {string} content - New content
+     * @param {string} fullContent - Full cumulative content
+     * @returns {string} Content for the current segment
      */
-    updateMessageContent(messageDiv, content) {
-      if (!messageDiv) return;
+    extractContentAfterTools(messageDiv, fullContent) {
+      // Get the content length that was rendered before the last tool call
+      const lastRenderedLength = parseInt(messageDiv.getAttribute('data-content-before-last-tool') || '0', 10);
+      
+      // Return only the new content after the last tool call
+      if (lastRenderedLength > 0 && lastRenderedLength < fullContent.length) {
+        return fullContent.substring(lastRenderedLength);
+      }
+      
+      // If no previous content recorded, return full content
+      return fullContent;
+    }
 
+    /**
+     * Finalize message content by adding helpSuffix
+     * Called when response is complete - just adds helpSuffix to the last content segment
+     * The content segments are already correctly rendered during streaming
+     * @param {HTMLElement} messageDiv - Message element
+     * @param {string} content - Final content (may be just the last segment from server)
+     */
+    finalizeMessage(messageDiv, content) {
+      if (!messageDiv) return;
+      
       const messageId = messageDiv.getAttribute('data-message-id');
       
-      // Check if there's a tool calls container or feedback buttons
-      const toolContainer = messageDiv.querySelector('.tool-calls-inline');
-      const feedbackContainer = messageDiv.querySelector('.ask-ai-feedback');
+      // Find the last block element (tool container or thinking panel)
+      const toolContainers = messageDiv.querySelectorAll('.tool-calls-inline');
+      const thinkingContainers = messageDiv.querySelectorAll('.thinking-inline');
+      const lastToolContainer = toolContainers.length > 0 ? toolContainers[toolContainers.length - 1] : null;
+      const lastThinkingContainer = thinkingContainers.length > 0 ? thinkingContainers[thinkingContainers.length - 1] : null;
       
-      if (toolContainer || feedbackContainer) {
-        // Find or create content wrapper
-        let contentWrapper = messageDiv.querySelector('.message-content');
+      let lastBlockElement = null;
+      if (lastToolContainer && lastThinkingContainer) {
+        const position = lastToolContainer.compareDocumentPosition(lastThinkingContainer);
+        lastBlockElement = (position & Node.DOCUMENT_POSITION_FOLLOWING) ? lastThinkingContainer : lastToolContainer;
+      } else {
+        lastBlockElement = lastThinkingContainer || lastToolContainer;
+      }
+      
+      if (!lastBlockElement) {
+        // No block elements - simple case, just render all content with suffix
+        let contentWrapper = messageDiv.querySelector('.message-content-segment');
         if (!contentWrapper) {
           contentWrapper = document.createElement('div');
-          contentWrapper.className = 'message-content';
-          // Insert before tool container or feedback buttons
-          if (toolContainer) {
-            messageDiv.insertBefore(contentWrapper, toolContainer.nextSibling);
-          } else if (feedbackContainer) {
-            messageDiv.insertBefore(contentWrapper, feedbackContainer);
-          } else {
-            messageDiv.appendChild(contentWrapper);
-          }
+          contentWrapper.className = 'message-content-segment';
+          messageDiv.appendChild(contentWrapper);
         }
-        // Update only the content part
-        contentWrapper.innerHTML = this.renderMarkdown(content);
+        contentWrapper.innerHTML = this.renderMarkdown(content + (this.i18n.helpSuffix || ''));
       } else {
-        // No tool calls or feedback, replace innerHTML and add feedback buttons
-        messageDiv.innerHTML = this.renderMarkdown(content);
-        if (messageId) {
-          this.addFeedbackButtons(messageDiv, messageId, content);
+        // Has block elements - find the last content segment after the last block
+        let lastContentSegment = lastBlockElement.nextElementSibling;
+        
+        if (lastContentSegment && lastContentSegment.classList.contains('message-content-segment')) {
+          const fullContent = messageDiv.getAttribute('data-full-content') || content;
+          const contentBeforeLastTool = parseInt(messageDiv.getAttribute('data-content-before-last-tool') || '0', 10);
+          const segmentContent = contentBeforeLastTool > 0 && contentBeforeLastTool < fullContent.length 
+            ? fullContent.substring(contentBeforeLastTool) 
+            : fullContent;
+          lastContentSegment.innerHTML = this.renderMarkdown(segmentContent + (this.i18n.helpSuffix || ''));
+        } else {
+          // No content segment after last block - check if there should be one
+          const fullContent = messageDiv.getAttribute('data-full-content') || content;
+          const contentBeforeLastTool = parseInt(messageDiv.getAttribute('data-content-before-last-tool') || '0', 10);
+          const segmentContent = contentBeforeLastTool > 0 && contentBeforeLastTool < fullContent.length 
+            ? fullContent.substring(contentBeforeLastTool) 
+            : '';
+          
+          if (segmentContent.trim()) {
+            lastContentSegment = document.createElement('div');
+            lastContentSegment.className = 'message-content-segment';
+            lastContentSegment.innerHTML = this.renderMarkdown(segmentContent + (this.i18n.helpSuffix || ''));
+            lastBlockElement.after(lastContentSegment);
+          }
         }
       }
       
-      // Update stored content for copying
-      if (feedbackContainer) {
-        feedbackContainer.setAttribute('data-content', content);
+      // Store full content for copying (use existing if available)
+      const existingFullContent = messageDiv.getAttribute('data-full-content');
+      if (!existingFullContent) {
+        messageDiv.setAttribute('data-full-content', content);
+      }
+      
+      // Add feedback buttons
+      if (messageId) {
+        const fullContent = messageDiv.getAttribute('data-full-content') || content;
+        this.addFeedbackButtons(messageDiv, messageId, fullContent);
       }
       
       this.scrollToBottom();
@@ -974,7 +1162,103 @@ var AskAIWidget = (function () {
     }
 
     /**
+     * Toggle thinking mode on/off
+     */
+    toggleThinking() {
+      this.enableThinking = !this.enableThinking;
+      if (this.enableThinking) {
+        this.thinkingBtn.classList.add('active');
+      } else {
+        this.thinkingBtn.classList.remove('active');
+      }
+    }
+
+    /**
+     * Create a new thinking container inside message bubble as a collapsible panel.
+     * Each reasoning phase gets its own container.
+     * @param {HTMLElement} messageDiv - Message element to add thinking info to
+     * @returns {HTMLElement} The created thinking container
+     */
+    createThinkingContainer(messageDiv) {
+      if (!messageDiv) return null;
+
+      // Record current content length before adding thinking block
+      const currentFullContent = messageDiv.getAttribute('data-full-content') || '';
+      messageDiv.setAttribute('data-content-before-last-tool', currentFullContent.length.toString());
+
+      const thinkingContainer = document.createElement('div');
+      thinkingContainer.className = 'thinking-inline';
+
+      // Add collapsible header
+      const header = document.createElement('div');
+      header.className = 'thinking-inline-header';
+      header.innerHTML = `
+      <span class="thinking-inline-title">💭 ${this.i18n.thinkingContent}</span>
+      <button class="thinking-inline-toggle">▼</button>
+    `;
+      thinkingContainer.appendChild(header);
+
+      // Add content container
+      const thinkingContentDiv = document.createElement('div');
+      thinkingContentDiv.className = 'thinking-inline-content';
+      thinkingContainer.appendChild(thinkingContentDiv);
+
+      // Append thinking container at the end of messageDiv
+      messageDiv.appendChild(thinkingContainer);
+
+      // Add toggle functionality
+      const toggleBtn = header.querySelector('.thinking-inline-toggle');
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const contentDiv = thinkingContainer.querySelector('.thinking-inline-content');
+        const isCollapsed = contentDiv.style.display === 'none';
+        contentDiv.style.display = isCollapsed ? 'block' : 'none';
+        toggleBtn.textContent = isCollapsed ? '▼' : '▶';
+        thinkingContainer.classList.toggle('collapsed', !isCollapsed);
+      });
+
+      return thinkingContainer;
+    }
+
+    /**
+     * Append delta text to an existing thinking container
+     * @param {string} thinkingText - Incremental thinking text (delta)
+     * @param {HTMLElement} thinkingContainer - The active thinking container
+     */
+    appendThinkingContent(thinkingText, thinkingContainer) {
+      if (!thinkingContainer) return;
+
+      const thinkingContentDiv = thinkingContainer.querySelector('.thinking-inline-content');
+      if (!thinkingContentDiv) return;
+
+      const currentText = thinkingContentDiv.getAttribute('data-raw-text') || '';
+      const updatedText = currentText + thinkingText;
+      thinkingContentDiv.setAttribute('data-raw-text', updatedText);
+      thinkingContentDiv.innerHTML = this.renderMarkdown(updatedText);
+
+      this.scrollToBottom();
+    }
+
+    /**
+     * Finalize a specific thinking container - collapse it when done
+     * @param {HTMLElement} thinkingContainer - The thinking container to finalize
+     */
+    finalizeThinking(thinkingContainer) {
+      if (!thinkingContainer) return;
+
+      const contentDiv = thinkingContainer.querySelector('.thinking-inline-content');
+      const toggleBtn = thinkingContainer.querySelector('.thinking-inline-toggle');
+      if (contentDiv && toggleBtn) {
+        contentDiv.style.display = 'none';
+        toggleBtn.textContent = '▶';
+        thinkingContainer.classList.add('collapsed');
+      }
+    }
+
+    /**
      * Add tool call info inside message bubble
+     * Consecutive tool calls go into the same tool container
+     * A new tool container is only created when there's text content between tool calls
      * @param {string} toolName - Name of the tool being used
      * @param {Object} toolArgs - Tool arguments
      * @param {HTMLElement} messageDiv - Message element to add tool info to
@@ -982,9 +1266,21 @@ var AskAIWidget = (function () {
     addToolCall(toolName, toolArgs, messageDiv) {
       if (!messageDiv) return;
 
-      // Find or create tool calls container inside message
-      let toolContainer = messageDiv.querySelector('.tool-calls-inline');
-      if (!toolContainer) {
+      // Record current content length before adding tool call
+      // This is used by updateMessageContent to know where to split content
+      const currentFullContent = messageDiv.getAttribute('data-full-content') || '';
+      messageDiv.setAttribute('data-content-before-last-tool', currentFullContent.length.toString());
+
+      // Check if we should reuse the last tool container or create a new one
+      // Reuse if: the last child is a tool container (no text content in between)
+      let toolContainer = null;
+      const lastChild = messageDiv.lastElementChild;
+      
+      if (lastChild && lastChild.classList.contains('tool-calls-inline')) {
+        // Reuse existing tool container (consecutive tool calls)
+        toolContainer = lastChild;
+      } else {
+        // Create a new tool container (first tool call or there's text content before this)
         toolContainer = document.createElement('div');
         toolContainer.className = 'tool-calls-inline';
         
@@ -998,25 +1294,27 @@ var AskAIWidget = (function () {
         toolContainer.appendChild(header);
         
         // Add content container
-        const content = document.createElement('div');
-        content.className = 'tool-calls-inline-content';
-        toolContainer.appendChild(content);
+        const toolContentDiv = document.createElement('div');
+        toolContentDiv.className = 'tool-calls-inline-content';
+        toolContainer.appendChild(toolContentDiv);
         
-        messageDiv.insertBefore(toolContainer, messageDiv.firstChild);
+        // Append tool container at the end of messageDiv
+        messageDiv.appendChild(toolContainer);
         
         // Add toggle functionality
         const toggleBtn = header.querySelector('.tool-calls-inline-toggle');
         toggleBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          const isCollapsed = content.style.display === 'none';
-          content.style.display = isCollapsed ? 'block' : 'none';
+          const contentDiv = toolContainer.querySelector('.tool-calls-inline-content');
+          const isCollapsed = contentDiv.style.display === 'none';
+          contentDiv.style.display = isCollapsed ? 'block' : 'none';
           toggleBtn.textContent = isCollapsed ? '▼' : '▶';
           toolContainer.classList.toggle('collapsed', !isCollapsed);
         });
       }
-
-      // Get content container
-      const content = toolContainer.querySelector('.tool-calls-inline-content');
+      
+      // Get the content container from the tool container
+      const toolContent = toolContainer.querySelector('.tool-calls-inline-content');
 
       // Create tool call item
       const toolId = `tool_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -1044,7 +1342,7 @@ var AskAIWidget = (function () {
       ${argsPreview}
     `;
 
-      content.appendChild(toolItem);
+      toolContent.appendChild(toolItem);
       this.scrollToBottom();
 
       return toolId;
@@ -1067,6 +1365,33 @@ var AskAIWidget = (function () {
     }
 
     /**
+     * Collapse all fully-completed tool containers in a message
+     * Called when a non-tool-call phase starts (text content or thinking)
+     * @param {HTMLElement} messageDiv - Message element
+     */
+    collapseCompletedToolContainers(messageDiv) {
+      if (!messageDiv) return;
+
+      const toolContainers = messageDiv.querySelectorAll('.tool-calls-inline');
+      toolContainers.forEach(toolContainer => {
+        // Skip already collapsed containers
+        if (toolContainer.classList.contains('collapsed')) return;
+
+        // Check if all tools in this container are done (no running ones)
+        const remainingRunning = toolContainer.querySelectorAll('.tool-call-inline.running');
+        if (remainingRunning.length === 0) {
+          const contentDiv = toolContainer.querySelector('.tool-calls-inline-content');
+          const toggleBtn = toolContainer.querySelector('.tool-calls-inline-toggle');
+          if (contentDiv && toggleBtn) {
+            contentDiv.style.display = 'none';
+            toggleBtn.textContent = '▶';
+            toolContainer.classList.add('collapsed');
+          }
+        }
+      });
+    }
+
+    /**
      * Scroll messages container to bottom
      */
     scrollToBottom() {
@@ -1082,12 +1407,7 @@ var AskAIWidget = (function () {
       this.messages = [];
       const existingMessages = this.messagesContainer.querySelectorAll('.ask-ai-message, .ask-ai-message-wrapper');
       existingMessages.forEach(msg => msg.remove());
-
-      // Remove welcome message if it exists
-      const welcomeElement = this.messagesContainer.querySelector('.ask-ai-welcome');
-      if (welcomeElement) {
-        welcomeElement.remove();
-      }
+      // Note: Welcome message is intentionally kept - it will be updated by addWelcomeMessage()
     }
 
     /**
@@ -1095,22 +1415,22 @@ var AskAIWidget = (function () {
      * @param {boolean} apiConnected - Whether API is connected
      */
     addWelcomeMessage(apiConnected) {
-      // Only add welcome message if no history was loaded
-      if (this.messages.length === 0) {
-        const welcomeElement = this.messagesContainer.querySelector('.ask-ai-welcome');
-        if (welcomeElement) {
-          if (apiConnected) {
-            welcomeElement.innerHTML = this.i18n.welcomeConnected;
-          } else {
-            welcomeElement.innerHTML = this.i18n.welcomeOffline;
-          }
-        }
+      // Always show welcome message, regardless of history
+      let welcomeElement = this.messagesContainer.querySelector('.ask-ai-welcome');
+      
+      // If welcome element doesn't exist, create it
+      if (!welcomeElement) {
+        welcomeElement = document.createElement('div');
+        welcomeElement.className = 'ask-ai-welcome';
+        // Insert at the beginning of messages container
+        this.messagesContainer.insertBefore(welcomeElement, this.messagesContainer.firstChild);
+      }
+      
+      // Update welcome message content based on connection status
+      if (apiConnected) {
+        welcomeElement.innerHTML = this.i18n.welcomeConnected;
       } else {
-        // Remove welcome message if we have history
-        const welcomeElement = this.messagesContainer.querySelector('.ask-ai-welcome');
-        if (welcomeElement) {
-          welcomeElement.remove();
-        }
+        welcomeElement.innerHTML = this.i18n.welcomeOffline;
       }
     }
 
@@ -1125,13 +1445,10 @@ var AskAIWidget = (function () {
       try {
         const renderer = new marked.Renderer();
 
-        // Custom heading renderer
+        // Custom heading renderer - use CSS classes instead of inline styles
         renderer.heading = (token) => {
-          const size = ['1.3em', '1.2em', '1.1em', '1em', '0.95em', '0.9em'];
           const escapedText = this.escapeHtml(token.text);
-          return `<h${token.depth} style="font-size: ${size[token.depth - 1]}; margin: 0.3em 0;">
-        ${escapedText}
-      </h${token.depth}>`;
+          return `<h${token.depth}>${escapedText}</h${token.depth}>`;
         };
 
         // Custom link renderer - open in new tab
@@ -1193,8 +1510,10 @@ var AskAIWidget = (function () {
     updateWidgetTheme() {
       const html = document.documentElement;
 
-      // Check various theme indicators
-      const isDark = html.getAttribute('data-theme') === 'dark';
+      // Check various theme indicators to match the observer's scope
+      const isDark = html.getAttribute('data-theme') === 'dark' ||
+                     html.getAttribute('data-bs-theme') === 'dark' ||
+                     document.body.classList.contains('theme-dark');
 
       if (isDark) {
         this.modal.classList.add('theme-dark');
@@ -1293,6 +1612,7 @@ var AskAIWidget = (function () {
         onClear: () => this.clearConversation(),
         onExpand: () => this.ui.toggleExpand(),
         onSend: () => this.sendMessage(),
+        onThinkingToggle: () => this.ui.toggleThinking(),
       });
 
       // Bind feedback button events
@@ -1414,27 +1734,61 @@ var AskAIWidget = (function () {
 
     /**
      * Load conversation history from API
+     * Merges consecutive assistant messages into single messages
      */
     async loadConversationHistory() {
       const messages = await this.api.loadConversationHistory();
 
       if (messages && messages.length > 0) {
-        messages.forEach(msg => {
-          if (msg.content && typeof msg.content === 'string') {
-            const isUser = msg.role === 'user';
-            const content = msg.content.trim();
-
-            // Skip JSON array messages (tool calls)
-            if (!(content.startsWith('[{') && content.endsWith('}]'))) {
-              if (content) {
-                const messageId = msg.id || `history_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-                this.ui.addMessage(content, isUser ? 'user' : 'assistant', messageId);
-              }
-            }
+        // Group messages by conversation turn
+        const turns = [];
+        let currentTurn = null;
+        
+        for (let i = 0; i < messages.length; i++) {
+          const msg = messages[i];
+          
+          if (!msg.content || typeof msg.content !== 'string') continue;
+          
+          const content = msg.content.trim();
+          if (!content) continue;
+          
+          // Skip JSON array messages (tool calls - not rendered in history)
+          let isJsonArray = false;
+          try {
+            const parsed = JSON.parse(content);
+            isJsonArray = Array.isArray(parsed);
+          } catch (e) {
+            // Not valid JSON
+          }
+          if (isJsonArray) continue;
+          
+          if (msg.role === 'user') {
+            currentTurn = {
+              user: { content: content, id: msg.id },
+              assistantTexts: []
+            };
+            turns.push(currentTurn);
+          } else if (msg.role === 'assistant' && currentTurn) {
+            currentTurn.assistantTexts.push(content);
+          }
+        }
+        
+        // Render each turn
+        turns.forEach(turn => {
+          // Render user message
+          const userMessageId = turn.user.id || 'history_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+          this.ui.addMessage(turn.user.content, 'user', userMessageId);
+          
+          // Render merged assistant message
+          if (turn.assistantTexts.length > 0) {
+            const mergedText = turn.assistantTexts.join('\n\n');
+            const assistantMessageId = 'history_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            const contentWithSuffix = mergedText + (this.i18n.helpSuffix || '');
+            this.ui.addMessage(contentWithSuffix, 'assistant', assistantMessageId);
           }
         });
 
-        if (messages.length > 0) {
+        if (turns.length > 0) {
           this.ui.scrollToBottom();
         }
       }
@@ -1466,6 +1820,13 @@ var AskAIWidget = (function () {
 
       // Track active tool calls by call_id
       const activeToolCalls = new Map();
+      // Track the currently active thinking container
+      let activeThinkingContainer = null;
+
+      // Build model_config based on thinking toggle state
+      const modelConfig = {
+        enable_thinking: this.ui.enableThinking
+      };
 
       try {
         // Get AI response with streaming
@@ -1475,6 +1836,13 @@ var AskAIWidget = (function () {
           (content) => {
             // Remove typing class when we start receiving content
             assistantMessageDiv.classList.remove('typing');
+            // Finalize thinking panel if it was open (thinking phase ended, text phase started)
+            if (activeThinkingContainer) {
+              this.ui.finalizeThinking(activeThinkingContainer);
+              activeThinkingContainer = null;
+            }
+            // Collapse completed tool containers when text content arrives
+            this.ui.collapseCompletedToolContainers(assistantMessageDiv);
             this.ui.updateMessageContent(assistantMessageDiv, content);
           },
           // onToolUse
@@ -1485,6 +1853,12 @@ var AskAIWidget = (function () {
             const typingIndicator = assistantMessageDiv.querySelector('.typing-indicator');
             if (typingIndicator) {
               typingIndicator.remove();
+            }
+
+            // Finalize thinking panel if it was open before tool call
+            if (activeThinkingContainer) {
+              this.ui.finalizeThinking(activeThinkingContainer);
+              activeThinkingContainer = null;
             }
             
             // Add tool call to panel
@@ -1501,6 +1875,12 @@ var AskAIWidget = (function () {
             activeToolCalls.forEach(toolId => {
               this.ui.markToolCallDone(toolId);
             });
+
+            // Finalize any remaining active thinking container
+            if (activeThinkingContainer) {
+              this.ui.finalizeThinking(activeThinkingContainer);
+              activeThinkingContainer = null;
+            }
             
             // Ensure typing class is removed
             assistantMessageDiv.classList.remove('typing');
@@ -1518,8 +1898,8 @@ var AskAIWidget = (function () {
                 .join('');
             }
             
-            // Update with verified content
-            this.ui.updateMessageContent(assistantMessageDiv, finalContent);
+            // Update with verified content and add helpSuffix at the end
+            this.ui.finalizeMessage(assistantMessageDiv, finalContent);
             
             // Update with server-provided message ID
             if (assistantMessage.id) {
@@ -1534,12 +1914,6 @@ var AskAIWidget = (function () {
               console.log('Adding feedback buttons in onComplete');
               this.ui.addFeedbackButtons(assistantMessageDiv, assistantMessage.id, finalContent);
             } else if (hasFeedbackButtons) {
-              // Update feedback buttons' message ID
-              const feedbackButtons = messageWrapper.querySelectorAll('.ask-ai-feedback-btn[data-message-id]');
-              feedbackButtons.forEach(btn => {
-                btn.setAttribute('data-message-id', assistantMessage.id);
-              });
-              
               // Update stored content for copying
               const feedbackDiv = messageWrapper.querySelector('.ask-ai-feedback-actions');
               if (feedbackDiv) {
@@ -1576,6 +1950,24 @@ var AskAIWidget = (function () {
               this.ui.markToolCallDone(toolId);
               console.log('Tool completed:', callId, '-> toolId:', toolId);
             }
+          },
+          // modelConfig
+          modelConfig,
+          // onThinkingUpdate
+          (thinkingText) => {
+            // Remove typing class when we start receiving thinking content
+            assistantMessageDiv.classList.remove('typing');
+            const typingIndicator = assistantMessageDiv.querySelector('.typing-indicator');
+            if (typingIndicator) {
+              typingIndicator.remove();
+            }
+            // Collapse completed tool containers when thinking phase starts
+            this.ui.collapseCompletedToolContainers(assistantMessageDiv);
+            // Create a new thinking container if none is active
+            if (!activeThinkingContainer) {
+              activeThinkingContainer = this.ui.createThinkingContainer(assistantMessageDiv);
+            }
+            this.ui.appendThinkingContent(thinkingText, activeThinkingContainer);
           }
         );
       } catch (error) {
@@ -1604,10 +1996,7 @@ var AskAIWidget = (function () {
         this.ui.clearMessages();
 
         // Add welcome message back
-        const welcomeDiv = document.createElement('div');
-        welcomeDiv.className = 'ask-ai-welcome';
-        welcomeDiv.innerHTML = this.i18n.welcomeMessage;
-        this.ui.messagesContainer.appendChild(welcomeDiv);
+        this.addWelcomeMessage();
 
         console.log('Conversation cleared successfully');
       } else {

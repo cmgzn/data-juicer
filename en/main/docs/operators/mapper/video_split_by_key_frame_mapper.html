@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -43,15 +43,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../../../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/operators/mapper/video_split_by_key_frame_mapper';</script>
     <script src="../../../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../../../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../../../_static/icon.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -158,21 +158,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -342,21 +342,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -480,10 +480,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DatasetCfg.html">Dataset Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../BadDataExhibition.html">“Bad” Data Exhibition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Cache.html">Cache Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DJ_SORA.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DJ_service.html">DJ_service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DeveloperGuide.html">How-to Guide for Developers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Export.html">Dataset Export</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../JobManagement.html">Job Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PartitionAndCheckpoint.html">Partitioned Processing with Checkpointing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Tracing.html">Data Tracing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">operators</span></p>
@@ -520,20 +525,26 @@
 <li class="toctree-l2"><a class="reference internal" href="extract_support_text_mapper.html">extract_support_text_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="extract_tables_from_html_mapper.html">extract_tables_from_html_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fix_unicode_mapper.html">fix_unicode_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_fused_op.html">general_fused_op</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_qa_from_examples_mapper.html">generate_qa_from_examples_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_qa_from_text_mapper.html">generate_qa_from_text_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="human_preference_annotation_mapper.html">human_preference_annotation_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_blur_mapper.html">image_blur_mapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="image_captioning_from_gpt4v_mapper.html">image_captioning_from_gpt4v_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_captioning_mapper.html">image_captioning_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_detection_yolo_mapper.html">image_detection_yolo_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_diffusion_mapper.html">image_diffusion_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_face_blur_mapper.html">image_face_blur_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_mmpose_mapper.html">image_mmpose_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_remove_background_mapper.html">image_remove_background_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_sam_3d_body_mapper.html">image_sam_3d_body_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_segment_mapper.html">image_segment_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_tagging_mapper.html">image_tagging_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_tagging_vlm_mapper.html">image_tagging_vlm_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="imgdiff_difference_area_generator_mapper.html">imgdiff_difference_area_generator_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="imgdiff_difference_caption_generator_mapper.html">imgdiff_difference_caption_generator_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="latex_figure_context_extractor_mapper.html">latex_figure_context_extractor_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="latex_merge_tex_mapper.html">latex_merge_tex_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_extract_mapper.html">llm_extract_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mllm_mapper.html">mllm_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nlpaug_en_mapper.html">nlpaug_en_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nlpcda_zh_mapper.html">nlpcda_zh_mapper</a></li>
@@ -559,18 +570,27 @@
 <li class="toctree-l2"><a class="reference internal" href="remove_table_text_mapper.html">remove_table_text_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remove_words_with_incorrect_substrings_mapper.html">remove_words_with_incorrect_substrings_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replace_content_mapper.html">replace_content_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3_download_file_mapper.html">s3_download_file_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3_upload_file_mapper.html">s3_upload_file_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdxl_prompt2prompt_mapper.html">sdxl_prompt2prompt_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sentence_augmentation_mapper.html">sentence_augmentation_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sentence_split_mapper.html">sentence_split_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_chunk_mapper.html">text_chunk_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text_tagging_by_prompt_mapper.html">text_tagging_by_prompt_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vggt_mapper.html">vggt_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_camera_calibration_static_deepcalib_mapper.html">video_camera_calibration_static_deepcalib_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_camera_calibration_static_moge_mapper.html">video_camera_calibration_static_moge_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_audio_mapper.html">video_captioning_from_audio_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_frames_mapper.html">video_captioning_from_frames_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_summarizer_mapper.html">video_captioning_from_summarizer_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_video_mapper.html">video_captioning_from_video_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_captioning_from_vlm_mapper.html">video_captioning_from_vlm_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_depth_estimation_mapper.html">video_depth_estimation_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_extract_frames_mapper.html">video_extract_frames_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_face_blur_mapper.html">video_face_blur_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_ffmpeg_wrapped_mapper.html">video_ffmpeg_wrapped_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_hand_reconstruction_mapper.html">video_hand_reconstruction_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_object_segmenting_mapper.html">video_object_segmenting_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_remove_watermark_mapper.html">video_remove_watermark_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_resize_aspect_ratio_mapper.html">video_resize_aspect_ratio_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_resize_resolution_mapper.html">video_resize_resolution_mapper</a></li>
@@ -579,17 +599,27 @@
 <li class="toctree-l2"><a class="reference internal" href="video_split_by_scene_mapper.html">video_split_by_scene_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_tagging_from_audio_mapper.html">video_tagging_from_audio_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_tagging_from_frames_mapper.html">video_tagging_from_frames_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_undistort_mapper.html">video_undistort_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_whole_body_pose_estimation_mapper.html">video_whole_body_pose_estimation_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="whitespace_normalization_mapper.html">whitespace_normalization_mapper</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../formatter/index.html">Formatter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../grouper/index.html">Grouper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../selector/index.html">Selector</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../op/index.html">Op</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">Pipeline</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">demos</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/README.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/BAD_CASE_INSIGHTS.html">Agent 交互数据：Bad case 洞察</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/BAD_CASE_REPORT.html">Bad case 自助报告（简化入口）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/PERFORMANCE_LLM.html">Agent 流水线里 LLM 算子：加速与超参</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/QUICKSTART_BAD_CASE.html">Bad case 流水线：一键运行与端到端指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/README.html">Agent quality &amp; bad-case docs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/minimal_configs/README.html">Agent 流水线最小可运行配置（便于逐项调试）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/scripts/README.html">Agent pipeline 后分析脚本</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/process_video_on_ray/data/Note.html">Note for dataset path</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">tools</span></p>
@@ -703,12 +733,37 @@
 <td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
 <td><p>The directory where generated video files will be stored. If not specified, outputs will be saved in the same directory as their corresponding input files. This path can alternatively be defined by setting the <code class="docutils literal notranslate"><span class="pre">DJ_PRODUCED_DATA_DIR</span></code> environment variable.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">args</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">video_backend</span></code></p></td>
+<td><p>&lt;class ‘str’&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'av'</span></code></p></td>
+<td><p>video backend, can be <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code>, <code class="docutils literal notranslate"><span class="pre">av</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ffmpeg_extra_args</span></code></p></td>
+<td><p>&lt;class ‘str’&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
+<td><p>Extra ffmpeg args for splitting video, only valid when <code class="docutils literal notranslate"><span class="pre">video_backend</span></code> is <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">output_format</span></code></p></td>
+<td><p>&lt;class ‘str’&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'path'</span></code></p></td>
+<td><p>The output format of the videos. Supported formats are: [“path”, “bytes”]. If format is “path”, the output is a list of lists, where each inner list contains the path of the split videos. e.g.[         [video1_split1_path, video1_split2_path, …],         [video2_split1_path, video2_split2_path, …],         …     ] (In the order of the videos). If format is “bytes”, the output is a list of lists, where each inner list contains the bytes of the split videos. e.g. [         [video1_split1_byte, video1_split2_byte, …],         [video2_split1_byte, video2_split2_byte, …],         …     ] (In the order of the videos).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">save_field</span></code></p></td>
+<td><p>&lt;class ‘str’&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>The new field name to save generated video files path. If not specified, will overwrite the original video field.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">legacy_split_by_text_token</span></code></p></td>
+<td><p>&lt;class ‘bool’&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Whether to split by special tokens (e.g. &lt;__dj__video&gt;) in the text field and read videos in order, or use the ‘videos’ field directly.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">args</span></code></p></td>
 <td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
 <td><p>extra args</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">kwargs</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">kwargs</span></code></p></td>
 <td><p></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
 <td><p>extra args</p></td>
@@ -721,7 +776,7 @@
 <h2>📊 Effect demonstration 效果演示<a class="headerlink" href="#effect-demonstration" title="Link to this heading">#</a></h2>
 <section id="test">
 <h3>test<a class="headerlink" href="#test" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VideoSplitByKeyFrameMapper</span><span class="p">(</span><span class="n">keep_original_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VideoSplitByKeyFrameMapper</span><span class="p">(</span><span class="n">keep_original_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;tempfile.TemporaryDirectory().name&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="input-data">
@@ -740,7 +795,7 @@
 </section>
 <section id="test-keep-ori-sample">
 <h3>test_keep_ori_sample<a class="headerlink" href="#test-keep-ori-sample" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VideoSplitByKeyFrameMapper</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VideoSplitByKeyFrameMapper</span><span class="p">(</span><span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;tempfile.TemporaryDirectory().name&#39;</span><span class="p">,</span> <span class="n">ffmpeg_extra_args</span><span class="o">=</span><span class="s1">&#39;-movflags frag_keyframe+empty_moov&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="id1">
@@ -884,7 +939,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -42,15 +42,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="../../../_static/documentation_options.js?v=8a448e45"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/data_juicer/core/ray_exporter';</script>
     <script src="../../../_static/sidebar.js?v=3fc1065c"></script>
-    <script src="../../../_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="../../../_static/icon.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -155,21 +155,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -337,21 +337,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -517,6 +517,7 @@
   <h1>Source code for data_juicer.core.ray_exporter</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
 
@@ -554,6 +555,8 @@
         <span class="n">export_shard_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
         <span class="n">keep_stats_in_res_ds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">keep_hashes_in_res_ds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">encrypt_before_export</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">encryption_key_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -567,6 +570,13 @@
 <span class="sd">            dataset.</span>
 <span class="sd">        :param keep_hashes_in_res_ds: whether to keep hashes in the result</span>
 <span class="sd">            dataset.</span>
+<span class="sd">        :param encrypt_before_export: whether to encrypt each exported file</span>
+<span class="sd">            in-place after Ray has finished writing. All files inside the</span>
+<span class="sd">            export directory will be encrypted. S3 paths are skipped.</span>
+<span class="sd">            Default: False.</span>
+<span class="sd">        :param encryption_key_path: path to a file containing the Fernet key.</span>
+<span class="sd">            Falls back to the ``DJ_ENCRYPTION_KEY`` environment variable when</span>
+<span class="sd">            ``None``. Only used when ``encrypt_before_export`` is True.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">export_path</span> <span class="o">=</span> <span class="n">export_path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">export_shard_size</span> <span class="o">=</span> <span class="n">export_shard_size</span>
@@ -579,6 +589,22 @@
                 <span class="sa">f</span><span class="s2">&quot;for now. Only support </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_SUPPORTED_FORMATS</span><span class="si">}</span><span class="s2">. Please check export_type or export_path.&quot;</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">export_extra_args</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
+
+        <span class="c1"># Set up encryption for local export</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encrypt_before_export</span> <span class="o">=</span> <span class="n">encrypt_before_export</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fernet</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">encrypt_before_export</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">export_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s3://&quot;</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;encrypt_before_export is True but export_path is an S3 &quot;</span>
+                    <span class="s2">&quot;path. Local-file encryption is skipped for S3 exports. &quot;</span>
+                    <span class="s2">&quot;Use S3 server-side encryption (SSE) to protect data at rest.&quot;</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">encrypt_before_export</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.encryption_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_fernet_key</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_fernet</span> <span class="o">=</span> <span class="n">load_fernet_key</span><span class="p">(</span><span class="n">encryption_key_path</span><span class="p">)</span>
 
         <span class="c1"># Check if export_path is S3 and create filesystem if needed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s3_filesystem</span> <span class="o">=</span> <span class="kc">None</span>
@@ -653,7 +679,19 @@
 <span class="sd">        :param columns: the columns to export.</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">feature_fields</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">columns</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">columns</span> <span class="k">else</span> <span class="n">columns</span>
+        <span class="c1"># Handle empty dataset case - Ray returns None for columns() on empty datasets</span>
+        <span class="c1"># Check if dataset is empty by calling columns() regardless of columns parameter</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">columns</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">cols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Empty dataset with unknown schema - create an empty file</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dataset is empty, creating empty export file at </span><span class="si">{</span><span class="n">export_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">export_path</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">):</span>
+                <span class="k">pass</span>  <span class="c1"># Create empty file</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Use provided columns or infer from dataset</span>
+        <span class="n">feature_fields</span> <span class="o">=</span> <span class="n">columns</span> <span class="k">if</span> <span class="n">columns</span> <span class="k">else</span> <span class="n">cols</span>
         <span class="n">removed_fields</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_stats_in_res_ds</span><span class="p">:</span>
             <span class="n">extra_fields</span> <span class="o">=</span> <span class="p">{</span><span class="n">Fields</span><span class="o">.</span><span class="n">stats</span><span class="p">,</span> <span class="n">Fields</span><span class="o">.</span><span class="n">meta</span><span class="p">}</span>
@@ -687,7 +725,25 @@
             <span class="n">num_shards</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">num_shards</span><span class="p">,</span> <span class="n">dataset_num_rows</span><span class="p">)</span>
             <span class="n">rows_per_file</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dataset_num_rows</span> <span class="o">/</span> <span class="n">num_shards</span><span class="p">)</span>
             <span class="n">export_kwargs</span><span class="p">[</span><span class="s2">&quot;export_extra_args&quot;</span><span class="p">][</span><span class="s2">&quot;min_rows_per_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rows_per_file</span>
-        <span class="k">return</span> <span class="n">export_method</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">export_path</span><span class="p">,</span> <span class="o">**</span><span class="n">export_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Ensure export directory exists (Ray&#39;s write_json treats export_path as a directory)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">export_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s3://&quot;</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">export_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">export_method</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">export_path</span><span class="p">,</span> <span class="o">**</span><span class="n">export_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Encrypt all exported files in-place after Ray has finished writing</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">encrypt_before_export</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fernet</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">export_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s3://&quot;</span><span class="p">):</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.encryption_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">encrypt_file</span>
+
+            <span class="n">export_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">export_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">export_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">fpath</span> <span class="ow">in</span> <span class="n">export_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">fpath</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                        <span class="n">encrypt_file</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fpath</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">fpath</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fernet</span><span class="p">)</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Encrypted exported file: </span><span class="si">{</span><span class="n">fpath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
 
 <div class="viewcode-block" id="RayExporter.export">
 <a class="viewcode-back" href="../../../api/data_juicer.core.ray_exporter.html#data_juicer.core.RayExporter.export">[docs]</a>
@@ -763,6 +819,11 @@
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">export_format</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;export_format&quot;</span><span class="p">,</span> <span class="s2">&quot;parquet&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">export_format</span> <span class="o">==</span> <span class="s2">&quot;lance&quot;</span><span class="p">:</span>
+            <span class="c1"># use lazy loader to check pylance installation</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.lazy_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">LazyLoader</span>
+
+            <span class="n">LazyLoader</span><span class="o">.</span><span class="n">check_packages</span><span class="p">([</span><span class="s2">&quot;pylance&quot;</span><span class="p">])</span>
         <span class="n">write_method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;write_</span><span class="si">{</span><span class="n">export_format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">export_extra_args</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;export_extra_args&quot;</span><span class="p">,</span> <span class="p">{})</span>
         <span class="n">filtered_kwargs</span> <span class="o">=</span> <span class="n">filter_arguments</span><span class="p">(</span><span class="n">write_method</span><span class="p">,</span> <span class="n">export_extra_args</span><span class="p">)</span>
@@ -846,7 +907,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>

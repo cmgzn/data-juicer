@@ -8,6 +8,7 @@ export class AskAIUI {
     this.isOpen = false;
     this.isExpanded = false;
     this.isTyping = false;
+    this.enableThinking = false;
     this.messages = [];
     
     // DOM references (will be set after createWidget)
@@ -16,6 +17,7 @@ export class AskAIUI {
     this.closeBtn = null;
     this.clearBtn = null;
     this.expandBtn = null;
+    this.thinkingBtn = null;
     this.messagesContainer = null;
     this.input = null;
     this.sendBtn = null;
@@ -30,7 +32,7 @@ export class AskAIUI {
     widget.innerHTML = `
       <!-- Ask AI Button -->
       <button class="ask-ai-button" id="askAiButton" title="${this.i18n.buttonTitle}">
-        🤖
+        <span class="ask-ai-button-text">Ask AI</span>
       </button>
 
       <!-- Chat Modal -->
@@ -54,15 +56,23 @@ export class AskAIUI {
 
         <!-- Input Area -->
         <div class="ask-ai-input-area">
-          <textarea 
-            class="ask-ai-input" 
-            id="askAiInput" 
-            placeholder="${this.i18n.inputPlaceholder}"
-            rows="1"
-          ></textarea>
-          <button class="ask-ai-send" id="askAiSend" title="${this.i18n.sendTitle}">
-            ➤
-          </button>
+          <div class="ask-ai-input-row">
+            <textarea 
+              class="ask-ai-input" 
+              id="askAiInput" 
+              placeholder="${this.i18n.inputPlaceholder}"
+              rows="1"
+            ></textarea>
+            <button class="ask-ai-send" id="askAiSend" title="${this.i18n.sendTitle}">
+              ➤
+            </button>
+          </div>
+          <div class="ask-ai-input-options">
+            <button class="ask-ai-thinking-toggle" id="askAiThinkingToggle" title="${this.i18n.thinkingTitle}">
+              <i class="fa-solid fa-brain"></i>
+              <span class="ask-ai-thinking-label">${this.i18n.thinking}</span>
+            </button>
+          </div>
         </div>
       </div>
     `;
@@ -75,6 +85,7 @@ export class AskAIUI {
     this.closeBtn = document.getElementById('askAiClose');
     this.clearBtn = document.getElementById('askAiClear');
     this.expandBtn = document.getElementById('askAiExpand');
+    this.thinkingBtn = document.getElementById('askAiThinkingToggle');
     this.messagesContainer = document.getElementById('askAiMessages');
     this.input = document.getElementById('askAiInput');
     this.sendBtn = document.getElementById('askAiSend');
@@ -91,7 +102,8 @@ export class AskAIUI {
       onClear,
       onExpand,
       onSend,
-      onInputChange
+      onInputChange,
+      onThinkingToggle
     } = callbacks;
 
     // Toggle modal
@@ -136,6 +148,14 @@ export class AskAIUI {
       });
     }
 
+    // Toggle thinking mode
+    if (onThinkingToggle) {
+      this.thinkingBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        onThinkingToggle();
+      });
+    }
+
     // Auto-resize textarea
     this.input.addEventListener('input', () => this.autoResizeInput());
     if (onInputChange) {
@@ -143,13 +163,11 @@ export class AskAIUI {
     }
 
     // Close modal when clicking outside
+    // Note: expandBtn, closeBtn, and clearBtn checks are redundant since they are children of this.modal
     document.addEventListener('click', (e) => {
       if (this.isOpen &&
         !this.modal.contains(e.target) &&
-        !this.button.contains(e.target) &&
-        !this.expandBtn.contains(e.target) &&
-        !this.closeBtn.contains(e.target) &&
-        !this.clearBtn.contains(e.target)) {
+        !this.button.contains(e.target)) {
         if (onClose) onClose();
       }
     });
@@ -323,60 +341,163 @@ export class AskAIUI {
 
 
   /**
-   * Update an existing assistant message
-   * @param {string} messageId - Message ID to update
-   * @param {string} content - New content
+   * Update message content while preserving tool calls and feedback buttons
+   * Content is organized in segments: each tool call creates a new segment
+   * @param {HTMLElement} messageDiv - Message element
+   * @param {string} content - New content (cumulative from stream)
+   * @param {boolean} addSuffix - Whether to add helpSuffix (default: false, used during streaming)
    */
-  updateMessage(messageId, content) {
-    const messageDiv = this.messagesContainer.querySelector(`[data-message-id="${messageId}"]`);
-    if (messageDiv) {
-      messageDiv.innerHTML = this.renderMarkdown(content);
-      this.scrollToBottom();
+  updateMessageContent(messageDiv, content, addSuffix = false) {
+    if (!messageDiv) return;
+
+    // Remove typing indicator if present
+    const typingIndicator = messageDiv.querySelector('.typing-indicator');
+    if (typingIndicator) {
+      typingIndicator.remove();
     }
+    
+    // Only append helpSuffix when explicitly requested (at the end of response)
+    const contentToRender = addSuffix ? content + (this.i18n.helpSuffix || '') : content;
+    
+    // Find the last "block" element (tool container or thinking panel)
+    // Content should always be placed after the last block element
+    const toolContainers = messageDiv.querySelectorAll('.tool-calls-inline');
+    const thinkingContainers = messageDiv.querySelectorAll('.thinking-inline');
+    const lastToolContainer = toolContainers.length > 0 ? toolContainers[toolContainers.length - 1] : null;
+    const lastThinkingContainer = thinkingContainers.length > 0 ? thinkingContainers[thinkingContainers.length - 1] : null;
+    
+    // Determine the last block element by comparing DOM positions
+    let lastBlockElement = null;
+    if (lastToolContainer && lastThinkingContainer) {
+      // Both exist - find which one comes last in DOM order
+      const position = lastToolContainer.compareDocumentPosition(lastThinkingContainer);
+      lastBlockElement = (position & Node.DOCUMENT_POSITION_FOLLOWING) ? lastThinkingContainer : lastToolContainer;
+    } else {
+      lastBlockElement = lastThinkingContainer || lastToolContainer;
+    }
+    
+    if (lastBlockElement) {
+      // Find or create content wrapper AFTER the last block element
+      let contentWrapper = lastBlockElement.nextElementSibling;
+      if (!contentWrapper || !contentWrapper.classList.contains('message-content-segment')) {
+        contentWrapper = document.createElement('div');
+        contentWrapper.className = 'message-content-segment';
+        lastBlockElement.after(contentWrapper);
+      }
+      
+      // Calculate what content belongs to this segment
+      const segmentContent = this.extractContentAfterTools(messageDiv, content);
+      contentWrapper.innerHTML = this.renderMarkdown(segmentContent);
+    } else {
+      // No block elements - find or create the first content segment
+      let contentWrapper = messageDiv.querySelector('.message-content-segment');
+      if (!contentWrapper) {
+        contentWrapper = document.createElement('div');
+        contentWrapper.className = 'message-content-segment';
+        messageDiv.appendChild(contentWrapper);
+      }
+      contentWrapper.innerHTML = this.renderMarkdown(contentToRender);
+    }
+    
+    // Store full content for copying
+    messageDiv.setAttribute('data-full-content', content);
+    
+    this.scrollToBottom();
   }
 
   /**
-   * Update message content while preserving tool calls and feedback buttons
+   * Extract content that should appear after the last tool call
+   * This handles the cumulative content from streaming
    * @param {HTMLElement} messageDiv - Message element
-   * @param {string} content - New content
+   * @param {string} fullContent - Full cumulative content
+   * @returns {string} Content for the current segment
    */
-  updateMessageContent(messageDiv, content) {
-    if (!messageDiv) return;
+  extractContentAfterTools(messageDiv, fullContent) {
+    // Get the content length that was rendered before the last tool call
+    const lastRenderedLength = parseInt(messageDiv.getAttribute('data-content-before-last-tool') || '0', 10);
+    
+    // Return only the new content after the last tool call
+    if (lastRenderedLength > 0 && lastRenderedLength < fullContent.length) {
+      return fullContent.substring(lastRenderedLength);
+    }
+    
+    // If no previous content recorded, return full content
+    return fullContent;
+  }
 
+  /**
+   * Finalize message content by adding helpSuffix
+   * Called when response is complete - just adds helpSuffix to the last content segment
+   * The content segments are already correctly rendered during streaming
+   * @param {HTMLElement} messageDiv - Message element
+   * @param {string} content - Final content (may be just the last segment from server)
+   */
+  finalizeMessage(messageDiv, content) {
+    if (!messageDiv) return;
+    
     const messageId = messageDiv.getAttribute('data-message-id');
     
-    // Check if there's a tool calls container or feedback buttons
-    const toolContainer = messageDiv.querySelector('.tool-calls-inline');
-    const feedbackContainer = messageDiv.querySelector('.ask-ai-feedback');
+    // Find the last block element (tool container or thinking panel)
+    const toolContainers = messageDiv.querySelectorAll('.tool-calls-inline');
+    const thinkingContainers = messageDiv.querySelectorAll('.thinking-inline');
+    const lastToolContainer = toolContainers.length > 0 ? toolContainers[toolContainers.length - 1] : null;
+    const lastThinkingContainer = thinkingContainers.length > 0 ? thinkingContainers[thinkingContainers.length - 1] : null;
     
-    if (toolContainer || feedbackContainer) {
-      // Find or create content wrapper
-      let contentWrapper = messageDiv.querySelector('.message-content');
+    let lastBlockElement = null;
+    if (lastToolContainer && lastThinkingContainer) {
+      const position = lastToolContainer.compareDocumentPosition(lastThinkingContainer);
+      lastBlockElement = (position & Node.DOCUMENT_POSITION_FOLLOWING) ? lastThinkingContainer : lastToolContainer;
+    } else {
+      lastBlockElement = lastThinkingContainer || lastToolContainer;
+    }
+    
+    if (!lastBlockElement) {
+      // No block elements - simple case, just render all content with suffix
+      let contentWrapper = messageDiv.querySelector('.message-content-segment');
       if (!contentWrapper) {
         contentWrapper = document.createElement('div');
-        contentWrapper.className = 'message-content';
-        // Insert before tool container or feedback buttons
-        if (toolContainer) {
-          messageDiv.insertBefore(contentWrapper, toolContainer.nextSibling);
-        } else if (feedbackContainer) {
-          messageDiv.insertBefore(contentWrapper, feedbackContainer);
-        } else {
-          messageDiv.appendChild(contentWrapper);
-        }
+        contentWrapper.className = 'message-content-segment';
+        messageDiv.appendChild(contentWrapper);
       }
-      // Update only the content part
-      contentWrapper.innerHTML = this.renderMarkdown(content);
+      contentWrapper.innerHTML = this.renderMarkdown(content + (this.i18n.helpSuffix || ''));
     } else {
-      // No tool calls or feedback, replace innerHTML and add feedback buttons
-      messageDiv.innerHTML = this.renderMarkdown(content);
-      if (messageId) {
-        this.addFeedbackButtons(messageDiv, messageId, content);
+      // Has block elements - find the last content segment after the last block
+      let lastContentSegment = lastBlockElement.nextElementSibling;
+      
+      if (lastContentSegment && lastContentSegment.classList.contains('message-content-segment')) {
+        const fullContent = messageDiv.getAttribute('data-full-content') || content;
+        const contentBeforeLastTool = parseInt(messageDiv.getAttribute('data-content-before-last-tool') || '0', 10);
+        const segmentContent = contentBeforeLastTool > 0 && contentBeforeLastTool < fullContent.length 
+          ? fullContent.substring(contentBeforeLastTool) 
+          : fullContent;
+        lastContentSegment.innerHTML = this.renderMarkdown(segmentContent + (this.i18n.helpSuffix || ''));
+      } else {
+        // No content segment after last block - check if there should be one
+        const fullContent = messageDiv.getAttribute('data-full-content') || content;
+        const contentBeforeLastTool = parseInt(messageDiv.getAttribute('data-content-before-last-tool') || '0', 10);
+        const segmentContent = contentBeforeLastTool > 0 && contentBeforeLastTool < fullContent.length 
+          ? fullContent.substring(contentBeforeLastTool) 
+          : '';
+        
+        if (segmentContent.trim()) {
+          lastContentSegment = document.createElement('div');
+          lastContentSegment.className = 'message-content-segment';
+          lastContentSegment.innerHTML = this.renderMarkdown(segmentContent + (this.i18n.helpSuffix || ''));
+          lastBlockElement.after(lastContentSegment);
+        }
       }
     }
     
-    // Update stored content for copying
-    if (feedbackContainer) {
-      feedbackContainer.setAttribute('data-content', content);
+    // Store full content for copying (use existing if available)
+    const existingFullContent = messageDiv.getAttribute('data-full-content');
+    if (!existingFullContent) {
+      messageDiv.setAttribute('data-full-content', content);
+    }
+    
+    // Add feedback buttons
+    if (messageId) {
+      const fullContent = messageDiv.getAttribute('data-full-content') || content;
+      this.addFeedbackButtons(messageDiv, messageId, fullContent);
     }
     
     this.scrollToBottom();
@@ -421,7 +542,103 @@ export class AskAIUI {
   }
 
   /**
+   * Toggle thinking mode on/off
+   */
+  toggleThinking() {
+    this.enableThinking = !this.enableThinking;
+    if (this.enableThinking) {
+      this.thinkingBtn.classList.add('active');
+    } else {
+      this.thinkingBtn.classList.remove('active');
+    }
+  }
+
+  /**
+   * Create a new thinking container inside message bubble as a collapsible panel.
+   * Each reasoning phase gets its own container.
+   * @param {HTMLElement} messageDiv - Message element to add thinking info to
+   * @returns {HTMLElement} The created thinking container
+   */
+  createThinkingContainer(messageDiv) {
+    if (!messageDiv) return null;
+
+    // Record current content length before adding thinking block
+    const currentFullContent = messageDiv.getAttribute('data-full-content') || '';
+    messageDiv.setAttribute('data-content-before-last-tool', currentFullContent.length.toString());
+
+    const thinkingContainer = document.createElement('div');
+    thinkingContainer.className = 'thinking-inline';
+
+    // Add collapsible header
+    const header = document.createElement('div');
+    header.className = 'thinking-inline-header';
+    header.innerHTML = `
+      <span class="thinking-inline-title">💭 ${this.i18n.thinkingContent}</span>
+      <button class="thinking-inline-toggle">▼</button>
+    `;
+    thinkingContainer.appendChild(header);
+
+    // Add content container
+    const thinkingContentDiv = document.createElement('div');
+    thinkingContentDiv.className = 'thinking-inline-content';
+    thinkingContainer.appendChild(thinkingContentDiv);
+
+    // Append thinking container at the end of messageDiv
+    messageDiv.appendChild(thinkingContainer);
+
+    // Add toggle functionality
+    const toggleBtn = header.querySelector('.thinking-inline-toggle');
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const contentDiv = thinkingContainer.querySelector('.thinking-inline-content');
+      const isCollapsed = contentDiv.style.display === 'none';
+      contentDiv.style.display = isCollapsed ? 'block' : 'none';
+      toggleBtn.textContent = isCollapsed ? '▼' : '▶';
+      thinkingContainer.classList.toggle('collapsed', !isCollapsed);
+    });
+
+    return thinkingContainer;
+  }
+
+  /**
+   * Append delta text to an existing thinking container
+   * @param {string} thinkingText - Incremental thinking text (delta)
+   * @param {HTMLElement} thinkingContainer - The active thinking container
+   */
+  appendThinkingContent(thinkingText, thinkingContainer) {
+    if (!thinkingContainer) return;
+
+    const thinkingContentDiv = thinkingContainer.querySelector('.thinking-inline-content');
+    if (!thinkingContentDiv) return;
+
+    const currentText = thinkingContentDiv.getAttribute('data-raw-text') || '';
+    const updatedText = currentText + thinkingText;
+    thinkingContentDiv.setAttribute('data-raw-text', updatedText);
+    thinkingContentDiv.innerHTML = this.renderMarkdown(updatedText);
+
+    this.scrollToBottom();
+  }
+
+  /**
+   * Finalize a specific thinking container - collapse it when done
+   * @param {HTMLElement} thinkingContainer - The thinking container to finalize
+   */
+  finalizeThinking(thinkingContainer) {
+    if (!thinkingContainer) return;
+
+    const contentDiv = thinkingContainer.querySelector('.thinking-inline-content');
+    const toggleBtn = thinkingContainer.querySelector('.thinking-inline-toggle');
+    if (contentDiv && toggleBtn) {
+      contentDiv.style.display = 'none';
+      toggleBtn.textContent = '▶';
+      thinkingContainer.classList.add('collapsed');
+    }
+  }
+
+  /**
    * Add tool call info inside message bubble
+   * Consecutive tool calls go into the same tool container
+   * A new tool container is only created when there's text content between tool calls
    * @param {string} toolName - Name of the tool being used
    * @param {Object} toolArgs - Tool arguments
    * @param {HTMLElement} messageDiv - Message element to add tool info to
@@ -429,9 +646,21 @@ export class AskAIUI {
   addToolCall(toolName, toolArgs, messageDiv) {
     if (!messageDiv) return;
 
-    // Find or create tool calls container inside message
-    let toolContainer = messageDiv.querySelector('.tool-calls-inline');
-    if (!toolContainer) {
+    // Record current content length before adding tool call
+    // This is used by updateMessageContent to know where to split content
+    const currentFullContent = messageDiv.getAttribute('data-full-content') || '';
+    messageDiv.setAttribute('data-content-before-last-tool', currentFullContent.length.toString());
+
+    // Check if we should reuse the last tool container or create a new one
+    // Reuse if: the last child is a tool container (no text content in between)
+    let toolContainer = null;
+    const lastChild = messageDiv.lastElementChild;
+    
+    if (lastChild && lastChild.classList.contains('tool-calls-inline')) {
+      // Reuse existing tool container (consecutive tool calls)
+      toolContainer = lastChild;
+    } else {
+      // Create a new tool container (first tool call or there's text content before this)
       toolContainer = document.createElement('div');
       toolContainer.className = 'tool-calls-inline';
       
@@ -445,25 +674,27 @@ export class AskAIUI {
       toolContainer.appendChild(header);
       
       // Add content container
-      const content = document.createElement('div');
-      content.className = 'tool-calls-inline-content';
-      toolContainer.appendChild(content);
+      const toolContentDiv = document.createElement('div');
+      toolContentDiv.className = 'tool-calls-inline-content';
+      toolContainer.appendChild(toolContentDiv);
       
-      messageDiv.insertBefore(toolContainer, messageDiv.firstChild);
+      // Append tool container at the end of messageDiv
+      messageDiv.appendChild(toolContainer);
       
       // Add toggle functionality
       const toggleBtn = header.querySelector('.tool-calls-inline-toggle');
       toggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const isCollapsed = content.style.display === 'none';
-        content.style.display = isCollapsed ? 'block' : 'none';
+        const contentDiv = toolContainer.querySelector('.tool-calls-inline-content');
+        const isCollapsed = contentDiv.style.display === 'none';
+        contentDiv.style.display = isCollapsed ? 'block' : 'none';
         toggleBtn.textContent = isCollapsed ? '▼' : '▶';
         toolContainer.classList.toggle('collapsed', !isCollapsed);
       });
     }
-
-    // Get content container
-    const content = toolContainer.querySelector('.tool-calls-inline-content');
+    
+    // Get the content container from the tool container
+    const toolContent = toolContainer.querySelector('.tool-calls-inline-content');
 
     // Create tool call item
     const toolId = `tool_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -491,7 +722,7 @@ export class AskAIUI {
       ${argsPreview}
     `;
 
-    content.appendChild(toolItem);
+    toolContent.appendChild(toolItem);
     this.scrollToBottom();
 
     return toolId;
@@ -514,6 +745,33 @@ export class AskAIUI {
   }
 
   /**
+   * Collapse all fully-completed tool containers in a message
+   * Called when a non-tool-call phase starts (text content or thinking)
+   * @param {HTMLElement} messageDiv - Message element
+   */
+  collapseCompletedToolContainers(messageDiv) {
+    if (!messageDiv) return;
+
+    const toolContainers = messageDiv.querySelectorAll('.tool-calls-inline');
+    toolContainers.forEach(toolContainer => {
+      // Skip already collapsed containers
+      if (toolContainer.classList.contains('collapsed')) return;
+
+      // Check if all tools in this container are done (no running ones)
+      const remainingRunning = toolContainer.querySelectorAll('.tool-call-inline.running');
+      if (remainingRunning.length === 0) {
+        const contentDiv = toolContainer.querySelector('.tool-calls-inline-content');
+        const toggleBtn = toolContainer.querySelector('.tool-calls-inline-toggle');
+        if (contentDiv && toggleBtn) {
+          contentDiv.style.display = 'none';
+          toggleBtn.textContent = '▶';
+          toolContainer.classList.add('collapsed');
+        }
+      }
+    });
+  }
+
+  /**
    * Scroll messages container to bottom
    */
   scrollToBottom() {
@@ -529,12 +787,7 @@ export class AskAIUI {
     this.messages = [];
     const existingMessages = this.messagesContainer.querySelectorAll('.ask-ai-message, .ask-ai-message-wrapper');
     existingMessages.forEach(msg => msg.remove());
-
-    // Remove welcome message if it exists
-    const welcomeElement = this.messagesContainer.querySelector('.ask-ai-welcome');
-    if (welcomeElement) {
-      welcomeElement.remove();
-    }
+    // Note: Welcome message is intentionally kept - it will be updated by addWelcomeMessage()
   }
 
   /**
@@ -542,22 +795,22 @@ export class AskAIUI {
    * @param {boolean} apiConnected - Whether API is connected
    */
   addWelcomeMessage(apiConnected) {
-    // Only add welcome message if no history was loaded
-    if (this.messages.length === 0) {
-      const welcomeElement = this.messagesContainer.querySelector('.ask-ai-welcome');
-      if (welcomeElement) {
-        if (apiConnected) {
-          welcomeElement.innerHTML = this.i18n.welcomeConnected;
-        } else {
-          welcomeElement.innerHTML = this.i18n.welcomeOffline;
-        }
-      }
+    // Always show welcome message, regardless of history
+    let welcomeElement = this.messagesContainer.querySelector('.ask-ai-welcome');
+    
+    // If welcome element doesn't exist, create it
+    if (!welcomeElement) {
+      welcomeElement = document.createElement('div');
+      welcomeElement.className = 'ask-ai-welcome';
+      // Insert at the beginning of messages container
+      this.messagesContainer.insertBefore(welcomeElement, this.messagesContainer.firstChild);
+    }
+    
+    // Update welcome message content based on connection status
+    if (apiConnected) {
+      welcomeElement.innerHTML = this.i18n.welcomeConnected;
     } else {
-      // Remove welcome message if we have history
-      const welcomeElement = this.messagesContainer.querySelector('.ask-ai-welcome');
-      if (welcomeElement) {
-        welcomeElement.remove();
-      }
+      welcomeElement.innerHTML = this.i18n.welcomeOffline;
     }
   }
 
@@ -572,13 +825,10 @@ export class AskAIUI {
     try {
       const renderer = new marked.Renderer();
 
-      // Custom heading renderer
+      // Custom heading renderer - use CSS classes instead of inline styles
       renderer.heading = (token) => {
-        const size = ['1.3em', '1.2em', '1.1em', '1em', '0.95em', '0.9em'];
         const escapedText = this.escapeHtml(token.text);
-        return `<h${token.depth} style="font-size: ${size[token.depth - 1]}; margin: 0.3em 0;">
-        ${escapedText}
-      </h${token.depth}>`;
+        return `<h${token.depth}>${escapedText}</h${token.depth}>`;
       };
 
       // Custom link renderer - open in new tab
@@ -640,8 +890,10 @@ export class AskAIUI {
   updateWidgetTheme() {
     const html = document.documentElement;
 
-    // Check various theme indicators
-    const isDark = html.getAttribute('data-theme') === 'dark';
+    // Check various theme indicators to match the observer's scope
+    const isDark = html.getAttribute('data-theme') === 'dark' ||
+                   html.getAttribute('data-bs-theme') === 'dark' ||
+                   document.body.classList.contains('theme-dark');
 
     if (isDark) {
       this.modal.classList.add('theme-dark');

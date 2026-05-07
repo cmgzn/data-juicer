@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=34d13042" />
-    <link rel="stylesheet" type="text/css" href="_static/ask-ai-widget.css?v=8b9ec7b0" />
+    <link rel="stylesheet" type="text/css" href="_static/ask-ai-widget.css?v=028e49fc" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -43,15 +43,15 @@
 
     <script>window.JUICER_API_URL = 'https://datajuicer.online:443';</script>
     <script src="_static/documentation_options.js?v=8a448e45"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api';</script>
     <script src="_static/sidebar.js?v=3fc1065c"></script>
-    <script src="_static/ask-ai-widget.js?v=2d9c81e9"></script>
     <script src="_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="_static/ask-ai-widget.js?v=bd1ac865"></script>
     <link rel="icon" href="_static/icon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -158,21 +158,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -342,21 +342,21 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-sandbox/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/">
     Sandbox
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-hub/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-hub/en/main/">
     Hub
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-external" href="https://cmgzn.github.io/data-juicer-agents/en/main/">
+  <a class="nav-link nav-external" href="https://datajuicer.github.io/data-juicer-agents/en/main/">
     Agents
   </a>
 </li>
@@ -563,6 +563,11 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.html#data_juicer.ops.Grouper"><code class="docutils literal notranslate"><span class="pre">Grouper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.html#data_juicer.ops.Aggregator"><code class="docutils literal notranslate"><span class="pre">Aggregator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.html#data_juicer.ops.Pipeline"><code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.html#data_juicer.ops.OPEnvSpec"><code class="docutils literal notranslate"><span class="pre">OPEnvSpec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.html#data_juicer.ops.op_requirements_to_op_env_spec"><code class="docutils literal notranslate"><span class="pre">op_requirements_to_op_env_spec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.html#data_juicer.ops.OPEnvManager"><code class="docutils literal notranslate"><span class="pre">OPEnvManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.html#data_juicer.ops.analyze_lazy_loaded_requirements"><code class="docutils literal notranslate"><span class="pre">analyze_lazy_loaded_requirements()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.html#data_juicer.ops.analyze_lazy_loaded_requirements_for_code_file"><code class="docutils literal notranslate"><span class="pre">analyze_lazy_loaded_requirements_for_code_file()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/data_juicer.ops.filter.html">data_juicer.ops.filter</a><ul>
@@ -581,6 +586,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.ImagePairSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">ImagePairSimilarityFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.ImageShapeFilter"><code class="docutils literal notranslate"><span class="pre">ImageShapeFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.ImageSizeFilter"><code class="docutils literal notranslate"><span class="pre">ImageSizeFilter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.ImageSubplotFilter"><code class="docutils literal notranslate"><span class="pre">ImageSubplotFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.ImageTextMatchingFilter"><code class="docutils literal notranslate"><span class="pre">ImageTextMatchingFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.ImageTextSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">ImageTextSimilarityFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.ImageWatermarkFilter"><code class="docutils literal notranslate"><span class="pre">ImageWatermarkFilter</span></code></a></li>
@@ -598,6 +604,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.SpecialCharactersFilter"><code class="docutils literal notranslate"><span class="pre">SpecialCharactersFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.SpecifiedFieldFilter"><code class="docutils literal notranslate"><span class="pre">SpecifiedFieldFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.SpecifiedNumericFieldFilter"><code class="docutils literal notranslate"><span class="pre">SpecifiedNumericFieldFilter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.LLMConditionFilter"><code class="docutils literal notranslate"><span class="pre">LLMConditionFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.StopWordsFilter"><code class="docutils literal notranslate"><span class="pre">StopWordsFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.SuffixFilter"><code class="docutils literal notranslate"><span class="pre">SuffixFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.TextActionFilter"><code class="docutils literal notranslate"><span class="pre">TextActionFilter</span></code></a></li>
@@ -611,6 +618,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoDurationFilter"><code class="docutils literal notranslate"><span class="pre">VideoDurationFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoFramesTextSimilarityFilter"><code class="docutils literal notranslate"><span class="pre">VideoFramesTextSimilarityFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoMotionScoreFilter"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreFilter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoMotionScorePtlflowFilter"><code class="docutils literal notranslate"><span class="pre">VideoMotionScorePtlflowFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoMotionScoreRaftFilter"><code class="docutils literal notranslate"><span class="pre">VideoMotionScoreRaftFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoNSFWFilter"><code class="docutils literal notranslate"><span class="pre">VideoNSFWFilter</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.filter.html#data_juicer.ops.filter.VideoOcrAreaRatioFilter"><code class="docutils literal notranslate"><span class="pre">VideoOcrAreaRatioFilter</span></code></a></li>
@@ -623,6 +631,13 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/data_juicer.ops.mapper.html">data_juicer.ops.mapper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.AgentBadCaseSignalMapper"><code class="docutils literal notranslate"><span class="pre">AgentBadCaseSignalMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.AgentDialogNormalizeMapper"><code class="docutils literal notranslate"><span class="pre">AgentDialogNormalizeMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.AgentInsightLLMMapper"><code class="docutils literal notranslate"><span class="pre">AgentInsightLLMMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.AgentSkillInsightMapper"><code class="docutils literal notranslate"><span class="pre">AgentSkillInsightMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.AgentToolTypeMapper"><code class="docutils literal notranslate"><span class="pre">AgentToolTypeMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.AgentToolRelevanceMapper"><code class="docutils literal notranslate"><span class="pre">AgentToolRelevanceMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.AgentTraceCoherenceMapper"><code class="docutils literal notranslate"><span class="pre">AgentTraceCoherenceMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.AudioAddGaussianNoiseMapper"><code class="docutils literal notranslate"><span class="pre">AudioAddGaussianNoiseMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.AudioFFmpegWrappedMapper"><code class="docutils literal notranslate"><span class="pre">AudioFFmpegWrappedMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.CalibrateQAMapper"><code class="docutils literal notranslate"><span class="pre">CalibrateQAMapper</span></code></a></li>
@@ -641,6 +656,13 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogSentimentDetectionMapper"><code class="docutils literal notranslate"><span class="pre">DialogSentimentDetectionMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogSentimentIntensityMapper"><code class="docutils literal notranslate"><span class="pre">DialogSentimentIntensityMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogTopicDetectionMapper"><code class="docutils literal notranslate"><span class="pre">DialogTopicDetectionMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogClarificationQualityMapper"><code class="docutils literal notranslate"><span class="pre">DialogClarificationQualityMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogCoreferenceMapper"><code class="docutils literal notranslate"><span class="pre">DialogCoreferenceMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogErrorRecoveryMapper"><code class="docutils literal notranslate"><span class="pre">DialogErrorRecoveryMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogMemoryConsistencyMapper"><code class="docutils literal notranslate"><span class="pre">DialogMemoryConsistencyMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogNonRepetitionMapper"><code class="docutils literal notranslate"><span class="pre">DialogNonRepetitionMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogProactivityMapper"><code class="docutils literal notranslate"><span class="pre">DialogProactivityMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DialogTopicShiftMapper"><code class="docutils literal notranslate"><span class="pre">DialogTopicShiftMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.Difference_Area_Generator_Mapper"><code class="docutils literal notranslate"><span class="pre">Difference_Area_Generator_Mapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.Difference_Caption_Generator_Mapper"><code class="docutils literal notranslate"><span class="pre">Difference_Caption_Generator_Mapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.DownloadFileMapper"><code class="docutils literal notranslate"><span class="pre">DownloadFileMapper</span></code></a></li>
@@ -657,7 +679,6 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.GenerateQAFromTextMapper"><code class="docutils literal notranslate"><span class="pre">GenerateQAFromTextMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.HumanPreferenceAnnotationMapper"><code class="docutils literal notranslate"><span class="pre">HumanPreferenceAnnotationMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageBlurMapper"><code class="docutils literal notranslate"><span class="pre">ImageBlurMapper</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageCaptioningFromGPT4VMapper"><code class="docutils literal notranslate"><span class="pre">ImageCaptioningFromGPT4VMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageCaptioningMapper"><code class="docutils literal notranslate"><span class="pre">ImageCaptioningMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageDetectionYoloMapper"><code class="docutils literal notranslate"><span class="pre">ImageDetectionYoloMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageDiffusionMapper"><code class="docutils literal notranslate"><span class="pre">ImageDiffusionMapper</span></code></a></li>
@@ -668,6 +689,8 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageSegmentMapper"><code class="docutils literal notranslate"><span class="pre">ImageSegmentMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageTaggingMapper"><code class="docutils literal notranslate"><span class="pre">ImageTaggingMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ImageTaggingVLMMapper"><code class="docutils literal notranslate"><span class="pre">ImageTaggingVLMMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.LatexFigureContextExtractorMapper"><code class="docutils literal notranslate"><span class="pre">LatexFigureContextExtractorMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.LatexMergeTexMapper"><code class="docutils literal notranslate"><span class="pre">LatexMergeTexMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.MllmMapper"><code class="docutils literal notranslate"><span class="pre">MllmMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.NlpaugEnMapper"><code class="docutils literal notranslate"><span class="pre">NlpaugEnMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.NlpcdaZhMapper"><code class="docutils literal notranslate"><span class="pre">NlpcdaZhMapper</span></code></a></li>
@@ -676,6 +699,8 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.OptimizeQueryMapper"><code class="docutils literal notranslate"><span class="pre">OptimizeQueryMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.OptimizeResponseMapper"><code class="docutils literal notranslate"><span class="pre">OptimizeResponseMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.PairPreferenceMapper"><code class="docutils literal notranslate"><span class="pre">PairPreferenceMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.PiiLlmSuspectMapper"><code class="docutils literal notranslate"><span class="pre">PiiLlmSuspectMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.PiiRedactionMapper"><code class="docutils literal notranslate"><span class="pre">PiiRedactionMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.PunctuationNormalizationMapper"><code class="docutils literal notranslate"><span class="pre">PunctuationNormalizationMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.PythonFileMapper"><code class="docutils literal notranslate"><span class="pre">PythonFileMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.PythonLambdaMapper"><code class="docutils literal notranslate"><span class="pre">PythonLambdaMapper</span></code></a></li>
@@ -693,12 +718,19 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveTableTextMapper"><code class="docutils literal notranslate"><span class="pre">RemoveTableTextMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.RemoveWordsWithIncorrectSubstringsMapper"><code class="docutils literal notranslate"><span class="pre">RemoveWordsWithIncorrectSubstringsMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ReplaceContentMapper"><code class="docutils literal notranslate"><span class="pre">ReplaceContentMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.S3DownloadFileMapper"><code class="docutils literal notranslate"><span class="pre">S3DownloadFileMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.LLMExtractMapper"><code class="docutils literal notranslate"><span class="pre">LLMExtractMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.S3UploadFileMapper"><code class="docutils literal notranslate"><span class="pre">S3UploadFileMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.SDXLPrompt2PromptMapper"><code class="docutils literal notranslate"><span class="pre">SDXLPrompt2PromptMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.SentenceAugmentationMapper"><code class="docutils literal notranslate"><span class="pre">SentenceAugmentationMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.SentenceSplitMapper"><code class="docutils literal notranslate"><span class="pre">SentenceSplitMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.TextChunkMapper"><code class="docutils literal notranslate"><span class="pre">TextChunkMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.TextTaggingByPromptMapper"><code class="docutils literal notranslate"><span class="pre">TextTaggingByPromptMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.ToolSuccessTaggerMapper"><code class="docutils literal notranslate"><span class="pre">ToolSuccessTaggerMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.UsageCounterMapper"><code class="docutils literal notranslate"><span class="pre">UsageCounterMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VggtMapper"><code class="docutils literal notranslate"><span class="pre">VggtMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCameraCalibrationStaticDeepcalibMapper"><code class="docutils literal notranslate"><span class="pre">VideoCameraCalibrationStaticDeepcalibMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCameraCalibrationStaticMogeMapper"><code class="docutils literal notranslate"><span class="pre">VideoCameraCalibrationStaticMogeMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromAudioMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromAudioMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromFramesMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromFramesMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoCaptioningFromSummarizerMapper"><code class="docutils literal notranslate"><span class="pre">VideoCaptioningFromSummarizerMapper</span></code></a></li>
@@ -707,6 +739,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoDepthEstimationMapper"><code class="docutils literal notranslate"><span class="pre">VideoDepthEstimationMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoExtractFramesMapper"><code class="docutils literal notranslate"><span class="pre">VideoExtractFramesMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoFFmpegWrappedMapper"><code class="docutils literal notranslate"><span class="pre">VideoFFmpegWrappedMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoHandReconstructionHaworMapper"><code class="docutils literal notranslate"><span class="pre">VideoHandReconstructionHaworMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoHandReconstructionMapper"><code class="docutils literal notranslate"><span class="pre">VideoHandReconstructionMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoFaceBlurMapper"><code class="docutils literal notranslate"><span class="pre">VideoFaceBlurMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoObjectSegmentingMapper"><code class="docutils literal notranslate"><span class="pre">VideoObjectSegmentingMapper</span></code></a></li>
@@ -718,12 +751,14 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoSplitBySceneMapper"><code class="docutils literal notranslate"><span class="pre">VideoSplitBySceneMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoTaggingFromAudioMapper"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromAudioMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoTaggingFromFramesMapper"><code class="docutils literal notranslate"><span class="pre">VideoTaggingFromFramesMapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoUndistortMapper"><code class="docutils literal notranslate"><span class="pre">VideoUndistortMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.VideoWholeBodyPoseEstimationMapper"><code class="docutils literal notranslate"><span class="pre">VideoWholeBodyPoseEstimationMapper</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.mapper.html#data_juicer.ops.mapper.WhitespaceNormalizationMapper"><code class="docutils literal notranslate"><span class="pre">WhitespaceNormalizationMapper</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentDeduplicator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentLineDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentLineDeduplicator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentMinhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicator</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentMinhashDeduplicatorWithUid"><code class="docutils literal notranslate"><span class="pre">DocumentMinhashDeduplicatorWithUid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.ops.deduplicator.html#data_juicer.ops.deduplicator.DocumentSimhashDeduplicator"><code class="docutils literal notranslate"><span class="pre">DocumentSimhashDeduplicator</span></code></a></li>
@@ -774,6 +809,9 @@
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.config.html#data_juicer.config.get_default_cfg"><code class="docutils literal notranslate"><span class="pre">get_default_cfg()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.config.html#data_juicer.config.prepare_cfgs_for_export"><code class="docutils literal notranslate"><span class="pre">prepare_cfgs_for_export()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data_juicer.config.html#data_juicer.config.update_op_attr"><code class="docutils literal notranslate"><span class="pre">update_op_attr()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.config.html#data_juicer.config.validate_work_dir_config"><code class="docutils literal notranslate"><span class="pre">validate_work_dir_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.config.html#data_juicer.config.resolve_job_id"><code class="docutils literal notranslate"><span class="pre">resolve_job_id()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_juicer.config.html#data_juicer.config.resolve_job_directories"><code class="docutils literal notranslate"><span class="pre">resolve_job_directories()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/data_juicer.format.html">data_juicer.format</a><ul>
@@ -880,7 +918,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
     <br/>
   </p>
 </div>
