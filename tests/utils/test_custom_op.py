@@ -115,12 +115,12 @@ class ReadWriteRegistryTest(DataJuicerTestCaseBase):
 
     def test_read_empty(self):
         data = _read_registry()
-        self.assertEqual(data["version"], 2)
+        self.assertEqual(data["version"], 1)
         self.assertEqual(data["registrations"], {})
 
     def test_write_and_read(self):
         payload = {
-            "version": 2,
+            "version": 1,
             "registrations": {
                 "/tmp/foo.py": {
                     "type": "file",
@@ -301,7 +301,7 @@ class LoadPersistentCustomOpsTest(DataJuicerTestCaseBase):
 
     def test_load_cleans_stale(self):
         payload = {
-            "version": 2,
+            "version": 1,
             "registrations": {
                 "/no/such/file.py": {
                     "type": "file",

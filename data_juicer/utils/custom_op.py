@@ -141,7 +141,7 @@ def get_registry_path() -> Path:
 # ---------------------------------------------------------------------------
 def _empty_registry() -> dict:
     """Return a fresh empty registry structure."""
-    return {"version": 2, "registrations": {}}
+    return {"version": 1, "registrations": {}}
 
 
 def _read_registry() -> dict:
