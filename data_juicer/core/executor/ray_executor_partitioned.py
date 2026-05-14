@@ -155,7 +155,7 @@ class PartitionedRayExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin)
         super().__init__(cfg)
 
         self.executor_type = "ray_partitioned"
-        self.work_dir = self.cfg.work_dir
+        self.work_dir = os.path.abspath(self.cfg.work_dir)
         self.job_id = self.cfg.get("job_id", None)
 
         # Initialize temporary directory for Ray operations
@@ -177,7 +177,9 @@ class PartitionedRayExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin)
 
         # Checkpoint configuration and manager initialization
         checkpoint_cfg = getattr(self.cfg, "checkpoint", None)
-        checkpoint_dir = getattr(self.cfg, "checkpoint_dir", os.path.join(self.work_dir, "checkpoints"))
+        checkpoint_dir = os.path.abspath(
+            getattr(self.cfg, "checkpoint_dir", os.path.join(self.work_dir, "checkpoints"))
+        )
 
         if checkpoint_cfg:
             # Use ConfigAccessor to handle both dict and object configurations
