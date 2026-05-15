@@ -274,6 +274,7 @@ class OpSearchCLIListTest(DataJuicerTestCaseBase):
         rc = op_search_main(["list"])
         self.assertEqual(rc, 0)
 
+
 class OpSearchCLIInfoTest(DataJuicerTestCaseBase):
     """Test the 'info' CLI sub-command."""
 
@@ -294,6 +295,7 @@ class OpSearchCLIInfoTest(DataJuicerTestCaseBase):
     def test_info_not_found(self):
         rc = op_search_main(["info", "no_such_op_xyz"])
         self.assertEqual(rc, 1)
+
 
 class OpSearchCLISearchTest(DataJuicerTestCaseBase):
     """Test the 'search' CLI sub-command."""
@@ -323,12 +325,14 @@ class OpSearchCLISearchTest(DataJuicerTestCaseBase):
         rc = op_search_main(["search", "--type", "mapper"])
         self.assertEqual(rc, 0)
 
+
 class OpSearchCLINoCommandTest(DataJuicerTestCaseBase):
     """Test calling op_search CLI with no command."""
 
     def test_no_command(self):
         rc = op_search_main([])
         self.assertEqual(rc, 1)
+
 
 if __name__ == '__main__':
     unittest.main()

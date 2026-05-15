@@ -458,7 +458,6 @@ def load_persistent_custom_ops() -> dict:
 
     # If we cleaned anything, persist the updated registry.
     if cleaned:
-        registry = _read_registry()
         for cp in cleaned:
             registry["registrations"].pop(cp, None)
         _write_registry(registry)
