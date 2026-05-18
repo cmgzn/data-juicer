@@ -258,8 +258,8 @@ class OPSearcherSpecifiedOpsTest(DataJuicerTestCaseBase):
 # ---------------------------------------------------------------------------
 
 
-class OpSearchCLIListTest(DataJuicerTestCaseBase):
-    """Test the 'list' CLI sub-command."""
+class _IsolatedRegistryCLIBase(DataJuicerTestCaseBase):
+    """Base class providing an isolated temp registry for CLI tests."""
 
     def setUp(self):
         self._tmp_dir = tempfile.TemporaryDirectory()
@@ -269,23 +269,18 @@ class OpSearchCLIListTest(DataJuicerTestCaseBase):
     def tearDown(self):
         os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
         self._tmp_dir.cleanup()
+
+
+class OpSearchCLIListTest(_IsolatedRegistryCLIBase):
+    """Test the 'list' CLI sub-command."""
 
     def test_list(self):
         rc = op_search_main(["list"])
         self.assertEqual(rc, 0)
 
 
-class OpSearchCLIInfoTest(DataJuicerTestCaseBase):
+class OpSearchCLIInfoTest(_IsolatedRegistryCLIBase):
     """Test the 'info' CLI sub-command."""
-
-    def setUp(self):
-        self._tmp_dir = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp_dir.name, "custom_op.json")
-        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
-
-    def tearDown(self):
-        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
-        self._tmp_dir.cleanup()
 
     def test_info_builtin(self):
         """Info on a built-in op should succeed."""
@@ -297,17 +292,8 @@ class OpSearchCLIInfoTest(DataJuicerTestCaseBase):
         self.assertEqual(rc, 1)
 
 
-class OpSearchCLISearchTest(DataJuicerTestCaseBase):
+class OpSearchCLISearchTest(_IsolatedRegistryCLIBase):
     """Test the 'search' CLI sub-command."""
-
-    def setUp(self):
-        self._tmp_dir = tempfile.TemporaryDirectory()
-        self._reg_path = os.path.join(self._tmp_dir.name, "custom_op.json")
-        os.environ["DJ_CUSTOM_OP_REGISTRY"] = self._reg_path
-
-    def tearDown(self):
-        os.environ.pop("DJ_CUSTOM_OP_REGISTRY", None)
-        self._tmp_dir.cleanup()
 
     def test_search_bm25(self):
         rc = op_search_main(["search", "text length"])

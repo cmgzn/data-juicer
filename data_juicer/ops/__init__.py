@@ -43,7 +43,12 @@ with timing_context('Importing operator modules'):
     )
 
     from data_juicer.utils.custom_op import load_persistent_custom_ops as _load_persistent  # isort: skip  # noqa: E501
-    _load_persistent()
+    try:
+        _load_persistent()
+    except Exception as _exc:
+        from loguru import logger as _logger
+        _logger.warning(f"Failed to load persistent custom ops: {_exc}")
+        del _logger, _exc
     del _load_persistent
 
 __all__ = [

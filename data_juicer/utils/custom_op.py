@@ -54,6 +54,7 @@ def _rollback_operators(new_names):
     try:
         from data_juicer.ops.base_op import OPERATORS
     except ImportError:
+        logger.debug("Cannot rollback operators: OPERATORS import failed.")
         return
     for name in new_names:
         OPERATORS.unregister_module(name)
@@ -190,6 +191,39 @@ def _write_registry(data: dict) -> None:
 # ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
+
+
+def _is_already_loaded(path: str) -> bool:
+    """Check whether *path* has already been loaded into sys.modules.
+
+    For a file, checks if a module with the same basename (sans .py) exists
+    in sys.modules and was loaded from the same real path.
+    For a directory, checks if a package with the same basename exists and
+    was loaded from the same real path.
+    """
+    abs_path = os.path.realpath(path)
+    if os.path.isfile(abs_path):
+        module_name = _generate_module_name(abs_path)
+        mod = sys.modules.get(module_name)
+        if mod is None:
+            return False
+        mod_file = getattr(mod, "__file__", None)
+        if mod_file is None:
+            return False
+        return os.path.realpath(mod_file) == abs_path
+    elif os.path.isdir(abs_path):
+        package_name = os.path.basename(abs_path)
+        mod = sys.modules.get(package_name)
+        if mod is None:
+            return False
+        loaded_from = getattr(mod, "__loaded_from__", None)
+        if loaded_from:
+            return os.path.realpath(loaded_from) == abs_path
+        pkg_path = mod.__path__[0] if hasattr(mod, "__path__") else None
+        if pkg_path:
+            return os.path.realpath(pkg_path) == abs_path
+        return False
+    return False
 
 
 def _collect_modules_for_path(abs_path: str) -> List[str]:
@@ -464,12 +498,17 @@ def load_persistent_custom_ops() -> dict:
 
     # Load valid entries one-by-one so that a failure in one path does
     # not prevent the remaining paths from loading.
+    # Skip paths whose modules are already loaded in this process
+    # (e.g. ops/__init__.py already triggered loading on import).
     paths_to_load = sorted(valid_entries.keys())
     if paths_to_load:
         from data_juicer.ops.base_op import OPERATORS
 
         before = set(OPERATORS.modules.keys())
         for path in paths_to_load:
+            if _is_already_loaded(path):
+                logger.debug(f"Custom op path already loaded in this process: '{path}', skipping.")
+                continue
             try:
                 load_custom_operators([path])
             except Exception as exc:
