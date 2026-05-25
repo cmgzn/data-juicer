@@ -6,11 +6,12 @@ import json
 import os
 import traceback
 from abc import ABC, abstractmethod
+from collections.abc import Mapping
 from functools import wraps
 from time import time
 from typing import Any, Dict, List, Optional, Union
 
-from datasets import Dataset, DatasetDict, is_caching_enabled
+from datasets import Dataset, DatasetDict, Features, is_caching_enabled
 from datasets.formatting.formatting import LazyBatch
 
 from data_juicer.core.data.schema import Schema
@@ -136,6 +137,26 @@ def nested_obj_factory(obj):
         return [nested_obj_factory(item) for item in obj]
     else:
         return obj
+
+
+def _merge_feature_dicts(base_features, output_feature_hints):
+    """Merge partial output feature hints into existing dataset features."""
+    merged = copy.deepcopy(dict(base_features or {}))
+
+    for key, feature in dict(output_feature_hints or {}).items():
+        if key in merged and isinstance(merged[key], Mapping) and isinstance(feature, Mapping):
+            merged[key] = _merge_feature_dicts(merged[key], feature)
+        else:
+            merged[key] = copy.deepcopy(feature)
+
+    return merged
+
+
+def merge_features(base_features, output_feature_hints):
+    """Return HuggingFace Features with partial output hints merged in."""
+    if output_feature_hints is None:
+        return base_features
+    return Features(_merge_feature_dicts(base_features, output_feature_hints))
 
 
 class NestedQueryDict(dict):
@@ -398,6 +419,10 @@ class NestedDataset(Dataset, DJDataset):
     def map(self, *args, **kargs):
         """Override the map func, which is called by most common operations,
         such that the processed samples can be accessed by nested manner."""
+
+        output_feature_hints = kargs.pop("output_feature_hints", None)
+        if output_feature_hints is not None:
+            kargs["features"] = merge_features(kargs.get("features", self.features), output_feature_hints)
 
         args, kargs = self.update_args(args, kargs)
 

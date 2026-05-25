@@ -1,5 +1,5 @@
 import unittest
-from datasets import Dataset, DatasetDict
+from datasets import Dataset, DatasetDict, Sequence, Value
 from datasets.formatting.formatting import LazyBatch
 from data_juicer.core.data import NestedDataset, wrap_func_with_nested_access
 from data_juicer.core.data.dj_dataset import nested_obj_factory, NestedDatasetDict, NestedQueryDict
@@ -282,6 +282,42 @@ class TestNestedDataset(DataJuicerTestCaseBase):
         self.assertEqual(result, 3.14)
         result = nested_obj_factory(None)
         self.assertIsNone(result)
+
+    def test_map_output_feature_hints_allow_empty_nested_list_first_batch(self):
+        dataset = NestedDataset(
+            Dataset.from_list(
+                [
+                    {'text': 'empty', 'meta': {'existing': 1}},
+                    {'text': 'hit', 'meta': {'existing': 2}},
+                ]
+            )
+        )
+
+        def add_bbox(batch):
+            metas = batch['meta']
+            existing_values = metas['existing'] if isinstance(metas, dict) else [meta['existing'] for meta in metas]
+            return {
+                'meta': [
+                    {
+                        'existing': existing,
+                        'bbox': [] if text == 'empty' else [[1.0, 2.0, 3.0, 4.0]],
+                    }
+                    for text, existing in zip(batch['text'], existing_values)
+                ]
+            }
+
+        mapped = dataset.map(
+            add_bbox,
+            batched=True,
+            batch_size=1,
+            output_feature_hints={'meta': {'bbox': Sequence(Sequence(Value('float32')))}},
+        )
+
+        self.assertEqual(mapped[0]['meta']['bbox'], [])
+        self.assertEqual(mapped[1]['meta']['bbox'], [[1.0, 2.0, 3.0, 4.0]])
+        self.assertEqual(mapped[0]['meta']['existing'], 1)
+        self.assertIn('existing', mapped.features['meta'])
+        self.assertIn('bbox', mapped.features['meta'])
 
     def test_nested_dataset(self):
         import pyarrow as pa

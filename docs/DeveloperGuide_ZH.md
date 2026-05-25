@@ -94,6 +94,23 @@ class StatsKeysConstant(object):
                 return False
     ```
 
+    如果算子会新增或改写在 HuggingFace map 早期 batch 中类型不明确的字段，请通过覆写
+    `output_feature_hints()` 声明局部输出特征提示。这主要适用于前几条样本为空 list、
+    后续样本才出现具体值的字段，或嵌套 list、list-of-struct、numpy array 等输出。该
+    hint 会被合并到输入 dataset features 中，并传给 `Dataset.map(features=...)`；
+    它不是完整的输出 schema。HuggingFace 会按声明的 features 对 map 结果做 cast，
+    因此 hint 必须和算子实际返回值一致。
+
+    ```python
+    from datasets import Sequence, Value
+
+    def output_feature_hints(self, input_features):
+        return {
+            Fields.meta: {
+                MetaKeys.bbox_tag: Sequence(Sequence(Value("float32"))),
+            }
+        }
+    ```
 
 3. 实现后，将其添加到 `data_juicer/ops/filter` 目录下 `__init__.py` 文件中的算子字典中：
 

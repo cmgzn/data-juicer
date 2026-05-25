@@ -4,6 +4,7 @@ from copy import deepcopy
 from typing import Dict, Optional
 
 import numpy as np
+from datasets import Sequence, Value
 
 import data_juicer
 from data_juicer.ops.base_op import OPERATORS, TAGGING_OPS, UNFORKABLE, Mapper
@@ -36,7 +37,7 @@ class Difference_Caption_Generator_Mapper(Mapper):
     - The key metric is the similarity score between the captions, computed using a CLIP
       model.
     - If no valid bounding boxes or differences are found, it returns empty captions and
-      zeroed bounding boxes.
+      empty bounding boxes.
     - Uses 'cuda' as the accelerator if any of the fused operations support it.
     - Caches temporary images during processing and clears them afterward."""
 
@@ -121,26 +122,37 @@ class Difference_Caption_Generator_Mapper(Mapper):
         args_dict["accelerator"] = self.accelerator
         return args_dict
 
+    def output_feature_hints(self, input_features):
+        return {
+            Fields.meta: {
+                "region_caption1": Sequence(Value("string")),
+                "region_caption2": Sequence(Value("string")),
+                MetaKeys.bbox_tag: Sequence(Sequence(Value("float32"))),
+                "bbox_difference_captions": Sequence(Value("string")),
+            }
+        }
+
+    def _empty_difference_meta(self):
+        return {
+            Fields.meta: {
+                "region_caption1": [],
+                "region_caption2": [],
+                MetaKeys.bbox_tag: [],
+                "bbox_difference_captions": [],
+            }
+        }
+
     def process_single(self, samples, rank=None):
         random_num = str(random.random()).split(".")[-1]
         if not os.path.exists(DATA_JUICER_ASSETS_CACHE):
             os.makedirs(DATA_JUICER_ASSETS_CACHE, exist_ok=True)
         cache_image_list = []
 
-        if (
-            len(samples[Fields.meta][MetaKeys.bbox_tag]) == 1
-            and np.sum(samples[Fields.meta][MetaKeys.bbox_tag][0]) == 0
-        ):
+        bbox_tag = samples[Fields.meta][MetaKeys.bbox_tag]
+        if len(bbox_tag) == 0 or len(bbox_tag) == 1 and np.sum(bbox_tag[0]) == 0:
             for temp_image_path in cache_image_list:
                 os.remove(temp_image_path)
-            return {
-                Fields.meta: {
-                    "region_caption1": [""],
-                    "region_caption2": [""],
-                    MetaKeys.bbox_tag: np.zeros((1, 4), dtype=np.float32),
-                    "bbox_difference_captions": [""],
-                }
-            }
+            return self._empty_difference_meta()
 
         # fused_ops 1.mllm_mapper 2.image_text_matching_filter 3.text_pair_similarity_filter
         # keys of sample: "image_path1", "image_path2", Fields.meta[MetaKeys.bbox_tag]
@@ -269,14 +281,7 @@ class Difference_Caption_Generator_Mapper(Mapper):
         if len(filtered_caption_pairs) == 0:
             for temp_image_path in cache_image_list:
                 os.remove(temp_image_path)
-            return {
-                Fields.meta: {
-                    "region_caption1": [""],
-                    "region_caption2": [""],
-                    MetaKeys.bbox_tag: np.zeros((1, 4), dtype=np.float32),
-                    "bbox_difference_captions": [""],
-                }
-            }
+            return self._empty_difference_meta()
 
         # Step4: determine whether there are differences between the two captions.
         filtered_caption_pairs = data_juicer.core.NestedDataset.from_list(filtered_caption_pairs)
@@ -313,14 +318,7 @@ class Difference_Caption_Generator_Mapper(Mapper):
         if len(effective_bboxes) == 0:
             for temp_image_path in cache_image_list:
                 os.remove(temp_image_path)
-            return {
-                Fields.meta: {
-                    "region_caption1": [""],
-                    "region_caption2": [""],
-                    MetaKeys.bbox_tag: np.zeros((1, 4), dtype=np.float32),
-                    "bbox_difference_captions": [""],
-                }
-            }
+            return self._empty_difference_meta()
 
         # Step5: Mark the difference area with a red box
         text_mllm_samples = []

@@ -5,6 +5,7 @@ import re
 from typing import Dict, Optional
 
 import numpy as np
+from datasets import Sequence, Value
 
 import data_juicer
 from data_juicer.ops.base_op import OPERATORS, TAGGING_OPS, UNFORKABLE, Mapper
@@ -192,6 +193,9 @@ class Difference_Area_Generator_Mapper(Mapper):
         # update num_proc with the min num_proc of all fusible filters
         self.num_proc = min([op.runtime_np() for op in self.fused_ops]) if self.fused_ops else 1
 
+    def output_feature_hints(self, input_features):
+        return {Fields.meta: {MetaKeys.bbox_tag: Sequence(Sequence(Value("float32")))}}
+
     def _prepare_op_args(self, op_name, args_dict):
         for key in self.FIXED_ARGS[op_name]:
             if key not in args_dict:
@@ -224,7 +228,7 @@ class Difference_Area_Generator_Mapper(Mapper):
         new_samples_s1 = self.fused_ops[0].process_single(new_samples_s1, rank=rank)
 
         if not new_samples_s1:
-            return {Fields.meta: {MetaKeys.bbox_tag: np.zeros((1, 4), dtype=np.float32)}}
+            return {Fields.meta: {MetaKeys.bbox_tag: []}}
 
         # Step2: compare the differences between the two captions and identify
         # the "valid object".
@@ -402,7 +406,7 @@ class Difference_Area_Generator_Mapper(Mapper):
                 os.remove(temp_image_path)
             for temp_image_path in crop_image2_path_to_bbox_dict:
                 os.remove(temp_image_path)
-            return {Fields.meta: {MetaKeys.bbox_tag: np.zeros((1, 4), dtype=np.float32)}}
+            return {Fields.meta: {MetaKeys.bbox_tag: []}}
 
         filtered_bboxes = []
         for temp_sub_image_pairs in filtered_sub_image_pairs:
@@ -414,7 +418,7 @@ class Difference_Area_Generator_Mapper(Mapper):
         iou_thresh = 0.5
         filtered_bboxes = iou_filter(filtered_bboxes, iou_thresh)
         samples[Fields.meta] = {}
-        samples[Fields.meta][MetaKeys.bbox_tag] = filtered_bboxes
+        samples[Fields.meta][MetaKeys.bbox_tag] = filtered_bboxes.tolist()
 
         # Step8: clear the cache
         for temp_image_path in crop_image1_path_to_bbox_dict:

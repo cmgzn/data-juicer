@@ -517,6 +517,35 @@ class OP(metaclass=OPMetaClass):
     def process(self, *args, **kwargs):
         raise NotImplementedError
 
+    def output_feature_hints(self, input_features):
+        """Return partial HuggingFace feature hints for fields written by this OP.
+
+        Most OPs can return None. Provide hints when this OP adds or rewrites
+        fields whose type cannot be inferred reliably from early HuggingFace
+        map batches, especially empty lists that later contain concrete values,
+        nested lists, list-of-struct fields, or numpy arrays.
+
+        The returned value is a partial feature tree. It is merged into the
+        input dataset features and forwarded to ``Dataset.map(features=...)``;
+        it is not required to describe the full output schema. HuggingFace will
+        cast mapped values to the declared features, so hints must match the
+        values returned by the OP.
+
+        Example:
+            return {
+                Fields.meta: {
+                    MetaKeys.bbox_tag: Sequence(Sequence(Value("float32"))),
+                }
+            }
+        """
+        return None
+
+    def _map_with_output_feature_hints(self, dataset, *args, **kwargs):
+        output_feature_hints = self.output_feature_hints(dataset.features)
+        if output_feature_hints is not None:
+            kwargs["output_feature_hints"] = output_feature_hints
+        return dataset.map(*args, **kwargs)
+
     def use_cuda(self):
         return self.accelerator == "cuda" and is_cuda_available()
 
@@ -698,7 +727,8 @@ class Mapper(OP):
             )
 
         try:
-            new_dataset = dataset.map(
+            new_dataset = self._map_with_output_feature_hints(
+                dataset,
                 self.process,
                 num_proc=self.runtime_np(),
                 with_rank=self.use_cuda(),
@@ -831,7 +861,8 @@ class Filter(OP):
 
     def run(self, dataset, *, exporter=None, tracer=None, reduce=True):
         dataset = super(Filter, self).run(dataset)
-        new_dataset = dataset.map(
+        new_dataset = self._map_with_output_feature_hints(
+            dataset,
             self.compute_stats,
             num_proc=self.runtime_np(),
             with_rank=self.use_cuda(),
@@ -918,8 +949,12 @@ class Deduplicator(OP):
 
     def run(self, dataset, *, exporter=None, tracer=None, reduce=True):
         dataset = super(Deduplicator, self).run(dataset)
-        new_dataset = dataset.map(
-            self.compute_hash, num_proc=self.runtime_np(), with_rank=self.use_cuda(), desc=self._name + "_compute_hash"
+        new_dataset = self._map_with_output_feature_hints(
+            dataset,
+            self.compute_hash,
+            num_proc=self.runtime_np(),
+            with_rank=self.use_cuda(),
+            desc=self._name + "_compute_hash",
         )
         if reduce:
             show_num = tracer.show_num if tracer else 0
@@ -1065,7 +1100,8 @@ class Aggregator(OP):
                 batch_size=self.batch_size,
                 desc="Adding new column for aggregation",
             )
-        new_dataset = dataset.map(
+        new_dataset = self._map_with_output_feature_hints(
+            dataset,
             self.process,
             num_proc=self.runtime_np(),
             with_rank=self.use_cuda(),

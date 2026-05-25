@@ -94,6 +94,26 @@ class StatsKeysConstant(object):
                 return False
     ```
 
+   If the OP adds or rewrites fields whose type can be ambiguous in early
+   HuggingFace map batches, declare partial output feature hints by overriding
+   `output_feature_hints()`. This is mainly needed for empty lists that later
+   contain concrete values, nested lists, list-of-struct fields, or numpy array
+   outputs. The hints are merged into the input dataset features and forwarded
+   to `Dataset.map(features=...)`; they are not a complete output schema.
+   HuggingFace will cast mapped values to the declared features, so the hints
+   must match the values returned by the OP.
+
+   ```python
+   from datasets import Sequence, Value
+
+   def output_feature_hints(self, input_features):
+       return {
+           Fields.meta: {
+               MetaKeys.bbox_tag: Sequence(Sequence(Value("float32"))),
+           }
+       }
+   ```
+
 3. After implementation, add it to the OP dictionary in the `__init__.py` file in `data_juicer/ops/filter/` directory.
 
 ```python
