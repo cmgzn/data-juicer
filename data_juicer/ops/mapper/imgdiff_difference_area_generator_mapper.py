@@ -5,7 +5,7 @@ import re
 from typing import Dict, Optional
 
 import numpy as np
-from datasets import Sequence, Value
+from datasets import List, Value
 
 import data_juicer
 from data_juicer.ops.base_op import OPERATORS, TAGGING_OPS, UNFORKABLE, Mapper
@@ -194,7 +194,7 @@ class Difference_Area_Generator_Mapper(Mapper):
         self.num_proc = min([op.runtime_np() for op in self.fused_ops]) if self.fused_ops else 1
 
     def output_feature_hints(self, input_features):
-        return {Fields.meta: {MetaKeys.bbox_tag: Sequence(Sequence(Value("float32")))}}
+        return {Fields.meta: {MetaKeys.bbox_tag: List(List(Value("float32")))}}
 
     def _prepare_op_args(self, op_name, args_dict):
         for key in self.FIXED_ARGS[op_name]:

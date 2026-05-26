@@ -1,5 +1,5 @@
 import unittest
-from datasets import Dataset, DatasetDict, Sequence, Value
+from datasets import Dataset, DatasetDict, List, Value
 from datasets.formatting.formatting import LazyBatch
 from data_juicer.core.data import NestedDataset, wrap_func_with_nested_access
 from data_juicer.core.data.dj_dataset import nested_obj_factory, NestedDatasetDict, NestedQueryDict
@@ -310,7 +310,7 @@ class TestNestedDataset(DataJuicerTestCaseBase):
             add_bbox,
             batched=True,
             batch_size=1,
-            output_feature_hints={'meta': {'bbox': Sequence(Sequence(Value('float32')))}},
+            output_feature_hints={'meta': {'bbox': List(List(Value('float32')))}},
         )
 
         self.assertEqual(mapped[0]['meta']['bbox'], [])

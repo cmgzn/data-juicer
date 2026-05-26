@@ -103,13 +103,17 @@ class StatsKeysConstant(object):
    HuggingFace will cast mapped values to the declared features, so the hints
    must match the values returned by the OP.
 
+   Prefer `datasets.List` for list-like hints. Avoid `Sequence(dict)` in this
+   hook: HuggingFace treats it as a struct of lists rather than a list of
+   structs.
+
    ```python
-   from datasets import Sequence, Value
+   from datasets import List, Value
 
    def output_feature_hints(self, input_features):
        return {
            Fields.meta: {
-               MetaKeys.bbox_tag: Sequence(Sequence(Value("float32"))),
+               MetaKeys.bbox_tag: List(List(Value("float32"))),
            }
        }
    ```

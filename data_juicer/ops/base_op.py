@@ -534,7 +534,7 @@ class OP(metaclass=OPMetaClass):
         Example:
             return {
                 Fields.meta: {
-                    MetaKeys.bbox_tag: Sequence(Sequence(Value("float32"))),
+                    MetaKeys.bbox_tag: List(List(Value("float32"))),
                 }
             }
         """

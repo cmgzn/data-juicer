@@ -101,13 +101,17 @@ class StatsKeysConstant(object):
     它不是完整的输出 schema。HuggingFace 会按声明的 features 对 map 结果做 cast，
     因此 hint 必须和算子实际返回值一致。
 
+    对于 list 类型的 hints，优先使用 `datasets.List`。避免在这个 hook 中使用
+    `Sequence(dict)`：HuggingFace 会把它解释为 struct of lists，而不是 list of
+    structs。
+
     ```python
-    from datasets import Sequence, Value
+    from datasets import List, Value
 
     def output_feature_hints(self, input_features):
         return {
             Fields.meta: {
-                MetaKeys.bbox_tag: Sequence(Sequence(Value("float32"))),
+                MetaKeys.bbox_tag: List(List(Value("float32"))),
             }
         }
     ```

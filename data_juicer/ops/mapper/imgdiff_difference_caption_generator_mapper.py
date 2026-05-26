@@ -4,7 +4,7 @@ from copy import deepcopy
 from typing import Dict, Optional
 
 import numpy as np
-from datasets import Sequence, Value
+from datasets import List, Value
 
 import data_juicer
 from data_juicer.ops.base_op import OPERATORS, TAGGING_OPS, UNFORKABLE, Mapper
@@ -125,10 +125,10 @@ class Difference_Caption_Generator_Mapper(Mapper):
     def output_feature_hints(self, input_features):
         return {
             Fields.meta: {
-                "region_caption1": Sequence(Value("string")),
-                "region_caption2": Sequence(Value("string")),
-                MetaKeys.bbox_tag: Sequence(Sequence(Value("float32"))),
-                "bbox_difference_captions": Sequence(Value("string")),
+                "region_caption1": List(Value("string")),
+                "region_caption2": List(Value("string")),
+                MetaKeys.bbox_tag: List(List(Value("float32"))),
+                "bbox_difference_captions": List(Value("string")),
             }
         }
 
