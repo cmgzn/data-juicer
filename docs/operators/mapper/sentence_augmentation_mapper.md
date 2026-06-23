@@ -1,8 +1,8 @@
 # sentence_augmentation_mapper
 
-Augments sentences by generating enhanced versions using a Hugging Face model. This operator enhances input sentences by generating new, augmented versions. It is designed to work best with individual sentences rather than full documents. For optimal results, ensure the input text is at the sentence level. The augmentation process uses a Hugging Face model, such as `lmsys/vicuna-13b-v1.5` or `Qwen/Qwen2-7B-Instruct`. The operator requires specifying both the primary and secondary text keys, where the augmented sentence will be stored in the secondary key. The generation process can be customized with parameters like temperature, top-p sampling, and beam search size.
+Augments sentences by generating enhanced versions using a language model. This operator enhances input sentences by generating new, augmented versions. It is designed to work best with individual sentences rather than full documents. For optimal results, ensure the input text is at the sentence level. The augmentation process uses a Hugging Face model by default, such as `lmsys/vicuna-13b-v1.5` or `Qwen/Qwen2-7B-Instruct`, and can optionally use an OpenAI-compatible API model. The operator requires specifying both the primary and secondary text keys, where the augmented sentence will be stored in the secondary key. The generation process can be customized with parameters like temperature, top-p sampling, and beam search size.
 
-使用 Hugging Face 模型生成增强版本的句子以进行数据增强。该算子通过生成新的增强版本来增强输入句子。它设计为最适合处理单个句子而不是整个文档。为了获得最佳结果，请确保输入文本处于句子级别。增强过程使用 Hugging Face 模型，如 `lmsys/vicuna-13b-v1.5` 或 `Qwen/Qwen2-7B-Instruct`。算子要求指定主次文本键，其中增强后的句子将存储在次级键中。生成过程可以通过温度、top-p 采样和束搜索大小等参数进行自定义。
+使用语言模型生成增强版本的句子以进行数据增强。该算子通过生成新的增强版本来增强输入句子。它设计为最适合处理单个句子而不是整个文档。为了获得最佳结果，请确保输入文本处于句子级别。增强过程默认使用 Hugging Face 模型，如 `lmsys/vicuna-13b-v1.5` 或 `Qwen/Qwen2-7B-Instruct`，也可以选择使用 OpenAI 兼容的 API 模型。算子要求指定主次文本键，其中增强后的句子将存储在次级键中。生成过程可以通过温度、top-p 采样和束搜索大小等参数进行自定义。
 
 Type 算子类型: **mapper**
 
@@ -20,6 +20,11 @@ Tags 标签: gpu, hf, text
 | `num_beams` |  | `1` | the larger the beam search size, the higher the quality of the generated text. |
 | `text_key` |  | `None` | the key name used to store the first sentence in the text pair. (optional, defalut='text') |
 | `text_key_second` |  | `None` | the key name used to store the second sentence in the text pair. |
+| `api_model` | typing.Optional[str] | `None` | API model name. If set, use the API backend instead of Hugging Face. |
+| `api_endpoint` | typing.Optional[str] | `None` | URL endpoint for the API. |
+| `response_path` | typing.Optional[str] | `None` | Path to extract content from the API response. Defaults to 'choices.0.message.content'. |
+| `model_params` | typing.Optional[typing.Dict] | `None` | Parameters for initializing the model. |
+| `sampling_params` | typing.Optional[typing.Dict] | `None` | Extra parameters passed to the API call. e.g {'temperature': 0.9, 'top_p': 0.95, 'max_tokens': 512} |
 | `args` |  | `''` | extra args |
 | `kwargs` |  | `''` | extra args |
 

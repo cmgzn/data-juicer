@@ -1,4 +1,5 @@
 import logging
+from typing import Dict, Optional
 
 from data_juicer.ops.base_op import OPERATORS, Mapper
 from data_juicer.utils.lazy_loader import LazyLoader
@@ -19,14 +20,15 @@ OP_NAME = "sentence_augmentation_mapper"
 
 @OPERATORS.register_module(OP_NAME)
 class SentenceAugmentationMapper(Mapper):
-    """Augments sentences by generating enhanced versions using a Hugging Face model. This
+    """Augments sentences by generating enhanced versions using a language model. This
     operator enhances input sentences by generating new, augmented versions. It is designed
     to work best with individual sentences rather than full documents. For optimal results,
-    ensure the input text is at the sentence level. The augmentation process uses a Hugging
-    Face model, such as `lmsys/vicuna-13b-v1.5` or `Qwen/Qwen2-7B-Instruct`. The operator
-    requires specifying both the primary and secondary text keys, where the augmented
-    sentence will be stored in the secondary key. The generation process can be customized
-    with parameters like temperature, top-p sampling, and beam search size."""
+    ensure the input text is at the sentence level. The augmentation process uses a
+    Hugging Face model by default, such as `lmsys/vicuna-13b-v1.5` or
+    `Qwen/Qwen2-7B-Instruct`, and can optionally use an OpenAI-compatible API model. The
+    operator requires specifying both the primary and secondary text keys, where the
+    augmented sentence will be stored in the secondary key. The generation process can be
+    customized with parameters like temperature, top-p sampling, and beam search size."""
 
     _accelerator = "cuda"
 
@@ -42,11 +44,21 @@ class SentenceAugmentationMapper(Mapper):
         text_key=None,
         text_key_second=None,
         *args,
+        api_model: Optional[str] = None,
+        api_endpoint: Optional[str] = None,
+        response_path: Optional[str] = None,
+        model_params: Optional[Dict] = None,
+        sampling_params: Optional[Dict] = None,
         **kwargs,
     ):
         """
         Initialization method.
         :param hf_model: Huggingface model id.
+        :param api_model: API model name. If set, use the API backend instead
+            of Hugging Face.
+        :param api_endpoint: URL endpoint for the API.
+        :param response_path: Path to extract content from the API response.
+            Defaults to 'choices.0.message.content'.
         :param system_prompt: System prompt.
         :param task_sentence: The instruction for the current task.
         :param max_new_tokens: the maximum number of new tokens
@@ -62,6 +74,9 @@ class SentenceAugmentationMapper(Mapper):
             in the text pair. (optional, defalut='text')
         :param text_key_second: the key name used to store the second sentence
             in the text pair.
+        :param model_params: Parameters for initializing the model.
+        :param sampling_params: Extra parameters passed to the API call.
+            e.g {'temperature': 0.9, 'top_p': 0.95, 'max_tokens': 512}
         :param args: extra args
         :param kwargs: extra args
         """
@@ -74,9 +89,23 @@ class SentenceAugmentationMapper(Mapper):
             system_prompt = DEFAULT_SYSTEM_PROMPT
         self.system_prompt = system_prompt
         self.hf_model = hf_model
+        self.api_model = api_model
+        self.is_api_model = api_model is not None
         self.max_new_tokens = max_new_tokens
 
-        self.model_key = prepare_model(model_type="huggingface", pretrained_model_name_or_path=hf_model)
+        model_params = model_params or {}
+        self.sampling_params = dict(sampling_params) if sampling_params else {}
+
+        if self.is_api_model:
+            self.model_key = prepare_model(
+                model_type="api",
+                model=api_model,
+                endpoint=api_endpoint,
+                response_path=response_path,
+                **model_params,
+            )
+        else:
+            self.model_key = prepare_model(model_type="huggingface", pretrained_model_name_or_path=hf_model)
         self.temperature = temperature
         self.top_p = top_p
         self.num_beams = num_beams
@@ -85,6 +114,25 @@ class SentenceAugmentationMapper(Mapper):
 
         if text_key is not None:
             self.text_key = text_key
+
+    def _build_messages(self, sample):
+        return [
+            {"role": "system", "content": self.system_prompt},
+            {
+                "role": "user",
+                "content": 'Here is a sentence: "' + sample[self.text_key] + '". ' + self.task_sentence,
+            },
+        ]
+
+    def _api_sampling_params(self):
+        params = {
+            "temperature": self.temperature,
+            "max_tokens": self.max_new_tokens,
+        }
+        if self.top_p is not None:
+            params["top_p"] = self.top_p
+        params.update(self.sampling_params)
+        return params
 
     def process_single(self, sample=None, rank=None):
         # there is no target text
@@ -101,6 +149,12 @@ class SentenceAugmentationMapper(Mapper):
             sample[self.text_key_second] = ""
             return sample
 
+        if self.is_api_model:
+            model = get_model(model_key=self.model_key, rank=rank, use_cuda=self.use_cuda())
+            output = model(self._build_messages(sample), **self._api_sampling_params())
+            sample[self.text_key_second] = output.strip().strip('"')
+            return sample
+
         model, processor = get_model(model_key=self.model_key, rank=rank, use_cuda=self.use_cuda())
 
         if "vicuna" in self.hf_model:
@@ -115,14 +169,9 @@ class SentenceAugmentationMapper(Mapper):
             )
 
         else:
-            messages = [
-                {"role": "system", "content": self.system_prompt},
-                {
-                    "role": "user",
-                    "content": 'Here is a sentence: "' + sample[self.text_key] + '". ' + self.task_sentence,
-                },
-            ]
-            input_prompt = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+            input_prompt = processor.apply_chat_template(
+                self._build_messages(sample), tokenize=False, add_generation_prompt=True
+            )
 
         inputs = processor(input_prompt, return_tensors="pt").to(model.device)
         response = model.generate(
