@@ -13,7 +13,7 @@ from ray.data._internal.util import get_compute_strategy
 from data_juicer.core.data import DJDataset
 from data_juicer.core.data.schema import Schema
 from data_juicer.core.tracer import should_trace_op
-from data_juicer.ops import Deduplicator, Filter, Mapper, Pipeline
+from data_juicer.ops import Deduplicator, Filter, Grouper, Mapper, Pipeline
 from data_juicer.ops.base_op import DEFAULT_BATCH_SIZE, TAGGING_OPS
 from data_juicer.utils.constant import Fields
 from data_juicer.utils.file_utils import is_remote_path
@@ -332,10 +332,22 @@ class RayDataset(DJDataset):
                     # Restore original process method
                     if tracer and should_trace_op(tracer, op._name) and original_process:
                         op.process = original_process
+            elif isinstance(op, Grouper):
+                from data_juicer.core.data import NestedDataset
+
+                logger.warning(
+                    "Ray Grouper support materializes the dataset locally and "
+                    "reuses NestedDataset grouper semantics; use with enough "
+                    "driver memory for the grouped input."
+                )
+                samples = [dict(row) for row in self.data.take_all()]
+                grouped_dataset = op.run(NestedDataset.from_list(samples), tracer=tracer)
+                self.data = ray.data.from_items(grouped_dataset.to_list())
+                cached_columns = set(self.data.columns() or [])
             elif isinstance(op, (Deduplicator, Pipeline)):
                 self.data = op.run(self.data)
             else:
-                logger.error("Ray executor only support Filter, Mapper, Deduplicator and Pipeline OPs for now")
+                logger.error("Ray executor only support Filter, Mapper, Grouper, Deduplicator and Pipeline OPs for now")
                 raise NotImplementedError
         except:  # noqa: E722
             logger.exception(f"An error occurred during Op [{op._name}].")

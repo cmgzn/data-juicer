@@ -302,6 +302,48 @@ class TestRayDataset(DataJuicerTestCaseBase):
         self.assertIsInstance(row["text"], str)
         self.assertIsInstance(row["score"], int)
 
+    @TEST_TAG("ray")
+    def test_process_key_value_grouper(self):
+        import ray
+
+        from data_juicer.core.data.ray_dataset import RayDataset
+        from data_juicer.ops.grouper.key_value_grouper import KeyValueGrouper
+
+        data = [
+            {
+                "text": "Today is Sunday and it's a happy day!",
+                "meta": {"language": "en"},
+            },
+            {
+                "text": "Welcome to Alibaba.",
+                "meta": {"language": "en"},
+            },
+            {
+                "text": "欢迎来到阿里巴巴！",
+                "meta": {"language": "zh"},
+            },
+        ]
+
+        dataset = RayDataset(ray.data.from_items(data))
+        dataset = dataset.process(KeyValueGrouper(["meta.language"]))
+
+        grouped_texts = {
+            row["meta"][0]["language"]: row["text"]
+            for row in dataset.data.take_all()
+        }
+        self.assertEqual(
+            grouped_texts,
+            {
+                "en": [
+                    "Today is Sunday and it's a happy day!",
+                    "Welcome to Alibaba.",
+                ],
+                "zh": [
+                    "欢迎来到阿里巴巴！",
+                ],
+            },
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
