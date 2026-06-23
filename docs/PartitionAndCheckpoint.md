@@ -92,6 +92,74 @@ dj-process --config config.yaml --job_id my_experiment_001
 dj-process --config config.yaml --job_id my_experiment_001
 ```
 
+## Python API Checkpointing
+
+For local `NestedDataset` workflows that call `dataset.process(...)` directly,
+create a `CheckpointManager` with the same operator config list used to build
+the operators. Build the operators with `load_ops(...)`; this attaches the
+operator config metadata that the checkpointer records after each successful
+operation.
+
+```python
+from pathlib import Path
+
+from data_juicer.core.data import NestedDataset
+from data_juicer.ops import load_ops
+from data_juicer.utils.ckpt_utils import CheckpointManager
+
+process_list = [
+    {"whitespace_normalization_mapper": {"num_proc": 1}},
+]
+ckpt_dir = Path("./outputs/python-api-checkpoint")
+
+
+def main():
+    dataset = NestedDataset.from_dict({
+        "text": ["  A\tline  ", "B\nline"],
+    })
+
+    checkpointer = CheckpointManager(
+        str(ckpt_dir),
+        original_process_list=process_list,
+    )
+
+    if checkpointer.ckpt_available:
+        dataset = checkpointer.load_ckpt()
+
+    operators = load_ops(checkpointer.get_left_process_list())
+    dataset = dataset.process(
+        operators,
+        checkpointer=checkpointer,
+        open_monitor=False,
+    )
+
+    print(dataset.to_list())
+
+
+if __name__ == "__main__":
+    main()
+```
+
+On the first run, Data-Juicer writes the latest processed dataset and the
+processed operator record under `ckpt_dir`. On a retry with the same
+`process_list`, `CheckpointManager` loads that record, `load_ckpt()` restores the
+latest dataset, and `get_left_process_list()` returns only the operators that
+still need to run. If any operator config differs from the recorded prefix,
+Data-Juicer starts from the original dataset again.
+
+For direct Python API use, prefer this config-list pattern instead of manually
+constructing operators and then attaching checkpointing. Directly constructed
+operator instances do not necessarily carry the `_op_cfg` metadata that
+`NestedDataset.process(checkpointer=...)` records. Keep the usual Python
+`if __name__ == "__main__"` guard in runnable scripts because checkpoint writes
+can start worker processes through HuggingFace Datasets.
+
+For Ray processing, checkpoint recovery is handled by the `ray_partitioned`
+executor and the `checkpoint` config block shown below. Although
+`RayDataset.process` exposes a `checkpointer` keyword for interface
+compatibility, direct `RayDataset.process(checkpointer=...)` is not the
+documented recovery path for partitioned Ray jobs.
+
 ### Checkpoint Strategies
 
 ```bash

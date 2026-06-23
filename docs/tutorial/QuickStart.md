@@ -61,6 +61,18 @@ dataset = op(dataset)
 dataset = op.run(dataset)
 ```
 
+### Python API Checkpointing
+
+When composing pipelines in Python, use `CheckpointManager` with the same
+operator config list that creates your operators, then pass it to
+`dataset.process(checkpointer=...)`. This lets Data-Juicer record processed
+operators and reload the latest checkpoint on retries.
+
+See [Python API checkpointing](../PartitionAndCheckpoint.md#python-api-checkpointing)
+for a runnable `NestedDataset` example. For Ray jobs, use the
+`ray_partitioned` executor checkpoint configuration described there instead of
+relying on direct `RayDataset.process(checkpointer=...)` recovery semantics.
+
 
 ## Distributed Data Processing
 

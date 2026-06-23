@@ -57,6 +57,11 @@ for s in res_ds:
     print(s)
 ```
 
+For checkpointed Python processing, use `CheckpointManager` with an operator
+config list and pass the loaded operators to `dataset.process(checkpointer=...)`.
+See [Python API checkpointing](docs/PartitionAndCheckpoint.md#python-api-checkpointing)
+for a runnable example and the Ray checkpointing boundary.
+
 
 ---
 
@@ -252,4 +257,3 @@ If you find Data-Juicer useful in your work, please cite:
 - (Data Scaling) [BiMix: A Bivariate Data Mixing Law for Language Model Pretraining](https://arxiv.org/abs/2405.14908)
 
 </details>
-
