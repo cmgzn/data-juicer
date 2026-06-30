@@ -60,3 +60,47 @@ jobs:
           for s in res_ds:
               print(s)
           EOF
+
+  extras:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 60
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        extra: ["nlp", "vision", "audio", "distributed", "generic", "all"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show architecture
+        run: uname -m
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential ffmpeg
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install Data-Juicer extra [${{ matrix.extra }}]
+        id: install_extra
+        continue-on-error: true
+        run: uv pip install --system -e ".[${{ matrix.extra }}]"
+
+      - name: Show install result
+        if: always()
+        run: |
+          echo "extra=[${{ matrix.extra }}] outcome=${{ steps.install_extra.outcome }}"
+          if [ "${{ steps.install_extra.outcome }}" = "success" ]; then
+            python -c "import data_juicer; print('import ok', data_juicer.__version__)"
+          else
+            echo "Install failed or could not find matching distribution"
+          fi
