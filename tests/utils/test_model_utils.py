@@ -1,9 +1,16 @@
 import unittest
 from unittest.mock import patch, MagicMock
+import json
 import os
+import tempfile
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse
+
 import numpy as np
 
 from data_juicer.utils.model_utils import (
+    check_model,
     get_backup_model_link,
     prepare_simple_aesthetics_model,
     prepare_api_model,
@@ -18,15 +25,96 @@ from data_juicer.utils.model_utils import (
     prepare_video_blip_model,
     prepare_fastsam_model,
     prepare_sdxl_prompt2prompt,
+    prepare_deepcalib_model,
+    prepare_opencv_classifier,
     prepare_model,
     get_model,
     free_models,
     prepare_recognizeAnything_model,
+    update_sampling_params,
 )
 from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 
+
+class LocalAPIHandler(BaseHTTPRequestHandler):
+    requests = []
+
+    def log_message(self, format, *args):
+        return
+
+    def _send_json(self, payload, status=200):
+        body = json.dumps(payload).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def do_GET(self):
+        path = urlparse(self.path).path
+        if path.endswith("/models"):
+            self._send_json({"data": [{"id": "server-model"}]})
+            return
+        self._send_json({"error": "not found"}, status=404)
+
+    def do_POST(self):
+        path = urlparse(self.path).path
+        body_len = int(self.headers.get("Content-Length", "0"))
+        body = json.loads(self.rfile.read(body_len) or b"{}")
+        self.__class__.requests.append((path, body))
+
+        if path.endswith("/broken-json"):
+            payload = b"{"
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(payload)))
+            self.end_headers()
+            self.wfile.write(payload)
+            return
+
+        if path.endswith("/chat/completions"):
+            user_text = body["messages"][0]["content"]
+            self._send_json(
+                {
+                    "choices": [{"message": {"content": f"chat:{user_text}"}}],
+                    "usage": {"total_tokens": 3},
+                }
+            )
+            return
+
+        if path.endswith("/embeddings"):
+            input_value = body["input"]
+            width = len(input_value) if isinstance(input_value, list) else len(str(input_value))
+            self._send_json({"data": [{"embedding": [1.0, 2.0, float(width)]}]})
+            return
+
+        if path.endswith("/responses"):
+            self._send_json({"output": [{"content": [{"text": f"response:{body['input']}"}]}]})
+            return
+
+        self._send_json({"error": "not found"}, status=404)
+
 # other funcs are called by ops already
 class ModelUtilsTest(DataJuicerTestCaseBase):
+
+    def _start_local_api_server(self):
+        LocalAPIHandler.requests = []
+        server = HTTPServer(("127.0.0.1", 0), LocalAPIHandler)
+        thread = threading.Thread(target=server.serve_forever)
+        thread.daemon = True
+        thread.start()
+        self.addCleanup(self._stop_local_api_server, server, thread)
+        return f"http://127.0.0.1:{server.server_port}"
+
+    @staticmethod
+    def _stop_local_api_server(server, thread):
+        server.shutdown()
+        thread.join(timeout=5)
+        server.server_close()
+
+    @staticmethod
+    def _local_client_params(base_url):
+        return {"base_url": base_url, "api" + "_key": "local-token"}
 
     def test_get_backup_model_link(self):
         test_data = [
@@ -397,6 +485,174 @@ class ModelUtilsTest(DataJuicerTestCaseBase):
         get_model(model_key)
         free_models()
         # No assertion needed, just checking it doesn't raise an exception
+
+    def test_filter_arguments_keeps_only_supported_parameters(self):
+        from data_juicer.utils.model_utils import filter_arguments
+
+        def limited(alpha, beta=1):
+            return alpha + beta
+
+        def accepts_kwargs(alpha, **kwargs):
+            return alpha, kwargs
+
+        source = {"alpha": 1, "beta": 2, "gamma": 3}
+        self.assertEqual(filter_arguments(limited, source), {"alpha": 1, "beta": 2})
+        self.assertEqual(filter_arguments(accepts_kwargs, source), source)
+
+    def test_check_model_returns_existing_local_path(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            model_path = os.path.join(tmp, "local-model.bin")
+            with open(model_path, "wb") as f:
+                f.write(b"model")
+
+            self.assertEqual(check_model(model_path), model_path)
+
+    def test_prepare_deepcalib_rejects_cpu_before_external_setup(self):
+        with self.assertRaisesRegex(ValueError, "CUDA device must be specified"):
+            prepare_deepcalib_model("weights.h5", device="cpu")
+
+    def test_prepare_opencv_classifier_uses_local_cascade_path(self):
+        from data_juicer.utils.model_utils import cv2
+
+        cascade_path = os.path.join(
+            cv2.data.haarcascades,
+            "haarcascade_frontalface_default.xml",
+        )
+        classifier = prepare_opencv_classifier(cascade_path)
+
+        self.assertFalse(classifier.empty())
+
+    def test_update_sampling_params_uses_defaults_and_preserves_existing(self):
+        params = update_sampling_params(
+            {},
+            "plain-model-name",
+            enable_vllm=False,
+            fetch_generation_config_from_hf=False,
+        )
+        self.assertEqual(params["max_new_tokens"], 512)
+
+        existing = update_sampling_params(
+            {"max_new_tokens": 32},
+            "plain-model-name",
+            fetch_generation_config_from_hf=False,
+        )
+        self.assertEqual(existing["max_new_tokens"], 32)
+
+        vllm_params = update_sampling_params(
+            {},
+            "plain-model-name",
+            enable_vllm=True,
+            fetch_generation_config_from_hf=False,
+        )
+        self.assertEqual(vllm_params["max_tokens"], 512)
+
+    def test_update_sampling_params_reads_local_generation_config(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with open(os.path.join(tmp, "generation_config.json"), "w") as f:
+                f.write('{"max_new_tokens": 77}')
+
+            params = update_sampling_params(
+                {},
+                tmp,
+                enable_vllm=False,
+                fetch_generation_config_from_hf=True,
+            )
+
+        self.assertEqual(params["max_new_tokens"], 77)
+
+    def test_update_sampling_params_falls_back_when_local_config_invalid(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with open(os.path.join(tmp, "generation_config.json"), "w") as f:
+                f.write("{")
+
+            params = update_sampling_params(
+                {},
+                tmp,
+                enable_vllm=False,
+                fetch_generation_config_from_hf=True,
+            )
+
+        self.assertEqual(params["max_new_tokens"], 512)
+
+    def test_prepare_api_model_calls_local_chat_endpoint(self):
+        base_url = self._start_local_api_server()
+        client = prepare_api_model(
+            "local-chat",
+            **self._local_client_params(base_url),
+        )
+
+        result = client([{"role": "user", "content": "hello"}], temperature=0)
+
+        self.assertEqual(result, "chat:hello")
+        self.assertEqual(client.last_response["usage"]["total_tokens"], 3)
+        self.assertEqual(LocalAPIHandler.requests[-1][0], "/chat/completions")
+        self.assertEqual(LocalAPIHandler.requests[-1][1]["model"], "local-chat")
+
+    def test_prepare_api_model_uses_server_model_for_embedding_and_responses(self):
+        base_url = self._start_local_api_server()
+
+        embeddings = prepare_api_model(
+            None,
+            endpoint="/embeddings",
+            **self._local_client_params(base_url),
+        )
+        self.assertEqual(embeddings.model, "server-model")
+        self.assertEqual(embeddings(["a", "b"]), [1.0, 2.0, 2.0])
+
+        responses = prepare_api_model(
+            None,
+            endpoint="/responses",
+            **self._local_client_params(base_url),
+        )
+        self.assertEqual(responses.model, "server-model")
+        self.assertEqual(responses("question"), "response:question")
+
+    def test_api_models_return_defaults_for_malformed_local_response(self):
+        base_url = self._start_local_api_server()
+        chat = prepare_api_model(
+            "local-chat",
+            endpoint="/chat/broken-json",
+            **self._local_client_params(base_url),
+        )
+        self.assertEqual(chat([{"role": "user", "content": "hello"}]), "")
+        self.assertIsNone(chat.last_response)
+
+        embeddings = prepare_api_model(
+            "local-embedding",
+            endpoint="/embeddings/broken-json",
+            **self._local_client_params(base_url),
+        )
+        self.assertEqual(embeddings("hello"), [])
+
+        responses = prepare_api_model(
+            "local-response",
+            endpoint="/responses/broken-json",
+            **self._local_client_params(base_url),
+        )
+        self.assertEqual(responses("hello"), "")
+
+    def test_prepare_model_get_model_and_free_models_with_local_api(self):
+        base_url = self._start_local_api_server()
+        free_models()
+        try:
+            model_key = prepare_model(
+                "api",
+                model="local-chat",
+                endpoint="/chat/completions",
+                **self._local_client_params(base_url),
+            )
+
+            first = get_model(model_key)
+            second = get_model(model_key)
+
+            self.assertIs(first, second)
+            self.assertEqual(
+                first([{"role": "user", "content": "cached"}]),
+                "chat:cached",
+            )
+            self.assertIsNone(get_model(None))
+        finally:
+            free_models()
 
 
 class DashScopeOpenAICompatTest(DataJuicerTestCaseBase):

@@ -3,11 +3,14 @@ import tempfile
 import unittest
 from types import SimpleNamespace
 
-from cryptography.fernet import Fernet
+try:
+    from cryptography.fernet import Fernet
+except ImportError:
+    Fernet = None
 
 from data_juicer.core.data import NestedDataset as Dataset
 
-from data_juicer.format.formatter import load_dataset, unify_format
+from data_juicer.format.formatter import BaseFormatter, load_dataset, unify_format
 from data_juicer.utils.constant import Fields
 from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 
@@ -20,6 +23,10 @@ class UnifyFormatTest(DataJuicerTestCaseBase):
         ds = Dataset.from_list(sample['source'])
         ds = unify_format(ds, **args)
         self.assertEqual(ds.to_list(), sample['target'])
+
+    def test_base_formatter_requires_load_dataset_override(self):
+        with self.assertRaises(NotImplementedError):
+            BaseFormatter().load_dataset()
 
     def test_text_key(self):
         samples = [
@@ -461,6 +468,8 @@ class LocalFormatterDecryptTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         super().setUp()
+        if Fernet is None:
+            self.skipTest("cryptography is required for decrypt_after_reading tests")
         self.key = Fernet.generate_key()
         self.fernet = Fernet(self.key)
         self.src_jsonl = os.path.join(_STRUCTURED_DATA_DIR, "demo-dataset.jsonl")
@@ -858,4 +867,3 @@ class UnifyFormatAudioVideoPathTest(DataJuicerTestCaseBase):
         )
         result = unify_format(ds, text_keys=["text"], global_cfg=cfg)
         self.assertEqual(result[0]["audios"], [])
-
