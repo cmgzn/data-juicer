@@ -1,0 +1,62 @@
+name: ARM64 Smoke Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  arm64:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show architecture
+        run: uname -m
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential ffmpeg
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install Data-Juicer (core only)
+        run: uv pip install --system -e .
+
+      - name: Check import and version
+        run: python -c "import data_juicer; print(data_juicer.__version__)"
+
+      - name: Run demo pipeline
+        run: dj-process --config demos/process_simple/process.yaml
+
+      - name: Python API smoke test
+        run: |
+          python - <<'EOF'
+          from data_juicer.core.data import NestedDataset
+          from data_juicer.ops.filter import TextLengthFilter
+          from data_juicer.ops.mapper import WhitespaceNormalizationMapper
+
+          ds = NestedDataset.from_dict({
+              "text": ["Short", "This passes the filter.", "Text   with   spaces"]
+          })
+
+          res_ds = ds.process([
+              TextLengthFilter(min_len=10),
+              WhitespaceNormalizationMapper()
+          ])
+
+          for s in res_ds:
+              print(s)
+          EOF
