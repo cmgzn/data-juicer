@@ -51,7 +51,7 @@
     <script src="../../../_static/sidebar.js?v=3fc1065c"></script>
     <script src="../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
+    <script src="../../../_static/ask-ai-widget.js?v=7a5b498f"></script>
     <link rel="icon" href="../../../_static/icon.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -578,8 +578,8 @@
 <li class="toctree-l2"><a class="reference internal" href="text_chunk_mapper.html">text_chunk_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="text_tagging_by_prompt_mapper.html">text_tagging_by_prompt_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vggt_mapper.html">vggt_mapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="video_camera_calibration_static_deepcalib_mapper.html">video_camera_calibration_static_deepcalib_mapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="video_camera_calibration_static_moge_mapper.html">video_camera_calibration_static_moge_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_camera_calibration_deepcalib_mapper.html">video_camera_calibration_deepcalib_mapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video_camera_calibration_moge_mapper.html">video_camera_calibration_moge_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_audio_mapper.html">video_captioning_from_audio_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_frames_mapper.html">video_captioning_from_frames_mapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video_captioning_from_summarizer_mapper.html">video_captioning_from_summarizer_mapper</a></li>
@@ -620,6 +620,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/minimal_configs/README.html">Agent 流水线最小可运行配置（便于逐项调试）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/agent/scripts/README.html">Agent pipeline 后分析脚本</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../demos/ego_hand_action_annotation/README.html">VLA Visualization Demo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../demos/process_video_on_ray/data/Note.html">Note for dataset path</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">tools</span></p>
@@ -764,8 +765,8 @@
 </section>
 <section id="explanation">
 <h4>✨ explanation 解释<a class="headerlink" href="#explanation" title="Link to this heading">#</a></h4>
-<p>This example shows the operator removing HTTPS links from text that contains both plain text and a link. The operator identifies and removes the links, leaving the rest of the text intact. For example, ‘This is a test,<a class="reference external" href="https://www.example.com/file.html?param1=value1&amp;amp;param2=value2">https://www.example.com/file.html?param1=value1&amp;param2=value2</a>’ becomes ‘This is a test,’ after processing.
-这个示例展示了算子从同时包含纯文本和链接的文本中移除HTTPS链接。算子识别并移除这些链接，而保留其余文本不变。例如，’This is a test,<a class="reference external" href="https://www.example.com/file.html?param1=value1&amp;amp;param2=value2">https://www.example.com/file.html?param1=value1&amp;param2=value2</a>’ 在处理后变为 ‘This is a test,’。</p>
+<p>This example shows the operator removing HTTPS links from text that contains both plain text and a link. The operator identifies and removes the links, leaving the rest of the text intact. For example, ‘This is a test,<a class="reference external" href="https://www.example.com/file.html?param1=value1&amp;param2=value2">https://www.example.com/file.html?param1=value1&amp;param2=value2</a>’ becomes ‘This is a test,’ after processing.
+这个示例展示了算子从同时包含纯文本和链接的文本中移除HTTPS链接。算子识别并移除这些链接，而保留其余文本不变。例如，’This is a test,<a class="reference external" href="https://www.example.com/file.html?param1=value1&amp;param2=value2">https://www.example.com/file.html?param1=value1&amp;param2=value2</a>’ 在处理后变为 ‘This is a test,’。</p>
 </section>
 </section>
 <section id="test-replace-links-text">

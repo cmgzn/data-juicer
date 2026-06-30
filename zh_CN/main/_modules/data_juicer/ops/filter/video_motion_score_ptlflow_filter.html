@@ -51,7 +51,7 @@
     <script src="../../../../_static/sidebar.js?v=3fc1065c"></script>
     <script src="../../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="../../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
+    <script src="../../../../_static/ask-ai-widget.js?v=7a5b498f"></script>
     <link rel="icon" href="../../../../_static/icon.png"/>
     <link rel="index" title="索引" href="../../../../genindex.html" />
     <link rel="search" title="搜索" href="../../../../search.html" />
@@ -577,6 +577,7 @@
         <span class="n">ckpt_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;things&quot;</span><span class="p">,</span>
         <span class="n">get_model_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">sampling_fps</span><span class="p">:</span> <span class="n">PositiveFloat</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">original_fps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PositiveFloat</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PositiveInt</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PositiveInt</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PositiveInt</span><span class="p">,</span> <span class="n">PositiveInt</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">max_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PositiveInt</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">divisible</span><span class="p">:</span> <span class="n">PositiveInt</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
@@ -592,6 +593,7 @@
             <span class="n">max_score</span><span class="p">,</span>
             <span class="n">frame_field</span><span class="p">,</span>
             <span class="n">sampling_fps</span><span class="p">,</span>
+            <span class="n">original_fps</span><span class="p">,</span>
             <span class="n">size</span><span class="p">,</span>
             <span class="n">max_size</span><span class="p">,</span>
             <span class="n">divisible</span><span class="p">,</span>

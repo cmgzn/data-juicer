@@ -51,7 +51,7 @@
     <script src="../../../../_static/sidebar.js?v=3fc1065c"></script>
     <script src="../../../../_static/switcher-mobile.js?v=07875724"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="../../../../_static/ask-ai-widget.js?v=bd1ac865"></script>
+    <script src="../../../../_static/ask-ai-widget.js?v=7a5b498f"></script>
     <link rel="icon" href="../../../../_static/icon.png"/>
     <link rel="index" title="索引" href="../../../../genindex.html" />
     <link rel="search" title="搜索" href="../../../../search.html" />
@@ -897,9 +897,8 @@
                     <span class="p">)</span>
                     <span class="n">adapter</span><span class="o">.</span><span class="n">analyze_small_batch</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">op</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>  <span class="c1"># noqa: E722</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error occurred during Op [</span><span class="si">{</span><span class="n">op</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">].&quot;</span><span class="p">)</span>
-            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
-            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error occurred during Op [</span><span class="si">{</span><span class="n">op</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">].&quot;</span><span class="p">)</span>
+            <span class="k">raise</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">checkpointer</span> <span class="ow">and</span> <span class="n">dataset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Writing checkpoint of dataset processed by &quot;</span> <span class="s2">&quot;last op...&quot;</span><span class="p">)</span>
