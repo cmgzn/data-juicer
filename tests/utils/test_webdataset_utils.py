@@ -158,10 +158,7 @@ class WebDatasetUtilsTest(DataJuicerTestCaseBase):
         np.testing.assert_array_equal(decoded["image.png"], image)
 
     def test_custom_encoder_decoder_handle_msgpack_and_audio_lists(self):
-        try:
-            import msgpack
-        except ImportError as exc:
-            self.skipTest(f"optional webdataset dependency is not installed: {exc}")
+        import msgpack
 
         sample = {
             "payload.mp": {"items": [1, "two"]},

@@ -3,10 +3,7 @@ import tempfile
 import unittest
 from types import SimpleNamespace
 
-try:
-    from cryptography.fernet import Fernet
-except ImportError:
-    Fernet = None
+from cryptography.fernet import Fernet
 
 from data_juicer.core.data import NestedDataset as Dataset
 
@@ -468,8 +465,6 @@ class LocalFormatterDecryptTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         super().setUp()
-        if Fernet is None:
-            self.skipTest("cryptography is required for decrypt_after_reading tests")
         self.key = Fernet.generate_key()
         self.fernet = Fernet(self.key)
         self.src_jsonl = os.path.join(_STRUCTURED_DATA_DIR, "demo-dataset.jsonl")
@@ -674,7 +669,7 @@ class UnifyFormatPathConversionTest(DataJuicerTestCaseBase):
                 self.assertTrue(path.startswith(self.ds_dir))
 
     def test_preserves_absolute_paths(self):
-        abs_path = "/absolute/path/img.jpg"
+        abs_path = os.path.join(self.tmp_dir, "img.jpg")
         ds = HFDataset.from_dict({
             "text": ["sample"],
             "images": [[abs_path]],
@@ -844,7 +839,7 @@ class UnifyFormatAudioVideoPathTest(DataJuicerTestCaseBase):
         self.assertTrue(os.path.isabs(result[0]["my_video"][0]))
 
     def test_preserves_absolute_audio_path(self):
-        abs_path = "/abs/audio.wav"
+        abs_path = os.path.join(self.tmp_dir, "audio.wav")
         ds = HFDataset.from_dict({
             "text": ["s1"],
             "audios": [[abs_path]],

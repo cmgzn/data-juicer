@@ -1,5 +1,6 @@
 import os
 import shutil
+import tempfile
 import unittest
 import numpy as np
 import subprocess
@@ -32,28 +33,16 @@ def is_valid_mp4_ffprobe(file_path):
     return True
 
 
-def full_video_reader_stack_available():
-    if shutil.which("ffmpeg") is None or shutil.which("ffprobe") is None:
-        return False
-    return all(cls.is_available() for cls in (AVReader, FFmpegReader, DecordReader))
-
-
 class TestVideoReader(DataJuicerTestCaseBase):
 
     def setUp(self) -> None:
         super().setUp()
-        if not full_video_reader_stack_available():
-            self.skipTest(
-                "ffmpeg, ffprobe, av, and decord are required for video reader "
-                "integration tests"
-            )
         data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                  '..',
                                  'ops',
                                  'data')
         self.vid_path1 = os.path.join(data_path, 'video1.mp4')
-        self.temp_output_path = 'tmp/test_video_utils/'
-        os.makedirs(self.temp_output_path, exist_ok=True)
+        self.temp_output_path = tempfile.mkdtemp(prefix="dj_test_video_utils_")
 
     def tearDown(self):
         if os.path.exists(self.temp_output_path):

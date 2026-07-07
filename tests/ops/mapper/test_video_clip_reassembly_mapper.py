@@ -1,4 +1,3 @@
-import importlib.util
 import os
 import shutil
 import tempfile
@@ -11,20 +10,6 @@ from data_juicer.ops.mapper.video_clip_reassembly_mapper import \
     VideoClipReassemblyMapper
 from data_juicer.utils.constant import CameraCalibrationKeys, MetaKeys
 from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
-
-
-def _has_module(module_name):
-    return importlib.util.find_spec(module_name) is not None
-
-
-requires_cv2 = unittest.skipUnless(
-    _has_module("cv2"),
-    "opencv is required for frame-image video clip reassembly tests",
-)
-requires_scipy = unittest.skipUnless(
-    _has_module("scipy"),
-    "scipy is required for 3-D transform video clip reassembly tests",
-)
 
 
 class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
@@ -42,19 +27,34 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
     # ------------------------------------------------------------------
     # helpers
     # ------------------------------------------------------------------
-    def _create_frames(self, n_frames, prefix="clip0"):
-        """Create unique dummy frames with reproducible content."""
-        import cv2
+    def _import_cv2(self):
+        """Import cv2 once and cache it for reuse across helpers."""
+        if not hasattr(self, "_cv2"):
+            import cv2 as _cv2
+            self._cv2 = _cv2
+        return self._cv2
 
+    def _write_frame_image(self, path, value_or_array):
+        """Write a deterministic 100x100 BGR frame image to *path*.
+
+        *value_or_array* may be a scalar fill value or a numpy array.
+        """
+        cv2 = self._import_cv2()
+        if isinstance(value_or_array, np.ndarray):
+            img = value_or_array
+        else:
+            img = np.full((100, 100, 3), fill_value=value_or_array, dtype=np.uint8)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        cv2.imwrite(path, img)
+        return path
+
+    def _create_frames(self, n_frames, prefix="clip0"):
+        """Create *n_frames* unique dummy frame paths with reproducible content."""
         clip_dir = os.path.join(self.tmp_dir, prefix)
-        os.makedirs(clip_dir, exist_ok=True)
         paths = []
         for i in range(n_frames):
-            # Deterministic content based on global frame id
-            img = np.full((100, 100, 3), fill_value=(i * 7) % 256,
-                          dtype=np.uint8)
             path = os.path.join(clip_dir, f"frame_{i:04d}.jpg")
-            cv2.imwrite(path, img)
+            self._write_frame_image(path, (i * 7) % 256)
             paths.append(path)
         return paths
 
@@ -65,36 +65,28 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
 
         Returns (per_clip_frames, all_frame_paths).
         """
-        import cv2
-
+        cv2 = self._import_cv2()
         step = clip_len - overlap
         all_dir = os.path.join(self.tmp_dir, "all_frames")
-        os.makedirs(all_dir, exist_ok=True)
 
-        # Create all unique frames
+        # Create all unique frames.
         all_paths = []
         for i in range(total_frames):
-            img = np.full((100, 100, 3), fill_value=(i * 7) % 256,
-                          dtype=np.uint8)
             path = os.path.join(all_dir, f"frame_{i:04d}.jpg")
-            cv2.imwrite(path, img)
+            self._write_frame_image(path, (i * 7) % 256)
             all_paths.append(path)
 
-        # Build per-clip frame lists (with real overlapping files)
+        # Build per-clip frame lists (with real overlapping files).
         per_clip = []
         offset = 0
         while offset < total_frames:
             end = min(offset + clip_len, total_frames)
             clip_frames = []
-            clip_dir = os.path.join(
-                self.tmp_dir, f"clip_{len(per_clip)}")
-            os.makedirs(clip_dir, exist_ok=True)
+            clip_dir = os.path.join(self.tmp_dir, f"clip_{len(per_clip)}")
             for local_i, global_i in enumerate(range(offset, end)):
-                # Copy the global frame so pixel matching works
                 src = all_paths[global_i]
                 dst = os.path.join(clip_dir, f"frame_{local_i:04d}.jpg")
-                img = cv2.imread(src)
-                cv2.imwrite(dst, img)
+                self._write_frame_image(dst, cv2.imread(src))
                 clip_frames.append(dst)
             per_clip.append(clip_frames)
             offset += step
@@ -147,7 +139,6 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
     # ------------------------------------------------------------------
     # _detect_clip_offsets
     # ------------------------------------------------------------------
-    @requires_cv2
     def test_detect_clip_offsets_with_matching(self):
         """Pixel matching should detect the correct overlap offset."""
         per_clip, _ = self._create_overlapping_clips(
@@ -160,7 +151,6 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
         if len(offsets) > 1:
             self.assertEqual(offsets[1], 10)
 
-    @requires_cv2
     def test_detect_clip_offsets_single_clip(self):
         frames = self._create_frames(10, "only_clip")
         offsets = VideoClipReassemblyMapper._detect_clip_offsets(
@@ -190,6 +180,7 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
     # _merge_moge
     # ------------------------------------------------------------------
     def test_merge_moge_basic(self):
+        """Test merging two simple moge depth maps."""
         moge_a = {"depth": ["d0", "d1", "d2"], "hfov": [1.0, 1.0, 1.0]}
         moge_b = {"depth": ["d3", "d4", "d5"], "hfov": [1.0, 1.0, 1.0]}
         merged = VideoClipReassemblyMapper._merge_moge(
@@ -199,7 +190,6 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
     # ------------------------------------------------------------------
     # end-to-end with single clip → passthrough
     # ------------------------------------------------------------------
-    @requires_cv2
     def test_single_clip_passthrough(self):
         """Single clip (non-nested frames) → no reassembly needed."""
         frames = self._create_frames(10, "single")
@@ -228,8 +218,6 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
     # ------------------------------------------------------------------
     # end-to-end with multiple clips
     # ------------------------------------------------------------------
-    @requires_cv2
-    @requires_scipy
     def test_multi_clip_reassembly(self):
         """Two overlapping clips should be merged correctly."""
         per_clip, _ = self._create_overlapping_clips(
@@ -279,6 +267,7 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
     # _empty_hand_result
     # ------------------------------------------------------------------
     def test_empty_hand_result(self):
+        """Test factory for an empty hand result structure."""
         r = VideoClipReassemblyMapper._empty_hand_result("left")
         self.assertEqual(r["hand_type"], "left")
         self.assertEqual(r["states"], [])
@@ -288,23 +277,26 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
     # nominal step computation
     # ------------------------------------------------------------------
     def test_compute_nominal_step(self):
+        """Test nominal frame step computation with valid config."""
         op = VideoClipReassemblyMapper(
             split_duration=5.0, overlap_duration=2.0, fps=30.0)
         self.assertEqual(op._compute_nominal_step(), 90)
 
     def test_compute_nominal_step_none(self):
+        """Test nominal step returns None when config is incomplete."""
         op = VideoClipReassemblyMapper()
         self.assertIsNone(op._compute_nominal_step())
 
     def test_no_meta_passthrough(self):
+        """Test process_single returns sample unchanged without video meta."""
         sample = {"text": "hello"}
         op = VideoClipReassemblyMapper()
         result = op.process_single(sample)
         self.assertEqual(result, sample)
 
-    @requires_cv2
-    def test_frame_hash_and_detect_offsets_fallback_branches(self):
-        import cv2
+    def test_detect_offsets_fallbacks(self):
+        """Cover _frame_hash missing file and _detect_clip_offsets fallback paths."""
+        cv2 = self._import_cv2()
 
         self.assertIsNone(
             VideoClipReassemblyMapper._frame_hash(
@@ -320,17 +312,15 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
 
         prev = self._create_frames(3, "prev")
         curr_dir = os.path.join(self.tmp_dir, "curr")
-        os.makedirs(curr_dir, exist_ok=True)
         first = os.path.join(curr_dir, "frame_0000.jpg")
         second = os.path.join(curr_dir, "frame_0001.jpg")
-        cv2.imwrite(first, cv2.imread(prev[1]))
-        cv2.imwrite(second, np.full((100, 100, 3), 222, dtype=np.uint8))
+        self._write_frame_image(first, cv2.imread(prev[1]))
+        self._write_frame_image(second, np.full((100, 100, 3), 222, dtype=np.uint8))
 
         offsets = VideoClipReassemblyMapper._detect_clip_offsets(
             [prev, [first, second]], nominal_step=2)
         self.assertEqual(offsets, [0, 2])
 
-    @requires_scipy
     def test_compute_alignment_transform_branches(self):
         eye = np.eye(4).tolist()
         self.assertEqual(
@@ -368,8 +358,8 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
         self.assertEqual(len(transforms), 2)
         self.assertTrue(np.allclose(transforms[1][:3, 3], [3.0, 0.0, 0.0]))
 
-    @requires_scipy
     def test_apply_transform_to_hand_data_and_c2w(self):
+        """Test applying transform to hand data and camera c2w matrices."""
         hand = self._make_hand_data(2)
         hand["joints_world"] = np.zeros((2, 21, 3), dtype=np.float32).tolist()
         T = np.eye(4)
@@ -392,6 +382,7 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
         self.assertTrue(np.allclose(aligned[:, :3, 3], [[1, 2, 3], [1, 2, 3]]))
 
     def test_merge_video_frames_and_moge_fill_gaps(self):
+        """Test gap filling in video frame and moge merging."""
         frames = VideoClipReassemblyMapper._merge_video_frames(
             [["a0"], ["b3"]], [0, 3])
         self.assertEqual(frames, ["a0", "a0", "a0", "b3"])
@@ -416,8 +407,8 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
         self.assertEqual(merged["depth"][6:], ["d5", "d5"])
         self.assertEqual(merged["vfov"][-2:], ["v6", "v7"])
 
-    @requires_scipy
-    def test_merge_hand_single_empty_and_joint_weighting(self):
+    def test_merge_hand_variants(self):
+        """Test hand merging with empty input, single clip, and joint blending."""
         op = VideoClipReassemblyMapper()
         empty = op._merge_hand_across_clips([None, {}], "right", 2, [0, 1], [1, 1])
         self.assertEqual(empty["hand_type"], "right")
@@ -442,7 +433,8 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
         self.assertEqual(len(merged["joints_world"]), 3)
         self.assertEqual(len(merged["joints_cam"]), 3)
 
-    def test_merge_cam_c2w_invalid_inputs_gap_and_metadata(self):
+    def test_merge_cam_c2w_edge_cases(self):
+        """Test camera c2w merging handles invalid inputs, gaps, and metadata."""
         op = VideoClipReassemblyMapper()
         empty = op._merge_cam_c2w([None, {}], [0, 1], [1, 1])
         self.assertIsNone(empty)
@@ -461,7 +453,8 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
         self.assertEqual(len(merged[CameraCalibrationKeys.cam_c2w]), 4)
         self.assertEqual(merged[CameraCalibrationKeys.cam_c2w][1], np.eye(4).tolist())
 
-    def test_merge_hawor_sorts_global_frames_and_skips_duplicates(self):
+    def test_merge_hawor_deduplicates_frames(self):
+        """Test hawor merge sorts frame ids and drops duplicate global ids."""
         op = VideoClipReassemblyMapper()
         merged = op._merge_hawor(
             [
@@ -497,7 +490,8 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
         self.assertEqual(merged["right"]["joints_cam"], ["j0", "j2", "j4"])
         self.assertEqual(merged["left"]["frame_ids"], [])
 
-    def test_process_single_catches_merge_failures_and_uses_clip_fallback(self):
+    def test_process_single_falls_back_on_merge_failure(self):
+        """Test process_single falls back to first clip when merge steps fail."""
         class RaisingMapper(VideoClipReassemblyMapper):
             def _merge_video_frames(self, *args, **kwargs):
                 raise RuntimeError("frames")
@@ -542,7 +536,8 @@ class VideoClipReassemblyMapperTest(DataJuicerTestCaseBase):
         self.assertEqual(out["clips"], ["clip0.mp4"])
         self.assertEqual(out[Fields.meta][MetaKeys.hand_action_tags][0]["right"]["hand_type"], "right")
 
-    def test_process_single_applies_alignment_and_continues_on_hand_failure(self):
+    def test_process_single_aligns_despite_hand_failure(self):
+        """Test alignment is applied and hand merge errors are tolerated."""
         class AligningMapper(VideoClipReassemblyMapper):
             def _detect_clip_offsets(self, *args, **kwargs):
                 return [0, 1]

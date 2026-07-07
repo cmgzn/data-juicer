@@ -5,6 +5,7 @@ import shutil
 import json
 import bz2
 import threading
+import contextlib
 from functools import partial
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
@@ -39,12 +40,25 @@ class TestDownload(DataJuicerTestCaseBase):
             shutil.rmtree(self.temp_dir)
         super().tearDown()
 
-    def test_wikipedia_urls(self):
-        dump_date = "20241101"
-
+    @contextlib.contextmanager
+    def _local_http_server(self, root):
+        """Serve *root* over HTTP on a random port and yield its URL prefix."""
         class QuietHandler(SimpleHTTPRequestHandler):
             def log_message(self, format, *args):
                 pass
+
+        server = HTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=root))
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            yield f"http://127.0.0.1:{server.server_address[1]}"
+        finally:
+            server.shutdown()
+            thread.join(timeout=5)
+            server.server_close()
+
+    def test_wikipedia_urls(self):
+        dump_date = "20241101"
 
         with tempfile.TemporaryDirectory() as root:
             dump_dir = os.path.join(root, "enwiki", dump_date)
@@ -66,11 +80,7 @@ class TestDownload(DataJuicerTestCaseBase):
                     f,
                 )
 
-            server = HTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=root))
-            thread = threading.Thread(target=server.serve_forever, daemon=True)
-            thread.start()
-            try:
-                prefix = f"http://127.0.0.1:{server.server_address[1]}"
+            with self._local_http_server(root) as prefix:
                 expected_urls = [
                     f"{prefix}/enwiki/{dump_date}/{name}"
                     for name in files
@@ -79,22 +89,11 @@ class TestDownload(DataJuicerTestCaseBase):
                     wikidumps_index_prefix=prefix,
                     dump_date=dump_date,
                 )
-            finally:
-                server.shutdown()
-                thread.join(timeout=5)
-                server.server_close()
 
         self.assertEqual(urls, expected_urls)
 
     def test_wikipedia_urls_latest_index_and_invalid_dump_json(self):
-        try:
-            import lxml  # noqa: F401
-        except ImportError:
-            self.skipTest("lxml is required by get_wikipedia_urls' parser path")
-
-        class QuietHandler(SimpleHTTPRequestHandler):
-            def log_message(self, format, *args):
-                pass
+        import lxml  # noqa: F401
 
         with tempfile.TemporaryDirectory() as root:
             wiki_dir = os.path.join(root, "enwiki")
@@ -122,11 +121,7 @@ class TestDownload(DataJuicerTestCaseBase):
             with open(os.path.join(bad_dump_dir, "dumpstatus.json"), "w", encoding="utf-8") as f:
                 f.write("not-json")
 
-            server = HTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=root))
-            thread = threading.Thread(target=server.serve_forever, daemon=True)
-            thread.start()
-            try:
-                prefix = f"http://127.0.0.1:{server.server_address[1]}"
+            with self._local_http_server(root) as prefix:
                 expected = [
                     f"{prefix}/enwiki/20250101/enwiki-20250101-pages-articles.xml.bz2",
                     f"{prefix}/enwiki/20250101/enwiki-20250101-pages-meta-history.xml.bz2",
@@ -134,16 +129,8 @@ class TestDownload(DataJuicerTestCaseBase):
                 self.assertEqual(get_wikipedia_urls(wikidumps_index_prefix=prefix), expected)
                 with self.assertRaises(ValueError):
                     get_wikipedia_urls(wikidumps_index_prefix=prefix, dump_date="19000101")
-            finally:
-                server.shutdown()
-                thread.join(timeout=5)
-                server.server_close()
 
     def test_wikipedia_download_components_extract_small_local_dump(self):
-        class QuietHandler(SimpleHTTPRequestHandler):
-            def log_message(self, format, *args):
-                pass
-
         dump_date = "20250101"
         dump_file = f"enwiki-{dump_date}-pages-articles.xml.bz2"
 
@@ -161,11 +148,7 @@ class TestDownload(DataJuicerTestCaseBase):
             with bz2.open(os.path.join(dump_dir, dump_file), "wb") as f:
                 f.write(xml)
 
-            server = HTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=root))
-            thread = threading.Thread(target=server.serve_forever, daemon=True)
-            thread.start()
-            try:
-                prefix = f"http://127.0.0.1:{server.server_address[1]}"
+            with self._local_http_server(root) as prefix:
                 raw_dir = os.path.join(self.temp_dir, "raw")
                 os.makedirs(raw_dir)
                 result = download_and_extract(
@@ -177,10 +160,6 @@ class TestDownload(DataJuicerTestCaseBase):
                     _WIKI_OUTPUT_FORMAT,
                     item_limit=1,
                 )
-            finally:
-                server.shutdown()
-                thread.join(timeout=5)
-                server.server_close()
 
         self.assertEqual(len(result), 1)
         row = result[0]

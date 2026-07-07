@@ -1,6 +1,7 @@
 """Unit tests for AgentBadCaseSignalMapper."""
 
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -199,9 +200,11 @@ class TestAgentBadCaseSignalMapper(DataJuicerTestCaseBase):
 
     def test_calibration_loader_and_recommendation_normalization_edges(self):
         self.assertIsNone(_load_calibration_json(""))
-        self.assertIsNone(_load_calibration_json("/tmp/data-juicer-calibration-missing.json"))
 
         with tempfile.TemporaryDirectory() as td:
+            missing_path = os.path.join(td, "data-juicer-calibration-missing.json")
+            self.assertIsNone(_load_calibration_json(missing_path))
+
             invalid = Path(td) / "invalid.json"
             invalid.write_text("{not-json", encoding="utf-8")
             self.assertIsNone(_load_calibration_json(str(invalid)))

@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+import shutil
 import tempfile
 import unittest
 import warnings
@@ -37,12 +38,11 @@ class FileUtilsTest(DataJuicerTestCaseBase):
 
     def setUp(self) -> None:
         super().setUp()
-        self.temp_output_path = "tmp/test_file_utils/"
-        os.makedirs(self.temp_output_path)
+        self.temp_output_path = tempfile.mkdtemp(prefix="dj_test_file_utils_")
 
     def tearDown(self):
         if os.path.exists(self.temp_output_path):
-            os.system(f"rm -rf {self.temp_output_path}")
+            shutil.rmtree(self.temp_output_path)
         super().tearDown()
 
     def test_find_files_with_suffix(self):
@@ -74,8 +74,8 @@ class FileUtilsTest(DataJuicerTestCaseBase):
         self.assertEqual(result_txt, expected_txt)
 
     def test_is_absolute_path(self):
-        self.assertFalse(is_absolute_path(self.temp_output_path))
-        self.assertTrue(is_absolute_path(os.path.abspath(self.temp_output_path)))
+        self.assertFalse(is_absolute_path("relative/path"))
+        self.assertTrue(is_absolute_path(os.path.abspath("relative/path")))
 
     def test_add_suffix_to_filename(self):
         self.assertEqual(add_suffix_to_filename("test.txt", "_suffix"), "test_suffix.txt")

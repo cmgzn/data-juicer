@@ -4,17 +4,14 @@ import pickle
 import tempfile
 import unittest
 
+import nltk
+
 import data_juicer.utils.nltk_utils as nltk_utils
 from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 
 
 class NLTKUtilsTest(DataJuicerTestCaseBase):
     def _with_nltk_path(self, paths, body):
-        try:
-            import nltk
-        except ImportError:
-            self.skipTest("nltk is not installed")
-
         old_path = list(nltk.data.path)
         try:
             nltk.data.path[:] = list(paths)
@@ -77,11 +74,6 @@ class NLTKUtilsTest(DataJuicerTestCaseBase):
             self._with_nltk_path([], empty)
 
     def test_patch_nltk_pickle_security_replaces_loader_and_allows_classes(self):
-        try:
-            import nltk.data
-        except ImportError:
-            self.skipTest("nltk is not installed")
-
         old_loader_marker = object()
         old_allowed_marker = object()
         old_loader = getattr(nltk.data, "restricted_pickle_load", old_loader_marker)
