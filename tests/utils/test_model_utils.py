@@ -619,10 +619,10 @@ class ModelUtilsTest(DataJuicerTestCaseBase):
 
     @skip_if_from_fork("Skipping API-based test because running from a fork repo")
     def test_prepare_api_model_embedding_with_real_api(self):
-        from data_juicer.utils.constant import DEFAULT_API_MODEL
+        embedding_model = "text-embedding-v4"
 
         embeddings = prepare_api_model(
-            DEFAULT_API_MODEL,
+            embedding_model,
             endpoint="/embeddings",
         )
         result = embeddings(["hello world"])
