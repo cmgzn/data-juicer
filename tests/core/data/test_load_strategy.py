@@ -317,6 +317,10 @@ class DataLoadStrategyRegistryTest(DataJuicerTestCaseBase):
             )
         )
         self.assertIs(
+            DataLoadStrategyRegistry.get_strategy_class("ray", "local", "records.json1"),
+            QuestionPatternStrategy,
+        )
+        self.assertIs(
             DataLoadStrategyRegistry.get_strategy_class("ray", "local", "records.jsonl"),
             ExactJsonLinesStrategy,
         )

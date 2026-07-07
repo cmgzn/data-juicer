@@ -474,9 +474,9 @@ class ReadSinglePartitionTest(DataJuicerTestCaseBase):
             columns=columns,
         )
 
-        self.assertEqual(columns, ["text", "filename"])
         self.assertEqual(list(df.columns), ["filename", "text"])
         self.assertEqual(df["filename"].iloc[0], "typed.jsonl")
+        self.assertEqual(df["text"].iloc[0], "row")
 
     def test_read_parquet_warns_when_input_meta_is_ignored(self):
         path = os.path.join(self.tmpdir, "data.parquet")

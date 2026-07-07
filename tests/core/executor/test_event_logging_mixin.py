@@ -650,12 +650,51 @@ class CoreEventLoggingFileTest(DataJuicerTestCaseBase):
         executor.log_job_failed("late failure marker", 4.0)
 
         events = executor.get_events()
-        self.assertGreaterEqual(len(events), 20)
+        expected_event_types = [
+            self.EventType.JOB_START,
+            self.EventType.PARTITION_START,
+            self.EventType.PARTITION_COMPLETE,
+            self.EventType.PARTITION_COMPLETE,
+            self.EventType.PARTITION_FAILED,
+            self.EventType.OP_START,
+            self.EventType.OP_COMPLETE,
+            self.EventType.OP_FAILED,
+            self.EventType.CHECKPOINT_SAVE,
+            self.EventType.CHECKPOINT_LOAD,
+            self.EventType.DAG_BUILD_START,
+            self.EventType.DAG_BUILD_COMPLETE,
+            self.EventType.DAG_NODE_READY,
+            self.EventType.DAG_NODE_START,
+            self.EventType.DAG_NODE_COMPLETE,
+            self.EventType.DAG_NODE_FAILED,
+            self.EventType.DAG_PARALLEL_GROUP_START,
+            self.EventType.DAG_PARALLEL_GROUP_COMPLETE,
+            self.EventType.DAG_EXECUTION_PLAN_SAVED,
+            self.EventType.DAG_EXECUTION_PLAN_LOADED,
+            self.EventType.JOB_RESTART,
+            self.EventType.PARTITION_RESUME,
+            self.EventType.JOB_COMPLETE,
+            self.EventType.JOB_FAILED,
+        ]
+        self.assertEqual([event.event_type for event in events], expected_event_types)
         self.assertTrue(os.path.exists(executor.event_logger.jsonl_file))
+
         op_start = executor.get_events(event_type=self.EventType.OP_START)[0]
         self.assertEqual(op_start.metadata["dag_node_id"], "0:1:clean")
+        self.assertEqual(op_start.metadata["operation_class"], "clean")
+        self.assertEqual(op_start.metadata["custom"], "yes")
+
+        failed_partition = events[4]
+        self.assertEqual(failed_partition.partition_id, 1)
+        self.assertEqual(failed_partition.error_message, "bad rows")
+        self.assertEqual(failed_partition.metadata["retry_count"], 2)
+
+        checkpoint_save = events[8]
+        self.assertEqual(checkpoint_save.checkpoint_path, "ckpt/save.pkl")
+        self.assertEqual(events[21].metadata["resume_reason"], "retry failed partition")
+        self.assertEqual(events[-1].error_message, "late failure marker")
         self.assertEqual(executor._get_config_name(), "Config_With_Spaces")
-        self.assertIn("Total Events:", executor.generate_status_report())
+        self.assertIn("Total Events: 24", executor.generate_status_report())
 
         with open(os.path.join(executor.work_dir, "job_summary.json")) as f:
             summary = json.load(f)
