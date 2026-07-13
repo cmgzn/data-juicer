@@ -1,4 +1,5 @@
 import hashlib
+import importlib.metadata
 import json
 import os
 from collections import defaultdict
@@ -173,6 +174,7 @@ class OPEnvSpec:
                 }
         else:
             self.pip_pkgs = []
+            self.parsed_requirements = {}
 
     def to_dict(self):
         """
@@ -197,6 +199,57 @@ class OPEnvSpec:
 
     def get_requirement_name_list(self):
         return sorted(self.parsed_requirements.keys())
+
+
+def _get_installed_version(package_name):
+    """Return the installed distribution version, or ``None`` if absent."""
+    try:
+        return importlib.metadata.version(package_name)
+    except importlib.metadata.PackageNotFoundError:
+        return None
+
+
+def resolve_local_env_spec(env_spec):
+    """Resolve an operator env spec against the current local environment.
+
+    Returns a single ``OPEnvSpec``.  An empty ``pip_pkgs`` means the
+    current main process already satisfies every applicable requirement,
+    so the operator can run in-process without touching the environment.
+    Otherwise the complete original spec is returned so the operator runs
+    in a dedicated isolated venv.
+
+    The main process is never modified: nothing is installed into it.  A
+    requirement is considered satisfiable in the main process only when it
+    is already installed at a compatible version; anything missing,
+    version-conflicting, or outside the registry (URL/VCS/local path)
+    triggers isolation of the whole spec.
+    """
+    for requirement in env_spec.parsed_requirements.values():
+        if requirement.markers and not PackageRequirement(f"placeholder; {requirement.markers}").marker.evaluate():
+            # Requirement does not apply to the current environment.
+            continue
+
+        # URL, VCS and local-path requirements are never resolvable against
+        # the installed set, even when they also declare a name.
+        if requirement.url or requirement.is_local or requirement.path or not requirement.name:
+            return env_spec
+
+        installed_version = _get_installed_version(requirement.name)
+        if installed_version is None:
+            # Not installed in the main process -> isolate.
+            return env_spec
+        if requirement.version and not requirement.version.contains(installed_version, prereleases=True):
+            # Installed but the version is incompatible -> isolate.
+            return env_spec
+        # Installed and compatible -> keep this requirement in the main process.
+
+    # Every applicable requirement is already satisfied in the main process.
+    return OPEnvSpec(
+        env_vars=env_spec.env_vars,
+        working_dir=env_spec.working_dir,
+        backend=env_spec.backend,
+        extra_env_params=env_spec.extra_env_params,
+    )
 
 
 def op_requirements_to_op_env_spec(
@@ -261,9 +314,17 @@ class OPEnvManager:
         """
         Initialize OPEnvManager instance.
 
-        :param min_common_dep_num_to_combine: The minimum number of common dependencies required to
-                                              determine whether to merge two operation environment specifications.
-                                              If set to -1, it means no combination of operation environments.
+        :param min_common_dep_num_to_combine: Controls whether environment management is delegated
+            to OPEnvManager.
+
+            - ``-1``: no environment management. Each execution mode keeps its default behavior
+              (Ray uses per-op runtime_env, local runs everything in the main process).
+            - ``>= 0``: enable environment management. OPEnvManager merges operator env specs
+              that share at least this many common dependencies. In Ray mode the merged spec
+              becomes the operator's runtime_env; in local mode operators whose merged spec
+              has pip dependencies are isolated in dedicated venvs (parent environment is
+              inherited via a managed .pth file); operators with no extra dependencies run
+              in the main process.
         :param conflict_resolve_strategy: Strategy for resolving dependency conflicts, default is SPLIT strategy.
                                           SPLIT: Keep the two specs split when there is a conflict.
                                           OVERWRITE: Overwrite the existing dependency with one from the later OP.
@@ -350,6 +411,8 @@ class OPEnvManager:
                     for op in self.hash2ops[curr_hash]:
                         self.op2hash[op] = combined_hash
                     self.hash2ops[combined_hash] = self.hash2ops.pop(curr_hash)
+                    # remove stale entry so future lookups don't hit it
+                    del self.hash2specs[curr_hash]
                 return combined_hash
         # no existing env specs can be combined
         self.hash2specs[new_hash] = new_env_spec
@@ -369,6 +432,11 @@ class OPEnvManager:
         # check the number of common deps
         first_env_req_set = set(first_env_spec.get_requirement_name_list())
         second_env_req_set = set(second_env_spec.get_requirement_name_list())
+        # An empty spec represents an operator that is safe in the main
+        # process.  It must never absorb, or be absorbed into, an isolated
+        # dependency group even when the common-dependency threshold is 0.
+        if not first_env_req_set or not second_env_req_set:
+            return False
         if len(first_env_req_set & second_env_req_set) < self.min_common_dep_num_to_combine:
             return False
         # check if they share the same working dir

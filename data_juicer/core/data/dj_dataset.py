@@ -261,6 +261,7 @@ class NestedDataset(Dataset, DJDataset):
         tracer=None,
         adapter=None,
         open_monitor=True,
+        op_stats_sink=None,
     ):
         # Local import to avoid logger being serialized in multiprocessing
         from loguru import logger
@@ -297,18 +298,41 @@ class NestedDataset(Dataset, DJDataset):
                     "exporter": exporter,
                     "tracer": tracer,
                 }
-                if open_monitor:
+                resource_util_per_op = None
+                use_outer_monitor = open_monitor and not getattr(op, "_use_child_monitor", False)
+                if use_outer_monitor:
                     dataset, resource_util_per_op = Monitor.monitor_func(op.run, args=run_args)
                 else:
                     dataset = op.run(**run_args)
                 # record processed ops
                 if checkpointer is not None:
                     checkpointer.record(op._op_cfg)
+                end = time()
+                op_stats = getattr(op, "_isolation_stats", None)
+                duration = end - start
+                sample_count = len(dataset)
+                if op_stats:
+                    duration = op_stats.get("duration", duration)
+                    sample_count = op_stats.get("sample_count", sample_count)
+                    resource_util_per_op = op_stats.get(
+                        "resource_util",
+                        resource_util_per_op if open_monitor else None,
+                    )
+                if open_monitor and resource_util_per_op is None:
+                    resource_util_per_op = {"time": duration, "sampling interval": 0.5, "resource": []}
                 if open_monitor:
                     resource_util_list.append(resource_util_per_op)
-                end = time()
+                if op_stats_sink is not None:
+                    op_stats_sink.append(
+                        {
+                            "op_name": op._name,
+                            "duration": duration,
+                            "sample_count": sample_count,
+                            "resource_util": resource_util_per_op if open_monitor else None,
+                        }
+                    )
                 logger.info(
-                    f"[{idx}/{op_num}] OP [{op._name}] Done in " f"{end - start:.3f}s. Left {len(dataset)} samples."
+                    f"[{idx}/{op_num}] OP [{op._name}] Done in " f"{duration:.3f}s. Left {sample_count} samples."
                 )
 
                 # record the analysis results of the current dataset

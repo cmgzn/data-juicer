@@ -20,7 +20,7 @@ class Tracer:
     Now supports sample-level tracing for better efficiency and accuracy.
     """
 
-    def __init__(self, work_dir, op_list_to_trace=None, show_num=10, trace_keys=None, lock=None):
+    def __init__(self, work_dir, op_list_to_trace=None, show_num=10, trace_keys=None, lock=None, clear_existing=True):
         """
         Initialization method.
 
@@ -32,13 +32,18 @@ class Tracer:
         :param trace_keys: list of field names to include in trace output.
             If set, the specified fields' values will be included in each
             trace entry.
+        :param clear_existing: whether to clear existing trace files in
+            the trace directory on construction.  Set to ``False`` when
+            reconstructing a Tracer in an isolated subprocess so that
+            trace files written by the main process are preserved.
         """
         self.work_dir = os.path.join(work_dir, "trace")
         if not os.path.exists(self.work_dir):
             os.makedirs(self.work_dir)
         # clear existing trace files in the work_dir
-        for f in os.listdir(self.work_dir):
-            os.remove(os.path.join(self.work_dir, f))
+        if clear_existing:
+            for f in os.listdir(self.work_dir):
+                os.remove(os.path.join(self.work_dir, f))
         self.op_list_to_trace = op_list_to_trace
         if not op_list_to_trace:
             logger.info("Trace for all ops.")

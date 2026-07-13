@@ -15,7 +15,7 @@ from data_juicer.core.executor.dag_execution_mixin import DAGExecutionMixin
 from data_juicer.core.executor.event_logging_mixin import EventLoggingMixin
 from data_juicer.core.exporter import Exporter
 from data_juicer.core.tracer import Tracer
-from data_juicer.ops import load_ops
+from data_juicer.ops import OPEnvManager, load_ops
 from data_juicer.ops.op_fusion import fuse_operators
 from data_juicer.ops.selector import (
     FrequencySpecifiedFieldSelector,
@@ -24,6 +24,16 @@ from data_juicer.ops.selector import (
 from data_juicer.utils import cache_utils
 from data_juicer.utils.ckpt_utils import CheckpointManager
 from data_juicer.utils.sample import random_sample
+
+
+def _create_local_op_env_manager(cfg):
+    if not cfg.local_op_isolation:
+        return None
+    logger.info("Preparing OPEnvManager for local operator isolation...")
+    return OPEnvManager(
+        min_common_dep_num_to_combine=cfg.min_common_dep_num_to_combine,
+        conflict_resolve_strategy=cfg.conflict_resolve_strategy,
+    )
 
 
 class DefaultExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin):
@@ -118,8 +128,29 @@ class DefaultExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin):
             **export_extra_args,
         )
 
+        # Save source config for subprocess reconstruction (JSON-serializable).
+        # Positional args are mapped to keyword names explicitly.
+        self._exporter_config = {
+            "export_path": self.cfg.export_path,
+            "export_type": self.cfg.export_type,
+            "export_shard_size": self.cfg.export_shard_size,
+            "export_in_parallel": self.cfg.export_in_parallel,
+            "num_proc": self.np,
+            "keep_stats_in_res_ds": self.cfg.keep_stats_in_res_ds,
+            "keep_hashes_in_res_ds": self.cfg.keep_hashes_in_res_ds,
+            "encrypt_before_export": getattr(self.cfg, "encrypt_before_export", False),
+            "encryption_key_path": getattr(self.cfg, "encryption_key_path", None),
+            **export_extra_args,
+        }
+
+        # Local isolation is independent from environment merging. With the
+        # default threshold (-1), conflicting operators are still isolated but
+        # each isolated spec keeps its own environment.
+        self.op_env_manager = _create_local_op_env_manager(self.cfg)
+
         # setup tracer
         self.open_tracer = self.cfg.open_tracer
+        self._tracer_config = None  # set below if tracer is opened
         if self.open_tracer:
             logger.info("Preparing tracer...")
             from multiprocessing import Manager
@@ -131,6 +162,15 @@ class DefaultExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin):
                 trace_keys=self.cfg.trace_keys,
                 lock=Manager().Lock(),
             )
+
+            # Save source config for subprocess reconstruction.
+            # Excludes `lock` (not cross-process serializable).
+            self._tracer_config = {
+                "work_dir": self.work_dir,
+                "op_list_to_trace": self.cfg.op_list_to_trace,
+                "show_num": self.cfg.trace_num,
+                "trace_keys": self.cfg.trace_keys,
+            }
 
     def run(
         self,
@@ -165,7 +205,21 @@ class DefaultExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin):
 
         # 2. extract processes and optimize their orders
         logger.info("Preparing process operators...")
-        ops = load_ops(self.cfg.process)
+        ops = load_ops(self.cfg.process, self.op_env_manager)
+
+        # Bind executor-provided runtime context to isolated proxies so the
+        # subprocess can reconstruct exporter/tracer and route isolated logs.
+        from data_juicer.ops.load import IsolatedOpProxy
+
+        isolated_log_dir = os.path.join(self.work_dir, "isolated_logs")
+        for op in ops:
+            if isinstance(op, IsolatedOpProxy):
+                op.bind_runtime(
+                    exporter_config=self._exporter_config,
+                    tracer_config=self._tracer_config,
+                    open_monitor=self.cfg.open_monitor,
+                    isolated_log_dir=isolated_log_dir,
+                )
 
         # Initialize DAG execution planning (pass ops to avoid redundant loading)
         self._initialize_dag_execution(self.cfg, ops=ops)

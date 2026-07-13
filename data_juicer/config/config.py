@@ -581,16 +581,21 @@ def build_base_parser() -> ArgumentParser:
         "is true.",
     )
     parser.add_argument(
+        "--local_op_isolation",
+        type=bool,
+        default=True,
+        help="Whether to isolate local-mode operators whose dependencies conflict with the current environment "
+        "or fall outside Data-Juicer's lock. Enabled by default. This option only affects the default/local "
+        "executor; Ray runtime_env behavior is controlled by min_common_dep_num_to_combine.",
+    )
+    parser.add_argument(
         "--min_common_dep_num_to_combine",
         type=int,
         default=-1,
-        help="The minimum number of common dependencies required to determine whether to merge two operation "
-        "environment specifications. If set to -1, it means no combination of operation environments, where "
-        "every OP has its own runtime environment during processing without any merging. If set to >= 0, "
-        "environments of OPs that share at least min_common_dep_num_to_combine common dependencies will be "
-        "merged. It will open the operator environment manager to automatically analyze and merge runtime "
-        "environment for different OPs. It helps different OPs share and reuse the same runtime environment to "
-        "reduce resource utilization. It's -1 in default. Only available in ray mode. ",
+        help="The minimum number of common dependencies required to merge two operation environment "
+        "specifications. -1 (default) means no merging: local isolation still works when local_op_isolation is "
+        "true, while Ray keeps its existing per-operator behavior. If set to >= 0, environments sharing at "
+        "least this many dependencies are merged. See docs/OperatorEnvIsolation.md.",
     )
     parser.add_argument(
         "--conflict_resolve_strategy",
@@ -600,7 +605,7 @@ def build_base_parser() -> ArgumentParser:
         help="Strategy for resolving dependency conflicts, default is 'split' strategy. 'split': Keep the two "
         "specs split when there is a conflict. 'overwrite': Overwrite the existing dependency with one "
         "from the later OP. 'latest': Use the latest version of all specified dependency versions. "
-        "Only available when min_common_dep_num_to_combine >= 0.",
+        "Only used when environment merging is enabled.",
     )
     parser.add_argument(
         "--op_fusion",

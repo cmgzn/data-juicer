@@ -424,11 +424,21 @@ class ConfigTest(DataJuicerTestCaseBase):
         self.assertEqual(cfg.add_suffix, False)
         self.assertEqual(cfg.export_path, './outputs/')
         self.assertEqual(cfg.suffixes, None)
+        self.assertTrue(cfg.local_op_isolation)
+        self.assertEqual(cfg.min_common_dep_num_to_combine, -1)
         
         # Test default values are of correct type
         self.assertIsInstance(cfg.executor_type, str)
         self.assertIsInstance(cfg.add_suffix, bool)
         self.assertIsInstance(cfg.export_path, str)
+
+    def test_local_op_isolation_can_be_disabled(self):
+        cfg = init_configs(args=[
+            '--config', test_yaml_path,
+            '--local_op_isolation', 'false',
+        ])
+
+        self.assertFalse(cfg.local_op_isolation)
 
     def test_cli_override(self):
         """Test that command line arguments correctly override YAML config values."""

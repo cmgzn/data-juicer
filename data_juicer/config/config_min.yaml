@@ -11,3 +11,6 @@ executor_type: default                                      # type of executor, 
 ray_address: auto                                           # the address of the Ray cluster.
 suffixes: null
 add_suffix: false
+local_op_isolation: true
+min_common_dep_num_to_combine: -1
+conflict_resolve_strategy: split
