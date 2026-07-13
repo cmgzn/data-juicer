@@ -4,6 +4,7 @@ import os.path as osp
 import shutil
 import tempfile
 import unittest
+import uuid
 from unittest.mock import patch, MagicMock
 
 from jsonargparse import Namespace
