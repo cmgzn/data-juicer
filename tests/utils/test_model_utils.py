@@ -615,6 +615,9 @@ class ModelUtilsTest(DataJuicerTestCaseBase):
         )
         self.assertIsInstance(result, str)
         self.assertGreater(len(result), 0)
+        # The model is asked to reply with exactly "OK"; verify the semantic
+        # content rather than only that *some* string came back.
+        self.assertIn("OK", result.upper())
         self.assertIsNotNone(client.last_response)
 
     @skip_if_from_fork("Skipping API-based test because running from a fork repo")
@@ -628,6 +631,11 @@ class ModelUtilsTest(DataJuicerTestCaseBase):
         result = embeddings(["hello world"])
         self.assertIsInstance(result, list)
         self.assertGreater(len(result), 0)
+        # A single input should yield a single embedding vector of floats.
+        first = result[0]
+        self.assertIsInstance(first, list)
+        self.assertGreater(len(first), 0)
+        self.assertTrue(all(isinstance(v, (int, float)) for v in first))
 
     # ===================================================================
     # Mock Server error-path tests.

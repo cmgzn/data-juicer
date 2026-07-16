@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+import pathlib
 import shutil
 import tempfile
 import unittest
@@ -74,8 +75,16 @@ class FileUtilsTest(DataJuicerTestCaseBase):
         self.assertEqual(result_txt, expected_txt)
 
     def test_is_absolute_path(self):
+        # relative paths -> False
         self.assertFalse(is_absolute_path("relative/path"))
-        self.assertTrue(is_absolute_path(os.path.abspath("relative/path")))
+        self.assertFalse(is_absolute_path("./a/b"))
+        self.assertFalse(is_absolute_path(""))
+        # literal absolute path (not derived from the SUT's own logic) -> True
+        abs_literal = os.sep + os.path.join("abs", "path")
+        self.assertTrue(is_absolute_path(abs_literal))
+        # Path input is supported by the signature (Union[str, Path])
+        self.assertTrue(is_absolute_path(pathlib.Path(abs_literal)))
+        self.assertFalse(is_absolute_path(pathlib.Path("relative/path")))
 
     def test_add_suffix_to_filename(self):
         self.assertEqual(add_suffix_to_filename("test.txt", "_suffix"), "test_suffix.txt")
