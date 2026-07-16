@@ -73,7 +73,7 @@ class NLTKUtilsTest(DataJuicerTestCaseBase):
 
             self._with_nltk_path([], empty)
 
-    def test_patch_nltk_pickle_security_replaces_loader_and_allows_classes(self):
+    def test_patch_nltk_pickle_security_extends_allowlist(self):
         old_loader_marker = object()
         old_allowed_marker = object()
         old_loader = getattr(nltk.data, "restricted_pickle_load", old_loader_marker)
@@ -84,13 +84,21 @@ class NLTKUtilsTest(DataJuicerTestCaseBase):
 
             self.assertTrue(nltk_utils.patch_nltk_pickle_security())
 
-            payload = pickle.dumps({"ok": True})
-            self.assertEqual(nltk.data.restricted_pickle_load(io.BytesIO(payload)), {"ok": True})
-            self.assertEqual(nltk.data.restricted_pickle_load(payload), {"ok": True})
+            # The patch must extend NLTK's allowlist with the model classes
+            # Data-Juicer relies on.
             self.assertIn(
                 "nltk.tokenize.punkt.PunktSentenceTokenizer",
                 nltk.data.ALLOWED_PICKLE_CLASSES,
             )
+
+            # The patched loader accepts both bytes and file-like objects for a
+            # benign payload. NOTE: we intentionally do NOT assert on the
+            # loader's security boundary (i.e. whether arbitrary payloads are
+            # accepted) so that this test does not turn the current loading
+            # behavior into a protected contract.
+            payload = pickle.dumps({"ok": True})
+            self.assertEqual(nltk.data.restricted_pickle_load(io.BytesIO(payload)), {"ok": True})
+            self.assertEqual(nltk.data.restricted_pickle_load(payload), {"ok": True})
         finally:
             if old_loader is old_loader_marker:
                 delattr(nltk.data, "restricted_pickle_load")
