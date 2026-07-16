@@ -629,13 +629,11 @@ class ModelUtilsTest(DataJuicerTestCaseBase):
             endpoint="/embeddings",
         )
         result = embeddings(["hello world"])
+        # The default response_path is "data.0.embedding", so a single
+        # embedding vector (a flat list of floats) is returned.
         self.assertIsInstance(result, list)
         self.assertGreater(len(result), 0)
-        # A single input should yield a single embedding vector of floats.
-        first = result[0]
-        self.assertIsInstance(first, list)
-        self.assertGreater(len(first), 0)
-        self.assertTrue(all(isinstance(v, (int, float)) for v in first))
+        self.assertTrue(all(isinstance(v, (int, float)) for v in result))
 
     # ===================================================================
     # Mock Server error-path tests.
