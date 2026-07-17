@@ -290,6 +290,9 @@ class DataLoadStrategyRegistryTest(DataJuicerTestCaseBase):
         self.assertIn("extra", ds.features)
 
     def test_registry_uses_defaults_and_specific_patterns(self):
+        saved_strategies = DataLoadStrategyRegistry._strategies.copy()
+        self.addCleanup(
+            setattr, DataLoadStrategyRegistry, '_strategies', saved_strategies)
         DataLoadStrategyRegistry._strategies = {}
 
         class ConcreteDataLoadStrategy(DataLoadStrategy):

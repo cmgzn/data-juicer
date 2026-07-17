@@ -43,6 +43,7 @@ from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase, skip_if_fro
 # or connection errors.  This server is NOT for happy-path testing — happy
 # paths should be covered by real API tests with @skip_if_from_fork.
 # ---------------------------------------------------------------------------
+
 class LocalAPIHandler(BaseHTTPRequestHandler):
     requests = []
 
@@ -101,6 +102,7 @@ class LocalAPIHandler(BaseHTTPRequestHandler):
 
         self._send_json({"error": "not found"}, status=404)
 
+
 # other funcs are called by ops already
 #
 # ===================================================================
@@ -125,7 +127,7 @@ class ModelUtilsTest(DataJuicerTestCaseBase):
 
     @staticmethod
     def _local_client_params(base_url):
-        return {"base_url": base_url, "api" + "_key": "local-token"}
+        return {"base_url": base_url, "api_key": "local-token"}  # noqa: S106
 
     def test_get_backup_model_link(self):
         test_data = [
