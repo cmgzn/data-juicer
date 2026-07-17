@@ -903,5 +903,510 @@ class CoreEventLoggingFileTest(DataJuicerTestCaseBase):
                 self.assertEqual(metadata, {})
 
 
+class FormatEventEdgeCasesTest(DataJuicerTestCaseBase):
+
+    def setUp(self):
+        super().setUp()
+        self.tmp_dir = tempfile.mkdtemp()
+        self.logger = EventLogger(self.tmp_dir, job_id='fmt-test')
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp_dir, ignore_errors=True)
+        super().tearDown()
+
+    def _event(self, **kwargs):
+        defaults = dict(
+            event_id='e1', event_type=EventType.JOB_START, job_id='j1',
+            timestamp=1000000.0, message='test',
+        )
+        defaults.update(kwargs)
+        return Event(**defaults)
+
+    def test_string_duration(self):
+        e = self._event(duration='not-a-number')
+        result = self.logger._format_event_for_logging(e)
+        self.assertIn('DURATION[not-a-number]', result)
+
+    def test_numeric_duration(self):
+        e = self._event(duration=3.14159)
+        result = self.logger._format_event_for_logging(e)
+        self.assertIn('DURATION[3.142s]', result)
+
+    def test_error_message(self):
+        e = self._event(error_message='OOM killed')
+        result = self.logger._format_event_for_logging(e)
+        self.assertIn('ERROR[OOM killed]', result)
+
+    def test_checkpoint_path(self):
+        e = self._event(checkpoint_path='/a/b/ckpt_001.parquet')
+        result = self.logger._format_event_for_logging(e)
+        self.assertIn('CHECKPOINT[ckpt_001.parquet]', result)
+
+    def test_output_path(self):
+        e = self._event(output_path='/data/output/result.jsonl')
+        result = self.logger._format_event_for_logging(e)
+        self.assertIn('OUTPUT[result.jsonl]', result)
+
+    def test_metadata_with_key_fields(self):
+        e = self._event(metadata={
+            'status': 'failed', 'retry_count': 3,
+            'error_type': 'ValueError', 'operation_class': 'mapper_x',
+            'extra': 'ignored',
+        })
+        result = self.logger._format_event_for_logging(e)
+        self.assertIn('META[', result)
+        self.assertIn('"status": "failed"', result)
+        self.assertIn('"retry_count": 3', result)
+        self.assertNotIn('extra', result)
+
+    def test_metadata_without_key_fields(self):
+        e = self._event(metadata={'irrelevant': True})
+        result = self.logger._format_event_for_logging(e)
+        self.assertNotIn('META[', result)
+
+    def test_operation_with_idx(self):
+        e = self._event(operation_name='filter_x', operation_idx=2)
+        result = self.logger._format_event_for_logging(e)
+        self.assertIn('OP[filter_x]', result)
+        self.assertIn('OP_IDX[2]', result)
+
+
+class EventLoggerStatusReportTest(DataJuicerTestCaseBase):
+
+    def setUp(self):
+        super().setUp()
+        self.tmp_dir = tempfile.mkdtemp()
+        self.logger = EventLogger(self.tmp_dir, job_id='rpt-test')
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp_dir, ignore_errors=True)
+        super().tearDown()
+
+    def test_report_shows_event_distribution(self):
+        self.logger.log_event(
+            EventType.JOB_START, 'start', event_id='e1')
+        self.logger.log_event(
+            EventType.OP_START, 'op1 start', event_id='e2',
+            operation_name='op1', operation_idx=0)
+        self.logger.log_event(
+            EventType.OP_COMPLETE, 'op1 done', event_id='e3',
+            operation_name='op1', operation_idx=0)
+        report = self.logger.generate_status_report()
+        self.assertIn('Total Events: 3', report)
+        self.assertIn('job_start', report)
+        self.assertIn('op_start', report)
+        self.assertIn('op_complete', report)
+
+
+class ListAvailableJobsEdgeCaseTest(DataJuicerTestCaseBase):
+
+    def setUp(self):
+        super().setUp()
+        self.tmp_dir = tempfile.mkdtemp()
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp_dir, ignore_errors=True)
+        super().tearDown()
+
+    def test_corrupted_summary_skipped(self):
+        job_dir = os.path.join(self.tmp_dir, 'job1')
+        os.makedirs(job_dir)
+        with open(os.path.join(job_dir, 'job_summary.json'), 'w') as f:
+            f.write('{invalid')
+        jobs = EventLogger.list_available_jobs(self.tmp_dir)
+        self.assertEqual(jobs, [])
+
+    def test_valid_and_corrupted_mixed(self):
+        good_dir = os.path.join(self.tmp_dir, 'good')
+        bad_dir = os.path.join(self.tmp_dir, 'bad')
+        os.makedirs(good_dir)
+        os.makedirs(bad_dir)
+        with open(os.path.join(good_dir, 'job_summary.json'), 'w') as f:
+            json.dump({'job_id': 'good', 'status': 'completed'}, f)
+        with open(os.path.join(bad_dir, 'job_summary.json'), 'w') as f:
+            f.write('not json')
+        jobs = EventLogger.list_available_jobs(self.tmp_dir)
+        self.assertEqual(len(jobs), 1)
+        self.assertEqual(jobs[0]['job_id'], 'good')
+
+
+class ResumptionAnalysisHelpersTest(DataJuicerTestCaseBase):
+
+    def _make_executor(self, work_dir, events_content=None):
+        class Executor(EventLoggingMixin):
+            def __init__(self, wd):
+                self.cfg = SimpleNamespace(
+                    event_logging={'enabled': True},
+                    job_id='test-job',
+                    config='test.yaml',
+                    project_name='test',
+                )
+                self.work_dir = wd
+                self.executor_type = 'unit'
+                super().__init__()
+
+        os.makedirs(work_dir, exist_ok=True)
+        summary = {'job_id': 'test-job', 'start_time': time.time() - 10,
+                    'resumption_command': 'dj --config test.yaml'}
+        with open(os.path.join(work_dir, 'job_summary.json'), 'w') as f:
+            json.dump(summary, f)
+
+        ex = Executor(work_dir)
+
+        if events_content:
+            with open(ex.event_logger.jsonl_file, 'w') as f:
+                for evt in events_content:
+                    f.write(json.dumps(evt) + '\n')
+
+        return ex
+
+    def setUp(self):
+        super().setUp()
+        self.tmp_dir = tempfile.mkdtemp()
+        self.work_dir = os.path.join(self.tmp_dir, 'job')
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp_dir, ignore_errors=True)
+        super().tearDown()
+
+    def test_determine_job_status_completed(self):
+        ex = self._make_executor(self.work_dir)
+        events = [{'event_type': 'job_complete'}]
+        status = ex._determine_job_status(events, [], [])
+        self.assertEqual(status, 'completed')
+
+    def test_determine_job_status_failed(self):
+        ex = self._make_executor(self.work_dir)
+        events = [{'event_type': 'job_failed'}]
+        status = ex._determine_job_status(events, [], [])
+        self.assertEqual(status, 'failed')
+
+    def test_determine_job_status_not_started(self):
+        ex = self._make_executor(self.work_dir)
+        status = ex._determine_job_status([], [], [])
+        self.assertEqual(status, 'not_started')
+
+    def test_determine_job_status_running(self):
+        ex = self._make_executor(self.work_dir)
+        completes = [{'metadata': {'success': False, 'error': None}}]
+        status = ex._determine_job_status([], completes, [])
+        self.assertEqual(status, 'running')
+
+    def test_determine_job_status_completed_with_failures(self):
+        ex = self._make_executor(self.work_dir)
+        completes = [{'metadata': {'success': True}},
+                      {'metadata': {'success': False, 'error': 'e'}}]
+        status = ex._determine_job_status([], completes, [])
+        self.assertEqual(status, 'completed_with_failures')
+
+    def test_analyze_partition_states(self):
+        ex = self._make_executor(self.work_dir)
+        starts = [{'partition_id': 0, 'timestamp': 1.0},
+                  {'partition_id': 1, 'timestamp': 2.0}]
+        completes = [{'partition_id': 0, 'timestamp': 3.0,
+                       'metadata': {'success': True,
+                                    'duration_seconds': 2.0,
+                                    'output_path': '/out'}}]
+        failures = [{'partition_id': 1}]
+        op_starts = [{'partition_id': 0, 'operation_name': 'filter',
+                       'operation_idx': 0, 'timestamp': 1.5}]
+        op_completes = [{'partition_id': 0, 'operation_name': 'filter',
+                          'operation_idx': 0, 'timestamp': 2.5}]
+        states = ex._analyze_partition_states(
+            starts, completes, failures, op_starts, op_completes)
+        self.assertIn(0, states)
+        self.assertEqual(states[0]['status'], 'completed')
+        self.assertIn(1, states)
+
+    def test_determine_partition_state_completed(self):
+        ex = self._make_executor(self.work_dir)
+        state = ex._determine_partition_state(
+            partition_id=0,
+            start_event={'timestamp': 1.0},
+            completes=[{'timestamp': 5.0,
+                         'metadata': {'success': True,
+                                      'duration_seconds': 4.0,
+                                      'output_path': '/out'}}],
+            failures=[],
+            op_starts=[{'operation_name': 'f', 'operation_idx': 0,
+                         'timestamp': 2.0}],
+            op_completes=[{'operation_name': 'f', 'operation_idx': 0,
+                            'timestamp': 3.0}],
+        )
+        self.assertEqual(state['status'], 'completed')
+        self.assertTrue(state['success'])
+        self.assertEqual(state['partition_id'], 0)
+        self.assertIsNotNone(state['current_operation'])
+        self.assertTrue(state['current_operation']['completed'])
+
+    def test_determine_partition_state_failed(self):
+        ex = self._make_executor(self.work_dir)
+        state = ex._determine_partition_state(
+            partition_id=1,
+            start_event={'timestamp': 1.0},
+            completes=[{'timestamp': 5.0,
+                         'metadata': {'success': False,
+                                      'error': 'OOM'}}],
+            failures=[{'partition_id': 1}],
+            op_starts=[],
+            op_completes=[],
+        )
+        self.assertEqual(state['status'], 'failed')
+        self.assertFalse(state['success'])
+        self.assertEqual(state['retry_count'], 1)
+
+    def test_determine_partition_state_running(self):
+        ex = self._make_executor(self.work_dir)
+        state = ex._determine_partition_state(
+            partition_id=2,
+            start_event={'timestamp': 1.0},
+            completes=[],
+            failures=[],
+            op_starts=[{'operation_name': 'mapper', 'operation_idx': 1,
+                         'timestamp': 2.0}],
+            op_completes=[],
+        )
+        self.assertEqual(state['status'], 'running')
+        self.assertIsNotNone(state['current_operation'])
+        self.assertFalse(state['current_operation']['completed'])
+
+    def test_generate_resumption_plan_completed_job(self):
+        ex = self._make_executor(self.work_dir)
+        plan = ex._generate_resumption_plan({}, [], 'completed')
+        self.assertFalse(plan['can_resume'])
+
+    def test_generate_resumption_plan_failed_with_retry(self):
+        ex = self._make_executor(self.work_dir)
+        states = {
+            0: {'status': 'completed'},
+            1: {'status': 'failed'},
+        }
+        plan = ex._generate_resumption_plan(states, [], 'failed')
+        self.assertTrue(plan['can_resume'])
+        self.assertIn(1, plan['partitions_to_retry'])
+        self.assertIn(0, plan['partitions_to_skip'])
+
+    def test_generate_resumption_plan_with_checkpoint(self):
+        ex = self._make_executor(self.work_dir)
+        checkpoints = [{'timestamp': 10.0,
+                         'metadata': {'checkpoint_path': '/ckpt'}}]
+        plan = ex._generate_resumption_plan({}, checkpoints, 'running')
+        self.assertTrue(plan['can_resume'])
+        self.assertEqual(plan['resume_from_checkpoint'], '/ckpt')
+
+    def test_generate_resumption_plan_no_work(self):
+        ex = self._make_executor(self.work_dir)
+        plan = ex._generate_resumption_plan({}, [], 'not_started')
+        self.assertFalse(plan['can_resume'])
+
+    def test_calculate_progress_metrics(self):
+        ex = self._make_executor(self.work_dir)
+        states = {
+            0: {'status': 'completed'},
+            1: {'status': 'completed'},
+            2: {'status': 'failed'},
+            3: {'status': 'running'},
+        }
+        events = [{'event_type': 'job_start', 'timestamp': time.time() - 5}]
+        metrics = ex._calculate_progress_metrics(states, events)
+        self.assertEqual(metrics['total_partitions'], 4)
+        self.assertEqual(metrics['completed_partitions'], 2)
+        self.assertEqual(metrics['failed_partitions'], 1)
+        self.assertEqual(metrics['running_partitions'], 1)
+        self.assertAlmostEqual(metrics['progress_percentage'], 50.0)
+        self.assertGreater(metrics['elapsed_time_seconds'], 0)
+
+    def test_calculate_progress_metrics_empty(self):
+        ex = self._make_executor(self.work_dir)
+        metrics = ex._calculate_progress_metrics({}, [])
+        self.assertEqual(metrics['progress_percentage'], 0)
+        self.assertEqual(metrics['total_partitions'], 0)
+
+    def test_full_analyze_resumption_state(self):
+        events = [
+            {'event_type': 'job_start', 'timestamp': 1.0},
+            {'event_type': 'partition_start', 'partition_id': 0,
+             'timestamp': 2.0},
+            {'event_type': 'op_start', 'partition_id': 0,
+             'operation_name': 'filter', 'operation_idx': 0,
+             'timestamp': 3.0},
+            {'event_type': 'op_complete', 'partition_id': 0,
+             'operation_name': 'filter', 'operation_idx': 0,
+             'timestamp': 4.0},
+            {'event_type': 'partition_complete', 'partition_id': 0,
+             'timestamp': 5.0,
+             'metadata': {'success': True, 'duration_seconds': 3.0,
+                           'output_path': '/out'}},
+            {'event_type': 'partition_start', 'partition_id': 1,
+             'timestamp': 6.0},
+            {'event_type': 'partition_failed', 'partition_id': 1,
+             'timestamp': 7.0},
+        ]
+        ex = self._make_executor(self.work_dir, events)
+        result = ex.analyze_resumption_state('test-job')
+        self.assertEqual(result['job_id'], 'test-job')
+        self.assertTrue(result['can_resume'])
+        self.assertIn(1, result['partitions_to_retry'])
+        self.assertIn(0, result['partitions_to_skip'])
+
+    def test_analyze_resumption_no_logger(self):
+        ex = self._make_executor(self.work_dir)
+        ex.event_logger = None
+        result = ex.analyze_resumption_state('test')
+        self.assertIn('error', result)
+
+    def test_analyze_resumption_no_events_file(self):
+        ex = self._make_executor(self.work_dir)
+        os.remove(ex.event_logger.jsonl_file)
+        result = ex.analyze_resumption_state('test')
+        self.assertIn('error', result)
+
+
+class MixinUpdateJobSummaryTest(DataJuicerTestCaseBase):
+
+    def _make_executor(self, work_dir):
+        class Executor(EventLoggingMixin):
+            def __init__(self, wd):
+                self.cfg = SimpleNamespace(
+                    event_logging={'enabled': True},
+                    job_id='summary-test',
+                    config='test.yaml',
+                    project_name='test',
+                )
+                self.work_dir = wd
+                self.executor_type = 'unit'
+                super().__init__()
+
+        os.makedirs(work_dir, exist_ok=True)
+        return Executor(work_dir)
+
+    def setUp(self):
+        super().setUp()
+        self.tmp_dir = tempfile.mkdtemp()
+        self.work_dir = os.path.join(self.tmp_dir, 'job')
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp_dir, ignore_errors=True)
+        super().tearDown()
+
+    def test_update_completed(self):
+        ex = self._make_executor(self.work_dir)
+        summary = {'job_id': 'j1', 'start_time': time.time() - 10,
+                    'resumption_command': 'dj'}
+        summary_path = os.path.join(self.work_dir, 'job_summary.json')
+        with open(summary_path, 'w') as f:
+            json.dump(summary, f)
+        ex._update_job_summary('completed')
+        with open(summary_path) as f:
+            updated = json.load(f)
+        self.assertEqual(updated['status'], 'completed')
+        self.assertIn('duration', updated)
+
+    def test_update_failed(self):
+        ex = self._make_executor(self.work_dir)
+        summary = {'job_id': 'j1', 'start_time': time.time() - 5,
+                    'resumption_command': 'dj'}
+        summary_path = os.path.join(self.work_dir, 'job_summary.json')
+        with open(summary_path, 'w') as f:
+            json.dump(summary, f)
+        ex._update_job_summary('failed', error_message='crash')
+        with open(summary_path) as f:
+            updated = json.load(f)
+        self.assertEqual(updated['status'], 'failed')
+        self.assertEqual(updated['error_message'], 'crash')
+
+    def test_update_no_summary_file(self):
+        ex = self._make_executor(self.work_dir)
+        ex._update_job_summary('completed')
+
+
+class MixinGetConfigNameTest(DataJuicerTestCaseBase):
+
+    def _make_executor(self, config=None, project_name='dj'):
+        class Executor(EventLoggingMixin):
+            def __init__(self):
+                self.cfg = SimpleNamespace(
+                    event_logging={'enabled': False},
+                    job_id='cfg-test',
+                    config=config,
+                    project_name=project_name,
+                )
+                self.work_dir = '/tmp/unused'
+                self.executor_type = 'unit'
+                super().__init__()
+        return Executor()
+
+    def test_from_config_file(self):
+        ex = self._make_executor(config='/path/to/my_pipeline.yaml')
+        name = ex._get_config_name()
+        self.assertEqual(name, 'my_pipeline')
+
+    def test_from_project_name(self):
+        ex = self._make_executor(config=None, project_name='my-project')
+        name = ex._get_config_name()
+        self.assertEqual(name, 'my-project')
+
+    def test_special_chars_cleaned(self):
+        ex = self._make_executor(config='/a/b/file with spaces!.yaml')
+        name = ex._get_config_name()
+        self.assertNotIn(' ', name)
+        self.assertNotIn('!', name)
+
+
+class MixinLogPartitionCompleteTest(DataJuicerTestCaseBase):
+
+    def setUp(self):
+        super().setUp()
+        self.tmp_dir = tempfile.mkdtemp()
+        self.work_dir = os.path.join(self.tmp_dir, 'job')
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp_dir, ignore_errors=True)
+        super().tearDown()
+
+    def _make_executor(self):
+        class Executor(EventLoggingMixin):
+            def __init__(self, wd):
+                self.cfg = SimpleNamespace(
+                    event_logging={'enabled': True},
+                    job_id='part-test',
+                    config='test.yaml',
+                    project_name='test',
+                )
+                self.work_dir = wd
+                self.executor_type = 'unit'
+                super().__init__()
+
+            def _get_dag_node_for_operation(self, *a, **kw):
+                return None
+
+        os.makedirs(self.work_dir, exist_ok=True)
+        return Executor(self.work_dir)
+
+    def test_log_partition_complete_success(self):
+        ex = self._make_executor()
+        ex.log_partition_complete(0, 5.0, '/output/part0', success=True)
+        events = ex.event_logger.get_events(
+            event_type=EventType.PARTITION_COMPLETE)
+        self.assertEqual(len(events), 1)
+        self.assertIn('successfully', events[0].message)
+
+    def test_log_partition_complete_failure(self):
+        ex = self._make_executor()
+        ex.log_partition_complete(1, 2.0, '/output/part1',
+                                  success=False, error='timeout')
+        events = ex.event_logger.get_events(
+            event_type=EventType.PARTITION_COMPLETE)
+        self.assertEqual(len(events), 1)
+        self.assertIn('failure', events[0].message)
+
+    def test_log_op_complete_with_metrics(self):
+        ex = self._make_executor()
+        ex.log_op_complete(0, 'filter_x', 0, 2.0, None, 1000, 500)
+        events = ex.event_logger.get_events(
+            event_type=EventType.OP_COMPLETE)
+        self.assertEqual(len(events), 1)
+
+
 if __name__ == '__main__':
     unittest.main()
