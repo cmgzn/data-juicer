@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 
 from data_juicer.ops.base_op import Filter, Mapper, OP
-from data_juicer.ops.filter import AudioDurationFilter
+from data_juicer.ops.filter import AverageLineLengthFilter
 from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 
 
@@ -12,7 +12,7 @@ class RemoveExtraParametersTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         super().setUp()
-        self.op = AudioDurationFilter()
+        self.op = AverageLineLengthFilter()
 
     def test_removes_underscored_keys(self):
         params = {'_internal': 1, 'public': 2, '__dunder': 3}
@@ -39,7 +39,7 @@ class AddParametersTest(DataJuicerTestCaseBase):
 
     def setUp(self):
         super().setUp()
-        self.op = AudioDurationFilter()
+        self.op = AverageLineLengthFilter()
 
     def test_merge(self):
         init = {'a': 1, 'b': 2}
@@ -55,13 +55,12 @@ class AddParametersTest(DataJuicerTestCaseBase):
 
 class IsBatchedOpTest(DataJuicerTestCaseBase):
 
-    def test_not_batched_by_default(self):
-        op = AudioDurationFilter()
-        self.assertFalse(op.is_batched_op())
+    def test_batched_op_returns_true(self):
+        op = AverageLineLengthFilter()
+        self.assertTrue(op.is_batched_op())
 
-    def test_batch_mode_explicit_raises_on_conflict(self):
-        op = AudioDurationFilter()
-        op._batched_op = True
+    def test_batch_mode_false_on_batched_op_raises(self):
+        op = AverageLineLengthFilter()
         op.batch_mode = False
         with self.assertRaises(ValueError):
             op.is_batched_op()
@@ -70,7 +69,7 @@ class IsBatchedOpTest(DataJuicerTestCaseBase):
 class EmptyHistoryTest(DataJuicerTestCaseBase):
 
     def test_returns_numpy_array(self):
-        op = AudioDurationFilter()
+        op = AverageLineLengthFilter()
         result = op.empty_history()
         self.assertIsInstance(result, np.ndarray)
         self.assertEqual(result.shape, (0, 0))
@@ -143,7 +142,7 @@ class BaseOPTest(DataJuicerTestCaseBase):
         ]
         for tc in test_cases:
             min_closed_interval, max_closed_interval, reversed_range, val, min_val, max_val, tgt = tc
-            op = AudioDurationFilter(min_closed_interval=min_closed_interval,
+            op = AverageLineLengthFilter(min_closed_interval=min_closed_interval,
                                      max_closed_interval=max_closed_interval,
                                      reversed_range=reversed_range)
             self.assertEqual(
