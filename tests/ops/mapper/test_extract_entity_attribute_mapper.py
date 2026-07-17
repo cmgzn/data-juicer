@@ -177,10 +177,8 @@ class ExtractEntityAttributeMapperAPITest(DataJuicerTestCaseBase):
             '李莲花：放心吧，我认识他十几年了，对他一清二楚。\n'
             '方多病：认识十几年？你上次才说是一面之缘？\n'
         )
-        samples = [{'text': raw_text}]
-        dataset = Dataset.from_list(samples)
-        dataset = op.run(dataset)
-        result = dataset[0]
+        sample = {'text': raw_text, Fields.meta: {}}
+        result = op.process_single(sample)
         self.assertNotIn('text', result)
         self.assertIn(MetaKeys.main_entities, result[Fields.meta])
 

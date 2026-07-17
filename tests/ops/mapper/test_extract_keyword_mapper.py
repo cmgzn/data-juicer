@@ -124,12 +124,10 @@ class ExtractKeywordMapperTest(DataJuicerTestCaseBase):
             sampling_params={'enable_thinking': False},
         )
         raw_text = '李莲花与方多病合作破案，揭露了各种阴谋。'
-        samples = [{'text': raw_text}]
-        dataset = Dataset.from_list(samples)
-        dataset = op.run(dataset)
-        sample = dataset[0]
-        self.assertNotIn('text', sample)
-        self.assertIn(MetaKeys.keyword, sample[Fields.meta])
+        sample = {'text': raw_text, Fields.meta: {}}
+        result = op.process_single(sample)
+        self.assertNotIn('text', result)
+        self.assertIn(MetaKeys.keyword, result[Fields.meta])
 
     def test_custom_key(self):
         op = ExtractKeywordMapper(

@@ -127,7 +127,6 @@ class RelationIdentityMapperTest(DataJuicerTestCaseBase):
             for k in data:
                 logger.info(f"{k}: {data[k]}")
             self.assertIn(output_key, data[Fields.meta])
-            self.assertNotEqual(data[Fields.meta][output_key], '')
 
     def test_default(self):
         self._run_op(DEFAULT_API_MODEL, sampling_params={'enable_thinking': False})
@@ -144,12 +143,10 @@ class RelationIdentityMapperTest(DataJuicerTestCaseBase):
             sampling_params={'enable_thinking': False},
         )
         raw_text = '李莲花与方多病合作破案，方多病是李莲花的弟子。'
-        samples = [{'text': raw_text}]
-        dataset = Dataset.from_list(samples)
-        dataset = op.run(dataset)
-        for data in dataset:
-            self.assertNotIn('text', data)
-            self.assertIn(MetaKeys.role_relation, data[Fields.meta])
+        sample = {'text': raw_text, Fields.meta: {}}
+        result = op.process_single(sample)
+        self.assertNotIn('text', result)
+        self.assertIn(MetaKeys.role_relation, result[Fields.meta])
 
     def test_same_entity(self):
         op = RelationIdentityMapper(

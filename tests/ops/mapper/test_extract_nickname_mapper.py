@@ -157,10 +157,8 @@ class ExtractNicknameMapperAPITest(DataJuicerTestCaseBase):
             '李莲花：方小宝，你可听过江湖上有什么门派是驯兽来斗？\n'
             '方多病回过神：不、不曾听过。\n'
         )
-        samples = [{'text': raw_text}]
-        dataset = Dataset.from_list(samples)
-        dataset = op.run(dataset)
-        result = dataset[0]
+        sample = {'text': raw_text, Fields.meta: {}}
+        result = op.process_single(sample)
         self.assertNotIn('text', result)
         self.assertIn(MetaKeys.nickname, result[Fields.meta])
 
