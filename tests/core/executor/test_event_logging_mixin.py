@@ -983,14 +983,17 @@ class EventLoggerStatusReportTest(DataJuicerTestCaseBase):
         super().tearDown()
 
     def test_report_shows_event_distribution(self):
-        self.logger.log_event(
-            EventType.JOB_START, 'start', event_id='e1')
-        self.logger.log_event(
-            EventType.OP_START, 'op1 start', event_id='e2',
-            operation_name='op1', operation_idx=0)
-        self.logger.log_event(
-            EventType.OP_COMPLETE, 'op1 done', event_id='e3',
-            operation_name='op1', operation_idx=0)
+        e1 = Event(event_id='e1', event_type=EventType.JOB_START,
+                   timestamp=time.time(), message='start', job_id='j')
+        e2 = Event(event_id='e2', event_type=EventType.OP_START,
+                   timestamp=time.time(), message='op1 start', job_id='j',
+                   operation_name='op1', operation_idx=0)
+        e3 = Event(event_id='e3', event_type=EventType.OP_COMPLETE,
+                   timestamp=time.time(), message='op1 done', job_id='j',
+                   operation_name='op1', operation_idx=0)
+        self.logger.log_event(e1)
+        self.logger.log_event(e2)
+        self.logger.log_event(e3)
         report = self.logger.generate_status_report()
         self.assertIn('Total Events: 3', report)
         self.assertIn('job_start', report)
@@ -1241,6 +1244,9 @@ class ResumptionAnalysisHelpersTest(DataJuicerTestCaseBase):
              'timestamp': 6.0},
             {'event_type': 'partition_failed', 'partition_id': 1,
              'timestamp': 7.0},
+            {'event_type': 'partition_complete', 'partition_id': 1,
+             'timestamp': 7.5,
+             'metadata': {'success': False, 'error': 'OOM'}},
         ]
         ex = self._make_executor(self.work_dir, events)
         result = ex.analyze_resumption_state('test-job')
@@ -1257,7 +1263,14 @@ class ResumptionAnalysisHelpersTest(DataJuicerTestCaseBase):
 
     def test_analyze_resumption_no_events_file(self):
         ex = self._make_executor(self.work_dir)
-        os.remove(ex.event_logger.jsonl_file)
+        # Remove all events files (name has dynamic timestamp)
+        import glob
+        for f in glob.glob(os.path.join(self.work_dir, 'events_*.jsonl')):
+            os.remove(f)
+        # Also remove from logs dir
+        logs_dir = os.path.join(self.work_dir, 'logs')
+        for f in glob.glob(os.path.join(logs_dir, 'events_*.jsonl')):
+            os.remove(f)
         result = ex.analyze_resumption_state('test')
         self.assertIn('error', result)
 
