@@ -184,7 +184,7 @@ All the specific operators are listed below, each featured with several capabili
 | agent_bad_case_signal_mapper | 💻CPU 🟡Beta | Attach structured bad-case *signals* and a conservative *tier* to each sample. 将结构化的坏情况 * 信号 * 和保守 * 层 * 附加到每个样本。 | - | - |
 | agent_dialog_normalize_mapper | 🔤Text 💻CPU 🟡Beta | Normalize agent format (messages + choices) to DJ fields. 将代理格式 (消息选择) 标准化为DJ字段。 | - | - |
 | agent_insight_llm_mapper | 💻CPU 🔗API 🟡Beta | Synthesize stats + LLM eval text into ``meta.agent_insight_llm`` (JSON). 将stats LLM eval文本合成为 &#39;&#39;meta.agent_insight_llm &#39;&#39;(JSON)。 | - | - |
-| agent_skill_insight_mapper | 💻CPU 🔗API 🔴Alpha | Summarize agent_tool_types and agent_skill_types into insights via LLM. 通过大语言模型将代理工具类型和代理技能类型总结为洞察。 | - | - |
+| agent_skill_insight_mapper | 💻CPU 🔗API 🟡Beta | Summarize agent_tool_types and agent_skill_types into insights via LLM. 通过大语言模型将代理工具类型和代理技能类型总结为洞察。 | - | - |
 | agent_tool_relevance_mapper | 💻CPU 🔴Alpha | Rough fit between tools/capabilities and the user task (uses meta tool tags). 工具/功能与用户任务之间的粗略匹配 (使用元工具标签)。 | - | [OpenJudge tool graders](https://agentscope-ai.github.io/OpenJudge/built_in_graders/agent_graders/) |
 | agent_tool_type_mapper | 💻CPU 🟡Beta | Set primary_tool_type and dominant_tool_types from meta.agent_tool_types. 从meta.Agent_ tool_types设置primary_tool_type和dominant_tool_types。 | - | - |
 | agent_trace_coherence_mapper | 🔤Text 💻CPU 🔴Alpha | Coherence of the flattened session ``text`` (goal focus, few detours). 扁平化会话 “文本” 的连贯性 (目标集中，少走弯路)。 | - | [OpenJudge trajectory graders](https://agentscope-ai.github.io/OpenJudge/built_in_graders/agent_graders/) |
