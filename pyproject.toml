@@ -84,6 +84,7 @@ vision = [
     "tf-keras==2.21.0",  # required by deepface on TensorFlow>=2.16
     "imageio>=2.37",  # required by VideoLLaMA3 remote code
     "imageio-ffmpeg>=0.6",  # ffmpeg backend for imageio
+    "scipy",  # signal/interpolation/wavfile for face-track ASD ops
 ]
 
 # Natural Language Processing
