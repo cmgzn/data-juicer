@@ -119,7 +119,6 @@ audio = [
     "ffmpeg-python",
     "audiomentations",
     "funasr==1.3.14",  # SenseVoice-based ASR / speech-emotion ops (HumanVBench)
-    "modelscope>=1.38.1",  # resolve SenseVoiceSmall snapshot for funasr (HumanVBench)
 ]
 
 # Distributed Computing
