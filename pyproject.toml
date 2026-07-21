@@ -75,7 +75,6 @@ vision = [
     "qwen-vl-utils==0.0.14",  # for Qwen-VL
     "ptlflow==0.4.1",  # optical flow models collection
     "timm==1.0.22",  # avoid importing issue in the latest v1.0.23
-    "protobuf<=3.20.3",  # timm->wandb pb2 code breaks on protobuf>=4 (Descriptors cannot be created directly)
     # --- HumanVBench (CVPR 2026) face/video ops ---
     # These ops additionally need ffmpeg/ffprobe binaries on PATH (VideoLLaMA3
     # video loading) and a flash-attn build matching the local torch/CUDA; the
