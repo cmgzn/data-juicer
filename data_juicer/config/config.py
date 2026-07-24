@@ -879,8 +879,9 @@ def init_configs(args: Optional[List[str]] = None, which_entry: object = None, l
 
                 # check the entry
                 from data_juicer.core.analyzer import Analyzer
+                from data_juicer.core.ray_analyzer import RayAnalyzer
 
-                if not isinstance(which_entry, Analyzer) and cfg.auto:
+                if not isinstance(which_entry, (Analyzer, RayAnalyzer)) and cfg.auto:
                     err_msg = "--auto argument can only be used for analyzer!"
                     logger.error(err_msg)
                     raise NotImplementedError(err_msg)
