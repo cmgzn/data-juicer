@@ -57,7 +57,11 @@ class RayAnalyzer:
 
         from data_juicer.utils.ray_utils import initialize_ray
 
-        initialize_ray(cfg=cfg)
+        try:
+            initialize_ray(cfg=self.cfg)
+        except ConnectionError:
+            logger.info("No existing Ray cluster found, starting a local one...")
+            ray.init(ignore_reinit_error=True)
 
         self.dataset_builder = DatasetBuilder(self.cfg, executor_type="ray")
 
