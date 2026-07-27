@@ -3,6 +3,7 @@ from typing import Optional
 
 import pandas as pd
 import pyarrow
+import pyarrow.compute as pc
 from jsonargparse import Namespace
 from loguru import logger
 from pydantic import PositiveInt
@@ -52,7 +53,7 @@ class RayAnalyzer:
     """
 
     def __init__(self, cfg: Optional[Namespace] = None):
-        self.cfg = init_configs(which_entry=self) if cfg is None else cfg
+        self.cfg = init_configs(allow_auto=True) if cfg is None else cfg
         self.work_dir = self.cfg.work_dir
 
         from data_juicer.utils.ray_utils import initialize_ray
@@ -142,7 +143,7 @@ class RayAnalyzer:
     def _compute_overall(self, dataset):
         os.makedirs(self.analysis_path, exist_ok=True)
 
-        from ray.data.aggregate import Max, Mean, Min, Std
+        from ray.data.aggregate import Count, Max, Mean, Min, Std
 
         select_cols = []
         available_cols = dataset.data.columns()
@@ -163,6 +164,8 @@ class RayAnalyzer:
             return pd.DataFrame()
 
         numeric_cols = []
+        list_numeric_cols = []
+        skipped_cols = []
         arrow_schema = flat_data.schema()
         if hasattr(arrow_schema, "base_schema"):
             arrow_schema = arrow_schema.base_schema
@@ -171,27 +174,52 @@ class RayAnalyzer:
             field_type = arrow_schema.field(idx).type
             if pyarrow.types.is_integer(field_type) or pyarrow.types.is_floating(field_type):
                 numeric_cols.append(col_name)
+            elif pyarrow.types.is_list(field_type) or pyarrow.types.is_large_list(field_type):
+                value_type = field_type.value_type
+                if pyarrow.types.is_integer(value_type) or pyarrow.types.is_floating(value_type):
+                    list_numeric_cols.append(col_name)
+                else:
+                    skipped_cols.append(col_name)
+            else:
+                skipped_cols.append(col_name)
 
-        if not numeric_cols:
+        if skipped_cols:
+            logger.warning(f"Skipping non-numeric columns in overall analysis: {skipped_cols}")
+
+        if not numeric_cols and not list_numeric_cols:
             logger.warning("No numeric stat columns found")
             return pd.DataFrame()
 
-        total_count = flat_data.count()
-
-        aggs = []
-        for col in numeric_cols:
-            aggs.extend([Mean(col), Std(col), Min(col), Max(col)])
-
-        agg_result = flat_data.aggregate(*aggs)
-
         rows = {}
-        for col in numeric_cols:
+
+        if numeric_cols:
+            aggs = []
+            for col in numeric_cols:
+                aggs.extend([Count(col), Mean(col), Std(col), Min(col), Max(col)])
+
+            agg_result = flat_data.aggregate(*aggs)
+
+            for col in numeric_cols:
+                rows[col] = {
+                    "count": agg_result[f"count({col})"],
+                    "mean": agg_result[f"mean({col})"],
+                    "std": agg_result[f"std({col})"],
+                    "min": agg_result[f"min({col})"],
+                    "max": agg_result[f"max({col})"],
+                }
+
+        for col in list_numeric_cols:
+            col_data = flat_data.select_columns([col]).map_batches(
+                lambda table, c=col: pyarrow.table({c: pc.list_flatten(table.column(c))}),
+                batch_format="pyarrow",
+            )
+            col_agg = col_data.aggregate(Count(col), Mean(col), Std(col), Min(col), Max(col))
             rows[col] = {
-                "count": total_count,
-                "mean": agg_result[f"mean({col})"],
-                "std": agg_result[f"std({col})"],
-                "min": agg_result[f"min({col})"],
-                "max": agg_result[f"max({col})"],
+                "count": col_agg[f"count({col})"],
+                "mean": col_agg[f"mean({col})"],
+                "std": col_agg[f"std({col})"],
+                "min": col_agg[f"min({col})"],
+                "max": col_agg[f"max({col})"],
             }
 
         overall = pd.DataFrame(rows)

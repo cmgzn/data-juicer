@@ -1,38 +1,19 @@
-import sys
-
 from loguru import logger
 
-
-def _get_executor_type():
-    """Peek at --executor_type or config file to decide which analyzer to use."""
-    args = sys.argv[1:]
-    for i, arg in enumerate(args):
-        if arg == "--executor_type" and i + 1 < len(args):
-            return args[i + 1]
-    for i, arg in enumerate(args):
-        if arg == "--config" and i + 1 < len(args):
-            try:
-                import yaml
-
-                with open(args[i + 1]) as f:
-                    cfg = yaml.safe_load(f)
-                return cfg.get("executor_type", "default")
-            except Exception:
-                pass
-    return "default"
+from data_juicer.config import init_configs
 
 
 @logger.catch(reraise=True)
 def main():
-    executor_type = _get_executor_type()
-    if executor_type in ("ray", "ray_partitioned"):
+    cfg = init_configs(allow_auto=True)
+    if cfg.executor_type in ("ray", "ray_partitioned"):
         from data_juicer.core import RayAnalyzer
 
-        analyzer = RayAnalyzer()
+        analyzer = RayAnalyzer(cfg)
     else:
         from data_juicer.core import Analyzer
 
-        analyzer = Analyzer()
+        analyzer = Analyzer(cfg)
     analyzer.run()
 
 

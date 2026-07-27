@@ -800,7 +800,7 @@ def build_base_parser() -> ArgumentParser:
     return parser
 
 
-def init_configs(args: Optional[List[str]] = None, which_entry: object = None, load_configs_only=False):
+def init_configs(args: Optional[List[str]] = None, allow_auto: bool = False, load_configs_only=False):
     """
     initialize the jsonargparse parser and parse configs from one of:
         1. POSIX-style commands line args;
@@ -809,7 +809,7 @@ def init_configs(args: Optional[List[str]] = None, which_entry: object = None, l
         4. hard-coded defaults
 
     :param args: list of params, e.g., ['--config', 'cfg.yaml'], default None.
-    :param which_entry: which entry to init configs (executor/analyzer)
+    :param allow_auto: whether --auto is allowed (only True for analyzer entries)
     :param load_configs_only: whether to load the configs only, not including backing up config files, display them, and
         setting up logger.
     :return: a global cfg object used by the DefaultExecutor or Analyzer
@@ -878,10 +878,7 @@ def init_configs(args: Optional[List[str]] = None, which_entry: object = None, l
                     load_custom_operators(cfg.custom_operator_paths)
 
                 # check the entry
-                from data_juicer.core.analyzer import Analyzer
-                from data_juicer.core.ray_analyzer import RayAnalyzer
-
-                if not isinstance(which_entry, (Analyzer, RayAnalyzer)) and cfg.auto:
+                if cfg.auto and not allow_auto:
                     err_msg = "--auto argument can only be used for analyzer!"
                     logger.error(err_msg)
                     raise NotImplementedError(err_msg)
