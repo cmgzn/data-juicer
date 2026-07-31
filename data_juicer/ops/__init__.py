@@ -78,7 +78,10 @@ def load_op_plugins(group: str = OP_PLUGIN_ENTRY_POINT_GROUP):
         except Exception as e:  # noqa: BLE001 - a bad plugin must not crash dj
             logger.warning(
                 f'Failed to load operator plugin [{ep.name}] from entry point '
-                f'group [{group}]: {e}. This plugin will be skipped.'
+                f'group [{group}]: {e}. '
+                f'Operators registered by this plugin before the error '
+                f'remain available, but any operators defined after the '
+                f'failing one in the same module will not be loaded.'
             )
     if loaded:
         logger.info(f'Discovered {len(loaded)} operator plugin(s) via entry points: {loaded}')
