@@ -109,7 +109,7 @@ python tools/analyze_data.py --config demos/analyze_simple/analyzer.yaml
 - **Distributed Analysis with Ray:** `dj-analyze` also supports Ray mode for large-scale distributed analysis. Set `executor_type: ray` in your config file, and the analyzer will automatically use `RayAnalyzer`, which computes overall statistics (count/mean/std/min/max) via Ray native aggregation without pandas materialization. Note that RayAnalyzer does not produce per-column distribution charts or correlation analysis. More details can be found in the doc for [distributed processing](../Distributed.md).
 
 ```shell
-dj-analyze --config demos/process_on_ray/configs/analyze.yaml
+dj-analyze --config demos/analyze_simple/ray_analyzer.yaml
 ```
 
 ## Data Visualization
