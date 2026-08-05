@@ -104,7 +104,6 @@ We provide simple demos in the directory `demos/process_on_ray/`, which includes
 ```text
 demos/process_on_ray
 ├── configs
-│   ├── analyze.yaml
 │   ├── demo.yaml
 │   └── dedup.yaml
 └── data
@@ -175,16 +174,16 @@ Data-Juicer will dedup the demo dataset with the demo config file and export the
 
 ### Running Example of Ray Analysis
 
-In the `analyze.yaml` config file, we set the executor type to "ray" to use the distributed `RayAnalyzer`.
+In [`demos/analyze_simple/ray_analyzer.yaml`](../demos/analyze_simple/ray_analyzer.yaml), we set the executor type to "ray" to use the distributed `RayAnalyzer`.
 
 ```yaml
-project_name: 'demo-ray-analyze'
-dataset_path: './demos/process_on_ray/data/demo-dataset.jsonl'
+project_name: 'demo-ray-analyzer'
+dataset_path: './demos/data/demo-dataset.jsonl'
 
 executor_type: 'ray'  # Set the executor type to "ray"
 ray_address: 'auto'  # Set an automatic Ray address
 
-export_path: './outputs/demo-ray-analyze/demo-analyzed.jsonl'
+export_path: './outputs/demo-ray-analyzer'
 
 process:
   - text_length_filter:
@@ -194,16 +193,19 @@ process:
       lang: en
       min_num: 10
       max_num: 10000
+  - alphanumeric_filter:
+      min_ratio: 0.25
+      max_ratio: 0.9
 ```
 
 Run the demo to analyze the dataset:
 
 ```shell
 # Run the tool from source
-python tools/analyze_data.py --config demos/process_on_ray/configs/analyze.yaml
+python tools/analyze_data.py --config demos/analyze_simple/ray_analyzer.yaml
 
 # Use the command-line tool
-dj-analyze --config demos/process_on_ray/configs/analyze.yaml
+dj-analyze --config demos/analyze_simple/ray_analyzer.yaml
 ```
 
 `RayAnalyzer` will compute the overall statistics (count, mean, std, min, max) for all numeric stats columns and print the results. The dataset with computed stats will be exported to the path specified by `export_path`.

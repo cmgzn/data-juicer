@@ -106,7 +106,6 @@ ray start --address='{head_ip}:6379'
 ```text
 demos/process_on_ray
 ├── configs
-│   ├── analyze.yaml
 │   ├── demo.yaml
 │   └── dedup.yaml
 └── data
@@ -176,16 +175,16 @@ Data-Juicer 会使用示例配置文件对示例数据集去重，并将结果�
 
 ### 运行 Ray 分析样例
 
-在配置文件 `analyze.yaml` 中，我们将执行器类型设置为 "ray" 来使用分布式的 `RayAnalyzer`。
+在 [`demos/analyze_simple/ray_analyzer.yaml`](../demos/analyze_simple/ray_analyzer.yaml) 配置文件中，我们将执行器类型设置为 "ray" 来使用分布式的 `RayAnalyzer`。
 
 ```yaml
-project_name: 'demo-ray-analyze'
-dataset_path: './demos/process_on_ray/data/demo-dataset.jsonl'
+project_name: 'demo-ray-analyzer'
+dataset_path: './demos/data/demo-dataset.jsonl'
 
 executor_type: 'ray'  # 将执行器类型设置为 "ray"
 ray_address: 'auto'  # 设置为自动 Ray 地址
 
-export_path: './outputs/demo-ray-analyze/demo-analyzed.jsonl'
+export_path: './outputs/demo-ray-analyzer'
 
 process:
   - text_length_filter:
@@ -195,16 +194,19 @@ process:
       lang: en
       min_num: 10
       max_num: 10000
+  - alphanumeric_filter:
+      min_ratio: 0.25
+      max_ratio: 0.9
 ```
 
 运行该示例来分析数据集：
 
 ```shell
 # 从源码运行分析工具
-python tools/analyze_data.py --config demos/process_on_ray/configs/analyze.yaml
+python tools/analyze_data.py --config demos/analyze_simple/ray_analyzer.yaml
 
 # 使用命令行工具
-dj-analyze --config demos/process_on_ray/configs/analyze.yaml
+dj-analyze --config demos/analyze_simple/ray_analyzer.yaml
 ```
 
 `RayAnalyzer` 会计算所有数值统计列的总体统计信息（count、mean、std、min、max）并打印结果。带有计算好的统计列的数据集将导出到 `export_path` 指定的路径。
