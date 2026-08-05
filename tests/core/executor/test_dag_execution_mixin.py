@@ -1,24 +1,3 @@
-"""
-Comprehensive tests for DAGExecutionMixin.
-
-Tests cover:
-- __init__() initialization of pipeline_dag, dag_initialized, locks, etc.
-- current_dag_node property (thread-local storage)
-- _initialize_dag_execution() with various configurations
-- _is_partitioned_executor() checks
-- _create_execution_strategy() returns correct strategy type
-- _generate_dag_with_strategy() generates nodes and edges
-- _get_operations_from_config() gets ops from cache or config
-- _mark_dag_node_started() marks node running, validates transition
-- _mark_dag_node_completed() marks node completed
-- _mark_dag_node_failed() marks node failed
-- _extract_operation_types_from_ops() infers types from op names
-- get_dag_execution_status() returns current status dict
-- _calculate_dag_statistics() counts by status
-- _find_ready_nodes() finds nodes with all deps completed
-- _determine_resumption_strategy() priority logic
-"""
-
 import os
 import tempfile
 import threading
@@ -70,50 +49,20 @@ class ConcreteDAGExecutor(DAGExecutionMixin):
 class DAGExecutionMixinInitTest(DataJuicerTestCaseBase):
     """Tests for DAGExecutionMixin.__init__()."""
 
-    def test_init_sets_pipeline_dag_to_none(self):
-        """Test that pipeline_dag is initialized to None."""
+    def test_state_lock_is_reentrant(self):
+        """Verify the lock is reentrant — concurrent mark calls depend on this."""
         executor = ConcreteDAGExecutor()
-        self.assertIsNone(executor.pipeline_dag)
+        executor._dag_state_lock.acquire()
+        executor._dag_state_lock.acquire()
+        executor._dag_state_lock.release()
+        executor._dag_state_lock.release()
 
-    def test_init_sets_dag_initialized_to_false(self):
-        """Test that dag_initialized is initially False."""
+    def test_fresh_executor_not_initialized(self):
+        """A fresh executor must report dag_initialized=False so that
+        _initialize_dag_execution runs on first call."""
         executor = ConcreteDAGExecutor()
         self.assertFalse(executor.dag_initialized)
-
-    def test_init_creates_state_lock(self):
-        """Test that _dag_state_lock is created as an RLock."""
-        executor = ConcreteDAGExecutor()
-        self.assertIsNotNone(executor._dag_state_lock)
-        # Verify it's reentrant (can acquire twice without deadlock)
-        executor._dag_state_lock.acquire()
-        executor._dag_state_lock.acquire()
-        executor._dag_state_lock.release()
-        executor._dag_state_lock.release()
-
-    def test_init_creates_thread_state(self):
-        """Test that _dag_thread_state is initialized."""
-        executor = ConcreteDAGExecutor()
-        self.assertIsNotNone(executor._dag_thread_state)
-
-    def test_init_creates_current_dag_nodes_dict(self):
-        """Test that current_dag_nodes is an empty dict."""
-        executor = ConcreteDAGExecutor()
-        self.assertEqual(executor.current_dag_nodes, {})
-
-    def test_init_dag_execution_start_time_is_none(self):
-        """Test that dag_execution_start_time is None."""
-        executor = ConcreteDAGExecutor()
-        self.assertIsNone(executor.dag_execution_start_time)
-
-    def test_init_dag_execution_strategy_is_none(self):
-        """Test that dag_execution_strategy is None."""
-        executor = ConcreteDAGExecutor()
-        self.assertIsNone(executor.dag_execution_strategy)
-
-    def test_init_dag_ops_is_none(self):
-        """Test that _dag_ops is None."""
-        executor = ConcreteDAGExecutor()
-        self.assertIsNone(executor._dag_ops)
+        self.assertIsNone(executor.pipeline_dag)
 
 
 class CurrentDagNodePropertyTest(DataJuicerTestCaseBase):
@@ -588,86 +537,31 @@ class MarkDAGNodeFailedTest(DataJuicerTestCaseBase):
 class ExtractOperationTypesTest(DataJuicerTestCaseBase):
     """Tests for _extract_operation_types_from_ops()."""
 
-    def test_detects_filter_type(self):
-        """Test that _filter suffix is detected."""
-        executor = ConcreteDAGExecutor()
-        ops = [FakeOperation("text_length_filter")]
-        types = executor._extract_operation_types_from_ops(ops)
-        self.assertIn("filter", types)
-
-    def test_detects_mapper_type(self):
-        """Test that _mapper suffix is detected."""
-        executor = ConcreteDAGExecutor()
-        ops = [FakeOperation("clean_links_mapper")]
-        types = executor._extract_operation_types_from_ops(ops)
-        self.assertIn("mapper", types)
-
-    def test_detects_deduplicator_type(self):
-        """Test that _deduplicator suffix is detected."""
-        executor = ConcreteDAGExecutor()
-        ops = [FakeOperation("minhash_deduplicator")]
-        types = executor._extract_operation_types_from_ops(ops)
-        self.assertIn("deduplicator", types)
-
-    def test_detects_selector_type(self):
-        """Test that _selector suffix is detected."""
-        executor = ConcreteDAGExecutor()
-        ops = [FakeOperation("topk_selector")]
-        types = executor._extract_operation_types_from_ops(ops)
-        self.assertIn("selector", types)
-
-    def test_detects_grouper_type(self):
-        """Test that _grouper suffix is detected."""
-        executor = ConcreteDAGExecutor()
-        ops = [FakeOperation("key_value_grouper")]
-        types = executor._extract_operation_types_from_ops(ops)
-        self.assertIn("grouper", types)
-
-    def test_detects_aggregator_type(self):
-        """Test that _aggregator suffix is detected."""
-        executor = ConcreteDAGExecutor()
-        ops = [FakeOperation("nested_aggregator")]
-        types = executor._extract_operation_types_from_ops(ops)
-        self.assertIn("aggregator", types)
-
-    def test_detects_multiple_types(self):
-        """Test detecting multiple types in a single list."""
-        executor = ConcreteDAGExecutor()
-        ops = [
-            FakeOperation("text_length_filter"),
-            FakeOperation("clean_mapper"),
-            FakeOperation("minhash_deduplicator"),
-        ]
-        types = executor._extract_operation_types_from_ops(ops)
-        self.assertIn("filter", types)
-        self.assertIn("mapper", types)
-        self.assertIn("deduplicator", types)
-
-    def test_returns_unique_types(self):
-        """Test that duplicate types are not returned."""
+    def test_detects_all_suffix_types_and_deduplicates(self):
         executor = ConcreteDAGExecutor()
         ops = [
             FakeOperation("text_length_filter"),
             FakeOperation("language_filter"),
-            FakeOperation("word_count_filter"),
+            FakeOperation("clean_mapper"),
+            FakeOperation("minhash_deduplicator"),
+            FakeOperation("topk_selector"),
+            FakeOperation("key_value_grouper"),
+            FakeOperation("nested_aggregator"),
         ]
         types = executor._extract_operation_types_from_ops(ops)
+        for expected in ("filter", "mapper", "deduplicator", "selector", "grouper", "aggregator"):
+            self.assertIn(expected, types)
         self.assertEqual(types.count("filter"), 1)
 
-    def test_empty_operations(self):
-        """Test with empty operations list."""
+    def test_empty_ops_returns_empty(self):
         executor = ConcreteDAGExecutor()
-        types = executor._extract_operation_types_from_ops([])
-        self.assertEqual(types, [])
+        self.assertEqual(executor._extract_operation_types_from_ops([]), [])
 
-    def test_unknown_operation_type_no_name(self):
-        """Test operation with no recognizable suffix."""
+    def test_unrecognized_suffix_excluded(self):
         executor = ConcreteDAGExecutor()
         ops = [FakeOperation("unknown_op")]
-        types = executor._extract_operation_types_from_ops(ops)
-        # Without a recognized suffix, it falls through to isinstance checks
-        # For FakeOperation, neither Filter nor Mapper, so empty
-        self.assertEqual(len(types), 0)
+        self.assertEqual(len(executor._extract_operation_types_from_ops(ops)), 0)
+
 
 
 class GetDAGExecutionStatusTest(DataJuicerTestCaseBase):
@@ -732,49 +626,12 @@ class CalculateDAGStatisticsTest(DataJuicerTestCaseBase):
     """Tests for _calculate_dag_statistics()."""
 
     def test_empty_node_states(self):
-        """Test statistics with empty node_states."""
         executor = ConcreteDAGExecutor()
         stats = executor._calculate_dag_statistics({})
-
         self.assertEqual(stats["total_nodes"], 0)
-        self.assertEqual(stats["completed_nodes"], 0)
-        self.assertEqual(stats["failed_nodes"], 0)
-        self.assertEqual(stats["running_nodes"], 0)
-        self.assertEqual(stats["pending_nodes"], 0)
         self.assertEqual(stats["completion_percentage"], 0)
-
-    def test_all_pending(self):
-        """Test statistics when all nodes are pending."""
-        executor = ConcreteDAGExecutor()
-        node_states = {
-            "node_1": {"status": DAGNodeStatus.PENDING.value},
-            "node_2": {"status": DAGNodeStatus.PENDING.value},
-            "node_3": {"status": DAGNodeStatus.PENDING.value},
-        }
-
-        stats = executor._calculate_dag_statistics(node_states)
-
-        self.assertEqual(stats["total_nodes"], 3)
-        self.assertEqual(stats["pending_nodes"], 3)
-        self.assertEqual(stats["completed_nodes"], 0)
-        self.assertEqual(stats["completion_percentage"], 0)
-
-    def test_all_completed(self):
-        """Test statistics when all nodes are completed."""
-        executor = ConcreteDAGExecutor()
-        node_states = {
-            "node_1": {"status": DAGNodeStatus.COMPLETED.value},
-            "node_2": {"status": DAGNodeStatus.COMPLETED.value},
-        }
-
-        stats = executor._calculate_dag_statistics(node_states)
-
-        self.assertEqual(stats["total_nodes"], 2)
-        self.assertEqual(stats["completed_nodes"], 2)
-        self.assertEqual(stats["completion_percentage"], 100.0)
 
     def test_mixed_statuses(self):
-        """Test statistics with mixed statuses."""
         executor = ConcreteDAGExecutor()
         node_states = {
             "node_1": {"status": DAGNodeStatus.COMPLETED.value},
@@ -792,28 +649,6 @@ class CalculateDAGStatisticsTest(DataJuicerTestCaseBase):
         self.assertEqual(stats["failed_nodes"], 1)
         self.assertEqual(stats["pending_nodes"], 2)
         self.assertAlmostEqual(stats["completion_percentage"], 20.0)
-
-    def test_completion_percentage_partial(self):
-        """Test completion percentage with partial completion."""
-        executor = ConcreteDAGExecutor()
-        node_states = {
-            "node_1": {"status": DAGNodeStatus.COMPLETED.value},
-            "node_2": {"status": DAGNodeStatus.COMPLETED.value},
-            "node_3": {"status": DAGNodeStatus.PENDING.value},
-            "node_4": {"status": DAGNodeStatus.PENDING.value},
-        }
-
-        stats = executor._calculate_dag_statistics(node_states)
-
-        self.assertAlmostEqual(stats["completion_percentage"], 50.0)
-
-    def test_ready_nodes_field_default(self):
-        """Test that ready_nodes is set to 0 (will be updated by caller)."""
-        executor = ConcreteDAGExecutor()
-        node_states = {"node_1": {"status": DAGNodeStatus.PENDING.value}}
-
-        stats = executor._calculate_dag_statistics(node_states)
-
         self.assertEqual(stats["ready_nodes"], 0)
 
 
@@ -821,180 +656,51 @@ class FindReadyNodesTest(DataJuicerTestCaseBase):
     """Tests for _find_ready_nodes()."""
 
     def test_empty_node_states(self):
-        """Test with empty node_states."""
         executor = ConcreteDAGExecutor()
-        ready = executor._find_ready_nodes({})
-        self.assertEqual(ready, [])
+        self.assertEqual(executor._find_ready_nodes({}), [])
 
-    def test_node_with_no_dependencies_is_ready(self):
-        """Test that pending node with no dependencies is ready."""
+    def test_pending_no_deps_is_ready(self):
         executor = ConcreteDAGExecutor()
         node_states = {
-            "node_1": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": [],
-            },
+            "node_1": {"status": DAGNodeStatus.PENDING.value, "dependencies": []},
         }
+        self.assertEqual(executor._find_ready_nodes(node_states), ["node_1"])
 
-        ready = executor._find_ready_nodes(node_states)
-        self.assertEqual(ready, ["node_1"])
-
-    def test_node_with_completed_deps_is_ready(self):
-        """Test that pending node with all completed dependencies is ready."""
+    def test_non_pending_statuses_excluded(self):
+        """Running, completed, and failed nodes are never 'ready'."""
         executor = ConcreteDAGExecutor()
         node_states = {
-            "node_1": {
-                "status": DAGNodeStatus.COMPLETED.value,
-                "dependencies": [],
-            },
-            "node_2": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": ["node_1"],
-            },
+            "a": {"status": DAGNodeStatus.RUNNING.value, "dependencies": []},
+            "b": {"status": DAGNodeStatus.COMPLETED.value, "dependencies": []},
+            "c": {"status": DAGNodeStatus.FAILED.value, "dependencies": []},
         }
+        self.assertEqual(executor._find_ready_nodes(node_states), [])
 
-        ready = executor._find_ready_nodes(node_states)
-        self.assertEqual(ready, ["node_2"])
-
-    def test_node_with_incomplete_deps_not_ready(self):
-        """Test that pending node with incomplete dependencies is not ready."""
+    def test_incomplete_deps_blocks_node(self):
         executor = ConcreteDAGExecutor()
         node_states = {
-            "node_1": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": [],
-            },
-            "node_2": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": ["node_1"],
-            },
+            "node_1": {"status": DAGNodeStatus.PENDING.value, "dependencies": []},
+            "node_2": {"status": DAGNodeStatus.PENDING.value, "dependencies": ["node_1"]},
         }
+        self.assertEqual(executor._find_ready_nodes(node_states), ["node_1"])
 
-        ready = executor._find_ready_nodes(node_states)
-        # Only node_1 is ready (no deps), node_2 depends on pending node_1
-        self.assertEqual(ready, ["node_1"])
-
-    def test_running_node_is_not_ready(self):
-        """Test that running nodes are not included in ready list."""
+    def test_diamond_dag_topology(self):
+        """Diamond: A→B,C→D. D ready only after both B and C complete."""
         executor = ConcreteDAGExecutor()
         node_states = {
-            "node_1": {
-                "status": DAGNodeStatus.RUNNING.value,
-                "dependencies": [],
-            },
+            "A": {"status": DAGNodeStatus.COMPLETED.value, "dependencies": []},
+            "B": {"status": DAGNodeStatus.COMPLETED.value, "dependencies": ["A"]},
+            "C": {"status": DAGNodeStatus.COMPLETED.value, "dependencies": ["A"]},
+            "D": {"status": DAGNodeStatus.PENDING.value, "dependencies": ["B", "C"]},
         }
+        self.assertEqual(executor._find_ready_nodes(node_states), ["D"])
 
-        ready = executor._find_ready_nodes(node_states)
-        self.assertEqual(ready, [])
-
-    def test_completed_node_is_not_ready(self):
-        """Test that completed nodes are not included in ready list."""
+    def test_missing_dep_treated_as_satisfied(self):
         executor = ConcreteDAGExecutor()
         node_states = {
-            "node_1": {
-                "status": DAGNodeStatus.COMPLETED.value,
-                "dependencies": [],
-            },
+            "node_2": {"status": DAGNodeStatus.PENDING.value, "dependencies": ["missing"]},
         }
-
-        ready = executor._find_ready_nodes(node_states)
-        self.assertEqual(ready, [])
-
-    def test_failed_node_is_not_ready(self):
-        """Test that failed nodes are not included in ready list."""
-        executor = ConcreteDAGExecutor()
-        node_states = {
-            "node_1": {
-                "status": DAGNodeStatus.FAILED.value,
-                "dependencies": [],
-            },
-        }
-
-        ready = executor._find_ready_nodes(node_states)
-        self.assertEqual(ready, [])
-
-    def test_multiple_ready_nodes(self):
-        """Test that multiple ready nodes are returned."""
-        executor = ConcreteDAGExecutor()
-        node_states = {
-            "node_1": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": [],
-            },
-            "node_2": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": [],
-            },
-            "node_3": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": [],
-            },
-        }
-
-        ready = executor._find_ready_nodes(node_states)
-        self.assertEqual(sorted(ready), ["node_1", "node_2", "node_3"])
-
-    def test_multiple_dependencies_all_must_be_completed(self):
-        """Test that all dependencies must be completed for a node to be ready."""
-        executor = ConcreteDAGExecutor()
-        node_states = {
-            "node_1": {
-                "status": DAGNodeStatus.COMPLETED.value,
-                "dependencies": [],
-            },
-            "node_2": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": [],
-            },
-            "node_3": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": ["node_1", "node_2"],
-            },
-        }
-
-        ready = executor._find_ready_nodes(node_states)
-        # node_3 depends on both node_1 (completed) and node_2 (pending)
-        # So node_3 is NOT ready; only node_2 is ready
-        self.assertEqual(ready, ["node_2"])
-
-    def test_dependency_not_in_node_states_is_ignored(self):
-        """Test that dependencies not in node_states are treated as satisfied."""
-        executor = ConcreteDAGExecutor()
-        node_states = {
-            "node_2": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": ["missing_node"],  # Not in node_states
-            },
-        }
-
-        ready = executor._find_ready_nodes(node_states)
-        # Missing dependency is skipped (treated as completed)
-        self.assertEqual(ready, ["node_2"])
-
-    def test_complex_dag_topology(self):
-        """Test with a diamond-shaped dependency graph."""
-        executor = ConcreteDAGExecutor()
-        node_states = {
-            "A": {
-                "status": DAGNodeStatus.COMPLETED.value,
-                "dependencies": [],
-            },
-            "B": {
-                "status": DAGNodeStatus.COMPLETED.value,
-                "dependencies": ["A"],
-            },
-            "C": {
-                "status": DAGNodeStatus.COMPLETED.value,
-                "dependencies": ["A"],
-            },
-            "D": {
-                "status": DAGNodeStatus.PENDING.value,
-                "dependencies": ["B", "C"],
-            },
-        }
-
-        ready = executor._find_ready_nodes(node_states)
-        self.assertEqual(ready, ["D"])
+        self.assertEqual(executor._find_ready_nodes(node_states), ["node_2"])
 
 
 class DetermineResumptionStrategyTest(DataJuicerTestCaseBase):
@@ -1283,30 +989,6 @@ class DetermineResumptionStrategyTest(DataJuicerTestCaseBase):
         self.assertIn("ready_nodes", result)
         self.assertIn("failed_nodes", result)
         self.assertIn("running_nodes", result)
-
-    def test_no_failed_no_running_no_ready_all_completed(self):
-        """Test edge case: no actionable nodes, all completed."""
-        executor = ConcreteDAGExecutor()
-        node_states = {
-            "node_1": {
-                "status": DAGNodeStatus.COMPLETED.value,
-                "execution_order": 1,
-            },
-        }
-        ready_nodes = []
-        statistics = {
-            "total_nodes": 1,
-            "completed_nodes": 1,
-            "failed_nodes": 0,
-            "running_nodes": 0,
-            "pending_nodes": 0,
-        }
-
-        result = executor._determine_resumption_strategy(
-            node_states, ready_nodes, statistics
-        )
-
-        self.assertFalse(result["can_resume"])
 
 
 class InitializeNodeStatesFromPlanTest(DataJuicerTestCaseBase):

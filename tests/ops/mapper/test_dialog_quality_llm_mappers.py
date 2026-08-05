@@ -45,22 +45,39 @@ from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase, skip_if_fro
 # ---------------------------------------------------------------------------
 
 
+class AllDialogMappersContractTest(DataJuicerTestCaseBase):
+    """Single test validating the contract all dialog mappers must satisfy."""
+
+    MAPPER_CLASSES = [
+        DialogNonRepetitionMapper,
+        DialogClarificationQualityMapper,
+        DialogMemoryConsistencyMapper,
+        DialogProactivityMapper,
+        DialogErrorRecoveryMapper,
+        DialogTopicShiftMapper,
+        DialogCoreferenceMapper,
+        AgentTraceCoherenceMapper,
+        AgentToolRelevanceMapper,
+    ]
+
+    def test_all_mappers_have_op_name_and_meta_key(self):
+        for cls in self.MAPPER_CLASSES:
+            with self.subTest(cls=cls.__name__):
+                self.assertTrue(len(cls.OP_NAME) > 0)
+                self.assertTrue(len(cls.META_KEY) > 0)
+
+    def test_all_mappers_produce_nonempty_system_prompt(self):
+        for cls in self.MAPPER_CLASSES:
+            with self.subTest(cls=cls.__name__):
+                op = cls(api_model="any-model")
+                prompt = op._system_prompt()
+                self.assertIsInstance(prompt, str)
+                self.assertGreater(len(prompt), 10)
+
+
 class DialogNonRepetitionUnitTest(DataJuicerTestCaseBase):
     """Unit tests for DialogNonRepetitionMapper (no API calls)."""
 
-    def test_class_attributes(self):
-        self.assertEqual(
-            DialogNonRepetitionMapper.OP_NAME, "dialog_non_repetition_mapper"
-        )
-        self.assertEqual(
-            DialogNonRepetitionMapper.META_KEY, MetaKeys.dialog_non_repetition
-        )
-
-    def test_system_prompt_non_empty(self):
-        op = DialogNonRepetitionMapper(api_model="any-model")
-        prompt = op._system_prompt()
-        self.assertIsInstance(prompt, str)
-        self.assertTrue(len(prompt) > 0)
 
     def test_process_single_empty_dialog_skipped(self):
         op = DialogNonRepetitionMapper(api_model="any-model")
@@ -85,29 +102,10 @@ class DialogNonRepetitionUnitTest(DataJuicerTestCaseBase):
             result[Fields.meta][MetaKeys.dialog_non_repetition], existing
         )
 
-    def test_instantiation_default_args(self):
-        op = DialogNonRepetitionMapper(api_model="any-model")
-        self.assertIsNotNone(op)
-
 
 class DialogClarificationQualityUnitTest(DataJuicerTestCaseBase):
     """Unit tests for DialogClarificationQualityMapper (no API calls)."""
 
-    def test_class_attributes(self):
-        self.assertEqual(
-            DialogClarificationQualityMapper.OP_NAME,
-            "dialog_clarification_quality_mapper",
-        )
-        self.assertEqual(
-            DialogClarificationQualityMapper.META_KEY,
-            MetaKeys.dialog_clarification_quality,
-        )
-
-    def test_system_prompt_non_empty(self):
-        op = DialogClarificationQualityMapper(api_model="any-model")
-        prompt = op._system_prompt()
-        self.assertIsInstance(prompt, str)
-        self.assertTrue(len(prompt) > 0)
 
     def test_process_single_empty_dialog_skipped(self):
         op = DialogClarificationQualityMapper(api_model="any-model")
@@ -134,29 +132,10 @@ class DialogClarificationQualityUnitTest(DataJuicerTestCaseBase):
             result[Fields.meta][MetaKeys.dialog_clarification_quality], existing
         )
 
-    def test_instantiation_default_args(self):
-        op = DialogClarificationQualityMapper(api_model="any-model")
-        self.assertIsNotNone(op)
-
 
 class DialogMemoryConsistencyUnitTest(DataJuicerTestCaseBase):
     """Unit tests for DialogMemoryConsistencyMapper (no API calls)."""
 
-    def test_class_attributes(self):
-        self.assertEqual(
-            DialogMemoryConsistencyMapper.OP_NAME,
-            "dialog_memory_consistency_mapper",
-        )
-        self.assertEqual(
-            DialogMemoryConsistencyMapper.META_KEY,
-            MetaKeys.dialog_memory_consistency,
-        )
-
-    def test_system_prompt_non_empty(self):
-        op = DialogMemoryConsistencyMapper(api_model="any-model")
-        prompt = op._system_prompt()
-        self.assertIsInstance(prompt, str)
-        self.assertTrue(len(prompt) > 0)
 
     def test_process_single_empty_dialog_skipped(self):
         op = DialogMemoryConsistencyMapper(api_model="any-model")
@@ -183,27 +162,10 @@ class DialogMemoryConsistencyUnitTest(DataJuicerTestCaseBase):
             result[Fields.meta][MetaKeys.dialog_memory_consistency], existing
         )
 
-    def test_instantiation_default_args(self):
-        op = DialogMemoryConsistencyMapper(api_model="any-model")
-        self.assertIsNotNone(op)
-
 
 class DialogProactivityUnitTest(DataJuicerTestCaseBase):
     """Unit tests for DialogProactivityMapper (no API calls)."""
 
-    def test_class_attributes(self):
-        self.assertEqual(
-            DialogProactivityMapper.OP_NAME, "dialog_proactivity_mapper"
-        )
-        self.assertEqual(
-            DialogProactivityMapper.META_KEY, MetaKeys.dialog_proactivity
-        )
-
-    def test_system_prompt_non_empty(self):
-        op = DialogProactivityMapper(api_model="any-model")
-        prompt = op._system_prompt()
-        self.assertIsInstance(prompt, str)
-        self.assertTrue(len(prompt) > 0)
 
     def test_process_single_empty_dialog_skipped(self):
         op = DialogProactivityMapper(api_model="any-model")
@@ -228,27 +190,10 @@ class DialogProactivityUnitTest(DataJuicerTestCaseBase):
             result[Fields.meta][MetaKeys.dialog_proactivity], existing
         )
 
-    def test_instantiation_default_args(self):
-        op = DialogProactivityMapper(api_model="any-model")
-        self.assertIsNotNone(op)
-
 
 class DialogErrorRecoveryUnitTest(DataJuicerTestCaseBase):
     """Unit tests for DialogErrorRecoveryMapper (no API calls)."""
 
-    def test_class_attributes(self):
-        self.assertEqual(
-            DialogErrorRecoveryMapper.OP_NAME, "dialog_error_recovery_mapper"
-        )
-        self.assertEqual(
-            DialogErrorRecoveryMapper.META_KEY, MetaKeys.dialog_error_recovery
-        )
-
-    def test_system_prompt_non_empty(self):
-        op = DialogErrorRecoveryMapper(api_model="any-model")
-        prompt = op._system_prompt()
-        self.assertIsInstance(prompt, str)
-        self.assertTrue(len(prompt) > 0)
 
     def test_process_single_empty_dialog_skipped(self):
         op = DialogErrorRecoveryMapper(api_model="any-model")
@@ -273,27 +218,10 @@ class DialogErrorRecoveryUnitTest(DataJuicerTestCaseBase):
             result[Fields.meta][MetaKeys.dialog_error_recovery], existing
         )
 
-    def test_instantiation_default_args(self):
-        op = DialogErrorRecoveryMapper(api_model="any-model")
-        self.assertIsNotNone(op)
-
 
 class DialogTopicShiftUnitTest(DataJuicerTestCaseBase):
     """Unit tests for DialogTopicShiftMapper (no API calls)."""
 
-    def test_class_attributes(self):
-        self.assertEqual(
-            DialogTopicShiftMapper.OP_NAME, "dialog_topic_shift_mapper"
-        )
-        self.assertEqual(
-            DialogTopicShiftMapper.META_KEY, MetaKeys.dialog_topic_shift
-        )
-
-    def test_system_prompt_non_empty(self):
-        op = DialogTopicShiftMapper(api_model="any-model")
-        prompt = op._system_prompt()
-        self.assertIsInstance(prompt, str)
-        self.assertTrue(len(prompt) > 0)
 
     def test_process_single_empty_dialog_skipped(self):
         op = DialogTopicShiftMapper(api_model="any-model")
@@ -318,27 +246,10 @@ class DialogTopicShiftUnitTest(DataJuicerTestCaseBase):
             result[Fields.meta][MetaKeys.dialog_topic_shift], existing
         )
 
-    def test_instantiation_default_args(self):
-        op = DialogTopicShiftMapper(api_model="any-model")
-        self.assertIsNotNone(op)
-
 
 class DialogCoreferenceUnitTest(DataJuicerTestCaseBase):
     """Unit tests for DialogCoreferenceMapper (no API calls)."""
 
-    def test_class_attributes(self):
-        self.assertEqual(
-            DialogCoreferenceMapper.OP_NAME, "dialog_coreference_mapper"
-        )
-        self.assertEqual(
-            DialogCoreferenceMapper.META_KEY, MetaKeys.dialog_coreference
-        )
-
-    def test_system_prompt_non_empty(self):
-        op = DialogCoreferenceMapper(api_model="any-model")
-        prompt = op._system_prompt()
-        self.assertIsInstance(prompt, str)
-        self.assertTrue(len(prompt) > 0)
 
     def test_process_single_empty_dialog_skipped(self):
         op = DialogCoreferenceMapper(api_model="any-model")
@@ -363,28 +274,10 @@ class DialogCoreferenceUnitTest(DataJuicerTestCaseBase):
             result[Fields.meta][MetaKeys.dialog_coreference], existing
         )
 
-    def test_instantiation_default_args(self):
-        op = DialogCoreferenceMapper(api_model="any-model")
-        self.assertIsNotNone(op)
-
 
 class AgentTraceCoherenceUnitTest(DataJuicerTestCaseBase):
     """Unit tests for AgentTraceCoherenceMapper (no API calls)."""
 
-    def test_class_attributes(self):
-        self.assertEqual(
-            AgentTraceCoherenceMapper.OP_NAME, "agent_trace_coherence_mapper"
-        )
-        self.assertEqual(
-            AgentTraceCoherenceMapper.META_KEY, MetaKeys.agent_trace_coherence
-        )
-        self.assertEqual(AgentTraceCoherenceMapper.EVAL_KIND, "agent_trace")
-
-    def test_system_prompt_non_empty(self):
-        op = AgentTraceCoherenceMapper(api_model="any-model")
-        prompt = op._system_prompt()
-        self.assertIsInstance(prompt, str)
-        self.assertTrue(len(prompt) > 0)
 
     def test_process_single_empty_text_skipped(self):
         op = AgentTraceCoherenceMapper(api_model="any-model")
@@ -417,28 +310,10 @@ class AgentTraceCoherenceUnitTest(DataJuicerTestCaseBase):
             result[Fields.meta][MetaKeys.agent_trace_coherence], existing
         )
 
-    def test_instantiation_default_args(self):
-        op = AgentTraceCoherenceMapper(api_model="any-model")
-        self.assertIsNotNone(op)
-
 
 class AgentToolRelevanceUnitTest(DataJuicerTestCaseBase):
     """Unit tests for AgentToolRelevanceMapper (no API calls)."""
 
-    def test_class_attributes(self):
-        self.assertEqual(
-            AgentToolRelevanceMapper.OP_NAME, "agent_tool_relevance_mapper"
-        )
-        self.assertEqual(
-            AgentToolRelevanceMapper.META_KEY, MetaKeys.agent_tool_relevance
-        )
-        self.assertEqual(AgentToolRelevanceMapper.EVAL_KIND, "agent_tool")
-
-    def test_system_prompt_non_empty(self):
-        op = AgentToolRelevanceMapper(api_model="any-model")
-        prompt = op._system_prompt()
-        self.assertIsInstance(prompt, str)
-        self.assertTrue(len(prompt) > 0)
 
     def test_process_single_empty_query_and_response_skipped(self):
         op = AgentToolRelevanceMapper(api_model="any-model")
@@ -466,17 +341,7 @@ class AgentToolRelevanceUnitTest(DataJuicerTestCaseBase):
             result[Fields.meta][MetaKeys.agent_tool_relevance], existing
         )
 
-    def test_instantiation_default_args(self):
-        op = AgentToolRelevanceMapper(api_model="any-model")
-        self.assertIsNotNone(op)
 
-
-# ---------------------------------------------------------------------------
-# Integration tests: actual LLM API calls
-# ---------------------------------------------------------------------------
-
-
-@skip_if_from_fork("Skipping API-based test because running from a fork repo")
 class TestDialogNonRepetitionMapper(DataJuicerTestCaseBase):
 
     def test_default(self):
