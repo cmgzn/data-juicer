@@ -2,8 +2,9 @@ import unittest
 from typing import Any, Dict, List
 
 import pyarrow as pa
-from datasets import ClassLabel, Features, Sequence, Value
+from datasets import ClassLabel, Dataset, Features, Sequence, Value
 
+from data_juicer.core.data import NestedDataset
 from data_juicer.core.data.schema import Schema
 from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase, TEST_TAG
 
@@ -122,5 +123,64 @@ class SchemaValidationTest(DataJuicerTestCaseBase):
         self.assertIn("text", s)
 
 
+@TEST_TAG("standalone")
+class NestedDatasetSchemaIntegrationTest(DataJuicerTestCaseBase):
+    """Integration test: verify NestedDataset.schema() produces correct Schema
+    through the real HF Features → Schema.from_hf_features pipeline."""
+
+    def test_nested_dataset_schema_end_to_end(self):
+        data = [
+            {"text": "hello", "score": 1.5, "tags": ["a", "b"]},
+            {"text": "world", "score": 2.0, "tags": ["c"]},
+        ]
+        dataset = NestedDataset(Dataset.from_list(data))
+        schema = dataset.schema()
+
+        self.assertIsInstance(schema, Schema)
+        self.assertEqual(schema.column_types["text"], str)
+        self.assertEqual(schema.column_types["score"], float)
+        self.assertEqual(schema.column_types["tags"], List[str])
+        self.assertEqual(set(schema.columns), {"text", "score", "tags"})
+
+
+@TEST_TAG("ray")
+class RayDatasetSchemaIntegrationTest(DataJuicerTestCaseBase):
+    """Integration test: verify RayDataset.schema() produces correct Schema
+    through the real Arrow schema → Schema.from_ray_schema pipeline."""
+
+    def test_ray_dataset_schema_end_to_end(self):
+        import ray.data
+        from data_juicer.core.data.ray_dataset import RayDataset
+
+        data = [
+            {"text": "hello", "score": 1, "flag": True},
+            {"text": "world", "score": 2, "flag": False},
+        ]
+        dataset = RayDataset(ray.data.from_items(data))
+        schema = dataset.schema()
+
+        self.assertIsInstance(schema, Schema)
+        self.assertEqual(schema.column_types["text"], str)
+        self.assertEqual(schema.column_types["score"], int)
+        self.assertEqual(schema.column_types["flag"], bool)
+
+    def test_ray_dataset_schema_nested_struct(self):
+        import ray.data
+        from data_juicer.core.data.ray_dataset import RayDataset
+
+        data = [
+            {"text": "hi", "metadata": {"lang": "en", "score": 1}},
+        ]
+        dataset = RayDataset(ray.data.from_items(data))
+        schema = dataset.schema()
+
+        self.assertEqual(schema.column_types["text"], str)
+        meta_schema = schema.column_types["metadata"]
+        self.assertIsInstance(meta_schema, Schema)
+        self.assertEqual(meta_schema.column_types["lang"], str)
+        self.assertEqual(meta_schema.column_types["score"], int)
+
+
 if __name__ == "__main__":
     unittest.main()
+
