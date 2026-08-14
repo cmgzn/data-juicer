@@ -2,6 +2,7 @@ import copy
 import os
 from typing import Optional
 
+from loguru import logger
 from PIL import Image
 from pydantic import Field, PositiveInt
 from typing_extensions import Annotated
@@ -155,7 +156,12 @@ class ImageDiffusionMapper(Mapper):
 
         # load captions
         if self.caption_key:
-            captions = ori_sample[self.caption_key]
+            captions = ori_sample.get(self.caption_key)
+            if captions is None or (isinstance(captions, str) and not captions.strip()):
+                logger.warning(
+                    f"Sample has missing or empty caption for key " f"'{self.caption_key}', skipping generation."
+                )
+                return []
             if not isinstance(captions, list):
                 # one caption for all images
                 captions = [captions] * len(images)
