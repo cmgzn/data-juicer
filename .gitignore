@@ -55,3 +55,4 @@ demos/local/*
 # claude
 .claude/
 CLAUDE.md
+.fix-session.json
