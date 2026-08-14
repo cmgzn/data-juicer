@@ -487,6 +487,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Export.html">Dataset Export</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../JobManagement.html">Job Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OperatorPlugins.html">Operator Plugins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PartitionAndCheckpoint.html">Partitioned Processing with Checkpointing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tracing.html">Data Tracing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
@@ -710,6 +711,12 @@ dj-analyze<span class="w"> </span>--auto<span class="w"> </span>--dataset_path<s
 </ul>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ANALYZER_FONT</span><span class="o">=</span><span class="s2">&quot;Heiti TC&quot;</span><span class="w">  </span><span class="c1"># Use Heiti for Chinese characters. And it&#39;s the default font for analyzer.</span>
 python<span class="w"> </span>tools/analyze_data.py<span class="w"> </span>--config<span class="w"> </span>demos/analyze_simple/analyzer.yaml
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Distributed Analysis with Ray:</strong> <code class="docutils literal notranslate"><span class="pre">dj-analyze</span></code> also supports Ray mode for large-scale distributed analysis. Set <code class="docutils literal notranslate"><span class="pre">executor_type:</span> <span class="pre">ray</span></code> in your config file, and the analyzer will automatically use <code class="docutils literal notranslate"><span class="pre">RayAnalyzer</span></code>, which computes overall statistics (count/mean/std/min/max) via Ray native aggregation without pandas materialization. Note that RayAnalyzer does not produce per-column distribution charts or correlation analysis. More details can be found in the doc for <a class="reference internal" href="../Distributed.html"><span class="std std-doc">distributed processing</span></a>.</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>dj-analyze<span class="w"> </span>--config<span class="w"> </span>demos/analyze_simple/ray_analyzer.yaml
 </pre></div>
 </div>
 </section>

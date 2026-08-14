@@ -529,6 +529,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlparse</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">jsonargparse</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -1047,6 +1048,16 @@
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Custom job ID for resumption and tracking. If not provided, a unique ID will be auto-generated.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--resume&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Resume a ray_partitioned job using the job ID printed by its &quot;</span>
+            <span class="s2">&quot;original run. The saved partition boundaries and content hashes &quot;</span>
+            <span class="s2">&quot;are used to reconstruct and validate the original partitions.&quot;</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--temp_dir&quot;</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1338,7 +1349,7 @@
 
 <div class="viewcode-block" id="init_configs">
 <a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.init_configs">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">init_configs</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">which_entry</span><span class="p">:</span> <span class="nb">object</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">load_configs_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">init_configs</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">allow_auto</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">load_configs_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    initialize the jsonargparse parser and parse configs from one of:</span>
 <span class="sd">        1. POSIX-style commands line args;</span>
@@ -1347,11 +1358,27 @@
 <span class="sd">        4. hard-coded defaults</span>
 
 <span class="sd">    :param args: list of params, e.g., [&#39;--config&#39;, &#39;cfg.yaml&#39;], default None.</span>
-<span class="sd">    :param which_entry: which entry to init configs (executor/analyzer)</span>
+<span class="sd">    :param allow_auto: whether --auto is allowed (only True for analyzer entries)</span>
 <span class="sd">    :param load_configs_only: whether to load the configs only, not including backing up config files, display them, and</span>
 <span class="sd">        setting up logger.</span>
 <span class="sd">    :return: a global cfg object used by the DefaultExecutor or Analyzer</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Backwards compatibility: accept deprecated `which_entry` keyword</span>
+    <span class="k">if</span> <span class="s2">&quot;which_entry&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;The &#39;which_entry&#39; parameter is deprecated. &quot;</span> <span class="s2">&quot;Use &#39;allow_auto=True&#39; instead.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">which_entry</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;which_entry&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_auto</span> <span class="ow">and</span> <span class="n">which_entry</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core.analyzer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span>
+
+            <span class="n">allow_auto</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">which_entry</span><span class="p">,</span> <span class="n">Analyzer</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;init_configs() got unexpected keyword arguments: &quot;</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="c1"># Optional: stdlib json for HF datasets JSONL (avoids ujson &quot;Value is too big!&quot;)</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.utils.datasets_json_compat</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
         <span class="n">apply_stdlib_json_patch_for_datasets</span><span class="p">,</span>
@@ -1416,9 +1443,7 @@
                     <span class="n">load_custom_operators</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">custom_operator_paths</span><span class="p">)</span>
 
                 <span class="c1"># check the entry</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core.analyzer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span>
-
-                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">which_entry</span><span class="p">,</span> <span class="n">Analyzer</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cfg</span><span class="o">.</span><span class="n">auto</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">auto</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">allow_auto</span><span class="p">:</span>
                     <span class="n">err_msg</span> <span class="o">=</span> <span class="s2">&quot;--auto argument can only be used for analyzer!&quot;</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
                     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
@@ -1494,7 +1519,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Handle remote paths (S3/HDFS) differently from local paths</span>
-    <span class="n">_is_remote</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">export_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s3://&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">cfg</span><span class="o">.</span><span class="n">export_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;hdfs://&quot;</span><span class="p">)</span>
+    <span class="n">_export_scheme</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">export_path</span><span class="p">)</span><span class="o">.</span><span class="n">scheme</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">_is_remote</span> <span class="o">=</span> <span class="n">_export_scheme</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="s2">&quot;hdfs&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">_is_remote</span><span class="p">:</span>
         <span class="c1"># For remote paths, keep as-is (don&#39;t use os.path.abspath)</span>
         <span class="c1"># If work_dir is not provided, use a default local directory for logs/checkpoints</span>
@@ -1517,10 +1543,11 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">load_configs_only</span><span class="p">:</span>
         <span class="c1"># For remote paths, use a simplified export path for log filename</span>
         <span class="k">if</span> <span class="n">_is_remote</span><span class="p">:</span>
-            <span class="c1"># Extract path after scheme prefix for log filename</span>
-            <span class="n">scheme</span> <span class="o">=</span> <span class="s2">&quot;s3://&quot;</span> <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">export_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s3://&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;hdfs://&quot;</span>
-            <span class="n">remote_parts</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">export_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">scheme</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">export_rel_path</span> <span class="o">=</span> <span class="n">remote_parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">remote_parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">remote_parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># Extract path after scheme prefix for log filename. urlparse</span>
+            <span class="c1"># splits the URI case-insensitively; netloc is the bucket/host</span>
+            <span class="c1"># and path is the key, falling back to netloc when no key.</span>
+            <span class="n">_parsed</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">export_path</span><span class="p">)</span>
+            <span class="n">export_rel_path</span> <span class="o">=</span> <span class="n">_parsed</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_parsed</span><span class="o">.</span><span class="n">netloc</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">export_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">export_path</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">work_dir</span><span class="p">)</span>
 
@@ -2015,7 +2042,15 @@
         <span class="c1"># Compare CLI arguments per key</span>
         <span class="n">cli_differences</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">all_cli_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">cli_config</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">current_cli_config</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="n">excluded_keys</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;_original_args&quot;</span><span class="p">,</span> <span class="s2">&quot;backed_up_config_path&quot;</span><span class="p">,</span> <span class="s2">&quot;_same_yaml_config&quot;</span><span class="p">,</span> <span class="s2">&quot;job_id&quot;</span><span class="p">,</span> <span class="s2">&quot;work_dir&quot;</span><span class="p">}</span>
+        <span class="n">excluded_keys</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;config&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;_original_args&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;backed_up_config_path&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;_same_yaml_config&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;job_id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;resume&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;work_dir&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
 
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">all_cli_keys</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">excluded_keys</span><span class="p">:</span>
@@ -2389,6 +2424,7 @@
         <span class="c1"># Remove internal attributes that are added during config processing</span>
         <span class="n">internal_attrs</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s2">&quot;_user_provided_job_id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;_resume_requested&quot;</span><span class="p">,</span>
             <span class="s2">&quot;_same_yaml_config&quot;</span><span class="p">,</span>
             <span class="s2">&quot;metadata_dir&quot;</span><span class="p">,</span>
             <span class="s2">&quot;results_dir&quot;</span><span class="p">,</span>
@@ -2458,6 +2494,19 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">resolve_job_id</span><span class="p">(</span><span class="n">cfg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve or auto-generate job_id and set it on cfg.&quot;&quot;&quot;</span>
     <span class="n">job_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">&quot;job_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">resume_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">&quot;resume&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">resume_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">job_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">job_id</span> <span class="o">!=</span> <span class="n">resume_id</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;--resume and --job_id must refer to the same job when both are provided.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">&quot;executor_type&quot;</span><span class="p">,</span> <span class="s2">&quot;ray_partitioned&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;ray_partitioned&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;--resume is only supported by the ray_partitioned executor.&quot;</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">&quot;job_id&quot;</span><span class="p">,</span> <span class="n">resume_id</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">&quot;_user_provided_job_id&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">&quot;_resume_requested&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cfg</span>
+
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">&quot;_resume_requested&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
     <span class="c1"># Track whether job_id was user-provided</span>
     <span class="k">if</span> <span class="n">job_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
