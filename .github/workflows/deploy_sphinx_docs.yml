@@ -136,4 +136,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: "repo/docs/sphinx_doc/build"
-          keep_files: true
+          keep_files: ${{ !(github.event_name == 'workflow_dispatch' && inputs.full) }}
