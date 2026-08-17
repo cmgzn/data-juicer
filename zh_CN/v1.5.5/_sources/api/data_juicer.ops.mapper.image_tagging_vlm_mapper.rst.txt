@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.image\_tagging\_vlm\_mapper module
-==========================================================
-
-.. automodule:: data_juicer.ops.mapper.image_tagging_vlm_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

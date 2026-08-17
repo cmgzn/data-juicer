@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.llm\_extract\_mapper module
-===================================================
-
-.. automodule:: data_juicer.ops.mapper.llm_extract_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

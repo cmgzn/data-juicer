@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.tool\_success\_tagger\_mapper module
-============================================================
-
-.. automodule:: data_juicer.ops.mapper.tool_success_tagger_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

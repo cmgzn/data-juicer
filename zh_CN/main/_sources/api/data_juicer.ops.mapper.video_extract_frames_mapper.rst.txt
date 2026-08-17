@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.video\_extract\_frames\_mapper module
-=============================================================
-
-.. automodule:: data_juicer.ops.mapper.video_extract_frames_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

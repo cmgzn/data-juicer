@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.usage\_counter\_mapper module
-=====================================================
-
-.. automodule:: data_juicer.ops.mapper.usage_counter_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

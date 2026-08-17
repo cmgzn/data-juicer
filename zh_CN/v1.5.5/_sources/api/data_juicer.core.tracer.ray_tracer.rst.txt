@@ -1,7 +1,0 @@
-data\_juicer.core.tracer.ray\_tracer module
-===========================================
-
-.. automodule:: data_juicer.core.tracer.ray_tracer
-   :members:
-   :show-inheritance:
-   :undoc-members:

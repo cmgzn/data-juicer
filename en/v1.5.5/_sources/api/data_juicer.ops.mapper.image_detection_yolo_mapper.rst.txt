@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.image\_detection\_yolo\_mapper module
-=============================================================
-
-.. automodule:: data_juicer.ops.mapper.image_detection_yolo_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

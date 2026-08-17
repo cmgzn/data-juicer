@@ -1,7 +1,0 @@
-data\_juicer.download.wikipedia module
-======================================
-
-.. automodule:: data_juicer.download.wikipedia
-   :members:
-   :show-inheritance:
-   :undoc-members:

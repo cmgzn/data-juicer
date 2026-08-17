@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.extract\_nickname\_mapper module
-========================================================
-
-.. automodule:: data_juicer.ops.mapper.extract_nickname_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:

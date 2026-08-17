@@ -1,7 +1,0 @@
-data\_juicer.ops.mapper.latex\_merge\_tex\_mapper module
-========================================================
-
-.. automodule:: data_juicer.ops.mapper.latex_merge_tex_mapper
-   :members:
-   :show-inheritance:
-   :undoc-members:
