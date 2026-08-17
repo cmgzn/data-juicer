@@ -69,7 +69,7 @@ jobs:
         run: |
           set -e
           echo "Cloning sphinx template..."
-          git clone --depth=1 https://github.com/datajuicer/data-juicer-sphinx.git /tmp/template
+          git clone --depth=1 -b incr-build https://github.com/cmgzn/data-juicer-sphinx.git /tmp/template
           uv pip install --system -e /tmp/template
           if [ -d "docs/sphinx_doc/source" ]; then
             echo "Backing up custom files..."
@@ -95,7 +95,7 @@ jobs:
         working-directory: repo
         run: |
           cd docs/sphinx_doc
-          python build_versions.py --tags
+          python build_versions.py --tags -A
           df -h
       - name: Redirect index.html
         working-directory: repo
