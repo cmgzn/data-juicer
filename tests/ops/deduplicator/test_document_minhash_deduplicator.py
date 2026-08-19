@@ -975,10 +975,6 @@ class DocumentMinhashDeduplicatorTest(DataJuicerTestCaseBase):
         self._run_minhash_dedup(dataset, tgt_list, op)
 
 
-if __name__ == '__main__':
-    unittest.main()
-
-
 class DocumentMinhashDeduplicatorRepeatedCallTest(DataJuicerTestCaseBase):
     """Regression test: process() must not leak state between calls."""
 
@@ -1055,3 +1051,7 @@ class DocumentMinhashDeduplicatorRepeatedCallTest(DataJuicerTestCaseBase):
         self.assertEqual(len(result_a), 2)
         self.assertEqual(len(result_b), 2,
                          "UID-based dedup must not carry state between process() calls")
+
+
+if __name__ == '__main__':
+    unittest.main()
