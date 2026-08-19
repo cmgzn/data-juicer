@@ -1160,7 +1160,7 @@ def init_setup_from_cfg(cfg: Namespace, load_configs_only=False):
     # otherwise, set arg text_key of each op to text_keys
     cfg.text_keys = cfg.get("text_keys", "text")
     if isinstance(cfg.text_keys, list):
-        text_key = cfg.text_keys[0]
+        text_key = cfg.text_keys[0] if cfg.text_keys else None
     else:
         text_key = cfg.text_keys
 
