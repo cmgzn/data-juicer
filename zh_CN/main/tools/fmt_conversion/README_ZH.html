@@ -97,15 +97,20 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/Installation_ZH.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/QuickStart_ZH.html">快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">核心概念</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/concepts/recipes_ZH.html">数据菜谱（Recipes）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/concepts/operators_ZH.html">算子（Operators）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/concepts/executor_ZH.html">执行引擎（Executor）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">使用指南</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DatasetCfg_ZH.html">数据集配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/Analyze_ZH.html">数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/Playground_ZH.html">Web Playground</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Export_ZH.html">数据集导出</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Cache_ZH.html">缓存管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Tracing_ZH.html">数据追踪</a></li>
@@ -119,7 +124,7 @@
 <p class="caption" role="heading"><span class="caption-text">扩展与开发</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/OperatorPlugins_ZH.html">算子插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_service_ZH.html">DJ_服务化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_service_ZH.html">DJ 服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DeveloperGuide_ZH.html">开发者指南</a></li>
 </ul>
@@ -382,16 +387,16 @@
 <p class="caption" role="heading"><span class="caption-text">工具</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../evaluator/README_ZH.html">Auto Evaluation Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluator/README_ZH.html">自动评测工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../evaluator/gpt_eval/README_ZH.html">GPT EVAL：使用 OpenAI API 评测大模型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../evaluator/recorder/README_ZH.html">Evaluation Results Recorder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluator/recorder/README_ZH.html">评测结果记录器</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">格式转换工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multimodal/README_ZH.html">多模态工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multimodal/README_ZH.html">多模态格式转换工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="post_tuning_dialog/README_ZH.html">后微调工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../postprocess/README_ZH.html">Postprocess tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mm_eval/vbench_metrics/README_ZH.html">VBench 视频质量指标</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../postprocess/README_ZH.html">后处理工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../preprocess/README_ZH.html">预处理工具</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">第三方</span></p>
@@ -415,7 +420,7 @@
         <article class="article" role="main">
   <section id="id1">
 <h1>格式转换工具<a class="headerlink" href="#id1" title="链接到此标题。">¶</a></h1>
-<p>在这里，Data-Juicer 为各式各样的数据集提供了十数种格式转换工具，包括多模态数据集，后微调数据集等等。
+<p><a class="reference external" href="https://github.com/datajuicer/data-juicer/tree/main/tools/fmt_conversion"><code class="docutils literal notranslate"><span class="pre">tools/fmt_conversion</span></code></a> 提供十数种格式转换工具，覆盖多模态数据集、后微调数据集等场景。
 这些工具能够将原始格式的数据集转换为Data-Juicer所需的统一中间格式（我们称之为&quot;DJ格式&quot;）。DJ算子的默认实现基于该格式进行设计，例如会直接从'text'字段读取数据载荷（payload）执行相应处理操作。对于特殊格式需求，用户既可以通过调整算子参数配置来适配，也可通过自定义算子实现进行扩展支持。</p>
 <p>DJ 格式的一个示例如下所示：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -485,11 +490,11 @@
       <nav class="prev-next">
         <a href="../evaluator/recorder/README_ZH.html" class="prev-next-link prev">
           <span class="prev-next-label">Previous</span>
-          <span class="prev-next-title">Evaluation Results Recorder</span>
+          <span class="prev-next-title">评测结果记录器</span>
         </a>
         <a href="multimodal/README_ZH.html" class="prev-next-link next">
           <span class="prev-next-label">Next</span>
-          <span class="prev-next-title">多模态工具</span>
+          <span class="prev-next-title">多模态格式转换工具</span>
         </a>
       </nav>
       <footer class="footer">

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Auto Evaluation Toolkit — data-juicer</title>
+  <title>自动评测工具 — data-juicer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,15 +97,20 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/Installation_ZH.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/QuickStart_ZH.html">快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">核心概念</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/concepts/recipes_ZH.html">数据菜谱（Recipes）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/concepts/operators_ZH.html">算子（Operators）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/concepts/executor_ZH.html">执行引擎（Executor）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../docs/tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">使用指南</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DatasetCfg_ZH.html">数据集配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/Analyze_ZH.html">数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/Playground_ZH.html">Web Playground</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Export_ZH.html">数据集导出</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Cache_ZH.html">缓存管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Tracing_ZH.html">数据追踪</a></li>
@@ -119,7 +124,7 @@
 <p class="caption" role="heading"><span class="caption-text">扩展与开发</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/OperatorPlugins_ZH.html">算子插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_service_ZH.html">DJ_服务化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_service_ZH.html">DJ 服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/DeveloperGuide_ZH.html">开发者指南</a></li>
 </ul>
@@ -382,16 +387,16 @@
 <p class="caption" role="heading"><span class="caption-text">工具</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Auto Evaluation Toolkit</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">自动评测工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpt_eval/README_ZH.html">GPT EVAL：使用 OpenAI API 评测大模型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recorder/README_ZH.html">Evaluation Results Recorder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recorder/README_ZH.html">评测结果记录器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fmt_conversion/README_ZH.html">格式转换工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fmt_conversion/multimodal/README_ZH.html">多模态工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fmt_conversion/multimodal/README_ZH.html">多模态格式转换工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../postprocess/README_ZH.html">Postprocess tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mm_eval/vbench_metrics/README_ZH.html">VBench 视频质量指标</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../postprocess/README_ZH.html">后处理工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../preprocess/README_ZH.html">预处理工具</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">第三方</span></p>
@@ -413,11 +418,11 @@
     <main class="main-content">
       <div class="content-wrapper">
         <article class="article" role="main">
-  <section id="auto-evaluation-toolkit">
-<h1>Auto Evaluation Toolkit<a class="headerlink" href="#auto-evaluation-toolkit" title="链接到此标题。">¶</a></h1>
+  <section id="id1">
+<h1>自动评测工具<a class="headerlink" href="#id1" title="链接到此标题。">¶</a></h1>
 <p>在训练过程中自动评测您的模型并持续监控指标的变化。</p>
-<section id="id1">
-<h2>准备工作<a class="headerlink" href="#id1" title="链接到此标题。">¶</a></h2>
+<section id="id2">
+<h2>准备工作<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h2>
 <ol class="arabic simple">
 <li><p>多台GPU机器（至少2台，一台用于运行评测，其他机器用于训练模型）。</p></li>
 <li><p>将共享文件系统（例如NAS）挂载到上述机器上的相同路径（例如 <code class="docutils literal notranslate"><span class="pre">/mnt/shared</span></code>）。</p></li>
@@ -427,8 +432,8 @@
 <li><p>在训练机器上运行 Megatron-LM 并将检查点保存在共享文件系统中（例如 <code class="docutils literal notranslate"><span class="pre">/mnt/shared/checkpoints</span></code>）。</p></li>
 </ol>
 </section>
-<section id="id2">
-<h2>用法<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h2>
+<section id="id3">
+<h2>用法<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h2>
 <p>通过 <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/tools/evaluator/evaluator.py"><code class="docutils literal notranslate"><span class="pre">evaluator.py</span></code></a> 来使用 HELM 或 OpenAI API 自动评估您的模型。</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/evaluator.py<span class="w">  </span><span class="se">\</span>
 <span class="w">    </span>--config<span class="w"> </span>&lt;config&gt;<span class="w">      </span><span class="se">\</span>
@@ -441,7 +446,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>: 包含运行评估所需的各种设置的 yaml 文件（详细信息请参阅<a class="reference internal" href="#id3">配置</a>）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>: 包含运行评估所需的各种设置的 yaml 文件（详细信息请参阅<a class="reference internal" href="#id4">配置</a>）。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">begin_iteration</span></code>: 首个需要评估的检查点的 iteration。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">end_iteration</span></code>: 最后一个需要评估的检查点的 iteration。如果没有设置，该进程将持续监控训练过程中产生的检查点。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">iteration_interval</span></code>: 两次评测之间的 iteration 间隔，默认为 1000。</p></li>
@@ -468,8 +473,8 @@
 </div></blockquote>
 <p>在运行 <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/tools/evaluator/evaluator.py">evaluator.py</a> 之后, 可以使用 <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/tools/evaluator/recorder/wandb_writer.py">recorder/wandb_writer.py</a> 将评测结果记录到 wandb 并可视化展示，更多细节请参考 <a class="reference internal" href="recorder/README_ZH.html"><span class="std std-doc">recorder/README_ZH.md</span></a>。</p>
 </section>
-<section id="id3">
-<h2>配置<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h2>
+<section id="id4">
+<h2>配置<a class="headerlink" href="#id4" title="链接到此标题。">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">config_file</span></code> 文件格式如下:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">auto_eval</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">project_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;str&gt;</span><span class="w"> </span><span class="c1"># 项目名称</span>
@@ -511,10 +516,10 @@
           <div class="toc-sidebar-inner">
             <p class="toc-title">On this page</p>
             <ul>
-<li><a class="reference internal" href="#">Auto Evaluation Toolkit</a><ul>
-<li><a class="reference internal" href="#id1">准备工作</a></li>
-<li><a class="reference internal" href="#id2">用法</a></li>
-<li><a class="reference internal" href="#id3">配置</a></li>
+<li><a class="reference internal" href="#">自动评测工具</a><ul>
+<li><a class="reference internal" href="#id2">准备工作</a></li>
+<li><a class="reference internal" href="#id3">用法</a></li>
+<li><a class="reference internal" href="#id4">配置</a></li>
 </ul>
 </li>
 </ul>

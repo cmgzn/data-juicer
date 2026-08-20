@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Evaluation Results Recorder — data-juicer</title>
+  <title>评测结果记录器 — data-juicer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,15 +97,20 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/tutorial/Installation_ZH.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/tutorial/QuickStart_ZH.html">快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">核心概念</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/concepts/recipes_ZH.html">数据菜谱（Recipes）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/concepts/operators_ZH.html">算子（Operators）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/concepts/executor_ZH.html">执行引擎（Executor）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../docs/tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">使用指南</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DatasetCfg_ZH.html">数据集配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/Analyze_ZH.html">数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/Playground_ZH.html">Web Playground</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Export_ZH.html">数据集导出</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Cache_ZH.html">缓存管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Tracing_ZH.html">数据追踪</a></li>
@@ -119,7 +124,7 @@
 <p class="caption" role="heading"><span class="caption-text">扩展与开发</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/OperatorPlugins_ZH.html">算子插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_service_ZH.html">DJ_服务化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_service_ZH.html">DJ 服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DJ_SORA_ZH.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DeveloperGuide_ZH.html">开发者指南</a></li>
 </ul>
@@ -382,16 +387,16 @@
 <p class="caption" role="heading"><span class="caption-text">工具</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README_ZH.html">Auto Evaluation Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README_ZH.html">自动评测工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gpt_eval/README_ZH.html">GPT EVAL：使用 OpenAI API 评测大模型</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Evaluation Results Recorder</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">评测结果记录器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fmt_conversion/README_ZH.html">格式转换工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fmt_conversion/multimodal/README_ZH.html">多模态工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fmt_conversion/multimodal/README_ZH.html">多模态格式转换工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../postprocess/README_ZH.html">Postprocess tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mm_eval/vbench_metrics/README_ZH.html">VBench 视频质量指标</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../postprocess/README_ZH.html">后处理工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preprocess/README_ZH.html">预处理工具</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">第三方</span></p>
@@ -413,8 +418,8 @@
     <main class="main-content">
       <div class="content-wrapper">
         <article class="article" role="main">
-  <section id="evaluation-results-recorder">
-<h1>Evaluation Results Recorder<a class="headerlink" href="#evaluation-results-recorder" title="链接到此标题。">¶</a></h1>
+  <section id="id1">
+<h1>评测结果记录器<a class="headerlink" href="#id1" title="链接到此标题。">¶</a></h1>
 <p>使用 <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/tools/evaluator/recorder/wandb_writer.py"><code class="docutils literal notranslate"><span class="pre">wandb_writer.py</span></code></a> 将评测结果记录到 <a class="reference external" href="https://wandb.ai/">W&amp;B</a> (wandb) 并可视化展示。</p>
 <p><code class="docutils literal notranslate"><span class="pre">wandb_writer.py</span></code> 能够:</p>
 <ul class="simple">
@@ -423,18 +428,18 @@
 <li><p>制作排行榜来比较不同模型的各项评测指标
 <img alt="Leaderboard" src="https://github.com/cmgzn/data-juicer/blob/main/docs/imgs/eval-01.png" /></p></li>
 </ul>
-<section id="id1">
-<h2>用法<a class="headerlink" href="#id1" title="链接到此标题。">¶</a></h2>
+<section id="id2">
+<h2>用法<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>wandb_writer.py<span class="w"> </span>--config<span class="w"> </span>&lt;config_file&gt;<span class="w"> </span><span class="o">[</span>--print-only<span class="o">]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">config_file</span></code>: yaml 配置文件路径（配置项细节请见<a class="reference internal" href="#id2">配置</a>）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_file</span></code>: yaml 配置文件路径（配置项细节请见<a class="reference internal" href="#id3">配置</a>）</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--print-only</span></code>: 仅将结果打印到命令行，不执行写 wandb 操作，用于调试</p></li>
 </ul>
 </section>
-<section id="id2">
-<h2>配置<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h2>
+<section id="id3">
+<h2>配置<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h2>
 <p>我们在 <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/tools/evaluator/recorder/config"><code class="docutils literal notranslate"><span class="pre">config</span></code></a> 文件夹中为三种不同的情况提供了三个示例文件，其中通用的配置项格式如下:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;str&gt;</span><span class="w">   </span><span class="c1"># wandb 项目名</span>
 <span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;str&gt;</span><span class="w">  </span><span class="c1"># wandb 实例 url</span>
@@ -478,8 +483,8 @@
 </div>
 </div></blockquote>
 </section>
-<section id="id3">
-<h3>从配置文件中读取评测结果<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h3>
+<section id="id4">
+<h3>从配置文件中读取评测结果<a class="headerlink" href="#id4" title="链接到此标题。">¶</a></h3>
 <p>评测结果可以直接写在配置文件中，该选项主要用于快速向 wandb 记录已有的评测结果。</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># general configurations</span>
 <span class="c1"># ...</span>
@@ -502,8 +507,8 @@
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h3>构建排行榜<a class="headerlink" href="#id4" title="链接到此标题。">¶</a></h3>
+<section id="id5">
+<h3>构建排行榜<a class="headerlink" href="#id5" title="链接到此标题。">¶</a></h3>
 <p>如下配置用于对在同一个 wandb 项目中的数据生成排行榜。</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># general configurations</span>
 <span class="c1"># ...</span>
@@ -532,12 +537,12 @@
           <div class="toc-sidebar-inner">
             <p class="toc-title">On this page</p>
             <ul>
-<li><a class="reference internal" href="#">Evaluation Results Recorder</a><ul>
-<li><a class="reference internal" href="#id1">用法</a></li>
-<li><a class="reference internal" href="#id2">配置</a><ul>
+<li><a class="reference internal" href="#">评测结果记录器</a><ul>
+<li><a class="reference internal" href="#id2">用法</a></li>
+<li><a class="reference internal" href="#id3">配置</a><ul>
 <li><a class="reference internal" href="#helm">从 HELM 输出目录中提取评测结果</a></li>
-<li><a class="reference internal" href="#id3">从配置文件中读取评测结果</a></li>
-<li><a class="reference internal" href="#id4">构建排行榜</a></li>
+<li><a class="reference internal" href="#id4">从配置文件中读取评测结果</a></li>
+<li><a class="reference internal" href="#id5">构建排行榜</a></li>
 </ul>
 </li>
 </ul>

@@ -97,15 +97,20 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ-Cookbook.html">DJ-Cookbook</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core Concepts</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../concepts/recipes.html">Recipes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts/operators.html">Operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts/executor.html">Executor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DJ-Cookbook.html">DJ-Cookbook</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DatasetCfg.html">Dataset Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Analyze.html">Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Playground.html">Web Playground</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Export.html">Dataset Export</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Cache.html">Cache Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tracing.html">Data Tracing</a></li>
@@ -413,290 +418,167 @@
         <article class="article" role="main">
   <section id="quickstart">
 <h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h1>
-<p>This guide walks you through a complete Data-Juicer workflow: run your first processing job, build a custom recipe, analyze your dataset, and tune filter thresholds interactively. You will have clean, filtered output data in under five minutes.</p>
+<p>This guide walks you through a complete Data-Juicer workflow in under 5 minutes: install, write a recipe, run the pipeline, and inspect the output.</p>
 <blockquote>
 <div><p><strong>Note:</strong> Some operators download model weights on first use (for example, <code class="docutils literal notranslate"><span class="pre">language_id_score_filter</span></code> downloads a fastText language identification model). The initial run may take a few extra minutes while these assets are fetched. Subsequent runs use the local cache and start immediately.</p>
 </div></blockquote>
-<section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>Data-Juicer installed — see <a class="reference internal" href="Installation.html"><span class="std std-doc">Installation</span></a>.</p></li>
-<li><p>A Python environment with the extras needed for the operators in your recipe.</p></li>
-</ul>
+<hr class="docutils" />
+<section id="install-data-juicer">
+<h2>1. Install Data-Juicer<a class="headerlink" href="#install-data-juicer" title="Link to this heading">¶</a></h2>
+<p>Install the core package with NLP extras needed for this guide:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"py-data-juicer[nlp]"</span>
+</pre></div>
+</div>
+<p>Verify the CLI is available:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--help
+</pre></div>
+</div>
+<blockquote>
+<div><p>For all installation methods (extras, source install, Docker), see <a class="reference internal" href="Installation.html"><span class="std std-doc">Installation</span></a>.</p>
+</div></blockquote>
 </section>
 <hr class="docutils" />
-<section id="run-your-first-processing-job">
-<h2>1. Run your first processing job<a class="headerlink" href="#run-your-first-processing-job" title="Link to this heading">¶</a></h2>
-<p>Data-Juicer processes datasets according to a <strong>recipe</strong> — a YAML config file that specifies the input dataset, the output path, and the operators to apply.</p>
-<p>Start with the built-in demo recipe <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/demos/process_simple/process.yaml"><code class="docutils literal notranslate"><span class="pre">demos/process_simple/process.yaml</span></code></a>, which keeps only Chinese samples with high language confidence:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># global parameters</span>
+<section id="understand-the-input-data">
+<h2>2. Understand the input data<a class="headerlink" href="#understand-the-input-data" title="Link to this heading">¶</a></h2>
+<p>Data-Juicer supports JSONL, Parquet, CSV/TSV, plain text, and more out of the box. This guide uses the built-in sample dataset <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/demos/data/demo-dataset.jsonl"><code class="docutils literal notranslate"><span class="pre">demos/data/demo-dataset.jsonl</span></code></a>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Today is Sunday and it's a happy day!"</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Arxiv"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do you need a cup of coffee?"</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"code"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"你好，请问你是谁"</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customized"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sur la plateforme MT4, plusieurs manières..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oscar"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"欢迎来到阿里巴巴！"</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customized"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This paper proposed a novel method on LLM pretraining."</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customized"</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>Each line is a JSON object. Text is in the <code class="docutils literal notranslate"><span class="pre">&quot;text&quot;</span></code> field by default; other fields are preserved as metadata.</p>
+<blockquote>
+<div><p>For advanced input configuration (format options, data mixing, remote datasets like Hugging Face), see <a class="reference internal" href="../DatasetCfg.html"><span class="std std-doc">Dataset Configuration</span></a>. For raw data that requires extra extraction or conversion (arXiv tar archives, Stack Exchange 7z files, etc.), the <a class="reference internal" href="../../tools/preprocess/README.html"><span class="std std-doc">preprocessing tools</span></a> can transform them into formats Data-Juicer reads directly.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="write-a-recipe">
+<h2>3. Write a recipe<a class="headerlink" href="#write-a-recipe" title="Link to this heading">¶</a></h2>
+<p>A <strong>recipe</strong> is a YAML config file declaring which operators to run and in what order. Use the built-in demo recipe <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/demos/process_simple/process.yaml"><code class="docutils literal notranslate"><span class="pre">demos/process_simple/process.yaml</span></code></a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Global parameters</span>
 <span class="nt">project_name</span><span class="p">:</span><span class="w"> </span><span class="s">'demo-process'</span>
 <span class="nt">dataset_path</span><span class="p">:</span><span class="w"> </span><span class="s">'./demos/data/demo-dataset.jsonl'</span>
 <span class="nt">np</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
 
 <span class="nt">export_path</span><span class="p">:</span><span class="w"> </span><span class="s">'./outputs/demo-process/demo-processed.jsonl'</span>
 
-<span class="c1"># operators to apply</span>
+<span class="c1"># Operators to apply</span>
 <span class="nt">process</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">language_id_score_filter</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">lang</span><span class="p">:</span><span class="w"> </span><span class="s">'zh'</span>
 <span class="w">      </span><span class="nt">min_score</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
 </pre></div>
 </div>
-<p>Run <code class="docutils literal notranslate"><span class="pre">dj-process</span></code> or <code class="docutils literal notranslate"><span class="pre">process_data.py</span></code> with the config file path as argument to process the dataset:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># command line tool</span>
-dj-process<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml
-
-<span class="c1"># from source only</span>
-python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml
-</pre></div>
-</div>
-<p>This will produce the following output in the work directory (<code class="docutils literal notranslate"><span class="pre">export_path</span></code>):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>outputs/demo-process/
-├── demo-processed.jsonl    # the processed dataset
-├── *.yaml                  # a backup of the full parsed config
-└── logs/                   # run logs
-</pre></div>
-</div>
-<p>That’s it — you have processed your first dataset.</p>
+<p>Each entry under <code class="docutils literal notranslate"><span class="pre">process</span></code> is one operator, executed in listed order—the output of each becomes the input to the next. This recipe keeps only Chinese samples with high language confidence.</p>
 <blockquote>
-<div><p><strong>Note:</strong> Operators that use third-party models or resources not saved locally may be slow on first run, because they need to download the corresponding resources to the cache directory. The default cache directory is <code class="docutils literal notranslate"><span class="pre">~/.cache/data_juicer</span></code>. You can change the cache directory location by setting the shell environment variable <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_CACHE_HOME</span></code>. You can also change <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_MODELS_CACHE</span></code> or <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_ASSETS_CACHE</span></code> in the same way to modify the model cache or asset cache directories respectively:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_CACHE_HOME</span><span class="o">=</span><span class="s2">"/path/to/another/directory"</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_MODELS_CACHE</span><span class="o">=</span><span class="s2">"/path/to/another/directory/models"</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_ASSETS_CACHE</span><span class="o">=</span><span class="s2">"/path/to/another/directory/assets"</span>
-</pre></div>
-</div>
-</div></blockquote>
-<blockquote>
-<div><p><strong>Note:</strong> For operators that use third-party models, you need to declare the corresponding <code class="docutils literal notranslate"><span class="pre">memory</span></code> in the config file (refer to the settings in <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/data_juicer/config/config_all.yaml"><code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code></a>). Data-Juicer will control the number of processes based on memory availability and the memory required by the operator’s model, to achieve better data processing performance. When running in a CUDA environment, incorrect <code class="docutils literal notranslate"><span class="pre">memory</span></code> declarations may lead to CUDA Out of Memory errors.</p>
+<div><p>For full recipe syntax and design, see <a class="reference internal" href="../concepts/recipes.html"><span class="std std-doc">Core Concepts: Recipes</span></a>. For the complete list of 200+ built-in operators, see <a class="reference internal" href="../Operators.html"><span class="std std-doc">Operators</span></a>.</p>
 </div></blockquote>
 </section>
 <hr class="docutils" />
-<section id="build-your-own-recipe">
-<h2>2. Build your own recipe<a class="headerlink" href="#build-your-own-recipe" title="Link to this heading">¶</a></h2>
-<p>A config file contains a series of global parameters and an operator list for data processing. You need to set:</p>
-<ul class="simple">
-<li><p><strong>Global arguments</strong>: input/output dataset paths, number of worker processes, etc.</p></li>
-<li><p><strong>Operator list</strong>: the operators and their arguments for processing the dataset.</p></li>
-</ul>
-<p>You can build your own config file in the following ways:</p>
+<section id="run-the-pipeline">
+<h2>4. Run the pipeline<a class="headerlink" href="#run-the-pipeline" title="Link to this heading">¶</a></h2>
+<p>Pass the recipe to the <code class="docutils literal notranslate"><span class="pre">dj-process</span></code> CLI:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml
+</pre></div>
+</div>
+<p>Data-Juicer loads the dataset, executes each operator in sequence, and writes filtered results to <code class="docutils literal notranslate"><span class="pre">export_path</span></code>. Per-operator statistics are printed to the console as the pipeline runs.</p>
+<p>Override any recipe parameter from the command line without editing the YAML:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml<span class="w"> </span>--language_id_score_filter.lang<span class="o">=</span>en
+</pre></div>
+</div>
+<blockquote>
+<div><p>Use <code class="docutils literal notranslate"><span class="pre">dj-install</span> <span class="pre">--config</span> <span class="pre">your-recipe.yaml</span></code> to automatically install operator dependencies. See <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/tutorial/Installation.md#5-operator-specific-installation">Installation §5</a>.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="inspect-the-output">
+<h2>5. Inspect the output<a class="headerlink" href="#inspect-the-output" title="Link to this heading">¶</a></h2>
+<p>The processed dataset is at your configured <code class="docutils literal notranslate"><span class="pre">export_path</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>./outputs/demo-process/demo-processed.jsonl
+</pre></div>
+</div>
+<p>You should see only the Chinese samples that passed the filter—English and French lines have been removed.</p>
+<p>To understand your dataset’s quality distribution before committing to a full run, use the analyzer:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-analyze<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml
+</pre></div>
+</div>
+<blockquote>
+<div><p>For the full analyzer usage (auto mode, distributed analysis, custom metrics), see <a class="reference internal" href="../Analyze.html"><span class="std std-doc">Data Analysis Guide</span></a>. For interactive threshold tuning with sliders, see <a class="reference internal" href="../Playground.html"><span class="std std-doc">Web Playground</span></a>.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="use-from-python-optional">
+<h2>6. Use from Python (optional)<a class="headerlink" href="#use-from-python-optional" title="Link to this heading">¶</a></h2>
+<p>To embed Data-Juicer in a training script or notebook:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Executor</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">init_configs</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">'--config'</span><span class="p">,</span> <span class="s1">'my-recipe.yaml'</span><span class="p">])</span>
+<span class="n">executor</span> <span class="o">=</span> <span class="n">Executor</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">executor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Chain-style single-operator calls are also supported:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">([</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">])</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>For more on the programming interface, see the <a class="reference internal" href="../DeveloperGuide.html"><span class="std std-doc">Developer Guide</span></a>.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
+<p>You have a working pipeline. Explore further based on your needs:</p>
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Approach</p></th>
-<th class="head"><p>How</p></th>
+<tr class="row-odd"><th class="head"><p>Topic</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Link</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>➖ Subtract</strong></p></td>
-<td><p>Modify the sample config file <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/data_juicer/config/config_all.yaml"><code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code></a>. This file includes <strong>all</strong> operators with their default parameters. You only need to <strong>remove</strong> operators you don’t need and adjust parameters as needed.</p></td>
+<tr class="row-even"><td><p><strong>Core Concepts</strong></p></td>
+<td><p>Understand recipes, operators, and executor design</p></td>
+<td><p><a class="reference internal" href="../concepts/recipes.html"><span class="std std-doc">Recipes</span></a> · <a class="reference internal" href="../concepts/operators.html"><span class="std std-doc">Operators</span></a> · <a class="reference internal" href="../concepts/executor.html"><span class="std std-doc">Executor</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>➕ Add</strong></p></td>
-<td><p>Build your own config file from scratch. You can refer to <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/data_juicer/config/config_all.yaml"><code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code></a>, the <a class="reference internal" href="../Operators.html"><span class="std std-doc">Operator Zoo</span></a>, and the <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/DeveloperGuide.md#2-build-your-own-data-recipes-and-configs">Developer Guide</a>.</p></td>
+<tr class="row-odd"><td><p><strong>Operator Zoo</strong></p></td>
+<td><p>Browse 200+ operators across text/image/audio/video</p></td>
+<td><p><a class="reference internal" href="../Operators.html"><span class="std std-doc">Operators Overview</span></a></p></td>
 </tr>
-</tbody>
-</table>
-<p>In addition to using yaml files, you can also specify one or more parameters on the command line, which will override values in the yaml file:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml<span class="w"> </span>--language_id_score_filter.lang<span class="o">=</span>en
-</pre></div>
-</div>
-<blockquote>
-<div><p><strong>Tip:</strong> The basic config format and definition is shown below:</p>
-<p><img alt="Basic config example of format and definition" src="https://img.alicdn.com/imgextra/i1/O1CN01uXgjgj1khWKOigYww_!!6000000004715-0-tps-1745-871.jpg" /></p>
-</div></blockquote>
-</section>
-<hr class="docutils" />
-<section id="configure-your-input-dataset">
-<h2>3. Configure your input dataset<a class="headerlink" href="#configure-your-input-dataset" title="Link to this heading">¶</a></h2>
-<p>Data-Juicer supports various dataset input types, including local files, remote datasets (e.g., Hugging Face); it also supports data validation and data mixture.</p>
-<p>Two methods for configuring input files:</p>
-<ul class="simple">
-<li><p><strong>Simple scenario</strong> — single path for a local or HF file:</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset_path</span><span class="p">:</span><span class="w"> </span><span class="s">'/path/to/your/dataset'</span><span class="w">   </span><span class="c1"># path to the dataset directory or file</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><strong>Advanced method</strong> — sub-configuration items with more features:</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">configs</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">'local'</span>
-<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">'path/to/your/dataset'</span><span class="w">   </span><span class="c1"># path to the dataset directory or file</span>
-</pre></div>
-</div>
-<p>For more details, see the <a class="reference internal" href="../DatasetCfg.html"><span class="std std-doc">Dataset Configuration Guide</span></a>.</p>
-</section>
-<hr class="docutils" />
-<section id="analyze-your-dataset">
-<h2>4. Analyze your dataset<a class="headerlink" href="#analyze-your-dataset" title="Link to this heading">¶</a></h2>
-<p>Before deciding on filter thresholds, it is usually helpful to look at the statistical profile of your dataset. The analyzer computes distributions and correlations for all stats produced by your operators.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># command line tool</span>
-dj-analyze<span class="w"> </span>--config<span class="w"> </span>demos/analyze_simple/analyzer.yaml
-
-<span class="c1"># from source only</span>
-python<span class="w"> </span>tools/analyze_data.py<span class="w"> </span>--config<span class="w"> </span>demos/analyze_simple/analyzer.yaml
-
-<span class="c1"># You can also use "auto" mode to avoid writing a new data recipe. It will use all</span>
-<span class="c1"># stat-producing Filters to analyze a small portion of your dataset (e.g., 1000 samples,</span>
-<span class="c1"># configurable via the `auto_num` parameter)</span>
-dj-analyze<span class="w"> </span>--auto<span class="w"> </span>--dataset_path<span class="w"> </span>xx.jsonl<span class="w"> </span><span class="o">[</span>--auto_num<span class="w"> </span><span class="m">1000</span><span class="o">]</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p><strong>Note:</strong> The Analyzer only works with Filter operators that produce statistics in the stats field, and other operators that produce tags or category labels in the meta field. All other operators are ignored during analysis. We use the following two registries to decorate the relevant operators:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">NON_STATS_FILTERS</span></code>: decorates Filter operators that <strong>cannot</strong> produce any statistics.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TAGGING_OPS</span></code>: decorates operators that produce tags or category labels in the meta field.</p></li>
-</ul>
-</div></blockquote>
-<blockquote>
-<div><p><strong>Tip:</strong> Sometimes “Glyph missing” warnings are produced and some garbled characters appear in the analysis result figures. You can use the environment variable <code class="docutils literal notranslate"><span class="pre">ANALYZER_FONT</span></code> to specify an appropriate font. For example:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ANALYZER_FONT</span><span class="o">=</span><span class="s2">"Heiti TC"</span><span class="w">  </span><span class="c1"># use Heiti to support CJK characters; this is the Analyzer default</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>Distributed analysis with Ray:</strong> <code class="docutils literal notranslate"><span class="pre">dj-analyze</span></code> also supports Ray mode for large-scale distributed data analysis. Set <code class="docutils literal notranslate"><span class="pre">executor_type:</span> <span class="pre">ray</span></code> in your config, and the analyzer will automatically use <code class="docutils literal notranslate"><span class="pre">RayAnalyzer</span></code>, which computes overall statistics (count/mean/std/min/max) via Ray native aggregation operators without pandas materialization. Note that RayAnalyzer does not produce per-column distribution charts or correlation analysis. See <a class="reference internal" href="../Distributed.html"><span class="std std-doc">Distributed Processing</span></a> for more details.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>dj-analyze<span class="w"> </span>--config<span class="w"> </span>demos/analyze_simple/ray_analyzer.yaml
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="interactive-visualization-and-recipe-tuning-web-playground">
-<h2>5. Interactive visualization and recipe tuning (Web Playground)<a class="headerlink" href="#interactive-visualization-and-recipe-tuning-web-playground" title="Link to this heading">¶</a></h2>
-<p>Run <code class="docutils literal notranslate"><span class="pre">app.py</span></code> in the project root directory to visualize your dataset in the browser.</p>
-<blockquote>
-<div><p><strong>Note:</strong> Only available for installation from source.</p>
-</div></blockquote>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># run in the project root directory</span>
-streamlit<span class="w"> </span>run<span class="w"> </span>app.py
-</pre></div>
-</div>
-<p>Typical workflow:</p>
-<ol class="arabic simple">
-<li><p><strong>Parse Cfg</strong> — point it at a recipe (a demo example is pre-filled), upload your own YAML, or override arguments. The playground shows the parsed config and raw YAML side by side.</p></li>
-<li><p><strong>Analyze original data</strong> — runs the <a class="reference internal" href="#analyze-your-dataset">Analyzer</a> and displays overall stats with per-stat distribution charts.</p></li>
-<li><p><strong>Process data</strong> — runs the full recipe and shows original vs. processed stats side by side.</p></li>
-<li><p><strong>Tune Filter OPs</strong> — drag sliders to adjust each filter’s threshold. The page instantly reports the <strong>discard ratio</strong>, draws the stat histogram with your cutoff marked, and lists <strong>retained vs. discarded samples</strong>. You can also view a stacked bar of each filter’s effect, inspect lexical diversity, and <strong>download retained/discarded splits as JSONL</strong>.</p></li>
-</ol>
-<p>Once you are happy with the thresholds, copy them back into your recipe YAML. This analyze → process → tune → export loop is the core of building a good data recipe.</p>
-</section>
-<hr class="docutils" />
-<section id="use-data-juicer-in-python">
-<h2>6. Use Data-Juicer in Python<a class="headerlink" href="#use-data-juicer-in-python" title="Link to this heading">¶</a></h2>
-<p>Besides the CLI tools, Data-Juicer provides simple programming interfaces:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ... init op &amp; dataset ...</span>
-
-<span class="c1"># Chain-call style — single operator or operator list</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">([</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">])</span>
-
-<span class="c1"># Functional style — for quick integration or script prototyping</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="scale-out-distributed-processing">
-<h2>7. Scale out: distributed processing<a class="headerlink" href="#scale-out-distributed-processing" title="Link to this heading">¶</a></h2>
-<p>Data-Juicer supports multi-machine distributed processing via <a class="reference external" href="https://www.ray.io/">Ray</a>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># text data</span>
-python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>./demos/process_on_ray/configs/demo.yaml
-
-<span class="c1"># video data</span>
-python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>./demos/process_video_on_ray/configs/demo.yaml
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>To use RAY for multi-machine data processing, you need to ensure all nodes can access the corresponding data paths, i.e., mount the data paths on a shared file system (such as NAS).</p></li>
-<li><p>Deduplication operators in RAY mode differ from the single-machine versions. All RAY-mode deduplication operators are prefixed with <code class="docutils literal notranslate"><span class="pre">ray</span></code>, e.g., <code class="docutils literal notranslate"><span class="pre">ray_video_deduplicator</span></code> and <code class="docutils literal notranslate"><span class="pre">ray_document_deduplicator</span></code>.</p></li>
-<li><p>See <a class="reference internal" href="../Distributed.html"><span class="std std-doc">Distributed Processing</span></a> for more details.</p></li>
-</ul>
-<blockquote>
-<div><p><strong>Note:</strong> You can also skip Ray and split the dataset to run on a cluster with <a class="reference external" href="https://slurm.schedmd.com/">Slurm</a>. In this case, use the default Data-Juicer without Ray. <a class="reference external" href="https://www.aliyun.com/activity/bigdata/pai-dlc">Aliyun PAI-DLC</a> supports both Ray and Slurm frameworks.</p>
-</div></blockquote>
-</section>
-<hr class="docutils" />
-<section id="sandbox-optional">
-<h2>8. Sandbox (optional)<a class="headerlink" href="#sandbox-optional" title="Link to this heading">¶</a></h2>
-<p>The data sandbox laboratory (DJ-Sandbox) provides best practices for continuously producing data recipes, with low overhead, portability, and guidance.</p>
-<ul class="simple">
-<li><p>Experiment, iterate, and refine recipes on small-scale datasets before scaling up.</p></li>
-<li><p>In addition to basic data optimization and recipe refinement, the sandbox offers configurable components: data probe and analysis, model training and evaluation, and data/model feedback-based recipe refinement — forming a complete data-model R&amp;D pipeline.</p></li>
-</ul>
-<p>For more details, see the <a class="reference external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/index.html">sandbox documentation</a>.</p>
-</section>
-<hr class="docutils" />
-<section id="preprocess-raw-data-optional">
-<h2>9. Preprocess raw data (optional)<a class="headerlink" href="#preprocess-raw-data-optional" title="Link to this heading">¶</a></h2>
-<p>Data-Juicer’s formatters support common input formats out of the box:</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Format</p></th>
-<th class="head"><p>Samples per file</p></th>
+<tr class="row-even"><td><p><strong>Data Analysis</strong></p></td>
+<td><p>Profile dataset distributions before processing</p></td>
+<td><p><a class="reference internal" href="../Analyze.html"><span class="std std-doc">Analysis Guide</span></a></p></td>
 </tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>jsonl/json, parquet, csv/tsv</p></td>
-<td><p>Multiple</p></td>
+<tr class="row-odd"><td><p><strong>Visual Tuning</strong></p></td>
+<td><p>Drag sliders to tune filter thresholds interactively</p></td>
+<td><p><a class="reference internal" href="../Playground.html"><span class="std std-doc">Web Playground</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p>txt, code, docx, pdf</p></td>
-<td><p>Single</p></td>
+<tr class="row-even"><td><p><strong>Distributed</strong></p></td>
+<td><p>Scale to multi-node clusters with Ray</p></td>
+<td><p><a class="reference internal" href="../Distributed.html"><span class="std std-doc">Distributed Processing</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Sandbox</strong></p></td>
+<td><p>Small-scale experiments with data-model co-optimization</p></td>
+<td><p><a class="reference external" href="https://datajuicer.github.io/data-juicer-sandbox/en/main/index.html">DJ-Sandbox</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Export &amp; Cache</strong></p></td>
+<td><p>Control output format, speed up repeated runs</p></td>
+<td><p><a class="reference internal" href="../Export.html"><span class="std std-doc">Export</span></a> · <a class="reference internal" href="../Cache.html"><span class="std std-doc">Cache</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Developer Guide</strong></p></td>
+<td><p>Write custom operators, contribute code</p></td>
+<td><p><a class="reference internal" href="../DeveloperGuide.html"><span class="std std-doc">Developer Guide</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DJ-Cookbook</strong></p></td>
+<td><p>Community recipes and tutorial resources</p></td>
+<td><p><a class="reference internal" href="DJ-Cookbook.html"><span class="std std-doc">DJ-Cookbook</span></a></p></td>
 </tr>
 </tbody>
 </table>
-<p>However, real-world data from different sources can be complex:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://info.arxiv.org/help/bulk_data_s3.html">Raw arXiv data from S3</a> includes thousands of tar/gzip files with embedded tex files that are hard to access directly.</p></li>
-<li><p>Crawled data may contain mixed file types (pdf, html, docx) with tables and charts that are hard to extract.</p></li>
-</ul>
-<p>We provide <strong>common preprocessing tools</strong> in <a class="reference internal" href="../../tools/preprocess/README.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">tools/preprocess</span></code></span></a> to handle these cases. Contributions for new data types are welcome. We <strong>highly recommend</strong> preprocessing complex data to jsonl or parquet before feeding it to Data-Juicer.</p>
-</section>
-<hr class="docutils" />
-<section id="for-docker-users">
-<h2>10. For Docker users<a class="headerlink" href="#for-docker-users" title="Link to this heading">¶</a></h2>
-<p>If you build or pull the <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code> Docker image, you can use it to run all the commands and tools mentioned above.</p>
-<p><strong>Run directly:</strong></p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--privileged<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--shm-size<span class="w"> </span>256g<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>dj<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>&lt;host_data_path&gt;:&lt;image_data_path&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>~/.cache/:/root/.cache/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>datajuicer/data-juicer:&lt;version_tag&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>dj-process<span class="w"> </span>--config<span class="w"> </span>/path/to/config.yaml
-</pre></div>
-</div>
-<p><strong>Or you can enter a running container and run commands in editable mode:</strong></p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># start the container</span>
-docker<span class="w"> </span>run<span class="w"> </span>-dit<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--privileged<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--shm-size<span class="w"> </span>256g<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--rm<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>dj<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>&lt;host_data_path&gt;:&lt;image_data_path&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>~/.cache/:/root/.cache/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>datajuicer/data-juicer:latest<span class="w"> </span>/bin/bash
-
-<span class="c1"># enter the container, then you can use data-juicer in editable mode</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container_id&gt;<span class="w"> </span>bash
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="what-s-next">
-<h2>What’s next<a class="headerlink" href="#what-s-next" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>Browse 200+ operators in the <a class="reference internal" href="../Operators.html"><span class="std std-doc">Operator Zoo</span></a> and configure inputs with the <a class="reference internal" href="../DatasetCfg.html"><span class="std std-doc">Dataset Configuration Guide</span></a>.</p></li>
-<li><p>Understand the mental model: <a class="reference internal" href="#concepts/recipes.md"><span class="xref myst">Recipes</span></a>, <a class="reference internal" href="#concepts/operators.md"><span class="xref myst">Operators</span></a>, <a class="reference internal" href="#concepts/executor.md"><span class="xref myst">Executor</span></a>.</p></li>
-<li><p>Control output with the <a class="reference internal" href="../Export.html"><span class="std std-doc">Export Guide</span></a>, speed up re-runs with <a class="reference internal" href="../Cache.html"><span class="std std-doc">Cache Management</span></a>, and debug sample-level changes with <a class="reference internal" href="../Tracing.html"><span class="std std-doc">Data Tracing</span></a>.</p></li>
-<li><p>Scale to clusters with <a class="reference internal" href="../Distributed.html"><span class="std std-doc">Distributed Processing</span></a> and <a class="reference internal" href="../PartitionAndCheckpoint.html"><span class="std std-doc">Partitioning &amp; Checkpointing</span></a>.</p></li>
-<li><p>Build your own operators with the <a class="reference internal" href="../DeveloperGuide.html"><span class="std std-doc">Developer Guide</span></a>, or reuse community recipes from the <a class="reference internal" href="DJ-Cookbook.html"><span class="std std-doc">DJ-Cookbook</span></a>.</p></li>
-</ul>
 </section>
 </section>
 
@@ -707,18 +589,13 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
             <p class="toc-title">On this page</p>
             <ul>
 <li><a class="reference internal" href="#">Quickstart</a><ul>
-<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
-<li><a class="reference internal" href="#run-your-first-processing-job">1. Run your first processing job</a></li>
-<li><a class="reference internal" href="#build-your-own-recipe">2. Build your own recipe</a></li>
-<li><a class="reference internal" href="#configure-your-input-dataset">3. Configure your input dataset</a></li>
-<li><a class="reference internal" href="#analyze-your-dataset">4. Analyze your dataset</a></li>
-<li><a class="reference internal" href="#interactive-visualization-and-recipe-tuning-web-playground">5. Interactive visualization and recipe tuning (Web Playground)</a></li>
-<li><a class="reference internal" href="#use-data-juicer-in-python">6. Use Data-Juicer in Python</a></li>
-<li><a class="reference internal" href="#scale-out-distributed-processing">7. Scale out: distributed processing</a></li>
-<li><a class="reference internal" href="#sandbox-optional">8. Sandbox (optional)</a></li>
-<li><a class="reference internal" href="#preprocess-raw-data-optional">9. Preprocess raw data (optional)</a></li>
-<li><a class="reference internal" href="#for-docker-users">10. For Docker users</a></li>
-<li><a class="reference internal" href="#what-s-next">What’s next</a></li>
+<li><a class="reference internal" href="#install-data-juicer">1. Install Data-Juicer</a></li>
+<li><a class="reference internal" href="#understand-the-input-data">2. Understand the input data</a></li>
+<li><a class="reference internal" href="#write-a-recipe">3. Write a recipe</a></li>
+<li><a class="reference internal" href="#run-the-pipeline">4. Run the pipeline</a></li>
+<li><a class="reference internal" href="#inspect-the-output">5. Inspect the output</a></li>
+<li><a class="reference internal" href="#use-from-python-optional">6. Use from Python (optional)</a></li>
+<li><a class="reference internal" href="#next-steps">Next steps</a></li>
 </ul>
 </li>
 </ul>
@@ -731,9 +608,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
           <span class="prev-next-label">Previous</span>
           <span class="prev-next-title">Installation Guide</span>
         </a>
-        <a href="../concepts/recipes.html" class="prev-next-link next">
+        <a href="DJ-Cookbook.html" class="prev-next-link next">
           <span class="prev-next-label">Next</span>
-          <span class="prev-next-title">Recipes</span>
+          <span class="prev-next-title">DJ-Cookbook</span>
         </a>
       </nav>
       <footer class="footer">

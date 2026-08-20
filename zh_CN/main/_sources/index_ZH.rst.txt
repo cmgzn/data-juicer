@@ -8,10 +8,16 @@
 
    docs/tutorial/Installation_ZH
    docs/tutorial/QuickStart_ZH
+   docs/tutorial/DJ-Cookbook_ZH
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 核心概念
+   :hidden:
+
    docs/concepts/recipes_ZH
    docs/concepts/operators_ZH
    docs/concepts/executor_ZH
-   docs/tutorial/DJ-Cookbook_ZH
 
 .. toctree::
    :maxdepth: 2
@@ -20,6 +26,8 @@
 
    docs/Operators
    docs/DatasetCfg_ZH
+   docs/Analyze_ZH
+   docs/Playground_ZH
    docs/Export_ZH
    docs/Cache_ZH
    docs/Tracing_ZH

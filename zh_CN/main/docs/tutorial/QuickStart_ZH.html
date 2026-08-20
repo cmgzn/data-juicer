@@ -97,15 +97,20 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Installation_ZH.html">安装</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">核心概念</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../concepts/recipes_ZH.html">数据菜谱（Recipes）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts/operators_ZH.html">算子（Operators）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts/executor_ZH.html">执行引擎（Executor）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">使用指南</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DatasetCfg_ZH.html">数据集配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Analyze_ZH.html">数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Playground_ZH.html">Web Playground</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Export_ZH.html">数据集导出</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Cache_ZH.html">缓存管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tracing_ZH.html">数据追踪</a></li>
@@ -119,7 +124,7 @@
 <p class="caption" role="heading"><span class="caption-text">扩展与开发</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../OperatorPlugins_ZH.html">算子插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DJ_service_ZH.html">DJ_服务化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DJ_service_ZH.html">DJ 服务化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DJ_SORA_ZH.html">DJ-SORA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DeveloperGuide_ZH.html">开发者指南</a></li>
 </ul>
@@ -382,16 +387,16 @@
 <p class="caption" role="heading"><span class="caption-text">工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/distributed_deduplication/README_ZH.html">分布式模糊去重工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tools/evaluator/README_ZH.html">Auto Evaluation Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/evaluator/README_ZH.html">自动评测工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/evaluator/gpt_eval/README_ZH.html">GPT EVAL：使用 OpenAI API 评测大模型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tools/evaluator/recorder/README_ZH.html">Evaluation Results Recorder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/evaluator/recorder/README_ZH.html">评测结果记录器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/fmt_conversion/README_ZH.html">格式转换工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tools/fmt_conversion/multimodal/README_ZH.html">多模态工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fmt_conversion/multimodal/README_ZH.html">多模态格式转换工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/fmt_conversion/post_tuning_dialog/README_ZH.html">后微调工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/humanops/README.html">Label Studio Service Utility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/mm_eval/inception_metrics/README_ZH.html">视频生成测评工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tools/mm_eval/vbench_metrics/README_ZH.html">VBench metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tools/postprocess/README_ZH.html">Postprocess tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/mm_eval/vbench_metrics/README_ZH.html">VBench 视频质量指标</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/postprocess/README_ZH.html">后处理工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/preprocess/README_ZH.html">预处理工具</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">第三方</span></p>
@@ -415,22 +420,46 @@
         <article class="article" role="main">
   <section id="id1">
 <h1>快速上手<a class="headerlink" href="#id1" title="链接到此标题。">¶</a></h1>
-<p>本指南带你逐步完成一次完整的 Data-Juicer 工作流：运行第一个数据处理任务、构建自定义菜谱、分析数据集、交互式调优过滤阈值。五分钟内即可获得清洗过滤后的输出数据。</p>
+<p>本指南带你在 5 分钟内完成一次完整的 Data-Juicer 数据处理：安装、编写菜谱、运行流水线、查看输出。</p>
 <blockquote>
-<div><p><strong>注意：</strong> 部分算子在首次使用时会下载模型权重（例如 <code class="docutils literal notranslate"><span class="pre">language_id_score_filter</span></code> 会下载 fastText 语言识别模型）。首次运行可能需要多等几分钟来下载这些资源，后续运行使用本地缓存，立即启动。</p>
+<div><p><strong>提示：</strong> 部分算子在首次使用时会下载模型权重（例如 <code class="docutils literal notranslate"><span class="pre">language_id_score_filter</span></code> 会下载 fastText 语言识别模型）。首次运行可能多等几分钟，后续使用本地缓存立即启动。</p>
 </div></blockquote>
+<hr class="docutils" />
+<section id="data-juicer">
+<h2>1. 安装 Data-Juicer<a class="headerlink" href="#data-juicer" title="链接到此标题。">¶</a></h2>
+<p>安装核心包及本指南所需的 NLP extras：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"py-data-juicer[nlp]"</span>
+</pre></div>
+</div>
+<p>验证 CLI 可用：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--help
+</pre></div>
+</div>
+<blockquote>
+<div><p>完整的安装方式（场景化 extras、源码安装、Docker）请参见<a class="reference internal" href="Installation_ZH.html"><span class="std std-doc">安装文档</span></a>。</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
 <section id="id2">
-<h2>前置条件<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h2>
-<ul class="simple">
-<li><p>已安装 Data-Juicer——参见<a class="reference internal" href="Installation_ZH.html"><span class="std std-doc">安装文档</span></a>。</p></li>
-<li><p>Python 环境已安装菜谱中算子所需的 extras。</p></li>
-</ul>
+<h2>2. 了解输入数据<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h2>
+<p>Data-Juicer 开箱支持 JSONL、Parquet、CSV/TSV、纯文本等多种格式。本指南使用内置的样例数据集 <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/demos/data/demo-dataset.jsonl"><code class="docutils literal notranslate"><span class="pre">demos/data/demo-dataset.jsonl</span></code></a>，内容如下：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Today is Sunday and it's a happy day!"</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Arxiv"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do you need a cup of coffee?"</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"code"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"你好，请问你是谁"</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customized"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sur la plateforme MT4, plusieurs manières..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oscar"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"欢迎来到阿里巴巴！"</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customized"</span><span class="p">}}</span>
+<span class="p">{</span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This paper proposed a novel method on LLM pretraining."</span><span class="p">,</span><span class="w"> </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customized"</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>每行一个 JSON 对象，文本默认在 <code class="docutils literal notranslate"><span class="pre">&quot;text&quot;</span></code> 字段，其余字段作为元数据保留。</p>
+<blockquote>
+<div><p>输入格式、数据混合、远程数据集（如 Hugging Face）等高级配置请参见<a class="reference internal" href="../DatasetCfg_ZH.html"><span class="std std-doc">数据集配置指南</span></a>。对于 arXiv tar 包、Stack Exchange 7z 等需要额外解压/转换的原始数据，可使用<a class="reference internal" href="../../tools/preprocess/README_ZH.html"><span class="std std-doc">预处理工具</span></a>将其转为 Data-Juicer 可直接读取的格式。</p>
+</div></blockquote>
 </section>
 <hr class="docutils" />
 <section id="id3">
-<h2>1. 运行第一个处理任务<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h2>
-<p>Data-Juicer 依照<strong>菜谱</strong>处理数据集——菜谱是一个 YAML 配置文件，指定了输入数据集、输出路径和要应用的算子。</p>
-<p>从内置的示例菜谱 <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/demos/process_simple/process.yaml"><code class="docutils literal notranslate"><span class="pre">demos/process_simple/process.yaml</span></code></a> 开始，它只保留语言置信度较高的中文样本：</p>
+<h2>3. 编写菜谱<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h2>
+<p><strong>菜谱</strong>是一个 YAML 配置文件，声明运行哪些算子、以什么顺序运行。这里使用内置的示例菜谱 <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/demos/process_simple/process.yaml"><code class="docutils literal notranslate"><span class="pre">demos/process_simple/process.yaml</span></code></a>：</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># 全局参数</span>
 <span class="nt">project_name</span><span class="p">:</span><span class="w"> </span><span class="s">'demo-process'</span>
 <span class="nt">dataset_path</span><span class="p">:</span><span class="w"> </span><span class="s">'./demos/data/demo-dataset.jsonl'</span>
@@ -445,259 +474,113 @@
 <span class="w">      </span><span class="nt">min_score</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
 </pre></div>
 </div>
-<p>以配置文件路径作为参数来运行 <code class="docutils literal notranslate"><span class="pre">dj-process</span></code> 命令行工具或者 <code class="docutils literal notranslate"><span class="pre">process_data.py</span></code> 来处理数据集：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用命令行工具</span>
-dj-process<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml
-
-<span class="c1"># 适用于从源码安装</span>
-python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml
-</pre></div>
-</div>
-<p>这会在工作目录（<code class="docutils literal notranslate"><span class="pre">export_path</span></code> 所在目录）中产出以下输出：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>outputs/demo-process/
-├── demo-processed.jsonl    # 处理后的数据集
-├── *.yaml                  # 完整解析配置的备份
-└── logs/                   # 运行日志
-</pre></div>
-</div>
-<p>至此，你已完成第一个数据集的处理。</p>
+<p><code class="docutils literal notranslate"><span class="pre">process</span></code> 下的每项是一个算子，按列出顺序依次执行——前一个算子的输出是后一个的输入。这个菜谱只保留语言置信度较高的中文样本。</p>
 <blockquote>
-<div><p><strong>注意：</strong> 使用未保存在本地的第三方模型或资源的算子第一次运行可能会很慢，因为这些算子需要将相应的资源下载到缓存目录中。默认的下载缓存目录为 <code class="docutils literal notranslate"><span class="pre">~/.cache/data_juicer</span></code>。您可通过设置 shell 环境变量 <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_CACHE_HOME</span></code> 更改缓存目录位置，您也可以通过同样的方式更改 <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_MODELS_CACHE</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DATA_JUICER_ASSETS_CACHE</span></code> 来分别修改模型缓存或资源缓存目录：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_CACHE_HOME</span><span class="o">=</span><span class="s2">"/path/to/another/directory"</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_MODELS_CACHE</span><span class="o">=</span><span class="s2">"/path/to/another/directory/models"</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">DATA_JUICER_ASSETS_CACHE</span><span class="o">=</span><span class="s2">"/path/to/another/directory/assets"</span>
-</pre></div>
-</div>
-</div></blockquote>
-<blockquote>
-<div><p><strong>注意：</strong> 对于使用了第三方模型的算子，在填写 config 文件时需要去声明其对应的 <code class="docutils literal notranslate"><span class="pre">memory</span></code>（可以参考 <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/data_juicer/config/config_all.yaml"><code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code></a> 中的设置）。Data-Juicer 在运行过程中会根据内存情况和算子模型所需的 memory 大小来控制对应的进程数，以达成更好的数据处理的性能效率。而在使用 CUDA 环境运行时，如果不正确的声明算子的 <code class="docutils literal notranslate"><span class="pre">memory</span></code> 情况，则有可能导致 CUDA Out of Memory。</p>
+<div><p>菜谱的完整语法和设计理念请参见<a class="reference internal" href="../concepts/recipes_ZH.html"><span class="std std-doc">核心概念：数据菜谱</span></a>。200+ 内置算子的完整列表请参见<a class="reference internal" href="../Operators.html"><span class="std std-doc">算子库</span></a>。</p>
 </div></blockquote>
 </section>
 <hr class="docutils" />
 <section id="id4">
-<h2>2. 构建自己的菜谱<a class="headerlink" href="#id4" title="链接到此标题。">¶</a></h2>
-<p>配置文件包含一系列全局参数和用于数据处理的算子列表。您需要设置：</p>
-<ul class="simple">
-<li><p><strong>全局参数</strong>：输入/输出数据集路径，worker 进程数量等。</p></li>
-<li><p><strong>算子列表</strong>：列出用于处理数据集的算子及其参数。</p></li>
-</ul>
-<p>您可以通过如下方式构建自己的配置文件：</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>方式</p></th>
-<th class="head"><p>做法</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>➖ 减法</strong></p></td>
-<td><p>修改样例配置文件 <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/data_juicer/config/config_all.yaml"><code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code></a>。该文件包含了<strong>所有</strong>算子以及算子对应的默认参数。您只需要<strong>移除</strong>不需要的算子并重新设置部分算子的参数即可。</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>➕ 加法</strong></p></td>
-<td><p>从头开始构建自己的配置文件。您可以参考 <a class="reference external" href="https://github.com/datajuicer/data-juicer/blob/main/data_juicer/config/config_all.yaml"><code class="docutils literal notranslate"><span class="pre">config_all.yaml</span></code></a>、<a class="reference internal" href="../Operators.html"><span class="std std-doc">算子文档</span></a>，以及<a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/DeveloperGuide_ZH.md#2-%E6%9E%84%E5%BB%BA%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%95%B0%E6%8D%AE%E8%8F%9C%E8%B0%B1%E5%92%8C%E9%85%8D%E7%BD%AE%E9%A1%B9">开发者指南</a>。</p></td>
-</tr>
-</tbody>
-</table>
-<p>除了使用 yaml 文件外，您还可以在命令行上指定一个或多个参数，这些参数将覆盖 yaml 文件中的值：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml<span class="w"> </span>--language_id_score_filter.lang<span class="o">=</span>en
+<h2>4. 运行流水线<a class="headerlink" href="#id4" title="链接到此标题。">¶</a></h2>
+<p>将菜谱传给 <code class="docutils literal notranslate"><span class="pre">dj-process</span></code> CLI：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml
+</pre></div>
+</div>
+<p>Data-Juicer 加载数据集，按顺序执行每个算子，将过滤后的结果写入 <code class="docutils literal notranslate"><span class="pre">export_path</span></code>。运行时会在控制台打印各算子的处理统计。</p>
+<p>命令行可以覆盖菜谱中的任何参数，无需修改 YAML：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml<span class="w"> </span>--language_id_score_filter.lang<span class="o">=</span>en
 </pre></div>
 </div>
 <blockquote>
-<div><p><strong>提示：</strong> 基础的配置项格式及定义如下图所示：</p>
-<p><img alt="基础配置项格式及定义样例" src="https://img.alicdn.com/imgextra/i4/O1CN01xPtU0t1YOwsZyuqCx_!!6000000003050-0-tps-1692-879.jpg" /></p>
+<div><p>使用 <code class="docutils literal notranslate"><span class="pre">dj-install</span> <span class="pre">--config</span> <span class="pre">your-recipe.yaml</span></code> 可以自动安装菜谱中算子所需的依赖，无需手动管理。详见<a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/tutorial/Installation_ZH.md#5-%E7%89%B9%E5%AE%9A%E7%AE%97%E5%AD%90%E7%9A%84%E5%AE%89%E8%A3%85">安装文档 §5</a>。</p>
 </div></blockquote>
 </section>
 <hr class="docutils" />
 <section id="id5">
-<h2>3. 配置输入数据集<a class="headerlink" href="#id5" title="链接到此标题。">¶</a></h2>
-<p>Data-Juicer 支持多种数据集输入类型，包括本地文件、远程数据集（如 Hugging Face）；还支持数据验证和数据混合。</p>
-<p>配置输入文件的两种方法：</p>
-<ul class="simple">
-<li><p><strong>简单场景</strong>，本地/HF 文件的单一路径：</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset_path</span><span class="p">:</span><span class="w"> </span><span class="s">'/path/to/your/dataset'</span><span class="w">   </span><span class="c1"># 数据集目录或文件的路径</span>
+<h2>5. 查看输出<a class="headerlink" href="#id5" title="链接到此标题。">¶</a></h2>
+<p>处理后的数据集在你配置的 <code class="docutils literal notranslate"><span class="pre">export_path</span></code> 路径：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>./outputs/demo-process/demo-processed.jsonl
 </pre></div>
 </div>
-<ul class="simple">
-<li><p><strong>高级方法</strong>，支持子配置项和更多功能：</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">configs</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">'local'</span>
-<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">'path/to/your/dataset'</span><span class="w">   </span><span class="c1"># 数据集目录或文件的路径</span>
+<p>你应该只看到通过过滤器的中文样本——英文和法文行已被移除。</p>
+<p>想在正式运行前了解数据集的质量分布？使用分析器：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-analyze<span class="w"> </span>--config<span class="w"> </span>demos/process_simple/process.yaml
 </pre></div>
 </div>
-<p>更多详细信息，请参阅<a class="reference internal" href="../DatasetCfg_ZH.html"><span class="std std-doc">数据集配置指南</span></a>。</p>
+<blockquote>
+<div><p>分析器的完整用法（自动模式、分布式分析、自定义指标）请参见<a class="reference internal" href="../Analyze_ZH.html"><span class="std std-doc">数据分析指南</span></a>。交互式拖动滑块调优过滤阈值请参见 <a class="reference internal" href="../Playground_ZH.html"><span class="std std-doc">Web Playground</span></a>。</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="python">
+<h2>6. 在 Python 中使用（可选）<a class="headerlink" href="#python" title="链接到此标题。">¶</a></h2>
+<p>如果你想在训练脚本或 Notebook 中嵌入 Data-Juicer：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Executor</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">init_configs</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">'--config'</span><span class="p">,</span> <span class="s1">'my-recipe.yaml'</span><span class="p">])</span>
+<span class="n">executor</span> <span class="o">=</span> <span class="n">Executor</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">executor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>也支持单算子链式调用：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">([</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">])</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>编程接口的更多用法请参见<a class="reference internal" href="../DeveloperGuide_ZH.html"><span class="std std-doc">开发者指南</span></a>。</p>
+</div></blockquote>
 </section>
 <hr class="docutils" />
 <section id="id6">
-<h2>4. 分析数据集<a class="headerlink" href="#id6" title="链接到此标题。">¶</a></h2>
-<p>在确定过滤阈值之前，通常需要先了解数据集的统计概况。分析器会计算算子产出的所有统计量的分布和相关性。</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用命令行工具</span>
-dj-analyze<span class="w"> </span>--config<span class="w"> </span>demos/analyze_simple/analyzer.yaml
-
-<span class="c1"># 适用于从源码安装</span>
-python<span class="w"> </span>tools/analyze_data.py<span class="w"> </span>--config<span class="w"> </span>demos/analyze_simple/analyzer.yaml
-
-<span class="c1"># 你也可以使用"自动"模式来避免写一个新的数据菜谱。它会使用全部可产出统计信息的 Filter 来分析</span>
-<span class="c1"># 你的数据集的一小部分（如1000条样本，可通过 `auto_num` 参数指定）</span>
-dj-analyze<span class="w"> </span>--auto<span class="w"> </span>--dataset_path<span class="w"> </span>xx.jsonl<span class="w"> </span><span class="o">[</span>--auto_num<span class="w"> </span><span class="m">1000</span><span class="o">]</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p><strong>注意：</strong> Analyzer 只用于能在 stats 字段里产出统计信息的 Filter 算子和能在 meta 字段里产出 tags 或类别标签的其他算子。除此之外的其他的算子会在分析过程中被忽略。我们使用以下两种注册器来装饰相关的算子：</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">NON_STATS_FILTERS</span></code>：装饰那些<strong>不能</strong>产出任何统计信息的 Filter 算子。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TAGGING_OPS</span></code>：装饰那些能在 meta 字段中产出 tags 或类别标签的算子。</p></li>
-</ul>
-</div></blockquote>
-<blockquote>
-<div><p><strong>提示：</strong> 有时会产生 &quot;Glyph missing&quot; 的警告，并且在分析结果图表中会出现一些非法字符。用户可以使用环境变量 <code class="docutils literal notranslate"><span class="pre">ANALYZER_FONT</span></code> 来指定合适的字体。例如：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ANALYZER_FONT</span><span class="o">=</span><span class="s2">"Heiti TC"</span><span class="w">  </span><span class="c1"># 使用黑体来支持中文字符，这也是 Analyzer 的默认字体</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p><strong>基于 Ray 的分布式分析：</strong> <code class="docutils literal notranslate"><span class="pre">dj-analyze</span></code> 同样支持 Ray 模式进行大规模分布式数据分析。在配置文件中设置 <code class="docutils literal notranslate"><span class="pre">executor_type:</span> <span class="pre">ray</span></code>，分析器将自动使用 <code class="docutils literal notranslate"><span class="pre">RayAnalyzer</span></code>，通过 Ray 原生聚合算子计算总体统计信息（count/mean/std/min/max），无需 pandas 物化。注意 RayAnalyzer 不会产出逐列分布图表或相关性分析。更多细节请参考<a class="reference internal" href="../Distributed_ZH.html"><span class="std std-doc">分布式处理文档</span></a>。</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>dj-analyze<span class="w"> </span>--config<span class="w"> </span>demos/analyze_simple/ray_analyzer.yaml
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="web-playground">
-<h2>5. 交互式可视化与菜谱调优（Web Playground）<a class="headerlink" href="#web-playground" title="链接到此标题。">¶</a></h2>
-<p>运行项目根目录下的 <code class="docutils literal notranslate"><span class="pre">app.py</span></code> 来在浏览器中可视化您的数据集。</p>
-<blockquote>
-<div><p><strong>注意：</strong> 只可用于从源码安装的方法。</p>
-</div></blockquote>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在项目根目录下运行</span>
-streamlit<span class="w"> </span>run<span class="w"> </span>app.py
-</pre></div>
-</div>
-<p>典型使用流程：</p>
-<ol class="arabic simple">
-<li><p><strong>解析配置（Parse Cfg）</strong>——指定一个菜谱（已预填示例）、上传你自己的 YAML，或覆盖参数。界面并排展示解析后的配置与原始 YAML。</p></li>
-<li><p><strong>分析原始数据（Analyze original data）</strong>——对数据集运行<a class="reference internal" href="#id6">分析器</a>，展示整体统计表和各类统计量的分布图表。</p></li>
-<li><p><strong>处理数据（Process data）</strong>——运行完整菜谱，并排展示原始与处理后数据的统计信息。</p></li>
-<li><p><strong>调优 Filter 算子</strong>——拖动滑块调整每个 filter 的阈值。页面即时报告<strong>丢弃比例</strong>，绘制标注了截断线的统计直方图，并列出具体的<strong>保留 vs. 丢弃样本</strong>。你还可以查看各 filter 效果的堆叠柱状图、词汇多样性分析，并<strong>将保留/丢弃的数据分别下载为 JSONL</strong>。</p></li>
-</ol>
-<p>对阈值满意后，把它们抄回你的菜谱 YAML 即可。这个「分析 → 处理 → 调优 → 导出」的收敛闭环，正是用 Data-Juicer 打磨优质数据菜谱的核心。</p>
-</section>
-<hr class="docutils" />
-<section id="python-data-juicer">
-<h2>6. 在 Python 中使用 Data-Juicer<a class="headerlink" href="#python-data-juicer" title="链接到此标题。">¶</a></h2>
-<p>除了命令行工具，Data-Juicer 还提供简洁的编程接口：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ... init op &amp; dataset ...</span>
-
-<span class="c1"># 链式调用风格，支持单算子或算子列表</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">([</span><span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">])</span>
-
-<span class="c1"># 函数式编程风格，方便快速集成或脚本原型迭代</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="id7">
-<h2>7. 规模扩展：分布式处理<a class="headerlink" href="#id7" title="链接到此标题。">¶</a></h2>
-<p>Data-Juicer 支持基于 <a class="reference external" href="https://www.ray.io/">Ray</a> 的多机分布式处理：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 运行文字数据处理</span>
-python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>./demos/process_on_ray/configs/demo.yaml
-
-<span class="c1"># 运行视频数据处理</span>
-python<span class="w"> </span>tools/process_data.py<span class="w"> </span>--config<span class="w"> </span>./demos/process_video_on_ray/configs/demo.yaml
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>如果需要在多机上使用 RAY 执行数据处理，需要确保所有节点都可以访问对应的数据路径，即将对应的数据路径挂载在共享文件系统（如 NAS）中。</p></li>
-<li><p>RAY 模式下的去重算子与单机版本不同，所有 RAY 模式下的去重算子名称都以 <code class="docutils literal notranslate"><span class="pre">ray</span></code> 作为前缀，例如 <code class="docutils literal notranslate"><span class="pre">ray_video_deduplicator</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ray_document_deduplicator</span></code>。</p></li>
-<li><p>更多细节请参考<a class="reference internal" href="../Distributed_ZH.html"><span class="std std-doc">分布式处理文档</span></a>。</p></li>
-</ul>
-<blockquote>
-<div><p><strong>注意：</strong> 你也可以不使用 Ray，而是拆分数据集后使用 <a class="reference external" href="https://slurm.schedmd.com/">Slurm</a> 在集群上运行。此时使用不包含 Ray 的原版 Data-Juicer 即可。<a class="reference external" href="https://www.aliyun.com/activity/bigdata/pai-dlc">阿里云 PAI-DLC</a> 同时支持 Ray 和 Slurm 框架。</p>
-</div></blockquote>
-</section>
-<hr class="docutils" />
-<section id="id8">
-<h2>8. 沙盒实验室（可选）<a class="headerlink" href="#id8" title="链接到此标题。">¶</a></h2>
-<p>数据沙盒实验室 (DJ-Sandbox) 为用户提供了持续生产数据菜谱的最佳实践，其具有低开销、可迁移、有指导性等特点。</p>
-<ul class="simple">
-<li><p>基于小规模数据集快速实验、迭代、优化菜谱，再迁移到更大规模。</p></li>
-<li><p>除基础的数据优化与菜谱微调外，沙盒还提供可配置组件：数据洞察与分析、模型训练与评测、基于数据/模型反馈优化菜谱——组成完整的一站式数据-模型研发流水线。</p></li>
-</ul>
-<p>更多介绍和细节请参阅<a class="reference external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/index_ZH.html">沙盒文档</a>。</p>
-</section>
-<hr class="docutils" />
-<section id="id9">
-<h2>9. 预处理原始数据（可选）<a class="headerlink" href="#id9" title="链接到此标题。">¶</a></h2>
-<p>Data-Juicer 的 formatter 开箱支持常见输入格式：</p>
+<h2>下一步<a class="headerlink" href="#id6" title="链接到此标题。">¶</a></h2>
+<p>你已经跑通了第一条流水线。根据需要探索以下方向：</p>
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>格式</p></th>
-<th class="head"><p>每文件样本数</p></th>
+<tr class="row-odd"><th class="head"><p>方向</p></th>
+<th class="head"><p>说明</p></th>
+<th class="head"><p>链接</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>jsonl/json、parquet、csv/tsv</p></td>
-<td><p>多个</p></td>
+<tr class="row-even"><td><p><strong>核心概念</strong></p></td>
+<td><p>理解菜谱、算子、执行引擎的设计</p></td>
+<td><p><a class="reference internal" href="../concepts/recipes_ZH.html"><span class="std std-doc">菜谱</span></a> · <a class="reference internal" href="../concepts/operators_ZH.html"><span class="std std-doc">算子</span></a> · <a class="reference internal" href="../concepts/executor_ZH.html"><span class="std std-doc">执行引擎</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p>txt、code、docx、pdf</p></td>
-<td><p>单个</p></td>
+<tr class="row-odd"><td><p><strong>算子库</strong></p></td>
+<td><p>浏览 200+ 算子，覆盖文本/图像/音频/视频</p></td>
+<td><p><a class="reference internal" href="../Operators.html"><span class="std std-doc">算子总览</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>数据分析</strong></p></td>
+<td><p>运行前用分析器了解数据分布</p></td>
+<td><p><a class="reference internal" href="../Analyze_ZH.html"><span class="std std-doc">数据分析指南</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>可视化调优</strong></p></td>
+<td><p>拖动滑块调整过滤阈值，即时预览效果</p></td>
+<td><p><a class="reference internal" href="../Playground_ZH.html"><span class="std std-doc">Web Playground</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>分布式处理</strong></p></td>
+<td><p>使用 Ray 扩展到多机集群</p></td>
+<td><p><a class="reference internal" href="../Distributed_ZH.html"><span class="std std-doc">分布式处理</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>数据沙盒</strong></p></td>
+<td><p>小数据快速实验，数据-模型协同优化闭环</p></td>
+<td><p><a class="reference external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/index_ZH.html">DJ-Sandbox</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>导出与缓存</strong></p></td>
+<td><p>控制输出格式、加速重复运行</p></td>
+<td><p><a class="reference internal" href="../Export_ZH.html"><span class="std std-doc">导出</span></a> · <a class="reference internal" href="../Cache_ZH.html"><span class="std std-doc">缓存</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>开发者指南</strong></p></td>
+<td><p>编写自定义算子、贡献代码</p></td>
+<td><p><a class="reference internal" href="../DeveloperGuide_ZH.html"><span class="std std-doc">开发者指南</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>DJ-Cookbook</strong></p></td>
+<td><p>社区菜谱合集与教程资源</p></td>
+<td><p><a class="reference internal" href="DJ-Cookbook_ZH.html"><span class="std std-doc">DJ-Cookbook</span></a></p></td>
 </tr>
 </tbody>
 </table>
-<p>但来自不同源的现实数据可能很复杂：</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://info.arxiv.org/help/bulk_data_s3.html">从 S3 下载的 arXiv 原始数据</a>包含数千个 tar/gzip 文件，内嵌的 tex 文件难以直接获取。</p></li>
-<li><p>爬取的数据可能包含混合文件类型（pdf、html、docx），表格和图表难以提取。</p></li>
-</ul>
-<p>我们在 <a class="reference internal" href="../../tools/preprocess/README_ZH.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">tools/preprocess</span></code></span></a> 中提供了<strong>常见预处理工具</strong>来处理这些情况。欢迎贡献新数据类型的处理能力。我们<strong>强烈建议</strong>将复杂数据预处理为 jsonl 或 parquet 后再输入 Data-Juicer。</p>
-</section>
-<hr class="docutils" />
-<section id="docker">
-<h2>10. 对于 Docker 用户<a class="headerlink" href="#docker" title="链接到此标题。">¶</a></h2>
-<p>如果您构建或者拉取了 <code class="docutils literal notranslate"><span class="pre">data-juicer</span></code> 的 Docker 镜像，您可以使用这个 Docker 镜像来运行上面提到的这些命令或者工具。</p>
-<p><strong>直接运行：</strong></p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--privileged<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--shm-size<span class="w"> </span>256g<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>dj<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>&lt;host_data_path&gt;:&lt;image_data_path&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>~/.cache/:/root/.cache/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>datajuicer/data-juicer:&lt;version_tag&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>dj-process<span class="w"> </span>--config<span class="w"> </span>/path/to/config.yaml
-</pre></div>
-</div>
-<p><strong>或者您可以进入正在运行的容器，然后在可编辑模式下运行命令：</strong></p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 启动容器</span>
-docker<span class="w"> </span>run<span class="w"> </span>-dit<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--privileged<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--shm-size<span class="w"> </span>256g<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--rm<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>dj<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>&lt;host_data_path&gt;:&lt;image_data_path&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>~/.cache/:/root/.cache/<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>datajuicer/data-juicer:latest<span class="w"> </span>/bin/bash
-
-<span class="c1"># 进入这个容器，然后您可以在编辑模式下使用 data-juicer</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container_id&gt;<span class="w"> </span>bash
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="id10">
-<h2>下一步<a class="headerlink" href="#id10" title="链接到此标题。">¶</a></h2>
-<ul class="simple">
-<li><p>在<a class="reference internal" href="../Operators.html"><span class="std std-doc">算子库</span></a>中浏览 200+ 内置算子，并通过<a class="reference internal" href="../DatasetCfg_ZH.html"><span class="std std-doc">数据集配置指南</span></a>灵活配置输入。</p></li>
-<li><p>理解心智模型：<a class="reference internal" href="#concepts/recipes_ZH.md"><span class="xref myst">数据菜谱</span></a>、<a class="reference internal" href="#concepts/operators_ZH.md"><span class="xref myst">算子</span></a>、<a class="reference internal" href="#concepts/executor_ZH.md"><span class="xref myst">执行引擎</span></a>。</p></li>
-<li><p>通过<a class="reference internal" href="../Export_ZH.html"><span class="std std-doc">导出指南</span></a>控制输出格式，通过<a class="reference internal" href="../Cache_ZH.html"><span class="std std-doc">缓存管理</span></a>加速重复运行，通过<a class="reference internal" href="../Tracing_ZH.html"><span class="std std-doc">数据追踪</span></a>调试样本级变化。</p></li>
-<li><p>通过<a class="reference internal" href="../Distributed_ZH.html"><span class="std std-doc">分布式处理</span></a>和<a class="reference internal" href="../PartitionAndCheckpoint_ZH.html"><span class="std std-doc">分区与检查点</span></a>扩展到集群规模。</p></li>
-<li><p>参照<a class="reference internal" href="../DeveloperGuide_ZH.html"><span class="std std-doc">开发者指南</span></a>开发自己的算子，或从 <a class="reference internal" href="DJ-Cookbook_ZH.html"><span class="std std-doc">DJ-Cookbook</span></a> 复用社区菜谱。</p></li>
-</ul>
 </section>
 </section>
 
@@ -708,18 +591,13 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
             <p class="toc-title">On this page</p>
             <ul>
 <li><a class="reference internal" href="#">快速上手</a><ul>
-<li><a class="reference internal" href="#id2">前置条件</a></li>
-<li><a class="reference internal" href="#id3">1. 运行第一个处理任务</a></li>
-<li><a class="reference internal" href="#id4">2. 构建自己的菜谱</a></li>
-<li><a class="reference internal" href="#id5">3. 配置输入数据集</a></li>
-<li><a class="reference internal" href="#id6">4. 分析数据集</a></li>
-<li><a class="reference internal" href="#web-playground">5. 交互式可视化与菜谱调优（Web Playground）</a></li>
-<li><a class="reference internal" href="#python-data-juicer">6. 在 Python 中使用 Data-Juicer</a></li>
-<li><a class="reference internal" href="#id7">7. 规模扩展：分布式处理</a></li>
-<li><a class="reference internal" href="#id8">8. 沙盒实验室（可选）</a></li>
-<li><a class="reference internal" href="#id9">9. 预处理原始数据（可选）</a></li>
-<li><a class="reference internal" href="#docker">10. 对于 Docker 用户</a></li>
-<li><a class="reference internal" href="#id10">下一步</a></li>
+<li><a class="reference internal" href="#data-juicer">1. 安装 Data-Juicer</a></li>
+<li><a class="reference internal" href="#id2">2. 了解输入数据</a></li>
+<li><a class="reference internal" href="#id3">3. 编写菜谱</a></li>
+<li><a class="reference internal" href="#id4">4. 运行流水线</a></li>
+<li><a class="reference internal" href="#id5">5. 查看输出</a></li>
+<li><a class="reference internal" href="#python">6. 在 Python 中使用（可选）</a></li>
+<li><a class="reference internal" href="#id6">下一步</a></li>
 </ul>
 </li>
 </ul>
@@ -732,9 +610,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
           <span class="prev-next-label">Previous</span>
           <span class="prev-next-title">安装</span>
         </a>
-        <a href="../concepts/recipes_ZH.html" class="prev-next-link next">
+        <a href="DJ-Cookbook_ZH.html" class="prev-next-link next">
           <span class="prev-next-label">Next</span>
-          <span class="prev-next-title">数据菜谱（Recipes）</span>
+          <span class="prev-next-title">DJ-Cookbook</span>
         </a>
       </nav>
       <footer class="footer">
