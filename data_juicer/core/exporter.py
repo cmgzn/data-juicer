@@ -179,7 +179,12 @@ class Exporter:
         :param export_path: the path to export datasets.
         :return: the suffix of export_path.
         """
-        suffix = export_path.split(".")[-1].lower()
+        from urllib.parse import urlparse
+
+        parsed = urlparse(export_path)
+        path = parsed.path if parsed.scheme else export_path
+        _, ext = os.path.splitext(path)
+        suffix = ext.lstrip(".").lower()
         return suffix
 
     @staticmethod

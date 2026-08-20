@@ -502,5 +502,30 @@ class CoreExporterFileTest(DataJuicerTestCaseBase):
         self.assertTrue(any(name.endswith(".jsonl") for name in shard_files))
 
 
+class ExporterGetSuffixTest(DataJuicerTestCaseBase):
+    """Regression tests for Exporter._get_suffix on various path formats."""
+
+    def _get_suffix(self, path):
+        from data_juicer.core.exporter import Exporter
+        e = Exporter.__new__(Exporter)
+        return e._get_suffix(path)
+
+    def test_local_path_with_extension(self):
+        self.assertEqual(self._get_suffix('./output/result.jsonl'), 'jsonl')
+        self.assertEqual(self._get_suffix('/tmp/data.parquet'), 'parquet')
+        self.assertEqual(self._get_suffix('export.JSON'), 'json')
+
+    def test_s3_path_with_extension(self):
+        self.assertEqual(self._get_suffix('s3://bucket/data/out.jsonl'), 'jsonl')
+        self.assertEqual(self._get_suffix('s3://my.bucket.name/key.parquet'), 'parquet')
+
+    def test_extensionless_path_returns_empty(self):
+        self.assertEqual(self._get_suffix('s3://bucket/output'), '')
+        self.assertEqual(self._get_suffix('hdfs://cluster/warehouse/out'), '')
+
+    def test_hdfs_path_with_extension(self):
+        self.assertEqual(self._get_suffix('hdfs://namenode/data/export.json'), 'json')
+
+
 if __name__ == '__main__':
     unittest.main()
