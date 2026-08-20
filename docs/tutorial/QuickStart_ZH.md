@@ -137,6 +137,7 @@ dataset = dataset.process([op1, op2])
 
 | 方向 | 说明 | 链接 |
 |------|------|------|
+| **处理数据** | CLI 与 Python API 完整用法、性能调优 | [处理数据指南](../ProcessData_ZH.md) |
 | **核心概念** | 理解菜谱、算子、执行引擎的设计 | [菜谱](../concepts/recipes_ZH.md) · [算子](../concepts/operators_ZH.md) · [执行引擎](../concepts/executor_ZH.md) |
 | **算子库** | 浏览 200+ 算子，覆盖文本/图像/音频/视频 | [算子总览](../Operators.md) |
 | **数据分析** | 运行前用分析器了解数据分布 | [数据分析指南](../Analyze_ZH.md) |

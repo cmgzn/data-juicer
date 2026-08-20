@@ -108,7 +108,7 @@ column_wise.analyze()
 
 ### Dynamic Analysis Dimensions
 
-Suited for agent workflows—choose analysis operators based on data modality:
+Programmatically choose analysis operators based on data modality—useful for automated pipelines:
 
 ```python
 from data_juicer.ops import load_ops

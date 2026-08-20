@@ -38,7 +38,7 @@ dj-install --config my-recipe.yaml
 
 ## Python API 方式
 
-Python API 提供了比 YAML 菜谱更灵活的控制——适合在训练脚本、Notebook 或 Agent 工作流中嵌入数据处理。
+Python API 提供了比 YAML 菜谱更灵活的控制——适合在训练脚本、Notebook 或自动化流水线中嵌入数据处理。
 
 ### 方式一：加载菜谱
 
@@ -109,7 +109,7 @@ dataset = length_filter.run(dataset=dataset)
 
 ### 方式四：动态组合算子
 
-适合 Agent 场景——根据数据特征动态选择算子：
+根据数据特征动态选择算子——适合编程式批处理或自动化工作流：
 
 ```python
 from data_juicer.ops import load_ops

@@ -38,7 +38,7 @@ Resolves and installs all per-operator dependencies in one pass. See [Installati
 
 ## Python API
 
-The Python API provides finer control than YAML recipes—ideal for training scripts, notebooks, or agent workflows.
+The Python API provides finer control than YAML recipes—ideal for training scripts, notebooks, or automated pipelines.
 
 ### Option 1: Load a Recipe
 
@@ -105,7 +105,7 @@ dataset = length_filter.run(dataset=dataset)
 
 ### Option 4: Dynamic Operator Composition
 
-Suited for agent workflows—choose operators based on data characteristics:
+Choose operators programmatically based on data characteristics—useful for automated pipelines:
 
 ```python
 from data_juicer.ops import load_ops
