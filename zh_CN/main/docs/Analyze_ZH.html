@@ -93,7 +93,7 @@
               <a href="../index_ZH.html">首页</a>
             </li>
           </ul>
-          <p class="caption" role="heading"><span class="caption-text">入门</span></p>
+          <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/Installation_ZH.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/QuickStart_ZH.html">快速上手</a></li>
@@ -115,14 +115,6 @@
 <li class="toctree-l1"><a class="reference internal" href="Cache_ZH.html">缓存管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Tracing_ZH.html">数据追踪</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">速查手册</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="GlobalConfig_ZH.html">全局配置参数速查</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul class="simple">
-</ul>
-</li>
-</ul>
 <p class="caption" role="heading"><span class="caption-text">分布式处理</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
@@ -140,6 +132,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 <li class="toctree-l1"><a class="reference internal" href="BadDataExhibition_ZH.html">“坏”数据展览</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">参考速查</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GlobalConfig_ZH.html">全局配置参数速查</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul class="simple">
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">算子</span></p>
 <ul>
@@ -527,7 +527,7 @@
 </section>
 <section id="id7">
 <h3>动态选择分析维度<a class="headerlink" href="#id7" title="链接到此标题。">¶</a></h3>
-<p>根据数据模态编程式选择分析算子——适合自动化工作流：</p>
+<p>适合 Agent 场景——根据数据模态选择合适的分析算子：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_ops</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span><span class="p">,</span> <span class="n">NestedDataset</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>

@@ -137,7 +137,6 @@ You have a working pipeline. Explore further based on your needs:
 
 | Topic | Description | Link |
 |-------|-------------|------|
-| **Processing Data** | Full CLI & Python API usage, performance tuning | [Processing Data Guide](../ProcessData.md) |
 | **Core Concepts** | Understand recipes, operators, and executor design | [Recipes](../concepts/recipes.md) · [Operators](../concepts/operators.md) · [Executor](../concepts/executor.md) |
 | **Operator Zoo** | Browse 200+ operators across text/image/audio/video | [Operators Overview](../Operators.md) |
 | **Data Analysis** | Profile dataset distributions before processing | [Analysis Guide](../Analyze.md) |

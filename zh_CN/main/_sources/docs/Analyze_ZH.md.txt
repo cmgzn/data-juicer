@@ -108,7 +108,7 @@ column_wise.analyze()
 
 ### 动态选择分析维度
 
-根据数据模态编程式选择分析算子——适合自动化工作流：
+适合 Agent 场景——根据数据模态选择合适的分析算子：
 
 ```python
 from data_juicer.ops import load_ops
