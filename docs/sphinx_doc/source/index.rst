@@ -24,10 +24,10 @@
    :caption: Guides
    :hidden:
 
-   docs/Operators
-   docs/DatasetCfg
+   docs/ProcessData
    docs/Analyze
    docs/Playground
+   docs/DatasetCfg
    docs/Export
    docs/Cache
    docs/Tracing
@@ -62,9 +62,17 @@
 
 .. toctree::
    :maxdepth: 2
+   :caption: Reference
+   :hidden:
+
+   docs/GlobalConfig
+   docs/Operators
+   api
+
+.. toctree::
+   :maxdepth: 1
    :caption: operators
    :hidden:
-   :glob:
 
    docs/operators/aggregator/index
    docs/operators/deduplicator/index
@@ -101,9 +109,3 @@
 
    thirdparty/*
    thirdparty/**/*
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-
-   api

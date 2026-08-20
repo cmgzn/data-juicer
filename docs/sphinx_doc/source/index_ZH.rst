@@ -24,10 +24,10 @@
    :caption: 使用指南
    :hidden:
 
-   docs/Operators
-   docs/DatasetCfg_ZH
+   docs/ProcessData_ZH
    docs/Analyze_ZH
    docs/Playground_ZH
+   docs/DatasetCfg_ZH
    docs/Export_ZH
    docs/Cache_ZH
    docs/Tracing_ZH
@@ -62,9 +62,17 @@
 
 .. toctree::
    :maxdepth: 2
+   :caption: 参考速查
+   :hidden:
+
+   docs/GlobalConfig_ZH
+   docs/Operators
+   api
+
+.. toctree::
+   :maxdepth: 1
    :caption: 算子
    :hidden:
-   :glob:
 
    docs/operators/aggregator/index
    docs/operators/deduplicator/index
@@ -101,9 +109,3 @@
 
    thirdparty/*
    thirdparty/**/*
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-
-   api
