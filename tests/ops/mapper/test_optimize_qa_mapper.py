@@ -132,6 +132,14 @@ class BuildInputTest(DataJuicerTestCaseBase):
         result = op.build_input(sample)
         self.assertIn('A1 <- Q1', result)
 
+    def test_mixed_placeholders_in_qa_pair_raises(self):
+        with self.assertRaises(ValueError):
+            self._create_op(qa_pair_template='{question}\n{}')
+
+    def test_mixed_placeholders_in_input_raises(self):
+        with self.assertRaises(ValueError):
+            self._create_op(input_template='{}\n{qa_pair}')
+
 
 class EdgeCaseTest(DataJuicerTestCaseBase):
     """Test edge cases without requiring model or API access."""

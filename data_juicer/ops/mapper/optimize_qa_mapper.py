@@ -92,6 +92,8 @@ class OptimizeQAMapper(Mapper):
         self.qa_pair_template = qa_pair_template or self.DEFAULT_QA_PAIR_TEMPLATE
         self.output_pattern = output_pattern or self.DEFAULT_OUTPUT_PATTERN
 
+        self._validate_templates()
+
         self.try_num = try_num
 
         self.is_hf_model = is_hf_model
@@ -128,6 +130,22 @@ class OptimizeQAMapper(Mapper):
                 endpoint=api_endpoint,
                 response_path=response_path,
                 **model_params,
+            )
+
+    def _validate_templates(self):
+        has_named = "{question}" in self.qa_pair_template or "{answer}" in self.qa_pair_template
+        has_positional = "{}" in self.qa_pair_template
+        if has_named and has_positional:
+            raise ValueError(
+                "qa_pair_template cannot mix positional '{}' with named "
+                "'{question}'/'{answer}' placeholders. Use one style only."
+            )
+
+        has_named = "{qa_pair}" in self.input_template
+        has_positional = "{}" in self.input_template
+        if has_named and has_positional:
+            raise ValueError(
+                "input_template cannot mix positional '{}' with named " "'{qa_pair}' placeholder. Use one style only."
             )
 
     def build_input(self, sample):
