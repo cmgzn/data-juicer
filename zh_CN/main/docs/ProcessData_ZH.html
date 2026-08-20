@@ -135,6 +135,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">参考速查</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="GlobalConfig_ZH.html">全局配置参数速查</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul class="simple">
 </ul>
@@ -422,167 +423,43 @@
         <article class="article" role="main">
   <section id="id1">
 <h1>处理数据<a class="headerlink" href="#id1" title="链接到此标题。">¶</a></h1>
-<p>本指南覆盖使用 <code class="docutils literal notranslate"><span class="pre">dj-process</span></code> 运行数据处理流水线的完整流程——从基本命令到性能调优。</p>
+<p>本指南覆盖使用 Data-Juicer 运行数据处理流水线的完整流程——CLI 与 Python API 两种方式。</p>
 <blockquote>
-<div><p>如果你还没跑过第一条流水线，建议先看<a class="reference internal" href="tutorial/QuickStart_ZH.html"><span class="std std-doc">快速上手</span></a>。</p>
+<div><p>如果你还没跑过第一条流水线，建议先看<a class="reference internal" href="tutorial/QuickStart_ZH.html"><span class="std std-doc">快速上手</span></a>。
+完整的全局参数列表请参见<a class="reference internal" href="GlobalConfig_ZH.html"><span class="std std-doc">全局配置参数速查</span></a>。</p>
 </div></blockquote>
 <hr class="docutils" />
+<section id="cli">
+<h2>CLI 方式<a class="headerlink" href="#cli" title="链接到此标题。">¶</a></h2>
 <section id="id2">
-<h2>基本用法<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h2>
+<h3>基本用法<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>my-recipe.yaml
 </pre></div>
 </div>
-<p>Data-Juicer 读取<a class="reference internal" href="concepts/recipes_ZH.html"><span class="std std-doc">菜谱</span></a>文件，按 <code class="docutils literal notranslate"><span class="pre">process</span></code> 列表的顺序依次执行算子，将结果写入 <code class="docutils literal notranslate"><span class="pre">export_path</span></code>。运行时在控制台打印各算子的处理统计。</p>
+<p>Data-Juicer 读取<a class="reference internal" href="concepts/recipes_ZH.html"><span class="std std-doc">菜谱</span></a>文件，按 <code class="docutils literal notranslate"><span class="pre">process</span></code> 列表的顺序依次执行算子，将结果写入 <code class="docutils literal notranslate"><span class="pre">export_path</span></code>。</p>
 </section>
-<hr class="docutils" />
 <section id="id3">
-<h2>命令行覆盖参数<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h2>
-<p>任何菜谱中的参数都可以在命令行直接覆盖，无需修改 YAML 文件：</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 覆盖全局参数</span>
-dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<span class="w"> </span>--np<span class="w"> </span><span class="m">8</span><span class="w"> </span>--export_path<span class="w"> </span>./out/result.parquet
-
-<span class="c1"># 覆盖算子参数（算子名.参数名=值）</span>
+<h3>命令行覆盖<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h3>
+<p>任何菜谱中的参数都可以在命令行直接覆盖，无需修改 YAML：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<span class="w"> </span>--np<span class="w"> </span><span class="m">8</span><span class="w"> </span>--export_path<span class="w"> </span>./out/result.parquet
 dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<span class="w"> </span>--language_id_score_filter.lang<span class="o">=</span>en
 </pre></div>
 </div>
-<p>命令行优先级高于配置文件——适合在不改动版本管理的菜谱的前提下做临时调整。</p>
 </section>
-<hr class="docutils" />
 <section id="id4">
-<h2>自动安装算子依赖<a class="headerlink" href="#id4" title="链接到此标题。">¶</a></h2>
-<p>部分算子依赖额外 Python 包（如模型推理库）。使用 <code class="docutils literal notranslate"><span class="pre">dj-install</span></code> 可一键安装菜谱中所有算子所需的依赖：</p>
+<h3>自动安装算子依赖<a class="headerlink" href="#id4" title="链接到此标题。">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-install<span class="w"> </span>--config<span class="w"> </span>my-recipe.yaml
 </pre></div>
 </div>
-<p>这比手动 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> 更可靠——它会解析每个算子声明的依赖并一次性安装。详见<a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/tutorial/Installation_ZH.md#5-%E7%89%B9%E5%AE%9A%E7%AE%97%E5%AD%90%E7%9A%84%E5%AE%89%E8%A3%85">安装文档 §5</a>。</p>
+<p>解析菜谱中每个算子声明的依赖并一次性安装。详见<a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/tutorial/Installation_ZH.md#5-%E7%89%B9%E5%AE%9A%E7%AE%97%E5%AD%90%E7%9A%84%E5%AE%89%E8%A3%85">安装文档 §5</a>。</p>
 </section>
-<hr class="docutils" />
-<section id="id5">
-<h2>算子执行顺序<a class="headerlink" href="#id5" title="链接到此标题。">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">process</span></code> 列表中的算子<strong>从上到下串行执行</strong>，前一个算子的输出是后一个的输入。顺序对性能和结果都有显著影响：</p>
-<ul class="simple">
-<li><p><strong>低成本算子先行</strong>：把文本长度过滤、语言识别等轻量算子放在前面，尽早减少样本数量。</p></li>
-<li><p><strong>高成本算子靠后</strong>：基于模型打分、GPU 推理类算子只处理经过初步筛选的数据。</p></li>
-<li><p><strong>去重放中段</strong>：去重需要全局状态（hash 表），通常在初步过滤后、精细处理前执行。</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">process</span><span class="p">:</span>
-<span class="w">  </span><span class="c1"># 阶段 1：低成本过滤</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text_length_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> min_len</span><span class="p">:</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="nt"> max_len</span><span class="p">:</span><span class="w"> </span><span class="nv">50000</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">language_id_score_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> lang</span><span class="p">:</span><span class="w"> </span><span class="nv">zh</span><span class="p p-Indicator">,</span><span class="nt"> min_score</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="w"> </span><span class="p p-Indicator">}</span>
-
-<span class="w">  </span><span class="c1"># 阶段 2：去重</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">document_minhash_deduplicator</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> tokenization</span><span class="p">:</span><span class="w"> </span><span class="nv">space</span><span class="p p-Indicator">,</span><span class="nt"> window_size</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="w"> </span><span class="p p-Indicator">}</span>
-
-<span class="w">  </span><span class="c1"># 阶段 3：高成本处理</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">clean_html_mapper</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text_quality_score_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> min_score</span><span class="p">:</span><span class="w"> </span><span class="nv">0.6</span><span class="w"> </span><span class="p p-Indicator">}</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="op-fusion">
-<h2>算子融合（Op Fusion）<a class="headerlink" href="#op-fusion" title="链接到此标题。">¶</a></h2>
-<p>启用算子融合后，Data-Juicer 会将可共享中间变量的相邻算子合并为一次数据读取，减少 I/O 开销，在典型流水线上可带来 <strong>2–10× 吞吐提升</strong>。</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">op_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">fusion_strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">probe</span><span class="w">   </span><span class="c1"># 或 greedy</span>
-</pre></div>
-</div>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>策略</p></th>
-<th class="head"><p>说明</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">probe</span></code>（默认）</p></td>
-<td><p>先探测各算子运行速度，按快→慢重排并融合</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">greedy</span></code></p></td>
-<td><p>保持原始顺序，仅融合相邻兼容算子</p></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<div><p>算子融合仅在 <code class="docutils literal notranslate"><span class="pre">executor_type:</span> <span class="pre">default</span></code> 下可用。使用 Ray 时靠分布式并行获得性能。</p>
-</div></blockquote>
-</section>
-<hr class="docutils" />
-<section id="gpu-mapper">
-<h2>GPU Mapper 融合<a class="headerlink" href="#gpu-mapper" title="链接到此标题。">¶</a></h2>
-<p>当菜谱中有多个连续的 GPU Mapper，Data-Juicer 可以将它们融合为一次 GPU 调用：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">op_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">mapper_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                </span><span class="c1"># 默认 true（需 op_fusion 开启）</span>
-<span class="nt">mapper_fusion_vram_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span><span class="w">      </span><span class="c1"># 最大聚合显存占比</span>
-<span class="nt">adaptive_batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">           </span><span class="c1"># 根据探测结果自适应 batch size</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="id6">
-<h2>检查点与断点续跑<a class="headerlink" href="#id6" title="链接到此标题。">¶</a></h2>
-<p>对于长时间运行的任务，启用检查点可以在中途失败时从上次完成的位置恢复：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">use_checkpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-<p>重新运行相同配置时，Data-Juicer 会跳过已完成的算子，直接从断点继续。</p>
-<blockquote>
-<div><p>注意：启用 <code class="docutils literal notranslate"><span class="pre">use_checkpoint</span></code> 会自动禁用缓存（<code class="docutils literal notranslate"><span class="pre">use_cache</span></code>），且与 <code class="docutils literal notranslate"><span class="pre">op_fusion</span></code> 互斥。</p>
-</div></blockquote>
-<p>对于 <code class="docutils literal notranslate"><span class="pre">ray_partitioned</span></code> 执行引擎，有更精细的检查点策略：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">executor_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ray_partitioned</span>
-<span class="nt">checkpoint</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">every_n_ops</span><span class="w">   </span><span class="c1"># every_op | every_partition | every_n_ops | manual | disabled</span>
-<span class="w">  </span><span class="nt">n_ops</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
-</pre></div>
-</div>
-<p>失败后可通过 <code class="docutils literal notranslate"><span class="pre">--resume</span> <span class="pre">&lt;job_id&gt;</span></code> 恢复：</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<span class="w"> </span>--resume<span class="w"> </span>dj-job-20260815-abc123
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="tracer">
-<h2>Tracer：追踪样本变化<a class="headerlink" href="#tracer" title="链接到此标题。">¶</a></h2>
-<p>想了解某个算子具体过滤/修改了哪些样本？启用 Tracer：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">open_tracer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">op_list_to_trace</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">        </span><span class="c1"># 空 = 追踪全部算子</span>
-<span class="nt">trace_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">               </span><span class="c1"># 每个算子展示多少条变化样本</span>
-<span class="nt">trace_keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">text</span><span class="p p-Indicator">]</span><span class="w">          </span><span class="c1"># 追踪哪些字段</span>
-</pre></div>
-</div>
-<p>Tracer 会在工作目录下输出每个算子的 before/after 对比。详见<a class="reference internal" href="Tracing_ZH.html"><span class="std std-doc">追踪文档</span></a>。</p>
-</section>
-<hr class="docutils" />
-<section id="id7">
-<h2>资源监控<a class="headerlink" href="#id7" title="链接到此标题。">¶</a></h2>
-<p>启用 Monitor 可追踪每个算子运行期间的 CPU、内存、GPU 利用率：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">open_monitor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="id8">
-<h2>数据采样<a class="headerlink" href="#id8" title="链接到此标题。">¶</a></h2>
-<p>在正式处理前，可以对数据集采样来快速验证菜谱效果：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset_sample_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w">   </span><span class="c1"># 仅取 1% 数据做试运行</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="id9">
-<h2>加密支持<a class="headerlink" href="#id9" title="链接到此标题。">¶</a></h2>
-<p>对于敏感数据，支持读取时解密、导出时加密：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">decrypt_after_reading</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">encrypt_before_export</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">encryption_key_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./keys/data.key</span><span class="w">   </span><span class="c1"># 或设置环境变量 DJ_ENCRYPTION_KEY</span>
-</pre></div>
-</div>
 </section>
 <hr class="docutils" />
 <section id="python-api">
-<h2>Python API<a class="headerlink" href="#python-api" title="链接到此标题。">¶</a></h2>
-<p>除了 CLI，你也可以在 Python 代码中运行流水线：</p>
+<h2>Python API 方式<a class="headerlink" href="#python-api" title="链接到此标题。">¶</a></h2>
+<p>Python API 提供了比 YAML 菜谱更灵活的控制——适合在训练脚本、Notebook 或 Agent 工作流中嵌入数据处理。</p>
+<section id="id5">
+<h3>方式一：加载菜谱<a class="headerlink" href="#id5" title="链接到此标题。">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultExecutor</span>
 
@@ -591,80 +468,163 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>也支持直接对已有 dataset 对象执行：</p>
+<p>对已有 dataset 对象直接执行：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">my_dataset</span><span class="p">,</span> <span class="n">skip_export</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>方式二：直接实例化算子<a class="headerlink" href="#id6" title="链接到此标题。">¶</a></h3>
+<p>不写 YAML，直接在 Python 中组装算子链：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_ops</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
+
+<span class="c1"># 从字典配置加载算子（与 YAML process 列表格式一致）</span>
+<span class="n">ops</span> <span class="o">=</span> <span class="n">load_ops</span><span class="p">([</span>
+    <span class="p">{</span><span class="s1">'language_id_score_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'lang'</span><span class="p">:</span> <span class="s1">'zh'</span><span class="p">,</span> <span class="s1">'min_score'</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">}},</span>
+    <span class="p">{</span><span class="s1">'text_length_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_len'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'max_len'</span><span class="p">:</span> <span class="mi">50000</span><span class="p">}},</span>
+    <span class="p">{</span><span class="s1">'document_minhash_deduplicator'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'tokenization'</span><span class="p">:</span> <span class="s1">'space'</span><span class="p">,</span> <span class="s1">'window_size'</span><span class="p">:</span> <span class="mi">5</span><span class="p">}},</span>
+<span class="p">])</span>
+
+<span class="c1"># 加载数据集</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s1">'my-data.jsonl'</span><span class="p">)</span>
+
+<span class="c1"># 链式处理</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>方式三：精确控制单个算子<a class="headerlink" href="#id7" title="链接到此标题。">¶</a></h3>
+<p>当你需要条件分支、循环或中间检查时：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageIDScoreFilter</span><span class="p">,</span> <span class="n">TextLengthFilter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops.deduplicator</span><span class="w"> </span><span class="kn">import</span> <span class="n">DocumentMinhashDeduplicator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s1">'my-data.jsonl'</span><span class="p">)</span>
+
+<span class="c1"># 第一步：语言过滤</span>
+<span class="n">lang_filter</span> <span class="o">=</span> <span class="n">LanguageIDScoreFilter</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s1">'zh'</span><span class="p">,</span> <span class="n">min_score</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">lang_filter</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"语言过滤后: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="si">}</span><span class="s2"> 条"</span><span class="p">)</span>
+
+<span class="c1"># 第二步：条件去重——仅当数据量超过阈值时执行</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10000</span><span class="p">:</span>
+    <span class="n">dedup</span> <span class="o">=</span> <span class="n">DocumentMinhashDeduplicator</span><span class="p">(</span><span class="n">tokenization</span><span class="o">=</span><span class="s1">'space'</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">dedup</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"去重后: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="si">}</span><span class="s2"> 条"</span><span class="p">)</span>
+
+<span class="c1"># 第三步：长度过滤</span>
+<span class="n">length_filter</span> <span class="o">=</span> <span class="n">TextLengthFilter</span><span class="p">(</span><span class="n">min_len</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">length_filter</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h3>方式四：动态组合算子<a class="headerlink" href="#id8" title="链接到此标题。">¶</a></h3>
+<p>适合 Agent 场景——根据数据特征动态选择算子：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_ops</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s1">'input.jsonl'</span><span class="p">)</span>
+
+<span class="c1"># 根据数据特征决定处理策略</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ops_config</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># 如果有多语言数据，加语言过滤</span>
+<span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">key</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'text'</span><span class="p">]):</span>
+    <span class="n">ops_config</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'language_id_score_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'lang'</span><span class="p">:</span> <span class="s1">'zh'</span><span class="p">,</span> <span class="s1">'min_score'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}})</span>
+
+<span class="c1"># 如果有图像字段，加图像分辨率过滤</span>
+<span class="k">if</span> <span class="s1">'images'</span> <span class="ow">in</span> <span class="n">sample</span> <span class="ow">and</span> <span class="n">sample</span><span class="p">[</span><span class="s1">'images'</span><span class="p">]:</span>
+    <span class="n">ops_config</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'image_size_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_width'</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span> <span class="s1">'min_height'</span><span class="p">:</span> <span class="mi">256</span><span class="p">}})</span>
+
+<span class="c1"># 统一清洗</span>
+<span class="n">ops_config</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'clean_html_mapper'</span><span class="p">:</span> <span class="p">{}})</span>
+<span class="n">ops_config</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'text_length_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_len'</span><span class="p">:</span> <span class="mi">10</span><span class="p">}})</span>
+
+<span class="n">ops</span> <span class="o">=</span> <span class="n">load_ops</span><span class="p">(</span><span class="n">ops_config</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h2>算子执行顺序最佳实践<a class="headerlink" href="#id9" title="链接到此标题。">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">process</span></code> 列表中的算子<strong>从上到下串行执行</strong>。顺序影响性能和结果：</p>
+<ol class="arabic simple">
+<li><p><strong>低成本过滤先行</strong>：文本长度、语言识别等轻量算子尽早减少数据量</p></li>
+<li><p><strong>去重放中段</strong>：去重需全局状态，在初步过滤后、精细处理前执行</p></li>
+<li><p><strong>高成本算子靠后</strong>：GPU 推理类算子只处理已过滤的子集</p></li>
+</ol>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">process</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 低成本</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text_length_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> min_len</span><span class="p">:</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="nt"> max_len</span><span class="p">:</span><span class="w"> </span><span class="nv">50000</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">language_id_score_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> lang</span><span class="p">:</span><span class="w"> </span><span class="nv">zh</span><span class="p p-Indicator">,</span><span class="nt"> min_score</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="c1"># 去重</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">document_minhash_deduplicator</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> tokenization</span><span class="p">:</span><span class="w"> </span><span class="nv">space</span><span class="p p-Indicator">,</span><span class="nt"> window_size</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="c1"># 高成本</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">clean_html_mapper</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text_quality_score_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> min_score</span><span class="p">:</span><span class="w"> </span><span class="nv">0.6</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </pre></div>
 </div>
 </section>
 <hr class="docutils" />
 <section id="id10">
-<h2>常用参数速查<a class="headerlink" href="#id10" title="链接到此标题。">¶</a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>参数</p></th>
-<th class="head"><p>默认值</p></th>
-<th class="head"><p>说明</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--config</span></code></p></td>
-<td><p>—</p></td>
-<td><p>菜谱文件路径（必需）</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--np</span></code></p></td>
-<td><p>4</p></td>
-<td><p>并行进程数</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--executor_type</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">default</span></code></p></td>
-<td><p>执行引擎：<code class="docutils literal notranslate"><span class="pre">default</span></code> / <code class="docutils literal notranslate"><span class="pre">ray</span></code> / <code class="docutils literal notranslate"><span class="pre">ray_partitioned</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dataset_path</span></code></p></td>
-<td><p>—</p></td>
-<td><p>输入数据集路径</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--export_path</span></code></p></td>
-<td><p>—</p></td>
-<td><p>输出路径</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--op_fusion</span></code></p></td>
-<td><p>false</p></td>
-<td><p>启用算子融合</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--use_checkpoint</span></code></p></td>
-<td><p>false</p></td>
-<td><p>启用检查点</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--open_tracer</span></code></p></td>
-<td><p>false</p></td>
-<td><p>启用样本追踪</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--open_monitor</span></code></p></td>
-<td><p>false</p></td>
-<td><p>启用资源监控</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dataset_sample_ratio</span></code></p></td>
-<td><p>1.0</p></td>
-<td><p>数据采样比例</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--keep_stats_in_res_ds</span></code></p></td>
-<td><p>false</p></td>
-<td><p>输出中保留统计字段</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--keep_hashes_in_res_ds</span></code></p></td>
-<td><p>false</p></td>
-<td><p>输出中保留哈希字段</p></td>
-</tr>
-</tbody>
-</table>
+<h2>性能调优<a class="headerlink" href="#id10" title="链接到此标题。">¶</a></h2>
+<section id="id11">
+<h3>算子融合<a class="headerlink" href="#id11" title="链接到此标题。">¶</a></h3>
+<p>启用后 Data-Juicer 将相邻兼容算子合并为一次数据读取，<strong>2–10× 吞吐提升</strong>（仅 <code class="docutils literal notranslate"><span class="pre">default</span></code> 模式）：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">op_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">fusion_strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">probe</span><span class="w">   </span><span class="c1"># probe（按速度重排）| greedy（保持原序）</span>
+</pre></div>
+</div>
+</section>
+<section id="gpu-mapper">
+<h3>GPU Mapper 融合<a class="headerlink" href="#gpu-mapper" title="链接到此标题。">¶</a></h3>
+<p>多个连续 GPU Mapper 融合为一次 GPU 调用：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">op_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">mapper_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">adaptive_batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>数据采样试跑<a class="headerlink" href="#id12" title="链接到此标题。">¶</a></h3>
+<p>正式运行前取 1% 数据验证菜谱：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset_sample_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+</pre></div>
+</div>
+</section>
 </section>
 <hr class="docutils" />
-<section id="id11">
-<h2>下一步<a class="headerlink" href="#id11" title="链接到此标题。">¶</a></h2>
+<section id="id13">
+<h2>检查点与断点续跑<a class="headerlink" href="#id13" title="链接到此标题。">¶</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">use_checkpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>重新运行相同配置时跳过已完成算子。<code class="docutils literal notranslate"><span class="pre">use_checkpoint</span></code> 与 <code class="docutils literal notranslate"><span class="pre">op_fusion</span></code> 互斥。</p>
+<p>对于 <code class="docutils literal notranslate"><span class="pre">ray_partitioned</span></code> 模式有更精细的策略，失败后可通过 <code class="docutils literal notranslate"><span class="pre">--resume</span> <span class="pre">&lt;job_id&gt;</span></code> 恢复。详见<a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/GlobalConfig_ZH.md#%E7%BC%93%E5%AD%98%E4%B8%8E%E6%A3%80%E6%9F%A5%E7%82%B9">全局配置</a>。</p>
+</section>
+<hr class="docutils" />
+<section id="id14">
+<h2>追踪与调试<a class="headerlink" href="#id14" title="链接到此标题。">¶</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">open_tracer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">trace_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+</pre></div>
+</div>
+<p>Tracer 在工作目录输出每个算子的 before/after 对比——帮助理解算子行为。详见<a class="reference internal" href="Tracing_ZH.html"><span class="std std-doc">追踪文档</span></a>。</p>
+</section>
+<hr class="docutils" />
+<section id="id15">
+<h2>下一步<a class="headerlink" href="#id15" title="链接到此标题。">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="Analyze_ZH.html"><span class="std std-doc">数据分析</span></a>——运行前先了解数据分布</p></li>
 <li><p><a class="reference internal" href="DatasetCfg_ZH.html"><span class="std std-doc">数据集配置</span></a>——输入格式、数据混合、远程数据集</p></li>
-<li><p><a class="reference internal" href="Export_ZH.html"><span class="std std-doc">导出</span></a>——输出格式、分片、S3 导出</p></li>
+<li><p><a class="reference internal" href="GlobalConfig_ZH.html"><span class="std std-doc">全局配置参数速查</span></a>——所有参数的完整列表</p></li>
 <li><p><a class="reference internal" href="Distributed_ZH.html"><span class="std std-doc">分布式处理</span></a>——使用 Ray 扩展到集群</p></li>
 <li><p><a class="reference internal" href="Operators.html"><span class="std std-doc">算子库</span></a>——浏览 200+ 可用算子</p></li>
 </ul>
@@ -678,20 +638,29 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
             <p class="toc-title">On this page</p>
             <ul>
 <li><a class="reference internal" href="#">处理数据</a><ul>
+<li><a class="reference internal" href="#cli">CLI 方式</a><ul>
 <li><a class="reference internal" href="#id2">基本用法</a></li>
-<li><a class="reference internal" href="#id3">命令行覆盖参数</a></li>
+<li><a class="reference internal" href="#id3">命令行覆盖</a></li>
 <li><a class="reference internal" href="#id4">自动安装算子依赖</a></li>
-<li><a class="reference internal" href="#id5">算子执行顺序</a></li>
-<li><a class="reference internal" href="#op-fusion">算子融合（Op Fusion）</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python-api">Python API 方式</a><ul>
+<li><a class="reference internal" href="#id5">方式一：加载菜谱</a></li>
+<li><a class="reference internal" href="#id6">方式二：直接实例化算子</a></li>
+<li><a class="reference internal" href="#id7">方式三：精确控制单个算子</a></li>
+<li><a class="reference internal" href="#id8">方式四：动态组合算子</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">算子执行顺序最佳实践</a></li>
+<li><a class="reference internal" href="#id10">性能调优</a><ul>
+<li><a class="reference internal" href="#id11">算子融合</a></li>
 <li><a class="reference internal" href="#gpu-mapper">GPU Mapper 融合</a></li>
-<li><a class="reference internal" href="#id6">检查点与断点续跑</a></li>
-<li><a class="reference internal" href="#tracer">Tracer：追踪样本变化</a></li>
-<li><a class="reference internal" href="#id7">资源监控</a></li>
-<li><a class="reference internal" href="#id8">数据采样</a></li>
-<li><a class="reference internal" href="#id9">加密支持</a></li>
-<li><a class="reference internal" href="#python-api">Python API</a></li>
-<li><a class="reference internal" href="#id10">常用参数速查</a></li>
-<li><a class="reference internal" href="#id11">下一步</a></li>
+<li><a class="reference internal" href="#id12">数据采样试跑</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13">检查点与断点续跑</a></li>
+<li><a class="reference internal" href="#id14">追踪与调试</a></li>
+<li><a class="reference internal" href="#id15">下一步</a></li>
 </ul>
 </li>
 </ul>

@@ -65,14 +65,14 @@
    :caption: Reference
    :hidden:
 
+   docs/GlobalConfig
    docs/Operators
    api
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: operators
    :hidden:
-   :glob:
 
    docs/operators/aggregator/index
    docs/operators/deduplicator/index

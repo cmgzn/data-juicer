@@ -135,6 +135,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="GlobalConfig.html">Global Configuration Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul class="simple">
 </ul>
@@ -420,167 +421,43 @@
         <article class="article" role="main">
   <section id="processing-data">
 <h1>Processing Data<a class="headerlink" href="#processing-data" title="Link to this heading">¶</a></h1>
-<p>This guide covers everything you need to run a data processing pipeline with <code class="docutils literal notranslate"><span class="pre">dj-process</span></code>—from basic commands to performance tuning.</p>
+<p>This guide covers running data processing pipelines with Data-Juicer—both CLI and Python API.</p>
 <blockquote>
-<div><p>If you haven’t run your first pipeline yet, start with the <a class="reference internal" href="tutorial/QuickStart.html"><span class="std std-doc">Quick Start</span></a>.</p>
+<div><p>If you haven’t run your first pipeline yet, start with the <a class="reference internal" href="tutorial/QuickStart.html"><span class="std std-doc">Quick Start</span></a>.
+For the full parameter list, see <a class="reference internal" href="GlobalConfig.html"><span class="std std-doc">Global Configuration Reference</span></a>.</p>
 </div></blockquote>
 <hr class="docutils" />
+<section id="cli">
+<h2>CLI<a class="headerlink" href="#cli" title="Link to this heading">¶</a></h2>
 <section id="basic-usage">
-<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">¶</a></h2>
+<h3>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>my-recipe.yaml
 </pre></div>
 </div>
-<p>Data-Juicer reads the <a class="reference internal" href="concepts/recipes.html"><span class="std std-doc">recipe</span></a> file, executes operators in the order listed under <code class="docutils literal notranslate"><span class="pre">process</span></code>, and writes results to <code class="docutils literal notranslate"><span class="pre">export_path</span></code>. Processing statistics are printed for each operator.</p>
+<p>Data-Juicer reads the <a class="reference internal" href="concepts/recipes.html"><span class="std std-doc">recipe</span></a>, executes operators in the listed order, and writes results to <code class="docutils literal notranslate"><span class="pre">export_path</span></code>.</p>
 </section>
-<hr class="docutils" />
 <section id="command-line-overrides">
-<h2>Command-Line Overrides<a class="headerlink" href="#command-line-overrides" title="Link to this heading">¶</a></h2>
-<p>Any recipe parameter can be overridden on the command line without modifying the YAML file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Override global parameters</span>
-dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<span class="w"> </span>--np<span class="w"> </span><span class="m">8</span><span class="w"> </span>--export_path<span class="w"> </span>./out/result.parquet
-
-<span class="c1"># Override operator parameters (operator_name.param=value)</span>
+<h3>Command-Line Overrides<a class="headerlink" href="#command-line-overrides" title="Link to this heading">¶</a></h3>
+<p>Override any recipe parameter without modifying the YAML:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<span class="w"> </span>--np<span class="w"> </span><span class="m">8</span><span class="w"> </span>--export_path<span class="w"> </span>./out/result.parquet
 dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<span class="w"> </span>--language_id_score_filter.lang<span class="o">=</span>en
 </pre></div>
 </div>
-<p>CLI values take precedence over the config file—useful for quick experiments without touching the version-controlled recipe.</p>
 </section>
-<hr class="docutils" />
 <section id="auto-install-operator-dependencies">
-<h2>Auto-Install Operator Dependencies<a class="headerlink" href="#auto-install-operator-dependencies" title="Link to this heading">¶</a></h2>
-<p>Some operators require extra Python packages (e.g., model inference libraries). Use <code class="docutils literal notranslate"><span class="pre">dj-install</span></code> to install all dependencies declared by the operators in your recipe:</p>
+<h3>Auto-Install Operator Dependencies<a class="headerlink" href="#auto-install-operator-dependencies" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-install<span class="w"> </span>--config<span class="w"> </span>my-recipe.yaml
 </pre></div>
 </div>
-<p>This is more reliable than manual <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>—it resolves per-operator dependency declarations and installs them in one pass. See <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/tutorial/Installation.md#5-op-specific-installation">Installation §5</a>.</p>
+<p>Resolves and installs all per-operator dependencies in one pass. See <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/tutorial/Installation.md#5-op-specific-installation">Installation §5</a>.</p>
 </section>
-<hr class="docutils" />
-<section id="operator-execution-order">
-<h2>Operator Execution Order<a class="headerlink" href="#operator-execution-order" title="Link to this heading">¶</a></h2>
-<p>Operators in the <code class="docutils literal notranslate"><span class="pre">process</span></code> list run <strong>top-to-bottom sequentially</strong>—each operator’s output is the next one’s input. Order matters for both correctness and performance:</p>
-<ul class="simple">
-<li><p><strong>Cheap operators first</strong>: Put lightweight filters (text length, language ID) up front to reduce sample count early.</p></li>
-<li><p><strong>Expensive operators last</strong>: Model-based scorers and GPU operators only see the filtered subset.</p></li>
-<li><p><strong>Deduplication in the middle</strong>: Dedup requires global state (hash tables); run it after initial filtering but before heavy processing.</p></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">process</span><span class="p">:</span>
-<span class="w">  </span><span class="c1"># Stage 1: Cheap filters</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text_length_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> min_len</span><span class="p">:</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="nt"> max_len</span><span class="p">:</span><span class="w"> </span><span class="nv">50000</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">language_id_score_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> lang</span><span class="p">:</span><span class="w"> </span><span class="nv">en</span><span class="p p-Indicator">,</span><span class="nt"> min_score</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="w"> </span><span class="p p-Indicator">}</span>
-
-<span class="w">  </span><span class="c1"># Stage 2: Deduplication</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">document_minhash_deduplicator</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> tokenization</span><span class="p">:</span><span class="w"> </span><span class="nv">space</span><span class="p p-Indicator">,</span><span class="nt"> window_size</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="w"> </span><span class="p p-Indicator">}</span>
-
-<span class="w">  </span><span class="c1"># Stage 3: Expensive processing</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">clean_html_mapper</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text_quality_score_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> min_score</span><span class="p">:</span><span class="w"> </span><span class="nv">0.6</span><span class="w"> </span><span class="p p-Indicator">}</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="op-fusion">
-<h2>Op Fusion<a class="headerlink" href="#op-fusion" title="Link to this heading">¶</a></h2>
-<p>When enabled, Data-Juicer merges adjacent operators that share intermediate variables into a single data pass, reducing I/O overhead—<strong>2–10× throughput improvement</strong> on typical pipelines.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">op_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">fusion_strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">probe</span><span class="w">   </span><span class="c1"># or greedy</span>
-</pre></div>
-</div>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Strategy</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">probe</span></code> (default)</p></td>
-<td><p>Probes each operator’s speed, reorders fast→slow, then fuses</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">greedy</span></code></p></td>
-<td><p>Keeps original order, fuses only adjacent compatible operators</p></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<div><p>Op fusion is only available with <code class="docutils literal notranslate"><span class="pre">executor_type:</span> <span class="pre">default</span></code>. Ray mode relies on distributed parallelism.</p>
-</div></blockquote>
-</section>
-<hr class="docutils" />
-<section id="gpu-mapper-fusion">
-<h2>GPU Mapper Fusion<a class="headerlink" href="#gpu-mapper-fusion" title="Link to this heading">¶</a></h2>
-<p>When your recipe chains multiple consecutive GPU Mappers, Data-Juicer can fuse them into a single GPU pass:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">op_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">mapper_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                </span><span class="c1"># default true (requires op_fusion)</span>
-<span class="nt">mapper_fusion_vram_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span><span class="w">      </span><span class="c1"># max aggregate VRAM fraction</span>
-<span class="nt">adaptive_batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">           </span><span class="c1"># auto-tune batch size per operator</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="checkpointing-and-resumption">
-<h2>Checkpointing and Resumption<a class="headerlink" href="#checkpointing-and-resumption" title="Link to this heading">¶</a></h2>
-<p>For long-running jobs, enable checkpointing to resume from the last completed operator on failure:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">use_checkpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-<p>Re-running the same config skips completed operators and continues from the checkpoint.</p>
-<blockquote>
-<div><p>Note: Enabling <code class="docutils literal notranslate"><span class="pre">use_checkpoint</span></code> automatically disables caching (<code class="docutils literal notranslate"><span class="pre">use_cache</span></code>) and is mutually exclusive with <code class="docutils literal notranslate"><span class="pre">op_fusion</span></code>.</p>
-</div></blockquote>
-<p>For <code class="docutils literal notranslate"><span class="pre">ray_partitioned</span></code> executor, finer-grained checkpoint strategies are available:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">executor_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ray_partitioned</span>
-<span class="nt">checkpoint</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">every_n_ops</span><span class="w">   </span><span class="c1"># every_op | every_partition | every_n_ops | manual | disabled</span>
-<span class="w">  </span><span class="nt">n_ops</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
-</pre></div>
-</div>
-<p>Resume a failed job with <code class="docutils literal notranslate"><span class="pre">--resume</span> <span class="pre">&lt;job_id&gt;</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<span class="w"> </span>--resume<span class="w"> </span>dj-job-20260815-abc123
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="tracer-track-sample-changes">
-<h2>Tracer: Track Sample Changes<a class="headerlink" href="#tracer-track-sample-changes" title="Link to this heading">¶</a></h2>
-<p>Want to see exactly which samples an operator filtered or modified? Enable the Tracer:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">open_tracer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">op_list_to_trace</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">        </span><span class="c1"># empty = trace all operators</span>
-<span class="nt">trace_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">               </span><span class="c1"># show N changed samples per operator</span>
-<span class="nt">trace_keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">text</span><span class="p p-Indicator">]</span><span class="w">          </span><span class="c1"># which fields to trace</span>
-</pre></div>
-</div>
-<p>The Tracer writes before/after comparisons under the work directory. See <a class="reference internal" href="Tracing.html"><span class="std std-doc">Tracing</span></a> for details.</p>
-</section>
-<hr class="docutils" />
-<section id="resource-monitoring">
-<h2>Resource Monitoring<a class="headerlink" href="#resource-monitoring" title="Link to this heading">¶</a></h2>
-<p>Enable the Monitor to track CPU, memory, and GPU utilization for each operator:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">open_monitor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="dataset-sampling">
-<h2>Dataset Sampling<a class="headerlink" href="#dataset-sampling" title="Link to this heading">¶</a></h2>
-<p>Before a full run, sample the dataset to quickly validate your recipe:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset_sample_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w">   </span><span class="c1"># use only 1% of data for a dry run</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="encryption">
-<h2>Encryption<a class="headerlink" href="#encryption" title="Link to this heading">¶</a></h2>
-<p>For sensitive data, Data-Juicer supports decrypt-on-read and encrypt-on-write:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">decrypt_after_reading</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">encrypt_before_export</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">encryption_key_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./keys/data.key</span><span class="w">   </span><span class="c1"># or set env var DJ_ENCRYPTION_KEY</span>
-</pre></div>
-</div>
 </section>
 <hr class="docutils" />
 <section id="python-api">
 <h2>Python API<a class="headerlink" href="#python-api" title="Link to this heading">¶</a></h2>
-<p>Besides the CLI, you can run pipelines programmatically:</p>
+<p>The Python API provides finer control than YAML recipes—ideal for training scripts, notebooks, or agent workflows.</p>
+<section id="option-1-load-a-recipe">
+<h3>Option 1: Load a Recipe<a class="headerlink" href="#option-1-load-a-recipe" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultExecutor</span>
 
@@ -589,72 +466,151 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>You can also pass an existing dataset object directly:</p>
+<p>Run on an existing dataset object:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">my_dataset</span><span class="p">,</span> <span class="n">skip_export</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
+<section id="option-2-instantiate-operators-from-config">
+<h3>Option 2: Instantiate Operators from Config<a class="headerlink" href="#option-2-instantiate-operators-from-config" title="Link to this heading">¶</a></h3>
+<p>No YAML needed—assemble an operator chain in Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_ops</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
+
+<span class="c1"># Load ops from dict config (same format as YAML process list)</span>
+<span class="n">ops</span> <span class="o">=</span> <span class="n">load_ops</span><span class="p">([</span>
+    <span class="p">{</span><span class="s1">'language_id_score_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'lang'</span><span class="p">:</span> <span class="s1">'en'</span><span class="p">,</span> <span class="s1">'min_score'</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">}},</span>
+    <span class="p">{</span><span class="s1">'text_length_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_len'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'max_len'</span><span class="p">:</span> <span class="mi">50000</span><span class="p">}},</span>
+    <span class="p">{</span><span class="s1">'document_minhash_deduplicator'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'tokenization'</span><span class="p">:</span> <span class="s1">'space'</span><span class="p">,</span> <span class="s1">'window_size'</span><span class="p">:</span> <span class="mi">5</span><span class="p">}},</span>
+<span class="p">])</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s1">'my-data.jsonl'</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="option-3-fine-grained-single-operator-control">
+<h3>Option 3: Fine-Grained Single-Operator Control<a class="headerlink" href="#option-3-fine-grained-single-operator-control" title="Link to this heading">¶</a></h3>
+<p>When you need conditional logic, loops, or intermediate inspection:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageIDScoreFilter</span><span class="p">,</span> <span class="n">TextLengthFilter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops.deduplicator</span><span class="w"> </span><span class="kn">import</span> <span class="n">DocumentMinhashDeduplicator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s1">'my-data.jsonl'</span><span class="p">)</span>
+
+<span class="c1"># Step 1: Language filter</span>
+<span class="n">lang_filter</span> <span class="o">=</span> <span class="n">LanguageIDScoreFilter</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s1">'en'</span><span class="p">,</span> <span class="n">min_score</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">lang_filter</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"After language filter: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="si">}</span><span class="s2"> samples"</span><span class="p">)</span>
+
+<span class="c1"># Step 2: Conditional dedup — only when dataset is large</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10000</span><span class="p">:</span>
+    <span class="n">dedup</span> <span class="o">=</span> <span class="n">DocumentMinhashDeduplicator</span><span class="p">(</span><span class="n">tokenization</span><span class="o">=</span><span class="s1">'space'</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">dedup</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"After dedup: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="si">}</span><span class="s2"> samples"</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Length filter</span>
+<span class="n">length_filter</span> <span class="o">=</span> <span class="n">TextLengthFilter</span><span class="p">(</span><span class="n">min_len</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">length_filter</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="option-4-dynamic-operator-composition">
+<h3>Option 4: Dynamic Operator Composition<a class="headerlink" href="#option-4-dynamic-operator-composition" title="Link to this heading">¶</a></h3>
+<p>Suited for agent workflows—choose operators based on data characteristics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_ops</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s1">'input.jsonl'</span><span class="p">)</span>
+
+<span class="c1"># Inspect data to decide processing strategy</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ops_config</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Add language filter if text field exists</span>
+<span class="k">if</span> <span class="s1">'text'</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+    <span class="n">ops_config</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'language_id_score_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'lang'</span><span class="p">:</span> <span class="s1">'en'</span><span class="p">,</span> <span class="s1">'min_score'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}})</span>
+
+<span class="c1"># Add image filter if images present</span>
+<span class="k">if</span> <span class="s1">'images'</span> <span class="ow">in</span> <span class="n">sample</span> <span class="ow">and</span> <span class="n">sample</span><span class="p">[</span><span class="s1">'images'</span><span class="p">]:</span>
+    <span class="n">ops_config</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'image_size_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_width'</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span> <span class="s1">'min_height'</span><span class="p">:</span> <span class="mi">256</span><span class="p">}})</span>
+
+<span class="c1"># Common cleaning</span>
+<span class="n">ops_config</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'clean_html_mapper'</span><span class="p">:</span> <span class="p">{}})</span>
+<span class="n">ops_config</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'text_length_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_len'</span><span class="p">:</span> <span class="mi">10</span><span class="p">}})</span>
+
+<span class="n">ops</span> <span class="o">=</span> <span class="n">load_ops</span><span class="p">(</span><span class="n">ops_config</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">ops</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <hr class="docutils" />
-<section id="parameter-quick-reference">
-<h2>Parameter Quick Reference<a class="headerlink" href="#parameter-quick-reference" title="Link to this heading">¶</a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Parameter</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--config</span></code></p></td>
-<td><p>—</p></td>
-<td><p>Recipe file path (required)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--np</span></code></p></td>
-<td><p>4</p></td>
-<td><p>Number of parallel worker processes</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--executor_type</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">default</span></code></p></td>
-<td><p>Executor: <code class="docutils literal notranslate"><span class="pre">default</span></code> / <code class="docutils literal notranslate"><span class="pre">ray</span></code> / <code class="docutils literal notranslate"><span class="pre">ray_partitioned</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dataset_path</span></code></p></td>
-<td><p>—</p></td>
-<td><p>Input dataset path</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--export_path</span></code></p></td>
-<td><p>—</p></td>
-<td><p>Output path</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--op_fusion</span></code></p></td>
-<td><p>false</p></td>
-<td><p>Enable operator fusion</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--use_checkpoint</span></code></p></td>
-<td><p>false</p></td>
-<td><p>Enable checkpointing</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--open_tracer</span></code></p></td>
-<td><p>false</p></td>
-<td><p>Enable sample tracing</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--open_monitor</span></code></p></td>
-<td><p>false</p></td>
-<td><p>Enable resource monitoring</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dataset_sample_ratio</span></code></p></td>
-<td><p>1.0</p></td>
-<td><p>Dataset sampling ratio</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--keep_stats_in_res_ds</span></code></p></td>
-<td><p>false</p></td>
-<td><p>Keep computed stats in output</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--keep_hashes_in_res_ds</span></code></p></td>
-<td><p>false</p></td>
-<td><p>Keep computed hashes in output</p></td>
-</tr>
-</tbody>
-</table>
+<section id="operator-execution-order">
+<h2>Operator Execution Order<a class="headerlink" href="#operator-execution-order" title="Link to this heading">¶</a></h2>
+<p>Operators run <strong>top-to-bottom sequentially</strong>. Order matters:</p>
+<ol class="arabic simple">
+<li><p><strong>Cheap filters first</strong>: Text length, language ID—reduce sample count early</p></li>
+<li><p><strong>Dedup in the middle</strong>: Requires global state; run after initial filtering</p></li>
+<li><p><strong>Expensive operators last</strong>: GPU inference only sees the filtered subset</p></li>
+</ol>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">process</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Cheap</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text_length_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> min_len</span><span class="p">:</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="nt"> max_len</span><span class="p">:</span><span class="w"> </span><span class="nv">50000</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">language_id_score_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> lang</span><span class="p">:</span><span class="w"> </span><span class="nv">en</span><span class="p p-Indicator">,</span><span class="nt"> min_score</span><span class="p">:</span><span class="w"> </span><span class="nv">0.5</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="c1"># Dedup</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">document_minhash_deduplicator</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> tokenization</span><span class="p">:</span><span class="w"> </span><span class="nv">space</span><span class="p p-Indicator">,</span><span class="nt"> window_size</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="c1"># Expensive</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">clean_html_mapper</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">text_quality_score_filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> min_score</span><span class="p">:</span><span class="w"> </span><span class="nv">0.6</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="performance-tuning">
+<h2>Performance Tuning<a class="headerlink" href="#performance-tuning" title="Link to this heading">¶</a></h2>
+<section id="op-fusion">
+<h3>Op Fusion<a class="headerlink" href="#op-fusion" title="Link to this heading">¶</a></h3>
+<p>Merges adjacent compatible operators into a single data pass—<strong>2–10× throughput</strong> (default mode only):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">op_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">fusion_strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">probe</span><span class="w">   </span><span class="c1"># probe (reorder by speed) | greedy (keep order)</span>
+</pre></div>
+</div>
+</section>
+<section id="gpu-mapper-fusion">
+<h3>GPU Mapper Fusion<a class="headerlink" href="#gpu-mapper-fusion" title="Link to this heading">¶</a></h3>
+<p>Fuses consecutive GPU Mappers into one GPU pass:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">op_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">mapper_fusion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">adaptive_batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</section>
+<section id="sampling-dry-run">
+<h3>Sampling Dry Run<a class="headerlink" href="#sampling-dry-run" title="Link to this heading">¶</a></h3>
+<p>Validate your recipe on 1% of data before the full run:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dataset_sample_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="checkpointing-resumption">
+<h2>Checkpointing &amp; Resumption<a class="headerlink" href="#checkpointing-resumption" title="Link to this heading">¶</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">use_checkpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>Re-running the same config skips completed operators. <code class="docutils literal notranslate"><span class="pre">use_checkpoint</span></code> is mutually exclusive with <code class="docutils literal notranslate"><span class="pre">op_fusion</span></code>.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">ray_partitioned</span></code>, finer strategies are available; resume with <code class="docutils literal notranslate"><span class="pre">--resume</span> <span class="pre">&lt;job_id&gt;</span></code>. See <a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/GlobalConfig.md#cache--checkpointing">Global Config</a>.</p>
+</section>
+<hr class="docutils" />
+<section id="tracing-debugging">
+<h2>Tracing &amp; Debugging<a class="headerlink" href="#tracing-debugging" title="Link to this heading">¶</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">open_tracer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">trace_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+</pre></div>
+</div>
+<p>Writes before/after comparisons per operator. See <a class="reference internal" href="Tracing.html"><span class="std std-doc">Tracing</span></a>.</p>
 </section>
 <hr class="docutils" />
 <section id="next-steps">
@@ -662,7 +618,7 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
 <ul class="simple">
 <li><p><a class="reference internal" href="Analyze.html"><span class="std std-doc">Data Analysis</span></a>—understand your data distribution before processing</p></li>
 <li><p><a class="reference internal" href="DatasetCfg.html"><span class="std std-doc">Dataset Configuration</span></a>—input formats, mixing, remote datasets</p></li>
-<li><p><a class="reference internal" href="Export.html"><span class="std std-doc">Export</span></a>—output formats, sharding, S3 export</p></li>
+<li><p><a class="reference internal" href="GlobalConfig.html"><span class="std std-doc">Global Configuration Reference</span></a>—full parameter list</p></li>
 <li><p><a class="reference internal" href="Distributed.html"><span class="std std-doc">Distributed Processing</span></a>—scale to Ray clusters</p></li>
 <li><p><a class="reference internal" href="Operators.html"><span class="std std-doc">Operator Library</span></a>—browse 200+ available operators</p></li>
 </ul>
@@ -676,19 +632,28 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
             <p class="toc-title">On this page</p>
             <ul>
 <li><a class="reference internal" href="#">Processing Data</a><ul>
+<li><a class="reference internal" href="#cli">CLI</a><ul>
 <li><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
 <li><a class="reference internal" href="#command-line-overrides">Command-Line Overrides</a></li>
 <li><a class="reference internal" href="#auto-install-operator-dependencies">Auto-Install Operator Dependencies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python-api">Python API</a><ul>
+<li><a class="reference internal" href="#option-1-load-a-recipe">Option 1: Load a Recipe</a></li>
+<li><a class="reference internal" href="#option-2-instantiate-operators-from-config">Option 2: Instantiate Operators from Config</a></li>
+<li><a class="reference internal" href="#option-3-fine-grained-single-operator-control">Option 3: Fine-Grained Single-Operator Control</a></li>
+<li><a class="reference internal" href="#option-4-dynamic-operator-composition">Option 4: Dynamic Operator Composition</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#operator-execution-order">Operator Execution Order</a></li>
+<li><a class="reference internal" href="#performance-tuning">Performance Tuning</a><ul>
 <li><a class="reference internal" href="#op-fusion">Op Fusion</a></li>
 <li><a class="reference internal" href="#gpu-mapper-fusion">GPU Mapper Fusion</a></li>
-<li><a class="reference internal" href="#checkpointing-and-resumption">Checkpointing and Resumption</a></li>
-<li><a class="reference internal" href="#tracer-track-sample-changes">Tracer: Track Sample Changes</a></li>
-<li><a class="reference internal" href="#resource-monitoring">Resource Monitoring</a></li>
-<li><a class="reference internal" href="#dataset-sampling">Dataset Sampling</a></li>
-<li><a class="reference internal" href="#encryption">Encryption</a></li>
-<li><a class="reference internal" href="#python-api">Python API</a></li>
-<li><a class="reference internal" href="#parameter-quick-reference">Parameter Quick Reference</a></li>
+<li><a class="reference internal" href="#sampling-dry-run">Sampling Dry Run</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkpointing-resumption">Checkpointing &amp; Resumption</a></li>
+<li><a class="reference internal" href="#tracing-debugging">Tracing &amp; Debugging</a></li>
 <li><a class="reference internal" href="#next-steps">Next Steps</a></li>
 </ul>
 </li>

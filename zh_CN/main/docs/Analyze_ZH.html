@@ -135,6 +135,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">参考速查</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="GlobalConfig_ZH.html">全局配置参数速查</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul class="simple">
 </ul>
@@ -423,14 +424,22 @@
   <section id="id1">
 <h1>数据分析<a class="headerlink" href="#id1" title="链接到此标题。">¶</a></h1>
 <p>在确定过滤阈值之前，通常需要先了解数据集的统计概况。<code class="docutils literal notranslate"><span class="pre">dj-analyze</span></code> 会计算算子产出的所有统计量的分布和相关性，帮助你做出数据驱动的阈值决策。</p>
+<blockquote>
+<div><p>完整的全局参数列表请参见<a class="reference internal" href="GlobalConfig_ZH.html"><span class="std std-doc">全局配置参数速查</span></a>。</p>
+</div></blockquote>
 <hr class="docutils" />
+<section id="cli">
+<h2>CLI 方式<a class="headerlink" href="#cli" title="链接到此标题。">¶</a></h2>
 <section id="id2">
-<h2>基本用法<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h2>
+<h3>基本用法<a class="headerlink" href="#id2" title="链接到此标题。">¶</a></h3>
 <p>对已有菜谱运行分析器：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-analyze<span class="w"> </span>--config<span class="w"> </span>path/to/your-recipe.yaml
 </pre></div>
 </div>
-<p>也可以使用<strong>自动模式</strong>，无需编写专门的分析菜谱——它会用全部可产出统计信息的 Filter 来分析数据集的一个子集：</p>
+</section>
+<section id="id3">
+<h3>自动模式<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h3>
+<p>无需编写专门的分析菜谱——自动使用全部可产出统计信息的 Filter 来分析数据集子集：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-analyze<span class="w"> </span>--auto<span class="w"> </span>--dataset_path<span class="w"> </span>your-dataset.jsonl<span class="w"> </span><span class="o">[</span>--auto_num<span class="w"> </span><span class="m">1000</span><span class="o">]</span>
 </pre></div>
 </div>
@@ -438,60 +447,174 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">--auto_num</span></code>：采样分析的样本数量，默认 1000。适合快速了解数据分布。</p></li>
 </ul>
 </section>
+</section>
 <hr class="docutils" />
-<section id="id3">
-<h2>分析输出<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h2>
+<section id="python-api">
+<h2>Python API 方式<a class="headerlink" href="#python-api" title="链接到此标题。">¶</a></h2>
+<section id="id4">
+<h3>基本用法：加载配置运行<a class="headerlink" href="#id4" title="链接到此标题。">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">init_configs</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">'--config'</span><span class="p">,</span> <span class="s1">'my-recipe.yaml'</span><span class="p">])</span>
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">Analyzer</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># 分析结果在 analyzer.overall_result 中</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">overall_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dataset">
+<h3>对已有 dataset 分析<a class="headerlink" href="#dataset" title="链接到此标题。">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span><span class="p">,</span> <span class="n">NestedDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">init_configs</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span>
+    <span class="s1">'--config'</span><span class="p">,</span> <span class="s1">'my-recipe.yaml'</span><span class="p">,</span>
+    <span class="s1">'--export_path'</span><span class="p">,</span> <span class="s1">'./analysis-output/stats.jsonl'</span><span class="p">,</span>
+<span class="p">])</span>
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">Analyzer</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
+<span class="c1"># 传入已加载的数据集</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s1">'my-data.jsonl'</span><span class="p">)</span>
+<span class="n">analyzed</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>仅计算统计量（不导出）<a class="headerlink" href="#id5" title="链接到此标题。">¶</a></h3>
+<p>适合在脚本中获取统计信息做后续判断：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">analyzed</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">skip_export</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 访问统计字段</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">analyzed</span><span class="p">[</span><span class="s1">'stats'</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"平均文本长度: </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'text_length'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">stats</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>手动构建分析流程<a class="headerlink" href="#id6" title="链接到此标题。">¶</a></h3>
+<p>当你需要完全控制分析逻辑时，可以直接使用底层分析组件：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageIDScoreFilter</span><span class="p">,</span> <span class="n">TextLengthFilter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">OverallAnalysis</span><span class="p">,</span> <span class="n">ColumnWiseAnalysis</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s1">'my-data.jsonl'</span><span class="p">)</span>
+
+<span class="c1"># 手动计算统计量（仅 compute_stats，不过滤）</span>
+<span class="n">filters</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">TextLengthFilter</span><span class="p">(</span><span class="n">min_len</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">999999</span><span class="p">),</span>
+    <span class="n">LanguageIDScoreFilter</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s1">'zh'</span><span class="p">,</span> <span class="n">min_score</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">:</span>
+    <span class="n">original_process</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">process</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>          <span class="c1"># 禁用过滤，仅计算统计</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">original_process</span>
+
+<span class="c1"># 运行分析</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s1">'./my-analysis'</span>
+<span class="n">overall</span> <span class="o">=</span> <span class="n">OverallAnalysis</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">overall</span><span class="o">.</span><span class="n">analyze</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">column_wise</span> <span class="o">=</span> <span class="n">ColumnWiseAnalysis</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">overall_result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+<span class="n">column_wise</span><span class="o">.</span><span class="n">analyze</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>动态选择分析维度<a class="headerlink" href="#id7" title="链接到此标题。">¶</a></h3>
+<p>适合 Agent 场景——根据数据模态选择合适的分析算子：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_ops</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analyzer</span><span class="p">,</span> <span class="n">NestedDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">NestedDataset</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s1">'input.jsonl'</span><span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 根据数据模态构建分析菜谱</span>
+<span class="n">process_config</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># 文本统计</span>
+<span class="k">if</span> <span class="s1">'text'</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+    <span class="n">process_config</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+        <span class="p">{</span><span class="s1">'text_length_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_len'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'max_len'</span><span class="p">:</span> <span class="mi">999999</span><span class="p">}},</span>
+        <span class="p">{</span><span class="s1">'language_id_score_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'lang'</span><span class="p">:</span> <span class="s1">'zh'</span><span class="p">,</span> <span class="s1">'min_score'</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}},</span>
+        <span class="p">{</span><span class="s1">'alphanumeric_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_ratio'</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}},</span>
+    <span class="p">])</span>
+
+<span class="c1"># 图像统计</span>
+<span class="k">if</span> <span class="s1">'images'</span> <span class="ow">in</span> <span class="n">sample</span> <span class="ow">and</span> <span class="n">sample</span><span class="p">[</span><span class="s1">'images'</span><span class="p">]:</span>
+    <span class="n">process_config</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+        <span class="p">{</span><span class="s1">'image_size_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_width'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'min_height'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}},</span>
+        <span class="p">{</span><span class="s1">'image_aspect_ratio_filter'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'min_ratio'</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">'max_ratio'</span><span class="p">:</span> <span class="mi">999</span><span class="p">}},</span>
+    <span class="p">])</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">init_configs</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span>
+    <span class="s1">'--dataset_path'</span><span class="p">,</span> <span class="s1">'input.jsonl'</span><span class="p">,</span>
+    <span class="s1">'--export_path'</span><span class="p">,</span> <span class="s1">'./analysis/stats.jsonl'</span><span class="p">,</span>
+<span class="p">])</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">process_config</span>
+
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">Analyzer</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">analyzed</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id8">
+<h2>分析输出<a class="headerlink" href="#id8" title="链接到此标题。">¶</a></h2>
 <p>分析器生成以下内容：</p>
 <ul class="simple">
 <li><p><strong>整体统计表</strong>：各统计量的 count、mean、std、min、max</p></li>
 <li><p><strong>分布图表</strong>：每个统计量的直方图</p></li>
 <li><p><strong>相关性分析</strong>：统计量之间的相关性热力图</p></li>
 </ul>
-<p>输出默认保存在 <code class="docutils literal notranslate"><span class="pre">export_path</span></code> 所在目录下。</p>
+<p>输出默认保存在 <code class="docutils literal notranslate"><span class="pre">export_path</span></code> 所在目录下的 <code class="docutils literal notranslate"><span class="pre">analysis/</span></code> 子目录。</p>
 </section>
 <hr class="docutils" />
-<section id="id4">
-<h2>哪些算子参与分析<a class="headerlink" href="#id4" title="链接到此标题。">¶</a></h2>
+<section id="id9">
+<h2>哪些算子参与分析<a class="headerlink" href="#id9" title="链接到此标题。">¶</a></h2>
 <p>Analyzer 只处理两类算子：</p>
 <ul class="simple">
 <li><p><strong>Filter 算子</strong>中能在 <code class="docutils literal notranslate"><span class="pre">stats</span></code> 字段产出统计信息的（大多数 Filter 都可以）</p></li>
-<li><p><strong>其他算子</strong>中能在 <code class="docutils literal notranslate"><span class="pre">meta</span></code> 字段产出 tags 或类别标签的</p></li>
+<li><p><strong>Tagging 算子</strong>中能在 <code class="docutils literal notranslate"><span class="pre">meta</span></code> 字段产出标签的</p></li>
 </ul>
-<p>使用以下注册器标记例外情况：</p>
+<p>注册器标记：</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">NON_STATS_FILTERS</span></code>：装饰那些<strong>不能</strong>产出统计信息的 Filter 算子</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TAGGING_OPS</span></code>：装饰那些能在 meta 中产出标签的算子</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NON_STATS_FILTERS</span></code>：不能产出统计信息的 Filter</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TAGGING_OPS</span></code>：能产出标签的算子</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="id5">
-<h2>分布式分析<a class="headerlink" href="#id5" title="链接到此标题。">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">dj-analyze</span></code> 支持 Ray 模式进行大规模分布式数据分析。在配置文件中设置：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">executor_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ray</span>
-</pre></div>
-</div>
-<p>分析器将自动使用 <code class="docutils literal notranslate"><span class="pre">RayAnalyzer</span></code>，通过 Ray 原生聚合算子计算总体统计信息（count/mean/std/min/max），无需 pandas 物化。</p>
-<blockquote>
-<div><p><strong>注意：</strong> RayAnalyzer 不会产出逐列分布图表或相关性分析。更多 Ray 相关细节请参考<a class="reference internal" href="Distributed_ZH.html"><span class="std std-doc">分布式处理文档</span></a>。</p>
-</div></blockquote>
+<section id="id10">
+<h2>分布式分析<a class="headerlink" href="#id10" title="链接到此标题。">¶</a></h2>
+<p>配置 <code class="docutils literal notranslate"><span class="pre">executor_type:</span> <span class="pre">ray</span></code> 后自动使用 <code class="docutils literal notranslate"><span class="pre">RayAnalyzer</span></code>，通过 Ray 原生聚合算子计算整体统计：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-analyze<span class="w"> </span>--config<span class="w"> </span>demos/analyze_simple/ray_analyzer.yaml
 </pre></div>
 </div>
+<blockquote>
+<div><p>RayAnalyzer 不产出逐列分布图和相关性分析。详见<a class="reference internal" href="Distributed_ZH.html"><span class="std std-doc">分布式处理</span></a>。</p>
+</div></blockquote>
 </section>
 <hr class="docutils" />
-<section id="id6">
-<h2>字体设置<a class="headerlink" href="#id6" title="链接到此标题。">¶</a></h2>
-<p>分析结果图表中如出现 &quot;Glyph missing&quot; 警告或非法字符，可通过环境变量指定字体：</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ANALYZER_FONT</span><span class="o">=</span><span class="s2">"Heiti TC"</span><span class="w">  </span><span class="c1"># 黑体，支持中文字符（默认值）</span>
+<section id="id11">
+<h2>字体设置<a class="headerlink" href="#id11" title="链接到此标题。">¶</a></h2>
+<p>分析结果图表中如出现 &quot;Glyph missing&quot; 警告：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ANALYZER_FONT</span><span class="o">=</span><span class="s2">"Heiti TC"</span><span class="w">  </span><span class="c1"># 默认值，支持中文</span>
 </pre></div>
 </div>
 </section>
 <hr class="docutils" />
-<section id="id7">
-<h2>下一步<a class="headerlink" href="#id7" title="链接到此标题。">¶</a></h2>
+<section id="id12">
+<h2>下一步<a class="headerlink" href="#id12" title="链接到此标题。">¶</a></h2>
 <ul class="simple">
 <li><p>根据分析结果调整阈值？使用 <a class="reference internal" href="Playground_ZH.html"><span class="std std-doc">Web Playground</span></a> 交互式调优</p></li>
-<li><p>确认阈值后运行处理？参见<a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/docs/tutorial/QuickStart_ZH.md#4-%E8%BF%90%E8%A1%8C%E6%B5%81%E6%B0%B4%E7%BA%BF">快速上手 §4</a></p></li>
+<li><p>确认阈值后运行处理？参见<a class="reference internal" href="ProcessData_ZH.html"><span class="std std-doc">处理数据</span></a></p></li>
 <li><p>大规模分析？参见<a class="reference internal" href="Distributed_ZH.html"><span class="std std-doc">分布式处理</span></a></p></li>
 </ul>
 </section>
@@ -504,12 +627,24 @@
             <p class="toc-title">On this page</p>
             <ul>
 <li><a class="reference internal" href="#">数据分析</a><ul>
+<li><a class="reference internal" href="#cli">CLI 方式</a><ul>
 <li><a class="reference internal" href="#id2">基本用法</a></li>
-<li><a class="reference internal" href="#id3">分析输出</a></li>
-<li><a class="reference internal" href="#id4">哪些算子参与分析</a></li>
-<li><a class="reference internal" href="#id5">分布式分析</a></li>
-<li><a class="reference internal" href="#id6">字体设置</a></li>
-<li><a class="reference internal" href="#id7">下一步</a></li>
+<li><a class="reference internal" href="#id3">自动模式</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#python-api">Python API 方式</a><ul>
+<li><a class="reference internal" href="#id4">基本用法：加载配置运行</a></li>
+<li><a class="reference internal" href="#dataset">对已有 dataset 分析</a></li>
+<li><a class="reference internal" href="#id5">仅计算统计量（不导出）</a></li>
+<li><a class="reference internal" href="#id6">手动构建分析流程</a></li>
+<li><a class="reference internal" href="#id7">动态选择分析维度</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">分析输出</a></li>
+<li><a class="reference internal" href="#id9">哪些算子参与分析</a></li>
+<li><a class="reference internal" href="#id10">分布式分析</a></li>
+<li><a class="reference internal" href="#id11">字体设置</a></li>
+<li><a class="reference internal" href="#id12">下一步</a></li>
 </ul>
 </li>
 </ul>
