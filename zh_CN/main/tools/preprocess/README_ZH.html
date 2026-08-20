@@ -107,10 +107,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">使用指南</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../docs/Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../docs/DatasetCfg_ZH.html">数据集配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/ProcessData_ZH.html">处理数据</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Analyze_ZH.html">数据分析</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Playground_ZH.html">Web Playground</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/DatasetCfg_ZH.html">数据集配置</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Export_ZH.html">数据集导出</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Cache_ZH.html">缓存管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/Tracing_ZH.html">数据追踪</a></li>
@@ -132,6 +132,13 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/BadDataExhibition_ZH.html">“坏”数据展览</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">参考速查</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/Operators.html">Operator Schemas 算子提要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a><ul class="simple">
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">算子</span></p>
 <ul>
@@ -405,11 +412,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../thirdparty/humanvbench_models/README.html">HumanVBench Models Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../thirdparty/models/README_ZH.html">第三方模型库</a></li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a><ul class="simple">
-</ul>
-</li>
-</ul>
 
         </nav>
       </div>
@@ -495,7 +497,7 @@ python<span class="w"> </span>tools/preprocess/raw_stackexchange_to_jsonl.py<spa
 <section id="alpaca-cot-jsonl">
 <h3>将原始 Alpaca-CoT 数据转换为 jsonl<a class="headerlink" href="#alpaca-cot-jsonl" title="链接到此标题。">¶</a></h3>
 <p>使用 <code class="docutils literal notranslate"><span class="pre">raw_alpaca_cot_merge_add_meta.py</span></code> 来转化原始 Alpaca-CoT 数据.</p>
-<p>该工具用于将从 [HuggingFace](<a class="reference external" href="https://github.com/cmgzn/data-juicer/blob/main/tools/preprocess/">https://github.com/cmgzn/data-juicer/blob/main/tools/preprocess/</a> https:/huggingface.co/datasets/QingyiSi/Alpaca-CoT) 下载的原始 Alpaca-Cot 数据转化为 jsonl 文件.</p>
+<p>该工具用于将从 <a class="reference external" href="https://huggingface.co/datasets/QingyiSi/Alpaca-CoT">HuggingFace</a> 下载的原始 Alpaca-CoT 数据转化为 jsonl 文件。</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>tools/preprocess/raw_alpaca_cot_merge_add_meta.py<span class="w">           </span><span class="se">\</span>
 <span class="w">    </span>--src_dir<span class="w">       </span>&lt;src_dir&gt;<span class="w">      </span><span class="se">\</span>
 <span class="w">    </span>--target_dir<span class="w">    </span>&lt;target_dir&gt;<span class="w">   </span><span class="se">\</span>

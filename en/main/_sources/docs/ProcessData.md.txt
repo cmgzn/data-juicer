@@ -1,0 +1,225 @@
+# Processing Data
+
+This guide covers everything you need to run a data processing pipeline with `dj-process`—from basic commands to performance tuning.
+
+> If you haven't run your first pipeline yet, start with the [Quick Start](tutorial/QuickStart.md).
+
+---
+
+## Basic Usage
+
+```bash
+dj-process --config my-recipe.yaml
+```
+
+Data-Juicer reads the [recipe](concepts/recipes.md) file, executes operators in the order listed under `process`, and writes results to `export_path`. Processing statistics are printed for each operator.
+
+---
+
+## Command-Line Overrides
+
+Any recipe parameter can be overridden on the command line without modifying the YAML file:
+
+```bash
+# Override global parameters
+dj-process --config recipe.yaml --np 8 --export_path ./out/result.parquet
+
+# Override operator parameters (operator_name.param=value)
+dj-process --config recipe.yaml --language_id_score_filter.lang=en
+```
+
+CLI values take precedence over the config file—useful for quick experiments without touching the version-controlled recipe.
+
+---
+
+## Auto-Install Operator Dependencies
+
+Some operators require extra Python packages (e.g., model inference libraries). Use `dj-install` to install all dependencies declared by the operators in your recipe:
+
+```bash
+dj-install --config my-recipe.yaml
+```
+
+This is more reliable than manual `pip install`—it resolves per-operator dependency declarations and installs them in one pass. See [Installation §5](tutorial/Installation.md#5-op-specific-installation).
+
+---
+
+## Operator Execution Order
+
+Operators in the `process` list run **top-to-bottom sequentially**—each operator's output is the next one's input. Order matters for both correctness and performance:
+
+- **Cheap operators first**: Put lightweight filters (text length, language ID) up front to reduce sample count early.
+- **Expensive operators last**: Model-based scorers and GPU operators only see the filtered subset.
+- **Deduplication in the middle**: Dedup requires global state (hash tables); run it after initial filtering but before heavy processing.
+
+```yaml
+process:
+  # Stage 1: Cheap filters
+  - text_length_filter: { min_len: 10, max_len: 50000 }
+  - language_id_score_filter: { lang: en, min_score: 0.5 }
+
+  # Stage 2: Deduplication
+  - document_minhash_deduplicator: { tokenization: space, window_size: 5 }
+
+  # Stage 3: Expensive processing
+  - clean_html_mapper: {}
+  - text_quality_score_filter: { min_score: 0.6 }
+```
+
+---
+
+## Op Fusion
+
+When enabled, Data-Juicer merges adjacent operators that share intermediate variables into a single data pass, reducing I/O overhead—**2–10× throughput improvement** on typical pipelines.
+
+```yaml
+op_fusion: true
+fusion_strategy: probe   # or greedy
+```
+
+| Strategy | Description |
+|----------|-------------|
+| `probe` (default) | Probes each operator's speed, reorders fast→slow, then fuses |
+| `greedy` | Keeps original order, fuses only adjacent compatible operators |
+
+> Op fusion is only available with `executor_type: default`. Ray mode relies on distributed parallelism.
+
+---
+
+## GPU Mapper Fusion
+
+When your recipe chains multiple consecutive GPU Mappers, Data-Juicer can fuse them into a single GPU pass:
+
+```yaml
+op_fusion: true
+mapper_fusion: true                # default true (requires op_fusion)
+mapper_fusion_vram_limit: 0.9      # max aggregate VRAM fraction
+adaptive_batch_size: true           # auto-tune batch size per operator
+```
+
+---
+
+## Checkpointing and Resumption
+
+For long-running jobs, enable checkpointing to resume from the last completed operator on failure:
+
+```yaml
+use_checkpoint: true
+```
+
+Re-running the same config skips completed operators and continues from the checkpoint.
+
+> Note: Enabling `use_checkpoint` automatically disables caching (`use_cache`) and is mutually exclusive with `op_fusion`.
+
+For `ray_partitioned` executor, finer-grained checkpoint strategies are available:
+
+```yaml
+executor_type: ray_partitioned
+checkpoint:
+  enabled: true
+  strategy: every_n_ops   # every_op | every_partition | every_n_ops | manual | disabled
+  n_ops: 5
+```
+
+Resume a failed job with `--resume <job_id>`:
+
+```bash
+dj-process --config recipe.yaml --resume dj-job-20260815-abc123
+```
+
+---
+
+## Tracer: Track Sample Changes
+
+Want to see exactly which samples an operator filtered or modified? Enable the Tracer:
+
+```yaml
+open_tracer: true
+op_list_to_trace: []        # empty = trace all operators
+trace_num: 10               # show N changed samples per operator
+trace_keys: [text]          # which fields to trace
+```
+
+The Tracer writes before/after comparisons under the work directory. See [Tracing](Tracing.md) for details.
+
+---
+
+## Resource Monitoring
+
+Enable the Monitor to track CPU, memory, and GPU utilization for each operator:
+
+```yaml
+open_monitor: true
+```
+
+---
+
+## Dataset Sampling
+
+Before a full run, sample the dataset to quickly validate your recipe:
+
+```yaml
+dataset_sample_ratio: 0.01   # use only 1% of data for a dry run
+```
+
+---
+
+## Encryption
+
+For sensitive data, Data-Juicer supports decrypt-on-read and encrypt-on-write:
+
+```yaml
+decrypt_after_reading: true
+encrypt_before_export: true
+encryption_key_path: ./keys/data.key   # or set env var DJ_ENCRYPTION_KEY
+```
+
+---
+
+## Python API
+
+Besides the CLI, you can run pipelines programmatically:
+
+```python
+from data_juicer.config import init_configs
+from data_juicer.core import DefaultExecutor
+
+cfg = init_configs(args=['--config', 'my-recipe.yaml'])
+executor = DefaultExecutor(cfg)
+dataset = executor.run()
+```
+
+You can also pass an existing dataset object directly:
+
+```python
+dataset = executor.run(dataset=my_dataset, skip_export=True)
+```
+
+---
+
+## Parameter Quick Reference
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `--config` | — | Recipe file path (required) |
+| `--np` | 4 | Number of parallel worker processes |
+| `--executor_type` | `default` | Executor: `default` / `ray` / `ray_partitioned` |
+| `--dataset_path` | — | Input dataset path |
+| `--export_path` | — | Output path |
+| `--op_fusion` | false | Enable operator fusion |
+| `--use_checkpoint` | false | Enable checkpointing |
+| `--open_tracer` | false | Enable sample tracing |
+| `--open_monitor` | false | Enable resource monitoring |
+| `--dataset_sample_ratio` | 1.0 | Dataset sampling ratio |
+| `--keep_stats_in_res_ds` | false | Keep computed stats in output |
+| `--keep_hashes_in_res_ds` | false | Keep computed hashes in output |
+
+---
+
+## Next Steps
+
+- [Data Analysis](Analyze.md)—understand your data distribution before processing
+- [Dataset Configuration](DatasetCfg.md)—input formats, mixing, remote datasets
+- [Export](Export.md)—output formats, sharding, S3 export
+- [Distributed Processing](Distributed.md)—scale to Ray clusters
+- [Operator Library](Operators.md)—browse 200+ available operators

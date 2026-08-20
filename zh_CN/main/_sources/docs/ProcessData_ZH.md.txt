@@ -1,0 +1,225 @@
+# 处理数据
+
+本指南覆盖使用 `dj-process` 运行数据处理流水线的完整流程——从基本命令到性能调优。
+
+> 如果你还没跑过第一条流水线，建议先看[快速上手](tutorial/QuickStart_ZH.md)。
+
+---
+
+## 基本用法
+
+```bash
+dj-process --config my-recipe.yaml
+```
+
+Data-Juicer 读取[菜谱](concepts/recipes_ZH.md)文件，按 `process` 列表的顺序依次执行算子，将结果写入 `export_path`。运行时在控制台打印各算子的处理统计。
+
+---
+
+## 命令行覆盖参数
+
+任何菜谱中的参数都可以在命令行直接覆盖，无需修改 YAML 文件：
+
+```bash
+# 覆盖全局参数
+dj-process --config recipe.yaml --np 8 --export_path ./out/result.parquet
+
+# 覆盖算子参数（算子名.参数名=值）
+dj-process --config recipe.yaml --language_id_score_filter.lang=en
+```
+
+命令行优先级高于配置文件——适合在不改动版本管理的菜谱的前提下做临时调整。
+
+---
+
+## 自动安装算子依赖
+
+部分算子依赖额外 Python 包（如模型推理库）。使用 `dj-install` 可一键安装菜谱中所有算子所需的依赖：
+
+```bash
+dj-install --config my-recipe.yaml
+```
+
+这比手动 `pip install` 更可靠——它会解析每个算子声明的依赖并一次性安装。详见[安装文档 §5](tutorial/Installation_ZH.md#5-特定算子的安装)。
+
+---
+
+## 算子执行顺序
+
+`process` 列表中的算子**从上到下串行执行**，前一个算子的输出是后一个的输入。顺序对性能和结果都有显著影响：
+
+- **低成本算子先行**：把文本长度过滤、语言识别等轻量算子放在前面，尽早减少样本数量。
+- **高成本算子靠后**：基于模型打分、GPU 推理类算子只处理经过初步筛选的数据。
+- **去重放中段**：去重需要全局状态（hash 表），通常在初步过滤后、精细处理前执行。
+
+```yaml
+process:
+  # 阶段 1：低成本过滤
+  - text_length_filter: { min_len: 10, max_len: 50000 }
+  - language_id_score_filter: { lang: zh, min_score: 0.5 }
+
+  # 阶段 2：去重
+  - document_minhash_deduplicator: { tokenization: space, window_size: 5 }
+
+  # 阶段 3：高成本处理
+  - clean_html_mapper: {}
+  - text_quality_score_filter: { min_score: 0.6 }
+```
+
+---
+
+## 算子融合（Op Fusion）
+
+启用算子融合后，Data-Juicer 会将可共享中间变量的相邻算子合并为一次数据读取，减少 I/O 开销，在典型流水线上可带来 **2–10× 吞吐提升**。
+
+```yaml
+op_fusion: true
+fusion_strategy: probe   # 或 greedy
+```
+
+| 策略 | 说明 |
+|------|------|
+| `probe`（默认） | 先探测各算子运行速度，按快→慢重排并融合 |
+| `greedy` | 保持原始顺序，仅融合相邻兼容算子 |
+
+> 算子融合仅在 `executor_type: default` 下可用。使用 Ray 时靠分布式并行获得性能。
+
+---
+
+## GPU Mapper 融合
+
+当菜谱中有多个连续的 GPU Mapper，Data-Juicer 可以将它们融合为一次 GPU 调用：
+
+```yaml
+op_fusion: true
+mapper_fusion: true                # 默认 true（需 op_fusion 开启）
+mapper_fusion_vram_limit: 0.9      # 最大聚合显存占比
+adaptive_batch_size: true           # 根据探测结果自适应 batch size
+```
+
+---
+
+## 检查点与断点续跑
+
+对于长时间运行的任务，启用检查点可以在中途失败时从上次完成的位置恢复：
+
+```yaml
+use_checkpoint: true
+```
+
+重新运行相同配置时，Data-Juicer 会跳过已完成的算子，直接从断点继续。
+
+> 注意：启用 `use_checkpoint` 会自动禁用缓存（`use_cache`），且与 `op_fusion` 互斥。
+
+对于 `ray_partitioned` 执行引擎，有更精细的检查点策略：
+
+```yaml
+executor_type: ray_partitioned
+checkpoint:
+  enabled: true
+  strategy: every_n_ops   # every_op | every_partition | every_n_ops | manual | disabled
+  n_ops: 5
+```
+
+失败后可通过 `--resume <job_id>` 恢复：
+
+```bash
+dj-process --config recipe.yaml --resume dj-job-20260815-abc123
+```
+
+---
+
+## Tracer：追踪样本变化
+
+想了解某个算子具体过滤/修改了哪些样本？启用 Tracer：
+
+```yaml
+open_tracer: true
+op_list_to_trace: []        # 空 = 追踪全部算子
+trace_num: 10               # 每个算子展示多少条变化样本
+trace_keys: [text]          # 追踪哪些字段
+```
+
+Tracer 会在工作目录下输出每个算子的 before/after 对比。详见[追踪文档](Tracing_ZH.md)。
+
+---
+
+## 资源监控
+
+启用 Monitor 可追踪每个算子运行期间的 CPU、内存、GPU 利用率：
+
+```yaml
+open_monitor: true
+```
+
+---
+
+## 数据采样
+
+在正式处理前，可以对数据集采样来快速验证菜谱效果：
+
+```yaml
+dataset_sample_ratio: 0.01   # 仅取 1% 数据做试运行
+```
+
+---
+
+## 加密支持
+
+对于敏感数据，支持读取时解密、导出时加密：
+
+```yaml
+decrypt_after_reading: true
+encrypt_before_export: true
+encryption_key_path: ./keys/data.key   # 或设置环境变量 DJ_ENCRYPTION_KEY
+```
+
+---
+
+## Python API
+
+除了 CLI，你也可以在 Python 代码中运行流水线：
+
+```python
+from data_juicer.config import init_configs
+from data_juicer.core import DefaultExecutor
+
+cfg = init_configs(args=['--config', 'my-recipe.yaml'])
+executor = DefaultExecutor(cfg)
+dataset = executor.run()
+```
+
+也支持直接对已有 dataset 对象执行：
+
+```python
+dataset = executor.run(dataset=my_dataset, skip_export=True)
+```
+
+---
+
+## 常用参数速查
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--config` | — | 菜谱文件路径（必需） |
+| `--np` | 4 | 并行进程数 |
+| `--executor_type` | `default` | 执行引擎：`default` / `ray` / `ray_partitioned` |
+| `--dataset_path` | — | 输入数据集路径 |
+| `--export_path` | — | 输出路径 |
+| `--op_fusion` | false | 启用算子融合 |
+| `--use_checkpoint` | false | 启用检查点 |
+| `--open_tracer` | false | 启用样本追踪 |
+| `--open_monitor` | false | 启用资源监控 |
+| `--dataset_sample_ratio` | 1.0 | 数据采样比例 |
+| `--keep_stats_in_res_ds` | false | 输出中保留统计字段 |
+| `--keep_hashes_in_res_ds` | false | 输出中保留哈希字段 |
+
+---
+
+## 下一步
+
+- [数据分析](Analyze_ZH.md)——运行前先了解数据分布
+- [数据集配置](DatasetCfg_ZH.md)——输入格式、数据混合、远程数据集
+- [导出](Export_ZH.md)——输出格式、分片、S3 导出
+- [分布式处理](Distributed_ZH.md)——使用 Ray 扩展到集群
+- [算子库](Operators.md)——浏览 200+ 可用算子

@@ -24,10 +24,10 @@
    :caption: Guides
    :hidden:
 
-   docs/Operators
-   docs/DatasetCfg
+   docs/ProcessData
    docs/Analyze
    docs/Playground
+   docs/DatasetCfg
    docs/Export
    docs/Cache
    docs/Tracing
@@ -59,6 +59,14 @@
    docs/awesome_llm_data
    docs/BadDataExhibition
    docs/news
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Reference
+   :hidden:
+
+   docs/Operators
+   api
 
 .. toctree::
    :maxdepth: 2
@@ -101,9 +109,3 @@
 
    thirdparty/*
    thirdparty/**/*
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-
-   api

@@ -80,7 +80,7 @@ python tools/preprocess/raw_stackexchange_to_jsonl.py  --help
 
 使用 `raw_alpaca_cot_merge_add_meta.py` 来转化原始 Alpaca-CoT 数据.
 
-该工具用于将从 [HuggingFace]( https://huggingface.co/datasets/QingyiSi/Alpaca-CoT) 下载的原始 Alpaca-Cot 数据转化为 jsonl 文件.
+该工具用于将从 [HuggingFace](https://huggingface.co/datasets/QingyiSi/Alpaca-CoT) 下载的原始 Alpaca-CoT 数据转化为 jsonl 文件。
 
 ```shell
 python tools/preprocess/raw_alpaca_cot_merge_add_meta.py           \
