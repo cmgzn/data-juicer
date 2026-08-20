@@ -24,6 +24,9 @@ test_bad_yaml_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 test_text_keys_yaml_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                         'demo_4_test_multiple_text_keys.yaml')
 
+test_empty_text_keys_yaml_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                              'demo_5_test_empty_text_keys.yaml')
+
 test_same_ops_yaml_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        'demo_4_test_same_ops.yaml')
 
@@ -548,6 +551,17 @@ class ConfigTest(DataJuicerTestCaseBase):
             first_op = cfg.process[0]
             first_op_name = list(first_op.keys())[0]
             self.assertEqual(first_op[first_op_name]['text_key'], 'text1')
+
+    def test_empty_text_keys(self):
+        out = StringIO()
+        with redirect_stdout(out):
+            cfg = init_configs(args=[
+                '--config', test_empty_text_keys_yaml_path,
+            ])
+            self.assertEqual(cfg.text_keys, [])
+            first_op = cfg.process[0]
+            first_op_name = list(first_op.keys())[0]
+            self.assertIsNone(first_op[first_op_name]['text_key'])
 
     def test_update_op_attr(self):
         ori_ops = [
