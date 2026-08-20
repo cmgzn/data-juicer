@@ -365,6 +365,7 @@
 
         var newMain = newDoc.querySelector('main.main-content');
         var newSidebar = newDoc.querySelector('aside.sidebar#sidebar');
+        var newLangDropdown = newDoc.querySelector('#lang-dropdown .dropdown-panel');
         var currentMain = document.querySelector('main.main-content');
         var currentSidebar = document.querySelector('aside.sidebar#sidebar');
 
@@ -381,6 +382,14 @@
 
         if (newSidebar && currentSidebar) {
           currentSidebar.innerHTML = newSidebar.innerHTML;
+        }
+
+        // Update language switcher links for the new page
+        if (newLangDropdown) {
+          var currentLangDropdown = document.querySelector('#lang-dropdown .dropdown-panel');
+          if (currentLangDropdown) {
+            currentLangDropdown.innerHTML = newLangDropdown.innerHTML;
+          }
         }
 
         document.title = newDoc.title;

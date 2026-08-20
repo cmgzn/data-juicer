@@ -34,6 +34,15 @@
 
 .. toctree::
    :maxdepth: 2
+   :caption: Lookup Materials
+   :hidden:
+
+   docs/GlobalConfig
+   docs/Operators
+   api
+
+.. toctree::
+   :maxdepth: 2
    :caption: Distributed Processing
    :hidden:
 
@@ -59,15 +68,6 @@
    docs/awesome_llm_data
    docs/BadDataExhibition
    docs/news
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Reference
-   :hidden:
-
-   docs/GlobalConfig
-   docs/Operators
-   api
 
 .. toctree::
    :maxdepth: 1

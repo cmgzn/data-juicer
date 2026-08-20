@@ -3,7 +3,7 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: 快速上手
+   :caption: 入门
    :hidden:
 
    docs/tutorial/Installation_ZH
@@ -34,6 +34,15 @@
 
 .. toctree::
    :maxdepth: 2
+   :caption: 速查手册
+   :hidden:
+
+   docs/GlobalConfig_ZH
+   docs/Operators
+   api
+
+.. toctree::
+   :maxdepth: 2
    :caption: 分布式处理
    :hidden:
 
@@ -59,15 +68,6 @@
    docs/awesome_llm_data
    docs/BadDataExhibition_ZH
    docs/news_zh
-
-.. toctree::
-   :maxdepth: 2
-   :caption: 参考速查
-   :hidden:
-
-   docs/GlobalConfig_ZH
-   docs/Operators
-   api
 
 .. toctree::
    :maxdepth: 1

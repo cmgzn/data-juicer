@@ -93,7 +93,7 @@
               <a href="../index_ZH.html">首页</a>
             </li>
           </ul>
-          <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
+          <p class="caption" role="heading"><span class="caption-text">入门</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/Installation_ZH.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/QuickStart_ZH.html">快速上手</a></li>
@@ -115,6 +115,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Cache_ZH.html">缓存管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Tracing_ZH.html">数据追踪</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">速查手册</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GlobalConfig_ZH.html">全局配置参数速查</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul class="simple">
+</ul>
+</li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">分布式处理</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
@@ -132,14 +140,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 <li class="toctree-l1"><a class="reference internal" href="BadDataExhibition_ZH.html">“坏”数据展览</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">参考速查</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="GlobalConfig_ZH.html">全局配置参数速查</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul class="simple">
-</ul>
-</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">算子</span></p>
 <ul>
@@ -457,7 +457,7 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
 <hr class="docutils" />
 <section id="python-api">
 <h2>Python API 方式<a class="headerlink" href="#python-api" title="链接到此标题。">¶</a></h2>
-<p>Python API 提供了比 YAML 菜谱更灵活的控制——适合在训练脚本、Notebook 或 Agent 工作流中嵌入数据处理。</p>
+<p>Python API 提供了比 YAML 菜谱更灵活的控制——适合在训练脚本、Notebook 或自动化流水线中嵌入数据处理。</p>
 <section id="id5">
 <h3>方式一：加载菜谱<a class="headerlink" href="#id5" title="链接到此标题。">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>
@@ -523,7 +523,7 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
 </section>
 <section id="id8">
 <h3>方式四：动态组合算子<a class="headerlink" href="#id8" title="链接到此标题。">¶</a></h3>
-<p>适合 Agent 场景——根据数据特征动态选择算子：</p>
+<p>根据数据特征动态选择算子——适合编程式批处理或自动化工作流：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_ops</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
 

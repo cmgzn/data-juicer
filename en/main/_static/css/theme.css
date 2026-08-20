@@ -718,6 +718,10 @@ a:hover {
   color: var(--text-secondary);
 }
 
+.article blockquote p:last-child {
+  margin-bottom: 0;
+}
+
 [data-theme="dark"] .article blockquote {
   background: rgba(244, 114, 11, 0.06);
 }

@@ -93,7 +93,7 @@
               <a href="../../index_ZH.html">首页</a>
             </li>
           </ul>
-          <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
+          <p class="caption" role="heading"><span class="caption-text">入门</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Installation_ZH.html">安装</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">快速上手</a></li>
@@ -115,6 +115,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../Cache_ZH.html">缓存管理</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tracing_ZH.html">数据追踪</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">速查手册</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../GlobalConfig_ZH.html">全局配置参数速查</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Operators.html">Operator Schemas 算子提要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a><ul class="simple">
+</ul>
+</li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">分布式处理</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Distributed_ZH.html">Data-Juicer 分布式数据处理</a></li>
@@ -132,14 +140,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 <li class="toctree-l1"><a class="reference internal" href="../BadDataExhibition_ZH.html">“坏”数据展览</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">参考速查</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../GlobalConfig_ZH.html">全局配置参数速查</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a><ul class="simple">
-</ul>
-</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">算子</span></p>
 <ul>
@@ -546,39 +546,43 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>核心概念</strong></p></td>
+<tr class="row-even"><td><p><strong>处理数据</strong></p></td>
+<td><p>CLI 与 Python API 完整用法、性能调优</p></td>
+<td><p><a class="reference internal" href="../ProcessData_ZH.html"><span class="std std-doc">处理数据指南</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>核心概念</strong></p></td>
 <td><p>理解菜谱、算子、执行引擎的设计</p></td>
 <td><p><a class="reference internal" href="../concepts/recipes_ZH.html"><span class="std std-doc">菜谱</span></a> · <a class="reference internal" href="../concepts/operators_ZH.html"><span class="std std-doc">算子</span></a> · <a class="reference internal" href="../concepts/executor_ZH.html"><span class="std std-doc">执行引擎</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>算子库</strong></p></td>
+<tr class="row-even"><td><p><strong>算子库</strong></p></td>
 <td><p>浏览 200+ 算子，覆盖文本/图像/音频/视频</p></td>
 <td><p><a class="reference internal" href="../Operators.html"><span class="std std-doc">算子总览</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>数据分析</strong></p></td>
+<tr class="row-odd"><td><p><strong>数据分析</strong></p></td>
 <td><p>运行前用分析器了解数据分布</p></td>
 <td><p><a class="reference internal" href="../Analyze_ZH.html"><span class="std std-doc">数据分析指南</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>可视化调优</strong></p></td>
+<tr class="row-even"><td><p><strong>可视化调优</strong></p></td>
 <td><p>拖动滑块调整过滤阈值，即时预览效果</p></td>
 <td><p><a class="reference internal" href="../Playground_ZH.html"><span class="std std-doc">Web Playground</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>分布式处理</strong></p></td>
+<tr class="row-odd"><td><p><strong>分布式处理</strong></p></td>
 <td><p>使用 Ray 扩展到多机集群</p></td>
 <td><p><a class="reference internal" href="../Distributed_ZH.html"><span class="std std-doc">分布式处理</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>数据沙盒</strong></p></td>
+<tr class="row-even"><td><p><strong>数据沙盒</strong></p></td>
 <td><p>小数据快速实验，数据-模型协同优化闭环</p></td>
 <td><p><a class="reference external" href="https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/index_ZH.html">DJ-Sandbox</a></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>导出与缓存</strong></p></td>
+<tr class="row-odd"><td><p><strong>导出与缓存</strong></p></td>
 <td><p>控制输出格式、加速重复运行</p></td>
 <td><p><a class="reference internal" href="../Export_ZH.html"><span class="std std-doc">导出</span></a> · <a class="reference internal" href="../Cache_ZH.html"><span class="std std-doc">缓存</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>开发者指南</strong></p></td>
+<tr class="row-even"><td><p><strong>开发者指南</strong></p></td>
 <td><p>编写自定义算子、贡献代码</p></td>
 <td><p><a class="reference internal" href="../DeveloperGuide_ZH.html"><span class="std std-doc">开发者指南</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><strong>DJ-Cookbook</strong></p></td>
+<tr class="row-odd"><td><p><strong>DJ-Cookbook</strong></p></td>
 <td><p>社区菜谱合集与教程资源</p></td>
 <td><p><a class="reference internal" href="DJ-Cookbook_ZH.html"><span class="std std-doc">DJ-Cookbook</span></a></p></td>
 </tr>

@@ -115,6 +115,14 @@
 <li class="toctree-l1"><a class="reference internal" href="Cache.html">Cache Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Tracing.html">Data Tracing</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Lookup Materials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GlobalConfig.html">Global Configuration Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul class="simple">
+</ul>
+</li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Distributed Processing</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Distributed.html">Distributed Data Processing in Data-Juicer</a></li>
@@ -132,14 +140,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="awesome_llm_data.html">Awesome Data-Model Co-Development of MLLMs </a></li>
 <li class="toctree-l1"><a class="reference internal" href="BadDataExhibition.html">“Bad” Data Exhibition</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="GlobalConfig.html">Global Configuration Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Operators.html">Operator Schemas 算子提要</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul class="simple">
-</ul>
-</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">operators</span></p>
 <ul>
@@ -449,7 +449,7 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
 <hr class="docutils" />
 <section id="python-api">
 <h2>Python API<a class="headerlink" href="#python-api" title="Link to this heading">¶</a></h2>
-<p>The Python API provides finer control than YAML recipes—ideal for training scripts, notebooks, or agent workflows.</p>
+<p>The Python API provides finer control than YAML recipes—ideal for training scripts, notebooks, or automated pipelines.</p>
 <section id="option-1-load-a-recipe">
 <h3>Option 1: Load a Recipe<a class="headerlink" href="#option-1-load-a-recipe" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_configs</span>
@@ -511,7 +511,7 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
 </section>
 <section id="option-4-dynamic-operator-composition">
 <h3>Option 4: Dynamic Operator Composition<a class="headerlink" href="#option-4-dynamic-operator-composition" title="Link to this heading">¶</a></h3>
-<p>Suited for agent workflows—choose operators based on data characteristics:</p>
+<p>Choose operators programmatically based on data characteristics—useful for automated pipelines:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_ops</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">data_juicer.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedDataset</span>
 
