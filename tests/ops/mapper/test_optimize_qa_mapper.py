@@ -78,6 +78,61 @@ class ParseOutputTest(DataJuicerTestCaseBase):
         self.assertEqual(result, (None, None))
 
 
+class BuildInputTest(DataJuicerTestCaseBase):
+    """Test build_input with positional and named placeholders."""
+
+    def _create_op(self, input_template=None, qa_pair_template=None):
+        kwargs = {
+            'api_or_hf_model': 'test-model',
+            'is_hf_model': False,
+        }
+        if input_template:
+            kwargs['input_template'] = input_template
+        if qa_pair_template:
+            kwargs['qa_pair_template'] = qa_pair_template
+        return OptimizeQAMapper(**kwargs)
+
+    def test_default_positional_placeholders(self):
+        op = self._create_op()
+        sample = {'query': '什么是AI？', 'response': 'AI是人工智能。'}
+        result = op.build_input(sample)
+        self.assertIn('什么是AI？', result)
+        self.assertIn('AI是人工智能。', result)
+
+    def test_named_placeholders_in_qa_pair_template(self):
+        op = self._create_op(
+            qa_pair_template='Q: {question}\nA: {answer}')
+        sample = {'query': '什么是AI？', 'response': 'AI是人工智能。'}
+        result = op.build_input(sample)
+        self.assertIn('Q: 什么是AI？', result)
+        self.assertIn('A: AI是人工智能。', result)
+
+    def test_named_placeholder_in_input_template(self):
+        op = self._create_op(
+            input_template='Please optimize:\n{qa_pair}')
+        sample = {'query': '什么是AI？', 'response': 'AI是人工智能。'}
+        result = op.build_input(sample)
+        self.assertIn('Please optimize:\n', result)
+        self.assertIn('什么是AI？', result)
+
+    def test_both_named_placeholders(self):
+        op = self._create_op(
+            input_template='Input:\n{qa_pair}',
+            qa_pair_template='Question: {question}\nAnswer: {answer}')
+        sample = {'query': '天空为什么是蓝的？', 'response': '瑞利散射。'}
+        result = op.build_input(sample)
+        self.assertEqual(
+            result,
+            'Input:\nQuestion: 天空为什么是蓝的？\nAnswer: 瑞利散射。')
+
+    def test_named_placeholder_order_independent(self):
+        op = self._create_op(
+            qa_pair_template='{answer} <- {question}')
+        sample = {'query': 'Q1', 'response': 'A1'}
+        result = op.build_input(sample)
+        self.assertIn('A1 <- Q1', result)
+
+
 class EdgeCaseTest(DataJuicerTestCaseBase):
     """Test edge cases without requiring model or API access."""
 
