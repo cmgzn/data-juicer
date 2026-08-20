@@ -720,7 +720,7 @@ a:hover {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  margin: 3rem 0 2rem;
+  margin: 3rem auto 2rem;
   padding: 0 2rem;
   max-width: var(--content-max-width);
 }
@@ -1046,6 +1046,31 @@ html:hover {
 
 .search-page input:focus {
   border-color: rgb(var(--primary));
+}
+
+/* ==================== SPA Loading Bar ==================== */
+#spa-loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: rgb(var(--primary));
+  width: 0;
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#spa-loading-bar.active {
+  opacity: 1;
+  width: 70%;
+  transition: width 2s cubic-bezier(0.1, 0.5, 0.3, 1);
+}
+
+#spa-loading-bar.complete {
+  width: 100%;
+  transition: width 0.2s ease, opacity 0.3s ease 0.2s;
+  opacity: 0;
 }
 
 /* ==================== Selection ==================== */
