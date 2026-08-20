@@ -144,26 +144,60 @@
     updateActive();
   }
 
-  // ==================== Sidebar Active State ====================
-  function initSidebarActive() {
-    document.querySelectorAll('.sidebar-nav li.current').forEach(function(li) {
-      li.classList.remove('current');
+  // ==================== Sidebar Collapsible ====================
+  function initSidebarCollapse() {
+    var nav = document.querySelector('.sidebar-nav');
+    if (!nav) return;
+
+    // Mark items that have children and add toggle chevrons
+    nav.querySelectorAll('li').forEach(function(li) {
+      var childUl = li.querySelector(':scope > ul');
+      if (childUl && childUl.querySelector('li')) {
+        li.classList.add('has-children');
+        var link = li.querySelector(':scope > a');
+        if (link && !link.querySelector('.toc-toggle')) {
+          var toggle = document.createElement('span');
+          toggle.className = 'toc-toggle';
+          toggle.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4.5 2.5l4 3.5-4 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          link.style.position = 'relative';
+          link.appendChild(toggle);
+        }
+      }
     });
 
+    // Expand current page's ancestor path
     var current = window.location.pathname;
-    document.querySelectorAll('.sidebar-nav a').forEach(function(link) {
+    nav.querySelectorAll('a').forEach(function(link) {
       var href = link.getAttribute('href');
       if (href && (current.endsWith(href) || current.includes(href.replace('.html', '')))) {
-        link.closest('li').classList.add('current');
-        var parent = link.closest('li').parentElement;
+        var li = link.closest('li');
+        if (li) li.classList.add('current');
+        // Expand all ancestors
+        var parent = li;
         while (parent) {
-          if (parent.tagName === 'UL' && parent.parentElement && parent.parentElement.tagName === 'LI') {
-            parent.style.display = 'block';
+          if (parent.tagName === 'LI') {
+            parent.classList.add('expanded');
           }
           parent = parent.parentElement;
         }
       }
     });
+
+    // Toggle on click
+    nav.addEventListener('click', function(e) {
+      var toggle = e.target.closest('.toc-toggle');
+      if (toggle) {
+        e.preventDefault();
+        e.stopPropagation();
+        var li = toggle.closest('li');
+        if (li) li.classList.toggle('expanded');
+      }
+    });
+  }
+
+  // ==================== Sidebar Active State ====================
+  function initSidebarActive() {
+    initSidebarCollapse();
   }
 
   // ==================== Search Modal ====================

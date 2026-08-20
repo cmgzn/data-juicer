@@ -412,6 +412,39 @@ a:hover {
   padding-left: 0.75rem;
   border-left: 1px solid var(--border-light);
   margin-left: 0.75rem;
+  display: none !important;
+}
+
+.sidebar-nav li.expanded > ul {
+  display: block !important;
+}
+
+.sidebar-nav li.has-children > a {
+  padding-right: 1.75rem;
+  position: relative;
+}
+
+.sidebar-nav .toc-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.sidebar-nav .toc-toggle:hover {
+  opacity: 1;
+}
+
+.sidebar-nav li.expanded > a .toc-toggle {
+  transform: translateY(-50%) rotate(90deg);
 }
 
 /* ==================== Page Layout ==================== */
@@ -481,6 +514,12 @@ a:hover {
   border-left: 1px solid var(--border-light);
 }
 
+.toc-sidebar ul ul {
+  border-left: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
 .toc-sidebar li {
   margin: 0;
 }
@@ -493,6 +532,17 @@ a:hover {
   border-left: 2px solid transparent;
   margin-left: -1px;
   transition: all 0.15s ease;
+}
+
+/* Nested TOC levels: progressive indentation */
+.toc-sidebar ul ul a {
+  padding-left: 1.75rem;
+  font-size: 0.75rem;
+}
+
+.toc-sidebar ul ul ul a {
+  padding-left: 2.5rem;
+  font-size: 0.75rem;
 }
 
 .toc-sidebar a:hover {

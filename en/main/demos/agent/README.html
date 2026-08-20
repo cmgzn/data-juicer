@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Agent quality &amp; bad-case docs — data-juicer</title>
+  <title>Agent Quality &amp; Bad-Case Pipeline — data-juicer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -377,14 +377,7 @@
 <p class="caption" role="heading"><span class="caption-text">demos</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../README.html">Demos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="BAD_CASE_INSIGHTS.html">Agent 交互数据：Bad case 洞察</a></li>
-<li class="toctree-l1"><a class="reference internal" href="BAD_CASE_REPORT.html">Bad case 自助报告（简化入口）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PERFORMANCE_LLM.html">Agent 流水线里 LLM 算子：加速与超参</a></li>
-<li class="toctree-l1"><a class="reference internal" href="QUICKSTART_BAD_CASE.html">Bad case 流水线：一键运行与端到端指南</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Agent quality &amp; bad-case docs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#agent-bad-case">Agent 质检 / bad-case 文档索引</a></li>
-<li class="toctree-l1"><a class="reference internal" href="minimal_configs/README.html">Agent 流水线最小可运行配置（便于逐项调试）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scripts/README.html">Agent pipeline 后分析脚本</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Agent Quality &amp; Bad-Case Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ego_hand_action_annotation/README.html">VLA Visualization Demo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../elastic_sharding/README.html">Elastic Multi-Node Sharding on Shared Storage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../process_video_on_ray/data/Note.html">Note for dataset path</a></li>
@@ -412,6 +405,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../thirdparty/models/README.html">Third-party Model Library</a></li>
 </ul>
 
+
         </nav>
       </div>
     </aside>
@@ -419,19 +413,18 @@
     <main class="main-content">
       <div class="content-wrapper">
         <article class="article" role="main">
-  <section id="agent-quality-bad-case-docs">
-<h1>Agent quality &amp; bad-case docs<a class="headerlink" href="#agent-quality-bad-case-docs" title="Link to this heading">¶</a></h1>
-<p><strong>English:</strong> This folder documents a <strong>recipe-driven</strong> pipeline for agent logs
+  <section id="agent-quality-bad-case-pipeline">
+<h1>Agent Quality &amp; Bad-Case Pipeline<a class="headerlink" href="#agent-quality-bad-case-pipeline" title="Link to this heading">¶</a></h1>
+<p>This folder documents a <strong>recipe-driven</strong> pipeline for agent logs
 (JSONL with <code class="docutils literal notranslate"><span class="pre">messages</span></code> + <code class="docutils literal notranslate"><span class="pre">choices</span></code> / <code class="docutils literal notranslate"><span class="pre">response_choices</span></code>). Core operators live
 under <code class="docutils literal notranslate"><span class="pre">data_juicer/ops/mapper/</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">agent_dialog_normalize_mapper</span></code>,
 <code class="docutils literal notranslate"><span class="pre">agent_bad_case_signal_mapper</span></code>, <code class="docutils literal notranslate"><span class="pre">dialog_*</span></code> quality mappers); default prompts
 and flattened dialog labels are <strong>English-first</strong> for upstream reuse—override
 <code class="docutils literal notranslate"><span class="pre">user_label</span></code> / <code class="docutils literal notranslate"><span class="pre">assistant_label</span></code> on the normalize mapper or subclass mappers
 for other locales.</p>
-</section>
 <hr class="docutils" />
-<section id="agent-bad-case">
-<h1>Agent 质检 / bad-case 文档索引<a class="headerlink" href="#agent-bad-case" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>文档索引<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>需求</p></th>
@@ -440,26 +433,27 @@ for other locales.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>只出 HTML 报告</strong>（已有 <code class="docutils literal notranslate"><span class="pre">processed.jsonl</span></code>）</p></td>
-<td><p><a class="reference internal" href="BAD_CASE_REPORT.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">BAD_CASE_REPORT.md</span></code></span></a></p></td>
+<td><p><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">BAD_CASE_REPORT_ZH.md</span></code></span></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>怎么跑 smoke / full / 校准 / 常见问题</strong></p></td>
-<td><p><a class="reference internal" href="QUICKSTART_BAD_CASE.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">QUICKSTART_BAD_CASE.md</span></code></span></a></p></td>
+<td><p><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">QUICKSTART_BAD_CASE_ZH.md</span></code></span></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>分层逻辑、信号表、insight 字段、jq</strong></p></td>
-<td><p><a class="reference internal" href="BAD_CASE_INSIGHTS.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">BAD_CASE_INSIGHTS.md</span></code></span></a></p></td>
+<td><p><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">BAD_CASE_INSIGHTS_ZH.md</span></code></span></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>后处理 Python 脚本参数</strong></p></td>
-<td><p><a class="reference internal" href="scripts/README.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">scripts/README.md</span></code></span></a></p></td>
+<td><p><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">scripts/README_ZH.md</span></code></span></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>LLM 算子加速</strong></p></td>
-<td><p><a class="reference internal" href="PERFORMANCE_LLM.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">PERFORMANCE_LLM.md</span></code></span></a></p></td>
+<td><p><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">PERFORMANCE_LLM_ZH.md</span></code></span></p></td>
 </tr>
 </tbody>
 </table>
 <p>端到端配置：<strong><code class="docutils literal notranslate"><span class="pre">agent_interaction_quality_analysis.yaml</span></code></strong>；无 API 冒烟：<strong><code class="docutils literal notranslate"><span class="pre">minimal_configs/09_bad_case_smoke.yaml</span></code></strong>。</p>
+</section>
 <hr class="docutils" />
-<section id="id1">
-<h2>维护指南<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h2>维护指南<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>项</p></th>
@@ -493,9 +487,9 @@ for other locales.</p>
           <div class="toc-sidebar-inner">
             <p class="toc-title">On this page</p>
             <ul>
-<li><a class="reference internal" href="#">Agent quality &amp; bad-case docs</a></li>
-<li><a class="reference internal" href="#agent-bad-case">Agent 质检 / bad-case 文档索引</a><ul>
-<li><a class="reference internal" href="#id1">维护指南</a></li>
+<li><a class="reference internal" href="#">Agent Quality &amp; Bad-Case Pipeline</a><ul>
+<li><a class="reference internal" href="#id1">文档索引</a></li>
+<li><a class="reference internal" href="#id2">维护指南</a></li>
 </ul>
 </li>
 </ul>
@@ -504,13 +498,13 @@ for other locales.</p>
         </aside>
       </div>
       <nav class="prev-next">
-        <a href="QUICKSTART_BAD_CASE.html" class="prev-next-link prev">
+        <a href="../README.html" class="prev-next-link prev">
           <span class="prev-next-label">Previous</span>
-          <span class="prev-next-title">Bad case 流水线：一键运行与端到端指南</span>
+          <span class="prev-next-title">Demos</span>
         </a>
-        <a href="minimal_configs/README.html" class="prev-next-link next">
+        <a href="../ego_hand_action_annotation/README.html" class="prev-next-link next">
           <span class="prev-next-label">Next</span>
-          <span class="prev-next-title">Agent 流水线最小可运行配置（便于逐项调试）</span>
+          <span class="prev-next-title">VLA Visualization Demo</span>
         </a>
       </nav>
       <footer class="footer">
