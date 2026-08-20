@@ -8,10 +8,16 @@
 
    docs/tutorial/Installation
    docs/tutorial/QuickStart
+   docs/tutorial/DJ-Cookbook
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Core Concepts
+   :hidden:
+
    docs/concepts/recipes
    docs/concepts/operators
    docs/concepts/executor
-   docs/tutorial/DJ-Cookbook
 
 .. toctree::
    :maxdepth: 2
@@ -20,6 +26,8 @@
 
    docs/Operators
    docs/DatasetCfg
+   docs/Analyze
+   docs/Playground
    docs/Export
    docs/Cache
    docs/Tracing

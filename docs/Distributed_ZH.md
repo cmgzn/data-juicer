@@ -1,5 +1,4 @@
 # Data-Juicer 分布式数据处理
-中文 | [EN](Distributed.md)
 
 ## 概览
 

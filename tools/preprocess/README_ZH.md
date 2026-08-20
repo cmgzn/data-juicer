@@ -1,6 +1,6 @@
 # 预处理工具
 
-此文件夹包含一些预处理脚本，用于在使用 Data-Juicer 之前对数据集进行处理。
+[`tools/preprocess`](https://github.com/datajuicer/data-juicer/tree/main/tools/preprocess) 中的脚本用于在 Data-Juicer 正式处理之前，将各类原始数据（arXiv tar、Stack Exchange 7z、Alpaca-CoT 等）转换为 JSONL 格式。
 
 ## 用法
 
