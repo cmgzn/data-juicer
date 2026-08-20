@@ -109,7 +109,8 @@ class TextChunkMapper(Mapper):
 
     def get_text_chunks(self, text, rank=None):
         if self.split_pattern is not None and self.max_len is None:
-            chunks = re.split(self.split_pattern, text)
+            nc_pattern = re.sub(r"\((?!\?)", "(?:", self.split_pattern)
+            chunks = re.split(nc_pattern, text)
             chunks = [t for t in chunks if t is not None and t.strip()]
         elif self.split_pattern is None and self.max_len is not None:
             tokens = text
