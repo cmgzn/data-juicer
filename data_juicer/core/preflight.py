@@ -297,7 +297,7 @@ def post_instantiation_check(
 
 
 def _check_export_path(cfg) -> List[PreflightError]:
-    """Check export path accessibility."""
+    """Check export path accessibility (local paths only)."""
     import os
     from urllib.parse import urlparse
 
@@ -307,20 +307,11 @@ def _check_export_path(cfg) -> List[PreflightError]:
         return errors
 
     scheme = urlparse(export_path).scheme.lower()
-    if scheme in ("s3", "hdfs"):
-        # Remote paths: check credentials exist
-        if scheme == "s3":
-            has_creds = (hasattr(cfg, "export_aws_credentials") and cfg.export_aws_credentials) or os.environ.get(
-                "AWS_ACCESS_KEY_ID"
-            )
-            if not has_creds:
-                errors.append(
-                    PreflightError(
-                        "__config__",
-                        f"Export path is S3 ({export_path}) but no AWS credentials found "
-                        f"(neither export_aws_credentials config nor AWS_ACCESS_KEY_ID env var)",
-                    )
-                )
+    if scheme in ("s3", "hdfs", "oss"):
+        # Remote paths: rely on the SDK's credential provider chain at export
+        # time. Preflight cannot reliably detect all valid auth mechanisms
+        # (IAM roles, Web Identity, shared credential files, etc.)
+        pass
     else:
         # Local path: check parent directory is writable
         export_dir = os.path.dirname(os.path.abspath(export_path))

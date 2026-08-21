@@ -640,6 +640,13 @@ class PartitionedRayExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin)
         # Note: Config validation is handled in _resume_job() if resuming
 
         # Load the full dataset using a single DatasetBuilder
+        # Preflight stage 1: validate config before any expensive I/O
+        if getattr(self.cfg, "strict_preflight", True):
+            from data_juicer.core.preflight import pre_instantiation_check
+
+            pre_instantiation_check(self.cfg.process)
+
+        # Load the full dataset using single DatasetBuilder
         logger.info("Loading dataset with single DatasetBuilder...")
 
         # Ray Dataset captures a copy of DataContext when it is created. This
@@ -1347,10 +1354,6 @@ class PartitionedRayExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin)
 
     def _prepare_operators(self):
         """Prepare process operators."""
-        if getattr(self.cfg, "strict_preflight", True):
-            from data_juicer.core.preflight import pre_instantiation_check
-
-            pre_instantiation_check(self.cfg.process)
         ops = load_ops(self.cfg.process)
 
         # Check for op_fusion configuration with safe attribute access
