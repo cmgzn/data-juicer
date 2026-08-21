@@ -169,6 +169,6 @@ dj-process --dataset_path 0.5 path/to/dataset1.json 0.5 path/to/dataset2.json
 
 ## What's next
 
-- [Recipes](concepts/recipes.md) — learn how to chain operators in your recipe.
-- [Operators](concepts/operators.md) — understand the operator types available for your data.
+- [Processing Data](ProcessData.md) — learn how to run pipelines and chain operators.
+- [Operator Schemas](Operators.md) — understand the operator types available for your data.
 - [Export Guide](Export.md) — control the output format and path.

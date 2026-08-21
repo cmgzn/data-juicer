@@ -56,5 +56,5 @@ Once satisfied with the thresholds, copy the tuned parameters back into your rec
 
 ## Next steps
 
-- For command-line analyzer usage, see [Data Analysis Guide](Analyze.md)
+- For command-line analyzer usage, see [Data Analysis Guide](AnalyzeData.md)
 - Ready to run at scale? See [Quickstart §4](tutorial/QuickStart.md#4-run-the-pipeline)

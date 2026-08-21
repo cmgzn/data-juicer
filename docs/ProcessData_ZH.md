@@ -15,7 +15,7 @@
 dj-process --config my-recipe.yaml
 ```
 
-Data-Juicer 读取[菜谱](concepts/recipes_ZH.md)文件，按 `process` 列表的顺序依次执行算子，将结果写入 `export_path`。
+Data-Juicer 读取菜谱文件，按 `process` 列表的顺序依次执行算子，将结果写入 `export_path`。
 
 ### 命令行覆盖
 
@@ -217,7 +217,7 @@ Tracer 在工作目录输出每个算子的 before/after 对比——帮助理�
 
 ## 下一步
 
-- [数据分析](Analyze_ZH.md)——运行前先了解数据分布
+- [数据分析](AnalyzeData_ZH.md)——运行前先了解数据分布
 - [数据集配置](DatasetCfg_ZH.md)——输入格式、数据混合、远程数据集
 - [全局配置参数速查](GlobalConfig_ZH.md)——所有参数的完整列表
 - [分布式处理](Distributed_ZH.md)——使用 Ray 扩展到集群

@@ -64,7 +64,7 @@ process:
 
 `process` 下的每项是一个算子，按列出顺序依次执行——前一个算子的输出是后一个的输入。这个菜谱只保留语言置信度较高的中文样本。
 
-> 菜谱的完整语法和设计理念请参见[核心概念：数据菜谱](../concepts/recipes_ZH.md)。200+ 内置算子的完整列表请参见[算子库](../Operators.md)。
+> 菜谱的完整语法请参见[全局配置参数速查](../GlobalConfig_ZH.md)。200+ 内置算子的完整列表请参见[算子库](../Operators.md)。
 
 ---
 
@@ -104,7 +104,7 @@ cat ./outputs/demo-process/demo-processed.jsonl
 dj-analyze --config demos/process_simple/process.yaml
 ```
 
-> 分析器的完整用法（自动模式、分布式分析、自定义指标）请参见[数据分析指南](../Analyze_ZH.md)。交互式拖动滑块调优过滤阈值请参见 [Web Playground](../Playground_ZH.md)。
+> 分析器的完整用法（自动模式、分布式分析、自定义指标）请参见[数据分析指南](../AnalyzeData_ZH.md)。交互式拖动滑块调优过滤阈值请参见 [Web Playground](../Playground_ZH.md)。
 
 ---
 
@@ -138,7 +138,7 @@ dataset = dataset.process([op1, op2])
 | 方向 | 说明 | 链接 |
 |------|------|------|
 | **处理数据** | CLI 与 Python API 完整用法、性能调优 | [处理数据指南](../ProcessData_ZH.md) |
-| **数据分析** | 运行前用分析器了解数据分布 | [数据分析指南](../Analyze_ZH.md) |
+| **数据分析** | 运行前用分析器了解数据分布 | [数据分析指南](../AnalyzeData_ZH.md) |
 | **算子库** | 浏览 200+ 算子，覆盖文本/图像/音频/视频 | [算子总览](../Operators.md) |
 | **可视化调优** | 拖动滑块调整过滤阈值，即时预览效果 | [Web Playground](../Playground_ZH.md) |
 | **分布式处理** | 使用 Ray 扩展到多机集群 | [分布式处理](../Distributed_ZH.md) |

@@ -56,5 +56,5 @@ streamlit run app.py
 
 ## 下一步
 
-- 想了解分析器的命令行用法？参见[数据分析指南](Analyze_ZH.md)
+- 想了解分析器的命令行用法？参见[数据分析指南](AnalyzeData_ZH.md)
 - 确认阈值后批量运行？参见[快速上手 §4](tutorial/QuickStart_ZH.md#4-运行流水线)
