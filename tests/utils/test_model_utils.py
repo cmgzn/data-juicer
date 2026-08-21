@@ -695,6 +695,21 @@ class ModelUtilsTest(DataJuicerTestCaseBase):
 class DashScopeOpenAICompatTest(DataJuicerTestCaseBase):
     """Env merge + model remap for DashScope OpenAI-compatible REST."""
 
+    def test_no_api_key_uses_placeholder(self):
+        from data_juicer.utils.model_utils import ChatAPIModel
+
+        env_overrides = {
+            "OPENAI_API_KEY": "",
+            "DASHSCOPE_API_KEY": "",
+            "SK": "",
+        }
+        with patch.dict(os.environ, env_overrides, clear=False):
+            model = ChatAPIModel(
+                model="local-model",
+                base_url="http://localhost:8000/v1",
+            )
+        self.assertEqual(model._client.api_key, "EMPTY")
+
     def test_merge_env_from_openai_and_dashscope_aliases(self):
         from data_juicer.utils.model_utils import _merge_openai_compatible_env_into_model_params
 

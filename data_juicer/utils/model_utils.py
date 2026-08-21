@@ -210,6 +210,7 @@ class ChatAPIModel:
         client_args = filter_arguments(openai.OpenAI, kwargs)
         if "base_url" not in client_args and os.environ.get("OPENAI_BASE_URL"):
             client_args["base_url"] = os.environ.get("OPENAI_BASE_URL").rstrip("/")
+        client_args.setdefault("api_key", os.environ.get("OPENAI_API_KEY") or "EMPTY")
         self._client = openai.OpenAI(**client_args)
         if self.model is None:
             logger.warning("No model specified. Using the first available model from the server.")
@@ -270,6 +271,7 @@ class EmbeddingAPIModel:
         client_args = filter_arguments(openai.OpenAI, kwargs)
         if "base_url" not in client_args and os.environ.get("OPENAI_BASE_URL"):
             client_args["base_url"] = os.environ.get("OPENAI_BASE_URL").rstrip("/")
+        client_args.setdefault("api_key", os.environ.get("OPENAI_API_KEY") or "EMPTY")
         self._client = openai.OpenAI(**client_args)
         if self.model is None:
             logger.warning("No model specified. Using the first available model from the server.")
@@ -319,6 +321,7 @@ class ResponsesAPIModel:
         client_args = filter_arguments(openai.OpenAI, kwargs)
         if "base_url" not in client_args and os.environ.get("OPENAI_BASE_URL"):
             client_args["base_url"] = os.environ.get("OPENAI_BASE_URL").rstrip("/")
+        client_args.setdefault("api_key", os.environ.get("OPENAI_API_KEY") or "EMPTY")
         self._client = openai.OpenAI(**client_args)
         if self.model is None:
             logger.warning("No model specified. Using the first available model from the server.")
@@ -364,8 +367,7 @@ def _merge_openai_compatible_env_into_model_params(model_params):
     out = dict(model_params) if model_params else {}
     if not out.get("api_key"):
         key = os.environ.get("OPENAI_API_KEY") or os.environ.get("DASHSCOPE_API_KEY") or os.environ.get("SK")
-        if key:
-            out["api_key"] = key
+        out["api_key"] = key or "EMPTY"
     if not out.get("base_url"):
         base = (
             os.environ.get("OPENAI_BASE_URL")
