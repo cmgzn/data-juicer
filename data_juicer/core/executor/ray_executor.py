@@ -48,7 +48,7 @@ class RayExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin):
 
     Run Data-Juicer data processing in a distributed cluster.
 
-        1. Support Filter, Mapper and Exact Deduplicator operators for now.
+        1. Only supports operators with _supported_exec_modes containing 'ray'.
         2. Only support loading `.json` files.
         3. Advanced functions, such as checkpoint, are not supported.
 
