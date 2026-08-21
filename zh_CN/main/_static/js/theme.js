@@ -167,11 +167,17 @@
 
     // Expand current page's ancestor path
     var current = window.location.pathname;
+    var matched = false;
     nav.querySelectorAll('a').forEach(function(link) {
       var href = link.getAttribute('href');
-      if (href && (current.endsWith(href) || current.includes(href.replace('.html', '')))) {
+      if (!href) return;
+      var hrefPath = href.replace('.html', '').replace(/\/index$/, '/');
+      if (current.endsWith(href) || current.includes(hrefPath)) {
         var li = link.closest('li');
-        if (li) li.classList.add('current');
+        if (li && !matched) {
+          li.classList.add('current');
+          matched = true;
+        }
         // Expand all ancestors
         var parent = li;
         while (parent) {

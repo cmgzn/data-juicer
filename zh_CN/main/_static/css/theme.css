@@ -665,8 +665,9 @@ a:hover {
   margin: 1.5rem 0;
   font-size: 0.875rem;
   border-radius: var(--radius-md);
-  overflow: hidden;
   border: 1px solid var(--border);
+  display: block;
+  overflow-x: auto;
 }
 
 .article th {
