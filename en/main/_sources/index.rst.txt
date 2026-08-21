@@ -8,9 +8,6 @@
 
    docs/tutorial/Installation
    docs/tutorial/QuickStart
-   docs/concepts/recipes
-   docs/concepts/operators
-   docs/concepts/executor
    docs/tutorial/DJ-Cookbook
 
 .. toctree::
@@ -19,7 +16,7 @@
    :hidden:
 
    docs/ProcessData
-   docs/Analyze
+   docs/AnalyzeData
    docs/Playground
    docs/DatasetCfg
    docs/Export

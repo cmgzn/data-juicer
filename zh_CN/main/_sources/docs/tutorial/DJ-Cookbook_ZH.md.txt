@@ -8,9 +8,9 @@
 - 基础
   - [DJ概览](https://github.com/datajuicer/data-juicer/blob/main/README_ZH.md)
   - [快速上手](QuickStart_ZH.md)
-  - [数据菜谱](../concepts/recipes_ZH.md)
-  - [算子](../concepts/operators_ZH.md)
-  - [执行引擎](../concepts/executor_ZH.md)
+  - [处理数据](../ProcessData_ZH.md)
+  - [算子提要](../Operators.md)
+  - [分布式处理](../Distributed_ZH.md)
   - [配置](https://datajuicer.github.io/data-juicer-hub/zh_CN/main/docs/RecipeGallery_ZH.html)
   - [数据集配置](../DatasetCfg_ZH.md)
   - [数据格式转换](../../tools/fmt_conversion/README_ZH.md)

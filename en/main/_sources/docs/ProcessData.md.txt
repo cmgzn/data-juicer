@@ -15,7 +15,7 @@ This guide covers running data processing pipelines with Data-Juicer—both CLI 
 dj-process --config my-recipe.yaml
 ```
 
-Data-Juicer reads the [recipe](concepts/recipes.md), executes operators in the listed order, and writes results to `export_path`.
+Data-Juicer reads the recipe, executes operators in the listed order, and writes results to `export_path`.
 
 ### Command-Line Overrides
 
@@ -213,7 +213,7 @@ Writes before/after comparisons per operator. See [Tracing](Tracing.md).
 
 ## Next Steps
 
-- [Data Analysis](Analyze.md)—understand your data distribution before processing
+- [Data Analysis](AnalyzeData.md)—understand your data distribution before processing
 - [Dataset Configuration](DatasetCfg.md)—input formats, mixing, remote datasets
 - [Global Configuration Reference](GlobalConfig.md)—full parameter list
 - [Distributed Processing](Distributed.md)—scale to Ray clusters

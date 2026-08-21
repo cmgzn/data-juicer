@@ -97,15 +97,12 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/Installation_ZH.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/QuickStart_ZH.html">快速上手</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts/recipes_ZH.html">数据菜谱（Recipes）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts/operators_ZH.html">算子（Operators）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts/executor_ZH.html">执行引擎（Executor）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/DJ-Cookbook_ZH.html">DJ-Cookbook</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">使用指南</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">处理数据</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Analyze_ZH.html">数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AnalyzeData_ZH.html">数据分析</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Playground_ZH.html">Web Playground</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DatasetCfg_ZH.html">数据集配置</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Export_ZH.html">数据集导出</a></li>
@@ -433,7 +430,7 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dj-process<span class="w"> </span>--config<span class="w"> </span>my-recipe.yaml
 </pre></div>
 </div>
-<p>Data-Juicer 读取<a class="reference internal" href="concepts/recipes_ZH.html"><span class="std std-doc">菜谱</span></a>文件，按 <code class="docutils literal notranslate"><span class="pre">process</span></code> 列表的顺序依次执行算子，将结果写入 <code class="docutils literal notranslate"><span class="pre">export_path</span></code>。</p>
+<p>Data-Juicer 读取菜谱文件，按 <code class="docutils literal notranslate"><span class="pre">process</span></code> 列表的顺序依次执行算子，将结果写入 <code class="docutils literal notranslate"><span class="pre">export_path</span></code>。</p>
 </section>
 <section id="id3">
 <h3>命令行覆盖<a class="headerlink" href="#id3" title="链接到此标题。">¶</a></h3>
@@ -619,7 +616,7 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
 <section id="id15">
 <h2>下一步<a class="headerlink" href="#id15" title="链接到此标题。">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="Analyze_ZH.html"><span class="std std-doc">数据分析</span></a>——运行前先了解数据分布</p></li>
+<li><p><a class="reference internal" href="AnalyzeData_ZH.html"><span class="std std-doc">数据分析</span></a>——运行前先了解数据分布</p></li>
 <li><p><a class="reference internal" href="DatasetCfg_ZH.html"><span class="std std-doc">数据集配置</span></a>——输入格式、数据混合、远程数据集</p></li>
 <li><p><a class="reference internal" href="GlobalConfig_ZH.html"><span class="std std-doc">全局配置参数速查</span></a>——所有参数的完整列表</p></li>
 <li><p><a class="reference internal" href="Distributed_ZH.html"><span class="std std-doc">分布式处理</span></a>——使用 Ray 扩展到集群</p></li>
@@ -670,7 +667,7 @@ dj-process<span class="w"> </span>--config<span class="w"> </span>recipe.yaml<sp
           <span class="prev-next-label">Previous</span>
           <span class="prev-next-title">DJ-Cookbook</span>
         </a>
-        <a href="Analyze_ZH.html" class="prev-next-link next">
+        <a href="AnalyzeData_ZH.html" class="prev-next-link next">
           <span class="prev-next-label">Next</span>
           <span class="prev-next-title">数据分析</span>
         </a>
