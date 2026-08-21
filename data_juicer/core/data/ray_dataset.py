@@ -363,8 +363,16 @@ class RayDataset(DJDataset):
             elif isinstance(op, (Deduplicator, Pipeline)):
                 self.data = op.run(self.data)
             else:
-                logger.error("Ray executor only support Filter, Mapper, Deduplicator and Pipeline OPs for now")
-                raise NotImplementedError
+                logger.error(
+                    f"Operator '{op._name or type(op).__name__}' (type "
+                    f"'{type(op).__bases__[0].__name__}') does not support "
+                    f"Ray mode. Supported modes: {op._supported_exec_modes}"
+                )
+                raise NotImplementedError(
+                    f"Operator type '{type(op).__bases__[0].__name__}' does not "
+                    f"support executor mode 'ray'. "
+                    f"Supported modes: {op._supported_exec_modes}"
+                )
         except:  # noqa: E722
             logger.exception(f"An error occurred during Op [{op._name}].")
             raise
