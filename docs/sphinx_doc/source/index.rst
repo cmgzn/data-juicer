@@ -8,16 +8,10 @@
 
    docs/tutorial/Installation
    docs/tutorial/QuickStart
-   docs/tutorial/DJ-Cookbook
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Core Concepts
-   :hidden:
-
    docs/concepts/recipes
    docs/concepts/operators
    docs/concepts/executor
+   docs/tutorial/DJ-Cookbook
 
 .. toctree::
    :maxdepth: 2
