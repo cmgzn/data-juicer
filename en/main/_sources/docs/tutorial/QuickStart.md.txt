@@ -127,7 +127,7 @@ Chain-style single-operator calls are also supported:
 dataset = dataset.process([op1, op2])
 ```
 
-> For more on the programming interface, see the [Developer Guide](../DeveloperGuide.md).
+> For complete Python API usage, see the [Processing Data Guide](../ProcessData.md#python-api).
 
 ---
 
@@ -138,12 +138,11 @@ You have a working pipeline. Explore further based on your needs:
 | Topic | Description | Link |
 |-------|-------------|------|
 | **Processing Data** | Full CLI & Python API usage, performance tuning | [Processing Data Guide](../ProcessData.md) |
-| **Core Concepts** | Understand recipes, operators, and executor design | [Recipes](../concepts/recipes.md) · [Operators](../concepts/operators.md) · [Executor](../concepts/executor.md) |
-| **Operator Zoo** | Browse 200+ operators across text/image/audio/video | [Operators Overview](../Operators.md) |
 | **Data Analysis** | Profile dataset distributions before processing | [Analysis Guide](../Analyze.md) |
+| **Operator Zoo** | Browse 200+ operators across text/image/audio/video | [Operators Overview](../Operators.md) |
 | **Visual Tuning** | Drag sliders to tune filter thresholds interactively | [Web Playground](../Playground.md) |
 | **Distributed** | Scale to multi-node clusters with Ray | [Distributed Processing](../Distributed.md) |
 | **Sandbox** | Small-scale experiments with data-model co-optimization | [DJ-Sandbox](https://datajuicer.github.io/data-juicer-sandbox/en/main/index.html) |
 | **Export & Cache** | Control output format, speed up repeated runs | [Export](../Export.md) · [Cache](../Cache.md) |
-| **Developer Guide** | Write custom operators, contribute code | [Developer Guide](../DeveloperGuide.md) |
+| **Custom Operators** | Write your own operators and contribute code | [Developer Guide](../DeveloperGuide.md) |
 | **DJ-Cookbook** | Community recipes and tutorial resources | [DJ-Cookbook](DJ-Cookbook.md) |

@@ -127,7 +127,7 @@ executor.run()
 dataset = dataset.process([op1, op2])
 ```
 
-> 编程接口的更多用法请参见[开发者指南](../DeveloperGuide_ZH.md)。
+> 编程接口的完整用法请参见[处理数据指南](../ProcessData_ZH.md#python-api-方式)。
 
 ---
 
@@ -138,12 +138,11 @@ dataset = dataset.process([op1, op2])
 | 方向 | 说明 | 链接 |
 |------|------|------|
 | **处理数据** | CLI 与 Python API 完整用法、性能调优 | [处理数据指南](../ProcessData_ZH.md) |
-| **核心概念** | 理解菜谱、算子、执行引擎的设计 | [菜谱](../concepts/recipes_ZH.md) · [算子](../concepts/operators_ZH.md) · [执行引擎](../concepts/executor_ZH.md) |
-| **算子库** | 浏览 200+ 算子，覆盖文本/图像/音频/视频 | [算子总览](../Operators.md) |
 | **数据分析** | 运行前用分析器了解数据分布 | [数据分析指南](../Analyze_ZH.md) |
+| **算子库** | 浏览 200+ 算子，覆盖文本/图像/音频/视频 | [算子总览](../Operators.md) |
 | **可视化调优** | 拖动滑块调整过滤阈值，即时预览效果 | [Web Playground](../Playground_ZH.md) |
 | **分布式处理** | 使用 Ray 扩展到多机集群 | [分布式处理](../Distributed_ZH.md) |
 | **数据沙盒** | 小数据快速实验，数据-模型协同优化闭环 | [DJ-Sandbox](https://datajuicer.github.io/data-juicer-sandbox/zh_CN/main/index_ZH.html) |
 | **导出与缓存** | 控制输出格式、加速重复运行 | [导出](../Export_ZH.md) · [缓存](../Cache_ZH.md) |
-| **开发者指南** | 编写自定义算子、贡献代码 | [开发者指南](../DeveloperGuide_ZH.md) |
+| **自定义算子** | 编写自己的算子并贡献代码 | [开发者指南](../DeveloperGuide_ZH.md) |
 | **DJ-Cookbook** | 社区菜谱合集与教程资源 | [DJ-Cookbook](DJ-Cookbook_ZH.md) |
