@@ -64,7 +64,7 @@ process:
 
 Each entry under `process` is one operator, executed in listed order—the output of each becomes the input to the next. This recipe keeps only Chinese samples with high language confidence.
 
-> For full recipe syntax and design, see [Core Concepts: Recipes](../concepts/recipes.md). For the complete list of 200+ built-in operators, see [Operators](../Operators.md).
+> For full recipe syntax, see [Global Configuration Reference](../GlobalConfig.md). For the complete list of 200+ built-in operators, see [Operators](../Operators.md).
 
 ---
 
@@ -104,7 +104,7 @@ To understand your dataset's quality distribution before committing to a full ru
 dj-analyze --config demos/process_simple/process.yaml
 ```
 
-> For the full analyzer usage (auto mode, distributed analysis, custom metrics), see [Data Analysis Guide](../Analyze.md). For interactive threshold tuning with sliders, see [Web Playground](../Playground.md).
+> For the full analyzer usage (auto mode, distributed analysis, custom metrics), see [Data Analysis Guide](../AnalyzeData.md). For interactive threshold tuning with sliders, see [Web Playground](../Playground.md).
 
 ---
 
@@ -138,7 +138,7 @@ You have a working pipeline. Explore further based on your needs:
 | Topic | Description | Link |
 |-------|-------------|------|
 | **Processing Data** | Full CLI & Python API usage, performance tuning | [Processing Data Guide](../ProcessData.md) |
-| **Data Analysis** | Profile dataset distributions before processing | [Analysis Guide](../Analyze.md) |
+| **Data Analysis** | Profile dataset distributions before processing | [Analysis Guide](../AnalyzeData.md) |
 | **Operator Zoo** | Browse 200+ operators across text/image/audio/video | [Operators Overview](../Operators.md) |
 | **Visual Tuning** | Drag sliders to tune filter thresholds interactively | [Web Playground](../Playground.md) |
 | **Distributed** | Scale to multi-node clusters with Ray | [Distributed Processing](../Distributed.md) |

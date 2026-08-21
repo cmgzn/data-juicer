@@ -169,6 +169,6 @@ dj-process --dataset_path 0.5 path/to/dataset1.json 0.5 path/to/dataset2.json
 
 ## 下一步
 
-- [数据菜谱](concepts/recipes_ZH.md)——学习如何在菜谱中串联算子。
-- [算子](concepts/operators_ZH.md)——了解可用于数据的算子类型。
+- [处理数据](ProcessData_ZH.md)——学习如何运行流水线和串联算子。
+- [算子提要](Operators.md)——了解可用于数据的算子类型。
 - [导出指南](Export_ZH.md)——控制输出格式和路径。

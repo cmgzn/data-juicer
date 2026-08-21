@@ -10,9 +10,9 @@
 - Basics
   - [Overview of DJ](https://github.com/datajuicer/data-juicer/blob/main/README.md)
   - [Quick Start](QuickStart.md)
-  - [Recipes](../concepts/recipes.md)
-  - [Operators](../concepts/operators.md)
-  - [Executor](../concepts/executor.md)
+  - [Processing Data](../ProcessData.md)
+  - [Operator Schemas](../Operators.md)
+  - [Distributed Processing](../Distributed.md)
   - [Configuration](https://datajuicer.github.io/data-juicer-hub/en/main/docs/RecipeGallery.html)
   - [Dataset Configuration](../DatasetCfg.md)
   - [Data Format Conversion](../../tools/fmt_conversion/README.md)

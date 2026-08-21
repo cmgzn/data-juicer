@@ -8,9 +8,6 @@
 
    docs/tutorial/Installation_ZH
    docs/tutorial/QuickStart_ZH
-   docs/concepts/recipes_ZH
-   docs/concepts/operators_ZH
-   docs/concepts/executor_ZH
    docs/tutorial/DJ-Cookbook_ZH
 
 .. toctree::
@@ -19,7 +16,7 @@
    :hidden:
 
    docs/ProcessData_ZH
-   docs/Analyze_ZH
+   docs/AnalyzeData_ZH
    docs/Playground_ZH
    docs/DatasetCfg_ZH
    docs/Export_ZH
