@@ -102,5 +102,48 @@ class OverallAnalysisTest(DataJuicerTestCaseBase):
         self.assertTrue(os.path.exists(os.path.join(self.temp_output_path, 'overall.md')))
 
 
+class OverallAnalysisStringDtypeTest(DataJuicerTestCaseBase):
+    """Regression test: pandas 2.x StringDtype should not crash analyze()."""
+
+    def setUp(self):
+        super().setUp()
+        self.temp_output_path = 'tmp/test_overall_stringdtype/'
+
+    def tearDown(self):
+        if os.path.exists(self.temp_output_path):
+            os.system(f'rm -rf {self.temp_output_path}')
+        super().tearDown()
+
+    def test_stringdtype_column_no_crash(self):
+        df = pd.DataFrame({
+            Fields.stats: [
+                {'score': 0.8, 'lang': 'zh'},
+                {'score': 0.9, 'lang': 'en'},
+                {'score': 0.7, 'lang': 'fr'},
+            ]
+        })
+        # Force string column to use pandas 2.x StringDtype
+        dataset = NestedDataset.from_pandas(df)
+        flat = dataset.flatten().to_pandas()
+        flat[f'{Fields.stats}.lang'] = flat[
+            f'{Fields.stats}.lang'
+        ].astype('string')
+
+        # Reconstruct dataset with StringDtype column
+        dataset_with_stringdtype = NestedDataset.from_pandas(
+            flat.rename(columns={
+                f'{Fields.stats}.lang': f'{Fields.stats}.lang',
+                f'{Fields.stats}.score': f'{Fields.stats}.score',
+            })
+        )
+        overall_analysis = OverallAnalysis(
+            dataset_with_stringdtype, self.temp_output_path
+        )
+        # Before the fix this raised:
+        # TypeError: Cannot interpret '<StringDtype>' as a data type
+        res = overall_analysis.analyze()
+        self.assertIsInstance(res, pd.DataFrame)
+
+
 if __name__ == '__main__':
     unittest.main()

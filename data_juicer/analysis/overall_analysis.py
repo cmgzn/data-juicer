@@ -45,8 +45,11 @@ class OverallAnalysis:
         self.supported_object_types = {str, list}
 
     def refine_single_column(self, col):
+        if pd.api.types.is_string_dtype(col) and col.dtype != "object":
+            # pandas 2.x StringDtype: treat like object-dtype strings
+            return col
         if col.dtype != "object":
-            # not an object, return directly
+            # numeric or other non-object dtype, return directly
             return col
         # if the type of this column is object, we can decide the actual type
         # according to the first element.
