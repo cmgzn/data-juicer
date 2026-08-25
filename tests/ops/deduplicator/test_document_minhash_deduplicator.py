@@ -1055,3 +1055,37 @@ class DocumentMinhashDeduplicatorRepeatedCallTest(DataJuicerTestCaseBase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class DocumentMinhashDeduplicatorEmptyInputTest(DataJuicerTestCaseBase):
+    """Regression test for empty-token ValueError (GitHub issue).
+
+    When a sample's text produces zero tokens (e.g. empty string or text
+    shorter than window_size), compute_hash should not raise ValueError.
+    """
+
+    def test_empty_text_no_crash(self):
+        ds_list = [
+            {'text': ''},
+            {'text': 'hello world this is a normal sentence'},
+        ]
+        dataset = Dataset.from_list(ds_list)
+        op = DocumentMinhashDeduplicator()
+        # Before the fix this raised:
+        # ValueError: zero-size array to reduction operation minimum
+        # which has no identity
+        dataset = dataset.map(op.compute_hash)
+        self.assertEqual(len(dataset), 2)
+        # The empty-text sample should still have minhash key
+        self.assertIn(HashKeys.minhash, dataset[0])
+
+    def test_short_text_below_window_size(self):
+        ds_list = [
+            {'text': 'ab'},  # shorter than default window_size=5
+            {'text': 'a long enough sentence for minhash to work properly'},
+        ]
+        dataset = Dataset.from_list(ds_list)
+        op = DocumentMinhashDeduplicator(tokenization='character', window_size=5)
+        dataset = dataset.map(op.compute_hash)
+        self.assertEqual(len(dataset), 2)
+        self.assertIn(HashKeys.minhash, dataset[0])
