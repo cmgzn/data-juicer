@@ -87,6 +87,14 @@ for s in res_ds:
 ## 📰 News
 
 <details open>
+<summary>[2026-08-27] 🚀 <b>Juicer-35B-A3B: Natural-Language Data Refinement Model</b></summary>
+
+We release **Juicer-35B-A3B**, a data-refinement model built on Qwen3.6-35B-A3B (MoE: 35B total / 3B activated parameters). Juicer executes data cleaning, filtering, PII redaction, and semantic tagging from plain-text instructions—no code required.
+
+* 🤗 [HuggingFace](https://huggingface.co/datajuicer/Juicer-35B-A3B) | 🪄 [ModelScope](https://www.modelscope.cn/models/Data-Juicer/Juicer-35B-A3B) | 🎮 [Playground](https://github.com/datajuicer/data-juicer-hub/tree/main/juicer_playground) | 📖 [Documentation](docs/Juicer.md)
+</details>
+
+<details open>
 <summary>[2026-08-07] Release v1.5.5: <b>External OP Plugins; HDFS I/O & Ray Data Optimizations; Elastic Multi-node Sharding</b></summary>
 
 * 🧩 *External OP Plugins* — Third-party operators can now be shipped as standalone pip packages and auto-registered via Python entry points.

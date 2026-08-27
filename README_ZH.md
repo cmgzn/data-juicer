@@ -84,6 +84,15 @@ for s in res_ds:
 ---
 
 ## 📰 动态
+
+<details open>
+<summary>[2026-08-27] 🚀 <b>Juicer-35B-A3B：自然语言数据精炼模型</b></summary>
+
+我们发布了 **Juicer-35B-A3B**，基于 Qwen3.6-35B-A3B 的数据精炼模型（MoE 架构：35B 总参数 / 3B 激活）。Juicer 能根据自然语言指令执行数据清洗、过滤、PII 脱敏和语义标注——无需编写代码。
+
+* 🤗 [HuggingFace](https://huggingface.co/datajuicer/Juicer-35B-A3B) | 🪄 [ModelScope](https://www.modelscope.cn/models/Data-Juicer/Juicer-35B-A3B) | 🎮 [Playground](https://github.com/datajuicer/data-juicer-hub/tree/main/juicer_playground) | 📖 [文档](docs/Juicer_ZH.md)
+</details>
+
 <details open>
 <summary>[2026-08-07] Release v1.5.5: <b>外部算子插件；HDFS I/O 与 Ray Data 优化；多节点弹性分片</b></summary>
 
