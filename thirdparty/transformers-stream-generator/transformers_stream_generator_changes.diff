@@ -1,0 +1,16 @@
+diff --git a/transformers_stream_generator/main.py b/transformers_stream_generator/main.py
+--- a/transformers_stream_generator/main.py
++++ b/transformers_stream_generator/main.py
+@@ -4,11 +4,11 @@ from transformers import (
+     LogitsProcessorList,
+     StoppingCriteriaList,
+     DisjunctiveConstraint,
+-    BeamSearchScorer,
+     PhrasalConstraint,
+     ConstrainedBeamSearchScorer,
+     PreTrainedModel,
+ )
++from transformers.generation.beam_search import BeamSearchScorer
+ 
+ from transformers.generation.utils import (
+     GenerateOutput,

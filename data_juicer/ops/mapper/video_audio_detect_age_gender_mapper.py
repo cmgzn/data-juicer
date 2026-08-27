@@ -8,7 +8,7 @@ from ..base_op import OPERATORS, Mapper
 librosa = LazyLoader("librosa")
 
 NAME = "video_audio_detect_age_gender_mapper"
-CHECK_PKGS = ["transformers", "transformers_stream_generator", "einops", "accelerate", "tiktoken"]
+CHECK_PKGS = ["transformers", "transformers-stream-generator @ git+https://github.com/LowinLi/transformers-stream-generator.git", "einops", "accelerate", "tiktoken"]
 
 
 @OPERATORS.register_module(NAME)

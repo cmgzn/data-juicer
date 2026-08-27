@@ -39,16 +39,13 @@ nltk = LazyLoader("nltk")
 aes_pred = LazyLoader("aesthetics_predictor", "simple-aesthetics-predictor")
 vllm = LazyLoader("vllm")
 diffusers = LazyLoader("diffusers")
-ram = LazyLoader("ram", "git+https://github.com/datajuicer/recognize-anything.git")
+ram = LazyLoader("ram", "git+https://github.com/xinyu1205/recognize-anything.git")
 cv2 = LazyLoader("cv2", "opencv-contrib-python")
 openai = LazyLoader("openai")
 ultralytics = LazyLoader("ultralytics")
 tiktoken = LazyLoader("tiktoken")
 dashscope = LazyLoader("dashscope")
 qwen_vl_utils = LazyLoader("qwen_vl_utils", "qwen-vl-utils")
-transformers_stream_generator = LazyLoader(
-    "transformers_stream_generator", "git+https://github.com/datajuicer/transformers-stream-generator.git"
-)
 
 MODEL_ZOO = {}
 

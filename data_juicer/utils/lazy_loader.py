@@ -1,5 +1,8 @@
 """A LazyLoader class for on-demand module loading with uv integration."""
 
+import glob
+import os
+
 import importlib
 import importlib.resources
 import inspect
@@ -278,6 +281,41 @@ class LazyLoader(types.ModuleType):
         #              ''.join(traceback.format_list(stack)))
 
         super(LazyLoader, self).__init__(module_name)
+    @classmethod
+    def _get_thirdparty_dir(cls):
+        """Get the path to the thirdparty/ directory in the project."""
+        try:
+            with importlib.resources.path("data_juicer", "__init__.py") as init_path:
+                return init_path.parent.parent / "thirdparty"
+        except (ImportError, FileNotFoundError):
+            return None
+
+    @classmethod
+    def _apply_patches(cls, repo_dir, repo_url):
+        """Apply patches from thirdparty/<repo_name>/ to a cloned repository."""
+        repo_name = repo_url.rstrip("/").split("/")[-1].replace(".git", "")
+        thirdparty_dir = cls._get_thirdparty_dir()
+        if thirdparty_dir is None:
+            return
+        patch_dir = thirdparty_dir / repo_name
+        if not patch_dir.is_dir():
+            return
+        diff_files = sorted(glob.glob(str(patch_dir / "*.diff")))
+        if not diff_files:
+            return
+        for diff_file in diff_files:
+            logger.info(f"Applying patch {os.path.basename(diff_file)} to {repo_name}...")
+            try:
+                subprocess.check_call(
+                    ["git", "apply", "--whitespace=nowarn", diff_file],
+                    cwd=repo_dir,
+                )
+            except subprocess.CalledProcessError as e:
+                logger.warning(
+                    f"Failed to apply patch {diff_file}: {e}. "
+                    f"The patch may be outdated or incompatible with the current upstream version."
+                )
+
 
     @classmethod
     def _install_package(cls, package_spec, pip_args=None):
@@ -294,7 +332,6 @@ class LazyLoader(types.ModuleType):
 
         # For GitHub repositories, clone only to get dependencies
         if package_spec.startswith(("git+", "https://github.com/")):
-            import os
             import shutil
             import tempfile
 
@@ -310,6 +347,7 @@ class LazyLoader(types.ModuleType):
                 else:
                     repo_url = package_spec
                 git.Repo.clone_from(repo_url, temp_dir)
+                cls._apply_patches(temp_dir, repo_url)
 
                 # Define all possible dependency files
                 dep_files = {

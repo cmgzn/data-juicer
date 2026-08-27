@@ -1,0 +1,26 @@
+diff --git a/setup.py b/setup.py
+index a4f49f9..494f917 100644
+--- a/setup.py
++++ b/setup.py
+@@ -1,2 +1,6 @@
+ import setuptools
+-setuptools.setup()
++
++with open("requirements.txt", "r", encoding="utf-8") as fh:
++    requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
++
++setuptools.setup(install_requires=requirements)
+diff --git a/ram/models/bert.py b/ram/models/bert.py
+index cb90b79..5f6d383 100644
+--- a/ram/models/bert.py
++++ b/ram/models/bert.py
+@@ -38,6 +38,9 @@ from transformers.modeling_outputs import (
+ )
+ from transformers.modeling_utils import (
+     PreTrainedModel,
++)
++
++from transformers.pytorch_utils import (
+     apply_chunking_to_forward,
+     find_pruneable_heads_and_indices,
+     prune_linear_layer,
