@@ -19,6 +19,7 @@ from data_juicer.utils.ray_cluster_utils import (
     ClusterTopology,
     detect_cluster_topology,
 )
+from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 
 MULTINODE_NODES = [
     {"Alive": True, "NodeID": "n1"},
@@ -116,8 +117,8 @@ def _fake_executor(**attrs):
     fake.max_concurrent_partitions = "auto"
     fake.num_partitions = 4
     fake.partition_mode = "auto"
-    fake.partition_size = 5000
-    fake.max_size_mb = 64
+    fake.partition_size_cfg = None
+    fake._partition_count_from_size = PartitionedRayExecutor._partition_count_from_size
     fake._partitions_per_node_cfg = "auto"
     for key, value in attrs.items():
         setattr(fake, key, value)
@@ -128,7 +129,7 @@ def _gpu_op(num_gpus):
     return SimpleNamespace(num_gpus=num_gpus, _name="gpu_op")
 
 
-class SentinelParsingTest(unittest.TestCase):
+class SentinelParsingTest(DataJuicerTestCaseBase):
     def _configure(self, partition_cfg):
         fake = _fake_executor()
         fake.cfg = SimpleNamespace(partition=partition_cfg)
@@ -152,6 +153,24 @@ class SentinelParsingTest(unittest.TestCase):
         fake = self._configure({"mode": "manual", "num_of_partitions": 16})
         self.assertEqual(fake.partition_mode, "manual")
         self.assertEqual(fake.num_partitions, 16)
+
+    def test_sample_target_is_recorded(self):
+        fake = self._configure({"mode": "manual", "size": 500})
+        self.assertEqual(fake.partition_size_cfg, 500)
+
+
+class PartitionSizeCountTest(DataJuicerTestCaseBase):
+    def test_count_uses_nearest_target(self):
+        self.assertEqual(PartitionedRayExecutor._partition_count_from_size(list(range(1001)), 500), 2)
+        self.assertEqual(PartitionedRayExecutor._partition_count_from_size(list(range(1499)), 500), 3)
+
+    def test_ray_style_count_method(self):
+        dataset = SimpleNamespace(count=lambda: 1001)
+        self.assertEqual(PartitionedRayExecutor._partition_count_from_size(dataset, 500), 2)
+
+    def test_unknown_dataset_size_is_rejected(self):
+        with self.assertRaises(RuntimeError):
+            PartitionedRayExecutor._partition_count_from_size(object(), 500)
 
 
 class ClusterPartitionBoundsTest(unittest.TestCase):
@@ -288,8 +307,41 @@ class PartitionsPerNodeTest(unittest.TestCase):
         self.assertEqual(value, 16)
 
 
-class OptimizerFallbackTest(unittest.TestCase):
-    """Cluster bounds must still apply when the optimizer fails."""
+class OptimizerFallbackTest(DataJuicerTestCaseBase):
+    """Cluster bounds and sample-count fallback apply when optimization fails."""
+
+    def test_partition_size_used_when_optimizer_raises(self):
+        fake = _fake_executor(partition_size_cfg=500)
+        fake._apply_cluster_partition_bounds = lambda ops: None
+        dataset = SimpleNamespace(count=lambda: 1001)
+        with patch(
+            "data_juicer.core.executor.partition_size_optimizer.auto_configure_resources",
+            side_effect=RuntimeError("optimizer unavailable"),
+        ):
+            PartitionedRayExecutor._configure_auto_partitioning(fake, dataset, [])
+        self.assertEqual(fake.num_partitions, 2)
+
+    def test_invalid_recommendation_uses_partition_size(self):
+        fake = _fake_executor(partition_size_cfg=500)
+        fake._apply_cluster_partition_bounds = lambda ops: None
+        dataset = SimpleNamespace(count=lambda: 1001)
+        recommendations = {"recommended_partition_size": 0, "recommended_worker_count": 4}
+        with patch(
+            "data_juicer.core.executor.partition_size_optimizer.auto_configure_resources",
+            return_value=recommendations,
+        ):
+            PartitionedRayExecutor._configure_auto_partitioning(fake, dataset, [])
+        self.assertEqual(fake.num_partitions, 2)
+
+    def test_unavailable_dataset_size_keeps_configured_count(self):
+        fake = _fake_executor(partition_size_cfg=500)
+        fake._apply_cluster_partition_bounds = lambda ops: None
+        with patch(
+            "data_juicer.core.executor.partition_size_optimizer.auto_configure_resources",
+            side_effect=RuntimeError("optimizer unavailable"),
+        ):
+            PartitionedRayExecutor._configure_auto_partitioning(fake, object(), [])
+        self.assertEqual(fake.num_partitions, 4)
 
     def _bound_fake(self, **attrs):
         fake = _fake_executor(**attrs)
