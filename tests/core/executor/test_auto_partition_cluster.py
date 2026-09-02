@@ -160,13 +160,26 @@ class SentinelParsingTest(DataJuicerTestCaseBase):
 
 
 class PartitionSizeCountTest(DataJuicerTestCaseBase):
+    def test_empty_dataset_uses_one_partition(self):
+        self.assertEqual(PartitionedRayExecutor._partition_count_from_size([], 500), 1)
+
     def test_count_uses_nearest_target(self):
         self.assertEqual(PartitionedRayExecutor._partition_count_from_size(list(range(1001)), 500), 2)
         self.assertEqual(PartitionedRayExecutor._partition_count_from_size(list(range(1499)), 500), 3)
+        self.assertEqual(PartitionedRayExecutor._partition_count_from_size(list(range(14)), 10), 1)
+        self.assertEqual(PartitionedRayExecutor._partition_count_from_size(list(range(15)), 10), 2)
 
     def test_ray_style_count_method(self):
         dataset = SimpleNamespace(count=lambda: 1001)
         self.assertEqual(PartitionedRayExecutor._partition_count_from_size(dataset, 500), 2)
+
+    def test_large_count_uses_exact_half_up_rounding(self):
+        total_samples = 2**53 + 1
+        dataset = SimpleNamespace(count=lambda: total_samples)
+        self.assertEqual(
+            PartitionedRayExecutor._partition_count_from_size(dataset, 2),
+            2**52 + 1,
+        )
 
     def test_unknown_dataset_size_is_rejected(self):
         with self.assertRaises(RuntimeError):
@@ -398,24 +411,36 @@ class SampleBasedSplitTest(DataJuicerTestCaseBase):
         fake._save_partitioning_info = lambda info: None
         return fake
 
-    def test_single_block_uses_split_at_indices(self):
-        """A single-block dataset with partition.size must use row-based
-        boundaries so all partitions get rows."""
+    def test_manual_size_uses_target_boundaries_without_recount(self):
         data = MagicMock()
-        data.count.return_value = 1000
-        data.split_at_indices.return_value = [MagicMock() for _ in range(10)]
+        data.split_at_indices.return_value = [MagicMock() for _ in range(3)]
         for p in data.split_at_indices.return_value:
-            p.count.return_value = 100
+            p.count.return_value = 2
             p.take.return_value = [{"x": 1}]
 
         dataset = SimpleNamespace(data=data)
-        fake = self._make_executor(partition_size_cfg=100, num_partitions=10)
+        fake = self._make_executor(partition_size_cfg=2, num_partitions=3)
 
         PartitionedRayExecutor._split_dataset_deterministic(fake, dataset)
 
         data.split_at_indices.assert_called_once()
         indices = data.split_at_indices.call_args[0][0]
-        self.assertEqual(indices, [100, 200, 300, 400, 500, 600, 700, 800, 900])
+        self.assertEqual(indices, [2, 4])
+        data.count.assert_not_called()
+        data.split.assert_not_called()
+
+    def test_single_partition_materializes_without_split_indices(self):
+        data = MagicMock()
+        materialized = MagicMock()
+        data.materialize.return_value = materialized
+        dataset = SimpleNamespace(data=data)
+        fake = self._make_executor(partition_size_cfg=100, num_partitions=1)
+
+        partitions, _ = PartitionedRayExecutor._split_dataset_deterministic(fake, dataset)
+
+        self.assertEqual(partitions, [materialized])
+        data.materialize.assert_called_once_with()
+        data.split_at_indices.assert_not_called()
         data.split.assert_not_called()
 
     def test_count_based_uses_block_split(self):

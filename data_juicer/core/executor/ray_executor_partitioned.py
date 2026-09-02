@@ -404,6 +404,9 @@ class PartitionedRayExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin)
     @staticmethod
     def _partition_count_from_size(dataset, partition_size: int) -> int:
         """Derive the nearest partition count for a samples-per-partition target."""
+        if partition_size <= 0:
+            raise ValueError(f"partition_size must be positive, got {partition_size}")
+
         if hasattr(dataset, "count"):
             try:
                 total_samples = dataset.count()
@@ -419,6 +422,9 @@ class PartitionedRayExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin)
                 "Cannot determine dataset size for sample-based partitioning; "
                 "use partition.num_of_partitions instead."
             )
+        if isinstance(total_samples, int) and isinstance(partition_size, int):
+            quotient, remainder = divmod(total_samples, partition_size)
+            return max(1, quotient + int(2 * remainder >= partition_size))
         return max(1, int(total_samples / partition_size + 0.5))
 
     def _configure_auto_partitioning(self, dataset, ops):
@@ -702,6 +708,10 @@ class PartitionedRayExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin)
             self._resolve_max_concurrent_partitions(ops)
             self._configure_auto_partitioning(dataset, ops)
         elif self.partition_size_cfg is not None:
+            # split_at_indices() materializes the input too. Retaining that
+            # materialization here lets counting and splitting share one stable
+            # snapshot instead of executing the lazy input plan repeatedly.
+            dataset.data = dataset.data.materialize()
             self.num_partitions = self._partition_count_from_size(dataset, self.partition_size_cfg)
             logger.info(
                 f"Manual sample-based partitioning: {self.num_partitions} partitions "
@@ -1639,16 +1649,19 @@ class PartitionedRayExecutor(ExecutorBase, DAGExecutionMixin, EventLoggingMixin)
 
         logger.info(f"Splitting dataset into {self.num_partitions} partitions (deterministic mode)...")
         if self.partition_mode == "manual" and self.partition_size_cfg is not None:
-            # Manual sample-based partitioning: cut at row boundaries so each
-            # partition gets roughly partition_size_cfg rows, even when the
-            # dataset has fewer Ray blocks than requested partitions.
-            total_rows = dataset.data.count()
-            split_indices = [total_rows * i // self.num_partitions for i in range(1, self.num_partitions)]
-            partitions = dataset.data.split_at_indices(split_indices)
-            logger.info(
-                f"Created {len(partitions)} partitions via row-based splitting "
-                f"(target: {self.partition_size_cfg} samples each)"
-            )
+            if self.num_partitions == 1:
+                partitions = [dataset.data.materialize()]
+                logger.info("Created 1 materialized partition")
+            else:
+                # Use the configured sample target as each boundary. The final
+                # partition absorbs the remainder implied by nearest-count
+                # planning and is the only partition that can differ in size.
+                split_indices = [self.partition_size_cfg * i for i in range(1, self.num_partitions)]
+                partitions = dataset.data.split_at_indices(split_indices)
+                logger.info(
+                    f"Created {len(partitions)} partitions via row-based splitting "
+                    f"(target: {self.partition_size_cfg} samples each)"
+                )
         else:
             partitions = dataset.data.split(self.num_partitions)
             logger.info(f"Created {len(partitions)} partitions")

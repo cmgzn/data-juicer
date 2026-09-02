@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 import tempfile
@@ -45,13 +46,34 @@ class PartitionedRayExecutorTest(DataJuicerTestCaseBase):
         self.assertTrue(os.path.exists(cfg.export_path))
         self.assertEqual(executor.num_partitions, 2)
 
-        import json
-
         with open(os.path.join(cfg.checkpoint_dir, 'partitioning_info.json')) as f:
             partitioning_info = json.load(f)
         self.assertEqual(
             [partition['row_count'] for partition in partitioning_info['partitions']],
             [5, 6],
+        )
+
+    @TEST_TAG('ray')
+    def test_end2end_manual_size_with_single_partition(self):
+        """A sample target larger than most of the dataset creates one partition."""
+        cfg = init_configs([
+            '--config', os.path.join(self.root_path, 'demos/process_on_ray/configs/demo-new-config.yaml'),
+            '--partition.mode', 'manual',
+            '--partition.size', '10',
+            '--override_num_blocks', '1',
+        ])
+        cfg.export_path = os.path.join(self.tmp_dir, 'test_manual_size_single_partition', 'res.jsonl')
+        cfg.work_dir = os.path.join(self.tmp_dir, 'test_manual_size_single_partition')
+
+        executor = PartitionedRayExecutor(cfg)
+        executor.run()
+
+        self.assertEqual(executor.num_partitions, 1)
+        with open(os.path.join(cfg.checkpoint_dir, 'partitioning_info.json')) as f:
+            partitioning_info = json.load(f)
+        self.assertEqual(
+            [partition['row_count'] for partition in partitioning_info['partitions']],
+            [11],
         )
 
     @TEST_TAG('ray')

@@ -54,8 +54,10 @@ partition:
 
 Manual mode can instead derive the nearest partition count from a sample
 target. `size` and `num_of_partitions` are mutually exclusive in manual mode.
-Ray assigns existing blocks across the derived partitions, so the row count of
-an individual partition can differ from the target:
+The executor materializes the input once and splits it at row boundaries. Each
+partition contains `size` samples except for the final partition, which absorbs
+the remainder from nearest-count planning. If the derived count is one, the
+whole dataset is processed as one materialized partition:
 
 ```yaml
 partition:
