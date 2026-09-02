@@ -536,41 +536,5 @@ class CheckpointResumeIntegrationTest(DataJuicerTestCaseBase):
         self.assertGreater(len(checkpoint_files), 0)
 
 
-    @TEST_TAG('ray')
-    def test_manual_size_splits_single_block_evenly(self):
-        """Regression: partition.size with a coarse-block dataset must produce
-        non-empty partitions via row-based split_at_indices, not block-based
-        split which would leave most partitions empty."""
-        import ray
-
-        items = [{'text': f'row-{i}'} for i in range(100)]
-        ray_ds = ray.data.from_items(items, override_num_blocks=1)
-        self.assertEqual(ray_ds.num_blocks(), 1)
-
-        # Directly exercise the split logic: 100 rows / size 25 → 4 partitions.
-        total_rows = ray_ds.count()
-        num_partitions = max(1, int(total_rows / 25 + 0.5))
-        self.assertEqual(num_partitions, 4)
-
-        split_indices = [total_rows * i // num_partitions
-                         for i in range(1, num_partitions)]
-        partitions = ray_ds.split_at_indices(split_indices)
-
-        self.assertEqual(len(partitions), num_partitions)
-        actual_total = 0
-        for i, p in enumerate(partitions):
-            count = p.count()
-            self.assertGreater(count, 0, f'Partition {i} is empty')
-            actual_total += count
-        self.assertEqual(actual_total, 100)
-
-        # Contrast: block-based split on a single block yields empty partitions.
-        block_partitions = ray_ds.split(num_partitions)
-        non_empty = sum(1 for p in block_partitions if p.count() > 0)
-        self.assertLess(non_empty, num_partitions,
-                        'Single-block split should NOT fill all partitions — '
-                        'this is the bug that row-based splitting fixes')
-
-
 if __name__ == '__main__':
     unittest.main()

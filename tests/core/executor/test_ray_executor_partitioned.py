@@ -33,7 +33,8 @@ class PartitionedRayExecutorTest(DataJuicerTestCaseBase):
         cfg = init_configs([
             '--config', os.path.join(self.root_path, 'demos/process_on_ray/configs/demo-new-config.yaml'),
             '--partition.mode', 'manual',
-            '--partition.size', '5'
+            '--partition.size', '5',
+            '--override_num_blocks', '1',
         ])
         cfg.export_path = os.path.join(self.tmp_dir, 'test_end2end_execution_manual', 'res.jsonl')
         cfg.work_dir = os.path.join(self.tmp_dir, 'test_end2end_execution_manual')
@@ -50,7 +51,7 @@ class PartitionedRayExecutorTest(DataJuicerTestCaseBase):
             partitioning_info = json.load(f)
         self.assertEqual(
             [partition['row_count'] for partition in partitioning_info['partitions']],
-            [6, 5],
+            [5, 6],
         )
 
     @TEST_TAG('ray')
