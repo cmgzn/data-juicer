@@ -1213,6 +1213,33 @@ class PartitionTargetSizeConfigTest(DataJuicerTestCaseBase):
         deprecations = [warning for warning in caught if issubclass(warning.category, DeprecationWarning)]
         return cfg, deprecations
 
+    def _load_config_all_partition(self, extra_args=None):
+        """Load the reference partition stanza in an otherwise minimal config."""
+        config_all_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))),
+            'data_juicer',
+            'config',
+            'config_all.yaml',
+        )
+        with open(config_all_path) as f:
+            partition = yaml.safe_load(f)['partition']
+
+        config = {
+            'project_name': 'partition_config_all_test',
+            'dataset_path': test_yaml_path,
+            'export_path': os.path.join(tempfile.gettempdir(), 'partition_config_all_test.jsonl'),
+            'process': [],
+            'partition': partition,
+        }
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
+            yaml.safe_dump(config, f)
+            config_path = f.name
+        self.addCleanup(lambda: os.path.exists(config_path) and os.unlink(config_path))
+        return init_configs(
+            ['--config', config_path] + (extra_args or []),
+            load_configs_only=True,
+        )
+
     def test_default_and_explicit_target_size(self):
         self.assertEqual(self._load().partition.target_size_mb, 256)
         cfg = self._load(['--partition.target_size_mb', '64'])
@@ -1239,6 +1266,17 @@ class PartitionTargetSizeConfigTest(DataJuicerTestCaseBase):
         with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
             with self.assertRaises(SystemExit):
                 self._load(['--partition.size', '0'])
+
+    def test_config_all_allows_manual_size_cli_override(self):
+        default_cfg = self._load_config_all_partition()
+        self.assertEqual(default_cfg.partition.num_of_partitions, 4)
+
+        size_cfg = self._load_config_all_partition([
+            '--partition.mode', 'manual',
+            '--partition.size', '500',
+        ])
+        self.assertEqual(size_cfg.partition.size, 500)
+        self.assertIsNone(size_cfg.partition.num_of_partitions)
 
     def test_flat_partition_size_bridges_and_warns(self):
         for value in ('2000', '10000'):
