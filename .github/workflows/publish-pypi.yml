@@ -6,12 +6,12 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Publish PyPi Package
+name: Verify PyPI Action Without Publishing
 
 on:
+  push:
+    branches: [codex/verify-pypi-action-v1.14.2]
   workflow_dispatch:
-  release:
-    types: [published]
 
 permissions:
   contents: read
@@ -20,6 +20,7 @@ jobs:
   deploy:
 
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
     - uses: actions/checkout@v4
@@ -29,17 +30,66 @@ jobs:
         python-version: '3.10'
     - name: Install Hatch
       uses: pypa/hatch@install
+    - uses: astral-sh/setup-uv@v6
     - name: Build package
-      run: hatch build
+      run: uv run --no-project hatch build
     - name: Install Wheel and Run Tests
       run: |
-        python -m venv venv
+        uv run --no-project python -m venv venv
         source venv/bin/activate
         pip install dist/*.whl
-        python -c "import data_juicer; print(data_juicer.__version__)"
+        uv run --no-project python -c "import data_juicer; print(data_juicer.__version__)"
         dj-process --help
-    - name: Publish package
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+    - name: Inspect actual distribution metadata
+      run: |
+        uv run --no-project python - <<'PY'
+        import glob, tarfile, zipfile
+        from email.parser import BytesParser
+        for path in glob.glob('dist/*'):
+            if path.endswith('.whl'):
+                with zipfile.ZipFile(path) as archive:
+                    metadata = archive.read(next(n for n in archive.namelist() if n.endswith('.dist-info/METADATA')))
+            else:
+                with tarfile.open(path) as archive:
+                    metadata = archive.extractfile(next(m for m in archive.getmembers() if m.name.endswith('/PKG-INFO'))).read()
+            version = BytesParser().parsebytes(metadata)['Metadata-Version']
+            print(f'{path}: Metadata-Version {version}')
+            assert version == '2.5', version
+        PY
+    - name: Start temporary package server
+      run: |
+        mkdir -p /tmp/pypi-validation-packages
+        uv tool install pypiserver==2.4.0
+        pypi-server run -P . -a . --host 0.0.0.0 --port 8080 /tmp/pypi-validation-packages > /tmp/pypi-validation-server.log 2>&1 &
+        gateway=$(docker network inspect bridge --format '{{(index .IPAM.Config 0).Gateway}}')
+        echo "VALIDATION_INDEX_URL=http://${gateway}:8080/" >> "$GITHUB_ENV"
+        for attempt in $(seq 1 30); do
+          if curl --fail --silent http://127.0.0.1:8080/ > /dev/null; then exit 0; fi
+          sleep 1
+        done
+        cat /tmp/pypi-validation-server.log
+        exit 1
+    - name: Publish only to temporary runner-local server
+      uses: pypa/gh-action-pypi-publish@v1.14.2
       with:
         user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        password: pypi-local-validation-only # pragma: allowlist secret
+        repository-url: ${{ env.VALIDATION_INDEX_URL }}
+        attestations: false
+    - name: Verify uploaded artifacts match the build
+      run: |
+        uv run --no-project python - <<'PY'
+        from pathlib import Path
+        import hashlib
+        built = sorted(Path('dist').iterdir())
+        assert len(built) == 2, built
+        for path in built:
+            uploaded = Path('/tmp/pypi-validation-packages') / path.name
+            assert uploaded.is_file(), uploaded
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            assert digest == hashlib.sha256(uploaded.read_bytes()).hexdigest()
+            print(f'Uploaded and SHA256 verified: {path.name}: {digest}')
+        PY
+    - name: Show temporary package server log
+      if: always()
+      run: cat /tmp/pypi-validation-server.log 2>/dev/null || true
