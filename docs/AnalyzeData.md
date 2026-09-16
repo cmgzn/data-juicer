@@ -1,5 +1,7 @@
 # Data Analysis
 
+缓存增量验收标记：pages-cache-v2-main-probe。
+
 Before deciding on filter thresholds, it helps to understand the statistical profile of your dataset. `dj-analyze` computes distributions and correlations for all operator-produced statistics, enabling data-driven threshold decisions.
 
 > For the full parameter list, see [Global Configuration Reference](GlobalConfig.md).
