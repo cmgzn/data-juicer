@@ -20,10 +20,19 @@ on:
         description: "Full rebuild of all versions (refreshes theme on old tags, cleans orphan files)"
         type: boolean
         default: false
+      test_tag:
+        description: "额外构建的正式版本标签（同时构建 main，不能与 full 同用）"
+        type: string
+        default: ""
 
 jobs:
   pages:
     runs-on: ubuntu-latest
+    concurrency:
+      # 正式构建从恢复缓存到发布全程串行；PR 使用独立组。
+      group: ${{ github.repository }}-pages-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'publish' }}
+      cancel-in-progress: false
+      queue: max
     strategy:
       matrix:
         python-version: ["3.11"]
@@ -32,6 +41,11 @@ jobs:
       REPO_OWNER: ${{ github.repository_owner }}
       MIN_TAG: v1.4.0
       JUICER_API_URL: ${{ vars.JUICER_API_URL }}
+      TEST_TAG: ${{ inputs.test_tag || '' }}
+      SPHINX_CACHE_FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.full && '1' || '0' }}
+      SOURCE_REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}.git
+      PREVIOUS_DIR: ${{ github.workspace }}/pages-previous
+      PUBLISH_DIR: ${{ github.workspace }}/pages-publish
     steps:
       - name: Mount /mnt into workspace (writable)
         run: |
@@ -47,6 +61,45 @@ jobs:
         with:
           fetch-depth: 0
           path: repo
+      - name: Validate build selection
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          import re
+          import subprocess
+
+          test_tag = os.environ["TEST_TAG"]
+          full = os.environ["SPHINX_CACHE_FORCE"] == "1"
+          if full and test_tag:
+              raise SystemExit("test_tag 不能与 full 同时使用")
+          minimum = tuple(map(int, os.environ["MIN_TAG"][1:].split(".")))
+          pushed_tag = (
+              os.environ["GITHUB_REF"].removeprefix("refs/tags/")
+              if os.environ["GITHUB_EVENT_NAME"] == "push"
+              and os.environ["GITHUB_REF"].startswith("refs/tags/") else ""
+          )
+          for tag in filter(None, (test_tag, pushed_tag)):
+              if not re.fullmatch(r"v[0-9]+\.[0-9]+\.[0-9]+", tag):
+                  raise SystemExit("标签必须为正式三段数字版本 vX.Y.Z")
+              if tuple(map(int, tag[1:].split("."))) < minimum:
+                  raise SystemExit("标签低于 MIN_TAG")
+              subprocess.run(
+                  ["git", "show-ref", "--verify", "--quiet", f"refs/tags/{tag}"],
+                  check=True,
+              )
+              subprocess.run(
+                  ["git", "rev-parse", "--verify", f"refs/tags/{tag}^{{commit}}"],
+                  check=True, stdout=subprocess.DEVNULL,
+              )
+          selected = (
+              "preview" if os.environ["GITHUB_EVENT_NAME"] == "pull_request" else
+              "main + 所有不低于 MIN_TAG 的正式标签" if full else
+              f"main, {test_tag}" if test_tag else pushed_tag or "main"
+          )
+          print(f"选定版本: {selected}")
+          PY
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@master
         with:
@@ -63,13 +116,18 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
-          enable-cache: true
+          enable-cache: ${{ github.event_name != 'pull_request' }}
       - name: Fetch Data-Juicer Sphinx Theme
         working-directory: repo
         run: |
-          set -e
+          set -euo pipefail
           echo "Cloning sphinx theme..."
           git clone --depth=1 https://github.com/datajuicer/data-juicer-sphinx.git /tmp/template
+          # 模板跟随默认分支最新提交。记录实际提交，让缓存指纹随模板变化而失效。
+          template_sha="$(git -C /tmp/template rev-parse HEAD)"
+          [[ "$template_sha" =~ ^[0-9a-f]{40}$ ]]
+          echo "TEMPLATE_SHA=$template_sha" >> "$GITHUB_ENV"
+          printf 'Template SHA: %s\n' "$template_sha"
           # CPU packages provide the real model base classes used by autodoc.
           uv pip install --system torch==2.8.0 torchvision==0.23.0 \
             --index https://download.pytorch.org/whl/cpu
@@ -97,26 +155,89 @@ jobs:
           git fetch --all --tags
           git branch -a
           git tag
+      - name: Compute compatible Sphinx cache context
+        id: cache_context
+        if: ${{ github.event_name != 'pull_request' }}
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          # 仅输出指纹，不打印依赖来源或凭证；兼容上下文不绑定单个 ref。
+          frozen = subprocess.check_output(["uv", "pip", "freeze", "--system"], text=True)
+          dependencies = hashlib.sha256(
+              ("\n".join(sorted(frozen.splitlines())) + "\n").encode()
+          ).hexdigest()
+          context = {
+              "schema": "pages-cache-v2",
+              "os": os.environ["RUNNER_OS"],
+              "arch": os.environ["RUNNER_ARCH"],
+              "image": os.environ["ImageVersion"],
+              "python": sys.version,
+              "python_abi": sys.implementation.cache_tag,
+              "template": os.environ["TEMPLATE_SHA"],
+              "dependencies": dependencies,
+              "render": {key: os.environ.get(key, "") for key in (
+                  "REPO_OWNER", "PROJECT", "JUICER_API_URL", "HTML_TITLE", "MIN_TAG", "PYTHONPATH"
+              )},
+              "api": True,
+              "languages": ["en", "zh_CN"],
+          }
+          fingerprint = hashlib.sha256(
+              json.dumps(context, sort_keys=True, separators=(",", ":")).encode()
+          ).hexdigest()
+          prefix = f"pages-cache-v2-{context['os']}-{context['arch']}-{fingerprint}-"
+          key = f"{prefix}{os.environ['GITHUB_RUN_ID']}-{os.environ['GITHUB_RUN_ATTEMPT']}"
+          cache_dir = Path(os.environ["GITHUB_WORKSPACE"]).resolve() / ".cache" / "sphinx"
+          cache_dir.mkdir(parents=True, exist_ok=True)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              for name, value in {"prefix": prefix, "key": key, "path": cache_dir,
+                                  "fingerprint": fingerprint}.items():
+                  print(f"{name}={value}", file=output)
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as output:
+              print(f"SPHINX_CACHE_DIR={cache_dir}", file=output)
+              print(f"SPHINX_CACHE_CONTEXT={fingerprint}", file=output)
+          print(f"Template SHA: {context['template']}")
+          print(f"依赖指纹: {dependencies}")
+          print(f"缓存兼容指纹: {fingerprint}")
+          PY
+      - name: Restore Sphinx cache
+        if: ${{ github.event_name != 'pull_request' && env.SPHINX_CACHE_FORCE != '1' }}
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ steps.cache_context.outputs.path }}
+          key: ${{ steps.cache_context.outputs.key }}
+          # 只恢复完全相同的兼容上下文，不回退到跨模板或跨依赖缓存。
+          restore-keys: ${{ steps.cache_context.outputs.prefix }}
       - id: build
         name: Build Documentation
         working-directory: repo
         run: |
+          set -euo pipefail
           cd docs/sphinx_doc
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
             python build_versions.py --current preview
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full }}" = "true" ]; then
+          elif [ "$SPHINX_CACHE_FORCE" = "1" ]; then
             python build_versions.py --tags
-          elif [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-            python build_versions.py --branches --tags "${GITHUB_REF_NAME}"
+          elif [ -n "$TEST_TAG" ]; then
+            python build_versions.py --branches main --tags "$TEST_TAG"
+          elif [ "$GITHUB_EVENT_NAME" = "push" ] && [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            python build_versions.py --branches --tags "$GITHUB_REF_NAME"
           else
             python build_versions.py --branches main
           fi
-      - name: Generate versions.json
-        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-        working-directory: repo
-        run: |
-          cd docs/sphinx_doc
-          python build_versions.py --emit-versions-json
+          if [ "$GITHUB_EVENT_NAME" != "pull_request" ]; then
+            if ! grep -Eq '^cache_changed=(true|false)$' "$GITHUB_OUTPUT"; then
+              echo '::error::模板未提供有效的 cache_changed 输出'
+              exit 1
+            fi
+          fi
       - name: Redirect index.html
         working-directory: repo
         run: |
@@ -125,16 +246,78 @@ jobs:
           cp ./redirect.html build/index.html
           sed -i "s/\[REPOSITORY_OWNER\]/${REPOSITORY_OWNER}/g" build/index.html
           sed -i "s/\[PROJECT\]/${PROJECT}/g" build/index.html
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            # 预览产物只包含 preview，使用可离线打开的相对入口。
+            sed -i "s|https://${REPOSITORY_OWNER}.github.io/${PROJECT}/en/main/|en/preview/|g" build/index.html
+          fi
           cp build/index.html build/404.html
           df -h
+      - name: Read current Pages snapshot
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$PREVIOUS_DIR"
+          if [ "$SPHINX_CACHE_FORCE" != "1" ]; then
+            # 返回码 2 才表示分支不存在；网络故障或快照读取失败必须终止。
+            set +e
+            git ls-remote --exit-code --heads "$SOURCE_REPOSITORY_URL" refs/heads/gh-pages
+            status=$?
+            set -e
+            case "$status" in
+              0)
+                git clone --depth=1 --single-branch --branch gh-pages \
+                  "$SOURCE_REPOSITORY_URL" "$PREVIOUS_DIR"
+                ;;
+              2) echo '首次发布：使用空的历史站点目录' ;;
+              *) echo '::error::无法检查当前 gh-pages 快照'; exit "$status" ;;
+            esac
+          fi
+      - name: Assemble complete publication site
+        if: ${{ github.event_name != 'pull_request' }}
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          cd docs/sphinx_doc
+          # 模板从本次 build 和历史静态 HTML 组装，校验入口并生成实际版本列表。
+          python build_versions.py --assemble-site "$PREVIOUS_DIR" "$PUBLISH_DIR"
+      - name: Prepare preview artifact without caches
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/pages-preview"
+          rsync -a --exclude='.git' --exclude='.doctrees' \
+            --exclude='.buildinfo' --exclude='.sphinx-cache-state.json' \
+            "$GITHUB_WORKSPACE/repo/docs/sphinx_doc/build/" "$GITHUB_WORKSPACE/pages-preview/"
       - name: Upload Documentation
         uses: actions/upload-artifact@v4
         with:
           name: SphinxDoc
-          path: "repo/docs/sphinx_doc/build"
+          path: ${{ github.event_name == 'pull_request' && format('{0}/pages-preview', github.workspace) || env.PUBLISH_DIR }}
+      - name: Reject superseded source ref before publication
+        if: ${{ github.event_name != 'pull_request' }}
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          # 显式抓取事件 ref 并剥离 annotated tag，避免旧结果覆盖新提交。
+          git fetch --no-tags origin "$GITHUB_REF"
+          remote_commit="$(git rev-parse --verify 'FETCH_HEAD^{commit}')"
+          expected_commit="$(git rev-parse --verify "${GITHUB_SHA}^{commit}")"
+          if [ "$remote_commit" != "$expected_commit" ]; then
+            echo '::error::源 ref 已更新，拒绝发布过期构建'
+            exit 1
+          fi
       - uses: peaceiris/actions-gh-pages@v3
         if: ${{ (github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))) || github.event_name == 'workflow_dispatch' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: "repo/docs/sphinx_doc/build"
-          keep_files: ${{ !(github.event_name == 'workflow_dispatch' && inputs.full) }}
+          publish_dir: ${{ env.PUBLISH_DIR }}
+          # 普通提交发布：保留 gh-pages 历史以便回滚。keep_files: false 让
+          # peaceiris 先 git rm -r 清空再铺入本次组装好的完整站点，删除的
+          # 版本/页面不会残留；doctree 已在组装阶段排除，历史只累积干净 HTML。
+          keep_files: false
+      - name: Save changed Sphinx cache after successful publication
+        if: ${{ success() && github.event_name != 'pull_request' && steps.build.outputs.cache_changed == 'true' }}
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ steps.cache_context.outputs.path }}
+          key: ${{ steps.cache_context.outputs.key }}
