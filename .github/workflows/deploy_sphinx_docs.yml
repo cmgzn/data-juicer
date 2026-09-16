@@ -1,19 +1,7 @@
 name: Deploy Sphinx documentation to Pages
 
+# 隔离验收：仅手动触发，不改上游或 cmgzn 现有站点。
 on:
-  pull_request:
-    types: [opened, synchronize]
-    paths:
-      - "**/*.md"
-      - "docs/**"
-      - "data_juicer/**/*.py"
-      - "pyproject.toml"
-      - ".github/workflows/deploy_sphinx_docs.yml"
-  push:
-    branches:
-      - main
-    tags:
-      - "*"
   workflow_dispatch:
     inputs:
       full:
@@ -24,13 +12,20 @@ on:
         description: "额外构建的正式版本标签（同时构建 main，不能与 full 同用）"
         type: string
         default: ""
+      probe_hold_seconds:
+        description: "仅验收：发布保护前等待秒数（0 至 120）"
+        type: number
+        default: 0
+
+permissions:
+  contents: write
 
 jobs:
   pages:
     runs-on: ubuntu-latest
     concurrency:
       # 正式构建从恢复缓存到发布全程串行；PR 使用独立组。
-      group: ${{ github.repository }}-pages-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'publish' }}
+      group: ${{ github.repository }}-pages-final-20260916-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'publish' }}
       cancel-in-progress: false
       queue: max
     strategy:
@@ -39,7 +34,8 @@ jobs:
     env:
       PROJECT: ${{ github.event.repository.name }}
       REPO_OWNER: ${{ github.repository_owner }}
-      MIN_TAG: v1.4.0
+      MIN_TAG: v999.0.0
+      PROBE_HOLD_SECONDS: ${{ inputs.probe_hold_seconds || 0 }}
       JUICER_API_URL: ${{ vars.JUICER_API_URL }}
       TEST_TAG: ${{ inputs.test_tag || '' }}
       SPHINX_CACHE_FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.full && '1' || '0' }}
@@ -61,6 +57,17 @@ jobs:
         with:
           fetch-depth: 0
           path: repo
+      - name: Bind isolated source and historical fixture
+        working-directory: repo
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = cmgzn/data-juicer
+          test "$GITHUB_REF" = refs/heads/test/pages-final-20260916
+          # 仅修改本次 runner 的本地引用，不改远端 main 或 tags。
+          git update-ref refs/heads/main "$GITHUB_SHA"
+          git tag v999.0.0 "$(git rev-parse 'v1.5.5^{commit}')"
+          printf '测试源码 main: %s\n' "$(git rev-parse main)"
+          printf '历史版本夹具: %s\n' "$(git rev-parse v999.0.0)"
       - name: Validate build selection
         working-directory: repo
         run: |
@@ -122,7 +129,8 @@ jobs:
         run: |
           set -euo pipefail
           echo "Cloning sphinx theme..."
-          git clone --depth=1 https://github.com/datajuicer/data-juicer-sphinx.git /tmp/template
+          git clone --depth=1 --single-branch --branch test/pages-final-20260916 https://github.com/cmgzn/data-juicer-sphinx.git /tmp/template
+          test "$(git -C /tmp/template rev-parse HEAD)" = 0063988f301ae3a362568f2298c3e14d3bc9a119
           # 模板跟随默认分支最新提交。记录实际提交，让缓存指纹随模板变化而失效。
           template_sha="$(git -C /tmp/template rev-parse HEAD)"
           [[ "$template_sha" =~ ^[0-9a-f]{40}$ ]]
@@ -175,7 +183,7 @@ jobs:
               ("\n".join(sorted(frozen.splitlines())) + "\n").encode()
           ).hexdigest()
           context = {
-              "schema": "pages-cache-v2",
+              "schema": "pages-final-20260916",
               "os": os.environ["RUNNER_OS"],
               "arch": os.environ["RUNNER_ARCH"],
               "image": os.environ["ImageVersion"],
@@ -192,7 +200,7 @@ jobs:
           fingerprint = hashlib.sha256(
               json.dumps(context, sort_keys=True, separators=(",", ":")).encode()
           ).hexdigest()
-          prefix = f"pages-cache-v2-{context['os']}-{context['arch']}-{fingerprint}-"
+          prefix = f"pages-final-20260916-{context['os']}-{context['arch']}-{fingerprint}-"
           key = f"{prefix}{os.environ['GITHUB_RUN_ID']}-{os.environ['GITHUB_RUN_ATTEMPT']}"
           cache_dir = Path(os.environ["GITHUB_WORKSPACE"]).resolve() / ".cache" / "sphinx"
           cache_dir.mkdir(parents=True, exist_ok=True)
@@ -260,12 +268,12 @@ jobs:
           if [ "$SPHINX_CACHE_FORCE" != "1" ]; then
             # 返回码 2 才表示分支不存在；网络故障或快照读取失败必须终止。
             set +e
-            git ls-remote --exit-code --heads "$SOURCE_REPOSITORY_URL" refs/heads/gh-pages
+            git ls-remote --exit-code --heads "$SOURCE_REPOSITORY_URL" refs/heads/test/pages-site-20260916
             status=$?
             set -e
             case "$status" in
               0)
-                git clone --depth=1 --single-branch --branch gh-pages \
+                git clone --depth=1 --single-branch --branch test/pages-site-20260916 \
                   "$SOURCE_REPOSITORY_URL" "$PREVIOUS_DIR"
                 ;;
               2) echo '首次发布：使用空的历史站点目录' ;;
@@ -288,11 +296,23 @@ jobs:
           rsync -a --exclude='.git' --exclude='.doctrees' \
             --exclude='.buildinfo' --exclude='.sphinx-cache-state.json' \
             "$GITHUB_WORKSPACE/repo/docs/sphinx_doc/build/" "$GITHUB_WORKSPACE/pages-preview/"
+      - name: Verify isolated publication invariants
+        run: python "$GITHUB_WORKSPACE/repo/.github/scripts/pages_final_assert.py"
       - name: Upload Documentation
         uses: actions/upload-artifact@v4
         with:
           name: SphinxDoc
           path: ${{ github.event_name == 'pull_request' && format('{0}/pages-preview', github.workspace) || env.PUBLISH_DIR }}
+      - name: Hold for stale-ref acceptance probe
+        run: |
+          python - <<'PY'
+          import os
+          import time
+          seconds = int(os.environ['PROBE_HOLD_SECONDS'])
+          assert 0 <= seconds <= 120
+          print(f'验收等待 {seconds} 秒', flush=True)
+          time.sleep(seconds)
+          PY
       - name: Reject superseded source ref before publication
         if: ${{ github.event_name != 'pull_request' }}
         working-directory: repo
@@ -311,6 +331,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ env.PUBLISH_DIR }}
+          publish_branch: test/pages-site-20260916
           # 普通提交发布：保留 gh-pages 历史以便回滚。keep_files: false 让
           # peaceiris 先 git rm -r 清空再铺入本次组装好的完整站点，删除的
           # 版本/页面不会残留；doctree 已在组装阶段排除，历史只累积干净 HTML。
