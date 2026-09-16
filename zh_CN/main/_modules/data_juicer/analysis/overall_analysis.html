@@ -73,6 +73,7 @@
           </button>
           <div class="dropdown-panel">
             <a href="../../../../main/_modules/data_juicer/analysis/overall_analysis.html" class="dropdown-item active">main</a>
+            <a href="../../../../v999.0.0/_modules/data_juicer/analysis/overall_analysis.html" class="dropdown-item">v999.0.0</a>
           </div>
         </div>
 
@@ -469,13 +470,13 @@
 
 
 <div class="viewcode-block" id="OverallAnalysis">
-<a class="viewcode-back" href="../../../api/data_juicer.analysis.overall_analysis.html#data_juicer.analysis.OverallAnalysis">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.analysis.overall_analysis.html#data_juicer.analysis.overall_analysis.OverallAnalysis">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">OverallAnalysis</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Apply analysis on the overall stats, including mean, std, quantiles,</span>
 <span class="sd">    etc."""</span>
 
 <div class="viewcode-block" id="OverallAnalysis.__init__">
-<a class="viewcode-back" href="../../../api/data_juicer.analysis.overall_analysis.html#data_juicer.analysis.OverallAnalysis.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.analysis.overall_analysis.html#data_juicer.analysis.overall_analysis.OverallAnalysis.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">output_path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialization method.</span>
@@ -505,7 +506,7 @@
 
 
 <div class="viewcode-block" id="OverallAnalysis.refine_single_column">
-<a class="viewcode-back" href="../../../api/data_juicer.analysis.overall_analysis.html#data_juicer.analysis.OverallAnalysis.refine_single_column">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.analysis.overall_analysis.html#data_juicer.analysis.overall_analysis.OverallAnalysis.refine_single_column">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">refine_single_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s2">"object"</span><span class="p">:</span>
             <span class="c1"># not an object, return directly</span>
@@ -530,7 +531,7 @@
 
 
 <div class="viewcode-block" id="OverallAnalysis.analyze">
-<a class="viewcode-back" href="../../../api/data_juicer.analysis.overall_analysis.html#data_juicer.analysis.OverallAnalysis.analyze">[文档]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.analysis.overall_analysis.html#data_juicer.analysis.overall_analysis.OverallAnalysis.analyze">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percentiles</span><span class="o">=</span><span class="p">[],</span> <span class="n">num_proc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">skip_export</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Apply overall analysis on the whole dataset based on the describe</span>

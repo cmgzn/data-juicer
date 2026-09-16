@@ -73,6 +73,7 @@
           </button>
           <div class="dropdown-panel">
             <a href="../../../../../main/_modules/data_juicer/core/data/dj_dataset.html" class="dropdown-item active">main</a>
+            <a href="../../../../../v999.0.0/_modules/data_juicer/core/data/dj_dataset.html" class="dropdown-item">v999.0.0</a>
           </div>
         </div>
 
@@ -484,19 +485,19 @@
 
 
 <div class="viewcode-block" id="DJDataset">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.DJDataset">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.DJDataset">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DJDataset</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Base dataset of DJ"""</span>
 
 <div class="viewcode-block" id="DJDataset.process">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.DJDataset.process">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.DJDataset.process">[文档]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operators</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exporter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">checkpointer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tracer</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DJDataset</span><span class="p">:</span>  <span class="c1"># TODO: add type hint</span>
 <span class="w">        </span><span class="sd">"""process a list of operators on the dataset."""</span></div>
 
 
 <div class="viewcode-block" id="DJDataset.schema">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.DJDataset.schema">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.DJDataset.schema">[文档]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Schema</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Get dataset schema.</span>
@@ -507,7 +508,7 @@
 
 
 <div class="viewcode-block" id="DJDataset.get">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.DJDataset.get">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.DJDataset.get">[文档]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">"""Get k rows from the dataset.</span>
@@ -521,7 +522,7 @@
 
 
 <div class="viewcode-block" id="DJDataset.get_column">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.DJDataset.get_column">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.DJDataset.get_column">[文档]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""Get values from a specific column/field, optionally limited to first k rows.</span>
@@ -540,14 +541,14 @@
 
 
 <div class="viewcode-block" id="DJDataset.to_list">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.DJDataset.to_list">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.DJDataset.to_list">[文档]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Convert the current dataset to a Python list."""</span></div>
 
 
 <div class="viewcode-block" id="DJDataset.contain_column">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.DJDataset.contain_column">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.DJDataset.contain_column">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">contain_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Check whether the dataset contains a specific column/field.</span>
 
@@ -561,7 +562,7 @@
 
 
 <div class="viewcode-block" id="DJDataset.count">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.DJDataset.count">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.DJDataset.count">[文档]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""return the count of the dataset"""</span></div>
@@ -570,7 +571,7 @@
 
 
 <div class="viewcode-block" id="wrap_func_with_nested_access">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.wrap_func_with_nested_access">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.wrap_func_with_nested_access">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">wrap_func_with_nested_access</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Before conducting actual function `f`, wrap its args and kargs into nested</span>
@@ -599,7 +600,7 @@
 
 
 <div class="viewcode-block" id="nested_obj_factory">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.nested_obj_factory">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.nested_obj_factory">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">nested_obj_factory</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Use nested classes to wrap the input object.</span>
@@ -624,12 +625,12 @@
 
 
 <div class="viewcode-block" id="NestedQueryDict">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedQueryDict">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedQueryDict">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NestedQueryDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Enhanced dict for better usability."""</span>
 
 <div class="viewcode-block" id="NestedQueryDict.__init__">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedQueryDict.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedQueryDict.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Dataset</span><span class="p">):</span>
             <span class="c1"># init from another DatasetDict instance</span>
@@ -650,12 +651,12 @@
 
 
 <div class="viewcode-block" id="NestedDatasetDict">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDatasetDict">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDatasetDict">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NestedDatasetDict</span><span class="p">(</span><span class="n">DatasetDict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Enhanced HuggingFace-DatasetDict for better usability and efficiency."""</span>
 
 <div class="viewcode-block" id="NestedDatasetDict.__init__">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDatasetDict.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDatasetDict.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Dataset</span><span class="p">):</span>
             <span class="c1"># init from another DatasetDict instance</span>
@@ -669,7 +670,7 @@
         <span class="k">return</span> <span class="n">nested_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 
 <div class="viewcode-block" id="NestedDatasetDict.map">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDatasetDict.map">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDatasetDict.map">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the map func, which is called by most common operations,</span>
 <span class="sd">        such that the processed samples can be accessed by nested manner."""</span>
@@ -684,12 +685,12 @@
 
 
 <div class="viewcode-block" id="NestedDataset">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset">[文档]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NestedDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">DJDataset</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Enhanced HuggingFace-Dataset for better usability and efficiency."""</span>
 
 <div class="viewcode-block" id="NestedDataset.__init__">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Dataset</span><span class="p">):</span>
             <span class="c1"># init from another Dataset instance</span>
@@ -712,7 +713,7 @@
         <span class="k">return</span> <span class="n">nested_obj_factory</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
 <div class="viewcode-block" id="NestedDataset.schema">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.schema">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.schema">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Schema</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Get dataset schema."""</span>
         <span class="c1"># Get features dictionary from HF dataset</span>
@@ -722,7 +723,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.get">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.get">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.get">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">"""Get k rows from the dataset."""</span>
         <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -736,7 +737,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.get_column">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.get_column">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.get_column">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">"""Get column values from HuggingFace dataset.</span>
 
@@ -766,7 +767,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.process">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.process">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.process">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">operators</span><span class="p">,</span>
@@ -865,13 +866,13 @@
 
 
 <div class="viewcode-block" id="NestedDataset.count">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.count">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.count">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_rows</span></div>
 
 
 <div class="viewcode-block" id="NestedDataset.update_args">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.update_args">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.update_args">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">update_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kargs</span><span class="p">,</span> <span class="n">is_filter</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
             <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
@@ -919,7 +920,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.map">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.map">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.map">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the map func, which is called by most common operations,</span>
 <span class="sd">        such that the processed samples can be accessed by nested manner."""</span>
@@ -941,7 +942,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.filter">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.filter">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.filter">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the filter func, which is called by most common operations,</span>
 <span class="sd">        such that the processed samples can be accessed by nested manner."""</span>
@@ -977,7 +978,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.select">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.select">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.select">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the select func, such that selected samples can be accessed</span>
 <span class="sd">        by nested manner."""</span>
@@ -985,13 +986,13 @@
 
 
 <div class="viewcode-block" id="NestedDataset.to_list">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.to_list">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.to_list">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="NestedDataset.from_dict">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.from_dict">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.from_dict">[文档]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the from_dict func, which is called by most from_xx</span>
@@ -1001,7 +1002,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.from_list">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.from_list">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.from_list">[文档]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the from_dict func, which is called by most from_xx</span>
@@ -1011,7 +1012,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.add_column">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.add_column">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.add_column">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the add column func, such that the processed samples</span>
 <span class="sd">        can be accessed by nested manner."""</span>
@@ -1019,7 +1020,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.select_columns">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.select_columns">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.select_columns">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">select_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the select columns func, such that the processed samples</span>
 <span class="sd">        can be accessed by nested manner."""</span>
@@ -1027,7 +1028,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.remove_columns">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.remove_columns">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.remove_columns">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">remove_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the remove columns func, such that the processed samples</span>
 <span class="sd">        can be accessed by nested manner."""</span>
@@ -1035,7 +1036,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.cleanup_cache_files">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.cleanup_cache_files">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.cleanup_cache_files">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_cache_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Override the cleanup_cache_files func, clear raw and compressed</span>
 <span class="sd">        cache files."""</span>
@@ -1044,7 +1045,7 @@
 
 
 <div class="viewcode-block" id="NestedDataset.load_from_disk">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.NestedDataset.load_from_disk">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.NestedDataset.load_from_disk">[文档]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">load_from_disk</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">NestedDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="o">.</span><span class="n">load_from_disk</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">))</span></div>
@@ -1053,7 +1054,7 @@
 
 
 <div class="viewcode-block" id="nested_query">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.nested_query">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.nested_query">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">nested_query</span><span class="p">(</span><span class="n">root_obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NestedDatasetDict</span><span class="p">,</span> <span class="n">NestedDataset</span><span class="p">,</span> <span class="n">NestedQueryDict</span><span class="p">],</span> <span class="n">key</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Find item from a given object, by first checking flatten layer, then</span>
@@ -1104,7 +1105,7 @@
 
 
 <div class="viewcode-block" id="add_same_content_to_new_column">
-<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.add_same_content_to_new_column">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.core.data.dj_dataset.html#data_juicer.core.data.dj_dataset.add_same_content_to_new_column">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">add_same_content_to_new_column</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">new_column_name</span><span class="p">,</span> <span class="n">initial_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A helper function to speed up add_column function. Apply map on this</span>
