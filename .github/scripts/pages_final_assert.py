@@ -20,6 +20,9 @@ for lang, entry in (("en", "index.html"), ("zh_CN", "index_ZH.html")):
         assert page.is_file() and page.stat().st_size > 1000, str(page)
         api = [path for path in root.rglob("*.html") if "api" in path.relative_to(root).parts]
         assert len(api) > 50, (lang, version, "缺少真实 API 页面", len(api))
+        real_api = (root / "api/data_juicer.ops.base_op.html").read_text()
+        for symbol in ("OP", "Mapper", "Filter", "OP.__init__"):
+            assert f'id="data_juicer.ops.base_op.{symbol}"' in real_api, (lang, version, symbol)
         summary["entries"].append({"lang": lang, "version": version, "api_pages": len(api)})
     root = site / lang / "main"
     keep = (root / "pages_cache_keep.html").read_text()
@@ -32,5 +35,13 @@ for lang, entry in (("en", "index.html"), ("zh_CN", "index_ZH.html")):
     if not removed_source.exists():
         for name in ("searchindex.js", "genindex.html"):
             assert "pages_cache_removed" not in (root / name).read_text(), (lang, name)
-    summary[lang] = {"api_marker": marker, "removed_page_exists": removed_page.exists()}
+    deleted_doc = "docs/AnalyzeData"
+    assert not (repo / f"{deleted_doc}.md").exists(), "该阶段应已删除普通文档夹具"
+    assert not (root / f"{deleted_doc}.html").exists(), (lang, "旧 HTML 残留")
+    assert not (root / "_sources" / f"{deleted_doc}.md.txt").exists(), (lang, "旧源文档副本残留")
+    for name in ("searchindex.js", "genindex.html"):
+        assert f'"{deleted_doc}"' not in (root / name).read_text(), (lang, name)
+    assert not (root / "pages_cache_ghost.html").exists(), (lang, "旧幽灵页残留")
+    assert (site / "legacy-retain.txt").is_file(), "历史静态资源丢失"
+    summary[lang] = {"api_marker": marker, "deleted_doc": deleted_doc, "deleted_doc_absent": True}
 print("PAGES_FINAL_ASSERT " + json.dumps(summary, ensure_ascii=False, sort_keys=True))

@@ -2,5 +2,5 @@
 
 
 def cache_probe():
-    """PAGES_FINAL_API_V1：验证真实 autodoc 输出会随源码变化。"""
-    return "v1"
+    """PAGES_FINAL_API_V2：验证增量重建会更新真实 autodoc 正文。"""
+    return "v2"
