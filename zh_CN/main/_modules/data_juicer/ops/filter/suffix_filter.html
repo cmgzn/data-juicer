@@ -73,7 +73,6 @@
           </button>
           <div class="dropdown-panel">
             <a href="../../../../../main/_modules/data_juicer/ops/filter/suffix_filter.html" class="dropdown-item active">main</a>
-            <a href="../../../../../v999.0.0/_modules/data_juicer/ops/filter/suffix_filter.html" class="dropdown-item">v999.0.0</a>
           </div>
         </div>
 
@@ -464,7 +463,7 @@
 
 
 <div class="viewcode-block" id="SuffixFilter">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.SuffixFilter">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.suffix_filter.html#data_juicer.ops.filter.suffix_filter.SuffixFilter">[文档]</a>
 <span class="nd">@NON_STATS_FILTERS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="nd">@OPERATORS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SuffixFilter</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
@@ -477,7 +476,7 @@
 <span class="sd">    sample is kept; otherwise, it is filtered out."""</span>
 
 <div class="viewcode-block" id="SuffixFilter.__init__">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.SuffixFilter.__init__">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.suffix_filter.html#data_juicer.ops.filter.suffix_filter.SuffixFilter.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suffixes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialization method.</span>
@@ -497,13 +496,13 @@
 
 
 <div class="viewcode-block" id="SuffixFilter.compute_stats_single">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.SuffixFilter.compute_stats_single">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.suffix_filter.html#data_juicer.ops.filter.suffix_filter.SuffixFilter.compute_stats_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_stats_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">sample</span></div>
 
 
 <div class="viewcode-block" id="SuffixFilter.process_single">
-<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.html#data_juicer.ops.filter.SuffixFilter.process_single">[文档]</a>
+<a class="viewcode-back" href="../../../../api/data_juicer.ops.filter.suffix_filter.html#data_juicer.ops.filter.suffix_filter.SuffixFilter.process_single">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">suffixes</span><span class="p">:</span>
             <span class="n">res_bool</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="n">Fields</span><span class="o">.</span><span class="n">suffix</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suffixes</span>

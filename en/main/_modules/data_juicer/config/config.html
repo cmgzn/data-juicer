@@ -73,7 +73,6 @@
           </button>
           <div class="dropdown-panel">
             <a href="../../../../main/_modules/data_juicer/config/config.html" class="dropdown-item active">main</a>
-            <a href="../../../../v999.0.0/_modules/data_juicer/config/config.html" class="dropdown-item">v999.0.0</a>
           </div>
         </div>
 
@@ -107,7 +106,6 @@
 <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/ProcessData.html">Processing Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../docs/AnalyzeData.html">Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Playground.html">Web Playground</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/DatasetCfg.html">Dataset Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs/Export.html">Dataset Export</a></li>
@@ -486,7 +484,7 @@
 
 
 <div class="viewcode-block" id="timing_context">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.timing_context">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.timing_context">[docs]</a>
 <span class="nd">@contextmanager</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">timing_context</span><span class="p">(</span><span class="n">description</span><span class="p">):</span>
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -503,7 +501,7 @@
 
 
 <div class="viewcode-block" id="load_custom_operators">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.load_custom_operators">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.load_custom_operators">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_custom_operators</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Dynamically load custom operator modules or packages in the specified path."""</span>
     <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
@@ -554,7 +552,7 @@
 
 
 <div class="viewcode-block" id="build_base_parser">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.build_base_parser">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.build_base_parser">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">build_base_parser</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ArgumentParser</span><span class="p">:</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">default_env</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_config_files</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">SUPPRESS</span><span class="p">)</span>
 
@@ -1366,7 +1364,7 @@
 
 
 <div class="viewcode-block" id="init_configs">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.init_configs">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.init_configs">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">init_configs</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">allow_auto</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">load_configs_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    initialize the jsonargparse parser and parse configs from one of:</span>
@@ -1504,7 +1502,7 @@
 
 
 <div class="viewcode-block" id="update_ds_cache_dir_and_related_vars">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.update_ds_cache_dir_and_related_vars">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.update_ds_cache_dir_and_related_vars">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">update_ds_cache_dir_and_related_vars</span><span class="p">(</span><span class="n">new_ds_cache_path</span><span class="p">):</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
@@ -1525,7 +1523,7 @@
 
 
 <div class="viewcode-block" id="init_setup_from_cfg">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.init_setup_from_cfg">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.init_setup_from_cfg">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">init_setup_from_cfg</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">,</span> <span class="n">load_configs_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Do some extra setup tasks after parsing config file or command line.</span>
@@ -1732,7 +1730,7 @@
 
 
 <div class="viewcode-block" id="load_ops_with_stats_meta">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.load_ops_with_stats_meta">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.load_ops_with_stats_meta">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_ops_with_stats_meta</span><span class="p">():</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pkgutil</span>
 
@@ -1750,7 +1748,7 @@
 
 
 <div class="viewcode-block" id="update_op_attr">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.update_op_attr">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.update_op_attr">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">update_op_attr</span><span class="p">(</span><span class="n">op_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">attr_dict</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">attr_dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">op_list</span>
@@ -1788,7 +1786,7 @@
 
 
 <div class="viewcode-block" id="sort_op_by_types_and_names">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.sort_op_by_types_and_names">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.sort_op_by_types_and_names">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">sort_op_by_types_and_names</span><span class="p">(</span><span class="n">op_name_classes</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Split ops items by op type and sort them to sub-ops by name, then concat</span>
@@ -1818,7 +1816,7 @@
 
 
 <div class="viewcode-block" id="update_op_process">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.update_op_process">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.update_op_process">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">update_op_process</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">used_ops</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Update operator process configuration with optimized performance.</span>
@@ -1929,7 +1927,7 @@
 
 
 <div class="viewcode-block" id="namespace_to_arg_list">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.namespace_to_arg_list">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.namespace_to_arg_list">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">namespace_to_arg_list</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">includes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">excludes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exclude_prefixes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">arg_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">exclude_prefixes</span> <span class="o">=</span> <span class="n">exclude_prefixes</span> <span class="ow">or</span> <span class="p">()</span>
@@ -1965,7 +1963,7 @@
 
 
 <div class="viewcode-block" id="save_cli_arguments">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.save_cli_arguments">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.save_cli_arguments">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_cli_arguments</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Save CLI arguments to cli.yaml in the work directory."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">"work_dir"</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">cfg</span><span class="o">.</span><span class="n">work_dir</span><span class="p">:</span>
@@ -2000,7 +1998,7 @@
 
 
 <div class="viewcode-block" id="validate_config_for_resumption">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.validate_config_for_resumption">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.validate_config_for_resumption">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_config_for_resumption</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">,</span> <span class="n">work_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">original_args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Validate that the current config matches the job's saved config for safe resumption.</span>
 
@@ -2244,7 +2242,7 @@
 
 
 <div class="viewcode-block" id="config_backup">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config_backup">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.config_backup">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">config_backup</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"config"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">return</span>
@@ -2271,7 +2269,7 @@
 
 
 <div class="viewcode-block" id="display_config">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.display_config">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.display_config">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">display_config</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">):</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pprint</span>
 
@@ -2294,7 +2292,7 @@
 
 
 <div class="viewcode-block" id="export_config">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.export_config">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.export_config">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">export_config</span><span class="p">(</span>
     <span class="n">cfg</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">,</span>
     <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -2342,7 +2340,7 @@
 
 
 <div class="viewcode-block" id="merge_config">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.merge_config">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.merge_config">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">merge_config</span><span class="p">(</span><span class="n">ori_cfg</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">,</span> <span class="n">new_cfg</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Merge configuration from new_cfg into ori_cfg</span>
@@ -2398,7 +2396,7 @@
 
 
 <div class="viewcode-block" id="prepare_side_configs">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.prepare_side_configs">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.prepare_side_configs">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">prepare_side_configs</span><span class="p">(</span><span class="n">ori_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Namespace</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    parse the config if ori_config is a string of a config file path with</span>
@@ -2434,7 +2432,7 @@
 
 
 <div class="viewcode-block" id="get_init_configs">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.get_init_configs">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.get_init_configs">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_init_configs</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Namespace</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="n">load_configs_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    set init configs of data-juicer for cfg</span>
@@ -2472,7 +2470,7 @@
 
 
 <div class="viewcode-block" id="get_default_cfg">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.get_default_cfg">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.get_default_cfg">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_default_cfg</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">"""Get default config values from config_min.yaml"""</span>
     <span class="n">cfg</span> <span class="o">=</span> <span class="n">Namespace</span><span class="p">()</span>
@@ -2501,7 +2499,7 @@
 
 
 <div class="viewcode-block" id="prepare_cfgs_for_export">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.prepare_cfgs_for_export">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.prepare_cfgs_for_export">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">prepare_cfgs_for_export</span><span class="p">(</span><span class="n">cfg</span><span class="p">):</span>
     <span class="c1"># 1. convert Path to str</span>
     <span class="k">if</span> <span class="s2">"config"</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">:</span>
@@ -2515,7 +2513,7 @@
 
 
 <div class="viewcode-block" id="resolve_job_id">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.resolve_job_id">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.resolve_job_id">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">resolve_job_id</span><span class="p">(</span><span class="n">cfg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Resolve or auto-generate job_id and set it on cfg."""</span>
     <span class="n">job_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">"job_id"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -2549,7 +2547,7 @@
 
 
 <div class="viewcode-block" id="validate_work_dir_config">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.validate_work_dir_config">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.validate_work_dir_config">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_work_dir_config</span><span class="p">(</span><span class="n">work_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Validate work_dir configuration to ensure {job_id} placement rules are followed.</span>
@@ -2572,7 +2570,7 @@
 
 
 <div class="viewcode-block" id="resolve_job_directories">
-<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.resolve_job_directories">[docs]</a>
+<a class="viewcode-back" href="../../../api/data_juicer.config.config.html#data_juicer.config.config.resolve_job_directories">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">resolve_job_directories</span><span class="p">(</span><span class="n">cfg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Centralize directory resolution and placeholder substitution. Assumes job_id is already set.</span>
