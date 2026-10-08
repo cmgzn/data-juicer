@@ -235,16 +235,19 @@ def unify_format(
     # TODO: optimize the filtering operation for better efficiency
     logger.info(f"There are {len(dataset)} sample(s) in the original dataset.")
 
-    def non_empty_text(sample, target_keys):
-        for target_key in target_keys:
-            # TODO: case for CFT, in which the len(sample[target_key]) == 0
-            if sample[target_key] is None:
-                # we filter out the samples contains at least None column
-                # since the op can not handle it now
-                return False
-        return True
+    if text_keys:
 
-    dataset = dataset.filter(non_empty_text, num_proc=num_proc, fn_kwargs={"target_keys": text_keys})
+        def non_empty_text(sample, target_keys):
+            for target_key in target_keys:
+                # TODO: case for CFT, in which the len(sample[target_key]) == 0
+                if sample[target_key] is None:
+                    # we filter out the samples contains at least None column
+                    # since the op can not handle it now
+                    return False
+            return True
+
+        dataset = dataset.filter(non_empty_text, num_proc=num_proc, fn_kwargs={"target_keys": text_keys})
+
     logger.info(f"{len(dataset)} samples left after filtering empty text.")
 
     # 3. convert relative paths to absolute paths

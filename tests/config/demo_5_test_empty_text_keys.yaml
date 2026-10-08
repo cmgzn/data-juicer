@@ -1,0 +1,12 @@
+# Config for multimedia-only processing with empty text_keys
+
+project_name: 'test_empty_text_keys'
+dataset_path: './demos/data/demo-dataset.jsonl'
+np: 4
+
+text_keys: []
+
+export_path: './outputs/demo/demo-processed.jsonl'
+
+process:
+  - whitespace_normalization_mapper:
