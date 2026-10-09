@@ -355,4 +355,7 @@ Output:
 
         sample[Fields.meta][self.entity_key] = entities
         sample[Fields.meta][self.relation_key] = relations
+
+        if self.drop_text:
+            sample.pop(self.text_key)
         return sample

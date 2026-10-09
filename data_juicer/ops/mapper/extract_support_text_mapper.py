@@ -133,4 +133,7 @@ class ExtractSupportTextMapper(Mapper):
             support_text = summary
 
         sample[Fields.meta][self.support_text_key] = support_text
+
+        if self.drop_text:
+            sample.pop(self.text_key)
         return sample
