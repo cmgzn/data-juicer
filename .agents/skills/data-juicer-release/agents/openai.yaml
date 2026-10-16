@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data-Juicer 发版"
+  short_description: "按历史惯例准备 Data-Juicer 发版、核查回归并验收发布产物"
+  default_prompt: "使用 $data-juicer-release 准备 Data-Juicer 下一版本发版，核对发布范围、测试、公告和产物状态。"
