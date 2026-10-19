@@ -14,6 +14,15 @@
 - 全量回归支持手动触发，定时为北京时间周五 07:00。已存在独立 ElasticJuicer pytest 步骤，不能仅凭 unittest discovery 否定其 CI 接入。
 - 公告、PR 合并、Release、PyPI 上传日期可能不同，不能相互代替。
 
+## v1.6.1 观察（2026-10-19）
+
+- Release PR #1101，tag `v1.6.1` 指向其合并提交 `abb9e498`。全量回归 [run 38873038803](https://github.com/datajuicer/data-juicer/actions/runs/38873038803)：standalone 2878 tests（skipped 70），Ray 172 tests（skipped 16），ElasticJuicer pytest 143 passed，耗时约 3 小时 23 分。Release 触发的 PyPI 发布一次成功。
+- v1.6.0 的 PyPI 自动发布因 Twine 不支持 `Metadata-Version: 2.5` 失败，之后从 `release/publish-v1.6.0`（`27bb553d`）手动补发；#1069 将发布 action 升到 `v1.14.2` 修复。
+- 已知问题：PyPI 1.5.3–1.6.1 的 sdist 缺 `data_juicer/ops/deduplicator/tokenize.pyx`、`minhash.cpp`（由 #851 引入，最早可追溯到 v1.4.5），从 sdist 构建 wheel 会在 `hatch_build.py` 失败；wheel 由源码树构建，不受影响。尚待单独修复。
+- OSS 每周定时同步在 2026-09-28、10-05、10-12 连续被取消。
+- v1.5.5、v1.6.0、v1.6.1 的 Release 只附 wheel。
+- v1.6.1 Release Notes 维护者预写 draft 约 1200 词，补齐后精简为约 720 词，经用户认可。
+
 ## 用户指定的执行约定
 
 - 全量回归应在分支推送后，在 GitHub 手动触发；不要尝试用本地资源跑全量。
@@ -28,6 +37,7 @@
 - [v1.5.4 PR #1010](https://github.com/datajuicer/data-juicer/pull/1010)
 - [v1.5.5 PR #1037](https://github.com/datajuicer/data-juicer/pull/1037)
 - [v1.6.0 PR #1068](https://github.com/datajuicer/data-juicer/pull/1068)
+- [v1.6.1 PR #1101](https://github.com/datajuicer/data-juicer/pull/1101)
 - [发布列表](https://github.com/datajuicer/data-juicer/releases)
 - [v1.6.0 Release](https://github.com/datajuicer/data-juicer/releases/tag/v1.6.0)
 - [PyPI 元数据](https://pypi.org/pypi/py-data-juicer/json)
