@@ -1,0 +1,17 @@
+2026-10-20 17:13:40,522	INFO worker.py:2024 -- Started a local Ray instance.
+2026-10-20 17:13:42,536	WARNING util.py:647 -- The argument ``concurrency`` is deprecated in Ray 2.51. Please specify argument ``compute`` instead. For more information, see https://docs.ray.io/en/master/data/transforming-data.html#stateful-transforms.
+2026-10-20 17:13:42,647	INFO streaming_executor.py:193 -- Starting execution of Dataset dataset_3_0. Full logs are in /tmp/ray/session_2026-10-20_17-13-37_522144_893908/logs/ray-data
+2026-10-20 17:13:42,648	INFO streaming_executor.py:194 -- Execution plan of Dataset dataset_3_0: InputDataBuffer[Input] -> TaskPoolMapOperator[ReadRange] -> TaskPoolMapOperator[MapBatches(slow_batch)] -> TaskPoolMapOperator[Write]
+2026-10-20 17:13:42,694	INFO __init__.py:56 -- Progress will be logged because stdout is a non-interactive terminal.
+2026-10-20 17:13:42,711	WARNING resource_manager.py:766 -- Cluster resources are not enough to run any task from TaskPoolMapOperator[ReadRange]. The job may hang forever unless the cluster scales up.
+2026-10-20 17:13:42,719	INFO logging_progress.py:174 -- ======= Running Dataset: dataset_3_0 =======
+2026-10-20 17:13:42,719	INFO logging_progress.py:225 -- Total Progress: 0/?
+2026-10-20 17:13:42,719	INFO logging_progress.py:227 -- Active & requested resources: 0/0 CPU, 0.0B/0.0B object store
+2026-10-20 17:13:42,719	INFO logging_progress.py:181 --
+2026-10-20 17:13:42,719	INFO logging_progress.py:231 -- ReadRange: 0/1
+2026-10-20 17:13:42,719	INFO logging_progress.py:233 --   Tasks: 1 [backpressured:tasks(ResourceBudget)]; Actors: 0; Queued blocks: 39 (0.0B); Resources: 1.0 CPU, 0.0B object store
+2026-10-20 17:13:42,719	INFO logging_progress.py:231 -- MapBatches(slow_batch): 0/1
+2026-10-20 17:13:42,719	INFO logging_progress.py:233 --   Tasks: 0 [backpressured:tasks(ResourceBudget)]; Actors: 0; Queued blocks: 0 (0.0B); Resources: 0.0 CPU, 0.0B object store
+2026-10-20 17:13:42,719	INFO logging_progress.py:231 -- Write: 0/1
+2026-10-20 17:13:42,719	INFO logging_progress.py:233 --   Tasks: 0 [backpressured:tasks(ResourceBudget)]; Actors: 0; Queued blocks: 0 (0.0B); Resources: 0.0 CPU, 0.0B object store
+2026-10-20 17:13:42,719	INFO logging_progress.py:192 -- ============================================

@@ -1,0 +1,33 @@
+{
+  "protocol_ray_dataset_recovery": {
+    "passed": 69,
+    "seconds": 287.78
+  },
+  "multinode": {
+    "passed": 2,
+    "seconds": 71.82
+  },
+  "original_executor_and_parallel": {
+    "passed": 46,
+    "failed": 12,
+    "failure": "All 12 fail during perplexity_filter initialization: kenlm missing, installation permission denied and missing cmake; no assertion reached."
+  },
+  "lightweight_executor_copy": {
+    "passed": 26,
+    "seconds": 67.27,
+    "recipe": [
+      {
+        "text_length_filter": {
+          "min_len": 0,
+          "num_proc": 1
+        }
+      },
+      {
+        "whitespace_normalization_mapper": {
+          "num_proc": 1
+        }
+      }
+    ],
+    "note": "Same test assertions with a temporary copy and model-free recipe; does not validate original perplexity_filter."
+  }
+}

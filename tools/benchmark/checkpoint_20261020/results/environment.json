@@ -1,0 +1,113 @@
+{
+  "python": "3.12.3 (main, Aug  8 2026, 13:47:19) [GCC 13.3.0]",
+  "host": "dsw-84166-f6f7bb8c5-jzbpq",
+  "packages": {
+    "ray": "2.56.1",
+    "pyarrow": "25.0.1",
+    "torch": "2.11.0+v0.1.0.ppu2.1.1",
+    "transformers": "4.57.1",
+    "datasets": "5.0.1",
+    "pillow": "12.3.0"
+  },
+  "devices": [
+    {
+      "name": "PPU-ZW810",
+      "memory_bytes": 103079215104
+    },
+    {
+      "name": "PPU-ZW810",
+      "memory_bytes": 103079215104
+    },
+    {
+      "name": "PPU-ZW810",
+      "memory_bytes": 103079215104
+    },
+    {
+      "name": "PPU-ZW810",
+      "memory_bytes": 103079215104
+    },
+    {
+      "name": "PPU-ZW810",
+      "memory_bytes": 103079215104
+    },
+    {
+      "name": "PPU-ZW810",
+      "memory_bytes": 103079215104
+    },
+    {
+      "name": "PPU-ZW810",
+      "memory_bytes": 103079215104
+    },
+    {
+      "name": "PPU-ZW810",
+      "memory_bytes": 103079215104
+    }
+  ],
+  "nproc": 96,
+  "data": {
+    "path": "/mnt/data/cmgzn.cmx/gimg-20261019/data/imagenette-13394.jsonl",
+    "sha256": "60b03a62b49623f54e0ea9b2b3210d4bd54ef1cd9b36aadc63a5d20d850a4e07",
+    "source": "hf-mirror ShaomuTan/imagenette full_size"
+  },
+  "score_tolerance": {
+    "absolute": 1e-05,
+    "relative": 0.0001
+  },
+  "models": [
+    {
+      "op": "image_nsfw_filter",
+      "arg": "hf_nsfw_model",
+      "model_id": "Falconsai/nsfw_image_detection",
+      "path": "/mnt/data/cmgzn.cmx/hf-cache/hub/models--Falconsai--nsfw_image_detection/snapshots/96cb0d0342c7afb80cab76ecc58b265fa44da256",
+      "revision": "96cb0d0342c7afb80cab76ecc58b265fa44da256",
+      "files_sha256": {
+        ".gitattributes": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+        "README.md": "2e6e2cd12fbe7d70e992ef649eae85e6d72d87c9cfc31b4cecd36de0d5facadc",
+        "config.json": "cd8c0a19566f199b5c64da402f1d6a9daf80d094fe6536befb060a2cc59449c2",
+        "falconsai_yolov9_nsfw_model_quantized.pt": "ad6659b81050e97d04224e9d02ecf7c6c4a34fccc1d1f40bcc00e0f22379319c",
+        "labels.json": "e5bd2d7de311ff9c564b075f52cf7c15c5d21068b0e9e74dd8c1bee5b77a034f",
+        "model.safetensors": "97b2ce64ec146884b37f98ee7944ca4891aa72f6827dc0cb10684a1cbecd5830",
+        "optimizer.pt": "02ff26c6fe3d23991889a373ee79cdb2ea615b3a04b65b1b5cf6985365edf414",
+        "preprocessor_config.json": "a34861a24e781942424ad790b82bc99348404a2e64ea882de88c40905851698d",
+        "pytorch_model.bin": "2a6b06faec569ad6b3873b7040020ab170be9d78d1cd1099a9d331b568aed12d"
+      }
+    },
+    {
+      "op": "image_watermark_filter",
+      "arg": "hf_watermark_model",
+      "model_id": "amrul-hzz/watermark_detector",
+      "path": "/mnt/data/cmgzn.cmx/hf-cache/hub/models--amrul-hzz--watermark_detector/snapshots/6d5ae470f2df770cd0ba15a9a0ae82d34e6fe1d8",
+      "revision": "6d5ae470f2df770cd0ba15a9a0ae82d34e6fe1d8",
+      "files_sha256": {
+        ".gitattributes": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+        "README.md": "b2fd7881fc5ea17b8da311e66d72a2fe5efa084a6505de36f957fdf2adc8f5f0",
+        "config.json": "3633f1d5012de4bf0ec3720944c8ead7c764786fc75d945cb517c0df62a2dbfa",
+        "preprocessor_config.json": "a34861a24e781942424ad790b82bc99348404a2e64ea882de88c40905851698d",
+        "pytorch_model.bin": "5e2a8ede3b9568b104dbd4341d0955447fb1260edd8ef18fa1ccc5637db54532",
+        "training_args.bin": "30f7025f518401e6bd8db99340b0d7f495ec7ba9e26347b904f44fd2aea494e3"
+      }
+    },
+    {
+      "op": "image_text_similarity_filter",
+      "arg": "hf_clip",
+      "model_id": "openai/clip-vit-large-patch14",
+      "path": "/mnt/data/cmgzn.cmx/hf-cache/hub/models--openai--clip-vit-large-patch14/snapshots/32bd64288804d66eefd0ccbe215aa642df71cc41",
+      "revision": "32bd64288804d66eefd0ccbe215aa642df71cc41",
+      "files_sha256": {
+        ".gitattributes": "98ccb431c012ebfe976280fbd45aea4cec7409935868ccecf3954370f96732a1",
+        "README.md": "de4274ec48590ab3aa1c239720ff55e99a37f4165c117ba3ad7af2b7df72687c",
+        "config.json": "8a09b467700c58138c29d53c605b34ebc69beaadd13274a8a2af8ad2c2f4032a",
+        "flax_model.msgpack": "156f677ed4495acd1ec7197249c091b85c240267c82f2f7f2e4eae4177931fed",
+        "merges.txt": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a",
+        "model.safetensors": "a2bf730a0c7debf160f7a6b50b3aaf3703e7e88ac73de7a314903141db026dcb",
+        "preprocessor_config.json": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd",
+        "pytorch_model.bin": "f1a17cdbe0f36fec524f5cafb1c261ea3bbbc13e346e0f74fc9eb0460dedd0d3",
+        "special_tokens_map.json": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf",
+        "tf_model.h5": "7f154e925c18270d662d28f6261523c2ff6e80f1f05292cb034db41d5951c7a4",
+        "tokenizer.json": "a83e0809aa4c3af7208b2df632a7a69668c6d48775b3c3fe4e1b1199d1f8b8f4",
+        "tokenizer_config.json": "deef455e52fa5e8151e339add0582e4235f066009601360999d3a9cda83b1129",
+        "vocab.json": "3f0c4f7d2086b61b38487075278ea9ed04edb53a03cbb045b86c27190fa8fb69"
+      }
+    }
+  ]
+}

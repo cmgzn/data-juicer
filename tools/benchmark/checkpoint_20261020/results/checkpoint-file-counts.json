@@ -1,0 +1,17 @@
+{
+  "old": {
+    "parquet": 688,
+    "other_json": 1,
+    "total": 689,
+    "parquet_by_stage": {"0": 196, "1": 196, "2": 196, "3": 100}
+  },
+  "new": {
+    "parquet": 784,
+    "commits_json": 784,
+    "run_json": 1,
+    "export_record": 1,
+    "total": 1570,
+    "parquet_by_stage": {"0": 196, "1": 196, "2": 196, "3": 196},
+    "commits_by_stage": {"0": 196, "1": 196, "2": 196, "3": 196}
+  }
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "storage": "LocalStore",
+    "concurrency": 1,
+    "warmup": true,
+    "commits": 2000,
+    "seconds": 11.286901433999446,
+    "commits_per_second": 177.1965505054749,
+    "parallel_load_seconds": 0.7985348000001977
+  },
+  {
+    "storage": "LocalStore",
+    "concurrency": 1,
+    "warmup": false,
+    "commits": 2000,
+    "seconds": 11.381111505999797,
+    "commits_per_second": 175.72976057265208,
+    "parallel_load_seconds": 0.5459825790003379
+  },
+  {
+    "storage": "LocalStore",
+    "concurrency": 16,
+    "warmup": true,
+    "commits": 2000,
+    "seconds": 4.193480535999697,
+    "commits_per_second": 476.9307936046527,
+    "parallel_load_seconds": 0.696941437001442
+  },
+  {
+    "storage": "LocalStore",
+    "concurrency": 16,
+    "warmup": false,
+    "commits": 2000,
+    "seconds": 5.262578390000272,
+    "commits_per_second": 380.0418448493452,
+    "parallel_load_seconds": 0.8009773419998965
+  },
+  {
+    "storage": "LocalStore",
+    "concurrency": 64,
+    "warmup": true,
+    "commits": 2000,
+    "seconds": 4.977881251999861,
+    "commits_per_second": 401.7773624464226,
+    "parallel_load_seconds": 0.7457046330000594
+  },
+  {
+    "storage": "LocalStore",
+    "concurrency": 64,
+    "warmup": false,
+    "commits": 2000,
+    "seconds": 4.622125800000504,
+    "commits_per_second": 432.7013340917251,
+    "parallel_load_seconds": 1.0352892509999947
+  },
+  {
+    "storage": "LatencyStore",
+    "concurrency": 1,
+    "warmup": true,
+    "commits": 2000,
+    "seconds": 31.503553743999873,
+    "commits_per_second": 63.48490129882307,
+    "parallel_load_seconds": 0.6623517770003673
+  },
+  {
+    "storage": "LatencyStore",
+    "concurrency": 1,
+    "warmup": false,
+    "commits": 2000,
+    "seconds": 31.3334947680014,
+    "commits_per_second": 63.829458373805565,
+    "parallel_load_seconds": 0.774664340999152
+  },
+  {
+    "storage": "LatencyStore",
+    "concurrency": 16,
+    "warmup": true,
+    "commits": 2000,
+    "seconds": 4.086120744999789,
+    "commits_per_second": 489.4617963620904,
+    "parallel_load_seconds": 0.7487838809993264
+  },
+  {
+    "storage": "LatencyStore",
+    "concurrency": 16,
+    "warmup": false,
+    "commits": 2000,
+    "seconds": 4.186068757999237,
+    "commits_per_second": 477.77523868382775,
+    "parallel_load_seconds": 0.6919451220001065
+  },
+  {
+    "storage": "LatencyStore",
+    "concurrency": 64,
+    "warmup": true,
+    "commits": 2000,
+    "seconds": 4.790736177999861,
+    "commits_per_second": 417.4723728650411,
+    "parallel_load_seconds": 0.9496839189996535
+  },
+  {
+    "storage": "LatencyStore",
+    "concurrency": 64,
+    "warmup": false,
+    "commits": 2000,
+    "seconds": 4.622868548998667,
+    "commits_per_second": 432.631812650872,
+    "parallel_load_seconds": 0.7899157439987903
+  }
+]

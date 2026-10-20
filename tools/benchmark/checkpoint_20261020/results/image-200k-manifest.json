@@ -1,0 +1,68 @@
+{
+  "heads": {
+    "old": "276f77849a899a8f91570e835d231094be13f3ce",
+    "main": "cb196ae20f08257068a689ea63e8b9cec031c316",
+    "new": "8142c6778c2377fa644ca4b3a374c04ffb3b905f+blocks-efaa9f6b1adb"
+  },
+  "input_sha256": "2c7c8b6ae0e247bc982793f053f5a78e786b3511a77215a6f28b7fb186fb0c2d",
+  "rows": 200000,
+  "unique_source_images": 13394,
+  "repeated_source": true,
+  "rows_per_file": 64,
+  "seed": 1075,
+  "score_tolerance": {
+    "absolute": 1e-05,
+    "relative": 0.0001
+  },
+  "labels": [
+    "nockpt-S14",
+    "old-n4-a16",
+    "main-n1-a16",
+    "new-S14-s1024"
+  ],
+  "timing": "fresh CLI process through export; excludes input creation, model prewarm and validation",
+  "runner_sha256": "392a9375e1659b965561271a9236f30762cf26f06a18d5f9e3f16222c8fe4b50",
+  "baseline": null,
+  "recipes": {
+    "old-n4-a16-r00": {
+      "path": "/mnt/data/cmgzn.cmx/gimg-200k-20261020-blocks/full-200000/old-n4-a16-r00/recipe.yaml",
+      "sha256": "6578669435ed9ed6c06148211ab8c5076a92bea9a774bf134a35ad9165f4da23",
+      "version": "old"
+    },
+    "main-n1-a16-r00": {
+      "path": "/mnt/data/cmgzn.cmx/gimg-200k-20261020-blocks/full-200000/main-n1-a16-r00/recipe.yaml",
+      "sha256": "19e7271745fbbb69b30072249777395102148a6de07b42bf3b07f407341653a3",
+      "version": "main"
+    },
+    "nockpt-S14-r00": {
+      "path": "/mnt/data/cmgzn.cmx/gimg-200k-20261020-blocks/full-200000/nockpt-S14-r00/recipe.yaml",
+      "sha256": "10174ad49a3b5b0599a4f5306a823e3c2e4122fd2331b91a57ce938a02385b4d",
+      "version": "new"
+    },
+    "new-S14-s1024-r00": {
+      "path": "/mnt/data/cmgzn.cmx/gimg-200k-20261020-blocks/full-200000/new-S14-s1024-r00/recipe.yaml",
+      "sha256": "22c550b22f40ec430276aeb6597a4614995cacfa2611c15f5c043dac585b98b4",
+      "version": "new"
+    },
+    "new-S14-s1024-r01": {
+      "path": "/mnt/data/cmgzn.cmx/gimg-200k-20261020-blocks/full-200000/new-S14-s1024-r01/recipe.yaml",
+      "sha256": "2b684ccb905c9e6d57d8161083dd0437000977e50cd295a3aa7622044f059976",
+      "version": "new"
+    },
+    "old-n4-a16-r01": {
+      "path": "/mnt/data/cmgzn.cmx/gimg-200k-20261020-blocks/full-200000/old-n4-a16-r01/recipe.yaml",
+      "sha256": "c6eb65db938e3a5ce0a08e42bf5607dc3355015a09bd6feb7aa85a5590074a0f",
+      "version": "old"
+    },
+    "main-n1-a16-r01": {
+      "path": "/mnt/data/cmgzn.cmx/gimg-200k-20261020-blocks/full-200000/main-n1-a16-r01/recipe.yaml",
+      "sha256": "3dd2b5197fe8b607959aa35d78a616d1e0388462583b7925a80f96257b6f4a9e",
+      "version": "main"
+    },
+    "nockpt-S14-r01": {
+      "path": "/mnt/data/cmgzn.cmx/gimg-200k-20261020-blocks/full-200000/nockpt-S14-r01/recipe.yaml",
+      "sha256": "90ee56535d612cf726e58363cb48df9fa9bafd318333097896cf6ff8320c9b52",
+      "version": "new"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "base_commit": "8142c6778c2377fa644ca4b3a374c04ffb3b905f",
+  "benchmarked_archive_sha256": "efaa9f6b1adbbb59b290eb01d7cd38e49c05de8c28f361b1b1ca8a366be300e2",
+  "modified_runtime_files_sha256": {
+    "data_juicer/core/data/ray_batch_plan.py": "d837e849f1ec5dc2ea22de72a97f09723f71f578ec02300b5f2d0f4f8e9bc77d",
+    "data_juicer/core/executor/ray_partition_runner.py": "b2d0fa4eeb8db1ef7540fbb661d3fca08fc6dcbc1ae684094796155edc2ac96e",
+    "data_juicer/core/executor/partition_protocol.py": "14e447491f1dd620da791841bebaa478e1f5903ee3ba9302d32d08e4ca1e2a39"
+  },
+  "note": "Measured archive is base plus three runtime edits. Submitted ray_batch_plan only adds import formatting after measurement; no execution change. Config help/docs/tests do not change benchmark execution. Archived scripts use local helper imports and formatting; timing original runner hashes remain in experiment manifests.",
+  "submitted_runtime_files_sha256": {
+    "data_juicer/core/data/ray_batch_plan.py": "76e4ad321a2ecc33b92d45942dc664f63a280bd44aa87dd9b249a93e0e345a0d",
+    "data_juicer/core/executor/ray_partition_runner.py": "b2d0fa4eeb8db1ef7540fbb661d3fca08fc6dcbc1ae684094796155edc2ac96e",
+    "data_juicer/core/executor/partition_protocol.py": "14e447491f1dd620da791841bebaa478e1f5903ee3ba9302d32d08e4ca1e2a39"
+  }
+}

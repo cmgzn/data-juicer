@@ -1,0 +1,11 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/cmgzn/data-juicer.worktrees/pr1075-ticket-rework
+configfile: pyproject.toml
+plugins: anyio-4.13.0, Faker-40.36.0, typeguard-4.6.0, requests-mock-1.12.1, cov-7.1.0
+collected 43 items
+
+tests/core/executor/test_partition_protocol.py ............              [ 27%]
+tests/core/data/test_ray_dataset.py ...............................      [100%]
+
+============================= 43 passed in 14.69s ==============================

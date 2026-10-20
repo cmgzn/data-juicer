@@ -1,0 +1,9 @@
+{
+  "expected_rows": 20000,
+  "files_at_kill": 8,
+  "loaded_rows": 4000,
+  "recognized_as_latest": true,
+  "accepted_partial_checkpoint": true,
+  "checkpoint_module": "/tmp/gimgpack/old-ckpt-utils.py",
+  "ray_version": "2.56.1"
+}
