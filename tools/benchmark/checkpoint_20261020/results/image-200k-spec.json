@@ -1,0 +1,85 @@
+{
+  "nockpt-S14": {
+    "gpu": {
+      "num_proc": 14,
+      "num_gpus": 0.18
+    },
+    "ops": {
+      "image_nsfw_filter": {
+        "num_proc": 14,
+        "num_gpus": 0.18
+      },
+      "image_watermark_filter": {
+        "num_proc": 14,
+        "num_gpus": 0.18
+      },
+      "image_text_similarity_filter": {
+        "num_proc": 14,
+        "num_gpus": 0.18
+      }
+    },
+    "version": "new",
+    "ckpt": false,
+    "partition": {
+      "mode": "manual",
+      "num_of_partitions": 1,
+      "max_concurrent_partitions": 1,
+      "gpu_preflight_enabled": false
+    }
+  },
+  "old-n4-a16": {
+    "version": "old",
+    "ckpt": true,
+    "partition": {
+      "mode": "manual",
+      "num_of_partitions": 4,
+      "max_concurrent_partitions": 4
+    },
+    "gpu": {
+      "num_proc": 16,
+      "num_gpus": 0.5
+    }
+  },
+  "main-n1-a16": {
+    "version": "main",
+    "ckpt": true,
+    "partition": {
+      "mode": "manual",
+      "num_of_partitions": 1,
+      "max_concurrent_partitions": 1,
+      "gpu_preflight_enabled": false
+    },
+    "gpu": {
+      "num_proc": 16,
+      "num_gpus": 0.5
+    }
+  },
+  "new-S14-s1024": {
+    "gpu": {
+      "num_proc": 14,
+      "num_gpus": 0.18
+    },
+    "ops": {
+      "image_nsfw_filter": {
+        "num_proc": 14,
+        "num_gpus": 0.18
+      },
+      "image_watermark_filter": {
+        "num_proc": 14,
+        "num_gpus": 0.18
+      },
+      "image_text_similarity_filter": {
+        "num_proc": 14,
+        "num_gpus": 0.18
+      }
+    },
+    "version": "new",
+    "ckpt": true,
+    "partition": {
+      "mode": "manual",
+      "size": 1024,
+      "max_concurrent_partitions": 1,
+      "gpu_preflight_enabled": false
+    }
+  }
+}

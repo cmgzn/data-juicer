@@ -1,0 +1,52 @@
+..........................                                               [100%]
+=============================== warnings summary ===============================
+test_light_executor.py::PartitionedRayExecutorTest::test_checkpoint_disabled
+  /home/cmgzn/data-juicer.worktrees/pr1075-ticket-rework/data_juicer/config/config.py:1304: JsonargparseDeprecationWarning:
+      By default only one JsonargparseDeprecationWarning per type is shown. To see all warnings set environment
+      variable JSONARGPARSE_DEPRECATION_WARNINGS=all and to disable the warnings set
+      JSONARGPARSE_DEPRECATION_WARNINGS=off.
+
+    params = parser.add_class_arguments(
+
+test_light_executor.py::PartitionedRayExecutorTest::test_checkpoint_disabled
+  /home/cmgzn/data-juicer.worktrees/pr1075-ticket-rework/data_juicer/config/config.py:1304: JsonargparseDeprecationWarning:
+      Parameter 'theclass' was renamed to 'class_type' in v4.50.0. The old name will stop working in v5.0.0.
+
+    params = parser.add_class_arguments(
+
+test_light_executor.py::PartitionedRayExecutorTest::test_checkpoint_disabled
+  /home/cmgzn/data-juicer.worktrees/pr1075-ticket-rework/data_juicer/config/config.py:1381: JsonargparseDeprecationWarning:
+      dict_to_namespace was deprecated in v4.43.0 and will be removed in v5.0.0. No replacement is provided because
+      blindly converting a dictionary to a namespace may not yield the same results as using a parser, which could
+      lead to confusion.
+
+    temp_cfg = parser.merge_config(dict_to_namespace({op_name: op_c}), temp_cfg)
+
+test_light_executor.py::PartitionedRayExecutorTest::test_checkpoint_disabled
+  /home/cmgzn/data-juicer.worktrees/pr1075-ticket-rework/data_juicer/config/config.py:1381: JsonargparseDeprecationWarning:
+      ``ArgumentParser.merge_config`` was deprecated in v4.50.0 and will be removed in v5.0.0. There is no
+      replacement since this is for internal use.
+
+    temp_cfg = parser.merge_config(dict_to_namespace({op_name: op_c}), temp_cfg)
+
+test_light_executor.py::PartitionedRayExecutorTest::test_checkpoint_disabled
+  /home/cmgzn/data-juicer.worktrees/pr1075-ticket-rework/data_juicer/config/config.py:1382: JsonargparseDeprecationWarning:
+      namespace_to_dict was deprecated in v4.40.0 and will be removed in v5.0.0. Instead you can use
+      ``.clone().as_dict()`` or ``.as_dict()``.
+
+    oc = namespace_to_dict(temp_cfg)[op_name]
+
+test_light_executor.py::PartitionedRayExecutorTest::test_checkpoint_disabled
+  /home/cmgzn/.local/lib/python3.10/site-packages/ray/data/context.py:931: DeprecationWarning: `use_push_based_shuffle` is deprecated! Configure `shuffle_strategy` instead.
+    warnings.warn(
+
+test_light_executor.py::PartitionedRayExecutorTest::test_checkpoint_disabled
+  /home/cmgzn/.local/lib/python3.10/site-packages/ray/data/context.py:945: DeprecationWarning: `use_polars` is deprecated, please configure `use_polars_sort`  instead.
+    warnings.warn(
+
+test_light_executor.py::PartitionedRayExecutorTest::test_checkpoint_disabled
+  /home/cmgzn/.local/lib/python3.10/site-packages/ray/data/context.py:953: DeprecationWarning: `use_arrow_tensor_v2` is deprecated. Configure `arrow_fixed_shape_tensor_format` instead.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+26 passed, 8 warnings in 67.27s (0:01:07)

@@ -1,0 +1,474 @@
+[
+  {
+    "arm": "old",
+    "head": "276f77849a899a8f91570e835d231094be13f3ce",
+    "iteration": 0,
+    "warmup": true,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 443.12539150519297,
+    "input_rows_per_second": 110.92119960231165,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/old-r00/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 145,
+    "checkpoint_bytes": 15434891,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1378601,
+      1378602,
+      1378604,
+      1378605,
+      1378613,
+      1378641
+    ],
+    "protocol_markers": [
+      "Manual partition mode: using 1 partitions",
+      "Checkpoint strategy: every_op",
+      "Grouped 3 operations into 3 groups for checkpointing"
+    ]
+  },
+  {
+    "arm": "ticket",
+    "head": "32bdf1a0db96dbb3a585fa666c4de6fbdf983892",
+    "iteration": 0,
+    "warmup": true,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 276.39385833684355,
+    "input_rows_per_second": 177.83318448450487,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/ticket-r00/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 290,
+    "checkpoint_bytes": 5603489,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1393674,
+      1393833,
+      1393834,
+      1393835,
+      1393836,
+      1393838
+    ],
+    "protocol_markers": [
+      "Recovery-unit execution selected; skipping manual partitioning.",
+      "of up to 512, 3 operator stages, resuming=False"
+    ]
+  },
+  {
+    "arm": "nockpt",
+    "head": "2ee474dc05292b0185685a78d7d5601d2f4718a0",
+    "iteration": 0,
+    "warmup": true,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 239.38727267086506,
+    "input_rows_per_second": 205.32419895012282,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/nockpt-r00/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 0,
+    "checkpoint_bytes": 0,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1396834,
+      1396839,
+      1396842,
+      1396843,
+      1396844,
+      1396845
+    ],
+    "protocol_markers": [
+      "Manual partition mode: using 1 partitions",
+      "Partitioning complete: 1 partitions",
+      "No convergence points found, processing with simple partitioning"
+    ]
+  },
+  {
+    "arm": "new",
+    "head": "2ee474dc05292b0185685a78d7d5601d2f4718a0",
+    "iteration": 0,
+    "warmup": true,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 251.5717827170156,
+    "input_rows_per_second": 195.37962274286298,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/new-r00/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 577,
+    "checkpoint_bytes": 5487785,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1410277,
+      1410278,
+      1410279,
+      1410280,
+      1410281,
+      1410282
+    ],
+    "protocol_markers": [
+      "Checkpointing selected; skipping ordinary input partitioning.",
+      "Checkpointing 3 operator(s) over 49152 input rows in commits of up to 512 rows"
+    ]
+  },
+  {
+    "arm": "new",
+    "head": "2ee474dc05292b0185685a78d7d5601d2f4718a0",
+    "iteration": 1,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 250.88947347179055,
+    "input_rows_per_second": 195.91096955897808,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/new-r01/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 577,
+    "checkpoint_bytes": 5487785,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1419088,
+      1419089,
+      1419090,
+      1419091,
+      1419093,
+      1419094
+    ],
+    "protocol_markers": [
+      "Checkpointing selected; skipping ordinary input partitioning.",
+      "Checkpointing 3 operator(s) over 49152 input rows in commits of up to 512 rows"
+    ]
+  },
+  {
+    "arm": "old",
+    "head": "276f77849a899a8f91570e835d231094be13f3ce",
+    "iteration": 1,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 446.9786913781427,
+    "input_rows_per_second": 109.96497360635375,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/old-r01/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 145,
+    "checkpoint_bytes": 15434891,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1421883,
+      1421886,
+      1421895,
+      1421896,
+      1421911,
+      1421925
+    ],
+    "protocol_markers": [
+      "Manual partition mode: using 1 partitions",
+      "Checkpoint strategy: every_op",
+      "Grouped 3 operations into 3 groups for checkpointing"
+    ]
+  },
+  {
+    "arm": "ticket",
+    "head": "32bdf1a0db96dbb3a585fa666c4de6fbdf983892",
+    "iteration": 1,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 276.7095601540059,
+    "input_rows_per_second": 177.63029211077452,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/ticket-r01/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 290,
+    "checkpoint_bytes": 5603489,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1436970,
+      1437121,
+      1437122,
+      1437123,
+      1437124,
+      1437125
+    ],
+    "protocol_markers": [
+      "Recovery-unit execution selected; skipping manual partitioning.",
+      "of up to 512, 3 operator stages, resuming=False"
+    ]
+  },
+  {
+    "arm": "nockpt",
+    "head": "2ee474dc05292b0185685a78d7d5601d2f4718a0",
+    "iteration": 1,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 241.27506644278765,
+    "input_rows_per_second": 203.7176933558328,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/nockpt-r01/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 0,
+    "checkpoint_bytes": 0,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1440149,
+      1440151,
+      1440152,
+      1440155,
+      1440156,
+      1440157
+    ],
+    "protocol_markers": [
+      "Manual partition mode: using 1 partitions",
+      "Partitioning complete: 1 partitions",
+      "No convergence points found, processing with simple partitioning"
+    ]
+  },
+  {
+    "arm": "nockpt",
+    "head": "2ee474dc05292b0185685a78d7d5601d2f4718a0",
+    "iteration": 2,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 241.35595876770094,
+    "input_rows_per_second": 203.6494157880211,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/nockpt-r02/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 0,
+    "checkpoint_bytes": 0,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1448085,
+      1448086,
+      1448087,
+      1448092,
+      1448094,
+      1448095
+    ],
+    "protocol_markers": [
+      "Manual partition mode: using 1 partitions",
+      "Partitioning complete: 1 partitions",
+      "No convergence points found, processing with simple partitioning"
+    ]
+  },
+  {
+    "arm": "ticket",
+    "head": "32bdf1a0db96dbb3a585fa666c4de6fbdf983892",
+    "iteration": 2,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 277.81923359120265,
+    "input_rows_per_second": 176.92079617613788,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/ticket-r02/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 290,
+    "checkpoint_bytes": 5603489,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1461694,
+      1461845,
+      1461846,
+      1461848,
+      1461849,
+      1461850
+    ],
+    "protocol_markers": [
+      "Recovery-unit execution selected; skipping manual partitioning.",
+      "of up to 512, 3 operator stages, resuming=False"
+    ]
+  },
+  {
+    "arm": "new",
+    "head": "2ee474dc05292b0185685a78d7d5601d2f4718a0",
+    "iteration": 2,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 250.2646838016808,
+    "input_rows_per_second": 196.40006433728342,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/new-r02/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 577,
+    "checkpoint_bytes": 5487785,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1470912,
+      1470913,
+      1470914,
+      1470915,
+      1470916,
+      1470917
+    ],
+    "protocol_markers": [
+      "Checkpointing selected; skipping ordinary input partitioning.",
+      "Checkpointing 3 operator(s) over 49152 input rows in commits of up to 512 rows"
+    ]
+  },
+  {
+    "arm": "old",
+    "head": "276f77849a899a8f91570e835d231094be13f3ce",
+    "iteration": 2,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 441.0933769252151,
+    "input_rows_per_second": 111.43218776629567,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/old-r02/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 145,
+    "checkpoint_bytes": 15434891,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1473709,
+      1473711,
+      1473720,
+      1473725,
+      1473726,
+      1473740
+    ],
+    "protocol_markers": [
+      "Manual partition mode: using 1 partitions",
+      "Checkpoint strategy: every_op",
+      "Grouped 3 operations into 3 groups for checkpointing"
+    ]
+  },
+  {
+    "arm": "ticket",
+    "head": "32bdf1a0db96dbb3a585fa666c4de6fbdf983892",
+    "iteration": 3,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 277.77192912157625,
+    "input_rows_per_second": 176.95092573046492,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/ticket-r03/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 290,
+    "checkpoint_bytes": 5603489,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1488759,
+      1488911,
+      1488912,
+      1488913,
+      1488914,
+      1488915
+    ],
+    "protocol_markers": [
+      "Recovery-unit execution selected; skipping manual partitioning.",
+      "of up to 512, 3 operator stages, resuming=False"
+    ]
+  },
+  {
+    "arm": "old",
+    "head": "276f77849a899a8f91570e835d231094be13f3ce",
+    "iteration": 3,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 444.1492691510357,
+    "input_rows_per_second": 110.6654978718102,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/old-r03/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 145,
+    "checkpoint_bytes": 15434891,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1491975,
+      1491976,
+      1491983,
+      1491991,
+      1491995,
+      1491999
+    ],
+    "protocol_markers": [
+      "Manual partition mode: using 1 partitions",
+      "Checkpoint strategy: every_op",
+      "Grouped 3 operations into 3 groups for checkpointing"
+    ]
+  },
+  {
+    "arm": "new",
+    "head": "2ee474dc05292b0185685a78d7d5601d2f4718a0",
+    "iteration": 3,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 253.05737248901278,
+    "input_rows_per_second": 194.23263395392314,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/new-r03/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 577,
+    "checkpoint_bytes": 5487785,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1506847,
+      1506848,
+      1506849,
+      1506850,
+      1506851,
+      1506853
+    ],
+    "protocol_markers": [
+      "Checkpointing selected; skipping ordinary input partitioning.",
+      "Checkpointing 3 operator(s) over 49152 input rows in commits of up to 512 rows"
+    ]
+  },
+  {
+    "arm": "nockpt",
+    "head": "2ee474dc05292b0185685a78d7d5601d2f4718a0",
+    "iteration": 3,
+    "warmup": false,
+    "returncode": 0,
+    "timed_out": false,
+    "wall_seconds": 241.44481314811856,
+    "input_rows_per_second": 203.5744705347919,
+    "log": "/mnt/data/cmgzn.cmx/g4-20261016/full/nockpt-r03/run.log",
+    "output_rows": 49152,
+    "max_score_difference": 0.0,
+    "output_sha256": "6c4c5cadc8038eb1c531aa292c5a22e826411693e9a8a6f153c8d89f6e2c9f52",
+    "checkpoint_files": 0,
+    "checkpoint_bytes": 0,
+    "validation_passed": true,
+    "observed_gpu_pids": [
+      1509605,
+      1509609,
+      1509611,
+      1509614,
+      1509618,
+      1509620
+    ],
+    "protocol_markers": [
+      "Manual partition mode: using 1 partitions",
+      "Partitioning complete: 1 partitions",
+      "No convergence points found, processing with simple partitioning"
+    ]
+  }
+]
