@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data-Juicer Review 导师"
+  short_description: "一步步理解 PR，用真实证据判断是否合并，并写简短明确的评论"
+  default_prompt: "使用 $data-juicer-review-mentor，按我的节奏指导我审查这个 PR。先讲清修改前后，再验证实际影响，给出维护建议。"
